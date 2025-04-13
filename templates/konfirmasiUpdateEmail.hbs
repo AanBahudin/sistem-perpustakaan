@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            width: 600px;
+            margin: auto auto;
+            background-color: #fff;
+            max-width: 600px;
+            padding: 20px 20px; 
+            display: block;
+        }
+
+        .logo {
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .img {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #27272a;
+        }
+
+        .desc {
+            font-size: 14px;
+            margin-top: 5px;
+            line-height: 18px;
+            color: #52525b;
+        }
+
+        .clue {
+            margin: 10px 0 20px 0;
+            font-size: 13px;
+            color: #71717a;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            margin: 10px auto 20px auto;
+            width: 300px;
+            text-decoration: none;
+            color: white !important;
+            font-weight: 600;
+            padding: 10px 5px;
+            border-radius: 4px;
+            background-color: #4071B5;
+        }
+
+        .warn {
+            font-size: 13px;
+            color: #71717a;
+            margin-top: 20px;
+        }
+
+        .verifikasi-ulang {
+            font-size: 13px;
+            color: #71717a;
+            margin-top: 10px;
+        }
+
+        .thanks {
+            font-weight: bold;
+        }
+        
+        .footer {
+            width: 100%;
+            padding: 10px 0;
+            border-top: 2px solid #71717a;
+            margin-top: 50px;
+            display: block;
+        }
+
+
+        .greet {
+            margin-top: 20px;
+
+        }
+
+        .footer-logo {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-footer {
+            display: block;
+            width: 80px;
+            margin: 0 auto;
+        }
+
+        .address {
+            display: block;
+            width: 80%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 10px auto 0 auto;
+            color: #52525b;
+        }
+
+        .kampus {
+            font-weight: 700;
+            color: #52525b;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="img" src="https://res.cloudinary.com/dhthnjizr/image/upload/v1744292810/hkrzfnuxeylxwbpscem6.png" alt="">
+        
+        <h4 class="title">Hai {{ name }}</h4>
+        <p class="desc">
+            Kami menerima permintaan untuk mengubah alamat email yang terhubung dengan akun Anda. Untuk memastikan bahwa permintaan ini benar-benar berasal dari Anda, kami memerlukan konfirmasi terlebih dahulu.
+        </p>
+        
+        <p class="clue">Gunakan tombol dibawah ini untuk memverifikasi perubahan email kamu.</p>
+        
+        <a class="btn" href="{{verficationLink}}">Perbaharui Email Saya</a>
+        <p class="warn">Kode verifikasi ini ini akan berakhir dalam waktu 24 jam. Bila kode ini tidak berfungsi atau sudah berakhir masa berlakunya, silahkan lakukan pembaruan email kembali.</p>
+        
+        <p class="verifikasi-ulang">Jika Anda tidak merasa melakukan permintaan ini, abaikan email ini. Perubahan tidak akan diproses tanpa konfirmasi dari Anda.</p>
+        
+        <p class="verifikasi-ulang thanks">Terima kasih telah menjaga keamanan akun Anda.</p>
+
+        <div class="greet">
+            <p class="verifikasi-ulang">Salam Hangat, </p>
+            <p class="verifikasi-ulang">Tim Perpustakaan Teknik Informatika</p>
+        </div>
+
+        
+        <footer class="footer">
+            <section class="footer-logo">
+                <img class="img-footer" src="https://res.cloudinary.com/dhthnjizr/image/upload/v1744206723/yxa4be4kr7xcsxt0nycq.png" alt="">
+            </section>
+
+            <p class="address">Jl. Yos Sudarso No.43, Wale, Kec. Wolio, Kota Bau-Bau, Sulawesi Tenggara 93711</p>
+
+            <p class="kampus">universitas dayanu ikhsanuddin</p>
+        </footer>
+    </div>
+</body>
+</html>
