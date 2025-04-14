@@ -3,6 +3,7 @@ import withValidationErrors from "./withValidationErrors";
 import { body, param } from "express-validator";
 import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
+import getDurasiPeminjaman from '../services/getDurasiPeminjaman'
 import Peminjaman from "../model/Peminjaman";
 
 
@@ -25,20 +26,20 @@ export const inputPengajuanPeminjamanValidator = withValidationErrors([
                 throw new NotFoundError('Buku tidak tersedia')
             }
         }),
-    body('lamaPeminjaman')
+    body('durasiPeminjaman')
         .notEmpty().withMessage('Durasi peminjaman tidak boleh kosong')
-        .isISO8601().withMessage('Format tanggal tidak valid')
-        .isDate().withMessage('Format tanggal tidak valid')
-        .toDate()
-        .custom((value) => {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // atur jam ke 00:00:00
-          
-            if (value < today) {
-              throw new Error('Tanggal peminjaman tidak boleh di masa lalu');
+        .isInt({min: 0}).withMessage('Durasi harus berupa angka')
+        .custom(async(durasiPeminjaman) => {
+            const durasiTersedia = (await getDurasiPeminjaman()).map(item => {
+                return item.durasi
+            })
+
+            if (!durasiTersedia.includes(durasiPeminjaman)) {
+                throw new BadRequestError('Durasi peminjaman tidak tersedia')
             }
-            return true;
-          })
+
+            return durasiPeminjaman;
+        })
 ])
 
 export const terimaPinjamanValidator = withValidationErrors([
@@ -53,7 +54,7 @@ export const terimaPinjamanValidator = withValidationErrors([
             const isPeminjamanExist = await Peminjaman.findOne({_id: id})
 
             // tolak jika data peminjaman sudah diterima
-            if (isPeminjamanExist?.disetujui || isPeminjamanExist?.statusPeminjaman !== 'Diajukan') {
+            if (isPeminjamanExist?.disetujui || isPeminjamanExist?.statusPeminjaman !== 'Diajukan' || isPeminjamanExist.berakhirPada) {
                 throw new BadRequestError('Data peminjaman tidak berlaku')
             }
 
@@ -70,7 +71,7 @@ export const terimaPinjamanValidator = withValidationErrors([
                 throw new NotFoundError('Data peminjaman tidak ditemukan')
             }
         }),
-    body('status')
+    body('statusPeminjaman')
         .notEmpty().withMessage('Status penerimaan tidak boleh kosong')
         .isBoolean().withMessage('Data harus boolean')
         .toBoolean()
