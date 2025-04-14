@@ -19,5 +19,21 @@ export const mencegahBukuDipinjamBerulang = async(idBuku: string, idPengguna: st
         buku: idBuku,
         statusPeminjaman: {$in: statusBlokir}
     })
+
+    console.log(peminjaman);
+    
+    return peminjaman
+}
+
+export const mencegahBukuDiterimaBerulang = async(idBuku: string, idPengguna: string) => {
+    const statusBlokir = ['Dipinjam', 'Terlambat']
+    const peminjaman = await Peminjaman.findOne({
+        peminjam: idPengguna,
+        buku: idBuku,
+        statusPeminjaman: {$in: statusBlokir}
+    })
+
+    console.log(peminjaman);
+    
     return peminjaman
 }

@@ -6,12 +6,12 @@ import Buku from "../../model/Buku"
 import Pengguna from "../../model/Pengguna"
 import { PinjamanUpdatedFieldType } from "../../types/pinjamanTypes"
 import tambahHariKeTanggal from "../../utils/tambahHari"
-import { mencegahBukuDipinjamBerulang } from "../../utils/checker"
+import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../../utils/checker"
 import { BadRequestError } from "../../errors/errorHandler"
 
 // 2 controller dibawah khusus untuk pengguna
 export const requestPinjaman = async(req: Request | any, res: Response) => {
-    const { id : idBuku, durasiPeminjaman } = req.body
+    const { idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
 
     // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
@@ -64,7 +64,7 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
     const {buku, peminjam, durasiPeminjaman} = dataPeminjaman!
 
     // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(buku as string, peminjam as string)
+    const pinjamanMasihAda = await mencegahBukuDiterimaBerulang(buku as string, peminjam as string)
     if (pinjamanMasihAda) {
         throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
     }
