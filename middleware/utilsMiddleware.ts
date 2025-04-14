@@ -5,7 +5,6 @@ import withValidationErrors from "../validator/withValidationErrors";
 import { param } from "express-validator";
 import mongoose, { isValidObjectId } from "mongoose";
 import Pustakawan from "../model/Pustakawan";
-import Buku from "../model/Buku";
 
 export const UpdateEmailPermissionMiddleware = async (req : any | Request, res : Response, next: NextFunction) => {
     const { userId } = req.user
@@ -76,18 +75,3 @@ export const verifyPenggunaIdMiddleware = withValidationErrors([
         })
 ])
 
-export const verifyBukuIdMiddleware = withValidationErrors([
-    param('id')
-        .custom(async(id) => {
-            const isValidId = mongoose.Types.ObjectId.isValid(id)
-
-            if (!isValidId) {
-                throw new BadRequestError('id buku tidak valid')
-            }
-
-            const buku = await Buku.findOne({_id: id})
-            if (!buku) {
-                throw new NotFoundError('Buku tidak ditemukan')
-            }
-        })
-])

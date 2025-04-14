@@ -11,6 +11,7 @@ import prodiRoute from './route/prodi/prodiRoute'
 import pinjamanRoute from './route/pinjaman/pinjamanRoute'
 import durasiRoute from './route/durasi/durasiRoute'
 import perpanjanganRoute from './route/perpanjangan/perpanjanganRoute'
+import bukuRoute from './route/buku/bukuRoute'
 
 import databaseConnectionFunction from './db/connect'
 
@@ -39,6 +40,7 @@ app.use('/api/v1/prodi', authenticationMiddleware, prodiMiddlewareAuthorized, pr
 app.use('/api/v1/pinjaman', authenticationMiddleware, pinjamanRoute)
 app.use('/api/v1/durasi', authenticationMiddleware, durasiRoute)
 app.use('/api/v1/perpanjangan', authenticationMiddleware, perpanjanganRoute)
+app.use('/api/v1/buku', authenticationMiddleware, bukuRoute)
 
 app.use(errorHandler)
 

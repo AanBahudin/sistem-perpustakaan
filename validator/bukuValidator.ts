@@ -1,8 +1,10 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+import mongoose from "mongoose";
+import Buku from "../model/Buku";
 import withValidationErrors from "./withValidationErrors";
 import { capitalizeWords } from "../utils/formatText";
 import Kategori from "../model/Kategori";
-import { BadRequestError } from "../errors/errorHandler";
+import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 
 export const bukuInputValidator = withValidationErrors([
     body('judul')
@@ -71,4 +73,20 @@ export const bukuInputValidator = withValidationErrors([
     body('totalDisukai')
         .optional()
         .customSanitizer(() => 0),
+])
+
+export const verifyBukuIdValidator = withValidationErrors([
+    param('id')
+        .custom(async(id) => {
+            const isValidId = mongoose.Types.ObjectId.isValid(id)
+
+            if (!isValidId) {
+                throw new BadRequestError('id buku tidak valid')
+            }
+
+            const buku = await Buku.findOne({_id: id})
+            if (!buku) {
+                throw new NotFoundError('Buku tidak ditemukan')
+            }
+        })
 ])
