@@ -5,11 +5,14 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
 import getDurasiPeminjaman from '../services/getDurasiPeminjaman'
 import Peminjaman from "../model/Peminjaman";
+import { isValidMongooseId } from "../utils/checker";
+import Pengguna from "../model/Pengguna";
+import { kondisiBuku } from "../utils/constants";
 
 
 // validasi untuk req.body pada pengajuan peminjaman
 export const inputPengajuanPeminjamanValidator = withValidationErrors([
-    body('id')
+    body('idBuku')
         .notEmpty().withMessage('Id Buku tidak boleh kosong')
         .custom(async(id) => {
             const isValidId = mongoose.Types.ObjectId.isValid(id)
@@ -92,4 +95,42 @@ export const idPinjamanValidator = withValidationErrors([
                 throw new NotFoundError('Data pemiinjaman tidak ditemuka')
             }
         })
-]);
+])
+
+// validasi untuk req.body pada pembuatan data peminjaman oleh pustakawan
+export const tambahPinjamanInputValidator = withValidationErrors([
+    body("idBuku")
+        .notEmpty().withMessage('Data buku tidak boleh kosong')
+        .custom(async(id) => {
+            isValidMongooseId(id)
+
+            const isBukuExist = await Buku.findOne({_id: id})
+            if (!isBukuExist) {
+                throw new NotFoundError('Data buku tidak ditemukan!')
+            }
+        }),
+    body("idPengguna")
+        .notEmpty().withMessage('Data peminjam tidak boleh kosong')
+        .custom(async(id) => {
+            isValidMongooseId(id)
+
+            const isPenggunaExist = await Pengguna.findOne({_id: id})
+            if (!isPenggunaExist) {
+                throw new NotFoundError('Pengguna tidak ditemukan !')
+            }
+        }),
+    body("durasiPeminjaman")
+        .notEmpty().withMessage('Durasi peminjaman tidak boleh kosong')
+        .isInt().withMessage('Durasi harus bertipe angka')
+        .toInt()
+        .custom(async(durasi) => {
+            const durasiPeminjaman = (await getDurasiPeminjaman()).map(item => item.durasi)
+
+            if (!durasiPeminjaman.includes(durasi)) {
+                throw new BadRequestError('Durasi tidak tersedia')
+            }
+        }),
+    body("kondisi")
+        .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
+        .isIn(kondisiBuku).withMessage('Kondisi buku tidak tersedia'),
+])

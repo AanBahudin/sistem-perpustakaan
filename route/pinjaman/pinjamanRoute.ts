@@ -7,10 +7,15 @@ import {
     getSinglePinjaman,
     hapusPinjaman,
     getAllRequestedPinjaman,
-    getAllPinjaman
+    getAllPinjaman,
+    getPinjamanUser
  } from '../../controllers/pinjaman/pinjamanController'
 
-import { idPinjamanValidator, inputPengajuanPeminjamanValidator, terimaPinjamanValidator
+import { 
+    idPinjamanValidator, 
+    inputPengajuanPeminjamanValidator, 
+    terimaPinjamanValidator,
+    tambahPinjamanInputValidator
 
  } from '../../validator/pinjamanValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -21,12 +26,22 @@ const router = express.Router()
 router.route('/request/pinjaman')
     .post(userMiddlewareAuthorized, inputPengajuanPeminjamanValidator, requestPinjaman)
 
+router.route('/user')
+    .get(userMiddlewareAuthorized, getPinjamanUser)
+
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')
     .get(getAllPinjaman)
 
 router.route('/pinjaman/aktif')
-    .get(pustakawanMiddlewareAuthorized, getAllPinjamanAktif)
+    .get(pustakawanMiddlewareAuthorized, 
+        getAllPinjamanAktif)
+
+router.route('/pinjaman/create')
+    .post(
+        pustakawanMiddlewareAuthorized, 
+        tambahPinjamanInputValidator, 
+        tambahPinjaman)
 
 router.route('/pinjaman/:id')
     .get(idPinjamanValidator, getSinglePinjaman)

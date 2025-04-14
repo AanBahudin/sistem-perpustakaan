@@ -6,11 +6,19 @@ import Buku from "../../model/Buku"
 import Pengguna from "../../model/Pengguna"
 import { PinjamanUpdatedFieldType } from "../../types/pinjamanTypes"
 import tambahHariKeTanggal from "../../utils/tambahHari"
+import { mencegahBukuDipinjamBerulang } from "../../utils/checker"
+import { BadRequestError } from "../../errors/errorHandler"
 
 // 2 controller dibawah khusus untuk pengguna
 export const requestPinjaman = async(req: Request | any, res: Response) => {
     const { id : idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
+
+    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
+    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, userId)
+    if (pinjamanMasihAda) {
+        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
+    }
 
     const pinjaman = await Peminjaman.create({ 
         peminjam: userId, 
@@ -23,6 +31,20 @@ export const requestPinjaman = async(req: Request | any, res: Response) => {
         message: `Peminjaman buku telah diajukan, silahkan tunggu email verifikasi`,
         timestamps: new Date(Date.now()).toString(),
         data: pinjaman
+    })
+}
+
+export const getPinjamanUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+
+    const pinjamanUser = await Peminjaman.find({peminjam: userId})
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Peminjaman',
+        timestamps: new Date(Date.now()).toString(),
+        data: pinjamanUser,
+        total: pinjamanUser.length
     })
 }
 
@@ -39,7 +61,13 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
 
     // ambil data pinjaman khususnya durasiPeminjaman
     const dataPeminjaman = await Peminjaman.findOne({_id: pinjamanId})
-    const {durasiPeminjaman} = dataPeminjaman!
+    const {buku, peminjam, durasiPeminjaman} = dataPeminjaman!
+
+    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
+    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(buku as string, peminjam as string)
+    if (pinjamanMasihAda) {
+        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
+    }
 
     // jika data peminjaman diterima, maka tambahkan field berakhirPada untuk menandai masa selesainya peminjaman
     if (isAccepted) {
@@ -56,7 +84,6 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
 
 
     if (isAccepted) {
-        
         // update attribute jumlahPinjaman di model Pengguna
         const user = await Pengguna.findOneAndUpdate(
             {_id: dataPinjaman?.peminjam},
@@ -67,7 +94,7 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
         // update attribute stok buku di model Buku
         const dataBuku = await Buku.findOneAndUpdate(
             {_id: dataPinjaman?.buku},
-            {$inc: {stok: -1}},
+            {$inc: {stok: -1, totalDipinjam: 1}},
             {new: true, runValidators: true}
         )
     }
@@ -84,8 +111,52 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
     
 }
 
-export const tambahPinjaman = async(req: Request, res: Response) => {
-    res.send('tambah pinjaman controller')
+export const tambahPinjaman = async(req: Request | any, res: Response) => {
+    const {
+        idBuku,
+        idPengguna,
+        durasiPeminjaman,
+        kondisi
+    } = req.body
+
+    const pinjamanField = {
+        peminjam: idPengguna,
+        buku: idBuku,
+        statusPinjaman: 'Dipinjam',
+        durasiPeminjaman,
+        kondisi,
+        disetujui: true,
+        berakhirPada: tambahHariKeTanggal(new Date, durasiPeminjaman),
+        diprosesOleh: req.user.userId
+    }
+
+    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
+    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, idPengguna)
+    if (pinjamanMasihAda) {
+        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
+    }
+
+    const pinjaman = await Peminjaman.create(pinjamanField)
+
+    const user = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {$inc: {jumlah_pinjaman: 1}},
+        {new: true, runValidators: true}
+    )
+
+    // update attribute stok buku di model Buku
+    const dataBuku = await Buku.findOneAndUpdate(
+        {_id: idBuku},
+        {$inc: {stok: -1, totalDipinjam: 1}},
+        {new: true, runValidators: true}
+    )
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Pinjaman Dibuat',
+        timestamps: new Date(Date.now()).toString(),
+        data: pinjaman,
+    })
 }
 
 export const getAllPinjaman = async(req: Request, res: Response) => {
