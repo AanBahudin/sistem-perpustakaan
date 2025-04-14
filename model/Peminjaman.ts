@@ -11,10 +11,6 @@ const PeminjamanSchema = new mongoose.Schema({
         ref: 'Buku',
         required: true
     },
-    lamaPeminjaman: {
-        type: Date,
-        default: Date.now
-    },
     statusPeminjaman: {
         type: String,
         enum: ['Dipinjam', 'Dikembalikan', 'Terlambat', 'Diajukan', 'Ditolak'],
@@ -23,6 +19,9 @@ const PeminjamanSchema = new mongoose.Schema({
     durasiPeminjaman: {
         type: Number,
         required: true
+    },
+    berakhirPada: {
+        type: Date
     },
     kondisi: {
         type: String,
@@ -44,17 +43,6 @@ const PeminjamanSchema = new mongoose.Schema({
         default: false
     },
     catatan: String,
-    pengajuanPerpanjangan: {
-        type: Boolean,
-        default: false
-    },
-    totalPerpanjangan: {
-        type: Boolean,
-        default: 0
-    },
-    berakhirPada: {
-        type: Date
-    },
     diprosesOleh: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan'
