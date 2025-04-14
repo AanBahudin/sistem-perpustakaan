@@ -3,9 +3,9 @@ import { Response, Request } from "express"
 import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
 import Buku from "../../model/Buku"
-import { BadRequestError } from "../../errors/errorHandler"
 import Pengguna from "../../model/Pengguna"
-import sendVerficationEmail from "../../utils/emailVerification"
+import { PinjamanUpdatedFieldType } from "../../types/pinjamanTypes"
+import tambahHariKeTanggal from "../../utils/tambahHari"
 
 // 2 controller dibawah khusus untuk pengguna
 export const requestPinjaman = async(req: Request | any, res: Response) => {
@@ -29,26 +29,25 @@ export const requestPinjaman = async(req: Request | any, res: Response) => {
 // controller ini khusus untuk pustakawan
 export const terimaPinjaman = async(req: Request | any, res: Response) => {
     const { id: pinjamanId, statusPeminjaman: isAccepted } = req.body
-    let updatedField : {
-        statusPeminjaman: string,
-        diprosesOleh: string,
-        disetujui: boolean,
-        berakhirPada?: Date
-    } = {
+
+    // objek yang akan digunakan untuk meng-update data pinjaman
+    let updatedField : PinjamanUpdatedFieldType = {
         statusPeminjaman : isAccepted ? 'Dipinjam' : 'Ditolak',
         disetujui: isAccepted,
         diprosesOleh: req.user.userId
     }
 
-    const dataPermintaanPinjaman = await Peminjaman.findOne({_id: pinjamanId})
-    if (isAccepted) {
-        const sekarang = new Date();
-        const durasiDalamMs = dataPermintaanPinjaman?.durasiPeminjaman as number * 24 * 60 * 60 * 1000;
-        const berakhirPada = new Date(sekarang.getTime() + durasiDalamMs);
+    // ambil data pinjaman khususnya durasiPeminjaman
+    const dataPeminjaman = await Peminjaman.findOne({_id: pinjamanId})
+    const {durasiPeminjaman} = dataPeminjaman!
 
+    // jika data peminjaman diterima, maka tambahkan field berakhirPada untuk menandai masa selesainya peminjaman
+    if (isAccepted) {
+        const berakhirPada = tambahHariKeTanggal(new Date, durasiPeminjaman as number)
         updatedField.berakhirPada = berakhirPada
     }    
 
+    // update data peminjaman dengan objek updatedField
     const dataPinjaman = await Peminjaman.findOneAndUpdate(
         {_id: pinjamanId},
         updatedField,
@@ -56,8 +55,9 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
     )
 
 
-    // update attribute jumlahPinjaman di model Pengguna
-    if (!isAccepted) {
+    if (isAccepted) {
+        
+        // update attribute jumlahPinjaman di model Pengguna
         const user = await Pengguna.findOneAndUpdate(
             {_id: dataPinjaman?.peminjam},
             {$inc: {jumlah_pinjaman: 1}},
