@@ -8,6 +8,8 @@ import Pustakawan from "../../model/Pustakawan";
 import Buku from "../../model/Buku";
 import Kategori from "../../model/Kategori";
 
+import getDurasiPeminjaman from '../../services/getDurasiPeminjaman'
+
 export const getAllUsers = async(req: Request, res: Response) => {
     const users = await Pengguna.find({ verifikasiEmail: true, verifikasiProdi: true })
 
@@ -98,18 +100,22 @@ export const getAllBuku = async(req: Request | any, res: Response) => {
         total: books.length,
         page: 1
     })
-}
+} 
 
 export const getSingleBuku = async(req: Request | any, res: Response) => {
     const { id } = req.params
 
     const buku = await Buku.findOne({_id: id})
+    const durasiPeminjaman = await getDurasiPeminjaman()
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
         message: `Data Buku ${buku?.judul}`,
         timestamps: new Date(Date.now()).toString(),
-        data: buku
+        data: buku,
+        meta: {
+            durasi: durasiPeminjaman
+        }
     })
 }
 

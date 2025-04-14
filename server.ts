@@ -9,6 +9,7 @@ import userRoute from './route/pengguna/penggunaRoute'
 import pustakawanRoute from './route/pustakawan/pustakawanRoute'
 import prodiRoute from './route/prodi/prodiRoute'
 import pinjamanRoute from './route/pinjaman/pinjamanRoute'
+import durasiRoute from './route/durasi/durasiRoute'
 
 import databaseConnectionFunction from './db/connect'
 
@@ -35,6 +36,7 @@ app.use('/api/v1/user', authenticationMiddleware, userMiddlewareAuthorized, user
 app.use('/api/v1/pustakawan', authenticationMiddleware, pustakawanMiddlewareAuthorized, pustakawanRoute)
 app.use('/api/v1/prodi', authenticationMiddleware, prodiMiddlewareAuthorized, prodiRoute)
 app.use('/api/v1/pinjaman', authenticationMiddleware, prodiMiddlewareAuthorized, pinjamanRoute)
+app.use('/api/v1/durasi', authenticationMiddleware, durasiRoute)
 
 app.use(errorHandler)
 

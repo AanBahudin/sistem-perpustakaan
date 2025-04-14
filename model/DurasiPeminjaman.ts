@@ -3,7 +3,8 @@ import mongoose, { model } from 'mongoose'
 const DurasiSchema = new mongoose.Schema({
     durasi: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     }
 }, {timestamps: true})
 

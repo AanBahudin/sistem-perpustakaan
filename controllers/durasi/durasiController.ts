@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import DurasiPeminjaman from "../../model/DurasiPeminjaman"
-import dataDurasiPeminjaman from "../../services/getDuration"
+import dataDurasiPeminjaman from "../../services/getDurasiPeminjaman"
 import { StatusCodes } from "http-status-codes"
 
 
