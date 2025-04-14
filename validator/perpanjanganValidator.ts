@@ -35,13 +35,10 @@ export const perpanjanganInputValidator = withValidationErrors([
         .isInt().withMessage('Durasi hanya boleh berupa angka')
         .toInt()
         .custom(async(durasi) => {
-            const durasiTersedia = await DurasiPeminjaman.find()
-            
-            durasiTersedia.forEach(item => {
-                if (durasi !== durasi) {
-                    throw new BadRequestError('Durasi perpanjangan tidak tersedia')
-                }
-            })
+            const durasiTersedia = (await DurasiPeminjaman.find()).map(item => item.durasi)
+            if (!durasiTersedia.includes(durasi)) {
+                throw new BadRequestError('Durasi perpanjangan tidak tersedia')
+            }
         }),
     body('alasan')
         .notEmpty().withMessage('Alasan perpanjangan tidak boleh kosong')

@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Perpanjangan from "../../model/Perpanjangan";
 import { StatusCodes } from "http-status-codes";
+import Peminjaman from "../../model/Peminjaman";
+import tambahHariKeTanggal from "../../utils/tambahHari";
 
 // untuk pengguna
 export const pengajuanPerpanjangan = async(req: Request | any, res: Response) => {
@@ -77,13 +79,73 @@ export const batalPerpanjanganUser = async(req: Request | any, res: Response) =>
 
 // untuk pustakawan
 export const getAllPerpanjangan = async(req: Request, res: Response) => {
-    res.send('pengajuan perpanjangan')
+    const dataPerpanjangan = await Perpanjangan.find()
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Semua Perpanjangan',
+        timestamps: new Date(Date.now()).toString(),
+        data: dataPerpanjangan,
+        total: dataPerpanjangan.length
+    })
 }
 
 export const getSinglePerpanjangan = async(req: Request, res: Response) => {
-    res.send('pengajuan perpanjangan')
+    const { id } = req.params
+
+    const dataPerpanjangan = await Perpanjangan.findOne({_id: id})
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Semua Perpanjangan',
+        timestamps: new Date(Date.now()).toString(),
+        data: dataPerpanjangan,
+    })
 }
 
-export const terimaPerpanjangan = async(req: Request, res: Response) => {
-    res.send('pengajuan perpanjangan')
+export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
+    const {id: perpanjanganId, disetujui} = req.body
+
+    // ambil data pengajuan perpanjangan
+    const dataPerpanjangan = await Perpanjangan.findOne({_id: perpanjanganId})
+
+    // ambil data yang dibutuhkan
+    const {durasi : durasiPerpanjangan, idPeminjaman} = dataPerpanjangan!
+
+    // ambil data peminjaman
+    const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
+    const {durasiPeminjaman, berakhirPada} = dataPeminjaman!
+
+    // perpanjangan masa durasi.
+    let penambahanDurasiPeminjaman = durasiPeminjaman + durasiPerpanjangan
+    let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, durasiPerpanjangan)
+
+    console.log('Durasi Peminjaman Terbaru ', penambahanDurasiPeminjaman)
+    console.log('Berlaku sampai ', penambahanTanggalPinjaman )
+
+    // update data perpanjangan (disetujui, disetujuiOleh)
+    await Perpanjangan.findOneAndUpdate(
+        {_id: perpanjanganId},
+        {
+            disetujui: 'Diterima',
+            disetujuiOleh: req.user.userId
+        }
+    )
+
+    // update data pinjaman (durasiPinjaman, berakhirPada)
+    const dataPinjamanBaru = await Peminjaman.findOneAndUpdate(
+        {_id: idPeminjaman},
+        {
+            durasiPeminjaman: penambahanDurasiPeminjaman,
+            berakhirPada: penambahanTanggalPinjaman
+        },
+        {new: true, runValidators: true}
+    )
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Perpanjangan Pinjaman Diterima',
+        timestamps: new Date(Date.now()).toString(),
+        data: dataPinjamanBaru
+    })
 }

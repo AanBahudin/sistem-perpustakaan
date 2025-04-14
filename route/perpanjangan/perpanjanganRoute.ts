@@ -18,7 +18,11 @@ router.route('/user')
     .post(userMiddlewareAuthorized, perpanjanganInputValidator, pengajuanPerpanjangan)
 
 router.route('/user/:id')
-    .get(userMiddlewareAuthorized, idPerpanjanganValidator, userValidator, getSinglePerpanjangan)
+    .get(
+        userMiddlewareAuthorized, 
+        idPerpanjanganValidator, 
+        userValidator, 
+        getSinglePerpanjangan)
     .patch(
         userMiddlewareAuthorized, 
         idPerpanjanganValidator, 
@@ -31,5 +35,19 @@ router.route('/user/:id')
         userValidator,
         deletePerpanjanganValidator,
         batalPerpanjanganUser)
+
+
+/*
+    Route dibawah dikhususkan hanya boleh diakses oleh pustakawan saja
+*/
+
+router.route('/')
+    .get(pustakawanMiddlewareAuthorized, getAllPerpanjangan)
+
+router.route('/data/:id')
+    .get(pustakawanMiddlewareAuthorized, getSinglePerpanjangan)
+
+router.route('/accept')
+    .post(pustakawanMiddlewareAuthorized, terimaPerpanjangan)
 
 export default router

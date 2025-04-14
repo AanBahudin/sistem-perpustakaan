@@ -27,15 +27,17 @@ export const requestPinjaman = async(req: Request | any, res: Response) => {
 }
 
 // controller ini khusus untuk pustakawan
-export const terimaPinjaman = async(req: Request, res: Response) => {
+export const terimaPinjaman = async(req: Request | any, res: Response) => {
     const { id: pinjamanId, statusPeminjaman: isAccepted } = req.body
     let updatedField : {
         statusPeminjaman: string,
+        diprosesOleh: string,
         disetujui: boolean,
         berakhirPada?: Date
     } = {
         statusPeminjaman : isAccepted ? 'Dipinjam' : 'Ditolak',
-        disetujui: isAccepted
+        disetujui: isAccepted,
+        diprosesOleh: req.user.userId
     }
 
     const dataPermintaanPinjaman = await Peminjaman.findOne({_id: pinjamanId})
