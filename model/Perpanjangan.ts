@@ -25,7 +25,7 @@ const PerpanjanganSchema = new mongoose.Schema({
         enum: ['Diterima', 'Pending', 'Ditolak'],
         default: 'Pending'
     },
-    disetujuiOleh: {
+    diprosesOleh: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan'
     },

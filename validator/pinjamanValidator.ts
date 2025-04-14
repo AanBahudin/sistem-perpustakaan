@@ -53,8 +53,12 @@ export const terimaPinjamanValidator = withValidationErrors([
 
             const isPeminjamanExist = await Peminjaman.findOne({_id: id})
 
+            if (!isPeminjamanExist) {
+                throw new NotFoundError('Data peminjaman tidak ditemukan')
+            }
+
             // tolak jika data peminjaman sudah diterima
-            if (isPeminjamanExist?.disetujui || isPeminjamanExist?.statusPeminjaman !== 'Diajukan' || isPeminjamanExist.berakhirPada) {
+            if (isPeminjamanExist.disetujui || isPeminjamanExist.statusPeminjaman !== 'Diajukan' || isPeminjamanExist.berakhirPada) {
                 throw new BadRequestError('Data peminjaman tidak berlaku')
             }
 
@@ -65,10 +69,6 @@ export const terimaPinjamanValidator = withValidationErrors([
 
             if (!buku) {
                 throw new NotFoundError('Buku tidak ditemukan')
-            }
-
-            if (!isPeminjamanExist) {
-                throw new NotFoundError('Data peminjaman tidak ditemukan')
             }
         }),
     body('statusPeminjaman')

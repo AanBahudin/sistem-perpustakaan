@@ -36,6 +36,6 @@ router.route('/requested/pinjaman')
     .get(pustakawanMiddlewareAuthorized, getAllRequestedPinjaman)
 
 router.route('/accept/pinjaman')
-    .patch(pustakawanMiddlewareAuthorized, terimaPinjamanValidator, terimaPinjaman)
+    .post(pustakawanMiddlewareAuthorized, terimaPinjamanValidator, terimaPinjaman)
 
 export default router

@@ -104,48 +104,58 @@ export const getSinglePerpanjangan = async(req: Request, res: Response) => {
 }
 
 export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
-    const {id: perpanjanganId, disetujui} = req.body
+    const {perpanjanganId, disetujui} = req.body
+    let message: string | null;
 
     // ambil data pengajuan perpanjangan
     const dataPerpanjangan = await Perpanjangan.findOne({_id: perpanjanganId})
 
-    // ambil data yang dibutuhkan
-    const {durasi : durasiPerpanjangan, idPeminjaman} = dataPerpanjangan!
+    if (disetujui) {
+        message = 'Perpanjangan Pinjaman Diterima'
+        // ambil data yang dibutuhkan
+        const {durasi : durasiPerpanjangan, idPeminjaman} = dataPerpanjangan!
 
-    // ambil data peminjaman
-    const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
-    const {durasiPeminjaman, berakhirPada} = dataPeminjaman!
+        // ambil data peminjaman
+        const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
+        const {durasiPeminjaman, berakhirPada} = dataPeminjaman!
 
-    // perpanjangan masa durasi.
-    let penambahanDurasiPeminjaman = durasiPeminjaman + durasiPerpanjangan
-    let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, durasiPerpanjangan)
+        // perpanjangan masa durasi.
+        let penambahanDurasiPeminjaman = durasiPeminjaman + durasiPerpanjangan
+        let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, durasiPerpanjangan)
 
-    console.log('Durasi Peminjaman Terbaru ', penambahanDurasiPeminjaman)
-    console.log('Berlaku sampai ', penambahanTanggalPinjaman )
+        // update data perpanjangan (disetujui, disetujuiOleh)
+        await Perpanjangan.findOneAndUpdate(
+            {_id: perpanjanganId},
+            {
+                disetujui: 'Diterima',
+                diprosesOleh: req.user.userId
+            }
+        )
 
-    // update data perpanjangan (disetujui, disetujuiOleh)
-    await Perpanjangan.findOneAndUpdate(
-        {_id: perpanjanganId},
-        {
-            disetujui: 'Diterima',
-            disetujuiOleh: req.user.userId
-        }
-    )
+        // update data pinjaman (durasiPinjaman, berakhirPada)
+        await Peminjaman.findOneAndUpdate(
+            {_id: idPeminjaman},
+            {
+                durasiPeminjaman: penambahanDurasiPeminjaman,
+                berakhirPada: penambahanTanggalPinjaman
+            },
+            {new: true, runValidators: true}
+        )
+    } else {
+        message = 'Perpanjangan Peminjaman Ditolak'
+        await Perpanjangan.findOneAndUpdate(
+            {_id: perpanjanganId},
+            {
+                diprosesOleh: req.user.userId,
+                disetujui: 'Ditolak'
+            }
+        )
+    }
 
-    // update data pinjaman (durasiPinjaman, berakhirPada)
-    const dataPinjamanBaru = await Peminjaman.findOneAndUpdate(
-        {_id: idPeminjaman},
-        {
-            durasiPeminjaman: penambahanDurasiPeminjaman,
-            berakhirPada: penambahanTanggalPinjaman
-        },
-        {new: true, runValidators: true}
-    )
-
+    // kirim respon berhasil menerima pengajuan perpanjangan
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
-        message: 'Perpanjangan Pinjaman Diterima',
+        message: message,
         timestamps: new Date(Date.now()).toString(),
-        data: dataPinjamanBaru
     })
 }

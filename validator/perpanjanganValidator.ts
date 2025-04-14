@@ -80,7 +80,7 @@ export const editPerpanjanganInputValidator = withValidationErrors([
 
             const perpanjangan = await Perpanjangan.findOne({_id: id})
 
-            if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.disetujuiOleh) {
+            if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.diprosesOleh) {
                 throw new BadRequestError('Pengajuan perpanjangan tidak berlaku')
             }
         })
@@ -110,8 +110,39 @@ export const deletePerpanjanganValidator = withValidationErrors([
             const {userId} = req.user
             const perpanjangan = await Perpanjangan.findOne({_id: id, idPengguna: userId})
 
-            if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.disetujuiOleh) {
+            if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.diprosesOleh) {
                 throw new BadRequestError('Perpanjangan tidak dapat dibatalkan!')
             }
         })
+])
+
+export const terimaPerpanjanganValidator = withValidationErrors([
+    body("perpanjanganId")
+        .notEmpty().withMessage('Id Perpanjangan tidak boleh kosong')
+        .custom(async(perpanjanganId) => {
+            isValidMongooseId(perpanjanganId)
+
+            const isPerpanjanganExist = await Perpanjangan.findOne({_id: perpanjanganId})
+            if (!isPerpanjanganExist) {
+                throw new NotFoundError('Data Perpanjangan tidak ditemukan')
+            }
+
+            // ini yg dikerja
+            const { idPeminjaman, disetujui} = isPerpanjanganExist
+            
+            if (disetujui !== 'Pending') {
+                throw new BadRequestError('Data perpanjangan tidak dapat diproses')
+            }
+
+            // cari peminjaman
+            const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
+            if (!dataPeminjaman) {
+                throw new NotFoundError('Data Peminjaman tidak ditemukan')
+            }
+        })
+    ,
+    body("disetujui")
+        .notEmpty().withMessage('Status pengajuan tidak tersedia')
+        .isBoolean().withMessage('Status harus boolean')
+        .toBoolean()
 ])
