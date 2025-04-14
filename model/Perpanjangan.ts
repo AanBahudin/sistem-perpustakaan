@@ -3,11 +3,18 @@ import mongoose from "mongoose";
 const PerpanjanganSchema = new mongoose.Schema({
     idPeminjaman: {
         type: mongoose.Types.ObjectId,
-        ref: 'Peminjaman'
+        ref: 'Peminjaman',
+        required: true
     },
     idPengguna: {
         type: mongoose.Types.ObjectId,
         ref: 'Pengguna',
+        required: true
+    },
+    idBuku: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Buku',
+        required: true
     },
     durasi: {
         type: Number,
