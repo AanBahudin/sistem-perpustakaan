@@ -21,7 +21,7 @@ export const addBuku = async(req: Request | any, res: Response) => {
 export const hapusBuku = async(req: Request | any, res: Response) => {
     const {id} = req.params
 
-    const buku = await Buku.findOneAndDelete({_id: id})
+    const buku = await Buku.findOneAndUpdate({_id: id}, {dihapus: true})
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,

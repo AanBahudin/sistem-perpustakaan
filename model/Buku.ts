@@ -75,6 +75,10 @@ const BukuSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    dihapus: {
+        type: Boolean,
+        default: false
+    },
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan'
