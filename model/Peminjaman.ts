@@ -20,6 +20,10 @@ const PeminjamanSchema = new mongoose.Schema({
         enum: ['Dipinjam', 'Dikembalikan', 'Terlambat', 'Diajukan', 'Ditolak'],
         default: 'Dipinjam'
     },
+    durasiPeminjaman: {
+        type: Number,
+        required: true
+    },
     kondisi: {
         type: String,
         enum: [
@@ -40,6 +44,17 @@ const PeminjamanSchema = new mongoose.Schema({
         default: false
     },
     catatan: String,
+    pengajuanPerpanjangan: {
+        type: Boolean,
+        default: false
+    },
+    totalPerpanjangan: {
+        type: Boolean,
+        default: 0
+    },
+    berakhirPada: {
+        type: Date
+    },
     diprosesOleh: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan'
