@@ -5,13 +5,17 @@ import {
     getSinglePerpanjangan,
     terimaPerpanjangan
 } from '../../controllers/perpanjangan/perpanjanganController'
+import { idPerpanjanganValidator } from '../../validator/peminjamanValidator'
+import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 
 const router = express.Router()
 
 router.route('/')
-    .get(getAllPerpanjangan)
+    .get(pustakawanMiddlewareAuthorized, getAllPerpanjangan)
     .post(pengajuanPerpanjangan)
 
 router.route('/:id')
-    .get(getSinglePerpanjangan)
-    .post(terimaPerpanjangan)
+    .get(pustakawanMiddlewareAuthorized, idPerpanjanganValidator, getSinglePerpanjangan)
+    .post(pustakawanMiddlewareAuthorized, idPerpanjanganValidator, terimaPerpanjangan)
+
+export default router
