@@ -106,3 +106,15 @@ export const editPerpanjanganInputValidator = withValidationErrors([
         .isString().withMessage('Alasan hanya boleh berupa string')
         .isLength({min: 10, max: 250}).withMessage('Alasan 10 - 250 karakter')
 ])
+
+export const deletePerpanjanganValidator = withValidationErrors([
+    param('id')
+        .custom(async(id, {req}) => {
+            const {userId} = req.user
+            const perpanjangan = await Perpanjangan.findOne({_id: id, idPengguna: userId})
+
+            if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.disetujuiOleh) {
+                throw new BadRequestError('Perpanjangan tidak dapat dibatalkan!')
+            }
+        })
+])

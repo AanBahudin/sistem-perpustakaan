@@ -5,9 +5,10 @@ import {
     getSinglePerpanjangan,
     terimaPerpanjangan,
     getAllPerpanjanganUser,
-    editPerpanjanganUser
+    editPerpanjanganUser,
+    batalPerpanjanganUser
 } from '../../controllers/perpanjangan/perpanjanganController'
-import { editPerpanjanganInputValidator, idPerpanjanganValidator, perpanjanganInputValidator, userValidator } from '../../validator/perpanjanganValidator'
+import { deletePerpanjanganValidator, editPerpanjanganInputValidator, idPerpanjanganValidator, perpanjanganInputValidator, userValidator } from '../../validator/perpanjanganValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 
 const router = express.Router()
@@ -24,5 +25,11 @@ router.route('/user/:id')
         userValidator, 
         editPerpanjanganInputValidator, 
         editPerpanjanganUser)
+    .delete(
+        userMiddlewareAuthorized,
+        idPerpanjanganValidator,
+        userValidator,
+        deletePerpanjanganValidator,
+        batalPerpanjanganUser)
 
 export default router
