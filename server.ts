@@ -20,6 +20,7 @@ import { prodiMiddlewareAuthorized, pustakawanMiddlewareAuthorized, userMiddlewa
 
 import { errorHandler } from './errors/errorHandler'
 import path from 'path'
+import Buku from './model/Buku'
 
 const app = express()
 app.set('view engine', 'pug')
@@ -29,8 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(cookieParser(process.env.JWT_SECRET))
 
-app.get('/', (req, res) => {
-    res.render('newEmailSuccessVerification')
+app.get('/', async(req, res) => {
+    await Buku.updateMany({}, {dihapus: false})
 })
 
 app.use('/api/v1/auth', authRoute)

@@ -2,7 +2,46 @@ import { Request, Response } from "express"
 import Buku, { BukuSchemaType } from "../../model/Buku"
 import getDurasiPeminjaman from '../../services/getDurasiPeminjaman'
 import { StatusCodes } from "http-status-codes"
+import { NotFoundError } from "../../errors/errorHandler"
 
+
+// khusus yang diakses user
+export const getAllBukuUser = async(req: Request, res: Response) => {
+    const buku = await Buku.find({
+        dihapus: false,
+        status: 'Tersedia'
+    }).select('-dihapus')
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Daftar Buku User',
+        timestamps: new Date(Date.now()).toString(),
+        data: buku,
+        total: buku.length
+    })
+}
+
+export const getSingleBukuUser = async(req: Request | any, res: Response) => {
+    const {id} = req.params
+
+    const buku = await Buku.findOne({_id: id, dihapus: false}).select("-dihapus -createdBy")
+    if (!buku) {
+        throw new NotFoundError('Buku tidak dapat ditemukan')
+    }
+
+    const durasiPeminjaman = await getDurasiPeminjaman()
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Buku',
+        timestamps: new Date(Date.now()).toString(),
+        data: buku,
+        durasiPeminjaman: [...durasiPeminjaman]
+    })
+}
+
+
+// untuk pustakawan
 export const addBuku = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     const dataBuku : BukuSchemaType = req.body
@@ -44,7 +83,7 @@ export const editBuku = async(req: Request | any, res: Response) => {
     })
 }
 
-export const getAllBuku = async(req: Request | any, res: Response) => {
+export const getAllBukuPustakawan = async(req: Request | any, res: Response) => {
     const books = await Buku.find()
 
     res.status(StatusCodes.OK).json({
@@ -57,19 +96,15 @@ export const getAllBuku = async(req: Request | any, res: Response) => {
     })
 } 
 
-export const getSingleBuku = async(req: Request | any, res: Response) => {
+export const getSingleBukuPustakawan = async(req: Request | any, res: Response) => {
     const { id } = req.params
 
     const buku = await Buku.findOne({_id: id})
-    const durasiPeminjaman = await getDurasiPeminjaman()
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
         message: `Data Buku ${buku?.judul}`,
         timestamps: new Date(Date.now()).toString(),
-        data: buku,
-        meta: {
-            durasi: durasiPeminjaman
-        }
+        data: buku
     })
 }

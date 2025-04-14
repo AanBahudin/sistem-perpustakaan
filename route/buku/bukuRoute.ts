@@ -1,23 +1,31 @@
 import express from 'express'
 
 import {
-    getAllBuku, 
-    getSingleBuku,
+    getAllBukuPustakawan, 
+    getSingleBukuPustakawan,
+    getAllBukuUser,
+    getSingleBukuUser,
     addBuku,
     editBuku,
     hapusBuku,
 } from '../../controllers/buku/bukuController'
 import { bukuInputValidator, verifyBukuIdValidator } from '../../validator/bukuValidator'
-import { pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
+import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 
 const router = express.Router()
 
-router.route('/')
-    .get(getAllBuku)
+router.route('/user')
+    .get(userMiddlewareAuthorized, getAllBukuUser)
+
+router.route('/user/:id')
+    .get(userMiddlewareAuthorized, verifyBukuIdValidator, getSingleBukuUser)
+
+router.route('/pustakawan')
+    .get(pustakawanMiddlewareAuthorized, getAllBukuPustakawan)
     .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)
 
-router.route('/:id')
-    .get(verifyBukuIdValidator, getSingleBuku)
+router.route('/pustakawan/:id')
+    .get(pustakawanMiddlewareAuthorized, verifyBukuIdValidator, getSingleBukuPustakawan)
     .delete(pustakawanMiddlewareAuthorized, verifyBukuIdValidator, hapusBuku)
     .patch(pustakawanMiddlewareAuthorized, verifyBukuIdValidator, bukuInputValidator, editBuku)
 
