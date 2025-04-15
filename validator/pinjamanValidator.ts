@@ -45,41 +45,15 @@ export const inputPengajuanPeminjamanValidator = withValidationErrors([
         })
 ])
 
-export const terimaPinjamanValidator = withValidationErrors([
-    body('id')
-        .notEmpty().withMessage('ID Pinjaman tidak boleh kosong')
-        .custom(async(id) => {
-            const isValidId = mongoose.Types.ObjectId.isValid(id)
-            if (!isValidId) {
-                throw new BadRequestError('Id Pinjaman tidak valid')
-            }
-
-            const isPeminjamanExist = await Peminjaman.findOne({_id: id})
-
-            if (!isPeminjamanExist) {
-                throw new NotFoundError('Data peminjaman tidak ditemukan')
-            }
-
-            // tolak jika data peminjaman sudah diterima
-            if (isPeminjamanExist.disetujui || isPeminjamanExist.statusPeminjaman !== 'Diajukan' || isPeminjamanExist.berakhirPada) {
-                throw new BadRequestError('Data peminjaman tidak berlaku')
-            }
-
-            const buku = await Buku.findOne({_id: isPeminjamanExist.buku})
-            if (buku?.stok as number <= 0) {
-                throw new BadRequestError('Stok buku sudah habis')
-            }
-
-            if (!buku) {
-                throw new NotFoundError('Buku tidak ditemukan')
-            }
-        }),
-    body('statusPeminjaman')
-        .notEmpty().withMessage('Status penerimaan tidak boleh kosong')
-        .isBoolean().withMessage('Data harus boolean')
-        .toBoolean()
-        
+// validasi untuk req.body pada pembatalan peminjaman oleh user
+export const inputPembatalanPeminjamanUserValidator = withValidationErrors([
+    body("idPeminjaman")
+        .notEmpty().withMessage('Data Peminjaman tidak ada')
+        .custom(idPeminjaman => {
+            isValidMongooseId(idPeminjaman)
+        })
 ])
+
 
 export const idPinjamanValidator = withValidationErrors([
     param('id')
@@ -133,4 +107,40 @@ export const tambahPinjamanInputValidator = withValidationErrors([
     body("kondisi")
         .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
         .isIn(kondisiBuku).withMessage('Kondisi buku tidak tersedia'),
+])
+
+export const terimaPinjamanValidator = withValidationErrors([
+    body('id')
+        .notEmpty().withMessage('ID Pinjaman tidak boleh kosong')
+        .custom(async(id) => {
+            const isValidId = mongoose.Types.ObjectId.isValid(id)
+            if (!isValidId) {
+                throw new BadRequestError('Id Pinjaman tidak valid')
+            }
+
+            const isPeminjamanExist = await Peminjaman.findOne({_id: id})
+
+            if (!isPeminjamanExist) {
+                throw new NotFoundError('Data peminjaman tidak ditemukan')
+            }
+
+            // tolak jika data peminjaman sudah diterima
+            if (isPeminjamanExist.disetujui || isPeminjamanExist.statusPeminjaman !== 'Diajukan' || isPeminjamanExist.berakhirPada) {
+                throw new BadRequestError('Data peminjaman tidak berlaku')
+            }
+
+            const buku = await Buku.findOne({_id: isPeminjamanExist.buku})
+            if (buku?.stok as number <= 0) {
+                throw new BadRequestError('Stok buku sudah habis')
+            }
+
+            if (!buku) {
+                throw new NotFoundError('Buku tidak ditemukan')
+            }
+        }),
+    body('statusPeminjaman')
+        .notEmpty().withMessage('Status penerimaan tidak boleh kosong')
+        .isBoolean().withMessage('Data harus boolean')
+        .toBoolean()
+        
 ])

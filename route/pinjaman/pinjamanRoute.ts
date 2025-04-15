@@ -1,22 +1,24 @@
 import express from 'express'
 import {
-    requestPinjaman,
     terimaPinjaman,
     tambahPinjaman,
     getAllPinjamanAktif,
     getSinglePinjaman,
     hapusPinjaman,
-    getAllRequestedPinjaman,
     getAllPinjaman,
+    getAllRequestedPinjaman,
+    requestPinjaman,
     getPinjamanUser,
-    getSinglePinjamanUser
+    getSinglePinjamanUser,
+    pembatalanPinjamanUser
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
     idPinjamanValidator, 
     inputPengajuanPeminjamanValidator, 
     terimaPinjamanValidator,
-    tambahPinjamanInputValidator
+    tambahPinjamanInputValidator,
+    inputPembatalanPeminjamanUserValidator
 
  } from '../../validator/pinjamanValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -32,6 +34,7 @@ router.route('/user')
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, idPinjamanValidator, getSinglePinjamanUser)
+    .delete(userMiddlewareAuthorized, idPinjamanValidator, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
 
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')

@@ -65,6 +65,29 @@ export const getSinglePinjamanUser = async(req: Request | any, res: Response) =>
     })
 }
 
+export const pembatalanPinjamanUser = async(req: Request | any, res: Response) => {
+    const {idPeminjaman} = req.body
+
+    // ambil data pinjama terlebih dahulu
+    const dataPinjaman = await Peminjaman.findOne({_id: idPeminjaman, peminjam: req.user.userId})
+    if (!dataPinjaman) {
+        throw new NotFoundError('Data pinjaman tidak ditemukan')
+    }
+
+    const { statusPeminjaman, disetujui, diprosesOleh } = dataPinjaman
+    if (statusPeminjaman !== 'Diajukan' || disetujui || diprosesOleh) {
+        throw new BadRequestError('Tidak dapat membatalkan pengajuan')
+    }
+
+    await Peminjaman.findOneAndDelete({_id: idPeminjaman});
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Pinjaman Dibatalkan',
+        timestamps: new Date(Date.now()).toString()
+    })
+}
+
 // controller ini khusus untuk pustakawan
 export const terimaPinjaman = async(req: Request | any, res: Response) => {
     const { id: pinjamanId, statusPeminjaman: isAccepted } = req.body
