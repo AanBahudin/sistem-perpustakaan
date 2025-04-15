@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 
 const PengembalianSchema = new mongoose.Schema({
-    peminjaman: {
+    idPeminjaman: {
         type: mongoose.Types.ObjectId,
         ref: 'Peminjaman'
+    },
+    idPengguna: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Pengguna'
     },
     tanggalPengembalian: {
         type: Date,
