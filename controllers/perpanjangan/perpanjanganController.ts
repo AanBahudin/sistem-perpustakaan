@@ -22,10 +22,10 @@ export const pengajuanPerpanjangan = async(req: Request | any, res: Response) =>
 export const getAllPerpanjanganUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
-    const dataPerpanjanganUser = await Perpanjangan.find({idPeminjaman: userId})
+    const dataPerpanjanganUser = await Perpanjangan.find({idPengguna: userId})
 
     res.status(StatusCodes.OK).json({
-        status: StatusCodes,
+        status: StatusCodes.OK,
         message: 'Data Permintaan Perpanjangan',
         timestamps: new Date(Date.now()).toString(),
         data: dataPerpanjanganUser,
@@ -97,7 +97,7 @@ export const getSinglePerpanjangan = async(req: Request, res: Response) => {
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
-        message: 'Data Semua Perpanjangan',
+        message: 'Data Perpanjangan',
         timestamps: new Date(Date.now()).toString(),
         data: dataPerpanjangan,
     })
@@ -159,4 +159,3 @@ export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
         timestamps: new Date(Date.now()).toString(),
     })
 }
-

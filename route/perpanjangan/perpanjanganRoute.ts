@@ -5,6 +5,7 @@ import {
     getSinglePerpanjangan,
     terimaPerpanjangan,
     getAllPerpanjanganUser,
+    getSinglePerpanjanganUser,
     editPerpanjanganUser,
     batalPerpanjanganUser
 } from '../../controllers/perpanjangan/perpanjanganController'
@@ -22,7 +23,7 @@ router.route('/user/:id')
         userMiddlewareAuthorized, 
         idPerpanjanganValidator, 
         userValidator, 
-        getSinglePerpanjangan)
+        getSinglePerpanjanganUser)
     .patch(
         userMiddlewareAuthorized, 
         idPerpanjanganValidator, 
