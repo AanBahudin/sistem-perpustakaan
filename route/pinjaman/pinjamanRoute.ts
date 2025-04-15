@@ -8,7 +8,8 @@ import {
     hapusPinjaman,
     getAllRequestedPinjaman,
     getAllPinjaman,
-    getPinjamanUser
+    getPinjamanUser,
+    getSinglePinjamanUser
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
@@ -28,6 +29,9 @@ router.route('/request/pinjaman')
 
 router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)
+
+router.route('/user/:id')
+    .get(userMiddlewareAuthorized, idPinjamanValidator, getSinglePinjamanUser)
 
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')

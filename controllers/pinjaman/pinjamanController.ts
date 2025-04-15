@@ -7,9 +7,9 @@ import Pengguna from "../../model/Pengguna"
 import { PinjamanUpdatedFieldType } from "../../types/pinjamanTypes"
 import tambahHariKeTanggal from "../../utils/tambahHari"
 import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../../utils/checker"
-import { BadRequestError } from "../../errors/errorHandler"
+import { BadRequestError, NotFoundError } from "../../errors/errorHandler"
 
-// 2 controller dibawah khusus untuk pengguna
+// 3 controller dibawah khusus untuk pengguna
 export const requestPinjaman = async(req: Request | any, res: Response) => {
     const { idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
@@ -45,6 +45,23 @@ export const getPinjamanUser = async(req: Request | any, res: Response) => {
         timestamps: new Date(Date.now()).toString(),
         data: pinjamanUser,
         total: pinjamanUser.length
+    })
+}
+
+export const getSinglePinjamanUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id} = req.params
+
+    const getInfoPinjaman = await Peminjaman.findOne({_id: id, peminjam: userId})
+    if (!getInfoPinjaman) {
+        throw new NotFoundError("Data Pinjaman tidak ditemukan")
+    }
+
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Data Pinjaman',
+        timestamps: new Date(Date.now()).toString(),
+        data: getInfoPinjaman
     })
 }
 
