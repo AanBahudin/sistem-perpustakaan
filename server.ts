@@ -9,6 +9,7 @@ import userRoute from './route/pengguna/penggunaRoute'
 import pustakawanRoute from './route/pustakawan/pustakawanRoute'
 import prodiRoute from './route/prodi/prodiRoute'
 import pinjamanRoute from './route/pinjaman/pinjamanRoute'
+import pengembalianRoute from './route/pengembalian/pengembalianRoute'
 import durasiRoute from './route/durasi/durasiRoute'
 import perpanjanganRoute from './route/perpanjangan/perpanjanganRoute'
 import bukuRoute from './route/buku/bukuRoute'
@@ -42,6 +43,7 @@ app.use('/api/v1/pinjaman', authenticationMiddleware, pinjamanRoute)
 app.use('/api/v1/durasi', authenticationMiddleware, durasiRoute)
 app.use('/api/v1/perpanjangan', authenticationMiddleware, perpanjanganRoute)
 app.use('/api/v1/buku', authenticationMiddleware, bukuRoute)
+app.use('/api/v1/pengembalian', authenticationMiddleware, pengembalianRoute)
 
 app.use(errorHandler)
 
