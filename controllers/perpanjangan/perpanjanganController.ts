@@ -70,7 +70,7 @@ export const batalPerpanjanganUser = async(req: Request | any, res: Response) =>
     await Perpanjangan.findOneAndDelete({_id: id, idPengguna: userId})
 
     res.status(StatusCodes.OK).json({
-        status: StatusCodes,
+        status: StatusCodes.OK,
         message: 'Data Perpanjangan Dibatalkan',
         timestamps: new Date(Date.now()).toString(),
     })

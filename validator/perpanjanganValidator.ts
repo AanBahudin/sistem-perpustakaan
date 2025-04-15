@@ -68,7 +68,9 @@ export const userValidator = withValidationErrors([
             const {userId} = req.user
 
             const perpanjangan = await Perpanjangan.findOne({_id: id})
-            if (perpanjangan?.idPengguna !== userId) {
+            const {idPengguna} = perpanjangan!
+
+            if (idPengguna.toString() !== userId) {
                 throw new NotAuthorized('Tidak dapat melihat pengajuan ini')
             }
         })
