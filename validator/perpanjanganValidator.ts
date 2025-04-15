@@ -19,6 +19,11 @@ export const perpanjanganInputValidator = withValidationErrors([
             if (!isPeminjamanExist) {
                 throw new NotFoundError('Data peminjaman tidak ditemukan')
             }
+
+            const { statusPeminjaman, disetujui, diprosesOleh } = isPeminjamanExist
+            if (statusPeminjaman !== "Dipinjam" || !disetujui || !diprosesOleh) {
+                throw new BadRequestError('Tidak bisa melakukan pengajuan')
+            }
         }),
     body('idBuku')
         .notEmpty().withMessage('Id Buku tidak boleh kosong')
@@ -79,7 +84,7 @@ export const userValidator = withValidationErrors([
 export const editPerpanjanganInputValidator = withValidationErrors([
     param('id')
         .custom(async(id) => {
-
+            isValidMongooseId(id)
             const perpanjangan = await Perpanjangan.findOne({_id: id})
 
             if (perpanjangan?.disetujui !== 'Pending' || perpanjangan.diprosesOleh) {
@@ -131,7 +136,6 @@ export const terimaPerpanjanganValidator = withValidationErrors([
 
             // ini yg dikerja
             const { idPeminjaman, disetujui} = isPerpanjanganExist
-            
             if (disetujui !== 'Pending') {
                 throw new BadRequestError('Data perpanjangan tidak dapat diproses')
             }
@@ -140,6 +144,12 @@ export const terimaPerpanjanganValidator = withValidationErrors([
             const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
             if (!dataPeminjaman) {
                 throw new NotFoundError('Data Peminjaman tidak ditemukan')
+            }
+
+            // mencegah pustakawan menerima perpanjangan dari pinjaman yang sedang tidak dalam status 'Dipinjam'
+            const { statusPeminjaman, disetujui:persetujuanPinjaman, diprosesOleh } = dataPeminjaman
+            if (statusPeminjaman !== "Dipinjam" || !persetujuanPinjaman || !diprosesOleh) {
+                throw new BadRequestError('Tidak bisa melakukan pengajuan')
             }
         })
     ,
