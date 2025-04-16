@@ -33,10 +33,11 @@ export const getAllPerpanjanganUser = async(req: Request | any, res: Response) =
     })
 }
 
-export const getSinglePerpanjanganUser = async(req: Request, res: Response) => {
+export const getSinglePerpanjanganUser = async(req: Request | any, res: Response) => {
     const { id } = req.params
+    const {userId} = req.user
 
-    const perpanjangan = await Perpanjangan.findOne({_id: id})
+    const perpanjangan = await Perpanjangan.findOne({_id: id, idPengguna: userId})
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
@@ -46,11 +47,12 @@ export const getSinglePerpanjanganUser = async(req: Request, res: Response) => {
     })
 }
 
-export const editPerpanjanganUser = async(req: Request, res: Response) => {
+export const editPerpanjanganUser = async(req: Request | any, res: Response) => {
     const {id} = req.params
+    const {userId} = req.user
 
     const data = await Perpanjangan.findOneAndUpdate(
-        {_id: id},
+        {_id: id, idPengguna: userId},
         req.body,
         {new: true, runValidators: true}
     )

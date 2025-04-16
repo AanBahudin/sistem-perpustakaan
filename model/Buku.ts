@@ -6,7 +6,7 @@ export type BukuSchemaType = {
     penerbit?: string,
     tahunTerbit?: string,
     deskripsi: string,
-    cover: string,
+    cover?: string,
     ISBN?: string,
     stok?: number,
     kategori: string,
@@ -32,8 +32,8 @@ const BukuSchema = new mongoose.Schema({
         default: 'Tidak diketahui'
     },
     tahunTerbit: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: '2024'
     },
     deskripsi: {
         type: String,

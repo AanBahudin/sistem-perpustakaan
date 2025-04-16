@@ -74,19 +74,3 @@ export const bukuInputValidator = withValidationErrors([
         .optional()
         .customSanitizer(() => 0),
 ])
-
-export const verifyBukuIdValidator = withValidationErrors([
-    param('id')
-        .custom(async(id) => {
-            const isValidId = mongoose.Types.ObjectId.isValid(id)
-
-            if (!isValidId) {
-                throw new BadRequestError('id buku tidak valid')
-            }
-
-            const buku = await Buku.findOne({_id: id})
-            if (!buku) {
-                throw new NotFoundError('Buku tidak ditemukan')
-            }
-        })
-])
