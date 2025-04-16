@@ -3,7 +3,7 @@ import withValidationErrors from "./withValidationErrors";
 import { body, param } from "express-validator";
 import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
-import getDurasiPeminjaman from '../services/getDurasiPeminjaman'
+import getDurasiPeminjaman from '../services/durasiServices'
 import Peminjaman from "../model/Peminjaman";
 import { isValidMongooseId } from "../utils/checker";
 import Pengguna from "../model/Pengguna";

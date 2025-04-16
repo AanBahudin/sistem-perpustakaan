@@ -1,11 +1,11 @@
 import { Request, Response } from "express"
 import DurasiPeminjaman from "../../model/DurasiPeminjaman"
-import dataDurasiPeminjaman from "../../services/getDurasiPeminjaman"
+import {dataDurasiPeminjaman, hapusDataDurasi, tambahDurasiPeminjaman} from "../../services/durasiServices"
 import { StatusCodes } from "http-status-codes"
 
 
 export const tambahDurasi = async(req : Request, res: Response) => {
-    const data = await DurasiPeminjaman.create(req.body)
+    const data = await tambahDurasiPeminjaman(req.body)
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
@@ -30,7 +30,7 @@ export const semuaDurasi = async(req : Request, res: Response) => {
 export const hapusDurasi = async(req : Request, res: Response) => {
     const { id } = req.params
 
-    await DurasiPeminjaman.findOneAndDelete({_id: id})
+    await hapusDataDurasi(id)
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,

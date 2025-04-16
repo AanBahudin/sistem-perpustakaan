@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import Buku, { BukuSchemaType } from "../../model/Buku"
-import getDurasiPeminjaman from '../../services/getDurasiPeminjaman'
+import getDurasiPeminjaman from '../../services/durasiServices'
 import { StatusCodes } from "http-status-codes"
 import { NotFoundError } from "../../errors/errorHandler"
 import { editDataBuku, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"

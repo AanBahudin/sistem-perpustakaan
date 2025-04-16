@@ -8,7 +8,7 @@ import Pustakawan from "../../model/Pustakawan";
 import Buku from "../../model/Buku";
 import Kategori from "../../model/Kategori";
 
-import getDurasiPeminjaman from '../../services/getDurasiPeminjaman'
+import getDurasiPeminjaman from '../../services/durasiServices'
 
 export const getAllUsers = async(req: Request, res: Response) => {
     const users = await Pengguna.find({ verifikasiEmail: true, verifikasiProdi: true })
