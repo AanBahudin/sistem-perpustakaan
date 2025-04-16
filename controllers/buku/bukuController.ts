@@ -1,8 +1,8 @@
 import { Request, Response } from "express"
 import Buku, { BukuSchemaType } from "../../model/Buku"
-import getDurasiPeminjaman from '../../services/durasiServices'
+import {dataDurasiPeminjaman} from '../../services/durasiServices'
 import { StatusCodes } from "http-status-codes"
-import { NotFoundError } from "../../errors/errorHandler"
+import { SendDataResponse, SendOneDataResponseWithDuration } from "../../utils/sendResponse"
 import { editDataBuku, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
 
 
@@ -10,12 +10,12 @@ import { editDataBuku, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan,
 export const getAllBukuUser = async(req: Request, res: Response) => {
     const buku = await getSemuaBukuTersediaUntukUser()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Daftar Buku User',
-        timestamps: new Date(Date.now()).toString(),
+    SendDataResponse({
+        res,
+        message: 'Data Buku',
         data: buku,
-        total: buku.length
+        total: buku.length,
+        page: 1
     })
 }
 
@@ -23,14 +23,13 @@ export const getSingleBukuUser = async(req: Request | any, res: Response) => {
     const {id} = req.params
 
     const buku = await getSatuBukuTersediaUntukUser(id)
-    const durasiPeminjaman = await getDurasiPeminjaman()
+    const durasiPeminjaman = await dataDurasiPeminjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponseWithDuration({
+        res,
         message: 'Data Buku',
-        timestamps: new Date(Date.now()).toString(),
         data: buku,
-        durasiPeminjaman: [...durasiPeminjaman]
+        durasi: durasiPeminjaman
     })
 }
 

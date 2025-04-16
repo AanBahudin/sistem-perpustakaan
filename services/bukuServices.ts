@@ -6,13 +6,13 @@ export const getSemuaBukuTersediaUntukUser = async() => {
     const buku = await Buku.find({
         dihapus: false,
         status: 'Tersedia'
-    })
+    }).select('-dihapus')
 
     return buku
 }
 
 export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
-    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'})
+    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'}).select('-dihapus')
 
     if (!buku) {
         throw new NotFoundError('Data buku tidak ditemukan')

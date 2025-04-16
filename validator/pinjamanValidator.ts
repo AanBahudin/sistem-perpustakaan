@@ -3,7 +3,7 @@ import withValidationErrors from "./withValidationErrors";
 import { body, param } from "express-validator";
 import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
-import getDurasiPeminjaman from '../services/durasiServices'
+import {dataDurasiPeminjaman} from '../services/durasiServices'
 import Peminjaman from "../model/Peminjaman";
 import { isValidMongooseId } from "../utils/checker";
 import Pengguna from "../model/Pengguna";
@@ -33,7 +33,7 @@ export const inputPengajuanPeminjamanValidator = withValidationErrors([
         .notEmpty().withMessage('Durasi peminjaman tidak boleh kosong')
         .isInt({min: 0}).withMessage('Durasi harus berupa angka')
         .custom(async(durasiPeminjaman) => {
-            const durasiTersedia = (await getDurasiPeminjaman()).map(item => {
+            const durasiTersedia = (await dataDurasiPeminjaman()).map(item => {
                 return item.durasi
             })
 
@@ -98,7 +98,7 @@ export const tambahPinjamanInputValidator = withValidationErrors([
         .isInt().withMessage('Durasi harus bertipe angka')
         .toInt()
         .custom(async(durasi) => {
-            const durasiPeminjaman = (await getDurasiPeminjaman()).map(item => item.durasi)
+            const durasiPeminjaman = (await dataDurasiPeminjaman()).map(item => item.durasi)
 
             if (!durasiPeminjaman.includes(durasi)) {
                 throw new BadRequestError('Durasi tidak tersedia')

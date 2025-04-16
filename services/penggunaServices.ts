@@ -1,6 +1,7 @@
 import { BadRequestError, NotAuthenticated, NotFoundError } from '../errors/errorHandler'
 import sendUpdateEmailVerification from '../helpers/sendUpdateEmailVerification'
 import Pengguna from '../model/Pengguna'
+import renderError from '../utils/renderError'
 import { GetProfileParamsServiceType, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 

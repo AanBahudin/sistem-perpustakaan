@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import Pengguna, { IPengguna } from "../../model/Pengguna";
 import { getProfil, updateProfil, updatingPassword, updatingEmail } from "../../services/penggunaServices";
+import { SendOneDataResponse } from "../../utils/sendResponse";
 
 export const getProfile = async(req: any, res: Response) => {
     const { userId } = req.user
 
     const userData = await getProfil({userId})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data profil',
-        timestamps: new Date(Date.now()),
         data: userData
     })
 }
