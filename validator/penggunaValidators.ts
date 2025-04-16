@@ -31,9 +31,14 @@ export const validateUpdateEmailPengguna = withValidationErrors([
         .withMessage('Alamat email tidak boleh kosong')
         .isEmail()
         .withMessage('Format email tidak didukung')
-        .custom(async(email) => {
-            const isEmailAlreadyExist = await Pengguna.findOne({email})
-            if (isEmailAlreadyExist) {
+        .custom(async(email, {req}) => {
+            const user = await Pengguna.findOne({ email })
+            /*
+                jika user yang didapat dengan email baru ini, 
+                memilki Id yang tidak sama sama dengan id saya. 
+                maka email ini sudah digunakan
+            */
+            if (user && user._id.toString() !== req.user.userId) {
                 throw new BadRequestError('Email sudah digunakan')
             }
 

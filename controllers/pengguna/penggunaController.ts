@@ -1,17 +1,12 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import Pengguna, { IPengguna } from "../../model/Pengguna";
-import { BadRequestError } from "../../errors/errorHandler";
-import mongoose from "mongoose";
-import { hashPassword, comparePassword } from "../../utils/passwordUtils";
-import { generateToken } from "../../utils/jwt";
-import sendVerficationEmail from "../../utils/emailVerification";
-
+import { getProfil, updateProfil, updatingPassword, updatingEmail } from "../../services/penggunaServices";
 
 export const getProfile = async(req: any, res: Response) => {
     const { userId } = req.user
 
-    const userData = await Pengguna.findOne({_id: userId}).select('-password')
+    const userData = await getProfil({userId})
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
@@ -24,7 +19,7 @@ export const getProfile = async(req: any, res: Response) => {
 export const updateProfile = async(req: any | Request, res: Response) => {
     const { userId } = req.user
 
-    const updatedProfile = await Pengguna.findOneAndUpdate({_id: userId}, req.body, {new: true, runValidators: true}).select('-password');
+    const updatedProfile = await updateProfil({userId, dataUpdate: req.body})
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
@@ -36,18 +31,9 @@ export const updateProfile = async(req: any | Request, res: Response) => {
 
 export const updatePassword = async(req: any | Request, res: Response) => {
     const { userId } = req.user
-    const { password: newPassword } = req.body
+    const { password: newPassword, oldPassword } = req.body
 
-    const user = await Pengguna.findOne({_id: userId})
-
-    const isPasswordCorrect = await comparePassword(user?.password as string, newPassword)
-    if (!isPasswordCorrect) {
-        throw new BadRequestError('Password salah !')
-    }
-
-    const hashedPassword = await hashPassword(newPassword)
-    
-    const updatedUser = await Pengguna.findOneAndUpdate({_id: userId}, { password: hashedPassword }, {new: true, runValidators: true})
+    const updatedUser = await updatingPassword({userId, newPassword, oldPassword})
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
@@ -68,35 +54,12 @@ export const updateEmail = async (req: any | Request, res: Response) => {
     */ 
     const { nama, email } = await Pengguna.findOne({ _id: userId }) as IPengguna
 
+    const updatedUser = await updatingEmail({newEmail: newEmail, userId})
 
-    try {
-        // generate token verifikasi
-        const tokenVerifikasi = generateToken({ userId, newEmail, email })
-
-        // generate link verifikasi
-        const linkVerifikasi = `http://localhost:4000/api/v1/auth/verify/email?token=${tokenVerifikasi}`
-
-        // kirim email ke user
-
-        await sendVerficationEmail({
-            templateName: 'konfirmasiUpdateEmail',
-            subject: 'Konfirmasi Perubahan Akun Email',
-            to: newEmail,
-            emailData: {
-                name: nama,
-                verficationLink: linkVerifikasi
-            }
-        })
-        console.log('pesan dikirim')
-
-        // respon berhasil dari API
-        res.status(StatusCodes.OK).json({
-            status: StatusCodes.OK,
-            message: 'Silahkan cek email anda untuk melakukan verifikasi',
-            timestamps: new Date(Date.now()).toString()
-        })
-    } catch (error) {
-        const errorMsg = error instanceof Error ? error.message : 'Something is wrong'
-        throw new BadRequestError(errorMsg)
-    }
+    // respon berhasil dari API
+    res.status(StatusCodes.OK).json({
+        status: StatusCodes.OK,
+        message: 'Silahkan cek email anda untuk melakukan verifikasi',
+        timestamps: new Date(Date.now()).toString()
+    })
 }

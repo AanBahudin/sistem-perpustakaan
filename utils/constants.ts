@@ -1,3 +1,5 @@
+export const authBaseUrl = 'http://localhost:4000/api/v1/auth'
+
 export const kondisiBuku = [
     'Normal',    // Buku dalam kondisi baik
     'Rusak',     // Buku rusak secara fisik
