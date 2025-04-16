@@ -15,19 +15,3 @@ export const durasiInputValidator = withValidationErrors([
             }
         })
 ])
-
-export const idDurasiValidator = withValidationErrors([
-    param('id')
-        .notEmpty().withMessage('Id tidak disediakan')
-        .custom(async(id) => {
-            const isValidId = mongoose.Types.ObjectId.isValid(id)
-            if (!isValidId) {
-                throw new BadRequestError('Id Durasi tidak valid')
-            }
-
-            const durasi = await DurasiPeminjaman.findOne({_id: id})
-            if (!durasi) {
-                throw new NotFoundError('Data durasi tidak ditemukan')
-            }
-        })
-])

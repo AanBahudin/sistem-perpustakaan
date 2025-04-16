@@ -1,7 +1,8 @@
 import express from 'express'
 import { hapusDurasi, semuaDurasi, tambahDurasi } from '../../controllers/durasi/durasiController'
 import { pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
-import { durasiInputValidator, idDurasiValidator } from '../../validator/durasiValidator'
+import { durasiInputValidator } from '../../validator/durasiValidator'
+import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router.route('/')
     .post(pustakawanMiddlewareAuthorized, durasiInputValidator, tambahDurasi)
 
 router.route('/:id')
-    .delete(pustakawanMiddlewareAuthorized, idDurasiValidator, hapusDurasi)
+    .delete(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, hapusDurasi)
 
 
 export default router
