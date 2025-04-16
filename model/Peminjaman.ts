@@ -46,6 +46,10 @@ const PeminjamanSchema = new mongoose.Schema({
     diprosesOleh: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan'
+    },
+    dataPengembalian: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Pengembalian'
     }
 }, {timestamps: true})
 

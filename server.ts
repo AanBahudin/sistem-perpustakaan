@@ -3,6 +3,7 @@ dotenv.config()
 
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import morgan from 'morgan'
 
 import authRoute from './route/auth/authRoute'
 import userRoute from './route/pengguna/penggunaRoute'
@@ -21,12 +22,14 @@ import { prodiMiddlewareAuthorized, pustakawanMiddlewareAuthorized, userMiddlewa
 
 import { errorHandler } from './errors/errorHandler'
 import path from 'path'
+
 import Buku from './model/Buku'
 
 const app = express()
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(morgan('dev'))
 
 app.use(express.json())
 app.use(cookieParser(process.env.JWT_SECRET))

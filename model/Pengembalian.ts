@@ -3,15 +3,22 @@ import mongoose from "mongoose";
 const PengembalianSchema = new mongoose.Schema({
     idPeminjaman: {
         type: mongoose.Types.ObjectId,
-        ref: 'Peminjaman'
+        ref: 'Peminjaman',
+        required: true
     },
     idPengguna: {
         type: mongoose.Types.ObjectId,
-        ref: 'Pengguna'
+        ref: 'Pengguna',
+        required: true
+    },
+    idBuku: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Buku',
+        required: true
     },
     tanggalPengembalian: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     durasiKeterlambatan: {
         type: Number,
@@ -19,7 +26,8 @@ const PengembalianSchema = new mongoose.Schema({
     },
     statusPengembalian: {
         type: String,
-        default: 'Dikembalikan'
+        enum: ['Dikembalikan', 'Dihilangkan', 'Pending'],
+        default: 'Pending'
     },
     keadaanBuku: {
         type: String,
@@ -36,7 +44,11 @@ const PengembalianSchema = new mongoose.Schema({
         ],
         default: "Normal"
     },
-    denda: {
+    dendaKeterlambatan: {
+        type: Number,
+        default: 0
+    },
+    dendaFisik: {
         type: Number,
         default: 0
     },
@@ -44,6 +56,10 @@ const PengembalianSchema = new mongoose.Schema({
         type: String,
         enum: ['Dibayar', 'Belum Bayar'],
         default: 'Belum Bayar'
+    },
+    diprosesOleh: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Pustakawan'
     }
 }, {timestamps: true})
 

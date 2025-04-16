@@ -4,11 +4,12 @@ import {
     getSinglePengembalianUser,
     getDataPengembalian,
     getSingleDataPengembalian,
-    terimaPengembalian
+    buatDataPengembalian,
+    terimaDataPengembalian
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
-import { pengembalianInputValidator } from '../../validator/pengembalianValidators'
+import { dataPengembalianValidator, pengembalianIdValidator } from '../../validator/pengembalianValidators'
 
 const router = express.Router()
 
@@ -17,17 +18,20 @@ router.route('/user')
     .get(userMiddlewareAuthorized, getAllPengembalianUser)
 
 router.route('/user/:id')
-    .get(userMiddlewareAuthorized, getSinglePengembalianUser)
+    .get(userMiddlewareAuthorized, pengembalianIdValidator, getSinglePengembalianUser)
 
 
 // pustakawan
 router.route('/')
     .get(pustakawanMiddlewareAuthorized, getDataPengembalian)
 
-router.route('/accept')
-    .post(pustakawanMiddlewareAuthorized, pengembalianInputValidator, terimaPengembalian)
+router.route('/create')
+    .post(pustakawanMiddlewareAuthorized, dataPengembalianValidator, buatDataPengembalian)
+
+router.route('/accept/:id')
+    .post(pustakawanMiddlewareAuthorized, pengembalianIdValidator, terimaDataPengembalian)
 
 router.route('/:id')
-    .get(pustakawanMiddlewareAuthorized, getSingleDataPengembalian)
+    .get(pustakawanMiddlewareAuthorized, pengembalianIdValidator, getSingleDataPengembalian)
 
 export default router
