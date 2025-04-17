@@ -50,7 +50,7 @@ export const login = async(req : Request<unknown, unknown, LoginInputBody>, res:
         httpOnly: true,
         expires: new Date(Date.now() + oneDay),
         secure: process.env.NODE_ENV === 'production'
-    }).status(StatusCodes.OK).json({
+    }).status(StatusCodes.CREATED).json({
         status: StatusCodes.CREATED,
         message: user.verifikasiEmail ? 'Proses masuk berhasil' : 'Berhasil masuk, jangan lupa verifikasi akun anda!' ,
         timestamps: new Date().toISOString()

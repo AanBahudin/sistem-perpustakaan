@@ -28,30 +28,29 @@ export const registerUser = async(dataRegister: RegisterUserServicesParamsType) 
 export const loginUser = async({email, password} : LoginServicesParamsType) => {
     // mencari data user
     const user = await Pengguna.findOne({email})
+    
     // pengecekkan data user dan status akun user
-    if (!user || user.statusAkun === "Nonaktif" || !user.verifikasiEmail) {
-        throw new NotFoundError('Akun tidak ditemukan')
-    }
-
+    if (!user) throw new NotFoundError('Akun tidak ditemukan')
+    // pengecekkan status akun
+    if (user.statusAkun === "Nonaktif") throw new NotAuthenticated('Akun telah dinonaktifkan')
+    // pengecekkan apakah pengguna sudah verifikasi email
+    if (!user.verifikasiEmail) throw new NotAuthenticated('Silahkan verifikasi email terlebih dahulu')
     // pengecekkan status blokir akun pengguna
-    if (user.blocked) {
-        throw new NotAuthorized("Akun anda telah di blokir")
-    }
-
-    // pecah data pengguna
-    const { _id: idPengguna, email: emailPengguna, role, password: hashPassword } = user
+    if (user.blocked) throw new NotAuthorized("Akun anda telah di blokir")
     
     // pengecekkan password 
-    const isPasswordCorrect = await comparePassword(hashPassword as string, password)
-    if (!isPasswordCorrect) {
-        throw new NotAuthenticated('Password yang dimasukan salah')
-    }
+    const isPasswordCorrect = await comparePassword(user.password as string, password)
+    if (!isPasswordCorrect) throw new NotAuthenticated('Password yang dimasukan salah')
 
     // generate token
-    const payload = {userId: idPengguna, role, email: emailPengguna}
+    const payload = {
+        userId: user._id, 
+        role: user.role, 
+        email: user.email
+    }
     const token = generateToken(payload)
 
-    return {token}
+    return {token, user}
 }
 
 export const loginProdi = async({email, password} : LoginServicesParamsType) => {
