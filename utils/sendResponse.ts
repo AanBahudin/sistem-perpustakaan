@@ -23,11 +23,11 @@ export const SendOneDataResponse = ({
         status,
         message,
         timestamps,
-        data: data ?? null,
+        data: data,
     })
 }
 
-export const SendOneDataResponseWithDuration = ({
+export const SendDataWithDurasiResponse = ({
     res,
     status = StatusCodes.OK,
     message,
