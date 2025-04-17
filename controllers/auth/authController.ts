@@ -72,7 +72,6 @@ export const prodiLogin =  async(req: Request, res: Response) => {
 
     const payload = {userId: user._id, role: user.role, email: user.email}
     const token = generateToken(payload)
-    const oneDay = 1000 * 60 * 60 * 24
 
     res.cookie('token', token, cookieConfiguration)
         .status(StatusCodes.OK)

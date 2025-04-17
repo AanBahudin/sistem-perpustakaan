@@ -9,6 +9,7 @@ import { generateToken } from "../../utils/jwt";
 import sendVerficationEmail from "../../utils/emailVerification";
 import { BadRequestError } from "../../errors/errorHandler";
 import Pengguna from "../../model/Pengguna";
+import { DataAuthPustakawanType } from "../../types/authTypes";
 
 export const createAdministrator = async(req: any | Request, res: Response) => {
     const bodyInput = req.body
@@ -43,7 +44,7 @@ export const createPustakawan = async(req : any | Request, res: Response) => {
     try {
 
         // set data yang akan dikirm via token, dan link verifikasi
-        const payload = {userId: user._id, email: user.email, password: plainPassword}
+        const payload = {pustakawanId: user._id.toString(), email: user.email, password: plainPassword} as DataAuthPustakawanType
         const tokenVerfikasi = generateToken(payload)
         const linkVerfikasi = `http://localhost:4000/api/v1/auth/verify/pustakawan/account?token=${tokenVerfikasi}`
 

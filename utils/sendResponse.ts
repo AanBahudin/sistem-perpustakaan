@@ -12,6 +12,19 @@ interface SendResponseParamsInterface {
     durasi?: any
 }
 
+export const SendBasicResponse = ({
+    res, 
+    status = StatusCodes.OK,
+    message,
+    timestamps = new Date(Date.now()).toString()
+} : SendResponseParamsInterface) => {
+    return res.status(StatusCodes.OK).json({
+        status,
+        message,
+        timestamps
+    })
+}
+
 export const SendOneDataResponse = ({
     res,
     status = StatusCodes.OK,
