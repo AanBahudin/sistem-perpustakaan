@@ -21,10 +21,9 @@ export const updateProfile = async(req: any | Request, res: Response) => {
 
     const updatedProfile = await updateProfil({userId, dataUpdate: req.body})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Berhasil update profile',
-        timestamps: new Date(Date.now()),
         data: updatedProfile
     })
 }
@@ -35,11 +34,11 @@ export const updatePassword = async(req: any | Request, res: Response) => {
 
     const updatedUser = await updatingPassword({userId, newPassword, oldPassword})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Berhasil update password',
-        timestamps: new Date(Date.now()),
         data: updatedUser
+
     })
 }
 
@@ -57,9 +56,9 @@ export const updateEmail = async (req: any | Request, res: Response) => {
     const updatedUser = await updatingEmail({newEmail: newEmail, userId})
 
     // respon berhasil dari API
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Silahkan cek email anda untuk melakukan verifikasi',
-        timestamps: new Date(Date.now()).toString()
+        data: updatedUser
     })
 }
