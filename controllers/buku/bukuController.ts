@@ -29,7 +29,7 @@ export const getSingleBukuUser = async(req: Request | any, res: Response) => {
         res,
         message: 'Data Buku',
         data: buku,
-        durasi: durasiPeminjaman
+        durasi: durasiPeminjaman,
     })
 }
 

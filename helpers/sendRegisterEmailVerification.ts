@@ -16,7 +16,7 @@ const sendRegisterEmailVerification = async({userId, nama, email} : SendRegister
     // send email
     await sendVerficationEmail({
         templateName: 'mail',
-        subject: "",
+        subject: "Selamat Bergabung, Silahkan Verifikasi Akun Anda",
         to: email, 
         emailData: {
             name: nama, 

@@ -1,36 +1,14 @@
 import { Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { SendManyDataResponseType, SendPageResponseType, SendResponseType, SendResponseWithToken } from "../types/sendResponseType";
 
-interface SendResponseParamsInterface {
-    res: Response,
-    status?: number,
-    message?: string,
-    timestamps?: string,
-    data?: any,
-    total?: number,
-    page?: number,
-    durasi?: any,
-    token?: string,
-    tokenName?: string,
-    expires?: Date
-    pageName?: string,
-    pageData?: {
-        name?: string
-    }
-}
-
-interface SendPageResponse {
-    res: Response,
-    pageName: string,
-    pageData?: Record<string, any>
-}
 
 export const SendBasicResponse = ({
     res, 
     status = StatusCodes.OK,
     message,
     timestamps = new Date(Date.now()).toString()
-} : SendResponseParamsInterface) => {
+} : SendResponseType) => {
     return res.status(StatusCodes.OK).json({
         status,
         message,
@@ -44,12 +22,12 @@ export const SendOneDataResponse = ({
     message,
     timestamps =  new Date(Date.now()).toString(),
     data,
-} : SendResponseParamsInterface) => {
+} : SendResponseType) => {
     return res.status(status).json({
         status,
         message,
         timestamps,
-        data: data,
+        data,
     })
 }
 
@@ -60,12 +38,12 @@ export const SendDataWithDurasiResponse = ({
     timestamps =  new Date(Date.now()).toString(),
     data,
     durasi
-} : SendResponseParamsInterface) => {
+} : SendManyDataResponseType) => {
     return res.status(status).json({
         status,
         message,
         timestamps,
-        data: data ?? null,
+        data,
         durasi
     })
 }
@@ -78,7 +56,7 @@ export const SendDataResponse = ({
     data,
     total,
     page,
-} : SendResponseParamsInterface ) => {
+} : SendManyDataResponseType ) => {
     return res.status(status).json({
         status,
         message,
@@ -97,7 +75,7 @@ export const sendResponseWithToken = ({
     token,
     tokenName,
     expires = new Date(Date.now() + 1000 * 60 * 60 * 24)
-} : SendResponseParamsInterface ) => {
+} : SendResponseWithToken ) => {
     return res.cookie(tokenName as string, token, {
         httpOnly: true,
         expires: expires,
@@ -113,6 +91,6 @@ export const sendResponseWithPage = ({
     res,
     pageName,
     pageData
-} : SendPageResponse) => {
+} : SendPageResponseType) => {
     res.render(pageName as string, pageData)
 }

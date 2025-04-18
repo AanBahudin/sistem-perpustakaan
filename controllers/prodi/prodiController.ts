@@ -1,205 +1,146 @@
-import { StatusCodes } from "http-status-codes";
-import jwt from 'jsonwebtoken'
-import Pustakawan, { PustakawanInterface } from "../../model/Pustakawan";
-import Prodi, { ProdiInterfaceModel } from "../../model/Prodi";
 import { Request, Response } from "express";
-import { ControllerParams } from "../../types/global";
-import { hashPassword } from "../../utils/passwordUtils";
-import { generateToken } from "../../utils/jwt";
-import sendVerficationEmail from "../../utils/emailVerification";
-import { BadRequestError } from "../../errors/errorHandler";
-import Pengguna from "../../model/Pengguna";
-import { DataAuthPustakawanType } from "../../types/authTypes";
+import { 
+    createAdmin, 
+    createNewPustakawan, 
+    getAllPenggunaData, 
+    getAllPustakawanData, 
+    getAllRequestedPengguna, 
+    getOnePenggunaData, 
+    getOnePustakawanData, 
+    getOneRequestedPengguna, 
+    getProdiProfile, 
+    verifyRegisteredAccount } from "../../services/prodiServices";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
+// controller untuk buat/tambah administrator
 export const createAdministrator = async(req: any | Request, res: Response) => {
-    const bodyInput = req.body
-    bodyInput.password = await hashPassword(bodyInput.password)
-
-    await Prodi.create(bodyInput)
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Akun administrator berhasil dibuat',
-        timestamps: new Date(Date.now()).toISOString()
+    const newAdmin = await createAdmin({
+        nama: req.body.nama,
+        email: req.body.email,
+        password: req.body.password,
+    })
+    
+    SendBasicResponse({
+        res,
+        message: 'Akun administrator berhasil dibuat'
     })
 }
 
+// controller untuk menambahkan akun pustakawan
 export const createPustakawan = async(req : any | Request, res: Response) => {
     const {userId} = req.user
 
-    // ambil input prodi
-    const pustakawanData : PustakawanInterface = req.body as PustakawanInterface
+    const newPustakawan = await createNewPustakawan({
+        adminId: userId,
+        nama: req.body.nama,
+        email: req.body.email,
+        password: req.body.password,
+        no_hp: req.body.no_hp
+    })
 
-    const plainPassword = pustakawanData.password
-    // set status akun menjadi pending
-    pustakawanData.statusAkun = 'Pending'
-    pustakawanData.createdBy = userId
-
-    // hash password pustakawan 
-    pustakawanData.password = await hashPassword(pustakawanData.password)
-
-    // buat data pustakawan
-    const user = await Pustakawan.create(pustakawanData)
-
-    try {
-
-        // set data yang akan dikirm via token, dan link verifikasi
-        const payload = {pustakawanId: user._id.toString(), email: user.email, password: plainPassword} as DataAuthPustakawanType
-        const tokenVerfikasi = generateToken(payload)
-        const linkVerfikasi = `http://localhost:4000/api/v1/auth/verify/pustakawan/account?token=${tokenVerfikasi}`
-
-        // kirim email verifikasi ke akun calon pustakawan
-        await sendVerficationEmail({
-            subject: 'Verifikasi Email Pustakawan',
-            templateName: 'konfirmasiEmailPustakawan',
-            to: pustakawanData.email,
-            emailData: {
-                verficationLink: linkVerfikasi,
-                name: pustakawanData.nama
-            }
-        })
-
-
-        // kirim response berhasil jika email sudah terkirim
-        res.status(StatusCodes.OK).json({
-            status: StatusCodes.OK,
-            message: 'Proses pendaftaran berhasil, menunggu verifikasi akun',
-            timestamps: new Date().toISOString()
-        })
-
-    } catch (error) {
-        const errormsg = error instanceof Error ? error.message : 'Something is wrong'
-        throw new BadRequestError(errormsg)
-    }
+    SendBasicResponse({res, message: 'Proses pendaftaran berhasil, menunggu verifikasi akun'})
 }
 
-// export const verifyPustakawanEmail = async({req, res} : ControllerParams) => {
-//     // mengambil data token dari query
-//     const { token } = req.query
-//     console.log(token)
-
-//     // pengecekkan type token dan apakah token disediakan atau tidak
-//     if (typeof token !== 'string' || !token) {
-//         return res.render('rejected')
-//     }
-
-//     try {
-//         // bongkar informasi dari jwt
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string, email: string, password: string }
-        
-//         // cari user yang sesuai dengan userId yang dikirim ke database
-//         const user = await Pustakawan.findOne({_id: decoded.userId})
-//         // cek status akun, jika sudah aktif atau nonaktif. lempar halaman error 
-//         if (user?.statusAkun !== 'Pending') {
-//             return res.render('rejected')
-//         }
-
-//         // jika statusAkun = Pending, maka update statusAkun menjadi aktif
-//         await Pustakawan.findOneAndUpdate({_id: decoded.userId}, {statusAkun: 'Aktif'})
-
-//         // kirim email berisi data login ke email pustakawan
-//         try {
-//             await sendVerficationEmail({
-//                 templateName: 'pustakawanAuthDataEmail',
-//                 subject: 'Data Login Perpustakaan',
-//                 to: decoded.email,
-//                 name: user.nama as string
-//             })
-//         } catch (error) {
-//             const errormsg = error instanceof Error ? error.message : 'Something is wrong'
-//             throw new BadRequestError(errormsg)
-//         }
-
-//         res.render('konfirmasiEmailPustakawan')
-//     } catch (error) {
-//         console.log('token kadaluarsa')
-//         return res.render('rejected')
-//     }
-// }
-
+// controller untuk menampilkan informasi profil
 export const getProfile = async(req: any | Request, res: Response) => {
     const {userId} = req.user
-    const user = await Prodi.findOne({_id: userId}).select('-password')
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Profil admin',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: user
+    const prodi = await getProdiProfile({prodiId: userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Profil Program Studi',
+        data: prodi.data
+
     })
 }
 
+// controller untuk mengambil data semua pustakawan
 export const getAllPustakawan = async(req: any | Request, res: Response) => {
-    const pustakawan = await Pustakawan.find()
+    const pustakawan = await getAllPustakawanData()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Pustakawan',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: pustakawan,
-        total: pustakawan.length
+        total: pustakawan.data.length,
+        data: pustakawan.data,
+        page: 1,
     })
 }
 
+// controller untuk mengambil data salah satu pustakawan
 export const getSinglePustakawan = async(req: any | Request, res: Response) => {
     const {id} = req.params
+    const pustakawan = await getOnePustakawanData({pustakawanId: id})
 
-    const pustakawan = await Pustakawan.findOne({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Data Pustakawan - ${pustakawan?.nama}`,
-        timestamps: new Date(Date.now()).toISOString(),
-        data: pustakawan
+    SendOneDataResponse({
+        res,
+        message: 'Data Pustakawan',
+        data: pustakawan.data
     })
 }
 
+// controller untuk mengambil data semua pengguna
 export const getAllUsers = async(req: any | Request, res: Response) => {
-    const allUsers = await Pengguna.find({verifikasiEmail: true, verifikasiProdi: true})
+    const getAllUsersData = await getAllPenggunaData()
     
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Pengguna aktif',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: allUsers,
-        total: allUsers.length
+    SendDataResponse({
+        res,
+        data: getAllUsersData.data,
+        message: 'Data Pengguna',
+        page: 1,
+        total: getAllUsersData.data.length
     })
 }
 
+// controller untuk mengambil data salah satu pengguna
 export const getSingleUser = async(req: any | Request, res: Response) => {
     const {id} = req.params
 
-    const user = await Pengguna.findOne({_id: id})
+    const user = await getOnePenggunaData({penggunaId: id})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Data Pengguna - ${user?.nama}`,
-        timestamps: new Date(Date.now()).toISOString(),
-        data: user
+    SendOneDataResponse({
+        res,
+        message: 'Data Pengguna',
+        data: user.data
     })
 }
 
+// controller untuk mengambil data permintaan pembuatan akun
 export const getRequestedUser = async (req: any | Request, res: Response) => {
-    const requestedUser = await Pengguna.find({verifikasiEmail: true, verifikasiProdi: false, blocked: false})
+    const requestedUser = await getAllRequestedPengguna()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Permintaan Daftar Pengguna',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: requestedUser,
-        total: requestedUser.length
+    SendDataResponse({
+        res,
+        message: 'Daftar permintaan pendaftaran',
+        total: requestedUser.data.length,
+        page: 1,
+        data: requestedUser.data,
     })
 }
 
+// controller untuk mengambil data permintaan pembuatan akun
 export const getSingleRequestedUser = async (req: any | Request, res: Response) => {
     const { id } = req.params
 
-    const requestedUser = await Pengguna.findOne({_id: id})
+    const requestedUser = await getOneRequestedPengguna({penggunaId: id})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Permintaan Pendaftaran',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: requestedUser
+    SendOneDataResponse({
+        res,
+        message: 'Data Pengguna',
+        data: requestedUser.data
+    })
+}
+
+// controller untuk mengaktifkan / meng-verifikasi akun pengguna
+export const verifiedUserAccount = async(req: Request, res: Response) => {
+    const {id: userId} = req.params
+
+    const verifyServices = await verifyRegisteredAccount({userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Akun pengguna berhasil diaktfikan',
+        data: verifyServices.data,
     })
 }

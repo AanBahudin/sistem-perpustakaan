@@ -27,7 +27,7 @@ export type LoginServicesParamsType = {
 export type RegisterUserServicesParamsType = {
     nama: string,
     email: string,
-    nim: string,
+    idKampus: string,
     password: string,
     role: "Mahasiswa" | "Dosen"
 }

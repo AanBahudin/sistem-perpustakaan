@@ -23,22 +23,10 @@ export const UpdateEmailPermissionMiddleware = async (req : any | Request, res :
     */
 
     const { statusAkun, verifikasiEmail, verifikasiProdi, blocked } = currentUser
-
-    if (statusAkun !== 'Aktif') {
-        throw new NotAuthorized('Akun anda belum aktif')
-    }
-
-    if (!verifikasiEmail) {
-        throw new NotAuthorized('Akun anda belum diverifikasi')
-    }
-
-    if (!verifikasiProdi) {
-        throw new NotAuthorized('Akun anda belum disetujui program studi')
-    }
-
-    if (blocked) {
-        throw new NotAuthorized('Akun anda diblokir!')
-    }
+    if (statusAkun !== 'Aktif') throw new NotAuthorized('Akun anda belum aktif')
+    if (!verifikasiEmail) throw new NotAuthorized('Akun anda belum diverifikasi')
+    if (!verifikasiProdi) throw new NotAuthorized('Akun anda belum disetujui program studi')
+    if (blocked) throw new NotAuthorized('Akun anda diblokir!')
 
     next()
 }
@@ -48,14 +36,10 @@ export const verifyPustakawanIdMiddleware = withValidationErrors([
         .custom(async(id) => {
             const isIdValid = mongoose.Types.ObjectId.isValid(id)
             
-            if (!isIdValid) {
-                throw new BadRequestError('id pustakawan tidak valid')
-            }
+            if (!isIdValid) throw new BadRequestError('id pustakawan tidak valid')
 
             const pustakawan = await Pustakawan.findOne({_id: id})
-            if (!pustakawan) {
-                throw new NotFoundError('Pustakawan tidak ditemukan')
-            }
+            if (!pustakawan) throw new NotFoundError('Pustakawan tidak ditemukan')
         })
 ])
 
@@ -63,15 +47,10 @@ export const verifyPenggunaIdMiddleware = withValidationErrors([
     param('id')
         .custom(async(id) => {
             const isIdValid = mongoose.Types.ObjectId.isValid(id)
-            
-            if (!isIdValid) {
-                throw new BadRequestError('id pengguna tidak valid')
-            }
+            if (!isIdValid) throw new BadRequestError('id pengguna tidak valid')
 
             const pustakawan = await Pengguna.findOne({_id: id})
-            if (!pustakawan) {
-                throw new NotFoundError('Pengguna tidak ditemukan')
-            }
+            if (!pustakawan) throw new NotFoundError('Pengguna tidak ditemukan')
         })
 ])
 

@@ -23,7 +23,7 @@ export const register = async(req : Request, res: Response) => {
     const registerServices = await registerUser({
         email: req.body.email,
         nama: req.body.nama,
-        nim: req.body.nim,
+        idKampus: req.body.nim,
         password: req.body.password,
         role: req.body.role
     })

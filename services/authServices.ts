@@ -10,14 +10,33 @@ import { generateToken } from "../utils/jwt"
 import Pustakawan from "../model/Pustakawan"
 import sendVerifyAndAuthDataPustakawan from "../helpers/sendVerifyAndAuthDataPustakawan"
 
+// SUDAH DITESTING
 export const registerUser = async(dataRegister: RegisterUserServicesParamsType) => {
-    // pengacakkan password
-    const hashedPassword = await hashPassword(dataRegister.password)
 
-    const {nama, email} = dataRegister
-    const user = await Pengguna.create({
-        ...dataRegister,
-        password: hashedPassword
+    const existingUser = await Pengguna.findOne({
+        $or: [
+            { email: dataRegister.email },
+            { idKampus: dataRegister.idKampus }
+          ]
+    })
+
+    // pengecekkan apakah email dan nim sudah digunakan
+    if (existingUser) {
+        if (existingUser.email === dataRegister.email) {
+          throw new BadRequestError('Email sudah digunakan');
+        }
+        if (existingUser.idKampus === dataRegister.idKampus) {
+          throw new BadRequestError('NIM / NIDN sudah digunakan');
+        }
+      }
+    
+      // pengacakkan password
+      const hashedPassword = await hashPassword(dataRegister.password)
+
+      const {nama, email} = dataRegister      
+      const user = await Pengguna.create({
+          ...dataRegister,
+          password: hashedPassword
     })
 
     try {
@@ -28,6 +47,7 @@ export const registerUser = async(dataRegister: RegisterUserServicesParamsType) 
     }
 }
 
+// SUDAH DITESTING
 export const loginUser = async({email, password} : LoginServicesParamsType) => {
     // mencari data user
     const user = await Pengguna.findOne({email})
@@ -56,6 +76,7 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
     return {token, user}
 }
 
+// SUDAH DITESTING
 export const loginProdi = async({email, password} : LoginServicesParamsType) => {
     const prodi = await Prodi.findOne({email})
 
@@ -81,6 +102,7 @@ export const loginProdi = async({email, password} : LoginServicesParamsType) => 
     return {token}
 }
 
+// SUDAH DITESTING
 export const loginPustakawan = async({email, password} : LoginServicesParamsType) => {
     // cari akun berdasarkan email yang di-input
     const pustakawan = await Pustakawan.findOne({email})
@@ -104,6 +126,7 @@ export const loginPustakawan = async({email, password} : LoginServicesParamsType
     return {token}
 }
 
+// SUDAH DITESTING
 export const verifyRegisterUser = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token ada dan bertipe string
     if (!token || typeof token !== 'string') {
@@ -128,7 +151,7 @@ export const verifyRegisterUser = async({token, res} : VerifyServicesParamsType)
         }
 
         // cari pengguna dengan id nya lalu update verifikasiEmail menjadi true
-        await Pengguna.findOneAndUpdate({_id: dataToken.userId}, {verifikasiEmail: true}, {new: true, runValidators: true})
+        await Pengguna.findOneAndUpdate({_id: dataToken.userId}, {verifikasiEmail: true, statusAkun: 'Pending'}, {new: true, runValidators: true})
 
         // kembalikan data pengguna baru
         return {nama: user.nama}

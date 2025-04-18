@@ -45,7 +45,8 @@ const PenggunaSchema = new mongoose.Schema({
     statusAkun: {
         type: String,
         enum: ['Nonaktif', 'Pending', 'Aktif'],
-        default: 'Nonaktif'
+        default: 'Nonaktif',
+        required: true
     },
     password: String,
     fotoProfil: String,

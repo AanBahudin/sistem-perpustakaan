@@ -1,7 +1,10 @@
 import mongoose, { ObjectId } from "mongoose";
 
 const PustakawanSchema = new mongoose.Schema({
-    nama: String,
+    nama: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -13,9 +16,13 @@ const PustakawanSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: 'Pustakawan'
+        default: 'Pustakawan',
+        required: true
     },
-    no_hp: String,
+    no_hp: {
+        type: String,
+        required: true
+    },
     statusAkun: {
         type: String,
         enum: ['Nonaktif', 'Pending', 'Aktif'],

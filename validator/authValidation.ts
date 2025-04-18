@@ -39,14 +39,8 @@ export const registerInputValidator = withValidationErrors([
         .notEmpty()
         .withMessage('Email tidak boleh kosong')
         .isEmail()
-        .withMessage('Format email tidak didukung')
-        .custom(async(email) => {
-            const isEmailAlredyExist = await Pengguna.findOne({email})
-            if (isEmailAlredyExist) {
-                throw new BadRequestError('Email sudah digunakan')
-            }
-        }),
-    body('nim')
+        .withMessage('Format email tidak didukung'),
+    body('idKampus')
         .notEmpty()
         .withMessage('id kampus tidak boleh kosong')
         .isLength({min: 8, max: 10})

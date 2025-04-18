@@ -45,6 +45,7 @@ export const createAdminValidator = withValidationErrors([
             }
         }),
     body('noHp')
+        .notEmpty().withMessage('Nomor hp tidak boleh kosong')
         .customSanitizer((noHp) => {
             if (noHp && noHp.startsWith('08')) {
                 if (noHp.length !== 12) {
