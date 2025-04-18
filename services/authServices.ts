@@ -46,11 +46,11 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
     if (!isPasswordCorrect) throw new NotAuthenticated('Password yang dimasukan salah')
 
     // generate token
-    const payload = {
+    const payload : TokenType = {
         userId: user._id.toString(), 
         role: user.role, 
         email: user.email
-    } as TokenType
+    }
     const token = generateToken(payload)
 
     return {token, user}
@@ -104,11 +104,11 @@ export const loginPustakawan = async({email, password} : LoginServicesParamsType
     return {token}
 }
 
-// mulai refactor disini
-export const verifyRegisterEmail = async({token, res} : VerifyServicesParamsType) => {
+export const verifyRegisterUser = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token ada dan bertipe string
     if (!token || typeof token !== 'string') {
-        return res.render('rejected')
+        res.render('rejected', {message: 'Terjadi kesalahan saat meng-verifikasi'})
+        return null
     }
 
     try {
@@ -117,25 +117,32 @@ export const verifyRegisterEmail = async({token, res} : VerifyServicesParamsType
         // mencari data pengguna berdasarkan userId dari token
         const user = await Pengguna.findOne({_id: dataToken.userId})
 
+        if (!user)  {
+            res.render('rejected', {message: 'Data Anda tidak dapat ditemukan'})
+            return null
+        }
         // cek apakah sudah menggunakan link verifikasi sebelumnya atau akunnya sudah di-verifikasi
-        if (user?.verifikasiEmail) {
-            return res.render('rejected')
+        if (user.verifikasiEmail) {
+            res.render('rejected', {message: 'Akun anda sudah di-verifikasi'})
+            return null
         }
 
         // cari pengguna dengan id nya lalu update verifikasiEmail menjadi true
-        const updateUser = await Pengguna.findOneAndUpdate({_id: dataToken.userId}, {verifikasiEmail: true}, {new: true, runValidators: true})
+        await Pengguna.findOneAndUpdate({_id: dataToken.userId}, {verifikasiEmail: true}, {new: true, runValidators: true})
 
         // kembalikan data pengguna baru
-        return {user: updateUser}
+        return {nama: user.nama}
     } catch (error) {
-        return res.render('rejected')
+        const errorMsg = renderError(error)
+        return res.render('rejected', {message: errorMsg})
     }
 }
 
-export const verifyEmailUpdate = async({token, res} : VerifyServicesParamsType) => {
+export const verifyEmailUpdateUser = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token tersedia atau bertipe string
     if (!token || typeof token !== 'string') {
-        return res.render('rejected')
+        res.render('rejected', {message: 'Terjadi kesalahan saat meng-verifikasi'})
+        return null
     }
 
     try {
@@ -144,27 +151,31 @@ export const verifyEmailUpdate = async({token, res} : VerifyServicesParamsType) 
         // ambil data pengguna dari database
         const dataPengguna = await Pengguna.findOne({_id: dataToken.userId})
         if (!dataPengguna) {
-            return res.render('rejected')
+            res.render('rejected', {message: 'Akun Anda tidak dapat ditemukan'})
+            return null
         }
 
         // pengecekkan agar tidak terjadi verifikasi 2 kali
         if (dataPengguna.email === dataToken.newEmail) {
-            return res.render('rejected')
+            res.render('rejected', {message: 'Akun Anda telah diverifikasi'})
+            return null
         }
 
         // perbaharui email
         const updatedUser = await Pengguna.findOneAndUpdate({ _id: dataToken.userId }, { email: dataToken.newEmail }, { new: true, runValidators: true })
-        return {data: updatedUser   }
+        return {data: updatedUser}
 
     } catch (error) {
-        return res.render('rejected')
+        const erroMsg = renderError(error)
+        return res.render('rejected', {message: erroMsg})
     }
 }
 
 export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServicesParamsType) => {
      // cek apakah token tersedia atau bertipe string
      if (!token || typeof token !== 'string') {
-        return res.render('rejected')
+        res.render('rejected', {message: 'Terjadi kesalahan saat meng-verifikasi'})
+        return null
     }
 
     try {
@@ -175,12 +186,13 @@ export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServi
         // ambil data pustakawan sebelum di-update
         const pustakawanExist = await Pustakawan.findOne({_id: pustakawanId, email})
         if (!pustakawanExist) {
-            return res.render('rejected')
+            return res.render('rejected', {message: 'Akun Anda tidak dapat ditemukan'})
         }
 
         // cek apakah akun pustakawan sudah di-verifikasi untuk mencegah update berulang
         if (pustakawanExist.statusAkun !== 'Pending') {
-            return res.render('rejected')
+            res.render('rejected', {messge: `Tidak dapat melakukan verifikasi, akun Anda dalam status ${pustakawanExist.statusAkun}`})
+            return null
         }
 
         // update status akun pustakawan menjadi aktif
@@ -192,7 +204,8 @@ export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServi
 
         // cek apakah pustakawan diupdate / tidak ditemukan
         if (!pustakawan) {
-            return res.render('rejected')
+            res.render('rejected', {message: 'Akun Anda tidak dapat ditemukan'})
+            return null
         }
 
         // ambil data pustakawan yang sudah di-update
@@ -205,6 +218,7 @@ export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServi
         })
 
     } catch (error) {
-        return res.render('rejected')
+        const errorMsg = renderError(error)
+        return res.render('rejected', {message: errorMsg})
     }
 }

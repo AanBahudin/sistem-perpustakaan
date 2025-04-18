@@ -4,12 +4,25 @@ import { StatusCodes } from "http-status-codes";
 interface SendResponseParamsInterface {
     res: Response,
     status?: number,
-    message: string,
+    message?: string,
     timestamps?: string,
     data?: any,
     total?: number,
     page?: number,
-    durasi?: any
+    durasi?: any,
+    token?: string,
+    tokenName?: string,
+    expires?: Date
+    pageName?: string,
+    pageData?: {
+        name?: string
+    }
+}
+
+interface SendPageResponse {
+    res: Response,
+    pageName: string,
+    pageData?: Record<string, any>
 }
 
 export const SendBasicResponse = ({
@@ -74,4 +87,32 @@ export const SendDataResponse = ({
         page,
         data,
     })
+}
+
+export const sendResponseWithToken = ({
+    res,
+    status = StatusCodes.OK,
+    message,
+    timestamps = new Date(Date.now()).toString(),
+    token,
+    tokenName,
+    expires = new Date(Date.now() + 1000 * 60 * 60 * 24)
+} : SendResponseParamsInterface ) => {
+    return res.cookie(tokenName as string, token, {
+        httpOnly: true,
+        expires: expires,
+        secure: process.env.NODE_ENV === 'production'
+    }).status(StatusCodes.OK).json({
+        status,
+        message,
+        timestamps,
+    })
+}
+
+export const sendResponseWithPage = ({
+    res,
+    pageName,
+    pageData
+} : SendPageResponse) => {
+    res.render(pageName as string, pageData)
 }

@@ -1,5 +1,16 @@
+import { JsonWebTokenError } from "jsonwebtoken";
+
 const renderError = (error: unknown) => {
-    const errorMsg = error instanceof Error ? error.message : 'Something is wrong'
+    let errorMsg = '';
+
+    if (error instanceof Error) {
+        errorMsg = error.message
+    } else if (error instanceof JsonWebTokenError) {
+        error = 'Terjadi kesalahan saat meng-verifikasi'
+    } else {
+        errorMsg = 'Terjadi kesalahan'
+    }
+
     return errorMsg
 }
 

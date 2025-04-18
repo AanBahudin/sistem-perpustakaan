@@ -39,6 +39,7 @@ const PenggunaSchema = new mongoose.Schema({
     angkatan: Number,
     email: {
         type: String,
+        required: true,
         unique: true
     },
     statusAkun: {
@@ -51,7 +52,8 @@ const PenggunaSchema = new mongoose.Schema({
     no_hp: String,
     role: {
         type: String,
-        enum: ['Dosen', 'Mahasiswa']
+        enum: ['Dosen', 'Mahasiswa'],
+        required: true
     },
     jumlah_pinjaman: {
         type: Number,
