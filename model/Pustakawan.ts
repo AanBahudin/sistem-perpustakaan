@@ -4,9 +4,13 @@ const PustakawanSchema = new mongoose.Schema({
     nama: String,
     email: {
         type: String,
+        required: true,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     role: {
         type: String,
         default: 'Pustakawan'

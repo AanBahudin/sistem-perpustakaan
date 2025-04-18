@@ -1,5 +1,11 @@
 import { Response } from "express"
 
+export type TokenType = {
+    userId: string,
+    email: string,
+    role: string
+}
+
 export type LoginInputBody = {
     email: string
     password: string

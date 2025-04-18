@@ -1,5 +1,5 @@
 import Pengguna from "../model/Pengguna"
-import { LoginServicesParamsType, RegisterUserServicesParamsType, DataVerifyAccountTokenType, DataVerifyEmailUpdateType, DataAuthPustakawanType, VerifyServicesParamsType } from "../types/authTypes"
+import { LoginServicesParamsType, RegisterUserServicesParamsType, DataVerifyAccountTokenType, DataVerifyEmailUpdateType, DataAuthPustakawanType, VerifyServicesParamsType, TokenType } from "../types/authTypes"
 import { comparePassword, hashPassword } from "../utils/passwordUtils"
 import sendRegisterEmailVerification from "../helpers/sendRegisterEmailVerification"
 import renderError from "../utils/renderError"
@@ -12,10 +12,13 @@ import sendVerifyAndAuthDataPustakawan from "../helpers/sendVerifyAndAuthDataPus
 
 export const registerUser = async(dataRegister: RegisterUserServicesParamsType) => {
     // pengacakkan password
-    dataRegister.password = await hashPassword(dataRegister.password)
+    const hashedPassword = await hashPassword(dataRegister.password)
 
     const {nama, email} = dataRegister
-    const user = await Pengguna.create(dataRegister)
+    const user = await Pengguna.create({
+        ...dataRegister,
+        password: hashedPassword
+    })
 
     try {
         await sendRegisterEmailVerification({email, nama, userId: user._id.toString()})
@@ -44,10 +47,10 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
 
     // generate token
     const payload = {
-        userId: user._id, 
+        userId: user._id.toString(), 
         role: user.role, 
         email: user.email
-    }
+    } as TokenType
     const token = generateToken(payload)
 
     return {token, user}
@@ -55,22 +58,25 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
 
 export const loginProdi = async({email, password} : LoginServicesParamsType) => {
     const prodi = await Prodi.findOne({email})
-    if (!prodi || prodi.statusAkun !== 'Aktif') {
-        throw new NotFoundError('Akun tidak ditemukan')
-    }
 
-    // pecah data prodi
-    const { password: hashPassword, _id: prodiId, role, email: emailProdi } = prodi
+    // cek apakah data prodi ada
+    if (!prodi) throw new NotFoundError('Data tidak ditemukan')
+    // cek status akun prodi
+    if (prodi.statusAkun !== 'Aktif') throw new NotAuthenticated('Akun tidak aktif')
 
     // cek password
-    const isPasswordCorrect = await comparePassword(hashPassword as string, password)
+    const isPasswordCorrect = await comparePassword(prodi.password as string, password)
     if (!isPasswordCorrect) {
         throw new NotAuthenticated('Password salah')
     }
 
     // buat token login
-    const paylaod = {userId: prodiId, role, emailProdi}
-    const token = generateToken(paylaod)
+    const payload : TokenType = {
+        userId: prodi._id.toString(), 
+        role: prodi.role,
+        email: prodi.email
+    }
+    const token = generateToken(payload)
 
     return {token}
 }
@@ -79,26 +85,26 @@ export const loginPustakawan = async({email, password} : LoginServicesParamsType
     // cari akun berdasarkan email yang di-input
     const pustakawan = await Pustakawan.findOne({email})
 
-    // pengecekkan akun dan status akun pustakawan
-    if (!pustakawan || pustakawan.statusAkun !== 'Aktif') {
-        throw new NotFoundError('Akun tidak ditemukan')
-    }
-
-    // pecah data pustakawan
-    const { password: hashPassword, _id: pustakawanId, email: emailPustakawan, role } = pustakawan!
+    // pengecekkan akun
+    if (!pustakawan) throw new NotFoundError('Data tidak ditemukan')
+    // pengecekkan status akun
+    if (pustakawan.statusAkun !== 'Aktif') throw new NotAuthorized('Akun di nonaktifkan')
 
     // pengecekkan password
-    const isPasswordCorrect = await comparePassword(hashPassword as string, password);
-    if (!isPasswordCorrect) {
-        throw new NotAuthenticated('Password salah')
-    }
+    const isPasswordCorrect = await comparePassword(pustakawan.password, password);
+    if (!isPasswordCorrect) throw new NotAuthenticated('Password salah')
 
-    const payload = {userId: pustakawanId, role, emailPustakawan};
+    const payload : TokenType = {
+        userId: pustakawan._id.toString(), 
+        role: pustakawan.role,
+        email: pustakawan.email
+    };
     const token = generateToken(payload)
 
     return {token}
 }
 
+// mulai refactor disini
 export const verifyRegisterEmail = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token ada dan bertipe string
     if (!token || typeof token !== 'string') {

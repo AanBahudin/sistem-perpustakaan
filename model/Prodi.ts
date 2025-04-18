@@ -4,7 +4,8 @@ const ProdiSchema = new mongoose.Schema({
     nama: String,
     email: {
         type: String,
-        unique: String
+        unique: true,
+        required: true
     },
     password: String,
     role: {
