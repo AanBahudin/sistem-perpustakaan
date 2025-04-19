@@ -1,6 +1,6 @@
 import express from 'express'
 import { getProfile, updateProfile, updateEmail } from '../../controllers/pengguna/penggunaController'
-import { validateUpdateEmailPengguna, validateUpdateInputPengguna } from '../../validator/penggunaValidators'
+import { validateUpdateEmailPengguna, validateUpdateInputPengguna } from '../../validator/penggunaValidator'
 import { UpdateEmailPermissionMiddleware } from '../../middleware/utilsMiddleware'
 
 const router = express.Router()

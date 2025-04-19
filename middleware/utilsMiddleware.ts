@@ -31,18 +31,6 @@ export const UpdateEmailPermissionMiddleware = async (req : any | Request, res :
     next()
 }
 
-export const verifyPustakawanIdMiddleware = withValidationErrors([
-    param('id')
-        .custom(async(id) => {
-            const isIdValid = mongoose.Types.ObjectId.isValid(id)
-            
-            if (!isIdValid) throw new BadRequestError('id pustakawan tidak valid')
-
-            const pustakawan = await Pustakawan.findOne({_id: id})
-            if (!pustakawan) throw new NotFoundError('Pustakawan tidak ditemukan')
-        })
-])
-
 export const verifyPenggunaIdMiddleware = withValidationErrors([
     param('id')
         .custom(async(id) => {

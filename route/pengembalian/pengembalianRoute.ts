@@ -9,7 +9,7 @@ import {
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
-import { dataPengembalianValidator, pengembalianIdValidator } from '../../validator/pengembalianValidators'
+import { dataPengembalianValidator, pengembalianIdValidator } from '../../validator/pengembalianValidator'
 
 const router = express.Router()
 

@@ -11,9 +11,8 @@ import {
     verifiedUserAccount,
     getSingleRequestedUser
 } from '../../controllers/prodi/prodiController'
-import { createPustakawanValidator } from '../../validator/pustakawanValidator'
-import { createAdminValidator } from '../../validator/adminValidators'
-import { verifyPenggunaIdMiddleware, verifyPustakawanIdMiddleware } from '../../middleware/utilsMiddleware'
+import { createPustakawanValidator } from '../../validator/adminValidator'
+import { createAdminValidator } from '../../validator/adminValidator'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
@@ -28,16 +27,16 @@ router.route('/pustakawan')
     .get(getAllPustakawan)
 
 router.route('/pustakawan/:id')
-    .get(verifyPustakawanIdMiddleware, getSinglePustakawan)
+    .get(mongooseIdMiddleware, getSinglePustakawan)
 
 router.route('/pengguna')
     .get(getAllUsers)
 
 router.route('/pengguna/verify/:id')
-    .patch(verifyPenggunaIdMiddleware, verifiedUserAccount)
+    .patch(mongooseIdMiddleware, verifiedUserAccount)
 
 router.route('/pengguna/:id')
-    .get(verifyPenggunaIdMiddleware, getSingleUser)
+    .get(mongooseIdMiddleware, getSingleUser)
 
 router.route('/requested/user')
     .get(getRequestedUser)

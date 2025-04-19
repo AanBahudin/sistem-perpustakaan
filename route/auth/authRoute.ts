@@ -1,7 +1,7 @@
 import express from 'express'
 const route = express.Router()
 import { login, prodiLogin, pustakawanLogin, register, verifyEmail, verifyEmailUpdate, logout, verifyPustakawanEmail } from '../../controllers/auth/authController'
-import { loginInputValidator, registerInputValidator } from '../../validator/authValidation'
+import { loginInputValidator, registerInputValidator } from '../../validator/authValidator'
 
 route.route('/register')
     .post(registerInputValidator, register)
