@@ -1,7 +1,4 @@
 import { body } from "express-validator";
-import Pengguna from "../model/Pengguna";
-import { Request } from "express";
-import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import withValidationErrors from "./withValidationErrors";
 
 export const loginInputValidator = withValidationErrors([
@@ -9,24 +6,12 @@ export const loginInputValidator = withValidationErrors([
         .notEmpty()
         .withMessage('Email tidak boleh kosong')
         .isEmail()
-        .withMessage('Format email tidak didukung')
-        .custom(async(email, {req}) => {
-            const isEmailAlredyExist = await Pengguna.findOne({email})
-            if (!isEmailAlredyExist) {
-                throw new NotFoundError('Email tidak ditemukan')
-            }
-
-            if (!isEmailAlredyExist.verifikasiEmail) {
-                throw new NotFoundError('Akun anda belum diverifikasi, Harap verifikasi terlebih dahulu')
-            }
-            req.user = isEmailAlredyExist
-
-        }),
+        .withMessage('Format email tidak didukung'),
     body('password')
         .notEmpty()
         .withMessage('Password tidak boleh kosong')
-        .isLength({ min: 6, max: 10 })
-        .withMessage('Password minimal 6 dan maksimal 10 karakter')
+        .isLength({ min: 6, max: 25 })
+        .withMessage('Password minimal 6 dan maksimal 25 karakter')
 ])
 
 export const registerInputValidator = withValidationErrors([

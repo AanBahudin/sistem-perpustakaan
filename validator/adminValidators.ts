@@ -6,27 +6,6 @@ import { NotFoundError } from "../errors/errorHandler";
 import { body } from "express-validator";
 
 
-export const adminLoginValidator = withValidationErrors([
-    body('email')
-        .notEmpty()
-        .withMessage('Email tidak boleh kosong')
-        .isEmail()
-        .withMessage('Format email tidak didukung')
-        .custom(async(email, {req}) => {
-            const isEmailAlredyExist = await Prodi.findOne({email})
-            if (!isEmailAlredyExist) {
-                throw new NotFoundError('Email tidak ditemukan')
-            }
-            req.user = isEmailAlredyExist
-
-        }),
-    body('password')
-        .notEmpty()
-        .withMessage('Password tidak boleh kosong')
-        .isLength({ min: 6, max: 10 })
-        .withMessage('Password minimal 6 dan maksimal 10 karakter')
-])
-
 export const createAdminValidator = withValidationErrors([
     body('nama')
         .notEmpty()
