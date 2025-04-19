@@ -49,6 +49,7 @@ export const addBuku = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH TESTING
 export const hapusBuku = async(req: Request | any, res: Response) => {
     const {id} = req.params
 
@@ -60,6 +61,7 @@ export const hapusBuku = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH TESTING
 export const editBuku = async(req: Request | any, res: Response) => {
     const {id} = req.params
 
@@ -72,6 +74,7 @@ export const editBuku = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH TESTING
 export const getAllBukuPustakawan = async(req: Request | any, res: Response) => {
     const books = await getSemuaBukuUntukPustakawan()
 
@@ -85,6 +88,7 @@ export const getAllBukuPustakawan = async(req: Request | any, res: Response) => 
     })
 } 
 
+// SUDAH TESTING
 export const getSingleBukuPustakawan = async(req: Request | any, res: Response) => {
     const { id } = req.params
 
