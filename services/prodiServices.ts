@@ -21,13 +21,13 @@ export const createAdmin = async({ nama, email, password } : CreateAdminParamsTy
     })
 }
 
-// TESTING ROUTE INI
+// SUDAH DITESTING
 export const createNewPustakawan = async({ nama, email, password, adminId, no_hp} : CreatePustakawanParamsType) => {
     const existingPustakawan = await Pustakawan.findOne({email})
     if (existingPustakawan) throw new BadRequestError('Akun Pustakawan sudah digunakan')
 
     // pengacakkan password
-    const hashedPassword = hashPassword(password)
+    const hashedPassword = await hashPassword(password)
 
     // membuat data pustakawan
     const pustakawan = await Pustakawan.create({
@@ -52,7 +52,7 @@ export const createNewPustakawan = async({ nama, email, password, adminId, no_hp
     }
 }
 
-// TESTING ROUTE INI
+// SUDAH DITESTING
 export const getProdiProfile = async({prodiId} : GetProdiProfileParamsType) => {
     const prodi = await Prodi.findOne({_id: prodiId}).select('-password')
     if (!prodi) throw new NotFoundError('Profil tidak ditemukan')
@@ -119,13 +119,12 @@ export const verifyRegisteredAccount = async({userId} : VerifyRegisteredAccountP
     if (pengguna.blocked) throw new NotAuthorized('Akun pengguna telah di-blokir')
     // pengecekkan apakah pengguna sudah meng-verifikasi akunnya sebelumnya
     if (pengguna.verifikasiProdi) throw new BadRequestError('Akun telah di-verifikasi')
-
     
     const updatedData = await Pengguna.findOneAndUpdate(
         {_id: pengguna._id},
         {statusAkun: 'Aktif', verifikasiProdi: true},
         {new: true, runValidators: true}
-    )
+    ).select('-password')
 
     return {data: updatedData}
 }

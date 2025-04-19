@@ -58,6 +58,7 @@ export const updatingPassword = async({userId, newPassword, oldPassword} : Updat
     return updatedUser
 }
 
+// SUDAH DITESTING
 export const updatingEmail = async({userId, newEmail} : UpdateEmailParamsServicesType) => {
     // ambil data pengguna terkait dan lakukan pengecekkan apakah data ada didatabase
     const user = await Pengguna.findOne({_id: userId})
