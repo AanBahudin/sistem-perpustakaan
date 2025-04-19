@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken'
 import { generateToken } from "../utils/jwt"
 import Pustakawan from "../model/Pustakawan"
 import sendVerifyAndAuthDataPustakawan from "../helpers/sendVerifyAndAuthDataPustakawan"
+import { attachTokenToCookie } from "./setTokenToCookie"
 
 // SUDAH DITESTING
 export const registerUser = async(dataRegister: RegisterUserServicesParamsType) => {
@@ -173,6 +174,18 @@ export const verifyEmailUpdateUser = async({token, res} : VerifyServicesParamsTy
 
         // perbaharui email
         const updatedUser = await Pengguna.findOneAndUpdate({ _id: dataToken.userId }, { email: dataToken.newEmail }, { new: true, runValidators: true })
+
+        // buat payload baru
+        const payload : TokenType = {
+            userId: updatedUser?._id.toString() as string, 
+            email: updatedUser?.email as string, 
+            role: updatedUser?.role as string
+        }
+        // generate token baru untuk di simpan
+        const newToken = generateToken(payload)
+        // masukan token ke dalam cookie
+        attachTokenToCookie(res, newToken)
+
         return {success: true, message: 'Berhasil diupdate', data: updatedUser?.nama}
 
     } catch (error) {
