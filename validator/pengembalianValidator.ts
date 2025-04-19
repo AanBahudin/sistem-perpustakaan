@@ -7,19 +7,9 @@ import Peminjaman from "../model/Peminjaman";
 export const dataPengembalianValidator = withValidationErrors([
     body("idPeminjaman")
         .notEmpty().withMessage('Data peminjaman tidak disediakan')
-        .custom(async(idPeminjaman) => {
-            isValidMongooseId(idPeminjaman)
-
-            const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
-            if (!dataPeminjaman) {
-                throw new NotFoundError('Data peminjaman tidak ditemukan!')
-            }
-
-            const statusDiizinkan = ['Dipinjam', 'Terlambat']
-            const { statusPeminjaman } = dataPeminjaman
-            if (!statusDiizinkan.includes(statusPeminjaman)) {
-                throw new BadRequestError('Tidak dapat memproses pengembalian')
-            }
+        .custom(idPeminjaman => {
+            const isValidId = isValidMongooseId(idPeminjaman)
+            if (!isValidId) throw new BadRequestError('Id peminjaman salah')
         }),
     body('kondisiBuku')
         .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
@@ -37,12 +27,4 @@ export const dataPengembalianValidator = withValidationErrors([
     body('statusPengembalian')
         .notEmpty().withMessage('status pengembalian tidak boleh kosong')
         .isIn(['Pending', 'Dihilangkan']).withMessage('Status pengembalian tidak tersedia')
-])
-
-export const pengembalianIdValidator = withValidationErrors([
-    param('id')
-        .notEmpty().withMessage('Id pengembalian tidak ditemukan')
-        .custom(async(id) => {
-            isValidMongooseId(id)
-        })
 ])

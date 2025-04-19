@@ -64,3 +64,22 @@ export const hapusDataBuku = async(idBuku: string)  => {
     
     return buku;
 }
+
+
+// FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN
+
+export const bukuDikembalikan = async(idBuku : string) => {
+    const buku = await Buku.findOneAndUpdate(
+        {_id: idBuku},
+        {$inc: {stok: 1, totalDipinjam: -1}},
+        {new: true, runValidators: true}
+    )
+}
+
+export const bukuDipinjam = async(idBuku : string) => {
+    const buku = await Buku.findOneAndUpdate(
+        {_id: idBuku},
+        {$inc: {stok: -1, totalDipinjam: 1}},
+        {new: true, runValidators: true}
+    )
+}

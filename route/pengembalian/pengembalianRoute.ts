@@ -9,7 +9,8 @@ import {
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
-import { dataPengembalianValidator, pengembalianIdValidator } from '../../validator/pengembalianValidator'
+import { dataPengembalianValidator } from '../../validator/pengembalianValidator'
+import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
 
@@ -18,7 +19,7 @@ router.route('/user')
     .get(userMiddlewareAuthorized, getAllPengembalianUser)
 
 router.route('/user/:id')
-    .get(userMiddlewareAuthorized, pengembalianIdValidator, getSinglePengembalianUser)
+    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePengembalianUser)
 
 
 // pustakawan
@@ -29,9 +30,9 @@ router.route('/create')
     .post(pustakawanMiddlewareAuthorized, dataPengembalianValidator, buatDataPengembalian)
 
 router.route('/accept/:id')
-    .post(pustakawanMiddlewareAuthorized, pengembalianIdValidator, terimaDataPengembalian)
+    .post(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, terimaDataPengembalian)
 
 router.route('/:id')
-    .get(pustakawanMiddlewareAuthorized, pengembalianIdValidator, getSingleDataPengembalian)
+    .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, getSingleDataPengembalian)
 
 export default router

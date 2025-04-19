@@ -2,7 +2,7 @@ import { BadRequestError, NotAuthenticated, NotFoundError } from '../errors/erro
 import sendUpdateEmailVerification from '../helpers/sendUpdateEmailVerification'
 import Pengguna from '../model/Pengguna'
 import renderError from '../utils/renderError'
-import { GetProfileParamsServiceType, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
+import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 
 // SUDAH DITESTING
@@ -89,4 +89,23 @@ export const updatingEmail = async({userId, newEmail} : UpdateEmailParamsService
         const errorMsg = renderError(error)
         throw new BadRequestError(errorMsg)
     }
+}
+
+
+// FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN
+
+export const penggunaMengembalikan = async({ idPengguna } : PenggunaMeminjamParamsType) => {
+    const pengguna = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {$inc: {jumlah_pinjaman: -1}},
+        {new: true, runValidators: true}
+    )
+}
+
+export const penggunaMeminjam = async({ idPengguna } : PenggunaMeminjamParamsType) => {
+    const pengguna = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {$inc: {jumlah_pinjaman: 1}},
+        {new: true, runValidators: true}
+    )
 }

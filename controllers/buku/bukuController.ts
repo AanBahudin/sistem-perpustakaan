@@ -35,7 +35,7 @@ export const getSingleBukuUser = async(req: Request | any, res: Response) => {
 }
 
 
-// untuk pustakawan
+// untuk pustakawan -  SUDAH DITESTING
 export const addBuku = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     req.body.createdBy = userId

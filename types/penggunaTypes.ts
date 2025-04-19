@@ -20,3 +20,7 @@ export type UpdateProfilParamsServicesType = {
 export type GetProfileParamsServiceType = {
     userId: string
 }
+
+export type PenggunaMeminjamParamsType = {
+    idPengguna: string
+}
