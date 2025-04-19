@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
-import Buku, { BukuSchemaType } from "../../model/Buku"
 import {dataDurasiPeminjaman} from '../../services/durasiServices'
-import { StatusCodes } from "http-status-codes"
 import { SendDataResponse, SendDataWithDurasiResponse, SendOneDataResponse } from "../../utils/sendResponse"
 import { editDataBuku, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
 
 
 // khusus yang diakses user
+
+// SUDAH TESTING
 export const getAllBukuUser = async(req: Request, res: Response) => {
     const buku = await getSemuaBukuTersediaUntukUser()
 
@@ -19,6 +19,7 @@ export const getAllBukuUser = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH TESTING
 export const getSingleBukuUser = async(req: Request | any, res: Response) => {
     const {id} = req.params
 

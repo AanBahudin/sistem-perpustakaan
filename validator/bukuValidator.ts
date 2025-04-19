@@ -53,7 +53,6 @@ export const bukuInputValidator = withValidationErrors([
             const dbKategori = await Kategori.find().lean()
 
             const allowedKategori = dbKategori.map(item => item.nama)
-
             kategori.forEach(item => {
                 if (!allowedKategori.includes(item)) {
                     throw new BadRequestError(`Kategori ${item} tidak tersedia`)

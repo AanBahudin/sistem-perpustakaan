@@ -1,5 +1,4 @@
 import express from 'express'
-
 import {
     getAllBukuPustakawan, 
     getSingleBukuPustakawan,
@@ -23,12 +22,14 @@ router.route('/user/:id')
 
 router.route('/pustakawan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuPustakawan)
+
+router.route('/create')
     .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)
 
-router.route('/pustakawan/:id')
+router.route('/:id')
     .get(pustakawanMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)
     .delete(pustakawanMiddlewareAuthorized, mongoIdMiddleware, hapusBuku)
-    .patch(pustakawanMiddlewareAuthorized, mongoIdMiddleware, editBuku)
+    .patch(pustakawanMiddlewareAuthorized, mongoIdMiddleware, bukuInputValidator, editBuku)
 
 
 export default router
