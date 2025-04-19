@@ -48,39 +48,3 @@ export const getProfile = async(req: Request | any, res: Response) => {
     })
 }
 
-export const getAllKategori = async(req: Request | any, res: Response) => {
-    const kategori = await Kategori.find()
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Daftar Kategori',
-        timestamps: new Date(Date.now()).toString(),
-        data: kategori,
-        total: kategori.length
-    })
-}
-
-export const createKategori = async(req: Request | any, res: Response) => {
-    const dataKategori = req.body
-
-    const kategori = await Kategori.create(dataKategori)
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Kategori Dibuat',
-        timestamps: new Date(Date.now()).toString(),
-        data: kategori
-    })
-}
-
-export const hapusKategori = async(req: Request | any, res: Response) => {
-    const {id} = req.params
-
-    await Kategori.findOneAndDelete({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Kategori Dihapus',
-        timestamp: new Date(Date.now()).toString()
-    })
-}
