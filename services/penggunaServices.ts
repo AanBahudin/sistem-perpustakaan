@@ -5,11 +5,13 @@ import renderError from '../utils/renderError'
 import { GetProfileParamsServiceType, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 
+// SUDAH DITESTING
 export const getProfil = async({userId} : GetProfileParamsServiceType) => {
     const profil = await Pengguna.findOne({_id: userId}).select('-password')
     return profil
 }
 
+// SUDAH DITESTING
 export const updateProfil = async({userId, dataUpdate} : UpdateProfilParamsServicesType) => {
     const updatedProfile = await Pengguna.findOneAndUpdate(
         {_id: userId},
@@ -24,6 +26,7 @@ export const updateProfil = async({userId, dataUpdate} : UpdateProfilParamsServi
     return updatedProfile
 }
 
+// SUDAH DITESITNG
 export const updatingPassword = async({userId, newPassword, oldPassword} : UpdatePasswordParamsServicesType) => {
 
     // memastikan password lama tidak sama dengan password baru
@@ -41,7 +44,7 @@ export const updatingPassword = async({userId, newPassword, oldPassword} : Updat
     const {password: oldHashedPassword} = pengguna
     const isPasswordCorrect = await comparePassword(oldHashedPassword!, oldPassword);
     if (!isPasswordCorrect) {
-        throw new NotAuthenticated('Password salah!')
+        throw new NotAuthenticated('Password yang dimasukan salah')
     }
 
     // hash password baru

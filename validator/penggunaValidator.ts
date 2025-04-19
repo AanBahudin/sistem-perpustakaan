@@ -44,3 +44,12 @@ export const validateUpdateEmailPengguna = withValidationErrors([
 
         })
 ])
+
+export const validateUpdatePasswordPengguna = withValidationErrors([
+    body('oldPassword')
+        .notEmpty().withMessage('password lama tidak boleh kosong')
+        .isLength({min: 6, max: 25}).withMessage('password 6-25 karakter'),
+    body('newPassword')
+    .notEmpty().withMessage('password lama tidak boleh kosong')
+    .isLength({min: 6, max: 25}).withMessage('password 6-25 karakter')
+])

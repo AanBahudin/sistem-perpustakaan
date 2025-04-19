@@ -4,9 +4,9 @@ import Pengguna, { IPengguna } from "../../model/Pengguna";
 import { getProfil, updateProfil, updatingPassword, updatingEmail } from "../../services/penggunaServices";
 import { SendOneDataResponse } from "../../utils/sendResponse";
 
+// SUDAH DITESTING
 export const getProfile = async(req: any, res: Response) => {
     const { userId } = req.user
-
     const userData = await getProfil({userId})
 
     SendOneDataResponse({
@@ -15,7 +15,7 @@ export const getProfile = async(req: any, res: Response) => {
         data: userData
     })
 }
-
+// SUDAH DITESTING
 export const updateProfile = async(req: any | Request, res: Response) => {
     const { userId } = req.user
 
@@ -30,7 +30,7 @@ export const updateProfile = async(req: any | Request, res: Response) => {
 
 export const updatePassword = async(req: any | Request, res: Response) => {
     const { userId } = req.user
-    const { password: newPassword, oldPassword } = req.body
+    const { newPassword, oldPassword } = req.body
 
     const updatedUser = await updatingPassword({userId, newPassword, oldPassword})
 
@@ -42,23 +42,16 @@ export const updatePassword = async(req: any | Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const updateEmail = async (req: any | Request, res: Response) => {
     const { userId } = req.user;
     const { email : newEmail } = req.body
 
-    /*
-        ambil data nama dan email lama dari database
-        nama - untuk headline link verifikasi
-        email - untuk mengirim link verifikasi
-    */ 
-    const { nama, email } = await Pengguna.findOne({ _id: userId }) as IPengguna
-
-    const updatedUser = await updatingEmail({newEmail: newEmail, userId})
+    const updatedUser = await updatingEmail({newEmail, userId})
 
     // respon berhasil dari API
     SendOneDataResponse({
         res,
         message: 'Silahkan cek email anda untuk melakukan verifikasi',
-        data: updatedUser
     })
 }
