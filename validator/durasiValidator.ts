@@ -8,10 +8,5 @@ export const durasiInputValidator = withValidationErrors([
     body('durasi')
         .notEmpty().withMessage('Durasi tidak boleh kosong')
         .isInt({min: 1}).withMessage('Durasi harus bertipe integer')
-        .custom(async(durasi) => {
-            const isDurasiExist = await DurasiPeminjaman.findOne({durasi})
-            if (isDurasiExist) {
-                throw new BadRequestError('Durasi sudah ada!')
-            }
-        })
+        .toInt()
 ])

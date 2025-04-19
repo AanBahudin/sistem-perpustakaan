@@ -1,20 +1,20 @@
 import { Request, Response } from "express"
-import DurasiPeminjaman from "../../model/DurasiPeminjaman"
 import {dataDurasiPeminjaman, hapusDataDurasi, tambahDurasiPeminjaman} from "../../services/durasiServices"
 import { StatusCodes } from "http-status-codes"
+import { SendOneDataResponse } from "../../utils/sendResponse"
 
-
+// SUDAH DITESTING
 export const tambahDurasi = async(req : Request, res: Response) => {
-    const data = await tambahDurasiPeminjaman(req.body)
+    const data = await tambahDurasiPeminjaman(req.body.durasi)
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data Durasi Peminjaman Ditambahkan',
-        timestamps: new Date(Date.now()).toString(),
-        data,
+        data
     })
 }
 
+// SUDAH DITESTING
 export const semuaDurasi = async(req : Request, res: Response) => {
     const data = await dataDurasiPeminjaman()
 
@@ -27,6 +27,7 @@ export const semuaDurasi = async(req : Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const hapusDurasi = async(req : Request, res: Response) => {
     const { id } = req.params
 
