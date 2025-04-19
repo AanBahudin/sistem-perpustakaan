@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import {dataDurasiPeminjaman, hapusDataDurasi, tambahDurasiPeminjaman} from "../../services/durasiServices"
 import { StatusCodes } from "http-status-codes"
-import { SendOneDataResponse } from "../../utils/sendResponse"
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
 // SUDAH DITESTING
 export const tambahDurasi = async(req : Request, res: Response) => {
@@ -9,6 +9,7 @@ export const tambahDurasi = async(req : Request, res: Response) => {
 
     SendOneDataResponse({
         res,
+        status: StatusCodes.CREATED,
         message: 'Data Durasi Peminjaman Ditambahkan',
         data
     })
@@ -18,11 +19,10 @@ export const tambahDurasi = async(req : Request, res: Response) => {
 export const semuaDurasi = async(req : Request, res: Response) => {
     const data = await dataDurasiPeminjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Durasi Peminjaman',
-        timestamps: new Date(Date.now()).toString(),
+    SendDataResponse({
+        res,
         data,
+        message: 'Data Durasi Peminjaman',
         total: data.length
     })
 }
@@ -33,9 +33,8 @@ export const hapusDurasi = async(req : Request, res: Response) => {
 
     await hapusDataDurasi(id)
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Durasi Dihapus',
-        timestamps: new Date(Date.now()).toString(),
+    SendBasicResponse({
+        res,
+        message: 'Data Durasi Dihapus'
     })
 }
