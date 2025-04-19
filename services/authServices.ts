@@ -156,7 +156,7 @@ export const verifyRegisterUser = async({token, res} : VerifyServicesParamsType)
     }
 }
 
-// SUDAH TESTING
+// SUDAH TESTING - SET TOKEN BARU DENGAN EMAIL YANG BARU DIUPDATE
 export const verifyEmailUpdateUser = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token tersedia atau bertipe string
     if (!token || typeof token !== 'string') return {success: false, message: 'Terjadi kesalahan saat meng-verifikasi', data: null}

@@ -15,6 +15,7 @@ export const getProfile = async(req: any, res: Response) => {
         data: userData
     })
 }
+
 // SUDAH DITESTING
 export const updateProfile = async(req: any | Request, res: Response) => {
     const { userId } = req.user
@@ -28,6 +29,7 @@ export const updateProfile = async(req: any | Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const updatePassword = async(req: any | Request, res: Response) => {
     const { userId } = req.user
     const { newPassword, oldPassword } = req.body
