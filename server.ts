@@ -16,6 +16,7 @@ import perpanjanganRoute from './route/perpanjangan/perpanjanganRoute'
 import bukuRoute from './route/buku/bukuRoute'
 import kategoriRoute from './route/kategori/kategoriRoute'
 import kondisiRoute from './route/kondisi/kondisiRoute'
+import dendaRoute from './route/denda/dendaRoute'
 
 import databaseConnectionFunction from './db/connect'
 
@@ -51,6 +52,7 @@ app.use('/api/v1/buku', authenticationMiddleware, bukuRoute)
 app.use('/api/v1/pengembalian', authenticationMiddleware, pengembalianRoute)
 app.use('/api/v1/kategori', authenticationMiddleware, pustakawanMiddlewareAuthorized, kategoriRoute)
 app.use('/api/v1/kondisi', authenticationMiddleware, pustakawanMiddlewareAuthorized, kondisiRoute)
+app.use('/api/v1/denda', authenticationMiddleware, pustakawanMiddlewareAuthorized, dendaRoute)
 
 app.use(errorHandler)
 
