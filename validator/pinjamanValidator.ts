@@ -27,7 +27,7 @@ export const inputPembatalanPeminjamanUserValidator = withValidationErrors([
 
 // validasi untuk req.body pada pembuatan data peminjaman oleh pustakawan
 export const terimaPinjamanValidator = withValidationErrors([
-    body('id')
+    body('idPeminjaman')
         .notEmpty().withMessage('ID Pinjaman tidak boleh kosong')
         .custom(async(id) => {
             isValidMongooseId(id)
