@@ -3,7 +3,7 @@ import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
 import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, PustakawanAcceptPengembalianParamsType, PustakawanCreatePengembalianParamsType, PustakawanEditPengembalianParamsType, PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
 import { hitungKeterlambatan } from "../utils/selisihHari"
-import { bukuDikembalikan } from "./bukuServices"
+import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
 import { penggunaMeminjam, penggunaMengembalikan } from "./penggunaServices"
 
@@ -127,8 +127,12 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
         idPeminjam: pengembalian.idPengguna as string,
         idPeminjaman: pengembalian.idPeminjaman as string
     })
-    // update data buku - stok dan totalPeminjaman
-    await bukuDikembalikan(pengembalian.idBuku as string)
+    // update data buku - jika dihilangkan maka update saja totalDipinjam
+    if (updatedPengembalian?.statusPengembalian === 'Dihilangkan') {
+        await bukuDihilangkan(pengembalian.idBuku as string)
+    } else {
+        await bukuDikembalikan(pengembalian.idBuku as string)
+    }
     // update data pengguna - total pinjaman
     await penggunaMengembalikan({idPengguna: pengembalian.idPengguna as string})
 

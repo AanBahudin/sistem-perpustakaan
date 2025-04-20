@@ -21,7 +21,8 @@ export type PembatalanPeminjamanUserParamsType = {
 export type TerimaPeminjamanUserParamsType = {
     userId: string,
     idPeminjaman: string,
-    statusPeminjaman: boolean
+    statusPeminjaman: boolean,
+    kondisiBuku: string
 }
 
 export type TambahPeminjamanParamsType = {
@@ -48,5 +49,6 @@ export type PinjamanUpdatedFieldType = {
     statusPeminjaman: string,
     diprosesOleh: string,
     disetujui: boolean,
+    kondisi: string,
     berakhirPada?: Date
 }

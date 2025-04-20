@@ -68,12 +68,13 @@ export const pembatalanPeminjamanUser = async({idPeminjaman, userId} : Pembatala
 // service dibawah khusus pustakawan
 
 // SUDAH DITESTING
-export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, userId} : TerimaPeminjamanUserParamsType) => {
+export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, kondisiBuku, userId} : TerimaPeminjamanUserParamsType) => {
     // objek yang akan digunakan untuk meng-update data pinjaman
     let updatedField : PinjamanUpdatedFieldType = {
         statusPeminjaman : statusPeminjaman ? 'Dipinjam' : 'Ditolak',
         disetujui: statusPeminjaman,
-        diprosesOleh: userId
+        diprosesOleh: userId,
+        kondisi: kondisiBuku
     }
 
     // ambil data pinjaman khususnya durasiPeminjaman

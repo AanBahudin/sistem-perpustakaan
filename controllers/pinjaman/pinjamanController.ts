@@ -66,10 +66,10 @@ export const pembatalanPinjamanUser = async(req: Request | any, res: Response) =
 
 // controller ini khusus untuk pustakawan
 export const terimaPinjaman = async(req: Request | any, res: Response) => {
-    const { idPeminjaman, statusPeminjaman } = req.body
+    const { idPeminjaman, statusPeminjaman, kondisiBuku } = req.body
     const {userId} = req.user
 
-    const {data} = await terimaPeminjamanUser({idPeminjaman, statusPeminjaman, userId})
+    const {data} = await terimaPeminjamanUser({idPeminjaman, statusPeminjaman, userId, kondisiBuku})
 
     // pemintaan ditolak/terima akan dikirim melalu notifikasi
 

@@ -83,3 +83,11 @@ export const bukuDipinjam = async(idBuku : string) => {
         {new: true, runValidators: true}
     )
 }
+
+export const bukuDihilangkan = async(idBuku: string) => {
+    const buku = await Buku.findOneAndUpdate(
+        {_id: idBuku},
+        {$inc: {totalDipinjam: -1}},
+        {new: true, runValidators: true}
+    )
+}
