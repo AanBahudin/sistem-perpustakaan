@@ -19,8 +19,6 @@ export const mencegahBukuDipinjamBerulang = async(idBuku: string, idPengguna: st
         buku: idBuku,
         statusPeminjaman: {$in: statusBlokir}
     })
-
-    console.log(peminjaman);
     
     return peminjaman
 }

@@ -4,47 +4,38 @@ import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
 import Buku from "../../model/Buku"
 import Pengguna from "../../model/Pengguna"
-import { PinjamanUpdatedFieldType } from "../../types/pinjamanTypes"
+import { PinjamanUpdatedFieldType } from "../../types/peminjamanTypes"
 import tambahHariKeTanggal from "../../utils/tambahHari"
 import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../../utils/checker"
 import { BadRequestError, NotFoundError } from "../../errors/errorHandler"
+import { getOnePeminjaman, getOnePeminjamanUser, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser } from "../../services/peminjamanServices"
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
-// 3 controller dibawah khusus untuk pengguna
+// 4 controller dibawah khusus untuk pengguna
 export const requestPinjaman = async(req: Request | any, res: Response) => {
     const { idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
 
-    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, userId)
-    if (pinjamanMasihAda) {
-        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
-    }
+    const {data} = await pengajuanPeminjaman({durasiPeminjaman, idBuku, userId})
 
-    const pinjaman = await Peminjaman.create({ 
-        peminjam: userId, 
-        buku: idBuku, 
-        durasiPeminjaman, 
-        statusPeminjaman: 'Diajukan' })
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: `Peminjaman buku telah diajukan, silahkan tunggu email verifikasi`,
-        timestamps: new Date(Date.now()).toString(),
-        data: pinjaman
+        data 
     })
 }
 
 export const getPinjamanUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
-    const pinjamanUser = await Peminjaman.find({peminjam: userId})
+    const {data} = await getSemuaPeminjamanUser({userId})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Peminjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: pinjamanUser,
-        total: pinjamanUser.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
@@ -52,102 +43,42 @@ export const getSinglePinjamanUser = async(req: Request | any, res: Response) =>
     const {userId} = req.user
     const {id} = req.params
 
-    const getInfoPinjaman = await Peminjaman.findOne({_id: id, peminjam: userId})
-    if (!getInfoPinjaman) {
-        throw new NotFoundError("Data Pinjaman tidak ditemukan")
-    }
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    const {data} = await getOnePeminjamanUser({userId, peminjamanId: id})
+    SendOneDataResponse({
+        res,
         message: 'Data Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: getInfoPinjaman
+        data
     })
 }
 
 export const pembatalanPinjamanUser = async(req: Request | any, res: Response) => {
     const {idPeminjaman} = req.body
+    const {userId} = req.user
 
     // ambil data pinjama terlebih dahulu
-    const dataPinjaman = await Peminjaman.findOne({_id: idPeminjaman, peminjam: req.user.userId})
-    if (!dataPinjaman) {
-        throw new NotFoundError('Data pinjaman tidak ditemukan')
-    }
+    const dataPinjaman = await pembatalanPeminjamanUser({idPeminjaman, userId})
 
-    const { statusPeminjaman, disetujui, diprosesOleh } = dataPinjaman
-    if (statusPeminjaman !== 'Diajukan' || disetujui || diprosesOleh) {
-        throw new BadRequestError('Tidak dapat membatalkan pengajuan')
-    }
-
-    await Peminjaman.findOneAndDelete({_id: idPeminjaman});
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendBasicResponse({
+        res,
         message: 'Data Pinjaman Dibatalkan',
-        timestamps: new Date(Date.now()).toString()
+
     })
 }
 
 // controller ini khusus untuk pustakawan
 export const terimaPinjaman = async(req: Request | any, res: Response) => {
-    const { id: pinjamanId, statusPeminjaman: isAccepted } = req.body
+    const { id: idPeminjaman, statusPeminjaman } = req.body
+    const {userId} = req.user
 
-    // objek yang akan digunakan untuk meng-update data pinjaman
-    let updatedField : PinjamanUpdatedFieldType = {
-        statusPeminjaman : isAccepted ? 'Dipinjam' : 'Ditolak',
-        disetujui: isAccepted,
-        diprosesOleh: req.user.userId
-    }
-
-    // ambil data pinjaman khususnya durasiPeminjaman
-    const dataPeminjaman = await Peminjaman.findOne({_id: pinjamanId})
-    const {buku, peminjam, durasiPeminjaman} = dataPeminjaman!
-
-    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDiterimaBerulang(buku as string, peminjam as string)
-    if (pinjamanMasihAda) {
-        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
-    }
-
-    // jika data peminjaman diterima, maka tambahkan field berakhirPada untuk menandai masa selesainya peminjaman
-    if (isAccepted) {
-        const berakhirPada = tambahHariKeTanggal(new Date, durasiPeminjaman as number)
-        updatedField.berakhirPada = berakhirPada
-    }    
-
-    // update data peminjaman dengan objek updatedField
-    const dataPinjaman = await Peminjaman.findOneAndUpdate(
-        {_id: pinjamanId},
-        updatedField,
-        {new: true, runValidators: true}
-    )
-
-
-    if (isAccepted) {
-        // update attribute jumlahPinjaman di model Pengguna
-        const user = await Pengguna.findOneAndUpdate(
-            {_id: dataPinjaman?.peminjam},
-            {$inc: {jumlah_pinjaman: 1}},
-            {new: true, runValidators: true}
-        )
-    
-        // update attribute stok buku di model Buku
-        const dataBuku = await Buku.findOneAndUpdate(
-            {_id: dataPinjaman?.buku},
-            {$inc: {stok: -1, totalDipinjam: 1}},
-            {new: true, runValidators: true}
-        )
-    }
-
+    const {data} = await terimaPeminjamanUser({idPeminjaman, statusPeminjaman, userId})
 
     // pemintaan ditolak/terima akan dikirim melalu notifikasi
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: isAccepted ? 'Pinjaman diterima' : 'Pinjaman ditolak',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman
-    }) 
+    SendOneDataResponse({
+        res,
+        message: statusPeminjaman ? 'Pinjaman diterima' : 'Pinjaman ditolak',
+        data
+    })
     
 }
 
@@ -158,98 +89,67 @@ export const tambahPinjaman = async(req: Request | any, res: Response) => {
         durasiPeminjaman,
         kondisi
     } = req.body
+    const {userId} = req.user
 
-    const pinjamanField = {
-        peminjam: idPengguna,
-        buku: idBuku,
-        statusPinjaman: 'Dipinjam',
+    const {data} = await tambahPinjamanUser({
+        idBuku,
+        idPengguna,
         durasiPeminjaman,
         kondisi,
-        disetujui: true,
-        berakhirPada: tambahHariKeTanggal(new Date, durasiPeminjaman),
-        diprosesOleh: req.user.userId
-    }
+        userId
+    })
 
-    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, idPengguna)
-    if (pinjamanMasihAda) {
-        throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses untuk buku ini')
-    }
-
-    const pinjaman = await Peminjaman.create(pinjamanField)
-
-    const user = await Pengguna.findOneAndUpdate(
-        {_id: idPengguna},
-        {$inc: {jumlah_pinjaman: 1}},
-        {new: true, runValidators: true}
-    )
-
-    // update attribute stok buku di model Buku
-    const dataBuku = await Buku.findOneAndUpdate(
-        {_id: idBuku},
-        {$inc: {stok: -1, totalDipinjam: 1}},
-        {new: true, runValidators: true}
-    )
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data Pinjaman Dibuat',
-        timestamps: new Date(Date.now()).toString(),
-        data: pinjaman,
+        data
     })
 }
 
 export const getAllPinjaman = async(req: Request, res: Response) => {
-    const dataPinjaman = await Peminjaman.find()
+    const {data} = await getSemuaPinjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Seluruh Data Peminjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman,
-        total: dataPinjaman.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
 export const getAllPinjamanAktif = async(req: Request, res: Response) => {
-    const dataPinjaman = await Peminjaman.find({statusPeminjaman: 'Dipinjam', disetujui: true})
+    const {data} = await getSemuaPinjamanAktif()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman,
-        total: dataPinjaman.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
 export const getAllRequestedPinjaman = async(req: Request, res: Response) => {
-    const dataPermintaanPeminjaman = await Peminjaman.find(
-        {statusPeminjaman: 'Diajukan', disetujui: 'false'}
-    ).populate([
-        {path: 'peminjam', select: '-password -role'},
-        {path: 'buku'}
-    ])
+    const {data} = await getSemuaPengajuanPeminjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Permintaan Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPermintaanPeminjaman,
-        total: dataPermintaanPeminjaman.length
+    SendDataResponse({
+        res,
+        message: 'Data Pinjaman',
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
 export const getSinglePinjaman = async(req: Request, res: Response) => {
-    const {id} = req.params
-
-    const dataPinjaman = await Peminjaman.findOne({_id: id})
+    const {idPeminjaman} = req.params
+    const {data} = await getOnePeminjaman({idPeminjaman})
     
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman
+        data
     })
 }
 

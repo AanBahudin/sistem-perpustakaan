@@ -14,7 +14,6 @@ import {
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
-    idPinjamanValidator, 
     inputPengajuanPeminjamanValidator, 
     terimaPinjamanValidator,
     tambahPinjamanInputValidator,
@@ -22,6 +21,7 @@ import {
 
  } from '../../validator/pinjamanValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
+import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
 
@@ -33,8 +33,8 @@ router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)
 
 router.route('/user/:id')
-    .get(userMiddlewareAuthorized, idPinjamanValidator, getSinglePinjamanUser)
-    .delete(userMiddlewareAuthorized, idPinjamanValidator, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
+    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUser)
+    .delete(userMiddlewareAuthorized, mongooseIdMiddleware, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
 
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')
@@ -51,8 +51,8 @@ router.route('/pinjaman/create')
         tambahPinjaman)
 
 router.route('/pinjaman/:id')
-    .get(idPinjamanValidator, getSinglePinjaman)
-    .delete(idPinjamanValidator, hapusPinjaman)
+    .get(mongooseIdMiddleware, getSinglePinjaman)
+    .delete(mongooseIdMiddleware, hapusPinjaman)
 
 router.route('/requested/pinjaman')
     .get(pustakawanMiddlewareAuthorized, getAllRequestedPinjaman)
