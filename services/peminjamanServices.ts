@@ -10,47 +10,41 @@ import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
 
 
-
 // 4 service dibawah khusus pengguna
+
+// SUDAH DITESTING
 export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : PengajuanPeminjamanParamsType) => {
     // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
     const pinjamanMasihAda = await mencegahBukuDiterimaBerulang(idBuku, userId)
     if (pinjamanMasihAda) throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses ')
     
     // cek apakah buku ada dan masih tersedia
-    const buku = await Buku.findOne({_id: idBuku})
+    const buku = await Buku.findOne({_id: idBuku, stok: { $gte: 1 }, status: 'Tersedia', dihapus: false})
     if (!buku) throw new NotFoundError('Buku tidak ditemukan')
 
-    // cek stok buku sebelum dipinjam
-    if (buku.stok <= 0) throw new BadRequestError('Buku telah habis')
-    // cek status buku apakah tersedia
-    if (buku.status === 'Tidak Tersedia') throw new BadRequestError('Buku tidak tersedia')
-    
-
     // cek apakah durasi yang dipilih tersedia
-    const durasiTersedia = (await dataDurasiPeminjaman()).map(item => {
-        return item.durasi
-    })
-
-    // cek apakah durasi peminjaman yang dipilih tersedia
+    const durasiTersedia = (await dataDurasiPeminjaman()).map(item => item.durasi)
     if (!durasiTersedia.includes(durasiPeminjaman)) throw new BadRequestError('Durasi tidak tersedia')
 
-     const pinjaman = await Peminjaman.create({ 
+    const pinjaman = await Peminjaman.create({ 
         peminjam: userId, 
         buku: idBuku, 
         durasiPeminjaman, 
         statusPeminjaman: 'Diajukan' 
     })
 
-    return {data: pinjaman}    
+    return {data: pinjaman} 
+    // return {data: []}
 }
 
+// SUDAH DITESTING
 export const getSemuaPeminjamanUser = async({userId} : GetSemuaPeminjamanUserParamsType) => {
     const pinjamanUser = await Peminjaman.find({peminjam: userId})
 
     return {data: pinjamanUser}
 }
 
+// SUDAH DITESTING
 export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminjamanUser) => {
     const peminjaman = await Peminjaman.findOne({_id: peminjamanId, peminjam: userId})
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
@@ -58,6 +52,7 @@ export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminja
     return {data: peminjaman}
 }
 
+// SUDAH DITESTING
 export const pembatalanPeminjamanUser = async({idPeminjaman, userId} : PembatalanPeminjamanUserParamsType) => {
     const peminjaman = await Peminjaman.findOne({_id: idPeminjaman, peminjam: userId})
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
@@ -71,6 +66,8 @@ export const pembatalanPeminjamanUser = async({idPeminjaman, userId} : Pembatala
 }
 
 // service dibawah khusus pustakawan
+
+// SUDAH DITESTING
 export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, userId} : TerimaPeminjamanUserParamsType) => {
     // objek yang akan digunakan untuk meng-update data pinjaman
     let updatedField : PinjamanUpdatedFieldType = {
@@ -89,7 +86,7 @@ export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, userI
     if (!dataPeminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
     // cek data buku
-    const isBukuExist = await Buku.findOne({_id: dataPeminjaman.buku, stok: { $gte: 1 }})
+    const isBukuExist = await Buku.findOne({_id: dataPeminjaman.buku, stok: { $gte: 1 }, status: 'Tersedia', dihapus: false})
     if (!isBukuExist) throw new NotFoundError('Buku tidak ditemukan')
 
      // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
@@ -119,6 +116,7 @@ export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, userI
     return {data: dataPinjaman}
 }
 
+// SUDAH DITESTING
 export const tambahPinjamanUser = async({
     idBuku,
     idPengguna,
@@ -140,7 +138,7 @@ export const tambahPinjamanUser = async({
     }
 
     // cek data buku
-    const isBukuExist = await Buku.findOne({_id: idBuku,stok: { $gte: 1 }})
+    const isBukuExist = await Buku.findOne({_id: idBuku,stok: { $gte: 1 }, status: 'Tersedia', dihapus: false})
     if (!isBukuExist) throw new NotFoundError('Data buku tidak tersedia')
 
     // cek data pengguna
@@ -166,18 +164,21 @@ export const tambahPinjamanUser = async({
     return {data: pinjaman}
 }
 
+// SUDAH DITESTING
 export const getSemuaPinjaman = async() => {
     const pinjaman = await Peminjaman.find()
 
     return {data: pinjaman}
 }
 
+// SUDAH DITESTING
 export const getSemuaPinjamanAktif = async() => {
     const peminjaman = await Peminjaman.find({statusPeminjaman: 'Dipinjam', disetujui: true})
 
     return {data: peminjaman}
 }
 
+// SUDAH DITESTING
 export const getSemuaPengajuanPeminjaman = async() => {
     const permintaanPeminjaman = await Peminjaman.find(
         {statusPeminjaman: 'Diajukan', disetujui: 'false'}
@@ -189,6 +190,7 @@ export const getSemuaPengajuanPeminjaman = async() => {
     return {data: permintaanPeminjaman}
 }
 
+// SUDAH DITESTING
 export const getOnePeminjaman = async({idPeminjaman} : GetOnePeminjamanParamsType) => {
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
     if (!pinjaman) throw new NotFoundError('Data pinjaman tidak ditemukan')

@@ -14,7 +14,7 @@ import {
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
-    inputPengajuanPeminjamanValidator, 
+    pengajuanPeminjamanValidator, 
     terimaPinjamanValidator,
     tambahPinjamanInputValidator,
     inputPembatalanPeminjamanUserValidator
@@ -27,14 +27,14 @@ const router = express.Router()
 
 // KHUSUS USER
 router.route('/request/pinjaman')
-    .post(userMiddlewareAuthorized, inputPengajuanPeminjamanValidator, requestPinjaman)
+    .post(userMiddlewareAuthorized, pengajuanPeminjamanValidator, requestPinjaman)
 
 router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)
+    .delete(userMiddlewareAuthorized, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUser)
-    .delete(userMiddlewareAuthorized, mongooseIdMiddleware, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
 
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')

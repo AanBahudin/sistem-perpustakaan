@@ -6,6 +6,8 @@ import { getOnePeminjaman, getOnePeminjamanUser, getSemuaPeminjamanUser, getSemu
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
 // 4 controller dibawah khusus untuk pengguna
+
+// SUDAH DITESTING
 export const requestPinjaman = async(req: Request | any, res: Response) => {
     const { idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
@@ -19,6 +21,7 @@ export const requestPinjaman = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getPinjamanUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
@@ -33,6 +36,7 @@ export const getPinjamanUser = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getSinglePinjamanUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     const {id} = req.params
@@ -45,6 +49,7 @@ export const getSinglePinjamanUser = async(req: Request | any, res: Response) =>
     })
 }
 
+// SUDAH DITESTING
 export const pembatalanPinjamanUser = async(req: Request | any, res: Response) => {
     const {idPeminjaman} = req.body
     const {userId} = req.user
@@ -76,6 +81,7 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
     
 }
 
+// SUDAH DITESTING
 export const tambahPinjaman = async(req: Request | any, res: Response) => {
     const {
         idBuku,
@@ -100,6 +106,7 @@ export const tambahPinjaman = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getAllPinjaman = async(req: Request, res: Response) => {
     const {data} = await getSemuaPinjaman()
 
@@ -112,6 +119,7 @@ export const getAllPinjaman = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getAllPinjamanAktif = async(req: Request, res: Response) => {
     const {data} = await getSemuaPinjamanAktif()
 
@@ -124,6 +132,7 @@ export const getAllPinjamanAktif = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getAllRequestedPinjaman = async(req: Request, res: Response) => {
     const {data} = await getSemuaPengajuanPeminjaman()
 
@@ -136,8 +145,9 @@ export const getAllRequestedPinjaman = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getSinglePinjaman = async(req: Request, res: Response) => {
-    const {idPeminjaman} = req.params
+    const {id: idPeminjaman} = req.params
     const {data} = await getOnePeminjaman({idPeminjaman})
     
     SendOneDataResponse({
