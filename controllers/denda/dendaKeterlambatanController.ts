@@ -18,6 +18,6 @@ export const getDendaKeterlambatan = async(req: Request, res: Response) => {
     SendOneDataResponse({
         res,
         message: 'Data denda',
-        data: denda?.denda
+        data: denda
     })
 }

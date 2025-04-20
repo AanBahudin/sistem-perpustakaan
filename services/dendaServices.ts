@@ -12,5 +12,5 @@ export const tambahDenda = async({denda} : {denda: number}) => {
 export const getDenda = async() => {
     const denda = await Denda.findOne().select('denda')
 
-    return denda
+    return denda?.denda
 }
