@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { getOneDataPengembalian, getOnePengembalianUser, getPengembalianUser, pustakawanBuatDataPengembalian, pustakawanEditDataPengembalian, pustakawanGetDataPengembalian, pustakawanTerimaDataPengembalian } from "../../services/pengembalianServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getAllPengembalianUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
@@ -17,7 +17,7 @@ export const getAllPengembalianUser = async(req: Request | any, res: Response) =
     })
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getSinglePengembalianUser = async(req: Request | any, res: Response) => {
     const {id} = req.params
     const { userId } = req.user
@@ -33,7 +33,7 @@ export const getSinglePengembalianUser = async(req: Request | any, res: Response
 
 // untuk pustakawan
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getDataPengembalian = async(req: Request, res: Response) => {
     const {data} = await pustakawanGetDataPengembalian()
 
@@ -46,7 +46,7 @@ export const getDataPengembalian = async(req: Request, res: Response) => {
     })
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getSingleDataPengembalian = async(req: Request, res: Response) => {
     const { id } = req.params
     const {data} = await getOneDataPengembalian({pengembalianId: id})
@@ -58,11 +58,11 @@ export const getSingleDataPengembalian = async(req: Request, res: Response) => {
     })
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const buatDataPengembalian = async(req: Request, res: Response) => {
     const {idPeminjaman, kondisiBuku, statusPengembalian} = req.body
 
-    const {data} = await pustakawanBuatDataPengembalian({
+    const {data, message} = await pustakawanBuatDataPengembalian({
         idPeminjaman,
         kondisiBuku,
         statusPengembalian
@@ -70,12 +70,12 @@ export const buatDataPengembalian = async(req: Request, res: Response) => {
 
     SendOneDataResponse({
         res,
-        message: 'Data Pengembalian dibuat',
+        message: message,
         data
     })
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const terimaDataPengembalian = async(req: Request | any, res: Response) => {
     // id dari params
     const {id} = req.params
@@ -91,7 +91,7 @@ export const terimaDataPengembalian = async(req: Request | any, res: Response) =
     })
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const editDataPengembalian = async(req: Request | any, res: Response) => {
     const {id: idPengembalian} = req.params
     const { kondisiBuku } = req.body

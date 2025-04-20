@@ -5,10 +5,10 @@ import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, Pus
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDikembalikan } from "./bukuServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
-import { penggunaMeminjam } from "./penggunaServices"
+import { penggunaMeminjam, penggunaMengembalikan } from "./penggunaServices"
 
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getPengembalianUser = async({ userId } : GetAllPengembalianDataParamsType) => {
     const pengembalian = await Pengembalian.find({idPengguna: userId})
 
@@ -24,14 +24,14 @@ export const getOnePengembalianUser = async({ pengembalianId, userId } : GetOneP
 }
 
 
-// BELUM TESTING
+// SUDAH TESTING
 export const pustakawanGetDataPengembalian = async() => {
     const pengembalian = await Pengembalian.find()
 
     return {data: pengembalian}
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOnePengembalianParamsType) => {
     const pengembalian = await Pengembalian.findOne({_id: pengembalianId})
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
@@ -39,7 +39,7 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
     return {data: pengembalian}
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const pustakawanBuatDataPengembalian = async({ 
     idPeminjaman, 
     kondisiBuku, 
@@ -97,7 +97,7 @@ export const pustakawanBuatDataPengembalian = async({
     }
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId } : PustakawanAcceptPengembalianParamsType) => {
     // mencari data pengembalian dan mengecek apakah data tersedia
     const pengembalian = await Pengembalian.findOne({
@@ -130,13 +130,13 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
     // update data buku - stok dan totalPeminjaman
     await bukuDikembalikan(pengembalian.idBuku as string)
     // update data pengguna - total pinjaman
-    await penggunaMeminjam({idPengguna: pengembalian.idPengguna as string})
+    await penggunaMengembalikan({idPengguna: pengembalian.idPengguna as string})
 
     // return agar diakses oleh controller
     return {data: updatedPengembalian}
 }
 
-// BELUM TESTING
+// SUDAH TESTING
 export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian} : PustakawanEditPengembalianParamsType) => {
     const pengembalian = await Pengembalian.findOne({
         _id: idPengembalian,
@@ -145,7 +145,7 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
     })
     if (!pengembalian) throw new NotFoundError('Data tidak ditemmukan')
 
-    const updatedPengembalian = await Pengembalian.findOne(
+    const updatedPengembalian = await Pengembalian.findOneAndUpdate(
         {_id: idPengembalian},
         {keadaanBuku: kondisiBuku},
         {new: true, runValidators: true}

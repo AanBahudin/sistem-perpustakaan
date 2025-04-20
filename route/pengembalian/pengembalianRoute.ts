@@ -5,7 +5,8 @@ import {
     getDataPengembalian,
     getSingleDataPengembalian,
     buatDataPengembalian,
-    terimaDataPengembalian
+    terimaDataPengembalian,
+    editDataPengembalian
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -34,5 +35,6 @@ router.route('/accept/:id')
 
 router.route('/:id')
     .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, getSingleDataPengembalian)
+    .patch(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, editDataPengembalian)
 
 export default router

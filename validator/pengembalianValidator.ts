@@ -8,8 +8,7 @@ export const dataPengembalianValidator = withValidationErrors([
     body("idPeminjaman")
         .notEmpty().withMessage('Data peminjaman tidak disediakan')
         .custom(idPeminjaman => {
-            const isValidId = isValidMongooseId(idPeminjaman)
-            if (!isValidId) throw new BadRequestError('Id peminjaman salah')
+            return isValidMongooseId(idPeminjaman)
         }),
     body('kondisiBuku')
         .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
