@@ -1,6 +1,7 @@
 export type BuatKondisiParamsType = {
     kondisi: string,
     denda: number,
+    deskripsi: string,
     userId: string
 }
 
@@ -11,6 +12,7 @@ export type GetOneKondisiParamsType = {
 export type EditKondisiParamsType = {
     kondisiId: string,
     kondisi: string,
+    deskripsi: string,
     denda: number
 }
 

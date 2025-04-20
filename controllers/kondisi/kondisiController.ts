@@ -4,10 +4,10 @@ import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../
 import { StatusCodes } from "http-status-codes"
 
 export const createKondisi = async(req: Request | any, res: Response) => {
-    const {kondisi, denda} = req.body
+    const {kondisi, denda, deskripsi} = req.body
     const {userId} = req.user
 
-    const {data} = await buatKondisi({denda, kondisi, userId})
+    const {data} = await buatKondisi({denda, kondisi, userId, deskripsi})
 
     SendOneDataResponse({
         res,
@@ -42,9 +42,9 @@ export const getSingleKondisi = async(req: Request, res: Response) => {
 
 export const updateKondisi = async(req: Request, res: Response) => {
     const {id: kondisiId} = req.params
-    const {denda, kondisi} = req.body
+    const {denda, kondisi, deskripsi} = req.body
 
-    const {data} = await editKondisi({denda, kondisi, kondisiId})
+    const {data} = await editKondisi({denda, kondisi, deskripsi, kondisiId})
 
     SendOneDataResponse({
         res,

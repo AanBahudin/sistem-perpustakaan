@@ -6,16 +6,17 @@ import {
     updateKondisi,
     deleteKondisi } from '../../controllers/kondisi/kondisiController'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
+import { kondisiValidator } from '../../validator/kondisiValidator'
 
 const router = express.Router()
 
 router.route('/')
     .get(getAllKondisi)
-    .post(createKondisi)
+    .post(kondisiValidator, createKondisi)
 
 router.route('/:id')
     .get(mongooseIdMiddleware, getSingleKondisi)
-    .patch(mongooseIdMiddleware, updateKondisi)
+    .patch(mongooseIdMiddleware, kondisiValidator, updateKondisi)
     .delete(mongooseIdMiddleware, deleteKondisi)
 
 export default router

@@ -10,6 +10,10 @@ const KondisiSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    deskripsi: {
+        type: String,
+        required: true
+    },
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'Pustakawan',
