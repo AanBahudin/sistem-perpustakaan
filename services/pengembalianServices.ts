@@ -2,10 +2,11 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler"
 import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
 import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, PustakawanAcceptPengembalianParamsType, PustakawanCreatePengembalianParamsType, PustakawanEditPengembalianParamsType, PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
+import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
-import { penggunaMeminjam, penggunaMengembalikan } from "./penggunaServices"
+import { penggunaMeminjam, penggunaMengembalikan, penggunaMenghilangkan, tambahDendaPengguna } from "./penggunaServices"
 
 
 // SUDAH TESTING
@@ -42,8 +43,8 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
 // SUDAH TESTING
 export const pustakawanBuatDataPengembalian = async({ 
     idPeminjaman, 
-    kondisiBuku, 
-    statusPengembalian 
+    kondisiBuku,
+    statusHilang,
 } : PustakawanCreatePengembalianParamsType) => {
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
@@ -52,10 +53,6 @@ export const pustakawanBuatDataPengembalian = async({
     // cek status peminjaman agar dapat diproses
     const statusYangDiizinkan = ['Dipinjam', 'Terlambat']
     if (!statusYangDiizinkan.includes(pinjaman.statusPeminjaman)) throw new BadRequestError('Tidak dapat melakukan pengembalian')
-
-    // menghitung jumlah hari dan denda keterlambatan
-    const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
-    const totalDendaKeterlambatan = 1000 * totalHariTerlambat
 
     // mengecek apakah pinjaman sudah diproses sebelumnya / pinjaman sudah memiliki data pengembalian
     const isPengembalianAlreadyExists = await Pengembalian.findOne({
@@ -71,16 +68,33 @@ export const pustakawanBuatDataPengembalian = async({
         }
     }
 
+    // menghitung jumlah hari dan denda keterlambatan
+    const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
+    console.log(totalHariTerlambat)
+    const totalDendaKeterlambatan = 1000 * totalHariTerlambat
+
+    // menghitung denda fisik
+    const dendaFisik = await hitungDendaFisik({
+        kondisiAwal: pinjaman.kondisi as string,
+        kondisiAkhir: kondisiBuku,
+        idBuku: pinjaman.buku as string,
+        statusHilang
+    })
+
+    // gabung semua jenis denda
+    let totalDenda = totalDendaKeterlambatan + dendaFisik
+
     // buat data pengembalian
     const dataPengembalian = await Pengembalian.create({
         idPeminjaman: idPeminjaman,
         idPengguna: pinjaman.peminjam,
         idBuku: pinjaman.buku,
+        isMissing: statusHilang,
         durasiKeterlambatan: totalHariTerlambat,
-        statusPengembalian: statusPengembalian,
         keadaanBuku: kondisiBuku,
         dendaKeterlambatan: totalDendaKeterlambatan,
-        dendaFisik: 0 // nanti dibuatkan database khusus untuk nominal denda fisik
+        dendaFisik,
+        totalDenda
     })
 
     // update data peminjaman dengan memasukan id pengembalian
@@ -94,19 +108,14 @@ export const pustakawanBuatDataPengembalian = async({
         success: true,
         message: 'Data Pengembalian dibuat',
         data: dataPengembalian
+        // data: []
     }
 }
 
 // SUDAH TESTING
 export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId } : PustakawanAcceptPengembalianParamsType) => {
     // mencari data pengembalian dan mengecek apakah data tersedia
-    const pengembalian = await Pengembalian.findOne({
-        _id: idPengembalian, 
-        $or: [
-                {statusPengembalian: 'Dihilangkan'},
-                {statusPengembalian: 'Pending'}
-            ]
-        })
+    const pengembalian = await Pengembalian.findOne({_id: idPengembalian, statusPengembalian: 'Pending'})
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
     
     // update data pengembalian
@@ -114,7 +123,7 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
         {_id: pengembalian._id},
         {
             statusPembayaran: 'Dibayar',
-            statusPengembalian: pengembalian.statusPengembalian === 'Pending' ? 'Dikembalikan' : 'Dihilangkan',
+            statusPengembalian: 'Dikembalikan',
             tanggalPengembalian: Date.now(),
             diprosesOleh: userId
         },
@@ -128,13 +137,20 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
         idPeminjaman: pengembalian.idPeminjaman as string
     })
     // update data buku - jika dihilangkan maka update saja totalDipinjam
-    if (updatedPengembalian?.statusPengembalian === 'Dihilangkan') {
+    if (updatedPengembalian?.isMissing) {
         await bukuDihilangkan(pengembalian.idBuku as string)
+        await penggunaMenghilangkan({idPengguna: pengembalian.idPengguna as string})
     } else {
         await bukuDikembalikan(pengembalian.idBuku as string)
     }
     // update data pengguna - total pinjaman
     await penggunaMengembalikan({idPengguna: pengembalian.idPengguna as string})
+
+    // tambah denda pengguna
+    await tambahDendaPengguna({
+        idPengguna: pengembalian.idPengguna as string,
+        denda: pengembalian.totalDenda
+    })
 
     // return agar diakses oleh controller
     return {data: updatedPengembalian}

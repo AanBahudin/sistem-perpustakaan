@@ -60,6 +60,10 @@ const PenggunaSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    bukuDihilangkan: {
+        type: Number,
+        default: 0
+    },
     totalDenda: {
         type: Number,
         default: 0

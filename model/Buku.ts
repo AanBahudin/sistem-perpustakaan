@@ -75,6 +75,14 @@ const BukuSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    totalDihilangkan: {
+        type: Number,
+        default: 0
+    },
+    hargaGanti: {
+        type: Number,
+        required: true
+    },
     dihapus: {
         type: Boolean,
         default: false

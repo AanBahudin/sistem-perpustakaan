@@ -16,7 +16,7 @@ export type PustakawanGetOnePengembalianParamsType = {
 export type PustakawanCreatePengembalianParamsType = {
     idPeminjaman: string,
     kondisiBuku: string,
-    statusPengembalian: string
+    statusHilang: boolean,
 }
 
 export type PustakawanAcceptPengembalianParamsType = {

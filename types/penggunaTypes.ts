@@ -24,3 +24,8 @@ export type GetProfileParamsServiceType = {
 export type PenggunaMeminjamParamsType = {
     idPengguna: string
 }
+
+export type TambahDendaPenggunaTypes = {
+    idPengguna: string,
+    denda: number
+}

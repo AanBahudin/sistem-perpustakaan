@@ -60,12 +60,12 @@ export const getSingleDataPengembalian = async(req: Request, res: Response) => {
 
 // SUDAH TESTING
 export const buatDataPengembalian = async(req: Request, res: Response) => {
-    const {idPeminjaman, kondisiBuku, statusPengembalian} = req.body
+    const {idPeminjaman, kondisiBuku, statusHilang} = req.body
 
     const {data, message} = await pustakawanBuatDataPengembalian({
         idPeminjaman,
         kondisiBuku,
-        statusPengembalian
+        statusHilang
     })
 
     SendOneDataResponse({

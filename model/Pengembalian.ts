@@ -26,22 +26,11 @@ const PengembalianSchema = new mongoose.Schema({
     },
     statusPengembalian: {
         type: String,
-        enum: ['Dikembalikan', 'Dihilangkan', 'Pending'],
+        enum: ['Dikembalikan', 'Pending'],
         default: 'Pending'
     },
     keadaanBuku: {
         type: String,
-        enum: [
-            'Normal',    // Buku dalam kondisi baik
-            'Rusak',     // Buku rusak secara fisik
-            'Hilang',    // Buku hilang
-            'Baik',      // Buku dalam kondisi fisik yang baik
-            'Luntur',    // Buku dengan warna pudar
-            'Kusam',     // Sampul buku yang kusam
-            'Terpotong', // Buku yang terpotong sebagian
-            'Kotor',     // Buku yang kotor atau bernoda
-            'Tidak Lengkap' // Buku yang beberapa bagiannya hilang
-        ],
         default: "Normal"
     },
     dendaKeterlambatan: {
@@ -52,10 +41,19 @@ const PengembalianSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    totalDenda: {
+        type: Number,
+        default: 0,
+        required: true
+    },
     statusPembayaran: {
         type: String,
         enum: ['Dibayar', 'Belum Bayar'],
         default: 'Belum Bayar'
+    },
+    isMissing: {
+        type: Boolean,
+        default: false
     },
     diprosesOleh: {
         type: mongoose.Types.ObjectId,

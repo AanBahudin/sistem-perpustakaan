@@ -2,7 +2,7 @@ import { BadRequestError, NotAuthenticated, NotFoundError } from '../errors/erro
 import sendUpdateEmailVerification from '../helpers/sendUpdateEmailVerification'
 import Pengguna from '../model/Pengguna'
 import renderError from '../utils/renderError'
-import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
+import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, TambahDendaPenggunaTypes, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 
 // SUDAH DITESTING
@@ -102,10 +102,25 @@ export const penggunaMengembalikan = async({ idPengguna } : PenggunaMeminjamPara
     )
 }
 
+export const penggunaMenghilangkan = async({idPengguna} : PenggunaMeminjamParamsType) => {
+    await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {$inc: {bukuDihilangkan: 1}},
+    )
+}
+
 export const penggunaMeminjam = async({ idPengguna } : PenggunaMeminjamParamsType) => {
     const pengguna = await Pengguna.findOneAndUpdate(
         {_id: idPengguna},
         {$inc: {jumlah_pinjaman: 1}},
+        {new: true, runValidators: true}
+    )
+}
+
+export const tambahDendaPengguna = async({ idPengguna, denda } : TambahDendaPenggunaTypes) => {
+    const pengguna = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {$inc: {totalDenda: denda}},
         {new: true, runValidators: true}
     )
 }
