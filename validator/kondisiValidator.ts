@@ -11,7 +11,7 @@ export const kondisiValidator = withValidationErrors([
         }),
     body('denda')
         .notEmpty().withMessage('Denda tidak boleh kosong')
-        .isInt({min: 1000}).withMessage('Denda tidak boleh kurang dari 1000')
+        .isInt({min: 0}).withMessage('Denda tidak boleh kurang dari 0')
         .toInt(),
     body('deskripsi')
         .notEmpty().withMessage('Deskripsi tidak boleh kosong')

@@ -3,6 +3,7 @@ import { buatKondisi, editKondisi, getDataKondisi, getOneKondisi, hapusKondisi }
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 import { StatusCodes } from "http-status-codes"
 
+// SUDAH DITESTING
 export const createKondisi = async(req: Request | any, res: Response) => {
     const {kondisi, denda, deskripsi} = req.body
     const {userId} = req.user
@@ -17,6 +18,7 @@ export const createKondisi = async(req: Request | any, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getAllKondisi = async(req: Request, res: Response) => {
     const {data} = await getDataKondisi()
 
@@ -28,6 +30,7 @@ export const getAllKondisi = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const getSingleKondisi = async(req: Request, res: Response) => {
     const {id: kondisiId} = req.params
 
@@ -40,6 +43,7 @@ export const getSingleKondisi = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const updateKondisi = async(req: Request, res: Response) => {
     const {id: kondisiId} = req.params
     const {denda, kondisi, deskripsi} = req.body
@@ -53,6 +57,7 @@ export const updateKondisi = async(req: Request, res: Response) => {
     })
 }
 
+// SUDAH DITESTING
 export const deleteKondisi = async(req: Request, res: Response) => {
     const {id: kondisiId} = req.params
     
