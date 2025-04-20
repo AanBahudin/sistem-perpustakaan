@@ -2,6 +2,8 @@ import withValidationErrors from "./withValidationErrors";
 import { body } from "express-validator";
 import { isValidMongooseId } from "../utils/checker";
 import { kondisiBuku } from "../utils/constants";
+import { getDataKondisi } from "../services/kondisiServices";
+import { BadRequestError } from "../errors/errorHandler";
 
 
 // validasi untuk req.body pada pengajuan peminjaman
@@ -37,7 +39,14 @@ export const terimaPinjamanValidator = withValidationErrors([
     body('statusPeminjaman')
         .notEmpty().withMessage('Status penerimaan tidak boleh kosong')
         .isBoolean().withMessage('Data harus boolean')
-        .toBoolean()
+        .toBoolean(),
+    body('kondisiBuku')
+        .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
+        .custom(async(kondisiBuku) => {
+            const {data} = await getDataKondisi()
+            const dataKondisi = data.map(item => item.kondisi)
+            if (!dataKondisi.includes(kondisiBuku)) throw new BadRequestError('Kondisi buku tidak tersedia')
+        })
 ])
 
 export const tambahPinjamanInputValidator = withValidationErrors([
