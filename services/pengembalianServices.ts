@@ -5,6 +5,7 @@ import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, Pus
 import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
+import { getDenda } from "./dendaServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
 import { penggunaMeminjam, penggunaMengembalikan, penggunaMenghilangkan, tambahDendaPengguna } from "./penggunaServices"
 
@@ -70,8 +71,8 @@ export const pustakawanBuatDataPengembalian = async({
 
     // menghitung jumlah hari dan denda keterlambatan
     const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
-    console.log(totalHariTerlambat)
-    const totalDendaKeterlambatan = 1000 * totalHariTerlambat
+    const nominalDenda = await getDenda()
+    const totalDendaKeterlambatan = nominalDenda as number * totalHariTerlambat
 
     // menghitung denda fisik
     const dendaFisik = await hitungDendaFisik({
