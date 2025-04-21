@@ -158,7 +158,7 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
 }
 
 // SUDAH TESTING
-export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian} : PustakawanEditPengembalianParamsType) => {
+export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian, statusHilang} : PustakawanEditPengembalianParamsType) => {
     const pengembalian = await Pengembalian.findOne({
         _id: idPengembalian,
         statusPembayaran: 'Belum Bayar',
@@ -166,9 +166,26 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
     })
     if (!pengembalian) throw new NotFoundError('Data tidak ditemmukan')
 
+
+    // hitung ulang denda fisik berdasarkan kondisi fisik terbaru
+    const dendaFisikBaru = await hitungDendaFisik({
+        kondisiAwal: pengembalian.keadaanBuku,
+        kondisiAkhir: kondisiBuku,
+        idBuku: pengembalian.idBuku as string,
+        statusHilang: statusHilang
+    })
+
+    // perbaharui nilai
+    const totalDendaBaru = pengembalian.dendaKeterlambatan + dendaFisikBaru
+    
+
     const updatedPengembalian = await Pengembalian.findOneAndUpdate(
         {_id: idPengembalian},
-        {keadaanBuku: kondisiBuku},
+        {
+            keadaanBuku: kondisiBuku,
+            dendaFisik: dendaFisikBaru,
+            totalDenda: totalDendaBaru
+        },
         {new: true, runValidators: true}
     )
 

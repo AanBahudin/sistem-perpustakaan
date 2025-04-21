@@ -94,9 +94,9 @@ export const terimaDataPengembalian = async(req: Request | any, res: Response) =
 // SUDAH TESTING
 export const editDataPengembalian = async(req: Request | any, res: Response) => {
     const {id: idPengembalian} = req.params
-    const { kondisiBuku } = req.body
+    const { kondisiBuku, statusHilang } = req.body
 
-    const {data} = await pustakawanEditDataPengembalian({kondisiBuku, idPengembalian})
+    const {data} = await pustakawanEditDataPengembalian({kondisiBuku, idPengembalian, statusHilang})
 
     SendOneDataResponse({
         res,

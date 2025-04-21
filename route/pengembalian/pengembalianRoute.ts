@@ -10,7 +10,7 @@ import {
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
-import { dataPengembalianValidator } from '../../validator/pengembalianValidator'
+import { dataPengembalianValidator, editDataPengembalianValidator } from '../../validator/pengembalianValidator'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
@@ -35,6 +35,6 @@ router.route('/accept/:id')
 
 router.route('/:id')
     .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, getSingleDataPengembalian)
-    .patch(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, editDataPengembalian)
+    .patch(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, editDataPengembalianValidator, editDataPengembalian)
 
 export default router

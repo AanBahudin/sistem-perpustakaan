@@ -24,3 +24,17 @@ export const dataPengembalianValidator = withValidationErrors([
         .toBoolean()
         .isBoolean().withMessage('Data harus berupa boolean')
 ])
+
+export const editDataPengembalianValidator = withValidationErrors([
+    body('kondisiBuku')
+        .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
+        .custom(async(kondisiBuku) => {
+            const {data} = await getDataKondisi()
+            const dataKondisi = data.map(item => item.kondisi)
+            if (!dataKondisi.includes(kondisiBuku)) throw new BadRequestError('Kondisi tidak tersedia')
+        }),
+    body('statusHilang')
+        .notEmpty().withMessage('status kehilangan tidak boleh kosong')
+        .toBoolean()
+        .isBoolean().withMessage('Data harus berupa boolean')
+])

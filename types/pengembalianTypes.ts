@@ -25,6 +25,7 @@ export type PustakawanAcceptPengembalianParamsType = {
 }
 
 export type PustakawanEditPengembalianParamsType = {
+    statusHilang: boolean
     kondisiBuku: string,
     idPengembalian: string
 }
