@@ -9,14 +9,12 @@ import {
     editPerpanjanganUser,
     batalPerpanjanganUser
 } from '../../controllers/perpanjangan/perpanjanganController'
-import { 
-    deletePerpanjanganValidator, 
-    editPerpanjanganInputValidator, 
-    idPerpanjanganValidator, 
+import {
+    editPerpanjanganInputValidator,
     perpanjanganInputValidator, 
-    terimaPerpanjanganValidator, 
-    userValidator } from '../../validator/perpanjanganValidator'
+    terimaPerpanjanganValidator, } from '../../validator/perpanjanganValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
+import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
 
@@ -26,21 +24,17 @@ router.route('/user')
 
 router.route('/user/:id')
     .get(
-        userMiddlewareAuthorized, 
-        idPerpanjanganValidator, 
-        userValidator, 
+        userMiddlewareAuthorized,
+        mongooseIdMiddleware,
         getSinglePerpanjanganUser)
     .patch(
         userMiddlewareAuthorized, 
-        idPerpanjanganValidator, 
-        userValidator, 
+        mongooseIdMiddleware,
         editPerpanjanganInputValidator, 
         editPerpanjanganUser)
     .delete(
         userMiddlewareAuthorized,
-        idPerpanjanganValidator,
-        userValidator,
-        deletePerpanjanganValidator,
+        mongooseIdMiddleware,
         batalPerpanjanganUser)
 
 

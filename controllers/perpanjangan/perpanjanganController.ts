@@ -3,161 +3,126 @@ import Perpanjangan from "../../model/Perpanjangan";
 import { StatusCodes } from "http-status-codes";
 import Peminjaman from "../../model/Peminjaman";
 import tambahHariKeTanggal from "../../utils/tambahHari";
+import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, ubahPerpanjangan } from "../../services/perpanjanganServices";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // untuk pengguna
+
+// BELUM DITESTING
 export const pengajuanPerpanjangan = async(req: Request | any, res: Response) => {
-    const {userId} = req.user
-    req.body.idPengguna = userId
+    const {idPeminjaman, idBuku, durasi, alasan} = req.body
+    const {data} = await tambahPerpanjangan({
+        userId: req.user.userId,
+        dataPerpanjangan: {alasan, durasi, idBuku, idPeminjaman}
+    })
 
-    const perpanjangan = await Perpanjangan.create(req.body)
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Perpanjangan di-ajukkan',
-        timestamps: new Date(Date.now()).toString(),
-        data: perpanjangan
+        data,
+        status: StatusCodes.CREATED
     })
 }
 
+// BELUM DITESTING
 export const getAllPerpanjanganUser = async(req: Request | any, res: Response) => {
-    const {userId} = req.user
+    const {data} = await getSemuaPerpanjangan({userId: req.user.userId})
 
-    const dataPerpanjanganUser = await Perpanjangan.find({idPengguna: userId})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Permintaan Perpanjangan',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPerpanjanganUser,
-        total: dataPerpanjanganUser.length
-    })
-}
-
-export const getSinglePerpanjanganUser = async(req: Request | any, res: Response) => {
-    const { id } = req.params
-    const {userId} = req.user
-
-    const perpanjangan = await Perpanjangan.findOne({_id: id, idPengguna: userId})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Perpanjangan',
-        timestamps: new Date(Date.now()).toString(),
-        data: perpanjangan
+        total: data.length,
+        page: 1,
+        data
     })
 }
 
+// BELUM DITESTING
+export const getSinglePerpanjanganUser = async(req: Request | any, res: Response) => {
+    const {data} = await getOnePerpanjangan({
+        idPerpanjangan: req.params.id,
+        userId: req.user.userId
+    })
+
+    SendOneDataResponse({
+        res,
+        message: 'Data Perpanjangan',
+        data
+    })
+}
+
+// BELUM DITESTING
 export const editPerpanjanganUser = async(req: Request | any, res: Response) => {
-    const {id} = req.params
-    const {userId} = req.user
+    const {data} = await ubahPerpanjangan({
+        userId: req.user.userId,
+        idPerpanjangan: req.params.id,
+        dataPerpanjangan: {
+            alasan: req.body.alasan,
+            durasi: req.body.durasi
+        }
+    })
 
-    const data = await Perpanjangan.findOneAndUpdate(
-        {_id: id, idPengguna: userId},
-        req.body,
-        {new: true, runValidators: true}
-    )
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes,
+    SendOneDataResponse({
+        res,
         message: 'Data Perpanjangan Diperbaharui',
-        timestamps: new Date(Date.now()).toString(),
-        data: data
+        data
     })
 }
 
+// BELUM DITESTING
 export const batalPerpanjanganUser = async(req: Request | any, res: Response) => {
-    const {userId} = req.user
-    const {id} = req.params
+    await pembatalanPerpanjangan({
+        userId: req.user.userId,
+        idPerpanjangan: req.params
+    })
 
-    await Perpanjangan.findOneAndDelete({_id: id, idPengguna: userId})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendBasicResponse({
+        res,
         message: 'Data Perpanjangan Dibatalkan',
-        timestamps: new Date(Date.now()).toString(),
     })
 }
 
 
 // untuk pustakawan
+
+// BELUM DITESTING
 export const getAllPerpanjangan = async(req: Request, res: Response) => {
-    const dataPerpanjangan = await Perpanjangan.find()
+    const {data} = await getSemuaPerpanjanganUser()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Semua Perpanjangan',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPerpanjangan,
-        total: dataPerpanjangan.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
+// BELUM DITESTING
 export const getSinglePerpanjangan = async(req: Request, res: Response) => {
-    const { id } = req.params
+    const {data} = await getOnePerpanjanganUser({idPerpanjangan: req.params.id})
 
-    const dataPerpanjangan = await Perpanjangan.findOne({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data Perpanjangan',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPerpanjangan,
+        data
     })
 }
 
+// BELUM DITESTING
 export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
-    const {perpanjanganId, disetujui} = req.body
-    let message: string | null;
+    const {data, message} = await acceptPerpanjangan({
+        userId: req.user.userId,
+        dataPerpanjangan: {
+            disetujui: req.body.disetujui,
+            idPerpanjangan: req.body.idPerpanjangan
+        }
+    })
 
-    // ambil data pengajuan perpanjangan
-    const dataPerpanjangan = await Perpanjangan.findOne({_id: perpanjanganId})
 
-    if (disetujui) {
-        message = 'Perpanjangan Pinjaman Diterima'
-        // ambil data yang dibutuhkan
-        const {durasi : durasiPerpanjangan, idPeminjaman} = dataPerpanjangan!
-
-        // ambil data peminjaman
-        const dataPeminjaman = await Peminjaman.findOne({_id: idPeminjaman})
-        const {durasiPeminjaman, berakhirPada} = dataPeminjaman!
-
-        // perpanjangan masa durasi.
-        let penambahanDurasiPeminjaman = durasiPeminjaman + durasiPerpanjangan
-        let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, durasiPerpanjangan)
-
-        // update data perpanjangan (disetujui, disetujuiOleh)
-        await Perpanjangan.findOneAndUpdate(
-            {_id: perpanjanganId},
-            {
-                disetujui: 'Diterima',
-                diprosesOleh: req.user.userId
-            }
-        )
-
-        // update data pinjaman (durasiPinjaman, berakhirPada)
-        await Peminjaman.findOneAndUpdate(
-            {_id: idPeminjaman},
-            {
-                durasiPeminjaman: penambahanDurasiPeminjaman,
-                berakhirPada: penambahanTanggalPinjaman
-            },
-            {new: true, runValidators: true}
-        )
-    } else {
-        message = 'Perpanjangan Peminjaman Ditolak'
-        await Perpanjangan.findOneAndUpdate(
-            {_id: perpanjanganId},
-            {
-                diprosesOleh: req.user.userId,
-                disetujui: 'Ditolak'
-            }
-        )
-    }
-
-    // kirim respon berhasil menerima pengajuan perpanjangan
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: message,
-        timestamps: new Date(Date.now()).toString(),
+    SendOneDataResponse({
+        res,
+        message,
+        data
     })
 }

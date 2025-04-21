@@ -207,3 +207,11 @@ export const pinjamanDikembalikan = async({idBuku, idPeminjam, idPeminjaman} : P
         {new: true, runValidators: true}
     )
 }
+
+export const updateDurasiPinjaman = async({idPinjaman, berakhirPada, durasiPeminjaman} : any) => {
+    await Peminjaman.findOneAndUpdate(
+        {_id: idPinjaman},
+        {berakhirPada, durasiPeminjaman},
+        {new: true, runValidators: true}
+    )
+}

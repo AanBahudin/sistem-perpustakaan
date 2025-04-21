@@ -30,7 +30,8 @@ const PerpanjanganSchema = new mongoose.Schema({
         ref: 'Pustakawan'
     },
     alasan: {
-        type: String
+        type: String,
+        required: true
     }
 }, {timestamps: true})
 
