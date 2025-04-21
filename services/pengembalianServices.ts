@@ -1,4 +1,5 @@
 import { BadRequestError, NotFoundError } from "../errors/errorHandler"
+import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
 import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, PustakawanAcceptPengembalianParamsType, PustakawanCreatePengembalianParamsType, PustakawanEditPengembalianParamsType, PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
@@ -6,6 +7,7 @@ import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
 import { getDenda } from "./dendaServices"
+import { getDataKondisi } from "./kondisiServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
 import { penggunaMeminjam, penggunaMengembalikan, penggunaMenghilangkan, tambahDendaPengguna } from "./penggunaServices"
 
@@ -166,28 +168,16 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
     })
     if (!pengembalian) throw new NotFoundError('Data tidak ditemmukan')
 
-
-    // hitung ulang denda fisik berdasarkan kondisi fisik terbaru
-    const dendaFisikBaru = await hitungDendaFisik({
-        kondisiAwal: pengembalian.keadaanBuku,
-        kondisiAkhir: kondisiBuku,
-        idBuku: pengembalian.idBuku as string,
-        statusHilang: statusHilang
-    })
-
-    // perbaharui nilai
-    const totalDendaBaru = pengembalian.dendaKeterlambatan + dendaFisikBaru
-    
-
     const updatedPengembalian = await Pengembalian.findOneAndUpdate(
         {_id: idPengembalian},
         {
             keadaanBuku: kondisiBuku,
-            dendaFisik: dendaFisikBaru,
-            totalDenda: totalDendaBaru
+            // dendaFisik: dendaFisikBaru,
+            // totalDenda: totalDendaBaru
         },
         {new: true, runValidators: true}
     )
 
     return {data: updatedPengembalian}
+    // return {data: pengembalian}
 }
