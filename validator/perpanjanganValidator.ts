@@ -41,7 +41,7 @@ export const editPerpanjanganInputValidator = withValidationErrors([
 ])
 
 export const terimaPerpanjanganValidator = withValidationErrors([
-    body("perpanjanganId")
+    body("idPerpanjangan")
         .notEmpty().withMessage('Id Perpanjangan tidak boleh kosong')
         .custom(async(perpanjanganId) => {
             return isValidMongooseId(perpanjanganId)
