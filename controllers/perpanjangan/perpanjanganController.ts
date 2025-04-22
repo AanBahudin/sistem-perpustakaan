@@ -8,7 +8,7 @@ import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../
 
 // untuk pengguna
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const pengajuanPerpanjangan = async(req: Request | any, res: Response) => {
     const {idPeminjaman, idBuku, durasi, alasan} = req.body
     const {data} = await tambahPerpanjangan({
@@ -73,7 +73,7 @@ export const editPerpanjanganUser = async(req: Request | any, res: Response) => 
 export const batalPerpanjanganUser = async(req: Request | any, res: Response) => {
     await pembatalanPerpanjangan({
         userId: req.user.userId,
-        idPerpanjangan: req.params
+        idPerpanjangan: req.params.id
     })
 
     SendBasicResponse({
@@ -109,7 +109,7 @@ export const getSinglePerpanjangan = async(req: Request, res: Response) => {
     })
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
     const {data, message} = await acceptPerpanjangan({
         userId: req.user.userId,

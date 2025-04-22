@@ -8,7 +8,7 @@ import { updateDurasiPinjaman } from "./peminjamanServices"
 
 // khusus pengguna
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPerpanjanganParamsType) => {
 
     const {idPeminjaman, idBuku, durasi} = dataPerpanjangan
@@ -34,21 +34,21 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
     return {data: perpanjangan}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const getSemuaPerpanjangan = async({userId} : GetSemauPerpanjanganParamsType) => {
-    const dataPerpanjangan = await Perpanjangan.find({_id: userId})
+    const dataPerpanjangan = await Perpanjangan.find({idPengguna: userId})
 
     return {data: dataPerpanjangan}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const getOnePerpanjangan = async({idPerpanjangan, userId} : GetOnePerpanjanganParamsType) => {
     const perpanjangan = await Perpanjangan.findOne({_id: idPerpanjangan, idPengguna: userId})
     if (!perpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan')
     return {data: perpanjangan}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const ubahPerpanjangan = async({idPerpanjangan, userId, dataPerpanjangan} : UpdatePerpanjanganParamsType) => {
 
     const {durasi} = dataPerpanjangan
@@ -66,7 +66,7 @@ export const ubahPerpanjangan = async({idPerpanjangan, userId, dataPerpanjangan}
     return {data}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const pembatalanPerpanjangan = async({userId, idPerpanjangan} : PembatalanPerpanjanganParamsType) => {
     const perpanjangan = await Perpanjangan.findOneAndDelete({
         _id: idPerpanjangan,
@@ -81,21 +81,21 @@ export const pembatalanPerpanjangan = async({userId, idPerpanjangan} : Pembatala
 
 // khusus pustakawan
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const getSemuaPerpanjanganUser = async() => {
     const dataPerpanjangan = await Perpanjangan.find()
 
     return {data: dataPerpanjangan}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const getOnePerpanjanganUser = async({idPerpanjangan} : GetOnePerpanjanganUserParamsType) => {
     const dataPerpanjangan = await Perpanjangan.findOne({_id: idPerpanjangan})
     if (!dataPerpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan')
     return {data: dataPerpanjangan}
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const acceptPerpanjangan = async({dataPerpanjangan, userId} : AcceptPerpanjanganParamsType) => {
     let message: string | null;
     const { idPerpanjangan, disetujui } = dataPerpanjangan
@@ -135,7 +135,7 @@ export const acceptPerpanjangan = async({dataPerpanjangan, userId} : AcceptPerpa
 
 // service digunakan di tempat lain
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const penambahanPerpanjangan = async({idPerpanjangan, userId} : PenambahanPerpanjanganParamsType) => {
     await Perpanjangan.findOneAndUpdate(
         {_id: idPerpanjangan},
@@ -144,7 +144,7 @@ export const penambahanPerpanjangan = async({idPerpanjangan, userId} : Penambaha
     )
 }
 
-// BELUM DITESTING
+// SUDAH DITESTING
 export const perpanjangaDitolak = async({userId, idPerpanjangan} : PerpanjanganDitolakParamsType) => {
     await Perpanjangan.findOneAndUpdate(
         {_id: idPerpanjangan},
