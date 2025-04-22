@@ -24,7 +24,7 @@ export const mencegahBukuDipinjamBerulang = async(idBuku: string, idPengguna: st
 }
 
 export const mencegahBukuDiterimaBerulang = async(idBuku: string, idPengguna: string) => {
-    const statusBlokir = ['Dipinjam', 'Terlambat', 'Diajukan']
+    const statusBlokir = ['Dipinjam', 'Terlambat']
     const peminjaman = await Peminjaman.findOne({
         peminjam: idPengguna,
         buku: idBuku,

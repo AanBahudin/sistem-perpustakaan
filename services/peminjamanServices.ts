@@ -15,7 +15,7 @@ import { penggunaMeminjam } from "./penggunaServices";
 // SUDAH DITESTING
 export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : PengajuanPeminjamanParamsType) => {
     // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDiterimaBerulang(idBuku, userId)
+    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, userId)
     if (pinjamanMasihAda) throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses ')
     
     // cek apakah buku ada dan masih tersedia
