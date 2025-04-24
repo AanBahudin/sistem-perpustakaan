@@ -19,6 +19,7 @@ const Navbar : React.FC= () => {
             <ModeToggle />
             <NavbarDropdown />
             <Button className='hidden lg:block text-white px-10 '>Masuk</Button>
+
           </div>
 
         </section>

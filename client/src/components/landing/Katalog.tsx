@@ -1,4 +1,3 @@
-import React from 'react'
 import Container from '@/globals/Container'
 import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 import { Link } from 'react-router-dom'

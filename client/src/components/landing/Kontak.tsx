@@ -1,4 +1,3 @@
-import React from 'react'
 import Container from '@/globals/Container'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
