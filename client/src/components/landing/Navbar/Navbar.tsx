@@ -1,8 +1,9 @@
 import React from 'react'
+import Navlink from './Navlink'
 import { BookOpenText } from 'lucide-react'
 import { ModeToggle } from '@/components/navbar/modeToggle'
-import Navlink from './Navlink'
 import { Button } from '@/components/ui/button'
+import NavbarDropdown from '../NavbarDropdown'
 
 const Navbar : React.FC= () => {
   return (
@@ -13,10 +14,11 @@ const Navbar : React.FC= () => {
           </div>
 
           {/* menu section */}
-          <div className='flex items-center justify-center gap-x-10'>
+          <div className='flex items-center justify-center lg:gap-x-10 gap-x-6'>
             <Navlink />
             <ModeToggle />
-            <Button className='text-white px-10'>Masuk</Button>
+            <NavbarDropdown />
+            <Button className='hidden lg:block text-white px-10 '>Masuk</Button>
           </div>
 
         </section>
