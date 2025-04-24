@@ -8,6 +8,10 @@
     "src/**/*"
   ],
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
