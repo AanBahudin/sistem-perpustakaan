@@ -10,7 +10,7 @@ const Kontak = () => {
     <Container className='mt-10 py-10'>
         <h1 id='kontak' className='text-4xl font-semibold'>Hubungi Kami</h1>
 
-        <main className='grid grid-cols-2 place-items-center'>
+        <main className='grid grid-cols-1 lg:grid-cols-2 place-items-center'>
             <section>
                 <p className='text-muted-foreground mt-6 leading-6'>
                 Nikmati akses ke beragam koleksi buku, jurnal, dan sumber digital yang mendukung studi dan penelitian Anda. Dengan fasilitas yang nyaman, perpustakaan ini siap menjadi ruang belajar yang inspiratif. Nikmati akses ke beragam koleksi buku, jurnal
@@ -56,7 +56,7 @@ const Kontak = () => {
                 </section>
             </section>
 
-            <section className='min-w-[500px] rounded p-6 h-full bg-muted place-self-end'>
+            <section className='min-w-[500px] rounded p-6 h-full bg-muted place-self-end hidden lg:grid'>
                 <h1 className='text-2xl font-semibold'>Kirim Pesan</h1>
 
                 <div className="flex flex-col mt-6 gap-y-4">
