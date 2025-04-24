@@ -7,7 +7,7 @@ const About = () => {
     <Container>
         <h1 id='tentang' className='text-3xl font-semibold mb-8'>Sekilas Perpustakaan</h1>
 
-        <section className='grid grid-cols-2 place-items-center'>
+        <section className='grid grid-cols-1 lg:grid-cols-2 place-items-center'>
             <div>
                 <h5 className='text-muted-foreground'>
                 Nikmati akses ke beragam koleksi buku, jurnal, dan sumber digital yang mendukung studi dan penelitian Anda. Dengan fasilitas yang nyaman, perpustakaan ini siap menjadi ruang belajar yang inspiratif. Nikmati akses ke beragam koleksi buku, jurnal, dan sumber digital yang mendukung studi dan penelitian Anda. Dengan fasilitas yang nyaman, perpustakaan ini siap menjadi ruang belajar yang inspiratif.
@@ -18,7 +18,7 @@ const About = () => {
                 </h5>
             </div>
 
-            <div className='justify-self-end'>
+            <div className='justify-self-end lg:grid hidden'>
                 <div className='w-[500px] h-[300px] bg-muted-foreground rounded'></div>
             </div>
         </section>
