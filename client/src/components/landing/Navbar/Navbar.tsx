@@ -1,8 +1,8 @@
 import React from 'react'
 import { BookOpenText } from 'lucide-react'
-import { landingNavbarLink } from '../../../utils/links'
 import { ModeToggle } from '@/components/navbar/modeToggle'
-import { Separator } from '@/components/ui/separator'
+import Navlink from './Navlink'
+import { Button } from '@/components/ui/button'
 
 const Navbar : React.FC= () => {
   return (
@@ -14,15 +14,9 @@ const Navbar : React.FC= () => {
 
           {/* menu section */}
           <div className='flex items-center justify-center gap-x-10'>
-            <div className='flex items-center justify-center gap-x-6'>
-              {landingNavbarLink.map(item => {
-                return (
-                  <a href={item.text} key={item.id} className='capitalize font-medium'>{item.text}</a>
-                )
-              })}
-            </div>
+            <Navlink />
             <ModeToggle />
-            <button className='bg-primary px-6 py-1 rounded-md font-semibold text-white'>Masuk</button>
+            <Button className='text-white px-10'>Masuk</Button>
           </div>
 
         </section>
