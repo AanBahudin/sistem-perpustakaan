@@ -1,3 +1,5 @@
+import { BookCopy, LibraryBig, Users, } from "lucide-react"
+
 export const accordions = [
     {
         id: 1,
@@ -29,5 +31,22 @@ export const accordions = [
         question: 'Bagaimana cara mengetahui status peminjaman saya?',
         answer: 'Anda bisa melihat status peminjaman melalui dashboard akun Anda di bagian "Peminjaman Saya".'
     },
-    
+]
+
+export const stats = [
+    {
+        total: '2432+',
+        text: 'Anggota Terdaftar',
+        icon: <Users className="mb-4 stroke-primary" size={40}  />
+    },
+    {
+        total: '230+',
+        text: 'Jumlah Buku',
+        icon: <LibraryBig className="mb-4 stroke-primary" size={40}  />
+    },
+    {
+        total: "34+",
+        text: "Kategori Buku",
+        icon: <BookCopy className="mb-4 stroke-primary" size={40}  />
+    }
 ]

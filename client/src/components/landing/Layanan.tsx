@@ -9,7 +9,7 @@ const Layanan = () => {
         </h5>
 
         {/* ICON */}
-        <section className='flex flex-col lg:flex-row items-center gap-x-6 gap-y-6 lg:gap-y-0 mt-10 justify-center'>
+        <section className='flex items-center gap-x-6 gap-y-6 lg:gap-y-0 mt-10 justify-center flex-wrap'>
             <div className='w-50 h-30 bg-muted-foreground rounded'></div>
             <div className='w-50 h-30 bg-muted-foreground rounded'></div>
             <div className='w-50 h-30 bg-muted-foreground rounded'></div>
