@@ -1,3 +1,4 @@
+import { TestimonialsDataType } from "@/types/constantsTypes";
 import { BookCopy, LibraryBig, Users, } from "lucide-react"
 
 export const accordions = [
@@ -50,3 +51,57 @@ export const stats = [
         icon: <BookCopy className="mb-4 stroke-primary" size={40}  />
     }
 ]
+
+export const testimoni : TestimonialsDataType[] = [
+    {
+      name: "Aan Bahudin",
+      position: "Mahasiswa",
+      message: "Aplikasi ini benar-benar membantu saya mencari referensi buku untuk tugas akhir. Cepat dan mudah digunakan!",
+    },
+    {
+      name: "Dwi Lestari",
+      position: "Dekan",
+      message: "Saya bangga dengan inovasi ini. Sistem perpustakaan berbasis web ini meningkatkan akses literatur akademik bagi seluruh civitas kampus.",
+    },
+    {
+      name: "Bima Saputra",
+      position: "Ketua Program Studi",
+      message: "Sangat mendukung pengembangan akademik mahasiswa. Aplikasi ini membuat pencarian buku lebih terstruktur.",
+    },
+    {
+      name: "Citra Rahmawati",
+      position: "Sekretaris",
+      message: "Proses administrasi peminjaman buku jauh lebih efisien. Tidak perlu lagi antre lama di perpustakaan!",
+    },
+    {
+      name: "Daniel Pratama",
+      position: "Dosen",
+      message: "Banyak literatur terbaru yang bisa langsung diakses mahasiswa. Ini tentu sangat membantu proses belajar mengajar.",
+    },
+    {
+      name: "Elsa Nuraini",
+      position: "Mahasiswa",
+      message: "Fitur pengingat pengembalian buku sangat berguna. Saya tidak pernah lagi telat mengembalikan buku!",
+    },
+    {
+      name: "Fauzan Hakim",
+      position: "Dosen",
+      message: "UI/UX dari aplikasi ini sangat ramah pengguna, bahkan untuk dosen yang tidak terlalu familiar dengan teknologi.",
+    },
+    {
+      name: "Gita Salsabila",
+      position: "Mahasiswa",
+      message: "Sistem katalog yang lengkap dan pencarian cepat membuat saya lebih produktif dalam menyusun makalah.",
+    },
+    {
+      name: "Hendra Wijaya",
+      position: "Ketua Program Studi",
+      message: "Aplikasi ini membawa kemajuan besar dalam pengelolaan literatur di program studi kami. Sukses terus!",
+    },
+    {
+      name: "Intan Maharani",
+      position: "Sekretaris",
+      message: "Proses verifikasi akun dan peminjaman buku kini jauh lebih tertib dan terdata dengan baik. Sangat membantu administrasi!",
+    },
+];
+  

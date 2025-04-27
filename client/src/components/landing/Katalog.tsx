@@ -14,17 +14,11 @@ const Katalog = () => {
         {/* ICON */}
         <ScrollArea>
             <section className='flex items-center gap-x-6 mt-10 justify-center'>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-muted-foreground rounded'></div>
-                <div className='w-50 h-70 bg-m  uted-foreground rounded'></div>
+              {Array.from({length: 5}).map((_, index) => {
+                return (
+                  <div className='lg:w-50 lg:h-70 w-30 h-50 bg-muted-foreground rounded'></div>
+                )
+              })}
             </section>
             <ScrollBar orientation="horizontal" />
         </ScrollArea>
