@@ -12,9 +12,9 @@ const Questions = () => {
         <Accordion type="single" collapsible className="w-full">
         {accordions.map(accordion => {
             return (
-            <AccordionItem value={accordion.id.toString()}>
+            <AccordionItem key={accordion.id} value={accordion.id.toString()}>
                 <AccordionTrigger className="text-md">{accordion.question}</AccordionTrigger>
-                <AccordionContent>
+                <AccordionContent className="text-muted-foreground">
                 {accordion.answer}
                 </AccordionContent>
             </AccordionItem>
