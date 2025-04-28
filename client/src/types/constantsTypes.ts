@@ -3,3 +3,9 @@ export type TestimonialsDataType = {
     position: "Mahasiswa" | "Dekan" | "Ketua Program Studi" | "Sekretaris" | "Dosen",
     message: string
 }
+
+export type ContactCardType = {
+    title: string,
+    value: string,
+    icon: any
+}

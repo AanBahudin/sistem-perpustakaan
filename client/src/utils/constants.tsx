@@ -1,5 +1,5 @@
-import { TestimonialsDataType } from "@/types/constantsTypes";
-import { BookCopy, LibraryBig, Users, } from "lucide-react"
+import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
+import { BookCopy, LibraryBig, Users, Mail, MapPin} from "lucide-react"
 
 export const accordions = [
     {
@@ -104,4 +104,17 @@ export const testimoni : TestimonialsDataType[] = [
       message: "Proses verifikasi akun dan peminjaman buku kini jauh lebih tertib dan terdata dengan baik. Sangat membantu administrasi!",
     },
 ];
+
+export const contactCard : ContactCardType[] = [
+  {
+    title: 'Kontak',
+    value: 'perpustakaanteknikinformatika@gmail.com',
+    icon: <Mail className='stroke-primary' />
+  },
+  {
+    title: 'Alamat',
+    value: 'Lipu, Kec. Betoambari, Kota Bau-Bau, Sulawesi Tenggara',
+    icon: <MapPin className='stroke-primary' />
+  }
+]
   
