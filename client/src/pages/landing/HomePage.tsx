@@ -1,5 +1,6 @@
 import About from '@/components/landing/About'
 import Faq from '@/components/landing/Faq'
+import Footer from '@/components/landing/Footer'
 import Hero from '@/components/landing/Hero'
 import Katalog from '@/components/landing/Katalog'
 import Kontak from '@/components/landing/Kontak'
@@ -21,6 +22,7 @@ const HomePage : React.FC = () => {
       <Katalog />
       <Faq />
       <Kontak />
+      <Footer />
     </>
   )
 }

@@ -13,6 +13,6 @@ createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={client}>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
   </QueryClientProvider>
 )
