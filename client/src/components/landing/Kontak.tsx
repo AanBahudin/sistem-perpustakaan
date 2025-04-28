@@ -1,11 +1,6 @@
 import Container from '@/globals/Container'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import { Button } from '../ui/button'
-import { Separator } from '../ui/separator'
 import Map from './Map'
-import { Mail, MapPin } from 'lucide-react'
-import ContactCard from './ContactCard'
+import ContactCard from './Contact/ContactCard'
 
 const Kontak = () => {
   return (

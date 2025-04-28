@@ -1,5 +1,5 @@
 import Container from "@/globals/Container"
-import StatisticCard from "./StatisticCard"
+import StatisticCard from "./Statistik/StatisticCard"
 
 const Statistik = () => {
   return (

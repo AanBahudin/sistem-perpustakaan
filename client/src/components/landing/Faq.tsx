@@ -1,5 +1,5 @@
 import Container from "@/globals/Container"
-import Questions from "./Questions"
+import Questions from "./Faq/Questions"
 
 const Faq = () => {
   return (

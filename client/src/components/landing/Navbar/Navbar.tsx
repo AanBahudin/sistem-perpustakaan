@@ -1,17 +1,15 @@
 import React from 'react'
 import Navlink from './Navlink'
-import { BookOpenText } from 'lucide-react'
 import { ModeToggle } from '@/components/navbar/modeToggle'
 import { Button } from '@/components/ui/button'
-import NavbarDropdown from '../NavbarDropdown'
+import NavbarDropdown from './NavbarDropdown'
+import Logo from './Logo'
 
 const Navbar : React.FC= () => {
   return (
     <nav className='w-full py-8 border-b border-accent '>
         <section className='w-[90%] mx-auto flex items-center justify-between '>
-          <div className='w-10 h-10 rounded-md bg-primary flex items-center justify-center'>
-            <BookOpenText className="text-white" />
-          </div>
+          <Logo />
 
           {/* menu section */}
           <div className='flex items-center justify-center lg:gap-x-10 gap-x-6'>

@@ -1,5 +1,5 @@
 import Container from "@/globals/Container"
-import TestimonialCarousel from "./TestimoniCurousel"
+import TestimonialCarousel from "./Testimoni/TestimoniCurousel"
 import { Quote } from "lucide-react"
 
 const Testimoni = () => {
