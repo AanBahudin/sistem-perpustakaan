@@ -1,5 +1,5 @@
 import Container from '@/globals/Container'
-import Map from './Map'
+import Map from './Contact/Map'
 import ContactCard from './Contact/ContactCard'
 
 const Kontak = () => {
