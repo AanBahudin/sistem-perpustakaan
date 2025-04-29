@@ -1,8 +1,11 @@
+import Container from '@/globals/Container'
 import React from 'react'
 
-const Gallery = () => {
+const Gallery : React.FC = () => {
   return (
-    <div>Gallery</div>
+    <Container>
+      <h1>Gallery</h1>
+    </Container>
   )
 }
 

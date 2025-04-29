@@ -1,6 +1,8 @@
 import About from '@/components/landing/About'
+import CallToAction from '@/components/landing/CallToAction'
 import Faq from '@/components/landing/Faq'
 import Footer from '@/components/landing/Footer'
+import Gallery from '@/components/landing/Gallery'
 import Hero from '@/components/landing/Hero'
 import Katalog from '@/components/landing/Katalog'
 import Kontak from '@/components/landing/Kontak'
@@ -16,15 +18,17 @@ const HomePage : React.FC = () => {
       <Hero />
       <About />
       <Statistik />
+      <Gallery />
       <Layanan />
       <Parallax />
       <Testimoni />
       <Katalog />
       <Faq />
+      <CallToAction />
       <Kontak />
       <Footer />
     </>
   )
 }
 
-export default HomePage
+export default HomePage 
