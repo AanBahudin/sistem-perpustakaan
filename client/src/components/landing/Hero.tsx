@@ -12,7 +12,7 @@ const Hero = () => {
 
           <div className='flex gap-x-4 mt-8'>
             <Button asChild>
-              <Link to='/login' className='w-36 bg-primary text-center py-2 rounded text-sm border border-transparent'>Mulai Sekarang</Link>
+              <Link to='/login' className='w-36 bg-primary text-center py-2 rounded text-sm border border-transparent text-white'>Mulai Sekarang</Link>
             </Button>
             <Link to='/login' className='w-36 text-center py-2 rounded text-sm text-muted-foreground border border-foreground'>Lihat Detail</Link>
             

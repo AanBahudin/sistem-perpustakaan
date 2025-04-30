@@ -20,9 +20,9 @@ const HomePage : React.FC = () => {
       <Statistik />
       <Gallery />
       <Layanan />
-      <Parallax />
       <Testimoni />
       <Katalog />
+      <Parallax />
       <Faq />
       <CallToAction />
       <Kontak />

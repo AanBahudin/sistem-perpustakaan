@@ -118,3 +118,25 @@ export const contactCard : ContactCardType[] = [
   }
 ]
   
+export const galleryPict = [
+  {
+    id: 1,
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg'
+  },
+  {
+    id: 2,
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905004/s1yqle6mjxcykd1brkrq.jpg'
+  },
+  {
+    id: 3,
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904999/lks7kqyid1aozwoibpag.jpg'
+  },
+  {
+    id: 4,
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904996/nonf0gcw31ta7gimzsf6.jpg'
+  },
+  {
+    id: 5,
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904995/afflxn84nr26h664crat.jpg'
+  }
+]
