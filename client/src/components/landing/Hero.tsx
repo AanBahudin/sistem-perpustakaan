@@ -23,7 +23,7 @@ const Hero = () => {
 
         <section className='w-fit h-full hidden lg:flex justify-end'>
           {/* <div></div> */}
-          <img src={heroImg} className='aspect-square rounded-2xl'/>
+          <img src={heroImg} className='aspect-square rounded-2xl dark:grayscale-50'/>
         </section>
       </div>
     </Container>

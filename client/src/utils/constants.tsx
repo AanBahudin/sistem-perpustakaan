@@ -1,5 +1,5 @@
 import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
-import { BookCopy, LibraryBig, Users, Mail, MapPin} from "lucide-react"
+import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole} from "lucide-react"
 
 export const accordions = [
     {
@@ -139,4 +139,32 @@ export const galleryPict = [
     id: 5,
     url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904995/afflxn84nr26h664crat.jpg'
   }
+]
+
+export const layananCardData = [
+  {
+    id: 1,
+    title: 'Notifikasi',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit?',
+    icon: <LockKeyhole className='stroke-primary dark:stroke-white' size={25} />
+  },
+  {
+    id: 2,
+    title: 'Keamanan',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit?',
+    icon: <BellRing className='stroke-primary dark:stroke-white' size={25} />
+  },
+  {
+    id: 3,
+    title: 'Jadwal',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit?',
+    icon: <Calendar className='stroke-primary dark:stroke-white' size={25} />
+  },
+  {
+    id: 4,
+    title: 'Akses',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit?',
+    icon: <LaptopMinimal className='stroke-primary dark:stroke-white' size={25} />
+  },
+  
 ]
