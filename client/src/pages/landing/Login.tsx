@@ -11,12 +11,12 @@ import { Link } from 'react-router-dom'
 const LoginPage : React.FC = () => {
   const [showPass, setShowPass] = useState<Boolean>(false)
   return (
-    <Container className='flex items-center flex-col justify-center p-10'>
-      <section className='w-full h-full grid grid-cols-2 border rounded-xl'>
+    <Container className='flex items-center flex-col justify-center py-10 lg:px-20'>
+      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2 border rounded-xl'>
 
-        <main className='px-20 flex flex-col items-start justify-center h-full'>
+        <main className='col-span-1 px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
           <Logo />
-          <h1 className='text-foreground dark:text-white font-semibold text-4xl mt-2'>Selamat Datang Kembali</h1>
+          <h1 className='text-foreground dark:text-white font-semibold text-3xl lg:text-4xl mt-2'>Selamat Datang Kembali</h1>
           <h5 className='text-muted-foreground mt-2 '>Silahkan masuk menggunakan akun Anda untuk mengakses halaman utama Anda.</h5>
 
           <form className='mt-6 w-full flex flex-col gap-y-4'>
@@ -42,7 +42,7 @@ const LoginPage : React.FC = () => {
           </form>
         </main>
 
-        <main className='flex items-center justify-end'>
+        <main className='col-span-1 hidden xl:flex items-center justify-end'>
           <img src={loginImg} className='h-[500px]' />
         </main>
 
