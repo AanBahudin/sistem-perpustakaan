@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
-import Logo from '@/components/landing/Navbar/Logo'
 import {
   Select,
   SelectContent,
