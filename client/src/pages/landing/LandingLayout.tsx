@@ -4,7 +4,7 @@ import Navbar from '../../components/landing/Navbar/Navbar'
 
 const LandingLayout = () => {
   return (
-    <div>
+    <div className='w-full h-[100%] flex flex-col'>
         <Navbar />
         <Outlet />
     </div>
