@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 const LoginPage : React.FC = () => {
   const [showPass, setShowPass] = useState<Boolean>(false)
   return (
-    <Container className='flex items-center flex-col justify-center py-10 lg:px-20'>
+    <Container className='flex items-center flex-col justify-center py-10'>
       <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2 border rounded-xl'>
 
         <main className='col-span-1 px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
@@ -43,7 +43,7 @@ const LoginPage : React.FC = () => {
         </main>
 
         <main className='col-span-1 hidden xl:flex items-center justify-end'>
-          <img src={loginImg} className='h-[500px]' />
+          <img src={loginImg} className='h-[550px]' />
         </main>
 
       </section>
