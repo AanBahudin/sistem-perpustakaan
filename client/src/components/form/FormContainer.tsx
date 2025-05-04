@@ -1,6 +1,7 @@
 import FormContext from '@/context/FormContext'
 import React, { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner';
 
 type ActionFunction = (formData: FormData) => Promise<any>;
 
@@ -16,17 +17,19 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
         onMutate: () => {
           setLoading(true);
         },
-        onSuccess: (message) => {
+        onSuccess: ({message, deskripsi}) => {
           setMessage(message || '');
           setLoading(false);
+          toast(message)
         },
         onError: (error: any) => {
           setMessage(error.message || 'Something went wrong');
           setLoading(false);
+          toast('Hello')
         },
-    });
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      });
+      
+      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         mutation.mutate(formData);
@@ -36,7 +39,7 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
         <FormContext.Provider value={{
             isLoading: loading
         }}>
-            <form onSubmit={handleSubmit}>
+            <form className='w-full' onSubmit={handleSubmit}>
                 {children}
             </form>
         </FormContext.Provider>

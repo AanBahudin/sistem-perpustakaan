@@ -2,7 +2,6 @@ import React from 'react'
 import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 
-import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import InputForm from '@/components/form/InputForm'
 import SelectForm from '@/components/form/SelectForm'
@@ -10,12 +9,12 @@ import PasswordInput from '@/components/form/PasswordInput'
 import { registerSelectInput } from '@/utils/SelectInputValue'
 import FormContainer from '@/components/form/FormContainer'
 import { registerAction } from '@/actions/authActions'
-
+import SubmitButton from '@/components/form/SubmitButton'
 const Register : React.FC = () => {
 
   return (
     <Container className='flex items-center flex-col justify-center py-10'>
-      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2 border rounded-xl'>
+      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2  rounded-xl'>
 
         <main className='col-span-1 px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
           {/* <Logo /> */}
@@ -37,7 +36,7 @@ const Register : React.FC = () => {
 
               <PasswordInput />
 
-              <Button type='submit' className='text-white text-center'>Daftar</Button>
+              <SubmitButton text='Daftar' />
               <p className='text-center text-sm text-muted-foreground'>Sudah punya akun? <Link to='/login' className='text-foreground underline'>Masuk Disini</Link></p>
             </div>
           </FormContainer>

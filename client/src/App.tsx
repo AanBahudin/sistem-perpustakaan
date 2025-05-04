@@ -2,6 +2,7 @@ import React from 'react'
 import appRoute from './routes'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from './components/theme-provider'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
 
@@ -9,9 +10,7 @@ const App = () => {
 
   return (
     <>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <RouterProvider router={route} />
-    </ThemeProvider>
     </>
   )
 }
