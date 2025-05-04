@@ -30,13 +30,13 @@ const Register : React.FC = () => {
 
           <form className='mt-6 w-full flex flex-col gap-y-4'>
 
-            <main className='grid grid-cols-2 gap-x-2'>
+            <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
               <div className="grid items-center gap-1.5">
                 <Label htmlFor="email">Nama</Label>
                 <Input type="email" id="email" placeholder="johndoe@gmail.com" className='mt-2' />
               </div>
 
-              <div className="grid items-center gap-1.5">
+              <div className="grid items-center gap-1.5 mt-4 lg:mt-0">
                 <Label htmlFor="email">Email</Label>
                 <Input type="email" id="email" placeholder="johndoe@gmail.com" className='mt-2' />
               </div>
@@ -49,7 +49,7 @@ const Register : React.FC = () => {
               </div>
 
               <div className="grid items-center gap-1.5">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Posisi</Label>
                 <Select>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Daftar Sebagai" />
