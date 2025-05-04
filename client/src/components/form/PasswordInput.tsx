@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Checkbox } from '../ui/checkbox'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
