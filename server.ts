@@ -27,6 +27,7 @@ import { errorHandler } from './errors/errorHandler'
 import path from 'path'
 
 import Buku from './model/Buku'
+import { StatusCodes } from 'http-status-codes'
 
 const app = express()
 app.set('view engine', 'pug')
@@ -37,8 +38,8 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser(process.env.JWT_SECRET))
 
-app.get('/', async(req, res) => {
-    await Buku.updateMany({}, {dihapus: false})
+app.get('/api/test', async(req, res) => {
+    res.status(StatusCodes.OK).json({msg: 'Success'})
 })
 
 app.use('/api/v1/auth', authRoute)

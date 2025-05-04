@@ -16,6 +16,24 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Link } from 'react-router-dom'
+import { QueryClient } from '@tanstack/react-query'
+import { customFetch } from '@/utils/customFetch'
+import { AxiosResponse } from 'axios'
+
+export const loader = (queryClient : QueryClient) => async() => {
+  const data : AxiosResponse = await queryClient.ensureQueryData({
+    queryKey: ['testing'],
+    queryFn: () => {
+      customFetch.post('/auth/login', {
+        email: 'aanbahudin11@gmail.com',
+        password: 'sayaaan'
+      })
+    }
+  })
+
+  console.log(data);
+  
+}
 
 const Register : React.FC = () => {
   const [showPass, setShowPass] = useState<Boolean>(false)
@@ -32,8 +50,8 @@ const Register : React.FC = () => {
 
             <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
               <div className="grid items-center gap-1.5">
-                <Label htmlFor="email">Nama</Label>
-                <Input type="email" id="email" placeholder="johndoe@gmail.com" className='mt-2' />
+                <Label htmlFor="nama">Nama</Label>
+                <Input type="text" id="nama" placeholder="johndoe@gmail.com" className='mt-2' />
               </div>
 
               <div className="grid items-center gap-1.5 mt-4 lg:mt-0">
@@ -44,14 +62,14 @@ const Register : React.FC = () => {
 
             <main className='grid grid-cols-2 gap-x-2'>
               <div className="grid items-center gap-1.5">
-                <Label htmlFor="email">Email</Label>
-                <Input type="email" id="email" placeholder="johndoe@gmail.com" className='mt-2' />
+                <Label htmlFor="idKampus">Nim / Nidn</Label>
+                <Input type="number" id="idKampus" placeholder="johndoe@gmail.com" className='mt-2' />
               </div>
 
               <div className="grid items-center gap-1.5">
-                <Label htmlFor="email">Posisi</Label>
-                <Select>
-                  <SelectTrigger className="w-full">
+                <Label htmlFor="role">Posisi</Label>
+                <Select name='role'>
+                  <SelectTrigger className="w-full" id='role'>
                     <SelectValue placeholder="Daftar Sebagai" />
                   </SelectTrigger>
                   <SelectContent>
@@ -68,7 +86,7 @@ const Register : React.FC = () => {
             </main>
 
             <div className="grid items-center gap-1.5">
-              <Label htmlFor="email">Password</Label>
+              <Label htmlFor="password">Password</Label>
               <Input type={showPass ? 'text' : 'password'} id="password" placeholder="****" className='mt-2' />
             </div>
 

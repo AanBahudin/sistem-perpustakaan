@@ -1,9 +1,16 @@
-import React from "react";
 import { RouteObject } from "react-router-dom";
 import { HomePage, LandingLayout, LoginPage, RegisterPage } from "./pages/landing";
 import { PenggunaLayout, ProfilPengguna, StatusPinjaman, KatalogPengguna, DetailBuku } from "./pages/pengguna";
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
+import { loader } from "./pages/landing/Register";
+import { QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {staleTime: 1000 * 60 * 5}
+    }
+})
 
 const router : RouteObject[] = [
     {
@@ -16,7 +23,8 @@ const router : RouteObject[] = [
             },
             {
                 path: 'register',
-                element: <RegisterPage />
+                element: <RegisterPage />,
+                loader: loader(queryClient)
             },
             {
                 path: 'login',
