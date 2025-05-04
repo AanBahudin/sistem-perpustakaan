@@ -11,7 +11,7 @@ const PasswordInput = () => {
        <>
           <div className="grid items-center gap-1.5">
               <Label htmlFor="password">Password</Label>
-              <Input type={showPass ? 'text' : 'password'} id="password" placeholder="****" className='mt-2' />
+              <Input type={showPass ? 'text' : 'password'} id="password" name='password' placeholder="****" className='mt-2' />
             </div>
 
             <div className="flex items-center space-x-2">

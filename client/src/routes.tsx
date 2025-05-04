@@ -3,7 +3,6 @@ import { HomePage, LandingLayout, LoginPage, RegisterPage } from "./pages/landin
 import { PenggunaLayout, ProfilPengguna, StatusPinjaman, KatalogPengguna, DetailBuku } from "./pages/pengguna";
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
-import { loader } from "./pages/landing/Register";
 import { QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
@@ -23,8 +22,7 @@ const router : RouteObject[] = [
             },
             {
                 path: 'register',
-                element: <RegisterPage />,
-                loader: loader(queryClient)
+                element: <RegisterPage />
             },
             {
                 path: 'login',

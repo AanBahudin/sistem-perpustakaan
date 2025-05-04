@@ -28,9 +28,9 @@ const SelectForm = ({label, name, placeholder, selectLabel, values} : SelectForm
         <SelectContent>
             <SelectGroup>
                 <SelectLabel>{selectLabel || 'Pilih salah satu'}</SelectLabel>
-                {values.map(item => {
+                {values.map((item, index) => {
                     return (
-                        <SelectItem value={item} className="capitalize">{item}</SelectItem>
+                        <SelectItem key={index} value={item} className="capitalize">{item}</SelectItem>
                     )
                 })}
             </SelectGroup>
