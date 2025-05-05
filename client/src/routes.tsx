@@ -6,6 +6,7 @@ import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
 import {loader as VerifyLoader} from '@/pages/Verify'
 import {loader as LoginLoader} from '@/pages/landing/Login'
+import {loader as RegisterLoader} from '@/pages/landing/Register'
 
 const router : RouteObject[] = [
     {
@@ -18,7 +19,8 @@ const router : RouteObject[] = [
             },
             {
                 path: 'register',
-                element: <RegisterPage />
+                element: <RegisterPage />,
+                loader: RegisterLoader
             },
             {
                 path: 'login',

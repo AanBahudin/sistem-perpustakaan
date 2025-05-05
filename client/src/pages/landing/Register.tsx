@@ -2,14 +2,27 @@ import React from 'react'
 import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 import InputForm from '@/components/form/InputForm'
 import SelectForm from '@/components/form/SelectForm'
 import PasswordInput from '@/components/form/PasswordInput'
 import { registerSelectInput } from '@/utils/SelectInputValue'
 import FormContainer from '@/components/form/FormContainer'
-import { registerAction } from '@/actions/authActions'
+import { accountStatus, registerAction } from '@/actions/authActions'
 import SubmitButton from '@/components/form/SubmitButton'
+
+
+export const loader = async() => {
+  try {
+    const {nama} = await accountStatus()
+    if (nama) {
+      return redirect('/status/account')
+    }
+  } catch (error) {
+    return null
+  }
+}
+
 const Register : React.FC = () => {
 
   return (
