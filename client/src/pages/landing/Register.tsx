@@ -11,7 +11,6 @@ import FormContainer from '@/components/form/FormContainer'
 import { accountStatus, registerAction } from '@/actions/authActions'
 import SubmitButton from '@/components/form/SubmitButton'
 
-
 export const loader = async() => {
   try {
     const {nama} = await accountStatus()
