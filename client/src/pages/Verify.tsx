@@ -1,17 +1,23 @@
-import { accountStatus } from '@/actions/authActions';
+import { accountStatus, logoutAction } from '@/actions/authActions';
 import Logo from '@/components/landing/Navbar/Logo';
 import { Button } from '@/components/ui/button';
 import loginImage from '@/assets/images/loginImg.png'
 import Container from '@/globals/Container';
-import { QueryClient } from '@tanstack/react-query'
 import React from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { redirect, useLoaderData } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
+import FormContainer from '@/components/form/FormContainer';
 
 export const loader = async() => {
-    const {verifikasiEmail, verifikasiProdi, nama} = await accountStatus()
-    
-    return {verifikasiEmail, verifikasiProdi, nama}
+    try {
+        const {verifikasiEmail, verifikasiProdi, nama} = await accountStatus()
+        if (verifikasiEmail && verifikasiProdi) {
+            return redirect('/user')
+        }
+        return {verifikasiEmail, verifikasiProdi, nama}
+    } catch (error) {
+        return redirect('/login')
+    }
 }
 
 const Verify : React.FC = () => {
@@ -42,7 +48,9 @@ const Verify : React.FC = () => {
                         </div>
                     </main>
 
-                    <Button size={'sm'} className='mt-10'>Logout</Button>
+                    <FormContainer action={logoutAction}>
+                        <Button size={'sm'} className='w-full mt-10'>Logout</Button>
+                    </FormContainer>
                 </div>
 
                 <div className='col-span-1 h-full hidden lg:grid content-center place-items-end'>

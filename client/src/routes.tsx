@@ -5,6 +5,7 @@ import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
 import {loader as VerifyLoader} from '@/pages/Verify'
+import {loader as LoginLoader} from '@/pages/landing/Login'
 
 const router : RouteObject[] = [
     {
@@ -21,7 +22,8 @@ const router : RouteObject[] = [
             },
             {
                 path: 'login',
-                element: <LoginPage />
+                element: <LoginPage />,
+                loader: LoginLoader
             },
         ]
     },

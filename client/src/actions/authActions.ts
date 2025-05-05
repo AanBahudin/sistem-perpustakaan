@@ -1,10 +1,12 @@
 import { customFetch } from "@/utils/customFetch";
 import { QueryClient } from "@tanstack/react-query";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const queryClient = new QueryClient({
     defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
 })
+
+
 
 export const registerAction = async(formData: FormData) => {
     const registerData = Object.fromEntries(formData)
@@ -31,14 +33,26 @@ export const loginAction = async(formData: FormData) => {
             const response = await customFetch.post('/auth/login', loginData)
 
             if (response.status >= 400) {
-                console.log(response.data.message)
                 return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
             }
             return response.data.message
         }
     })
 
-    return {message: message, deskripsi: 'Selamat Datang di Akun Anda'}
+    return {message: message, deskripsi: 'Selamat Datang di Akun Anda', redirectTo: '/status/account'}
+}
+
+export const logoutAction = async(formData: FormData) => {
+    await queryClient.ensureQueryData({
+        queryKey: ['logout'],
+        queryFn: async() => {
+            const response = await customFetch.get('/auth/logout')
+            if (response.data.status >= 400) return 'Terjadi kesalahan'
+            return response.data.message
+        }
+    })
+
+    return {message: 'Anda Keluar', deskripsi: 'Logout berhasil', redirectTo: '/login'}
 }
 
 export const accountStatus = async() => {
@@ -46,10 +60,9 @@ export const accountStatus = async() => {
         queryKey: ['verify'],
         queryFn: async() => {
             const response = await customFetch.get('/user/profile')
-            if (response.status >= 400) redirect('/')
+            if (response.data.status >= 400) return redirect('/login')
             return response.data.data
         }
     })
-
     return data
 }

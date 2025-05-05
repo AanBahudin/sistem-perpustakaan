@@ -2,11 +2,12 @@ import FormContext from '@/context/FormContext'
 import React, { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 type ActionFunction = (formData: FormData) => Promise<any>;
 
 const FormContainer = ({action, children} : {action: ActionFunction, children: React.ReactNode}) => {
-
+    const navigate = useNavigate()
     const [message, setMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -17,12 +18,19 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
         onMutate: () => {
           setLoading(true);
         },
-        onSuccess: ({message, deskripsi}) => {
+        onSuccess: ({message, deskripsi, redirectTo}) => {
           setMessage(message || '');
           setLoading(false);
           toast(message, {description: deskripsi})
+        
+          if (redirectTo) {
+            navigate(redirectTo)
+          }
         },
         onError: (error: any) => {
+          const isRedirect = error.response.data.redirectTo
+          console.log(error);
+    
           setMessage(error.message || 'Something went wrong');
           setLoading(false);
           toast("Terjadi Kesalahan", {description: error.response.data.message})

@@ -3,16 +3,28 @@ import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 import Logo from '@/components/landing/Navbar/Logo'
 
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 
 import InputForm from '@/components/form/InputForm'
 import PasswordInput from '@/components/form/PasswordInput'
 import SubmitButton from '@/components/form/SubmitButton'
 import FormContainer from '@/components/form/FormContainer'
-import { loginAction } from '@/actions/authActions'
+import { accountStatus, loginAction } from '@/actions/authActions'
+
+export const loader = async() => {
+  try {
+    const {nama} = await accountStatus()
+    if (nama) {
+      return redirect('/status/account')
+    }
+  } catch (error) {
+    return null
+  }
+
+  return
+}
 
 const LoginPage : React.FC = () => {
-
   return (
     <Container className='flex items-center flex-col justify-center py-10'>
       <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2 border rounded-xl'>
