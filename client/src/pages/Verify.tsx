@@ -1,12 +1,11 @@
-import { accountStatus, logoutAction } from '@/actions/authActions';
+import { accountStatus } from '@/actions/authActions';
 import Logo from '@/components/landing/Navbar/Logo';
-import { Button } from '@/components/ui/button';
 import loginImage from '@/assets/images/loginImg.png'
 import Container from '@/globals/Container';
 import React from 'react'
 import { redirect, useLoaderData } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
-import FormContainer from '@/components/form/FormContainer';
+import LogoutButton from '@/components/form/LogoutButton';
 
 export const loader = async() => {
     try {
@@ -40,7 +39,7 @@ const Verify : React.FC = () => {
                         </div>
                     </main>
 
-                    <main className='flex gap-x-2 text-sm mt-2'>
+                    <main className='flex gap-x-2 text-sm mt-2 mb-8'>
                         <span> {verifikasiProdi ? <Check className='stroke-primary' size={20} /> : <X className='stroke-red-400' size={20} />} </span>
                         <div>
                             <h5>Menunggu Persetujuan Program Studi</h5>
@@ -48,9 +47,7 @@ const Verify : React.FC = () => {
                         </div>
                     </main>
 
-                    <FormContainer action={logoutAction}>
-                        <Button size={'sm'} className='w-full mt-10'>Logout</Button>
-                    </FormContainer>
+                    <LogoutButton />
                 </div>
 
                 <div className='col-span-1 h-full hidden lg:grid content-center place-items-end'>

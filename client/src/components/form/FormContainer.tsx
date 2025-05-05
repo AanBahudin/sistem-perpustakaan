@@ -22,15 +22,11 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
           setMessage(message || '');
           setLoading(false);
           toast(message, {description: deskripsi})
-        
           if (redirectTo) {
             navigate(redirectTo)
           }
         },
         onError: (error: any) => {
-          const isRedirect = error.response.data.redirectTo
-          console.log(error);
-    
           setMessage(error.message || 'Something went wrong');
           setLoading(false);
           toast("Terjadi Kesalahan", {description: error.response.data.message})

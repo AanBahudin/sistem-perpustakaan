@@ -25,10 +25,11 @@ const router : RouteObject[] = [
                 element: <LoginPage />,
                 loader: LoginLoader
             },
+            
         ]
     },
     {
-        path: '/status/account',
+        path:'status/account',
         element: <Verify />,
         loader: VerifyLoader
     },

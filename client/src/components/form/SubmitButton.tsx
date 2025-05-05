@@ -6,7 +6,7 @@ const SubmitButton = ({text} : {text: string}) => {
     const {isLoading} = useFormStatus()
 
     return (
-        <Button disabled={isLoading} type='submit' className='text-white text-center capitalize'>
+        <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full'>
             {isLoading ? 'Loading...' : text}
         </Button>
     )
