@@ -74,7 +74,14 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
     }
     const token = generateToken(payload)
 
-    return {token, user}
+    return {
+        token, 
+        user,
+        data: {
+            verfikasiEmail: user.verifikasiEmail,
+            verifikasiProdi: user.verifikasiProdi
+        }
+    }
 }
 
 // SUDAH DITESTING

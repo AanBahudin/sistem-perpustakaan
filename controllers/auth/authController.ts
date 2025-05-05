@@ -26,7 +26,7 @@ export const register = async(req : Request, res: Response) => {
 // controller untuk login pengguna - SUDAH DITESTING
 export const login = async(req : Request, res: Response) => {
 
-    const loginServices = await loginUser({
+    const {data, token} = await loginUser({
         email: req.body.email,
         password: req.body.password
     })
@@ -34,8 +34,12 @@ export const login = async(req : Request, res: Response) => {
     sendResponseWithToken({
         res,
         message: 'Login berhasil',
-        token: loginServices.token,
-        tokenName: 'token'
+        token: token,
+        tokenName: 'token',
+        data: {
+            verifikasiEmail: data.verfikasiEmail,
+            verifikasiProdi: data.verifikasiProdi
+        }
     })
 }
 

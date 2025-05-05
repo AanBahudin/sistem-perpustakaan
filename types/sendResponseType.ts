@@ -26,7 +26,8 @@ export interface SendResponseWithToken {
     expires?: Date,
     message: string,
     tokenName: string,
-    token: string
+    token: string,
+    data?: {verifikasiEmail: boolean, verifikasiProdi: boolean}
 }
 
 export interface SendPageResponseType {

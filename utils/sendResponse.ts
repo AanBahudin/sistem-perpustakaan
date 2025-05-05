@@ -74,7 +74,8 @@ export const sendResponseWithToken = ({
     timestamps = new Date(Date.now()).toString(),
     token,
     tokenName,
-    expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
+    expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    data
 } : SendResponseWithToken ) => {
     return res.cookie(tokenName as string, token, {
         httpOnly: true,
@@ -84,6 +85,7 @@ export const sendResponseWithToken = ({
         status,
         message,
         timestamps,
+        data
     })
 }
 
