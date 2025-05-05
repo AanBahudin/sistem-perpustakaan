@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-import { StatusCodes } from "http-status-codes";
-import Pengguna, { IPengguna } from "../../model/Pengguna";
 import { getProfil, updateProfil, updatingPassword, updatingEmail } from "../../services/penggunaServices";
 import { SendOneDataResponse } from "../../utils/sendResponse";
 

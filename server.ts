@@ -43,7 +43,7 @@ app.get('/api/test', async(req, res) => {
 })
 
 app.use('/api/v1/auth', authRoute)
-app.use('/api/v1/user', authenticationMiddleware, userMiddlewareAuthorized, userRoute)
+app.use('/api/v1/user', authenticationMiddleware, userRoute)
 app.use('/api/v1/pustakawan', authenticationMiddleware, pustakawanMiddlewareAuthorized, pustakawanRoute)
 app.use('/api/v1/prodi', authenticationMiddleware, prodiMiddlewareAuthorized, prodiRoute)
 app.use('/api/v1/pinjaman', authenticationMiddleware, pinjamanRoute)

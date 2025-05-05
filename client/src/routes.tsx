@@ -4,6 +4,8 @@ import { PenggunaLayout, ProfilPengguna, StatusPinjaman, KatalogPengguna, Detail
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import { QueryClient } from "@tanstack/react-query";
+import Verify from "./pages/Verify";
+import {loader as VerifyLoader} from '@/pages/Verify'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -27,8 +29,13 @@ const router : RouteObject[] = [
             {
                 path: 'login',
                 element: <LoginPage />
-            }
+            },
         ]
+    },
+    {
+        path: '/status/account',
+        element: <Verify />,
+        loader: VerifyLoader(queryClient)
     },
     {
         path: '/user',

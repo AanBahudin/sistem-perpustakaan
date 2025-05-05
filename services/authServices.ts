@@ -56,9 +56,9 @@ export const loginUser = async({email, password} : LoginServicesParamsType) => {
     // pengecekkan data user dan status akun user
     if (!user) throw new NotFoundError('Akun tidak ditemukan')
     // pengecekkan status akun
-    if (user.statusAkun === "Nonaktif") throw new NotAuthenticated('Akun telah dinonaktifkan')
+    if (user.statusAkun === "Nonaktif" && user.verifikasiEmail && user.verifikasiProdi) throw new NotAuthenticated('Akun telah dinonaktifkan')
     // pengecekkan apakah pengguna sudah verifikasi email
-    if (!user.verifikasiEmail) throw new NotAuthenticated('Silahkan verifikasi email terlebih dahulu')
+    // if (!user.verifikasiEmail) throw new NotAuthenticated('Silahkan verifikasi email terlebih dahulu')
     // pengecekkan status blokir akun pengguna
     if (user.blocked) throw new NotAuthorized("Akun anda telah di blokir")
     

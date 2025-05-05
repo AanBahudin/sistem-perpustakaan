@@ -1,5 +1,6 @@
 import { customFetch } from "@/utils/customFetch";
 import { QueryClient } from "@tanstack/react-query";
+import { redirect } from "react-router-dom";
 
 const queryClient = new QueryClient({
     defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
@@ -38,4 +39,17 @@ export const loginAction = async(formData: FormData) => {
     })
 
     return {message: message, deskripsi: 'Selamat Datang di Akun Anda'}
+}
+
+export const accountStatus = async() => {
+    const data = await queryClient.ensureQueryData({
+        queryKey: ['verify'],
+        queryFn: async() => {
+            const response = await customFetch.get('/user/profile')
+            if (response.status >= 400) redirect('/')
+            return response.data.data
+        }
+    })
+
+    return data
 }
