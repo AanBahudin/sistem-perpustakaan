@@ -18,7 +18,7 @@ export const registerAction = async(formData: FormData) => {
         }
     })
 
-    return {message: 'test', deskripsi: 'Hello there!'}
+    return {message: message, deskripsi: 'Cek email anda untuk verifikasi'}
 }
 
 export const loginAction = async(formData: FormData) => {
@@ -29,7 +29,10 @@ export const loginAction = async(formData: FormData) => {
         queryFn: async() => {
             const response = await customFetch.post('/auth/login', loginData)
 
-            if (response.status >= 400) return 'Terjadi kesalahan'
+            if (response.status >= 400) {
+                console.log(response.data.message)
+                return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
+            }
             return response.data.message
         }
     })

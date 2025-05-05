@@ -20,12 +20,12 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
         onSuccess: ({message, deskripsi}) => {
           setMessage(message || '');
           setLoading(false);
-          toast(message)
+          toast(message, {description: deskripsi})
         },
         onError: (error: any) => {
           setMessage(error.message || 'Something went wrong');
           setLoading(false);
-          toast('Hello')
+          toast("Terjadi Kesalahan", {description: error.response.data.message})
         },
       });
       
