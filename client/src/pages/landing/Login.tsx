@@ -3,7 +3,7 @@ import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 import Logo from '@/components/landing/Navbar/Logo'
 
-import { Link, redirect, useNavigate } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 
 import InputForm from '@/components/form/InputForm'
 import PasswordInput from '@/components/form/PasswordInput'
