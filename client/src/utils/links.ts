@@ -20,3 +20,31 @@ export const landingNavbarLink = [
         url: '/#katalog'
     }
 ]
+
+export const penggunaNavbarLink = [
+    {
+        title: 'Buku',
+        url: '/buku'
+    },
+    {
+        title: 'Profil',
+        url: '/profil'
+    },
+    {
+        title: 'Peminjaman',
+        url: '/peminjam'
+    },
+    {
+        title: 'Pengembalian',
+        url: '/buku'
+    },
+    {
+        title: 'Perpanjangan',
+        url: '/buku'
+    },
+    {
+        title: 'Disukai',
+        url: '/buku'
+    },
+    
+]
