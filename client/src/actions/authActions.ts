@@ -45,7 +45,8 @@ export const loginAction = async(formData: FormData) => {
 export const logoutAction = async() => {
     const {data} = await customFetch.get('/auth/logout')
     toast(data.message, {description: 'Anda telah keluar dari Perpustakaan'})
-    queryClient.removeQueries({ queryKey: ['verify', 'login'] })
+    // queryClient.removeQueries({ queryKey: ['verify', 'login'] })
+    queryClient.clear()
 }
 
 export const accountStatus = async() => {
