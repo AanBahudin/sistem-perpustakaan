@@ -8,7 +8,7 @@ import React from 'react'
 import { useLoaderData } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
 
-export const loader = (queryClient : QueryClient) => async() => {
+export const loader = async() => {
     const {verifikasiEmail, verifikasiProdi, nama} = await accountStatus()
     
     return {verifikasiEmail, verifikasiProdi, nama}

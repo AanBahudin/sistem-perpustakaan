@@ -3,15 +3,8 @@ import { HomePage, LandingLayout, LoginPage, RegisterPage } from "./pages/landin
 import { PenggunaLayout, ProfilPengguna, StatusPinjaman, KatalogPengguna, DetailBuku } from "./pages/pengguna";
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
-import { QueryClient } from "@tanstack/react-query";
 import Verify from "./pages/Verify";
 import {loader as VerifyLoader} from '@/pages/Verify'
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {staleTime: 1000 * 60 * 5}
-    }
-})
 
 const router : RouteObject[] = [
     {
@@ -35,7 +28,7 @@ const router : RouteObject[] = [
     {
         path: '/status/account',
         element: <Verify />,
-        loader: VerifyLoader(queryClient)
+        loader: VerifyLoader
     },
     {
         path: '/user',
