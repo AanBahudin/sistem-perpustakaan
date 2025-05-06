@@ -1,6 +1,6 @@
 import React from 'react'
 import TablePeminjaman from './TablePeminjaman'
-import CalendarPengguna from '../CalendarUser'
+import CalendarPengguna from './CalendarUser'
 
 const LoanOverview = () => {
   return (

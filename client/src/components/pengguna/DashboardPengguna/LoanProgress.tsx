@@ -1,5 +1,5 @@
 import React from 'react'
-import PenggunaCharts from '../PenggunaLineCharts'
+import PenggunaCharts from './PenggunaLineCharts'
 import PenggunaBarChart from '../PenggunaBarChart'
 
 const LoanProgress = () => {
