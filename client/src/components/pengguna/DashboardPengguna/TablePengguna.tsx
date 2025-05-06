@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ScrollArea } from '../ui/scroll-area'
+import { ScrollArea } from '../../ui/scroll-area'
 
 const TablePengguna = () => {
   return (

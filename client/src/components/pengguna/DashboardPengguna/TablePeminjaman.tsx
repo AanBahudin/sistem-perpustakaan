@@ -1,5 +1,5 @@
 import React from 'react'
-import TablePengguna from '../TablePengguna'
+import TablePengguna from './TablePengguna'
 
 const TablePeminjaman = () => {
   return (

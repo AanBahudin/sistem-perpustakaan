@@ -1,6 +1,6 @@
 import React from 'react'
 import PenggunaCharts from './PenggunaLineCharts'
-import PenggunaBarChart from '../PenggunaBarChart'
+import PenggunaBarChart from './PenggunaBarChart'
 
 const LoanProgress = () => {
   return (
