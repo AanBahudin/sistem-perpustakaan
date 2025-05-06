@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card } from '@/components/ui/card'
 import { ArrowRight, Book } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'

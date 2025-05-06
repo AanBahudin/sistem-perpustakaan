@@ -1,4 +1,3 @@
-import React from 'react'
 import DeadlineTable from './DeadlineTable'
 import PinjamanTerakhir from './PinjamanTerakhir'
 
