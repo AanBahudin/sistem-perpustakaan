@@ -5,7 +5,8 @@ import { Separator } from '@/components/ui/separator'
 import TablePengguna from '@/components/pengguna/TablePengguna'
 import CalendarPengguna from '@/components/pengguna/CalendarUser'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import PenggunaCharts from '@/components/pengguna/PenggunaCharts'
+import PenggunaCharts from '@/components/pengguna/PenggunaLineCharts'
+import PenggunaBarChart from '@/components/pengguna/PenggunaBarChart'
 
 const KatalogPengguna = () => {
   return (
@@ -54,8 +55,12 @@ const KatalogPengguna = () => {
           <PenggunaCharts />
         </div>
 
-        <div className='w-2/3 border rounded-xl'>
-          <h1></h1>
+        <div className='w-2/3 border rounded-xl bg-card p-6'>
+          <h3>Peminjaman</h3>
+
+          <h1 className='text-2xl mt-4 font-semibold text-white'>+12 Peminjaman</h1>
+          <p className='text-muted-foreground text-sm mb-6'>1 Peminjaman lebih banyak</p>
+          <PenggunaBarChart />
         </div>
       </section>
 
@@ -76,7 +81,7 @@ const KatalogPengguna = () => {
         </div>
 
         {/* <div className='w-full flex-1'> */}
-        <ScrollArea className="w-1/3 h-[350px] rounded-xl border">
+        <ScrollArea className="w-1/3 h-[350px] rounded-xl border bg-card">
           <div className="p-4">
             <h4 className="mb-8 text-md font-medium leading-none">Deadline Pengembalian</h4>
             {Array.from({length: 3}).map((_, index) => (
