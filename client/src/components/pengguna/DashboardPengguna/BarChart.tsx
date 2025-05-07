@@ -1,4 +1,3 @@
-import React from 'react'
 import { ChartContainer } from '@/components/ui/chart'
 import { Bar, BarChart, CartesianGrid } from "recharts"
 
