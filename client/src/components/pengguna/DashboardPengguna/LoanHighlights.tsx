@@ -3,7 +3,7 @@ import PinjamanTerakhir from './PinjamanTerakhir'
 
 const LoanHighlights = () => {
   return (
-    <section className='w-full my-10 flex gap-x-6'>
+    <section className='w-full my-6 grid grid-cols-12 gap-x-6 gap-y-6'>
         <PinjamanTerakhir />
         <DeadlineTable />
       </section>

@@ -3,11 +3,11 @@ import { Eye, BookCheck, ThumbsUp } from 'lucide-react'
 
 const RecommendationBook = () => {
   return (
-    <main className='self-center w-[90%] flex gap-x-6'>
+    <main className='hidden self-center w-[90%] lg:flex gap-x-6'>
         <img className="h-40 w-28 object-fill rounded" src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746458439/eeerieu4ivgzsylylaaj.jpg" alt="" />
 
         <div className='flex flex-col'>
-            <h2 className='font-semibold text-2xl'>Clean Code  </h2>
+            <h2 className='font-semibold text-xl lg:text-2xl'>Clean Code  </h2>
             <h5 className='text-sm text-muted-foreground'>{'A Handbook of Agile Software Craftmanship'.slice(0,40)}...</h5>
             <p className='text-sm text-muted-foreground mt-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod itaque mollitia quam dolorem, ullam architecto!</p>
 

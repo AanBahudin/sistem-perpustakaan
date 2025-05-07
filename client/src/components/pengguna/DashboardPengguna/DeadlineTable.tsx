@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/separator'
 
 const DeadlineTable = () => {
   return (
-    <ScrollArea className="w-full h-[350px] rounded-xl border bg-card">
+    <ScrollArea className="col-span-12 lg:col-span-7 h-[350px] rounded-xl border bg-card">
         <div className="p-4">
         <h4 className="mb-8 text-md font-medium leading-none">Deadline Pengembalian</h4>
         {Array.from({length: 3}).map((_, index) => (
