@@ -7,6 +7,7 @@ import Verify from "./pages/Verify";
 import {loader as VerifyLoader} from '@/pages/Verify'
 import {loader as LoginLoader} from '@/pages/landing/Login'
 import {loader as RegisterLoader} from '@/pages/landing/Register'
+import KatalogPenggunaPage from "./pages/pengguna/KatalogPenggunaPage";
 
 const router : RouteObject[] = [
     {
@@ -50,6 +51,10 @@ const router : RouteObject[] = [
             {
                 path: 'status',
                 element: <StatusPinjaman />
+            },
+            {
+                path: 'buku',
+                element: <KatalogPenggunaPage />
             },
             {
                 path: 'buku/:id',

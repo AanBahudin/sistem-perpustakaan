@@ -23,8 +23,12 @@ export const landingNavbarLink = [
 
 export const penggunaNavbarLink = [
     {
+        title: 'Dashboard',
+        url: '/user'
+    },
+    {
         title: 'Buku',
-        url: '/buku'
+        url: 'buku'
     },
     {
         title: 'Profil',
@@ -36,15 +40,15 @@ export const penggunaNavbarLink = [
     },
     {
         title: 'Pengembalian',
-        url: '/buku'
+        url: '/'
     },
     {
         title: 'Perpanjangan',
-        url: '/buku'
+        url: '/'
     },
     {
         title: 'Disukai',
-        url: '/buku'
+        url: '/'
     },
     
 ]
