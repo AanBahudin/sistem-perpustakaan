@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { BookOpenCheck, UserRoundPen } from 'lucide-react'
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const LastAdded = () => {
@@ -9,7 +8,7 @@ const LastAdded = () => {
         <h1 className='font-semibold text-xl'>Buku Terbaru</h1>
 
         <main className='w-full flex items-center justify-center gap-x-10 mt-6 px-6'>
-            <img className='w-[300px] h-[350px] bg-muted rounded-xl' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746591517/vduqbwxwfvxaktiotebg.jpg" alt="" />
+            <img className='w-[300px] h-[350px] rounded-xl' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746591517/vduqbwxwfvxaktiotebg.jpg" alt="" />
 
             <div className='self-start'>
                 <h1 className='text-3xl font-semibold text-left'>Designing Interfaces</h1>

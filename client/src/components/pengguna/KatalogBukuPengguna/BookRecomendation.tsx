@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const BookRecomendation = () => {
@@ -18,7 +17,7 @@ const BookRecomendation = () => {
             <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/wnsqnnjsplzphfieu8zm.jpg" alt="" />
             <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/pniobt30gz28siatflgf.jpg" alt="" />
             <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746585631/rljqdfpo7oljsit5zdyq.jpg" alt="" />
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746585631/rljqdfpo7oljsit5zdyq.jpg" alt="" />
+            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746593065/nuo2sfk9hdv5r7alvth6.jpg" alt="" />
         </main>
     </section>
   )
