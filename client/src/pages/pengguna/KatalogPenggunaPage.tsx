@@ -3,7 +3,6 @@ import KatalogCover from '@/components/pengguna/KatalogBukuPengguna/KatalogCover
 import KatalogSection from '@/components/pengguna/KatalogBukuPengguna/KatalogSection'
 import KategorySection from '@/components/pengguna/KatalogBukuPengguna/KategorySection'
 import LastAdded from '@/components/pengguna/KatalogBukuPengguna/LastAdded'
-import ProductGrid from '@/components/pengguna/KatalogBukuPengguna/ProductGrid'
 import Container from '@/globals/Container'
 
 const KatalogPenggunaPage = () => {

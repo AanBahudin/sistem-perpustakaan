@@ -16,7 +16,7 @@ const Katalog = () => {
             <section className='flex items-center gap-x-6 mt-10 justify-center'>
               {Array.from({length: 5}).map((_, index) => {
                 return (
-                  <div className='lg:w-50 lg:h-70 w-30 h-50 bg-muted-foreground rounded'></div>
+                  <div key={index} className='lg:w-50 lg:h-70 w-30 h-50 bg-muted-foreground rounded'></div>
                 )
               })}
             </section>

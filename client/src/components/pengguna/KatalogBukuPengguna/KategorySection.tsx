@@ -1,5 +1,4 @@
 import { kategori } from '@/utils/constants'
-import { Figma } from 'lucide-react'
 
 const KategorySection = () => {
   return (
