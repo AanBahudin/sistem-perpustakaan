@@ -8,11 +8,11 @@ const DeadlineTable = () => {
         <h4 className="mb-8 text-md font-medium leading-none">Deadline Pengembalian</h4>
         {Array.from({length: 3}).map((_, index) => (
             <>
-            <div key={index} className="text-sm flex justify-between">
-                <h1>Clean Architecture</h1>
-                <p className='text-muted-foreground'>3 Hari Lagi</p>
-            </div>
-            <Separator className="my-2" />
+              <div key={index} className="text-sm flex justify-between">
+                  <h1>Clean Architecture</h1>
+                  <p className='text-muted-foreground'>3 Hari Lagi</p>
+              </div>
+              <Separator className="my-2" />
             </>
         ))}
         </div>
