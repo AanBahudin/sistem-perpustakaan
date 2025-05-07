@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const BookRecomendation = () => {
   return (
-    <section className='w-full flex flex-col items-center justify-center'>
+    <section className='w-full flex flex-col items-center justify-center mt-10'>
 
         <main className='w-full flex items-center justify-between'>
             <h1 className='font-semibold text-xl'>Rekomendasi Buku</h1>

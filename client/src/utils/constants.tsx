@@ -1,6 +1,6 @@
 import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
 import { ChartConfig } from "@/components/ui/chart";
-import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole} from "lucide-react"
+import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Figma, Code, Database, Layout, Layers, GitGraph} from "lucide-react"
 
 export const accordions = [
     {
@@ -188,3 +188,31 @@ export const chartConfig = {
       color: "#60a5fa",
   },
 } satisfies ChartConfig
+
+export const kategori = [
+  {
+    title: 'UI/UX',
+    icon: <Figma />
+  },
+  {
+    title: 'Coding',
+    icon: <Code />
+  },
+  {
+    title: 'Web Design',
+    icon: <Layout />
+  },
+  {
+    title: 'Database',
+    icon: <Database />
+  },
+  {
+    title: 'Data Science',
+    icon: <Layers />
+  },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
+  
+]

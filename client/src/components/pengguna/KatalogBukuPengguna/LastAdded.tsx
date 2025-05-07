@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { BookOpenCheck, UserRoundPen } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
+import { BookOpenCheck, Layers, Library, UserRoundPen } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const LastAdded = () => {
@@ -21,7 +22,7 @@ const LastAdded = () => {
 
                 <p className='mt-4 text-muted-foreground'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores facere voluptates et perferendis odit ut voluptatibus natus reprehenderit possimus a corrupti quas numquam, quibusdam quo deserunt? Asperiores aut, non dolore labore eaque quo deserunt reprehenderit deleniti nihil minima sint commodi aspernatur excepturi perferendis fugit quod saepe veritatis, repudiandae possimus laudantium! Repudiandae necessitatibus reprehenderit eius quibusdam placeat explicabo, ipsa magnam et.</p>
 
-                <div className='mt-4 flex flex-col gap-y-2'>
+                <div className='mt-4 flex items-start justify-start gap-x-20'>
                     <span className='flex gap-x-2 items-center text-muted-foreground'>
                         <UserRoundPen className='w-6 h-6 stroke-muted-foreground' />
                         <p>Jenifer Tidwell</p>
@@ -31,9 +32,19 @@ const LastAdded = () => {
                         <BookOpenCheck className='w-6 h-6 stroke-muted-foreground' />
                         <p>Tersedia</p>
                     </span>
+
+                    <span className='flex gap-x-2 items-center text-muted-foreground'>
+                        <Layers className='w-6 h-6 stroke-muted-foreground' />
+                        <p>304 Halaman</p>
+                    </span>
+
+                    <span className='flex gap-x-2 items-center text-muted-foreground'>
+                        <Library className='w-6 h-6 stroke-muted-foreground' />
+                        <p>13 Buku</p>
+                    </span>
                 </div>
 
-                <Button asChild className='self-end mt-4 text-white w-1/3'>
+                <Button asChild className='self-end mt-10 text-white w-1/3'>
                     <Link to='/' className='self-end text-sm'>Mulai Baca</Link>
                 </Button>
             </div>
