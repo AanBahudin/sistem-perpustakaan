@@ -11,7 +11,7 @@ import { ScrollArea } from '../../ui/scroll-area'
 
 const TablePengguna = () => {
   return (
-    <Table className=''>
+    <Table className='w-full'>
         <TableCaption className='my-2'>Belum ada peminjaman</TableCaption>
         <ScrollArea className='w-full h-[250px] p-2'>
         <TableHeader>
