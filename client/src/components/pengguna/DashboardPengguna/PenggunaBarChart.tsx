@@ -3,7 +3,7 @@ import {chartConfig, chartData} from '@/utils/constants'
 
 const PenggunaBarChart = () => {
     return (
-        <div className='w-2/3 border rounded-xl bg-card p-6'>
+        <div className='w-1/4 border rounded-xl bg-card p-6'>
             <h3>Peminjaman</h3>
 
             <h1 className='text-2xl mt-4 font-semibold text-white'>+12 Peminjaman</h1>
