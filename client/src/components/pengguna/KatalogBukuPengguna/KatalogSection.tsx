@@ -1,7 +1,5 @@
-import React from 'react'
 import FilterSection from './FilterSection'
 import BookContainer from './BookContainer'
-import { Separator } from '@/components/ui/separator'
 
 const KatalogSection = () => {
   return (

@@ -1,9 +1,48 @@
-import React from 'react'
+import { Input } from '@/components/ui/input'
+import React, { useState } from 'react'
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { kategori } from '@/utils/constants'
+
 
 const FilterSection = () => {
+
+
+  const [isChecked, setChecked] = useState<string | null>();
+
+  const handleChecked = (value: any) => {
+    setChecked(value)
+  }
+
+  
   return (
-    <section className='col-span-3  border-r'>
-      <h1>Filters</h1>
+    <section className='col-span-3 pr-4 border-r'>
+      <h1 className='font-semibold text-xl'>Filters</h1>
+
+      <main className='mt-6 w-full'>
+
+        <div className='flex flex-col gap-y-4'>
+          <Input type='number' placeholder='ISBN' />
+          <Input type='text' placeholder='Penulis' />
+          <Input type='text' placeholder='Penerbit' />
+          <Input type='number' placeholder='Tahun Terbit' />
+        </div>
+
+        <div className='mt-6'>
+          <h3 className='font-semibold mb-6'>Kategori</h3>
+          <RadioGroup defaultValue="option-one">
+            {kategori.map((item, index) => {
+              const {title} = item
+              return (
+                <div key={index} className="flex items-center space-x-2">
+                  <RadioGroupItem onClick={() => handleChecked(title)} checked={title === isChecked} value={title} id={title} />
+                  <Label htmlFor={title}>{title}</Label>
+                </div>
+              )
+            })}
+          </RadioGroup>
+        </div>
+      </main>
     </section>
   )
 }
