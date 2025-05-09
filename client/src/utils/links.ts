@@ -32,7 +32,7 @@ export const penggunaNavbarLink = [
     },
     {
         title: 'Profil',
-        url: '/profil'
+        url: 'profil'
     },
     {
         title: 'Peminjaman',
