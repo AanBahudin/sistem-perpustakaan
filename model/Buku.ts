@@ -42,6 +42,9 @@ const BukuSchema = new mongoose.Schema({
     cover: {
         type: String
     },
+    featured: {
+        type: Boolean,
+    },
     ISBN: {
         type: String,
         unique: true,
