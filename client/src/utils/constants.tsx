@@ -216,3 +216,21 @@ export const kategori = [
   },
   
 ]
+
+export const profileMenulinks = [
+  {
+    id: 1,
+    title: 'general',
+    url: '.'
+  },
+  {
+    id: 2,
+    title: 'credentials',
+    url: 'credentials'
+  },
+  {
+    id: 3,
+    title: 'status',
+    url: 'status'
+  }
+]

@@ -8,6 +8,9 @@ import {loader as VerifyLoader} from '@/pages/Verify'
 import {loader as LoginLoader} from '@/pages/landing/Login'
 import {loader as RegisterLoader} from '@/pages/landing/Register'
 import KatalogPenggunaPage from "./pages/pengguna/KatalogPenggunaPage";
+import GeneralProfilePage from "./pages/pengguna/GeneralProfilePage";
+import CredentialsProfilePage from "./pages/pengguna/CredentialsProfilePage";
+import StatusProfilePage from "./pages/pengguna/StatusProfilePage";
 
 const router : RouteObject[] = [
     {
@@ -46,7 +49,21 @@ const router : RouteObject[] = [
             },
             {
                 path: 'profil',
-                element: <ProfilPengguna />
+                element: <ProfilPengguna />,
+                children: [
+                    {
+                        index: true,
+                        element: <GeneralProfilePage />
+                    },
+                    {
+                        path: 'credentials',
+                        element: <CredentialsProfilePage />
+                    },
+                    {
+                        path: 'status',
+                        element: <StatusProfilePage />
+                    }
+                ]
             },
             {
                 path: 'status',
