@@ -9,7 +9,9 @@ const ProfilPengguna = () => {
     <Container className="mt-20 px-20 grid grid-cols-12 gap-x-4">
       <ProfileCover />
       <MenuSection />
-      <Outlet />
+      <section className="col-span-9">
+        <Outlet />
+      </section>
     </Container>
   )
 }
