@@ -7,7 +7,7 @@ import { comparePassword, hashPassword } from '../utils/passwordUtils'
 
 // SUDAH DITESTING
 export const getProfil = async({userId} : GetProfileParamsServiceType) => {
-    const profil = await Pengguna.findOne({_id: userId}).select('-password')
+    const profil = await Pengguna.findOne({_id: userId})
     return profil
 }
 

@@ -49,6 +49,7 @@ const router : RouteObject[] = [
                 element: <KatalogPengguna />
             },
             {
+                id: 'user-profil',
                 path: 'profil',
                 element: <ProfilPengguna />,
                 loader: profileLoader,

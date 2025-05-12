@@ -2,12 +2,14 @@ import { profileAction } from "@/actions/userActions"
 import MenuSection from "@/components/pengguna/ProfilPengguna/MenuSection"
 import ProfileCover from "@/components/pengguna/ProfilPengguna/ProfileCover"
 import Container from "@/globals/Container"
-import { Outlet } from "react-router-dom"
+import { Outlet, redirect, useLoaderData } from "react-router-dom"
 
 export const profileLoader = async() => {
   const response = await profileAction()
-  console.log(response)
-  return null
+
+  // jika belum login
+  if (!response) return redirect('/')
+  return response
 }
 
 

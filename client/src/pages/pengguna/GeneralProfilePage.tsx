@@ -1,7 +1,11 @@
 import { Separator } from '@/components/ui/separator'
 import ProfileData from '@/components/pengguna/ProfilPengguna/ProfileData'
+import { useRouteLoaderData } from 'react-router-dom'
 
 const GeneralProfilePage = () => {
+
+  const data = useRouteLoaderData('user-profil')
+
   return (
     <section className='w-full grid-cols-9 flex flex-col justify-start'>
       <h1 className='w-full text-2xl font-semibold'>Pribadi</h1>
@@ -9,10 +13,10 @@ const GeneralProfilePage = () => {
       <p className='text-muted-foreground'>Data profil utama yang digunakan untuk keperluan akademik dan identifikasi akun.</p>
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
-        <ProfileData label='Nama Lengkap' value='Aan Bahudin' isEditable={true} />
-        <ProfileData label='Kelas' value='D' isEditable={true} />
-        <ProfileData label='Angkatan' value='2021' />
-        <ProfileData label='Jurusan' value='Teknik Informatika' />
+        <ProfileData label='Nama Lengkap' value={data.nama} isEditable={true} />
+        <ProfileData label='Kelas' value={data.kelas || '-'} isEditable={true} />
+        <ProfileData label='Angkatan' value={data.angkatan} />
+        <ProfileData label='Jurusan' value={data.jurusan} />
       </main>
 
       <h1 className='w-full text-2xl font-semibold mt-10'>Kontak</h1>
@@ -21,7 +25,7 @@ const GeneralProfilePage = () => {
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
         
-        <ProfileData label='Telepon' value='08123473942'  isEditable={true}/>
+        <ProfileData label='Telepon' value={data.no_hp || '-'}  isEditable={true}/>
       </main>
 
       <h1 className='w-full text-2xl font-semibold mt-10'>Identitas Kampus</h1>
@@ -29,8 +33,8 @@ const GeneralProfilePage = () => {
       <p className='text-muted-foreground'>Informasi unik Anda dalam sistem kampus</p>
 
       <main className='w-full grid grid-cols-2 gap-4 my-10'>
-        <ProfileData label='NIM / NIDN' value='21650166' />
-        <ProfileData label='Role' value='Mahasiswa'/>
+        <ProfileData label='NIM / NIDN' value={data.idKampus} />
+        <ProfileData label='Role' value={data.role}/>
       </main>
     </section>
   )
