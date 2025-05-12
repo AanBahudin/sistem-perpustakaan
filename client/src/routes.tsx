@@ -11,6 +11,7 @@ import KatalogPenggunaPage from "./pages/pengguna/KatalogPenggunaPage";
 import GeneralProfilePage from "./pages/pengguna/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/StatusProfilePage";
+import { profileLoader } from "./pages/pengguna/ProfilPengguna";
 
 const router : RouteObject[] = [
     {
@@ -50,6 +51,7 @@ const router : RouteObject[] = [
             {
                 path: 'profil',
                 element: <ProfilPengguna />,
+                loader: profileLoader,
                 children: [
                     {
                         index: true,
