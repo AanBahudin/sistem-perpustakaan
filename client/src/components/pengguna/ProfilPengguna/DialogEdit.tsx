@@ -11,18 +11,25 @@ import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
+import {store} from '@/store'
+import { setEdit } from "@/cart/profileSlice"
+import { useSelector } from "react-redux"
 
 
-const DialogEdit = ({isEditable} : {isEditable: boolean}) => {
+const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) => {
+
+  const {tipe} = useSelector((state:any) =>state.profileState)
+  
+
   return (
     <Dialog>
         <DialogTrigger asChild className={`${isEditable ? 'block' : 'hidden'}`}>
-            <Button variant='default'><Pencil className='stroke-primary-foreground dark:stroke-white' /></Button>
+            <Button onClick={() => store.dispatch(setEdit(name))} variant='default'><Pencil className='stroke-primary-foreground dark:stroke-white' /></Button>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle className="capitalize">Perbaharui {tipe}</DialogTitle>
             <DialogDescription>
                 Make changes to your profile here. Click save when you're done.
             </DialogDescription>

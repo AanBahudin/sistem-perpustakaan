@@ -5,7 +5,6 @@ import { useRouteLoaderData } from 'react-router-dom'
 const CredentialsProfilePage = () => {
   
   const data = useRouteLoaderData('user-profil')
-  console.log(data)
 
   return (
     <section className='w-full min-h-[70vh] grid-cols-9 flex flex-col justify-start'>
@@ -14,8 +13,8 @@ const CredentialsProfilePage = () => {
       <p className='text-muted-foreground'>Informasi keamanan akun </p>
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
-        <ProfileData label='Email' value={data.email} isEditable={true} />
-        <ProfileData label='Password' value={data.password} isEditable={true} />
+        <ProfileData label='Email' value={data.email} isEditable={true} name='email' />
+        <ProfileData label='Password' value={data.password} isEditable={true} name='password' />
       </main>
     </section>
   )

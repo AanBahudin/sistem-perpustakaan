@@ -13,8 +13,8 @@ const GeneralProfilePage = () => {
       <p className='text-muted-foreground'>Data profil utama yang digunakan untuk keperluan akademik dan identifikasi akun.</p>
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
-        <ProfileData label='Nama Lengkap' value={data.nama} isEditable={true} />
-        <ProfileData label='Kelas' value={data.kelas || '-'} isEditable={true} />
+        <ProfileData label='Nama Lengkap' value={data.nama} isEditable={true} name='nama' />
+        <ProfileData label='Kelas' value={data.kelas || '-'} isEditable={true} name='kelas' />
         <ProfileData label='Angkatan' value={data.angkatan} />
         <ProfileData label='Jurusan' value={data.jurusan} />
       </main>
@@ -25,7 +25,7 @@ const GeneralProfilePage = () => {
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
         
-        <ProfileData label='Telepon' value={data.no_hp || '-'}  isEditable={true}/>
+        <ProfileData label='Telepon' value={data.no_hp || '-'} isEditable={true} name='no_hp'/>
       </main>
 
       <h1 className='w-full text-2xl font-semibold mt-10'>Identitas Kampus</h1>

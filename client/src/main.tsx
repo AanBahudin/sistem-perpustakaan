@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import {store} from './store/store.tsx'
+import {store} from './store.ts'
 import { Provider } from 'react-redux'
 import './index.css'
 import App from './App.tsx'
@@ -11,11 +11,11 @@ const client = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={client}>
-    <Provider store={store}>
       <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
         <Toaster position='top-right' />
+    <Provider store={store}>
           <App />
-      </ThemeProvider>
     </Provider>
+      </ThemeProvider>
   </QueryClientProvider>
 )
