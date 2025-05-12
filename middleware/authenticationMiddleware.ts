@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { StatusCodes } from "http-status-codes";
 import { NotAuthorized, NotFoundError } from "../errors/errorHandler";
 import { verifyToken } from "../utils/jwt";
 import { JwtVerifiedToken } from "../types/jwtTypes";
 
-const authenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authenticationMiddleware = (req: Request, res: Response, next: NextFunction) : void | Promise<void>=> {
     const { token } = req.cookies
 
     if (!token) {
-        throw new NotFoundError('Halaman tidak tersedia')
+        res.status(200).json({status: false})
+        return
     }
 
     try {
