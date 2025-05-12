@@ -26,8 +26,8 @@ import { prodiMiddlewareAuthorized, pustakawanMiddlewareAuthorized, userMiddlewa
 import { errorHandler } from './errors/errorHandler'
 import path from 'path'
 
-import Buku from './model/Buku'
 import { StatusCodes } from 'http-status-codes'
+import { basedAuthMiddleware } from './middleware/basicAuthMiddleware'
 
 const app = express()
 app.set('view engine', 'pug')

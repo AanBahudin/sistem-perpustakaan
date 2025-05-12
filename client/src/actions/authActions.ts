@@ -62,7 +62,9 @@ export const accountStatus = async() => {
         queryKey: ['verify'],
         queryFn: async() => {
             const response = await customFetch.get('/user/profile')
-            if (response.data.status >= 400) return redirect('/login')
+            console.log(response);
+            
+            if (response.data.status >= 400 || null) return redirect('/login')
             return response.data.data
         }
     })
