@@ -20,7 +20,7 @@ const GeneralProfilePage = () => {
       <p className='text-muted-foreground'>Data yang digunakan untuk keperluan komunikasi</p>
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
-        <ProfileData label='Email' value='aan.bahudin11@gmail.com' isEditable={true} />
+        
         <ProfileData label='Telepon' value='08123473942'  isEditable={true}/>
       </main>
 
