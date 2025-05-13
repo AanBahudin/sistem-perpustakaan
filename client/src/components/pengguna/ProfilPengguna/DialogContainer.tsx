@@ -8,14 +8,10 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import {store} from '@/store'
 import { setEdit } from "@/cart/profileSlice"
 import { useSelector } from "react-redux"
-import FormContainer from "@/components/form/FormContainer"
-import { updateNamaAction } from "@/actions/userActions"
-import SubmitButton from "@/components/form/SubmitButton"
+import {KelasDialog, NoHpDialog, NamaDialog, EmailDialog, PasswordDialog} from "./DialogBox"
 
 
 const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) => {
@@ -39,15 +35,13 @@ const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) =
             </DialogDescription>
 
             </DialogHeader>
-            <FormContainer action={updateNamaAction} className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor={tipe} className="text-right capitalize">
-                  {tipe} Baru
-                </Label>
-                <Input required id={tipe} name={tipe} className="col-span-3 selection:text-white" />
-              </div>
-              <SubmitButton className='text-white mt-6 place-self-end w-fit' text="Save changes "/>
-            </FormContainer>
+
+            {tipe === 'nama' && <NamaDialog />}
+            {tipe === 'no_hp' && <NoHpDialog />}
+            {tipe === 'kelas' && <KelasDialog />}
+            {tipe === 'email' && <EmailDialog />}
+            {tipe === 'password' && <PasswordDialog />}
+
         </DialogContent>
     </Dialog>
   )

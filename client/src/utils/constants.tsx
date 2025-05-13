@@ -234,3 +234,5 @@ export const profileMenulinks = [
     url: 'status'
   }
 ]
+
+export const kelasEnum = ['A', 'B', 'C', 'D', 'E', 'F']

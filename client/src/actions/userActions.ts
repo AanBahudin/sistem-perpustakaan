@@ -19,29 +19,35 @@ export const profileAction = async() => {
     return data
 }
 
-export const updateNamaAction = async(formData: FormData) => {
+export const updateProfileAction = async(formData: FormData) => {
     const inputData = Object.fromEntries(formData)
-
     const response = await customFetch.patch('/user/update/profil', inputData)
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui nama'}
     }
     queryClient.setQueryData(['profil'], response.data.data)
-    return {message: 'Profil Diperbaharui', deskripsi: 'Nama telah diperbaharui', redirectTo: '/user/profil'}
-}
-
-export const updateKelasAction = async(formData: FormData) => {
-    console.log('update update function');
-}
-
-export const updateNohpAction = async(formData: FormData) => {
-    console.log('update nohp function');
+    return {message: 'Profil Diperbaharui', deskripsi: 'Data telah diperbaharui', redirectTo: '/user/profil'}
 }
 
 export const updateEmailAction = async(formData: FormData) => {
-    console.log('update email function');
+    const inputData = Object.fromEntries(formData)
+    const response = await customFetch.patch('/user/update/email', inputData)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui email'}
+    }
+
+    queryClient.setQueryData(['profil'], response.data.data)
+    return {message: 'Email Menunggu Diperbaharui', deskripsi: 'Silahkan cek email anda untuk verifikasi', redirectTo: '/user/profil'}
 }
 
 export const updatePasswordAction = async(formData: FormData) => {
-    console.log('update password function');
+    const inputData = Object.fromEntries(formData)
+    
+    const response = await customFetch.patch('/user/update/password', inputData)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui password'}
+    }
+
+    queryClient.setQueryData(['profil'], response.data.data)
+    return {message: 'Diperbaharui', deskripsi: 'Password telah diubah', redirectTo: '/user/profil/credentials'}
 }
