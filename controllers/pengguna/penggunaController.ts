@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getProfil, updateProfil, updatingPassword, updatingEmail, photoUpdate } from "../../services/penggunaServices";
-import { SendBasicResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH DITESTING
 export const getProfile = async(req: any, res: Response) => {
@@ -29,10 +29,11 @@ export const updateProfile = async(req: any | Request, res: Response) => {
 
 // BELUM TESTING
 export const updatePhoto = async(req: any | Request, res: Response) => {
-    await photoUpdate(req, req)
-    SendBasicResponse({
+    const data = await photoUpdate(req, req)
+    SendDataResponse({
         res,
-        message: 'Foto berhasil diubah'
+        message: 'Foto berhasil diubah',
+        data
     })
 }
 

@@ -42,8 +42,8 @@ export const updatePhotoAction = async(formData: FormData) => {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui foto'}
     }
 
-    queryClient.invalidateQueries({ queryKey: ['profil'] })
-    return {message: 'Foto diupload', deskripsi: 'Photo telah diperbaharui'}
+    queryClient.setQueryData(['profil'], response.data.data)
+    return {message: 'Foto diupload', deskripsi: 'Photo telah diperbaharui', redirectTo: '/user/profil'}
 }
 
 export const updateEmailAction = async(formData: FormData) => {
