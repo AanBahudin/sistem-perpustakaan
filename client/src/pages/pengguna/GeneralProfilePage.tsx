@@ -1,6 +1,7 @@
 import { Separator } from '@/components/ui/separator'
 import ProfileData from '@/components/pengguna/ProfilPengguna/ProfileData'
 import { useRouteLoaderData } from 'react-router-dom'
+import PhotoProfile from '@/components/pengguna/ProfilPengguna/PhotoProfile'
 
 const GeneralProfilePage = () => {
 
@@ -12,7 +13,9 @@ const GeneralProfilePage = () => {
       <Separator className='my-2' />
       <p className='text-muted-foreground'>Data profil utama yang digunakan untuk keperluan akademik dan identifikasi akun.</p>
 
-      <main className='w-full grid grid-cols-2 gap-4 mt-10'>
+      <PhotoProfile />
+
+      <main className='w-full grid grid-cols-2 gap-4'>
         <ProfileData label='Nama Lengkap' value={data.nama} isEditable={true} name='nama' />
         <ProfileData label='Kelas' value={data.kelas || '-'} isEditable={true} name='kelas' />
         <ProfileData label='Angkatan' value={data.angkatan} />
