@@ -18,3 +18,24 @@ export const profileAction = async() => {
     })
     return data
 }
+
+export const updateNamaAction = async(formData: FormData) => {
+    const inputData = Object.fromEntries(formData)
+    console.log(inputData);
+}
+
+export const updateKelasAction = async(formData: FormData) => {
+    console.log('update update function');
+}
+
+export const updateNohpAction = async(formData: FormData) => {
+    console.log('update nohp function');
+}
+
+export const updateEmailAction = async(formData: FormData) => {
+    console.log('update email function');
+}
+
+export const updatePasswordAction = async(formData: FormData) => {
+    console.log('update password function');
+}

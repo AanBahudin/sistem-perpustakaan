@@ -5,7 +5,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
@@ -14,17 +13,21 @@ import { Input } from '@/components/ui/input'
 import {store} from '@/store'
 import { setEdit } from "@/cart/profileSlice"
 import { useSelector } from "react-redux"
+import FormContainer from "@/components/form/FormContainer"
+import { updateNamaAction } from "@/actions/userActions"
 
 
 const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) => {
 
   const {tipe} = useSelector((state:any) =>state.profileState)
+  const handleClick = () => {
+    store.dispatch(setEdit(name))
+  }
   
-
   return (
     <Dialog>
         <DialogTrigger asChild className={`${isEditable ? 'block' : 'hidden'}`}>
-            <Button onClick={() => store.dispatch(setEdit(name))} variant='default'><Pencil className='stroke-primary-foreground dark:stroke-white' /></Button>
+            <Button onClick={handleClick} variant='default'><Pencil className='stroke-primary-foreground dark:stroke-white' /></Button>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-[425px]">
@@ -33,24 +36,17 @@ const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) =
             <DialogDescription>
                 Make changes to your profile here. Click save when you're done.
             </DialogDescription>
+
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                Name
+            <FormContainer action={updateNamaAction} className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor={tipe} className="text-right capitalize">
+                  {tipe} Baru
                 </Label>
-                <Input id="name" className="col-span-3 selection:text-white" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                Username
-                </Label>
-                <Input id="username" className="col-span-3 selection:text-white" />
-            </div>
-            </div>
-            <DialogFooter>
-            <Button type="submit" className='text-white'>Save changes</Button>
-            </DialogFooter>
+                <Input required id={tipe} name={tipe} className="col-span-3 selection:text-white" />
+              </div>
+              <Button type="submit" className='text-white mt-6 place-self-end'>Save changes</Button>
+            </FormContainer>
         </DialogContent>
     </Dialog>
   )

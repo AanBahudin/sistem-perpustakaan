@@ -13,7 +13,7 @@ const CredentialsProfilePage = () => {
       <p className='text-muted-foreground'>Informasi keamanan akun </p>
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
-        <ProfileData label='Email' value={data.email} isEditable={true} name='email' />
+        <ProfileData label='Email' value={data.email} isEditable={true} name='email'/>
         <ProfileData label='Password' value={data.password} isEditable={true} name='password' />
       </main>
     </section>

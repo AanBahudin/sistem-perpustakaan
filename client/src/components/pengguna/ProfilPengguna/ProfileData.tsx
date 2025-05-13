@@ -8,7 +8,7 @@ type ProfileDataPropsType = {
     label: string,
     value: string,
     name?: string,
-    isEditable?: boolean
+    isEditable?: boolean,
 }
 
 const ProfileData = ({name, label, value, isEditable = false} : ProfileDataPropsType) => {

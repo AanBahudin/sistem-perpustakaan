@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 type ActionFunction = (formData: FormData) => Promise<any>;
 
-const FormContainer = ({action, children} : {action: ActionFunction, children: React.ReactNode}) => {
+const FormContainer = ({action, children, className} : {action: ActionFunction, children: React.ReactNode, className?: string}) => {
     const navigate = useNavigate()
     const [message, setMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
@@ -43,7 +44,7 @@ const FormContainer = ({action, children} : {action: ActionFunction, children: R
         <FormContext.Provider value={{
             isLoading: loading
         }}>
-            <form className='w-full' onSubmit={handleSubmit}>
+            <form className={cn('w-full h-full mx-auto', className)} onSubmit={handleSubmit}>
                 {children}
             </form>
         </FormContext.Provider>
