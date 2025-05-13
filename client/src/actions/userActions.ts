@@ -21,7 +21,13 @@ export const profileAction = async() => {
 
 export const updateNamaAction = async(formData: FormData) => {
     const inputData = Object.fromEntries(formData)
-    console.log(inputData);
+
+    const response = await customFetch.patch('/user/update/profil', inputData)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui nama'}
+    }
+    queryClient.setQueryData(['profil'], response.data.data)
+    return {message: 'Profil Diperbaharui', deskripsi: 'Nama telah diperbaharui', redirectTo: '/user/profil'}
 }
 
 export const updateKelasAction = async(formData: FormData) => {

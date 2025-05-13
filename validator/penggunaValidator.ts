@@ -7,6 +7,7 @@ import { body } from "express-validator";
 
 export const validateUpdateInputPengguna = withValidationErrors([
     body('nama')
+        .optional()
         .isLength({min: 3, max: 50}).withMessage('Nama 3-50 Karakter')
         .customSanitizer(async(nama: string, {req}) => {
             const user = await Pengguna.findOne({_id: req.user.userId})
@@ -16,9 +17,16 @@ export const validateUpdateInputPengguna = withValidationErrors([
             return nama
         }),
     body('kelas')
-        .notEmpty()
-        .withMessage('Kelas tidak boleh kosong'),
+        .optional()
+        .customSanitizer(async(nama: string, {req}) => {
+            const user = await Pengguna.findOne({_id: req.user.userId})
+            if (nama.length === 0) {
+                return user?.nama
+            }
+            return nama
+        }),
     body('no_hp')
+        .optional()
         .customSanitizer((no_hp : string | null) => {
             if (no_hp && no_hp.startsWith('08')) {
 

@@ -15,6 +15,7 @@ import { setEdit } from "@/cart/profileSlice"
 import { useSelector } from "react-redux"
 import FormContainer from "@/components/form/FormContainer"
 import { updateNamaAction } from "@/actions/userActions"
+import SubmitButton from "@/components/form/SubmitButton"
 
 
 const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) => {
@@ -45,7 +46,7 @@ const DialogEdit = ({isEditable, name} : {isEditable: boolean, name?: string}) =
                 </Label>
                 <Input required id={tipe} name={tipe} className="col-span-3 selection:text-white" />
               </div>
-              <Button type="submit" className='text-white mt-6 place-self-end'>Save changes</Button>
+              <SubmitButton className='text-white mt-6 place-self-end w-fit' text="Save changes "/>
             </FormContainer>
         </DialogContent>
     </Dialog>
