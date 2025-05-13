@@ -44,7 +44,7 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
         <FormContext.Provider value={{
             isLoading: loading
         }}>
-            <form className={cn('w-full h-full mx-auto', className)} onSubmit={handleSubmit}>
+            <form encType='multipart/form-data' className={cn('w-full h-full mx-auto', className)} onSubmit={handleSubmit}>
                 {children}
             </form>
         </FormContext.Provider>

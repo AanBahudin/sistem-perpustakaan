@@ -29,6 +29,23 @@ export const updateProfileAction = async(formData: FormData) => {
     return {message: 'Profil Diperbaharui', deskripsi: 'Data telah diperbaharui', redirectTo: '/user/profil'}
 }
 
+export const updatePhotoAction = async(formData: FormData) => {
+    const file = formData.get('fotoProfil') as File
+    console.log(file.size)
+
+    if (file && file.size > 200000) {
+        return {message: 'Terjadi kesalahan', deskripsi: 'Ukuran foto maksimal 4000 MB'}
+    }
+
+    const response = await customFetch.patch('/user/update/photo', formData)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui foto'}
+    }
+
+    queryClient.invalidateQueries({ queryKey: ['profil'] })
+    return {message: 'Foto diupload', deskripsi: 'Photo telah diperbaharui'}
+}
+
 export const updateEmailAction = async(formData: FormData) => {
     const inputData = Object.fromEntries(formData)
     const response = await customFetch.patch('/user/update/email', inputData)

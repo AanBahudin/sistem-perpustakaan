@@ -14,7 +14,7 @@ router.route('/update/profil')
     .patch(userMiddlewareAuthorized, validateUpdateInputPengguna, updateProfile)
 
 router.route('/update/photo')
-    .patch(userMiddlewareAuthorized, validateUpdatePhoto, upload.single('fotoProfil'), updatePhoto)
+    .patch(userMiddlewareAuthorized, upload.single('fotoProfil'), updatePhoto)
 
 router.route('/update/password')
     .patch(userMiddlewareAuthorized, validateUpdatePasswordPengguna, updatePassword)

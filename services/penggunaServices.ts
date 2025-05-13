@@ -40,10 +40,11 @@ export const photoUpdate = async(req: Request | any, res: Response) => {
         req.body.photoPublicId = response.public_id
     }
 
-    const updatedUser = await Pengguna.findOneAndUpdate({_id: userId}, req.body, {runValidators: true, new: true})
-    if (req.file && updatedUser?.photoPublicId) {
-        await cloudinary.v2.uploader.destroy(updatedUser.photoPublicId)
+    const user = await Pengguna.findOne({_id: userId})
+    if (req.file && user && user.photoPublicId) {
+        await cloudinary.v2.uploader.destroy(user.photoPublicId)
     }
+    const updatedUser = await Pengguna.findOneAndUpdate({_id: userId}, req.body, {runValidators: true, new: true})
 }
 
 // SUDAH DITESITNG
