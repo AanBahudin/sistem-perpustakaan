@@ -6,6 +6,15 @@ import { body } from "express-validator";
 
 
 export const validateUpdateInputPengguna = withValidationErrors([
+    body('nama')
+        .isLength({min: 3, max: 50}).withMessage('Nama 3-50 Karakter')
+        .customSanitizer(async(nama: string, {req}) => {
+            const user = await Pengguna.findOne({_id: req.user.userId})
+            if (nama.length === 0) {
+                return user?.nama
+            }
+            return nama
+        }),
     body('kelas')
         .notEmpty()
         .withMessage('Kelas tidak boleh kosong'),
