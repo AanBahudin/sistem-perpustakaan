@@ -50,6 +50,7 @@ const PenggunaSchema = new mongoose.Schema({
     },
     password: String,
     fotoProfil: String,
+    photoPublicId: String,
     no_hp: String,
     role: {
         type: String,

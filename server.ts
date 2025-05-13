@@ -4,6 +4,8 @@ dotenv.config()
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
+import {v2 as cloudinary} from 'cloudinary'
+import { StatusCodes } from 'http-status-codes'
 
 import authRoute from './route/auth/authRoute'
 import userRoute from './route/pengguna/penggunaRoute'
@@ -26,9 +28,6 @@ import { prodiMiddlewareAuthorized, pustakawanMiddlewareAuthorized, userMiddlewa
 import { errorHandler } from './errors/errorHandler'
 import path from 'path'
 
-import { StatusCodes } from 'http-status-codes'
-import { basedAuthMiddleware } from './middleware/basicAuthMiddleware'
-
 const app = express()
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
@@ -37,6 +36,13 @@ app.use(morgan('dev'))
 
 app.use(express.json())
 app.use(cookieParser(process.env.JWT_SECRET))
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+})
+
 
 app.get('/api/test', async(req, res) => {
     res.status(StatusCodes.OK).json({msg: 'Success'})

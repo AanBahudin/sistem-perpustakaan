@@ -27,7 +27,7 @@ const PhotoProfile = () => {
             <img className="w-[100px] border-2 h-[100px] bg-muted rounded-full object-cover" src={img || 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746624245/uk3h7ilkoo7wm2axglsd.jpg'} alt="" />
 
             <main className="flex gap-x-4">
-                <Input ref={inputImg} type="file" accept='image/*'  className="w-[250px]" placeholder="Upload foto profil" onChange={handleImgInput}/>
+                <Input ref={inputImg} name="fotoProfil" id="fotoProfil" type="file" accept='image/*'  className="w-[250px]" placeholder="Upload foto profil" onChange={handleImgInput}/>
                 
                 <div className={`${img ? 'flex' : 'hidden'} gap-x-2`}>
                     <Button onClick={handleCancel} variant='destructive'><X /></Button>

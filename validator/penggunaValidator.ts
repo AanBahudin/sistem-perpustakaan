@@ -42,6 +42,11 @@ export const validateUpdateInputPengguna = withValidationErrors([
         }),
 ])
 
+export const validateUpdatePhoto = withValidationErrors([
+    body('fotoProfil')
+        .notEmpty().withMessage('Foto tidak boleh kosong')
+])
+
 export const validateUpdateEmailPengguna = withValidationErrors([
     body('email')
         .notEmpty()

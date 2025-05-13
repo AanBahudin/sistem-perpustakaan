@@ -4,6 +4,9 @@ import Pengguna from '../model/Pengguna'
 import renderError from '../utils/renderError'
 import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, TambahDendaPenggunaTypes, UpdateEmailParamsServicesType, UpdatePasswordParamsServicesType, UpdateProfilParamsServicesType } from '../types/penggunaTypes'
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
+import cloudinary from 'cloudinary'
+import { promises as fs } from 'fs'
+
 
 // SUDAH DITESTING
 export const getProfil = async({userId} : GetProfileParamsServiceType) => {
@@ -24,6 +27,23 @@ export const updateProfil = async({userId, dataUpdate} : UpdateProfilParamsServi
     }
 
     return updatedProfile
+}
+
+export const photoUpdate = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+
+    if (req.file) {
+        const response = await cloudinary.v2.uploader.upload(req.file.path)
+        await fs.unlink(req.file.path)
+
+        req.body.fotoProfil = response.secure_url
+        req.body.photoPublicId = response.public_id
+    }
+
+    const updatedUser = await Pengguna.findOneAndUpdate({_id: userId}, req.body, {runValidators: true, new: true})
+    if (req.file && updatedUser?.photoPublicId) {
+        await cloudinary.v2.uploader.destroy(updatedUser.photoPublicId)
+    }
 }
 
 // SUDAH DITESITNG
