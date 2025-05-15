@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const defaultState = {
     tipe: '',
+    selectedImg: ''
 }
 
 const profileSlice = createSlice({
@@ -10,9 +11,15 @@ const profileSlice = createSlice({
     reducers: {
         setEdit: (state, action) => {
             state.tipe = action.payload
+        },
+        setSelectedImg: (state, action) => {
+            state.selectedImg = action.payload
+        },
+        removeSelectedImg: (state) => {
+            state.selectedImg = ''
         }
     }
 })
 
-export const {setEdit} = profileSlice.actions
+export const {setEdit, setSelectedImg, removeSelectedImg} = profileSlice.actions
 export default profileSlice.reducer

@@ -1,3 +1,5 @@
+import { removeSelectedImg } from "@/cart/profileSlice";
+import { store } from "@/store";
 import { customFetch } from "@/utils/customFetch";
 import { QueryClient } from "@tanstack/react-query";
 
@@ -43,6 +45,7 @@ export const updatePhotoAction = async(formData: FormData) => {
     }
 
     queryClient.setQueryData(['profil'], response.data.data)
+    store.dispatch(removeSelectedImg())
     return {message: 'Foto diupload', deskripsi: 'Photo telah diperbaharui', redirectTo: '/user/profil'}
 }
 
