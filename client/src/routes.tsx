@@ -12,6 +12,7 @@ import GeneralProfilePage from "./pages/pengguna/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/StatusProfilePage";
 import { profileLoader } from "./pages/pengguna/ProfilPengguna";
+import PeminjamanPage from "./pages/pengguna/PeminjamanPage";
 
 const router : RouteObject[] = [
     {
@@ -67,6 +68,10 @@ const router : RouteObject[] = [
                         element: <StatusProfilePage />
                     }
                 ]
+            },
+            {
+                path: 'peminjaman',
+                element: <PeminjamanPage />
             },
             {
                 path: 'status',
