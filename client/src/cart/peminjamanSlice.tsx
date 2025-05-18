@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type DefaultStateType = {
     layout: 'grid' | 'list',
-    activeTab: 1
+    activeTab: 1,
+    peminjamanFilter: 'semua' | 'Dipinjam' | 'Dikembalikan' | 'Diajukan' | 'Ditolak'
 }
 
 const defaultState : DefaultStateType = {
     layout: 'list',
-    activeTab: 1
+    activeTab: 1,
+    peminjamanFilter: 'semua'
 }
 
 const peminjamanSlice = createSlice({
@@ -18,7 +20,9 @@ const peminjamanSlice = createSlice({
             state.layout = action.payload
         },
         setTab: (state, action) => {
-            state.activeTab = action.payload
+            const {id, title} = action.payload
+            state.activeTab = id
+            state.peminjamanFilter = title
         }
     }
 })

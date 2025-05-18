@@ -240,23 +240,23 @@ export const kelasEnum = ['A', 'B', 'C', 'D', 'E', 'F']
 export const tabsMenu = [
   {
     id: 1,
-    title: 'semua'
+    title: 'Semua'
   },
   {
     id: 2,
-    title: 'diterima'
+    title: 'Diterima'
   },
   {
     id: 3,
-    title: 'ditolak'
+    title: 'Ditolak'
   },
   {
     id: 4,
-    title: 'diajukkan'
+    title: 'Diajukan'
   },
   {
     id: 5,
-    title: 'dipinjam'
+    title: 'Dipinjam'
   }
   
 ]

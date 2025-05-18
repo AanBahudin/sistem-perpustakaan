@@ -3,11 +3,7 @@ import { Separator } from "@/components/ui/separator"
 import { useRouteLoaderData } from "react-router-dom"
 
 const PeminjamanList = () => {
-  const url = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/ybtknqtmtdtjfnhmoarf.jpg'
   const {data, total} = useRouteLoaderData('peminjaman-data')
-  console.log(data)
-  
-
   if (total === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }

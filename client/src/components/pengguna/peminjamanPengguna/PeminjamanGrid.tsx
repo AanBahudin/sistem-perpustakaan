@@ -1,26 +1,39 @@
-import { CalendarCheck, CalendarX } from "lucide-react"
+import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { useRouteLoaderData } from "react-router-dom"
+import { useSelector } from "react-redux"
 
-const PeminjamanGrid = ({data} : {data: Object[]}) => {
-    const url = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/ybtknqtmtdtjfnhmoarf.jpg'
+const PeminjamanGrid = () => {
+    const {data, total} = useRouteLoaderData('peminjaman-data')
+    const {peminjamanFilter} = useSelector((state:any) => state.peminjamanState)
+
+    if (total === 0) {
+        return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
+    }
     return (
         <div className="w-full grid grid-cols-12 gap-4">
-            {data.map((item, index) => {
+            {data.filter((item: any) => {
+                if (peminjamanFilter === 'Semua') return item
+                console.log(peminjamanFilter === item.statusPeminjaman);
+                
+                return peminjamanFilter === item.statusPeminjaman
+            }).map((item:any) => {
+                const {buku, statusPeminjaman, durasiPeminjaman} = item
                 return (
-                    <main key={index} className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
-                        <img src={url} className="w-24 object-fill rounded" />
+                    <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
+                        <img src={buku.cover} className="w-24 object-fill rounded" />
                         <div className="w-full flex flex-col items-start justify-stretch ">
-                        <h2 className="text-2xl font-semibold">Deep Work</h2>
+                        <h2 className="text-2xl font-semibold">{buku.judul}</h2>
                         <Separator className="my-2 w-full" />
                         <p className="flex gap-x-2 text-sm text-muted-foreground items-center">
                             <CalendarCheck className="w-5 h-5 stroke-primary" />
                             <span>10 September 2001</span>
                         </p>
                         <p className="flex gap-x-2 text-sm text-muted-foreground items-center mt-2">
-                            <CalendarX className="w-5 h-5 stroke-destructive" />
-                            <span>10 September 2001</span>
+                            <Hourglass className="w-5 h-5 stroke-primary" />
+                            <span>Durasi peminjaman selama {durasiPeminjaman} Hari</span>
                         </p>
-                        <h3 className="w-full text-center bg-primary self-center py-1 mt-4 rounded text-sm text-white">Dipinjam</h3>
+                        <h3 className="w-full text-center bg-primary self-center py-1 mt-4 rounded text-sm text-white">{statusPeminjaman}</h3>
                         </div>
                     </main>
                 )

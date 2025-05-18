@@ -1,14 +1,12 @@
-import { useRouteLoaderData } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import PeminjamanGrid from './PeminjamanGrid'
 import PeminjamanList from './PeminjamanList'
 
-const PeminjamanDataLayout = ({layout} : {layout: 'grid' | 'list'}) => {
-
-  const {data, total} = useRouteLoaderData('peminjaman-data')
-
+const PeminjamanDataLayout = () => {
+  const {layout} = useSelector((state: any) => state.peminjamanState)
   return (
     <>
-      {layout === 'grid' && <PeminjamanGrid data={data} />}
+      {layout === 'grid' && <PeminjamanGrid />}
       {layout === 'list' && <PeminjamanList />}
     </>
   )
