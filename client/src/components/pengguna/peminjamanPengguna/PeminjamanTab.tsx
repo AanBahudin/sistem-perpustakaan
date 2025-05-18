@@ -1,4 +1,6 @@
 import { tabsMenu } from "@/utils/constants"
+import { store } from "@/store"
+import { setTab } from "@/cart/peminjamanSlice"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 const PeminjamanTab = () => {
@@ -9,6 +11,7 @@ const PeminjamanTab = () => {
 
     const handleTabs = (data: any) => {
         const params = new URLSearchParams()
+        store.dispatch(setTab(data))
         params.set('filter', data.title)
         navigate(`?${params.toString()}`);
     }
