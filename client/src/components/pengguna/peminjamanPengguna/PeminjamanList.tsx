@@ -1,8 +1,9 @@
 import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
+import { Link } from "react-router-dom"
 
-const PeminjamanList = ({data} : {data: Object[]}) => {
+const PeminjamanList = ({data = []} : {data: Object[]}) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }
@@ -12,7 +13,7 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
       {data.map((item: any) => {
           const {buku, statusPeminjaman, durasiPeminjaman, createdAt} = item
           return (
-              <main key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
+              <Link to={`/my/peminjaman/${item._id}`} key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
                   <img src={buku.cover} className="w-24 object-fill rounded" />
                   <div className="w-full flex flex-col items-start justify-stretch ">
                   <div className="w-full flex items-center justify-between">
@@ -38,7 +39,7 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
                     </main>
                   </div>
                   </div>
-              </main>
+              </Link>
           )
       })}
     </div>

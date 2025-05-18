@@ -2,7 +2,7 @@ import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 
-const PeminjamanGrid = ({data} : {data: Object[]}) => {
+const PeminjamanGrid = ({data = ['default']} : {data: Object[]}) => {
 
     if (data.length === 0) {
         return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>

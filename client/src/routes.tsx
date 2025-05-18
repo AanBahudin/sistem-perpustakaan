@@ -17,6 +17,7 @@ import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
 import PengembalianPage from "./pages/pengguna/PengembalianPage";
 import PerpanjanganPage from "./pages/pengguna/PerpanjanganPage";
 import { peminjamanLoader } from "./pages/pengguna/PeminjamanPage";
+import PeminjamanDetailPage from "./pages/pengguna/PeminjamanDetailPage";
 
 const router : RouteObject[] = [
     {
@@ -92,6 +93,10 @@ const router : RouteObject[] = [
                         element: <PerpanjanganPage />
                     }
                 ]
+            },
+            {
+                path: 'peminjaman/:id',
+                element: <PeminjamanDetailPage />
             },
             {
                 path: 'status',
