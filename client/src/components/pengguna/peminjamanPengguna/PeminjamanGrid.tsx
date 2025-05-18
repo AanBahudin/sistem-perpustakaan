@@ -1,13 +1,13 @@
 import { CalendarCheck, CalendarX } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
-const PeminjamanGrid = () => {
+const PeminjamanGrid = ({data} : {data: Object[]}) => {
     const url = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/ybtknqtmtdtjfnhmoarf.jpg'
     return (
         <div className="w-full grid grid-cols-12 gap-4">
-            {Array.from({length: 10}).map(_ => {
+            {data.map((item, index) => {
                 return (
-                    <main className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
+                    <main key={index} className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
                         <img src={url} className="w-24 object-fill rounded" />
                         <div className="w-full flex flex-col items-start justify-stretch ">
                         <h2 className="text-2xl font-semibold">Deep Work</h2>

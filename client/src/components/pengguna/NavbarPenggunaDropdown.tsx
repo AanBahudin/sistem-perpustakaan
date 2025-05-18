@@ -24,7 +24,7 @@ const NavbarPenggunaDropdown = () => {
             <DropdownMenuGroup>
               {penggunaNavbarLink.map((item, index) => {
                 return (
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem asChild key={index}>
                     <Link key={index} to={item.url}>{item.title}</Link>
                   </DropdownMenuItem>
                 )

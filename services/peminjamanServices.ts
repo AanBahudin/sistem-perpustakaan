@@ -39,7 +39,7 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : 
 
 // SUDAH DITESTING
 export const getSemuaPeminjamanUser = async({userId} : GetSemuaPeminjamanUserParamsType) => {
-    const pinjamanUser = await Peminjaman.find({peminjam: userId})
+    const pinjamanUser = await Peminjaman.find({peminjam: userId}).populate('buku')
 
     return {data: pinjamanUser}
 }

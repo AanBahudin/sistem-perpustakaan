@@ -16,6 +16,7 @@ import PeminjamanPage from "./pages/pengguna/PeminjamanPage";
 import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
 import PengembalianPage from "./pages/pengguna/PengembalianPage";
 import PerpanjanganPage from "./pages/pengguna/PerpanjanganPage";
+import { peminjamanLoader } from "./pages/pengguna/PeminjamanPage";
 
 const router : RouteObject[] = [
     {
@@ -45,7 +46,7 @@ const router : RouteObject[] = [
         loader: VerifyLoader
     },
     {
-        path: '/user',
+        path: '/my',
         element: <PenggunaLayout />,
         children: [
             {
@@ -77,8 +78,10 @@ const router : RouteObject[] = [
                 element: <DataPenggunaLayout />,
                 children: [
                     {
+                        id: 'peminjaman-data',
                         path: 'peminjaman',
-                        element: <PeminjamanPage />
+                        element: <PeminjamanPage />,
+                        loader: peminjamanLoader
                     },
                     {
                         path: 'pengembalian',
