@@ -1,4 +1,4 @@
-import { CalendarCheck, CalendarX } from "lucide-react"
+import { CalendarCheck, CalendarX, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
 const PeminjamanList = ({data} : {data: Object[]}) => {
@@ -9,7 +9,7 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
       {data.map((item: any) => {
-          const {buku, statusPeminjaman} = item
+          const {buku, statusPeminjaman, durasiPeminjaman} = item
           return (
               <main key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
                   <img src={buku.cover} className="w-24 object-fill rounded" />
@@ -25,14 +25,14 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
                       <h5 className="text-sm text-muted-foreground">{buku.deskripsi}</h5>
                     </main>
                     <Separator orientation="vertical" className="mx-2" />
-                    <main className="self-center flex items-center flex-col justify-center w-1/3">
+                    <main className=" pl-20 self-center flex items-start flex-col justify-center w-1/3">
                       <p className="flex gap-x-2 text-sm text-muted-foreground items-center">
                             <CalendarCheck className="w-5 h-5 stroke-primary" />
                             <span>10 September 2001</span>
                       </p>
                       <p className="flex gap-x-2 text-sm text-muted-foreground items-center mt-2">
-                          <CalendarX className="w-5 h-5 stroke-destructive" />
-                          <span>10 September 2001</span>
+                          <Hourglass className="w-5 h-5 stroke-primary" />
+                          <span>Durasi pinjam {durasiPeminjaman} hari</span>
                       </p>
                     </main>
                   </div>
