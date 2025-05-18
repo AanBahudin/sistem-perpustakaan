@@ -1,23 +1,14 @@
 import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
-import { useRouteLoaderData } from "react-router-dom"
-import { useSelector } from "react-redux"
 
-const PeminjamanGrid = () => {
-    const {data, total} = useRouteLoaderData('peminjaman-data')
-    const {peminjamanFilter} = useSelector((state:any) => state.peminjamanState)
+const PeminjamanGrid = ({data} : {data: Object[]}) => {
 
-    if (total === 0) {
+    if (data.length === 0) {
         return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
     }
     return (
         <div className="w-full grid grid-cols-12 gap-4">
-            {data.filter((item: any) => {
-                if (peminjamanFilter === 'Semua') return item
-                console.log(peminjamanFilter === item.statusPeminjaman);
-                
-                return peminjamanFilter === item.statusPeminjaman
-            }).map((item:any) => {
+            {data.map((item:any) => {
                 const {buku, statusPeminjaman, durasiPeminjaman} = item
                 return (
                     <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">

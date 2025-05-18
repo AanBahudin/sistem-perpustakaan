@@ -1,10 +1,8 @@
 import { CalendarCheck, CalendarX } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
-import { useRouteLoaderData } from "react-router-dom"
 
-const PeminjamanList = () => {
-  const {data, total} = useRouteLoaderData('peminjaman-data')
-  if (total === 0) {
+const PeminjamanList = ({data} : {data: Object[]}) => {
+  if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }
 
