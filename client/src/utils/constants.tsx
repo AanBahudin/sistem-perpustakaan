@@ -236,3 +236,27 @@ export const profileMenulinks = [
 ]
 
 export const kelasEnum = ['A', 'B', 'C', 'D', 'E', 'F']
+
+export const tabsMenu = [
+  {
+    id: 1,
+    title: 'semua'
+  },
+  {
+    id: 2,
+    title: 'diterima'
+  },
+  {
+    id: 3,
+    title: 'ditolak'
+  },
+  {
+    id: 4,
+    title: 'diajukkan'
+  },
+  {
+    id: 5,
+    title: 'dipinjam'
+  }
+  
+]
