@@ -1,6 +1,7 @@
 import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
 import { ChartConfig } from "@/components/ui/chart";
-import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Figma, Code, Database, Layout, Layers, GitGraph} from "lucide-react"
+import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Figma, Code, Database, Layout, Layers, GitGraph, Clipboard, ClipboardCheck, ClipboardPen} from "lucide-react"
+import { icon } from "leaflet";
 
 export const accordions = [
     {
@@ -258,5 +259,24 @@ export const tabsMenu = [
     id: 5,
     title: 'dipinjam'
   }
+  
+]
+
+export const dataMenuLinks = [
+  {
+    id: 1,
+    title: 'peminjaman',
+    icon: <Clipboard size={20} className="stroke-muted-foreground" />
+  },
+  {
+    id: 2,
+    title: 'pengembalian',
+    icon: <ClipboardCheck size={20} className="stroke-muted-foreground" />
+  },
+  {
+    id: 3,
+    title: 'perpanjangan',
+    icon: <ClipboardPen size={20} className="stroke-muted-foreground" />
+  },
   
 ]
