@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type DefaultStateType = {
+export type DefaultStateType = {
     layout: 'grid' | 'list',
     activeTab: 1,
-    peminjamanFilter: 'semua' | 'Dipinjam' | 'Dikembalikan' | 'Diajukan' | 'Ditolak'
+    peminjamanFilter: string
 }
 
 const defaultState : DefaultStateType = {
     layout: 'list',
     activeTab: 1,
-    peminjamanFilter: 'semua'
+    peminjamanFilter: ''
 }
 
 const peminjamanSlice = createSlice({
@@ -23,10 +23,12 @@ const peminjamanSlice = createSlice({
             const {id, title} = action.payload
             state.activeTab = id
             state.peminjamanFilter = title
+        },
+        setFilter: (state, action) => {
+            state.peminjamanFilter = action.payload
         }
     }
 })
 
-
-export const { setLayout, setTab } = peminjamanSlice.actions
+export const { setLayout, setTab, setFilter } = peminjamanSlice.actions
 export default peminjamanSlice.reducer

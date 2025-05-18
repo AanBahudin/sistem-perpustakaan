@@ -1,5 +1,6 @@
-import { CalendarCheck, CalendarX, Hourglass } from "lucide-react"
+import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
+import { formatedDate } from "@/utils/formatDate"
 
 const PeminjamanList = ({data} : {data: Object[]}) => {
   if (data.length === 0) {
@@ -9,7 +10,7 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
       {data.map((item: any) => {
-          const {buku, statusPeminjaman, durasiPeminjaman} = item
+          const {buku, statusPeminjaman, durasiPeminjaman, createdAt} = item
           return (
               <main key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
                   <img src={buku.cover} className="w-24 object-fill rounded" />
@@ -28,7 +29,7 @@ const PeminjamanList = ({data} : {data: Object[]}) => {
                     <main className=" pl-20 self-center flex items-start flex-col justify-center w-1/3">
                       <p className="flex gap-x-2 text-sm text-muted-foreground items-center">
                             <CalendarCheck className="w-5 h-5 stroke-primary" />
-                            <span>10 September 2001</span>
+                            {formatedDate(createdAt as Date)}
                       </p>
                       <p className="flex gap-x-2 text-sm text-muted-foreground items-center mt-2">
                           <Hourglass className="w-5 h-5 stroke-primary" />
