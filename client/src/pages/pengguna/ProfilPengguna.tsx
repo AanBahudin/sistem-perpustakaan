@@ -2,7 +2,7 @@ import { profileAction } from "@/actions/userActions"
 import MenuSection from "@/components/pengguna/ProfilPengguna/MenuSection"
 import ProfileCover from "@/components/pengguna/ProfilPengguna/ProfileCover"
 import Container from "@/globals/Container"
-import { Outlet, redirect, useLoaderData } from "react-router-dom"
+import { Outlet, redirect } from "react-router-dom"
 
 export const profileLoader = async() => {
   const response = await profileAction()

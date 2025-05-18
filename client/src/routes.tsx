@@ -13,6 +13,9 @@ import CredentialsProfilePage from "./pages/pengguna/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/StatusProfilePage";
 import { profileLoader } from "./pages/pengguna/ProfilPengguna";
 import PeminjamanPage from "./pages/pengguna/PeminjamanPage";
+import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
+import PengembalianPage from "./pages/pengguna/PengembalianPage";
+import PerpanjanganPage from "./pages/pengguna/PerpanjanganPage";
 
 const router : RouteObject[] = [
     {
@@ -70,8 +73,22 @@ const router : RouteObject[] = [
                 ]
             },
             {
-                path: 'peminjaman',
-                element: <PeminjamanPage />
+                path: 'data',
+                element: <DataPenggunaLayout />,
+                children: [
+                    {
+                        path: 'peminjaman',
+                        element: <PeminjamanPage />
+                    },
+                    {
+                        path: 'pengembalian',
+                        element: <PengembalianPage />,
+                    },
+                    {
+                        path: 'perpanjangan',
+                        element: <PerpanjanganPage />
+                    }
+                ]
             },
             {
                 path: 'status',

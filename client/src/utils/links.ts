@@ -36,15 +36,15 @@ export const penggunaNavbarLink = [
     },
     {
         title: 'Peminjaman',
-        url: 'peminjaman'
+        url: 'data/peminjaman'
     },
     {
         title: 'Pengembalian',
-        url: 'pengembalian'
+        url: 'data/pengembalian'
     },
     {
         title: 'Perpanjangan',
-        url: 'perpanjangan'
+        url: 'data/perpanjangan'
     },
     {
         title: 'Disukai',
