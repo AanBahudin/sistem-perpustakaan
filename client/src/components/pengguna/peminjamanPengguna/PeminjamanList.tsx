@@ -2,7 +2,7 @@ import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
-import StatusPeminjaman from "./StatusPeminjamanGrid"
+import StatusPeminjamanList from "./StatusPeminjamanList"
 
 const PeminjamanList = ({data = []} : {data: Object[]}) => {
   if (data.length === 0) {
@@ -19,8 +19,7 @@ const PeminjamanList = ({data = []} : {data: Object[]}) => {
                   <div className="w-full flex flex-col items-start justify-stretch ">
                   <div className="w-full flex items-center justify-between">
                     <h2 className="text-2xl font-semibold group-hover:underline">{buku.judul}</h2>
-                    <StatusPeminjaman status={statusPeminjaman} />
-                    {/* <h5 className="bg-primary px-6 text-sm py-1 rounded">{statusPeminjaman}</h5> */}
+                    <StatusPeminjamanList status={statusPeminjaman} />
                   </div>
                   <Separator className="my-2 w-full" />
 
