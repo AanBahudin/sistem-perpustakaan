@@ -45,7 +45,7 @@ export const loginAction = async(formData: FormData) => {
         }
     })
 
-    const url = response.verifikasiEmail && response.verifikasiProdi ? '/user' : '/status/account'
+    const url = response.verifikasiEmail && response.verifikasiProdi ? '/my' : '/status/account'
 
     return {message: response.message, deskripsi: 'Selamat Datang di Akun Anda', redirectTo: url}
 }

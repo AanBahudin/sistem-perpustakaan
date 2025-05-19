@@ -1,20 +1,29 @@
 import { tabsMenu } from "@/utils/constants"
 import { store } from "@/store"
-import { setTab } from "@/cart/peminjamanSlice"
+import { setFilter, setTab } from "@/cart/peminjamanSlice"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { useEffect } from "react"
 
 const PeminjamanTab = () => {
 
     const navigate = useNavigate()
     const [searchParams] = useSearchParams(); // ✅ ambil instance URLSearchParams
-    const filter = searchParams.get('filter') || 'Semua';    
-
+    const filter = searchParams.get('filter') || 'Semua';
+    
     const handleTabs = (data: any) => {
         const params = new URLSearchParams()
         store.dispatch(setTab(data))
         params.set('filter', data.title)
         navigate(`?${params.toString()}`);
     }
+    
+    useEffect(() => {
+        if (!filter) {
+            store.dispatch(setFilter('Semua'))
+        } else {
+            store.dispatch(setFilter(filter))
+        }
+    }, [])
 
     return (
         <div className="w-full grid grid-cols-5 place-items-center gap-x-2 rounded-xl border">

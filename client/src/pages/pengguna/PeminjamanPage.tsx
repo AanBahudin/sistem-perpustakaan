@@ -1,7 +1,11 @@
+import React from "react"
 import PeminjamanSearch from "@/components/pengguna/peminjamanPengguna/PeminjamanSearch"
 import PeminjamanTab from "@/components/pengguna/peminjamanPengguna/PeminjamanTab"
-import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
 import { getPeminjamanData } from "@/actions/peminjamanActions"
+import { Suspense } from "react"
+import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
+
+const LazyComponent = React.lazy(() => import('@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout'))
 
 export const peminjamanLoader = async() => {
   const response = await getPeminjamanData()
@@ -13,7 +17,10 @@ const PeminjamanPage = () => {
     <main className="col-span-9">
       <PeminjamanTab  />
       <PeminjamanSearch />
-      <PeminjamanDataLayout />
+      <Suspense fallback={<PeminjamanLoading />}>
+        {/* <PeminjamanDataLayout /> */}
+        <LazyComponent />
+      </Suspense>
     </main>
   )
 }

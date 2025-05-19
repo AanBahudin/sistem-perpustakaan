@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type DefaultStateType = {
-    layout: 'grid' | 'list',
+    layout: string,
     activeTab: 1,
     peminjamanFilter: string
 }
 
 const defaultState : DefaultStateType = {
-    layout: 'list',
+    layout: '',
     activeTab: 1,
     peminjamanFilter: ''
 }
