@@ -2,11 +2,16 @@ import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
+import ListLoading from "./ListLoading"
 
 const PeminjamanList = ({data = []} : {data: Object[]}) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }
+
+  // if (true) {
+  //   return <ListLoading />
+  // }
 
   return (
     <div className="w-full grid grid-cols-12 gap-4">
