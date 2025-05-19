@@ -1,14 +1,11 @@
-import React from "react"
-import { Suspense } from "react"
 import { defer } from "react-router-dom"
-import {Await, useLoaderData} from 'react-router-dom'
+import {useLoaderData} from 'react-router-dom'
 import PeminjamanSearch from "@/components/pengguna/peminjamanPengguna/PeminjamanSearch"
 import PeminjamanTab from "@/components/pengguna/peminjamanPengguna/PeminjamanTab"
 import { getPeminjamanData } from "@/actions/peminjamanActions"
 import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
 import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
-
-const LazyComponent = React.lazy(() => import('@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout'))
+import AwaitHooks from "@/hooks/AwaitHooks"
 
 export const peminjamanLoader = async() => {
   return defer({
@@ -24,13 +21,12 @@ const PeminjamanPage = () => {
     <main className="col-span-9">
       <PeminjamanTab  />
       <PeminjamanSearch />
-      <Suspense fallback={<PeminjamanLoading />}>
-        <Await resolve={peminjaman}>
-          {(data) => <PeminjamanDataLayout peminjamanData={data.data} />}
-        </Await>
-      </Suspense>
+
+      <AwaitHooks data={peminjaman} loadingComponent={<PeminjamanLoading />}>
+        {(data) => <PeminjamanDataLayout peminjamanData={data.data} />}
+      </AwaitHooks>
     </main>
-  )
+  ) 
 }
 
 export default PeminjamanPage 

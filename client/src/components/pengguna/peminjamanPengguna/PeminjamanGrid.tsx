@@ -1,6 +1,7 @@
 import { CalendarCheck, Hourglass } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
+import StatusPeminjaman from "./StatusPeminjamanGrid"
 
 const PeminjamanGrid = ({data = ['default']} : {data: Object[]}) => {
 
@@ -25,7 +26,7 @@ const PeminjamanGrid = ({data = ['default']} : {data: Object[]}) => {
                                 <Hourglass className="w-5 h-5 stroke-primary" />
                                 <span>Durasi peminjaman selama {durasiPeminjaman} Hari</span>
                             </p>
-                            <h3 className="w-full text-center bg-primary self-center py-1 mt-4 rounded text-sm text-white">{statusPeminjaman}</h3>
+                            <StatusPeminjaman status={statusPeminjaman} />
                         </div>
                     </main>
                 )
