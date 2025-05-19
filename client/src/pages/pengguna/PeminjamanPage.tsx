@@ -11,14 +11,14 @@ import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/Pemin
 const LazyComponent = React.lazy(() => import('@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout'))
 
 export const peminjamanLoader = async() => {
-  return defer
-  const response = await getPeminjamanData()
-  return response
+  return defer({
+    peminjaman: getPeminjamanData()
+  })
 }
 
 const PeminjamanPage = () => {
 
-  const peminjaman = useLoaderData();
+  const {peminjaman} = useLoaderData() as { peminjaman: Promise<any> }
 
   return (
     <main className="col-span-9">
@@ -26,7 +26,7 @@ const PeminjamanPage = () => {
       <PeminjamanSearch />
       <Suspense fallback={<PeminjamanLoading />}>
         <Await resolve={peminjaman}>
-          {(data) => <PeminjamanDataLayout peminjamanData={data} />}
+          {(data) => <PeminjamanDataLayout peminjamanData={data.data} />}
         </Await>
       </Suspense>
     </main>

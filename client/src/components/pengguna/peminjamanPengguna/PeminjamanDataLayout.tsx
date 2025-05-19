@@ -1,13 +1,9 @@
 import { useSelector } from 'react-redux'
 import PeminjamanGrid from './PeminjamanGrid'
 import PeminjamanList from './PeminjamanList'
-import { useRouteLoaderData } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 
 const PeminjamanDataLayout = ({peminjamanData} : {peminjamanData: any} ) => {
-  console.log(peminjamanData)
-  
-  // const {data} = useRouteLoaderData('peminjaman-data')
   const [searchParams] = useSearchParams();
   const {peminjamanFilter} = useSelector((state:any) => state.peminjamanState)
   const layout = searchParams.get('layout') || 'grid';
