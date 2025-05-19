@@ -4,8 +4,10 @@ import PeminjamanList from './PeminjamanList'
 import { useRouteLoaderData } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 
-const PeminjamanDataLayout = () => {
-  const {data} = useRouteLoaderData('peminjaman-data')
+const PeminjamanDataLayout = ({peminjamanData} : {peminjamanData: any} ) => {
+  console.log(peminjamanData)
+  
+  // const {data} = useRouteLoaderData('peminjaman-data')
   const [searchParams] = useSearchParams();
   const {peminjamanFilter} = useSelector((state:any) => state.peminjamanState)
   const layout = searchParams.get('layout') || 'grid';
@@ -13,7 +15,7 @@ const PeminjamanDataLayout = () => {
   const newFilter = peminjamanFilter ? peminjamanFilter : 'Semua'
   const newLayout = layout ? layout : 'grid'
 
-  const newData = data.filter((item:any) => {
+  const newData = peminjamanData.filter((item:any) => {
     if (newFilter === 'Semua') return item
     return item.statusPeminjaman === peminjamanFilter
   })
