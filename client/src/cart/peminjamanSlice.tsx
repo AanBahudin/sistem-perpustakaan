@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialLayout = localStorage.getItem('layout') || 'grid'
+
 export type DefaultStateType = {
     layout: string,
     activeTab: 1,
@@ -7,7 +9,7 @@ export type DefaultStateType = {
 }
 
 const defaultState : DefaultStateType = {
-    layout: '',
+    layout: initialLayout,
     activeTab: 1,
     peminjamanFilter: ''
 }

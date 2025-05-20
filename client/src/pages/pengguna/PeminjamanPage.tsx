@@ -7,7 +7,11 @@ import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/Peminjam
 import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
 import AwaitHooks from "@/hooks/AwaitHooks"
 
-export const peminjamanLoader = async() => {
+export const peminjamanLoader = async({request} : {request: Request}) => {
+  
+  const url = new URL(request.url)
+  const searchParams = url.searchParams.toString() 
+  
   return defer({
     peminjaman: getPeminjamanData()
   })

@@ -18,7 +18,7 @@ const PeminjamanSearch = () => {
       params.delete('search')
     }
     navigate(`?${params.toString()}`);
-  }, 500)
+  }, 500) 
 
   return (
     <div className="w-full flex items-center border my-6 rounded bg-muted">

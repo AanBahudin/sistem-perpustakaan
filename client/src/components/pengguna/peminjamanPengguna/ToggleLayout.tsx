@@ -1,23 +1,18 @@
 import { setLayout } from '@/cart/peminjamanSlice';
 import { store } from '@/store';
 import { LayoutGrid, StretchHorizontal } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { useSearchParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const ToggleLayout = () => {
+
+    const {layout} = useSelector((state:any) => state.peminjamanState)
     
-    const [searchParams] = useSearchParams();
-    const navigate = useNavigate()
-
-    const params = new URLSearchParams(searchParams); // clone existing query
-    const layout = searchParams.get('layout') || 'grid';
-
     const handleLayout = (newLayout: string) => {
-        params.set('layout', newLayout); // tambahkan / ganti layout
-        navigate(`?${params.toString()}`); // update URL tanpa hapus query lain
         store.dispatch(setLayout(newLayout))
+        localStorage.setItem('layout', newLayout)
     }
 
+    console.log(layout)
 
     return (
         <main className="flex items-center gap-x-4">
