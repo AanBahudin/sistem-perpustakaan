@@ -7,8 +7,11 @@ const queryClient = new QueryClient({
 
 
 export const getPeminjamanData = async(search? : string) => {
+
+    console.log(search)
+
     const data = await queryClient.ensureQueryData({
-            queryKey: ['peminjaman'],
+            queryKey: ['peminjaman',search],
             queryFn: async() => {
                 const response = await customFetch.get(`/pinjaman/user?${search}`)
                 if (response.status >= 400) {

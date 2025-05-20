@@ -6,6 +6,10 @@ const PeminjamanSchema = new mongoose.Schema({
         ref: 'Pengguna',
         required: true
     },
+    judulBuku: {
+        type: String,
+        required: true
+    },
     buku: {
         type: mongoose.Types.ObjectId,
         ref: 'Buku',

@@ -7,11 +7,11 @@ import { useEffect } from "react"
 const PeminjamanTab = () => {
 
     const navigate = useNavigate()
-    const params = new URLSearchParams()
     const [searchParams] = useSearchParams(); // ✅ ambil instance URLSearchParams
     const filter = searchParams.get('statusPeminjaman') || 'Semua';
-
+    
     const handleTabs = (data: any) => {
+        const params = new URLSearchParams(searchParams)
         store.dispatch(setTab(data))
         if (data.filter) {
             params.set('statusPeminjaman', data.filter)

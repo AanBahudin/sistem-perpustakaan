@@ -1,11 +1,12 @@
 export type PengajuanPeminjamanParamsType = {
     idBuku: string,
     durasiPeminjaman: number,
-    userId: string
+    userId: string,
 }
 
 export type GetSemuaPeminjamanUserParamsType = {
-    userId: string
+    userId: string,
+    query: any
 }
 
 export type GetOnePeminjamanUser = {

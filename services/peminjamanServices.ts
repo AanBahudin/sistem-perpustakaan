@@ -27,8 +27,9 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : 
     if (!durasiTersedia.includes(durasiPeminjaman)) throw new BadRequestError('Durasi tidak tersedia')
 
     const pinjaman = await Peminjaman.create({ 
-        peminjam: userId, 
-        buku: idBuku, 
+        peminjam: userId,
+        buku: idBuku,
+        judulBuku: buku.judul,
         durasiPeminjaman, 
         statusPeminjaman: 'Diajukan' 
     })
@@ -38,9 +39,12 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : 
 }
 
 // SUDAH DITESTING
-export const getSemuaPeminjamanUser = async({userId} : GetSemuaPeminjamanUserParamsType) => {
-    const pinjamanUser = await Peminjaman.find({peminjam: userId}).populate('buku')
-
+export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjamanUserParamsType) => {
+    console.log(query)
+    if (query?.judulBuku) {
+        query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
+    }
+    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate('buku')
     return {data: pinjamanUser}
 }
 
