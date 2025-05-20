@@ -12,8 +12,6 @@ const ToggleLayout = () => {
         localStorage.setItem('layout', newLayout)
     }
 
-    console.log(layout)
-
     return (
         <main className="flex items-center gap-x-4">
             <LayoutGrid onClick={() => handleLayout('grid')} className={`${layout === 'grid' ? 'bg-primary' : 'bg-transparent'} border p-1 rounded w-8 h-8 ease-in-out duration-200`} />

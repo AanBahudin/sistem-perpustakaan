@@ -6,11 +6,11 @@ const queryClient = new QueryClient({
 })
 
 
-export const getPeminjamanData = async() => {
+export const getPeminjamanData = async(search? : string) => {
     const data = await queryClient.ensureQueryData({
             queryKey: ['peminjaman'],
             queryFn: async() => {
-                const response = await customFetch.get('/pinjaman/user')
+                const response = await customFetch.get(`/pinjaman/user?${search}`)
                 if (response.status >= 400) {
                     return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
                 }

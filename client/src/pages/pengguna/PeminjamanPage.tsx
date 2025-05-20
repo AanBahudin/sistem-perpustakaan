@@ -13,7 +13,7 @@ export const peminjamanLoader = async({request} : {request: Request}) => {
   const searchParams = url.searchParams.toString() 
   
   return defer({
-    peminjaman: getPeminjamanData()
+    peminjaman: getPeminjamanData(searchParams)
   })
 }
 
