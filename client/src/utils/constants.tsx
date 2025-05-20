@@ -266,6 +266,22 @@ export const tabsMenu = [
   
 ]
 
+export const tabPengembalian = [
+  {
+    title: 'Semua',
+    value: ''
+  },
+  {
+    title: 'Dibayar',
+    value: 'Dibayar'
+  },
+  {
+    title: 'Belum Bayar',
+    value: 'Belum Bayar'
+  },
+  
+]
+
 export const dataMenuLinks = [
   {
     id: 1,

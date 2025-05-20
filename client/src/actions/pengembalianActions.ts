@@ -6,16 +6,13 @@ const queryClient = new QueryClient({
 })
 
 
-export const getPeminjamanData = async(search? : string) => {
-
-    console.log(search)
-
+export const getPengembalianData = async(search? : string) => {
     const data = await queryClient.ensureQueryData({
-            queryKey: ['peminjaman',search],
+            queryKey: ['pengembalian',search],
             queryFn: async() => {
-                const response = await customFetch.get(`/pinjaman/user?${search}`)
+                const response = await customFetch.get(`/pengembalian/user?${search}`)
                 if (response.status >= 400) {
-                    return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
+                    return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
                 }
                 return response.data      
             }
