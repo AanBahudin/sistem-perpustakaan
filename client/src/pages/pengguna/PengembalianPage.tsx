@@ -5,6 +5,7 @@ import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/Peminjam
 import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
 import AwaitHooks from "@/hooks/AwaitHooks"
 import { getPengembalianData } from '@/actions/pengembalianActions'
+import PengembalianSearch from '@/components/pengguna/PengembalianPengguna/PengembalianSearch'
 
 export const pengembalianLoader = async({request} : {request: Request}) => {
   const url  = new URL(request.url)
@@ -24,7 +25,8 @@ const PengembalianPage = () => {
       <PengembalianTabs  />
 
       {/* GANTI DAN BUATKAN KOMPONEN BARU UNTUK PENGEMBALIAN */}
-      <PeminjamanSearch />
+      {/* <PeminjamanSearch /> */}
+      <PengembalianSearch />
 
       <AwaitHooks data={pengembalian} loadingComponent={<PeminjamanLoading />}>
         {(data) => <PeminjamanDataLayout peminjamanData={data.data} />}
