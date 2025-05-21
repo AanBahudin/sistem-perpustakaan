@@ -1,5 +1,4 @@
 import {defer, useLoaderData} from 'react-router-dom'
-import PeminjamanSearch from "@/components/pengguna/peminjamanPengguna/PeminjamanSearch"
 import PengembalianTabs from '@/components/pengguna/PengembalianPengguna/PengembalianTabs'
 import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
 import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
@@ -23,9 +22,6 @@ const PengembalianPage = () => {
   return (
     <main className="col-span-9">
       <PengembalianTabs  />
-
-      {/* GANTI DAN BUATKAN KOMPONEN BARU UNTUK PENGEMBALIAN */}
-      {/* <PeminjamanSearch /> */}
       <PengembalianSearch />
 
       <AwaitHooks data={pengembalian} loadingComponent={<PeminjamanLoading />}>

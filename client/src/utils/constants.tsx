@@ -272,12 +272,12 @@ export const tabPengembalian = [
     value: ''
   },
   {
-    title: 'Dibayar',
-    value: 'Dibayar'
+    title: 'Dikembalikan',
+    value: 'Dikembalikan'
   },
   {
-    title: 'Belum Bayar',
-    value: 'Belum Bayar'
+    title: 'Pending',
+    value: 'Pending'
   },
   
 ]
