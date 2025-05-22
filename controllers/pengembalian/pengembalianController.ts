@@ -1,12 +1,22 @@
 import { Request, Response } from "express";
-import { getOneDataPengembalian, getOnePengembalianUser, getPengembalianUser, pustakawanBuatDataPengembalian, pustakawanEditDataPengembalian, pustakawanGetDataPengembalian, pustakawanTerimaDataPengembalian } from "../../services/pengembalianServices";
+import { 
+    getOneDataPengembalian,
+    getOnePengembalianUser, 
+    getPengembalianUser, 
+    pustakawanBuatDataPengembalian, 
+    pustakawanEditDataPengembalian, 
+    pustakawanGetDataPengembalian, 
+    pustakawanTerimaDataPengembalian } from "../../services/pengembalianServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH TESTING
 export const getAllPengembalianUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
+    const query = req.query
 
-    const {data} = await getPengembalianUser({userId})
+    console.log(query)
+
+    const {data} = await getPengembalianUser({userId, query})
 
     SendDataResponse({
         res,

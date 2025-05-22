@@ -2,19 +2,32 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler"
 import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
-import { GetAllPengembalianDataParamsType, GetOnePengembalianDataParamsType, PustakawanAcceptPengembalianParamsType, PustakawanCreatePengembalianParamsType, PustakawanEditPengembalianParamsType, PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
+import { GetAllPengembalianDataParamsType, 
+    GetOnePengembalianDataParamsType, 
+    PustakawanAcceptPengembalianParamsType, 
+    PustakawanCreatePengembalianParamsType, 
+    PustakawanEditPengembalianParamsType,
+    PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
 import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
 import { getDenda } from "./dendaServices"
 import { getDataKondisi } from "./kondisiServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
-import { penggunaMeminjam, penggunaMengembalikan, penggunaMenghilangkan, tambahDendaPengguna } from "./penggunaServices"
+import { penggunaMeminjam, 
+    penggunaMengembalikan, 
+    penggunaMenghilangkan, 
+    tambahDendaPengguna } from "./penggunaServices"
 
 
 // SUDAH TESTING
-export const getPengembalianUser = async({ userId } : GetAllPengembalianDataParamsType) => {
-    const pengembalian = await Pengembalian.find({idPengguna: userId}).populate('idBuku')
+export const getPengembalianUser = async({ userId, query } : GetAllPengembalianDataParamsType) => {
+
+    if (query.judulBuku) {
+        query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
+    }
+
+    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query}).populate('idBuku')
 
     return {data: pengembalian}
 }
@@ -52,6 +65,10 @@ export const pustakawanBuatDataPengembalian = async({
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
     if (!pinjaman) throw new NotFoundError('Data pinjaman tidak ditemukan')
+
+    // cek data buku
+    const buku = await Buku.findOne({_id: pinjaman.buku})
+    if (!buku) throw new NotFoundError('Terjadi kesalahan, data buku tidak ditemukan')
 
     // cek status peminjaman agar dapat diproses
     const statusYangDiizinkan = ['Dipinjam', 'Terlambat']
@@ -97,6 +114,7 @@ export const pustakawanBuatDataPengembalian = async({
         keadaanBuku: kondisiBuku,
         dendaKeterlambatan: totalDendaKeterlambatan,
         dendaFisik,
+        judulBuku: buku.judul,
         totalDenda
     })
 

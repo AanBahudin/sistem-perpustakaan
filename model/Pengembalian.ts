@@ -16,6 +16,10 @@ const PengembalianSchema = new mongoose.Schema({
         ref: 'Buku',
         required: true
     },
+    judulBuku: {
+        type: String,
+        required: true
+    },
     tanggalPengembalian: {
         type: Date,
         default: Date.now,

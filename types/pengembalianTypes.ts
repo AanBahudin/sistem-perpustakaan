@@ -1,7 +1,8 @@
 import { ObjectId } from "mongoose"
 
 export type GetAllPengembalianDataParamsType = {
-    userId: string
+    userId: string,
+    query: any
 }
 
 export type GetOnePengembalianDataParamsType = {
