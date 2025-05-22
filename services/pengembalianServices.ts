@@ -14,7 +14,7 @@ import { penggunaMeminjam, penggunaMengembalikan, penggunaMenghilangkan, tambahD
 
 // SUDAH TESTING
 export const getPengembalianUser = async({ userId } : GetAllPengembalianDataParamsType) => {
-    const pengembalian = await Pengembalian.find({idPengguna: userId})
+    const pengembalian = await Pengembalian.find({idPengguna: userId}).populate('idBuku')
 
     return {data: pengembalian}
 }

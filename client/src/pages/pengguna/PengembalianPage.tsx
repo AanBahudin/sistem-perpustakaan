@@ -1,10 +1,10 @@
 import {defer, useLoaderData} from 'react-router-dom'
 import PengembalianTabs from '@/components/pengguna/PengembalianPengguna/PengembalianTabs'
 import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
-import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
 import AwaitHooks from "@/hooks/AwaitHooks"
 import { getPengembalianData } from '@/actions/pengembalianActions'
 import PengembalianSearch from '@/components/pengguna/PengembalianPengguna/PengembalianSearch'
+import PengembalianDataLayout from '@/components/pengguna/PengembalianPengguna/PengembalianDataLayout'
 
 export const pengembalianLoader = async({request} : {request: Request}) => {
   const url  = new URL(request.url)
@@ -25,7 +25,7 @@ const PengembalianPage = () => {
       <PengembalianSearch />
 
       <AwaitHooks data={pengembalian} loadingComponent={<PeminjamanLoading />}>
-        {(data) => <PeminjamanDataLayout peminjamanData={data.data} />}
+        {(data) => <PengembalianDataLayout pengembalianData={data.data} />}
       </AwaitHooks>
     </main>
   )

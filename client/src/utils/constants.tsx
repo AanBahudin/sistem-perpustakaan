@@ -245,8 +245,8 @@ export const tabsMenu = [
   },
   {
     id: 2,
-    title: 'Diterima',
-    filter: 'Diterima',
+    title: 'Dikembalikan',
+    filter: 'Dikembalikan',
   },
   {
     id: 3,
