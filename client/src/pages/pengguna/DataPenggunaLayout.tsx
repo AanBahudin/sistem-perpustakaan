@@ -14,12 +14,12 @@ const DataPenggunaLayout = () => {
       </section>
 
       <section className="w-full grid grid-cols-12 mt-10">
-        <main className="col-span-3 pr-6">
+        <main className="col-span-2 pr-6 border-r">
           <ProfilContainer />
           <MenuContainer />
         </main>
 
-        <main className="col-span-9">
+        <main className="col-span-10 pl-10">
           <Outlet />
         </main>
       </section>

@@ -6,13 +6,13 @@ import StatusPengembalianGrid from "./StatusPengembalianGrid"
 const PengembalianGrid = ({data = []} : {data: any}) => {
 
   if (data.length === 0) {
-    return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
+    return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada pengembalian</h2>
   }
 
   return (
      <div className="w-full grid grid-cols-12 gap-4">
         {data.map((item:any) => {
-            const {idBuku, statusPengembalian, durasiPeminjaman, createdAt} = item
+            const {idBuku, statusPengembalian, createdAt} = item
             return (
                 <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
                     <img src={idBuku.cover} className="w-24 object-fill rounded" />
@@ -25,7 +25,7 @@ const PengembalianGrid = ({data = []} : {data: any}) => {
                         </p>
                         <p className="flex gap-x-2 text-sm text-muted-foreground items-center mt-2">
                             <Hourglass className="w-5 h-5 stroke-primary" />
-                            <span>Durasi peminjaman selama {durasiPeminjaman} Hari</span>
+                            <span className="capitalize">Kondisi buku {item.keadaanBuku}</span>
                         </p>
                         <StatusPengembalianGrid status={statusPengembalian} />
                     </div>
