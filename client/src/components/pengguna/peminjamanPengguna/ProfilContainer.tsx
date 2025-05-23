@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const ProfilContainer = () => {
   return (
-    <div className="flex gap-x-10 w-full items-center">
+    <div className="flex gap-x-4 w-full items-center">
         <div className="w-12 h-12 rounded-full bg-muted"></div>
         <main>
             <h2 className="font-semibold">Aan Bahudin</h2>

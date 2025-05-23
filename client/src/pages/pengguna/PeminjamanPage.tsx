@@ -22,7 +22,7 @@ const PeminjamanPage = () => {
   const {peminjaman} = useLoaderData() as { peminjaman: Promise<any> }
 
   return (
-    <main className="col-span-9">
+    <main className="min-h-[90vh] col-span-9">
       <PeminjamanTab  />
       <PeminjamanSearch />
 
