@@ -282,6 +282,8 @@ export const tabPengembalian = [
   
 ]
 
+export const tabPerpanjangan = ['Semua', 'Diterima', 'Pending', 'Ditolak']
+
 export const dataMenuLinks = [
   {
     id: 1,
@@ -297,6 +299,5 @@ export const dataMenuLinks = [
     id: 3,
     title: 'perpanjangan',
     icon: <ClipboardPen size={20} className="stroke-muted-foreground" />
-  },
-  
+  }, 
 ]

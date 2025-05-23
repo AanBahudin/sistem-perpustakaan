@@ -35,9 +35,13 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
 }
 
 // SUDAH DITESTING
-export const getSemuaPerpanjangan = async({userId} : GetSemauPerpanjanganParamsType) => {
-    const dataPerpanjangan = await Perpanjangan.find({idPengguna: userId})
+export const getSemuaPerpanjangan = async({userId, query} : GetSemauPerpanjanganParamsType) => {
 
+    if (query.judulBuku) {
+        query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
+    }
+
+    const dataPerpanjangan = await Perpanjangan.find({idPengguna: userId, ...query}).populate('idBuku')
     return {data: dataPerpanjangan}
 }
 

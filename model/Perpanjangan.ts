@@ -16,6 +16,10 @@ const PerpanjanganSchema = new mongoose.Schema({
         ref: 'Buku',
         required: true
     },
+    judulBuku: {
+        type: String,
+        required: true
+    },
     durasi: {
         type: Number,
         required: true

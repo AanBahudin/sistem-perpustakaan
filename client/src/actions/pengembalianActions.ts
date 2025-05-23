@@ -12,7 +12,7 @@ export const getPengembalianData = async(search? : string) => {
             queryFn: async() => {
                 const response = await customFetch.get(`/pengembalian/user?${search}`)
                 if (response.status >= 400) {
-                    return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
+                    return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat mengambil data pengembalian'}
                 }
                 return response.data      
             }

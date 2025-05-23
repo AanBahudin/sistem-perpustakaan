@@ -26,8 +26,8 @@ export const pengajuanPerpanjangan = async(req: Request | any, res: Response) =>
 
 // BELUM DITESTING
 export const getAllPerpanjanganUser = async(req: Request | any, res: Response) => {
-    const {data} = await getSemuaPerpanjangan({userId: req.user.userId})
-
+    const query = req.query
+    const {data} = await getSemuaPerpanjangan({userId: req.user.userId, query})
     SendDataResponse({
         res,
         message: 'Data Perpanjangan',

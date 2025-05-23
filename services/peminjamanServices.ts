@@ -40,7 +40,6 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : 
 
 // SUDAH DITESTING
 export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjamanUserParamsType) => {
-    console.log(query)
     if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
