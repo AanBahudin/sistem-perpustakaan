@@ -43,7 +43,7 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
     if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
-    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate('buku')
+    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate('buku').sort({createdAt: -1})
     return {data: pinjamanUser}
 }
 

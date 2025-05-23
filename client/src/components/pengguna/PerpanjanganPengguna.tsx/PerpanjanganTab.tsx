@@ -10,7 +10,7 @@ const PerpanjanganTab = () => {
   const handleTabs = (value: string) => {
     const params = new URLSearchParams(searchParams)
 
-    if (!value) {
+    if (!value || value === 'Semua') {
       params.delete('disetujui')
     } else {
       params.set('disetujui', value)
