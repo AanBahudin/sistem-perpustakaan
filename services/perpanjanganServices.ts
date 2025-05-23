@@ -1,4 +1,5 @@
 import { BadRequestError, NotFoundError } from "../errors/errorHandler"
+import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Perpanjangan from "../model/Perpanjangan"
 import { AcceptPerpanjanganParamsType, GetOnePerpanjanganParamsType, GetOnePerpanjanganUserParamsType, GetSemauPerpanjanganParamsType, PembatalanPerpanjanganParamsType, PenambahanPerpanjanganParamsType, PerpanjanganDitolakParamsType, TambahPerpanjanganParamsType, UpdatePerpanjanganParamsType } from "../types/perpanjanganTypes"
@@ -6,7 +7,7 @@ import tambahHariKeTanggal from "../utils/tambahHari"
 import { dataDurasiPeminjaman } from "./durasiServices"
 import { updateDurasiPinjaman } from "./peminjamanServices"
 
-// khusus pengguna
+// ================================= KHUSUS PENGGUNA =================================
 
 // SUDAH DITESTING
 export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPerpanjanganParamsType) => {
@@ -21,6 +22,10 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
         disetujui: true})
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
+    // cek buku
+    const buku = await Buku.findOne({_id: idBuku})
+    if (!buku) throw new NotFoundError('Buku tidak ditemukan')
+
     
     // cek durasi
     const durasiTersedia = (await dataDurasiPeminjaman()).map(item => item.durasi)
@@ -28,6 +33,7 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
 
     const perpanjangan = await Perpanjangan.create({
         ...dataPerpanjangan,
+        judulBuku: buku.judul,
         idPengguna: userId
     })
 
@@ -83,7 +89,9 @@ export const pembatalanPerpanjangan = async({userId, idPerpanjangan} : Pembatala
     if (!perpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan')
 }
 
-// khusus pustakawan
+
+
+// ================================= KHUSUS PUSTAKAWAN =================================
 
 // SUDAH DITESTING
 export const getSemuaPerpanjanganUser = async() => {
@@ -137,7 +145,9 @@ export const acceptPerpanjangan = async({dataPerpanjangan, userId} : AcceptPerpa
     }
 }
 
-// service digunakan di tempat lain
+
+
+// ================================= DIGUNAKAN DITEMPAT LAIN =================================
 
 // SUDAH DITESTING
 export const penambahanPerpanjangan = async({idPerpanjangan, userId} : PenambahanPerpanjanganParamsType) => {
