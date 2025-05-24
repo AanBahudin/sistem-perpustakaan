@@ -7,9 +7,6 @@ const queryClient = new QueryClient({
 
 
 export const getPeminjamanData = async(search? : string) => {
-
-    console.log(search)
-
     const data = await queryClient.ensureQueryData({
             queryKey: ['peminjaman',search],
             queryFn: async() => {
