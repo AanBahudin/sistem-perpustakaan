@@ -20,7 +20,6 @@ const PeminjamanList = ({data = []} : {data: Object[]}) => {
           const {buku, statusPeminjaman, durasiPeminjaman, berakhirPada, createdAt} = item
           const newDeskripsi = buku.deskripsi.slice(0,240) + '...'
 
-          
           return (
             <section key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
               <img src={buku.cover} className="w-24 h-32 object-fill rounded" />
