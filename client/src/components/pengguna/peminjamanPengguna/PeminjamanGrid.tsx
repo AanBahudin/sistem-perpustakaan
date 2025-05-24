@@ -1,8 +1,10 @@
-import { BookMarked, CalendarCheck, CalendarClock, CalendarX, Hourglass, Share2, ThumbsUp } from "lucide-react"
+import { BookMarked, CalendarCheck, CalendarClock, CalendarX, Share2, ThumbsUp } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import StatusPeminjaman from "./StatusPeminjamanGrid"
 import GlobalTooltip from "@/globals/GlobalTooltip"
+import ShareBookDialog from "@/globals/ShareBookDialog"
+import { generateBookLink } from "@/utils/generateBookLink"
 
 const PeminjamanGrid = ({data = ['default']} : {data: Object[]}) => {
 
@@ -53,7 +55,9 @@ const PeminjamanGrid = ({data = ['default']} : {data: Object[]}) => {
                                         <BookMarked className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
                                     </GlobalTooltip>
                                     <GlobalTooltip text="Bagikan">
-                                        <Share2 className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
+                                        <ShareBookDialog>
+                                                <Share2 onClick={() => generateBookLink(buku._id)} className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
+                                        </ShareBookDialog>
                                     </GlobalTooltip>
                                 </div>
                             </div>

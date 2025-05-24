@@ -6,21 +6,14 @@ import StatusPeminjamanList from "./StatusPeminjamanList"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import PeminjamanKategori from "./PeminjamanKategori"
 import ShareBookDialog from "@/globals/ShareBookDialog"
-import { setShareLink } from "@/cart/globalSlice"
-import { store } from "@/store"
+import { generateBookLink } from "@/utils/generateBookLink"
 
 
 const PeminjamanList = ({data = []} : {data: Object[]}) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }
-
-
-  const generateBookLink = (id: string) => {
-    const bookURL = `http://localhost:5173/my/buku/${id}`
-    store.dispatch(setShareLink(bookURL))
-  }
-
+  
   return (
     <div className="w-full grid grid-cols-12 gap-4">
       {data.map((item: any) => {
