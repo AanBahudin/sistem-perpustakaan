@@ -1,8 +1,10 @@
-import { CalendarCheck, Hourglass } from "lucide-react"
+import { CalendarCheck, CalendarClock, CalendarSync } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 import StatusPengembalianList from "./StatusPengembalianList"
+import ListLayoutButtons from "@/globals/ListLayoutButtons"
+import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
 
 const PengembalianList = ({data = []} : {data: any}) => {
 
@@ -13,35 +15,49 @@ const PengembalianList = ({data = []} : {data: any}) => {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
       {data.map((item: any) => {
-          const {idBuku, statusPengembalian, createdAt} = item
+          const {idBuku, statusPengembalian, idPeminjaman, tanggalPengembalian, createdAt} = item
+          const newDeskripsi = idBuku.deskripsi.slice(0,240) + '...'
           return (
-              <Link to={`/my/peminjaman/${item._id}`} key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
-                  <img src={idBuku.cover} className="w-24 object-fill rounded" />
-                  <div className="w-full flex flex-col items-start justify-stretch ">
-                  <div className="w-full flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</h2>
-                    <StatusPengembalianList status={statusPengembalian} />
-                  </div>
-                  <Separator className="my-2 w-full" />
+              <section key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
+                <img src={idBuku.cover} className="w-24 h-32 object-fill rounded" />
 
+                <div className="w-full flex flex-col items-start justify-stretch ">
                   <div className="w-full flex items-center justify-between">
+                    <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
+                    <div className="flex items-center gap-x-4">
+                      <StatusPengembalianList status={statusPengembalian} />
+                      <ListLayoutButtons id={idBuku._id} />
+                    </div>
+                </div>
+                <Separator className="my-2 w-full" />
+
+                <div className="w-full flex items-center justify-between">
                     <main className="w-2/3">
-                      <h5 className="text-sm text-muted-foreground">{idBuku.deskripsi}</h5>
+                      <h5 className="text-sm text-muted-foreground">{newDeskripsi}</h5>
+                      <PeminjamanKategori kategori={idBuku.kategori} />
                     </main>
+
                     <Separator orientation="vertical" className="mx-2" />
-                    <main className=" pl-20 self-center flex items-start flex-col justify-center w-1/3">
-                      <p className="flex gap-x-2 text-sm text-muted-foreground items-center">
-                            <CalendarCheck className="w-5 h-5 stroke-primary" />
+                    
+                    <main className="self-center flex items-start flex-col justify-center w-1/3 gap-y-2 pl-10">
+                      <p className="flex gap-x-4 text-sm text-muted-foreground items-center">
+                            <CalendarCheck className="w-5 h-5 stroke-muted-foreground" />
                             {formatedDate(createdAt as Date)}
                       </p>
-                      <p className="flex gap-x-2 text-sm text-muted-foreground items-center mt-2">
-                          <Hourglass className="w-5 h-5 stroke-primary" />
-                          <span className="capitalize">Kondisi buku {item.keadaanBuku}</span>
+                      <p className="flex gap-x-4 text-sm text-muted-foreground items-center">
+                            <CalendarSync className={`w-5 h-5 ${statusPengembalian === 'Diajukan' ? 'stroke-muted-foreground' : 'stroke-destructive'}`}  />
+                            {tanggalPengembalian ? formatedDate(tanggalPengembalian) : (
+                              statusPengembalian === 'Ditolak' ? 'Permintaan Ditolak' : "Sedang menunggu..."
+                            )}
+                      </p>
+                      <p className="flex gap-x-4 text-sm text-muted-foreground items-center">
+                        <CalendarClock className="w-5 h-5 stroke-muted-foreground" />
+                        Peminjaman selama {idPeminjaman.durasiPeminjaman} hari
                       </p>
                     </main>
                   </div>
-                  </div>
-              </Link>
+                </div>
+            </section>
           )
       })}
     </div>

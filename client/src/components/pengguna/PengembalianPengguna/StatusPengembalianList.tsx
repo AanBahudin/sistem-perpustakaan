@@ -9,13 +9,13 @@ const StatusPengembalianList = (status: any) => {
 
 const Dikembalikan = () => {
   return (
-      <h3 className="bg-primary text-muted px-6 text-sm py-1 rounded">Dikembalikan</h3>
+      <h3 className="w-28 text-center bg-primary text-muted text-sm py-1 rounded">Dikembalikan</h3>
   )
 }
 
 const Pending = () => {
   return (
-      <h3 className="bg-muted-foreground text-muted px-6 text-sm py-1 rounded">Pending</h3>
+      <h3 className="w-28 text-center bg-muted-foreground text-muted text-sm py-1 rounded">Pending</h3>
   )
 }
 

@@ -13,13 +13,13 @@ const StatusPengembalianGrid = ({status} : StatusPengembalianType) => {
 
 const Dikembalikan = () => {
   return (
-    <h3 className="w-full text-center bg-muted-foreground self-center py-1 mt-4 rounded text-sm text-muted">Diajukan</h3>
+    <h3 className="w-full text-center bg-muted-foreground self-center py-1 rounded text-sm text-muted">Diajukan</h3>
   )
 }
 
 const Pending = () => {
   return (
-    <h3 className="w-full text-center bg-muted-foreground place-self-end py-1 mt-4 rounded text-sm text-muted">Tertunda</h3>
+    <h3 className="w-full text-center bg-muted-foreground place-self-end py-1 rounded text-sm text-muted">Tertunda</h3>
   )
 }
 
