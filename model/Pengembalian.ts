@@ -22,7 +22,6 @@ const PengembalianSchema = new mongoose.Schema({
     },
     tanggalPengembalian: {
         type: Date,
-        default: Date.now,
     },
     durasiKeterlambatan: {
         type: Number,
@@ -64,5 +63,4 @@ const PengembalianSchema = new mongoose.Schema({
         ref: 'Pustakawan'
     }
 }, {timestamps: true})
-
 export default mongoose.model('Pengembalian', PengembalianSchema)

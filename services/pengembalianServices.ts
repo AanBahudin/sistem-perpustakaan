@@ -2,7 +2,8 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler"
 import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
-import { GetAllPengembalianDataParamsType, 
+import { 
+    GetAllPengembalianDataParamsType, 
     GetOnePengembalianDataParamsType, 
     PustakawanAcceptPengembalianParamsType, 
     PustakawanCreatePengembalianParamsType, 
@@ -12,9 +13,8 @@ import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
 import { getDenda } from "./dendaServices"
-import { getDataKondisi } from "./kondisiServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
-import { penggunaMeminjam, 
+import { 
     penggunaMengembalikan, 
     penggunaMenghilangkan, 
     tambahDendaPengguna } from "./penggunaServices"
@@ -27,7 +27,7 @@ export const getPengembalianUser = async({ userId, query } : GetAllPengembalianD
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
 
-    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query}).populate('idBuku')
+    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query}).populate(['idBuku', 'idPeminjaman'])
 
     return {data: pengembalian}
 }
