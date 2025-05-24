@@ -15,9 +15,9 @@ const PengembalianGrid = ({data = []} : {data: any}) => {
         {data.map((item:any) => {
             const {idBuku, idPeminjaman, statusPengembalian, createdAt, tanggalPengembalian} = item
             let newJudul = idBuku.judul
-                if (newJudul.length > 27) {
-                    newJudul = newJudul.slice(0,27) + '....'
-                }
+            if (newJudul.length > 27) {
+                newJudul = newJudul.slice(0,27) + '....'
+            }
             return (
                 <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
                     <img src={idBuku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />

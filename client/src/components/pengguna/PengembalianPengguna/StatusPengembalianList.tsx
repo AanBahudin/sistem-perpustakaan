@@ -15,7 +15,7 @@ const Dikembalikan = () => {
 
 const Pending = () => {
   return (
-      <h3 className="w-28 text-center bg-muted-foreground text-muted text-sm py-1 rounded">Pending</h3>
+      <h3 className="w-28 text-center bg-muted-foreground text-muted text-sm py-1 rounded">Tertunda</h3>
   )
 }
 
