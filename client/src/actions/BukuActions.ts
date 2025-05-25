@@ -20,3 +20,18 @@ export const getAllBuku = async(query?: string) => {
     })
     return response
 }
+
+export const getRecommendationsBuku = async() => {
+    const response = await queryClient.ensureQueryData({
+        queryKey: ['recommendation'],
+        queryFn: async() => {
+            const data = await customFetch.get('/buku/user/rekomendasi')
+            if (data.status >= 400) {
+                return {message: 'Terjadi kesalahan', deskripsi: 'Silahkan periksa koneksi Internet Anda'}
+            }
+
+            return data.data
+        }
+    })
+    return response
+}

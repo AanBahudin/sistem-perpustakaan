@@ -9,13 +9,14 @@ import { editDataBuku, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan,
 // SUDAH TESTING
 export const getAllBukuUser = async(req: Request, res: Response) => {
     const query = req.query
-    const {buku, recommendation, totalPage} = await getSemuaBukuTersediaUntukUser({query})
+    const {buku, recommendation, totalPage, lastAdded} = await getSemuaBukuTersediaUntukUser({query})
     SendDataResponse({
         res,
         message: 'Data Buku',
         data: {
             buku,
-            recommendation
+            recommendation,
+            lastAdded
         },
         total: totalPage,
         page: 1

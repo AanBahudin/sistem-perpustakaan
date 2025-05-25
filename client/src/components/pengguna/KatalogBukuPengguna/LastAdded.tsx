@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const LastAdded = ({buku} : {buku:any}) => {
     
-    const book = buku.buku[0]
+    const book = buku.lastAdded
 
     return (
         <section className='w-full'>
@@ -40,7 +40,7 @@ const LastAdded = ({buku} : {buku:any}) => {
 
                         <span className='flex gap-x-2 items-center text-muted-foreground'>
                             <Layers className='w-6 h-6 stroke-muted-foreground' />
-                            <p>304 Halaman</p>
+                            <p>{book.jumlahHalaman} Halaman</p>
                         </span>
 
                         <span className='flex gap-x-2 items-center text-muted-foreground'>

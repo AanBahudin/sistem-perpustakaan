@@ -18,14 +18,16 @@ export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
         dihapus: false,
         status: 'Tersedia',
         ...(filters.length > 0 && { $or: filters })
-    }).select('-dihapus')
+    }).select('-dihapus').sort({createdAt: -1})
 
 
     const recommendation = await recomendationBook()
+    const lastAdded = await lastAddedBook()
+
     // for testing purposed
     const totalPage = 4
 
-    return {buku, recommendation, totalPage}
+    return {buku, recommendation, totalPage, lastAdded}
 }
 
 // SUDAH TESTING
@@ -114,4 +116,9 @@ export const bukuDihilangkan = async(idBuku: string) => {
 export const recomendationBook = async() => {
     const recommendation = await Buku.find().sort({totalDipinjam: -1}).limit(5)
     return recommendation
+}
+
+export const lastAddedBook = async() => {
+    const lastAdded = await Buku.findOne().sort({ createdAt: -1 });
+    return lastAdded
 }

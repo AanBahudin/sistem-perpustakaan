@@ -10,7 +10,7 @@ import { setSelectedImg } from "@/cart/profileSlice"
 
 
 const PhotoProfile = () => {
-    const data = useRouteLoaderData('user-profil')
+    const data = useRouteLoaderData('user-profil') as any
     const {isLoading}  = useFormStatus()
     const {selectedImg} = useSelector((state: any) =>  state.profileState)
     const inputImg = useRef<HTMLInputElement>(null)
