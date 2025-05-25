@@ -7,9 +7,8 @@ const queryClient = new QueryClient({
 })
 
 export const getAllBuku = async(query?: string) => {
-    console.log(query)
     const response = await queryClient.ensureQueryData({
-        queryKey: ['buku'],
+        queryKey: ['buku', query],
         queryFn: async() => {
             const data = await customFetch.get(`/buku/user?${query}`)
 

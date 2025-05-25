@@ -4,6 +4,11 @@ import GridLayoutButtons from '@/globals/GridLayoutButtons'
 const BookGrid = ({buku} : {buku: any}) => {
 
   const {buku: books} = buku
+
+  if (buku.length === 0) {
+    return <h1>Oops, tidak ditemukan</h1>
+  }
+
   return (
     <section className='w-full grid grid-cols-12 gap-6'>
       {books.map((item:any, index: number) => {
