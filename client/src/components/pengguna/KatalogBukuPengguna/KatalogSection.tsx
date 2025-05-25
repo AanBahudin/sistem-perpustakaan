@@ -1,4 +1,3 @@
-import FilterSection from './FilterSection'
 import BookContainer from './BookContainer'
 
 type KatalogSectionType = {
@@ -9,9 +8,8 @@ type KatalogSectionType = {
 
 const KatalogSection = ({dataBuku, page = 1, total} : KatalogSectionType) => {
   return (
-    <section className='grid grid-cols-12 gap-x-4'>
-        <FilterSection />
-        <BookContainer buku={dataBuku} />
+    <section className='grid grid-cols-12 min-h-[80vh] gap-x-4'>
+        <BookContainer buku={dataBuku} totalPage={total} />
     </section>
   )
 }

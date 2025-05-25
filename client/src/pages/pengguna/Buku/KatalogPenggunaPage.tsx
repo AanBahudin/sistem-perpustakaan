@@ -6,8 +6,10 @@ import KategorySection from '@/components/pengguna/KatalogBukuPengguna/KategoryS
 import LastAdded from '@/components/pengguna/KatalogBukuPengguna/LastAdded'
 import PeminjamanLoading from '@/components/pengguna/peminjamanPengguna/PeminjamanLoading'
 import Container from '@/globals/Container'
+import BookLoading from '@/components/Loading/BookLoading'
 import AwaitHooks from '@/hooks/AwaitHooks'
 import { defer, useLoaderData } from 'react-router-dom'
+import BookSearch from '@/components/pengguna/KatalogBukuPengguna/BookSearch'
 
 export const katalogPageLoader = async({request} : {request: Request}) => {
 
@@ -32,7 +34,8 @@ const KatalogPenggunaPage = () => {
       </AwaitHooks>
       <KategorySection />
       
-      <AwaitHooks data={buku} loadingComponent={<PeminjamanLoading />}>
+      <BookSearch />
+      <AwaitHooks data={buku} loadingComponent={<BookLoading />}>
         {((data) => <KatalogSection dataBuku={data.data} total={data.total} page={data.page} />)}
       </AwaitHooks>
     </Container>

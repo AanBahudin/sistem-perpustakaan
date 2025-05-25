@@ -2,19 +2,37 @@ import Buku, { BukuSchemaType } from "../model/Buku";
 import { NotFoundError } from "../errors/errorHandler";
 
 // SUDAH TESTING
-export const getSemuaBukuTersediaUntukUser = async() => {
+export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
+
+    let filters : Record<string, any>[] = []
+     if (query.search) {
+        const searchRegex = { $regex: query.search, $options: "i" };
+        filters = [
+            { penulis: searchRegex },
+            { judul: searchRegex },
+            { penerbit: searchRegex }
+        ];
+    }
+
     const buku = await Buku.find({
         dihapus: false,
-        status: 'Tersedia'
+        status: 'Tersedia',
+        ...(filters.length > 0 && { $or: filters })
     }).select('-dihapus')
-    const recommendation = await recomendationBook()
 
-    return {buku, recommendation}
+
+    const recommendation = await recomendationBook()
+    // for testing purposed
+    const totalPage = 4
+
+    return {buku, recommendation, totalPage}
 }
 
 // SUDAH TESTING
 export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
-    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'}).select('-dihapus').sort({createdAt: -1})
+    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'})
+        .select('-dihapus')
+        .sort({bukuDipinjam: -1})
 
     if (!buku) throw new NotFoundError('Data buku tidak ditemukan')
     return buku
