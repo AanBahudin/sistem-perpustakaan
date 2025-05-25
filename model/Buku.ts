@@ -23,6 +23,10 @@ const BukuSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    tagline: {
+        type: String,
+        required: true
+    },
     penulis: {
         type: String,
         default: 'Tidak diketahui'
@@ -42,12 +46,20 @@ const BukuSchema = new mongoose.Schema({
     cover: {
         type: String
     },
+    jumlahHalaman: {
+        type: Number,
+        required: true
+    },
     featured: {
         type: Boolean,
     },
     ISBN: {
         type: String,
         unique: true,
+        required: true
+    },
+    halaman: {
+        type: Number,
         required: true
     },
     stok: {

@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import RecomendationBook from './RecomendationBook'
 
-const BookRecomendation = () => {
+const BookRecomendation = ({buku} : {buku: Promise<any> }) => {
   return (
     <section className='w-full flex flex-col items-center justify-center mt-10'>
 
@@ -12,13 +13,7 @@ const BookRecomendation = () => {
             </Button>
         </main>
 
-        <main className='flex gap-x-8 my-8'>
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/ybtknqtmtdtjfnhmoarf.jpg" alt="" />
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/wnsqnnjsplzphfieu8zm.jpg" alt="" />
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746590828/pniobt30gz28siatflgf.jpg" alt="" />
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746585631/rljqdfpo7oljsit5zdyq.jpg" alt="" />
-            <img className='bg-muted h-[300px] w-[230px] rounded-xl border object-fill' src="https://res.cloudinary.com/dhthnjizr/image/upload/v1746593065/nuo2sfk9hdv5r7alvth6.jpg" alt="" />
-        </main>
+        <RecomendationBook data={buku} />
     </section>
   )
 }

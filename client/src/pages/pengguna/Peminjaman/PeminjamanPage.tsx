@@ -20,6 +20,8 @@ export const peminjamanLoader = async({request} : {request: Request}) => {
 const PeminjamanPage = () => {
 
   const {peminjaman} = useLoaderData() as { peminjaman: Promise<any> }
+  console.log(peminjaman);
+  
 
   return (
     <main className="min-h-[90vh] col-span-9">

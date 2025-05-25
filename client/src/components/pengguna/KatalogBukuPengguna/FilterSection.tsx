@@ -14,7 +14,6 @@ const FilterSection = () => {
     setChecked(value)
   }
 
-  
   return (
     <section className='col-span-3 pr-4 border-r'>
       <h1 className='font-semibold text-xl'>Filters</h1>

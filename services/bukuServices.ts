@@ -7,13 +7,14 @@ export const getSemuaBukuTersediaUntukUser = async() => {
         dihapus: false,
         status: 'Tersedia'
     }).select('-dihapus')
+    const recommendation = await recomendationBook()
 
-    return buku
+    return {buku, recommendation}
 }
 
 // SUDAH TESTING
 export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
-    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'}).select('-dihapus')
+    const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'}).select('-dihapus').sort({createdAt: -1})
 
     if (!buku) throw new NotFoundError('Data buku tidak ditemukan')
     return buku
@@ -66,7 +67,7 @@ export const hapusDataBuku = async(idBuku: string)  => {
 }
 
 
-// FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN
+// FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN / INI
 
 export const bukuDikembalikan = async(idBuku : string) => {
     const buku = await Buku.findOneAndUpdate(
@@ -90,4 +91,9 @@ export const bukuDihilangkan = async(idBuku: string) => {
         {$inc: {totalDipinjam: -1}},
         {new: true, runValidators: true}
     )
+}
+
+export const recomendationBook = async() => {
+    const recommendation = await Buku.find().sort({totalDipinjam: -1}).limit(5)
+    return recommendation
 }

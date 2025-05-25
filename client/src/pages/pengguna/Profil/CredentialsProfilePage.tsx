@@ -4,7 +4,7 @@ import { useRouteLoaderData } from 'react-router-dom'
 
 const CredentialsProfilePage = () => {
   
-  const data = useRouteLoaderData('user-profil')
+  const data : any = useRouteLoaderData('user-profil')
 
   return (
     <section className='w-full min-h-[70vh] grid-cols-9 flex flex-col justify-start'>

@@ -7,18 +7,18 @@ import Verify from "./pages/Verify";
 import {loader as VerifyLoader} from '@/pages/Verify'
 import {loader as LoginLoader} from '@/pages/landing/Login'
 import {loader as RegisterLoader} from '@/pages/landing/Register'
-import KatalogPenggunaPage from "./pages/pengguna/KatalogPenggunaPage";
-import GeneralProfilePage from "./pages/pengguna/GeneralProfilePage";
-import CredentialsProfilePage from "./pages/pengguna/CredentialsProfilePage";
-import StatusProfilePage from "./pages/pengguna/StatusProfilePage";
+import KatalogPenggunaPage, { katalogPageLoader } from "./pages/pengguna/Buku/KatalogPenggunaPage";
+import GeneralProfilePage from "./pages/pengguna/Profil/GeneralProfilePage";
+import CredentialsProfilePage from "./pages/pengguna/Profil/CredentialsProfilePage";
+import StatusProfilePage from "./pages/pengguna/Profil/StatusProfilePage";
 import { profileLoader } from "./pages/pengguna/ProfilPengguna";
-import PeminjamanPage from "./pages/pengguna/PeminjamanPage";
+import PeminjamanPage from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
-import PengembalianPage from "./pages/pengguna/PengembalianPage";
-import PerpanjanganPage, { perpanjanganLoader } from "./pages/pengguna/PerpanjanganPage";
-import { peminjamanLoader } from "./pages/pengguna/PeminjamanPage";
-import { pengembalianLoader } from "./pages/pengguna/PengembalianPage";
-import PeminjamanDetailPage from "./pages/pengguna/PeminjamanDetailPage";
+import PengembalianPage from "./pages/pengguna/Pengembalian/PengembalianPage";
+import PerpanjanganPage, { perpanjanganLoader } from "./pages/pengguna/Perpanjangan/PerpanjanganPage";
+import { peminjamanLoader } from "./pages/pengguna/Peminjaman/PeminjamanPage";
+import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPage";
+import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 
 const router : RouteObject[] = [
     {
@@ -106,8 +106,10 @@ const router : RouteObject[] = [
                 element: <StatusPinjaman />
             },
             {
+                id: 'buku-data',
                 path: 'buku',
-                element: <KatalogPenggunaPage />
+                element: <KatalogPenggunaPage />,
+                loader: katalogPageLoader
             },
             {
                 path: 'buku/:id',

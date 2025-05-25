@@ -1,4 +1,4 @@
-import Container from '../../globals/Container'
+import Container from '../../../globals/Container'
 import SummaryCard from '@/components/pengguna/DashboardPengguna/SummaryCard'
 import LoanOverview from '@/components/pengguna/DashboardPengguna/LoanOverview'
 import LoanProgress from '@/components/pengguna/DashboardPengguna/LoanProgress'

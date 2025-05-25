@@ -20,7 +20,7 @@ const BookPagination = () => {
 
             {Array.from({length: 3}).map((_, index) => {
                 return (
-                    <PaginationItem>
+                    <PaginationItem key={index}>
                         <PaginationLink href="#">{index + 1}</PaginationLink>
                     </PaginationItem>
                 )
