@@ -77,7 +77,7 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+      <span className="hidden sm:block"></span>
     </PaginationLink>
   )
 }
@@ -93,7 +93,7 @@ function PaginationNext({
       className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
+      <span className="hidden sm:block"></span>
       <ChevronRightIcon />
     </PaginationLink>
   )
@@ -110,7 +110,8 @@ function PaginationEllipsis({
       className={cn("flex size-9 items-center justify-center", className)}
       {...props}
     >
-      <MoreHorizontalIcon className="size-4" />
+      {/* <MoreHorizontalIcon className="size-4" /> */}
+      of
       <span className="sr-only">More pages</span>
     </span>
   )

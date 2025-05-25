@@ -7,6 +7,7 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
+import { ArrowLeft } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
   
 
@@ -43,7 +44,6 @@ const BookPagination = ({totalPage} : {totalPage: number}) => {
         navigate(`?${params.toString()}`)
     }
 
-
     return (
         <Pagination className='mt-16'>
             <PaginationContent>
@@ -51,17 +51,17 @@ const BookPagination = ({totalPage} : {totalPage: number}) => {
                     <PaginationPrevious />
                 </PaginationItem>
 
-                {Array.from({length: 3}).map((_, index) => {
-                    return (
-                        <PaginationItem onClick={() => navigatePages(index + 1)} key={index} className={`${currentPage === index + 1 ? 'bg-secondary' : null} rounded`}>
-                            <PaginationLink>{index + 1}</PaginationLink>
-                        </PaginationItem>
-                    )
-                })}
+                <PaginationItem onClick={() => navigatePages(currentPage)} className={`bg-secondary rounded`}>
+                    <PaginationLink>{currentPage}</PaginationLink>
+                </PaginationItem>
 
-                {/* <PaginationItem>
+                <PaginationItem>
                     <PaginationEllipsis />
-                </PaginationItem> */}
+                </PaginationItem>
+
+                <PaginationItem onClick={() => navigatePages(totalPage)} className={`bg-secondary rounded`}>
+                    <PaginationLink>{totalPage}</PaginationLink>
+                </PaginationItem>
 
                 <PaginationItem onClick={nextPage} className={currentPage === totalPage ? 'hidden' : ''}>
                     <PaginationNext />
