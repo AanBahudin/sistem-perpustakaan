@@ -15,7 +15,7 @@ const bookSlice = createSlice({
 
         },
         navigatedPage: (state, action) => {
-
+            
         }
     }
 })

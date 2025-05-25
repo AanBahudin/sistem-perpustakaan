@@ -7,7 +7,6 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
-import { ArrowLeft } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
   
 
