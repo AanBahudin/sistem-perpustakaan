@@ -214,6 +214,26 @@ export const kategori = [
     title: 'Algoritma',
     icon: <GitGraph />
   },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
+  {
+    title: 'Algoritma',
+    icon: <GitGraph />
+  },
   
 ]
 

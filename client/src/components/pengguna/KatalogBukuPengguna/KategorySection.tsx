@@ -1,20 +1,24 @@
-import { kategori } from '@/utils/constants'
+import Container from '@/globals/Container'
+import KategoryCard from './KategoryCard'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
-const KategorySection = () => {
+const KategorySection = ({data} : {data:any}) => {
   return (
-    <section className='w-full flex gap-x-3 items-center justify-center my-20'>
-        {kategori.map((item, index) => {
-            return (
-                <div key={index} className='w-1/6 p-4 rounded-xl border'>
-                    <main className='bg-primary-foreground w-fit p-2 rounded'>
-                        {item.icon}
-                    </main>
-                    <h3 className='font-semibold  my-2'>{item.title}</h3>
-                    <p className='text-sm text-muted-foreground'>Lorem ipsum dolor, sit amet consectetur</p>
-                </div>
-            )
-        })}
-    </section>
+    <Container className='w-[95%] flex gap-x-3 items-center justify-center mt-20 mb-10'>
+        <Carousel className='w-full'>
+            <CarouselContent className='-ml-1'>
+                <KategoryCard data={data} />
+            </CarouselContent>
+
+            <CarouselPrevious />
+            <CarouselNext />
+        </Carousel>
+    </Container>
   )
 }
 

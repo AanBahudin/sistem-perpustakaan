@@ -57,7 +57,7 @@ app.use('/api/v1/durasi', authenticationMiddleware, durasiRoute)
 app.use('/api/v1/perpanjangan', authenticationMiddleware, perpanjanganRoute)
 app.use('/api/v1/buku', authenticationMiddleware, bukuRoute)
 app.use('/api/v1/pengembalian', authenticationMiddleware, pengembalianRoute)
-app.use('/api/v1/kategori', authenticationMiddleware, pustakawanMiddlewareAuthorized, kategoriRoute)
+app.use('/api/v1/kategori', authenticationMiddleware, kategoriRoute)
 app.use('/api/v1/kondisi', authenticationMiddleware, pustakawanMiddlewareAuthorized, kondisiRoute)
 app.use('/api/v1/denda', authenticationMiddleware, pustakawanMiddlewareAuthorized, dendaRoute)
 
