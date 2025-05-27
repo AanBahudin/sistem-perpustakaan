@@ -3,10 +3,16 @@ import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 import StatusPengembalianList from "./StatusPengembalianList"
-import ListLayoutButtons from "@/globals/ListLayoutButtons"
+import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
 
-const PengembalianList = ({data = []} : {data: any}) => {
+type PengembalianListType = {
+    data: any,
+    likedData: any,
+    savedData: any
+}
+
+const PengembalianList = ({data, likedData, savedData} : PengembalianListType) => {
 
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada pengembalian</h2>
@@ -26,7 +32,7 @@ const PengembalianList = ({data = []} : {data: any}) => {
                   <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
                   <div className="flex items-center gap-x-4">
                     <StatusPengembalianList status={statusPengembalian} />
-                    <ListLayoutButtons id={idBuku._id} />
+                    <GridLayoutButtons id={idBuku._id} savedData={savedData} data={likedData} />
                   </div>
               </div>
 

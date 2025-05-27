@@ -15,7 +15,7 @@ const PengembalianDataLayout = ({pengembalianData, likedData, savedData} : Penge
     return (
         <>
             {layout === 'grid' && <PengembalianGrid data={pengembalianData} savedData={savedData} likedData={likedData} />}
-            {layout === 'list' && <PengembalianList data={pengembalianData} />}
+            {layout === 'list' && <PengembalianList data={pengembalianData} savedData={savedData} likedData={likedData} />}
         </>
     )
 }
