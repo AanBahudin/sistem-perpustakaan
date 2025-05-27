@@ -9,7 +9,7 @@ export const fetchOrCreateServices = async({userId} : {userId: string}) => {
         const simpanan = await createTersimpan({userId})
         return simpanan
     } else {
-        const simpanan = await fetchTersimpan()
+        const simpanan = await fetchTersimpan({userId})
         return simpanan
     }
 }
@@ -39,8 +39,13 @@ export const addOrDeleteServices = async({userId, bookId} : {userId: string, boo
 
 // services terpisah
 
-const fetchTersimpan = async() => {
-    const tersimpan = await Simpan.find()
+const fetchTersimpan = async({userId} : {userId: string}) => {
+    const tersimpan = await Simpan.find({userId})
+        .select('bukuDisimpan')
+        .populate({
+            path: 'bukuDisimpan.buku',
+            select: '-dihapus -createdBy -totalDihilangkan'
+        })
     return tersimpan
 }
 

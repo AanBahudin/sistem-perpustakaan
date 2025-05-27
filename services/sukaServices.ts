@@ -29,7 +29,6 @@ export const addOrRemoveBuku = async({userId, bukuId} : {userId: string, bukuId:
 
 }
 
-
 // fungsi terpisah
 
 export const createSukaData = async({userId} : {userId: string}) => {
