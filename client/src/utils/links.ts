@@ -24,7 +24,7 @@ export const landingNavbarLink = [
 export const penggunaNavbarLink = [
     {
         title: 'Dashboard',
-        url: '/user'
+        url: '/my'
     },
     {
         title: 'Buku',

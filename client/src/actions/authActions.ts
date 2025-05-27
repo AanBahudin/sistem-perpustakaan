@@ -61,7 +61,7 @@ export const accountStatus = async() => {
     const data = await queryClient.fetchQuery({
         queryKey: ['verify'],
         queryFn: async() => {
-            const response = await customFetch.get('/user/profile')
+            const response = await customFetch.get('/my/profile')
             
             if (response.data.status >= 400 || null) return redirect('/login')
             return response.data.data || {}
