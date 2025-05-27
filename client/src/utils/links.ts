@@ -50,5 +50,9 @@ export const penggunaNavbarLink = [
         title: 'Disukai',
         url: 'disukai'
     },
+    {
+        title: 'Disimpan',
+        url: 'tersimpan'
+    }
     
 ]
