@@ -1,14 +1,12 @@
 import { getAllSuka } from "@/actions/sukaActions"
 import SukaLoading from "@/components/Loading/SukaLoading"
 import Books from "@/components/pengguna/Suka/Books"
-import SukaSearch from "@/components/pengguna/Suka/SukaSearch"
 import Container from "@/globals/Container"
 import AwaitHooks from "@/hooks/AwaitHooks"
 import { defer, useLoaderData } from "react-router-dom"
 
-export const sukaLoader = async({request} : {request: Request}) => {
-    const url  = new URL(request.url)
-    const searchParams = url.searchParams.toString()
+export const sukaLoader = async() => {
+
     return defer({
         disukai: getAllSuka()
     })
@@ -20,7 +18,8 @@ const SukaPage = () => {
 
     return (
         <Container className="my-20">
-            <SukaSearch />
+            {/* <SukaSearch /> */}
+            <h1 className="text-2xl font-semibold">Buku yang anda sukai</h1>
 
             <AwaitHooks data={disukai} loadingComponent={<SukaLoading />}>
                 {(data) => <Books books={data.bukuDisukai} />}
