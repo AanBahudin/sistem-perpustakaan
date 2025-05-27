@@ -2,7 +2,7 @@ import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import { Button } from "@/components/ui/button"
 
 
-const Books = ({books}: {books:any}) => {
+const Books = ({books, savedData}: {books:any, savedData: any}) => {
     if (books.length === 0) {
         return <h1>Belum ada buku yang disukai</h1>
     }
@@ -28,7 +28,7 @@ const Books = ({books}: {books:any}) => {
 
                     <div className='w-full flex gap-x-2'>
                     <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
-                    <GridLayoutButtons id={item._id} data={books} />
+                    <GridLayoutButtons id={item._id} data={books} savedData={savedData} />
                     </div>
                 </div>
                 </main>

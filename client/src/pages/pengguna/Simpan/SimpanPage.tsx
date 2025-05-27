@@ -19,7 +19,6 @@ const SimpanPage = () => {
   const {tersimpan, disukai} = useLoaderData() as {tersimpan: Promise<any>, disukai: Promise<any>}
   const semuaData = Promise.all([tersimpan, disukai])
 
-
   return (
     <Container className="my-20">
       <SimpanSearch />
