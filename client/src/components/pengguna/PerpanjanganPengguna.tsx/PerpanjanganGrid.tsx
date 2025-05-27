@@ -4,7 +4,13 @@ import { formatedDate } from "@/utils/formatDate"
 import StatusPerpanjanganGrid from "./StatusPerpanjanganGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
-const PerpanjanganGrid = ({data} : {data: any}) => {
+type PerpanjanganGridType = {
+    data: any,
+    likedData: any,
+    savedData: any
+}
+
+const PerpanjanganGrid = ({data, likedData, savedData} : PerpanjanganGridType) => {
   return (
     <div className="w-full grid grid-cols-12 gap-4">
         {data.map((item:any) => {
@@ -40,7 +46,7 @@ const PerpanjanganGrid = ({data} : {data: any}) => {
 
                         <div className="w-full flex justify-center items-center gap-x-4 mt-4">
                             <StatusPerpanjanganGrid status={disetujui} />
-                            <GridLayoutButtons id={idBuku._id} />
+                            <GridLayoutButtons id={idBuku._id} savedData={savedData} data={likedData} />
                         </div>
                     </div>
                 </main>

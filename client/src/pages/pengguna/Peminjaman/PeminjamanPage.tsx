@@ -33,7 +33,7 @@ const PeminjamanPage = () => {
       <PeminjamanSearch />
 
       <AwaitHooks data={semuaData} loadingComponent={<PeminjamanLoading />}>
-        {(data) => <PeminjamanDataLayout peminjamanData={data[0].data} likedData={data[1].bukuDisukai} savedData={data[2].bukuDisimpan}  />}
+        {(data) => <PeminjamanDataLayout peminjamanData={data[0].data} likedData={data[1].bukuDisukai} savedData={data[2].bukuDisimpan} />}
       </AwaitHooks>
     </main>
   ) 

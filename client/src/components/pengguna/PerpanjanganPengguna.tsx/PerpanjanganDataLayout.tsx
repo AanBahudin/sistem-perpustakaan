@@ -2,13 +2,19 @@ import { useSelector } from 'react-redux'
 import PerpanjanganGrid from './PerpanjanganGrid'
 import PerpanjanganList from './PerpanjanganList'
 
-const PerpanjanganDataLayout = ({data} : {data: any}) => {
+type PerpanjanganDataLayoutType = {
+  data: any,
+  savedData: any,
+  likedData: any
+}
+
+const PerpanjanganDataLayout = ({data, savedData, likedData} : PerpanjanganDataLayoutType) => {
 
     const {layout} = useSelector((state:any) => state.peminjamanState)
 
     return (
         <>
-            {layout === 'grid' && <PerpanjanganGrid data={data} />}
+            {layout === 'grid' && <PerpanjanganGrid data={data} savedData={savedData} likedData={likedData} />}
             {layout === 'list' && <PerpanjanganList data={data} />}
         </>
     )
