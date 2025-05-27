@@ -1,15 +1,18 @@
-import { CalendarCheck, CalendarX, CalendarClock, ThumbsUp, BookMarked, Share2 } from "lucide-react"
+import { CalendarCheck, CalendarX, CalendarClock } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 import StatusPeminjamanList from "./StatusPeminjamanList"
-import GlobalTooltip from "@/globals/GlobalTooltip"
 import PeminjamanKategori from "./PeminjamanKategori"
-import ShareBookDialog from "@/globals/ShareBookDialog"
-import { generateBookLink } from "@/utils/generateBookLink"
+import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
+type PeminjamanListType = {
+    data: any,
+    likedData: any,
+    savedData: any
+}
 
-const PeminjamanList = ({data = []} : {data: Object[]}) => {
+const PeminjamanList = ({data = [], likedData, savedData} : PeminjamanListType) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
   }
@@ -29,19 +32,7 @@ const PeminjamanList = ({data = []} : {data: Object[]}) => {
                   <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{buku.judul}</Link>
                   <div className="flex items-center gap-x-4">
                     <StatusPeminjamanList status={statusPeminjaman} />
-                    <div className="flex items-center gap-x-2">
-                        <GlobalTooltip text="Disukai">
-                          <ThumbsUp className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
-                        </GlobalTooltip>
-                        <GlobalTooltip text="Simpan">
-                          <BookMarked className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
-                        </GlobalTooltip>
-                        <GlobalTooltip text="Bagikan">
-                          <ShareBookDialog>
-                            <Share2 onClick={() => generateBookLink(buku._id)} className="w-8 h-8 border p-2 rounded-lg hover:bg-muted duration-200 ease-in-out" />
-                          </ShareBookDialog>
-                        </GlobalTooltip>
-                    </div>
+                    <GridLayoutButtons id={buku._id} savedData={savedData} data={likedData} />
                   </div>
               </div>
               <Separator className="my-2 w-full" />
