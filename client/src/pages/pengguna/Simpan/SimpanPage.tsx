@@ -1,5 +1,4 @@
 import { getAllSimpanan } from "@/actions/simpanActions"
-import SimpanSearch from "@/components/pengguna/Simpan/SimpanSearch"
 import Container from "@/globals/Container"
 import { defer, useLoaderData } from "react-router-dom"
 import SimpananBooks from "./SimpananBooks"
@@ -7,7 +6,7 @@ import AwaitHooks from "@/hooks/AwaitHooks"
 import SukaLoading from "@/components/Loading/SukaLoading"
 import { getAllSuka } from "@/actions/sukaActions"
 
-export const bukuTersimpanLoader = async({request} : {request: Request}) => {
+export const bukuTersimpanLoader = async() => {
 
   return defer({
     tersimpan: getAllSimpanan(),

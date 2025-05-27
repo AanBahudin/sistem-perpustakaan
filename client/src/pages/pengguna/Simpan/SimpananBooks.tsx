@@ -1,5 +1,6 @@
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 
 const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
 
@@ -24,12 +25,16 @@ const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
                 <img src={cover} className='w-[300px] h-[160px] overflow-hidden rounded object-cover object-center' alt="" />
 
                 <div className='flex items-start justify-start flex-col'>
-                    <h1 className='text-lg font-semibold group-hover:underline duration-150 ease-in-out'>{newJudul}</h1>
+                    <Link to={`/my/buku/${_id}`}>
+                        <h1 className='text-lg font-semibold group-hover:underline duration-150 ease-in-out'>{newJudul}</h1>
+                    </Link>
                     <p className='capitalize italic text-[12px] text-muted-foreground text-ellipsis w-full'>{newTagline}...</p>
                     <p className='text-muted-foreground text-[12px] my-4'>{newDeskripsi}...</p>
 
                     <div className='w-full flex gap-x-2'>
-                        <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
+                        <Button asChild className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>
+                            <Link to={`/my/buku/${_id}`}>Selengkapnya</Link>
+                        </Button>
                         
                         <GridLayoutButtons id={_id} data={likedData.bukuDisukai} savedData={books} />
                     </div>
