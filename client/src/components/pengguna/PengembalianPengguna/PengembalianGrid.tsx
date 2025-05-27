@@ -4,8 +4,13 @@ import { formatedDate } from "@/utils/formatDate"
 import StatusPengembalianGrid from "./StatusPengembalianGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
+type PeminjamanGridType = {
+    data: any,
+    likedData: any,
+    savedData: any
+}
 
-const PengembalianGrid = ({data = []} : {data: any}) => {
+const PengembalianGrid = ({data=['default'], likedData, savedData} : PeminjamanGridType) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada pengembalian</h2>
   }
@@ -14,8 +19,9 @@ const PengembalianGrid = ({data = []} : {data: any}) => {
      <div className="w-full grid grid-cols-12 gap-4">
         {data.map((item:any) => {
             const {idBuku, idPeminjaman, statusPengembalian, createdAt, tanggalPengembalian} = item
+            // console.log(newJudul)
             let newJudul = idBuku.judul
-            if (newJudul.length > 27) {
+            if (newJudul?.length > 27) {
                 newJudul = newJudul.slice(0,27) + '....'
             }
             return (
@@ -45,7 +51,7 @@ const PengembalianGrid = ({data = []} : {data: any}) => {
 
                         <div className="w-full flex justify-center items-center gap-x-4 mt-4">
                             <StatusPengembalianGrid status={statusPengembalian} />
-                            <GridLayoutButtons id={idBuku._id} />
+                            <GridLayoutButtons id={idBuku._id} data={likedData} savedData={savedData} />
                         </div>
                     </div>
                 </main>
