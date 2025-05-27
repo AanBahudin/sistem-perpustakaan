@@ -15,7 +15,7 @@ const PerpanjanganDataLayout = ({data, savedData, likedData} : PerpanjanganDataL
     return (
         <>
             {layout === 'grid' && <PerpanjanganGrid data={data} savedData={savedData} likedData={likedData} />}
-            {layout === 'list' && <PerpanjanganList data={data} />}
+            {layout === 'list' && <PerpanjanganList data={data} savedData={savedData} likedData={likedData} />}
         </>
     )
 }

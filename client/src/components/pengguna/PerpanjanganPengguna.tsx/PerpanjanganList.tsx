@@ -3,10 +3,16 @@ import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { CalendarCheck, CalendarSync, CalendarClock } from "lucide-react"
 import StatusPerpanjanganList from "./StatusPerpanjanganList"
-import ListLayoutButtons from "@/globals/ListLayoutButtons"
 import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
+import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
-const PerpanjanganList = ({data} : {data: any}) => {
+type PerpanjanganListType = {
+    data: any,
+    likedData: any,
+    savedData: any
+}
+
+const PerpanjanganList = ({data, likedData, savedData} : PerpanjanganListType) => {
 
     if (data.length === 0) {
         return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada perpanjangan</h2>
@@ -26,7 +32,7 @@ const PerpanjanganList = ({data} : {data: any}) => {
                             <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
                             <div className="flex items-center gap-x-4">
                                 <StatusPerpanjanganList status={disetujui} />
-                                <ListLayoutButtons id={idBuku._id} />
+                                <GridLayoutButtons id={idBuku._id} savedData={savedData} data={likedData} />
                             </div>
                         </div>
 
