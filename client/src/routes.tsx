@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom";
 import { HomePage, LandingLayout, LoginPage, RegisterPage } from "./pages/landing";
-import { PenggunaLayout, ProfilPengguna, StatusPinjaman, KatalogPengguna, DetailBuku } from "./pages/pengguna";
+import { PenggunaLayout, ProfilPengguna, KatalogPengguna, DetailBuku } from "./pages/pengguna";
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
@@ -19,6 +19,7 @@ import PerpanjanganPage, { perpanjanganLoader } from "./pages/pengguna/Perpanjan
 import { peminjamanLoader } from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
+import SukaPage, { sukaLoader } from "./pages/pengguna/Suka/SukaPage";
 
 const router : RouteObject[] = [
     {
@@ -52,8 +53,9 @@ const router : RouteObject[] = [
         element: <PenggunaLayout />,
         children: [
             {
+                id: 'data-layout',
                 index: true,
-                element: <KatalogPengguna />
+                element: <KatalogPengguna />,
             },
             {
                 id: 'user-profil',
@@ -102,8 +104,10 @@ const router : RouteObject[] = [
                 element: <PeminjamanDetailPage />
             },
             {
-                path: 'status',
-                element: <StatusPinjaman />
+                id: 'disukai-data',
+                path: 'disukai',
+                element: <SukaPage />,
+                loader: sukaLoader
             },
             {
                 id: 'buku-data',

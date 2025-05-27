@@ -19,10 +19,14 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
         onMutate: () => {
           setLoading(true);
         },
-        onSuccess: ({message, deskripsi, redirectTo}) => {
+        onSuccess: ({message, deskripsi, redirectTo, showToast = true}) => {
+          
           setMessage(message || '');
           setLoading(false);
-          toast(message, {description: deskripsi})
+          
+          if (showToast) {
+            toast(message, {description: deskripsi})
+          }
           if (redirectTo) {
             navigate(redirectTo)
           }
