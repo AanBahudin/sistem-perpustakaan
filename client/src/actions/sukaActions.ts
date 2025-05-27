@@ -29,7 +29,6 @@ export const addOrRemoveSuka = async(formData: FormData) => {
     }
        
     await queryClient.setQueryData(['suka'], response.data.data)
-
     
     return {
         message: 'Disukai',

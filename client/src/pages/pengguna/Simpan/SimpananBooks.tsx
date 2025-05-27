@@ -24,8 +24,9 @@ const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
                     <p className='text-muted-foreground text-[12px] my-4'>{newDeskripsi}...</p>
 
                     <div className='w-full flex gap-x-2'>
-                    <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
-                    <GridLayoutButtons id={_id} data={likedData.bukuDisukai} />
+                        <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
+                        
+                        <GridLayoutButtons id={_id} data={likedData.bukuDisukai} savedData={books} />
                     </div>
                 </div>
                 </main>
