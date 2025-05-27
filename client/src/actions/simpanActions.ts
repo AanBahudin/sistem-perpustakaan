@@ -9,7 +9,7 @@ export const getAllSimpanan = async() => {
     const response = await queryClient.ensureQueryData({
         queryKey: ['simpan'],
         queryFn: async() => {
-            const response = await customFetch.get('/simpan')
+            const response = await customFetch.get(`/simpan`)
             if (response.status >= 400) {
                 return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
             }

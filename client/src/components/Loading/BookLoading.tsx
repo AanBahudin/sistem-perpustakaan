@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton"
 const BookLoading = () => {
   return (
     <section className='w-full grid grid-cols-12 gap-6'>
-      {Array.from({length: 12}).map((_, index) => {
+      {Array.from({length: 3}).map((_, index) => {
         return (
           <main key={index} className='col-span-4 bg-card p-2 flex items-center gap-x-4 rounded-xl border hover:border-primary duration-150 ease-in-out group'>
             <Skeleton className='w-[200px] h-[160px] '/>

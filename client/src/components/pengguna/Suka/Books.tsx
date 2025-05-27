@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 const Books = ({books, savedData}: {books:any, savedData: any}) => {
     if (books.length === 0) {
-        return <h1>Belum ada buku yang disukai</h1>
+        return <h1 className='text-2xl font-semibold mt-10'>Tidak ada buku yang disukai</h1>
     }
 
   return (

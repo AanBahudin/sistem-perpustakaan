@@ -2,6 +2,11 @@ import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Button } from '@/components/ui/button'
 
 const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
+
+    if (books.length === 0) {
+        return <h1 className='text-2xl font-semibold mt-10'>Tidak ada buku tersimpan</h1>
+    }
+
   return (
     <section className='w-full grid grid-cols-12 gap-6 mt-10'>
         {books.map((item:any, index: number) => {

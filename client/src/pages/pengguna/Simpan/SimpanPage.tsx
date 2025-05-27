@@ -7,7 +7,8 @@ import AwaitHooks from "@/hooks/AwaitHooks"
 import SukaLoading from "@/components/Loading/SukaLoading"
 import { getAllSuka } from "@/actions/sukaActions"
 
-export const bukuTersimpanLoader = async() => {
+export const bukuTersimpanLoader = async({request} : {request: Request}) => {
+
   return defer({
     tersimpan: getAllSimpanan(),
     disukai: getAllSuka()
@@ -20,8 +21,8 @@ const SimpanPage = () => {
   const semuaData = Promise.all([tersimpan, disukai])
 
   return (
-    <Container className="my-20">
-      <SimpanSearch />
+    <Container className="my-20 min-h-[110vh]">
+      {/* <SimpanSearch /> */}
 
       <AwaitHooks data={semuaData} loadingComponent={<SukaLoading />}>
         {(data) => <SimpananBooks books={data[0].bukuDisimpan} likedData={data[1]} />}

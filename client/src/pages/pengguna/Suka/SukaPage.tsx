@@ -18,11 +18,9 @@ const SukaPage = () => {
 
     const {disukai, tersimpan} = useLoaderData() as { disukai: Promise<any>, tersimpan: Promise<any>}    
     const semuaData = Promise.all([disukai, tersimpan])
-
     return (
         <Container className="my-20">
             {/* <SukaSearch /> */}
-            <h1 className="text-2xl font-semibold">Buku yang anda sukai</h1>
 
             <AwaitHooks data={semuaData} loadingComponent={<SukaLoading />}>
                 {(data) => <Books books={data[0].bukuDisukai} savedData={data[1].bukuDisimpan} />}
