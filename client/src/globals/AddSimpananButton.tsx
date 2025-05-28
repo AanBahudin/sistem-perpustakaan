@@ -3,8 +3,6 @@ import { BookMarked, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const AddSimpananButton = ({id, savedData} : {id: string, savedData: any}) => {
-
-    console.log(savedData)
     const {isLoading} = useFormStatus()
     const idBukuTersimpan = savedData.map((item: any) => item.buku._id.toString())
 

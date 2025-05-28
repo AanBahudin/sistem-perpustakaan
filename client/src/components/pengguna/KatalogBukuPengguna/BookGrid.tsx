@@ -3,8 +3,7 @@ import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Link } from 'react-router-dom'
 
 const BookGrid = ({buku, disukai, disimpan} : {buku: any, disukai: any, disimpan: any}) => {
-  const {buku: books} = buku  
-
+  const {buku: books} = buku
   if (books.length === 0) {
     return <h1>Oops, tidak ditemukan</h1>
   }  

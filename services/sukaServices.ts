@@ -1,5 +1,6 @@
 import mongoose, { ObjectId } from "mongoose" 
 import Suka from "../model/Suka"
+import Buku from "../model/Buku"
 
 export const createOrFetchData = async({userId} : {userId: string}) => {
     const isSukaExist = await Suka.findOne({userId: userId})
@@ -52,6 +53,9 @@ export const addSuka = async({userId, bukuId} : {userId: string, bukuId: string}
         {$addToSet: {bukuDisukai: bukuId}},
         { new: true, runValidators: true }
     )
+    await Buku.findOneAndUpdate({_id: bukuId}, 
+        {$inc: {totalDisukai: 1}},
+        {new: true, runValidators: true})
     return addBuku
 }
 

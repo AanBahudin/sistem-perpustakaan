@@ -35,3 +35,18 @@ export const getRecommendationsBuku = async() => {
     })
     return response
 }
+
+export const getDetailBuku = async(id: string) => {
+    const response = await queryClient.ensureQueryData({
+        queryKey: ['detail-book', id],
+        queryFn: async() => {
+            const data = await customFetch.get(`/buku/user/${id}`)
+            if (data.status >= 400) {
+                return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data buku'}
+            }
+
+            return data.data
+        }
+    })
+    return response
+}

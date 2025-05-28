@@ -22,19 +22,19 @@ const SelectForm = ({label, name, placeholder, selectLabel, values} : SelectForm
     <div className="grid items-center gap-1.5">
         <Label htmlFor={name}>{label}</Label>
         <Select name={name}>
-        <SelectTrigger className="w-full" id={name}>
-            <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-            <SelectGroup>
-                <SelectLabel>{selectLabel || 'Pilih salah satu'}</SelectLabel>
-                {values.map((item, index) => {
-                    return (
-                        <SelectItem key={index} value={item} className="capitalize">{item}</SelectItem>
-                    )
-                })}
-            </SelectGroup>
-        </SelectContent>
+            <SelectTrigger className="w-full" id={name}>
+                <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectGroup>
+                    <SelectLabel>{selectLabel || 'Pilih salah satu'}</SelectLabel>
+                    {values.map((item, index) => {
+                        return (
+                            <SelectItem key={index} value={item} className="capitalize">{item}</SelectItem>
+                        )
+                    })}
+                </SelectGroup>
+            </SelectContent>
         </Select>
     </div>
   )
