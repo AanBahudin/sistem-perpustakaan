@@ -1,11 +1,12 @@
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import SukaPageNoData from "@/components/NoDataDisplay/SukaPageNoData"
 
 
 const Books = ({books}: {books:any}) => {
     if (books.length === 0) {
-        return <h1 className='text-2xl font-semibold mt-10'>Tidak ada buku yang disukai</h1>
+        return <SukaPageNoData />
     }
 
   return (
