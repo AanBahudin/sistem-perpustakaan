@@ -19,7 +19,7 @@ import PerpanjanganPage, { perpanjanganLoader } from "./pages/pengguna/Perpanjan
 import { peminjamanLoader } from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
-import SukaPage, { sukaLoader } from "./pages/pengguna/Suka/SukaPage";
+import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage, { bukuTersimpanLoader } from "./pages/pengguna/Simpan/SimpanPage";
 
 const router : RouteObject[] = [
@@ -108,7 +108,6 @@ const router : RouteObject[] = [
                 id: 'disukai-data',
                 path: 'disukai',
                 element: <SukaPage />,
-                loader: sukaLoader
             },
             {
                 id: 'buku-data',

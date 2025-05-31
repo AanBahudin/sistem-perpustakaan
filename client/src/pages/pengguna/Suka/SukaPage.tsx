@@ -3,28 +3,30 @@ import { getAllSuka } from "@/actions/sukaActions"
 import SukaLoading from "@/components/Loading/SukaLoading"
 import Books from "@/components/pengguna/Suka/Books"
 import Container from "@/globals/Container"
-import AwaitHooks from "@/hooks/AwaitHooks"
-import { defer, useLoaderData } from "react-router-dom"
-
-export const sukaLoader = async() => {
-
-    return defer({
-        disukai: getAllSuka(),
-        tersimpan: getAllSimpanan()
-    })
-}
+import { useQueries } from "@tanstack/react-query"
 
 const SukaPage = () => {
+    const results = useQueries({
+        queries: [
+            {
+                queryKey: ['suka'],
+                queryFn: getAllSuka
+            },
+            {
+                queryKey: ['simpan'],
+                queryFn: getAllSimpanan
+            }
+        ]
+    })
 
-    const {disukai, tersimpan} = useLoaderData() as { disukai: Promise<any>, tersimpan: Promise<any>}    
-    const semuaData = Promise.all([disukai, tersimpan])
+    const [disukai] = results
+    const isLoading = results.some(q => q.isLoading)
+
+    if (isLoading) return <SukaLoading />
+
     return (
         <Container className="my-20">
-            {/* <SukaSearch /> */}
-
-            <AwaitHooks data={semuaData} loadingComponent={<SukaLoading />}>
-                {(data) => <Books books={data[0].bukuDisukai} savedData={data[1].bukuDisimpan} />}
-            </AwaitHooks>
+            <Books books={disukai.data.bukuDisukai} />
         </Container>
     )
 }

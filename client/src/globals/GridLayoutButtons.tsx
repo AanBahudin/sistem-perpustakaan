@@ -4,7 +4,7 @@ import { generateBookLink } from '@/utils/generateBookLink'
 import AddLikedButton from './AddLikedButton'
 import AddSimpananButton from './AddSimpananButton'
 
-const GridLayoutButtons = ({id} : {id: string, data?: any}) => {
+const GridLayoutButtons = ({id} : {id: string}) => {
     return (
         <div className="flex justify-center items-center gap-x-2">
             <AddLikedButton id={id} />

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 
-const Books = ({books, savedData}: {books:any, savedData: any}) => {
+const Books = ({books}: {books:any}) => {
     if (books.length === 0) {
         return <h1 className='text-2xl font-semibold mt-10'>Tidak ada buku yang disukai</h1>
     }
@@ -33,7 +33,7 @@ const Books = ({books, savedData}: {books:any, savedData: any}) => {
                     <Button asChild className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>
                         <Link to={`/my/buku/${item._id}`}>Selengkapnya</Link>
                     </Button>
-                    <GridLayoutButtons id={item._id} data={books} savedData={savedData} />
+                    <GridLayoutButtons id={item._id}/>
                     </div>
                 </div>
                 </main>
