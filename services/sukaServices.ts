@@ -65,5 +65,11 @@ export const removeBuku = async({userId, bukuId} : {userId: string, bukuId: stri
         {$pull: {bukuDisukai: bukuId}},
         { new: true, runValidators: true }
     )
+
+     await Buku.findOneAndUpdate({_id: bukuId}, 
+        {$inc: {totalDisukai: -1}},
+        {new: true, runValidators: true}
+    )
+
     return removeBuku
 }

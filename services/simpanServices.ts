@@ -62,6 +62,11 @@ const addSimpanan = async({userId, bookId} : {userId: string, bookId: string}) =
         {userId},
         {$addToSet: {bukuDisimpan: {judulBuku: buku.judul, buku: bookId}}}
     )
+
+    await Buku.findOneAndUpdate({_id: bookId}, {
+        $inc: {totalDisimpan: 1},
+
+    })
     
     return tersimpan
 }
@@ -74,5 +79,9 @@ const removeSimpanan = async({userId, bookId} : {userId: string, bookId: string}
             }}},
             { new: true, runValidators: true }
     )
+
+    await Buku.findOneAndUpdate({_id: bookId}, {
+        $inc: {totalDisimpan: -1}
+    })
     return removeBuku
 }

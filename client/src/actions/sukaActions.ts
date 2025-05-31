@@ -22,19 +22,35 @@ export const getAllSuka = async() => {
 
 export const addOrRemoveSuka = async(formData: FormData) => {
     const data = Object.fromEntries(formData)
+    const idBuku = formData.get('bukuId') as string
     
     const response = await customFetch.post('/suka', data)
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
     }
 
-    await queryClient.invalidateQueries({ queryKey: ['suka'] })
+    await queryClient.invalidateQueries({ queryKey: ['suka']})
+    await queryClient.invalidateQueries({ queryKey: ['detail-book', idBuku]})
     
     return {
         message: 'Disukai',
         deskripsi: 'Buku ditambahkan di menu Disukai',
         showToast: false,
-        queryKey: ['suka'],
+        queryKey: ['detail-book', idBuku],
+        // queryKey: [
+        //     ['suka'],
+        //     ['detail-book', idBuku]
+        // ],
         redirectTo: '.'
     }
+}
+
+export const addOrRemoveSukaNew = async(id: string) => {
+    const response = await customFetch.post('/suka', {bukuId: id})
+    if (response.status >= 400) {
+        return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
+    }
+
+    await queryClient.invalidateQueries({ queryKey: ['suka']})
+    await queryClient.invalidateQueries({ queryKey: ['detail-book', id]})
 }

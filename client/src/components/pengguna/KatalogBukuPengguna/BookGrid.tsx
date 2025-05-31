@@ -1,14 +1,24 @@
+import { getAllBuku } from '@/actions/BukuActions'
 import { Button } from '@/components/ui/button'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
+import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import GridLoading from '../peminjamanPengguna/GridLoading'
 
 
-const BookGrid = ({buku, disukai, disimpan} : {buku: any, disukai: any, disimpan: any}) => {
-  const {buku: books} = buku
+const BookGrid = () => {
+
+  const {data:buku, isLoading} = useQuery({
+    queryKey: ['buku'],
+    queryFn: () => getAllBuku()
+  })  
+  if (isLoading) return <GridLoading />
+  
+  const {buku: books} = buku.data
   if (books.length === 0) {
     return <h1>Oops, tidak ditemukan</h1>
+    
   }  
-
   return (
     <section className='w-full grid grid-cols-12 gap-6'>
       {books.map((item:any, index: number) => {
@@ -33,7 +43,7 @@ const BookGrid = ({buku, disukai, disimpan} : {buku: any, disukai: any, disimpan
 
               <div className='w-full flex gap-x-2'>
                 <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
-                <GridLayoutButtons id={item._id} data={disukai.bukuDisukai} savedData={disimpan}/>
+                <GridLayoutButtons id={item._id}/>
               </div>
             </div>
           </main>

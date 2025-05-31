@@ -90,6 +90,10 @@ const BukuSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    totalDisimpan: {
+        type: Number,
+        default: 0
+    },
     totalDihilangkan: {
         type: Number,
         default: 0

@@ -1,5 +1,5 @@
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { BookCheck, CheckCircle, Eye, ThumbsUp } from "lucide-react"
+import { BookCheck, BookMarked, CheckCircle, Eye, ThumbsUp } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
 const StatsDetailInfo = ({data} : {data: any}) => {
@@ -29,6 +29,13 @@ const StatsDetailInfo = ({data} : {data: any}) => {
                 <span>{data.totalDisukai}</span>
             </p>
         </GlobalTooltip>
+
+        <Separator orientation="vertical" />
+
+        <p className="flex gap-x-2 items-center text-sm justify-center">
+            <BookMarked className="stroke-muted-foreground w-5 h-5" />
+            <span className="text-muted-foreground">{data.totalDisimpan || 0}</span>
+        </p>
 
         <Separator orientation="vertical" />
 

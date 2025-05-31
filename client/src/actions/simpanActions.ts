@@ -20,20 +20,12 @@ export const getAllSimpanan = async() => {
     return response[0]
 }
 
-export const addOrRemoveSimpanan = async(formData: FormData) => {
-    const data = Object.fromEntries(formData)
-
-    queryClient.invalidateQueries({ queryKey: ['simpan'] })
-    
-    const response = await customFetch.post('/simpan', data)
+export const addOrRemoveSimpanan = async(id: string) => {    
+    const response = await customFetch.post('/simpan', {bookId: id})
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
     }
-        
 
-    return {
-        redirectTo: '.',
-        showToast: false,
-        queryKey: ['simpan']
-    }
+    await queryClient.invalidateQueries({ queryKey: ['simpan']})
+    await queryClient.invalidateQueries({ queryKey: ['detail-book', id]})
 }
