@@ -20,7 +20,7 @@ import { peminjamanLoader } from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage from "./pages/pengguna/Suka/SukaPage";
-import SimpanPage, { bukuTersimpanLoader } from "./pages/pengguna/Simpan/SimpanPage";
+import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
 
 const router : RouteObject[] = [
     {
@@ -123,7 +123,6 @@ const router : RouteObject[] = [
             {
                 path: 'tersimpan',
                 element: <SimpanPage />,
-                loader: bukuTersimpanLoader
             }
         ]
     },

@@ -1,11 +1,12 @@
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
+import SimpanPageNoData from '@/components/NoDataDisplay/SimpanPageNoData'
 
-const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
+const SimpananBooks = ({books} : {books: any}) => {
 
     if (books.length === 0) {
-        return <h1 className='text-2xl font-semibold mt-10'>Tidak ada buku tersimpan</h1>
+        return <SimpanPageNoData />
     }
 
   return (
@@ -36,7 +37,7 @@ const SimpananBooks = ({books, likedData} : {books: any, likedData: any}) => {
                             <Link to={`/my/buku/${_id}`}>Selengkapnya</Link>
                         </Button>
                         
-                        <GridLayoutButtons id={_id} data={likedData.bukuDisukai} savedData={books} />
+                        <GridLayoutButtons id={_id} />
                     </div>
                 </div>
                 </main>
