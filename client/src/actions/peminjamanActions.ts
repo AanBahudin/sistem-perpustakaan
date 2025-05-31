@@ -6,23 +6,16 @@ const queryClient = new QueryClient({
     defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
 })
 
-
 export const getPeminjamanData = async(search? : string) => {
-    const data = await queryClient.ensureQueryData({
-        queryKey: ['peminjaman',search],
-        queryFn: async() => {
-            const response = await customFetch.get(`/pinjaman/user?${search}`)
-            if (response.status >= 400) {
-                return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
-            }
-            return response.data      
-        }
-    })
-    return data
+    const response = await customFetch.get(`/pinjaman/user?${search}`)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
+    }
+    return response.data
 }
 
 export const getPeminjamanByBookId = async(bookId: string) => {
-    const response = await queryClient.fetchQuery({
+    const response = await queryClient.ensureQueryData({
         queryKey: ['detail-peminjaman', bookId],
         queryFn: async() => {
             const response = await customFetch.get(`/pinjaman/user/book/${bookId}`)

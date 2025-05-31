@@ -6,11 +6,9 @@ import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
 type PeminjamanGridType = {
     data: any,
-    likedData: any,
-    savedData: any
 }
 
-const PeminjamanGrid = ({data = ['default'], likedData, savedData} : PeminjamanGridType) => {
+const PeminjamanGrid = ({data = ['default']} : PeminjamanGridType) => {
 
     if (data.length === 0) {
         return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada peminjaman</h2>
@@ -51,7 +49,7 @@ const PeminjamanGrid = ({data = ['default'], likedData, savedData} : PeminjamanG
                             <div className="w-full flex justify-center items-center gap-x-4 mt-4">
                                 <StatusPeminjaman status={statusPeminjaman} />
                                 
-                                <GridLayoutButtons id={buku._id} savedData={savedData} data={likedData} />
+                                <GridLayoutButtons id={buku._id}/>
                             </div>
                         </div>
                     </main>
