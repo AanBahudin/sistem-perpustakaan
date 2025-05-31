@@ -16,7 +16,6 @@ import PeminjamanPage from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
 import PengembalianPage from "./pages/pengguna/Pengembalian/PengembalianPage";
 import PerpanjanganPage from "./pages/pengguna/Perpanjangan/PerpanjanganPage";
-import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
@@ -88,8 +87,7 @@ const router : RouteObject[] = [
                     },
                     {
                         path: 'pengembalian',
-                        element: <PengembalianPage />,
-                        loader: pengembalianLoader
+                        element: <PengembalianPage />
                     },
                     {
                         path: 'perpanjangan',

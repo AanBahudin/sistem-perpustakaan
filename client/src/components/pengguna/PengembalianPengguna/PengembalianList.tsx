@@ -7,12 +7,10 @@ import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
 
 type PengembalianListType = {
-    data: any,
-    likedData: any,
-    savedData: any
+    data: any
 }
 
-const PengembalianList = ({data, likedData, savedData} : PengembalianListType) => {
+const PengembalianList = ({data} : PengembalianListType) => {
 
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada pengembalian</h2>
@@ -32,7 +30,7 @@ const PengembalianList = ({data, likedData, savedData} : PengembalianListType) =
                   <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
                   <div className="flex items-center gap-x-4">
                     <StatusPengembalianList status={statusPengembalian} />
-                    <GridLayoutButtons id={idBuku._id} savedData={savedData} data={likedData} />
+                    <GridLayoutButtons id={idBuku._id}/>
                   </div>
               </div>
 

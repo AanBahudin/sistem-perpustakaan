@@ -5,12 +5,10 @@ import StatusPengembalianGrid from "./StatusPengembalianGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
 type PeminjamanGridType = {
-    data: any,
-    likedData: any,
-    savedData: any
+    data: any
 }
 
-const PengembalianGrid = ({data=['default'], likedData, savedData} : PeminjamanGridType) => {
+const PengembalianGrid = ({data=['default']} : PeminjamanGridType) => {
   if (data.length === 0) {
     return <h2 className="mt-20 text-muted-foreground text-2xl">Belum ada pengembalian</h2>
   }
@@ -51,7 +49,7 @@ const PengembalianGrid = ({data=['default'], likedData, savedData} : PeminjamanG
 
                         <div className="w-full flex justify-center items-center gap-x-4 mt-4">
                             <StatusPengembalianGrid status={statusPengembalian} />
-                            <GridLayoutButtons id={idBuku._id} data={likedData} savedData={savedData} />
+                            <GridLayoutButtons id={idBuku._id} />
                         </div>
                     </div>
                 </main>
