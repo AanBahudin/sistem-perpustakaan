@@ -3,8 +3,6 @@ import { Button } from '@/components/ui/button'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import GridLoading from '../peminjamanPengguna/GridLoading'
-
 
 const BookGrid = () => {
 
@@ -12,8 +10,9 @@ const BookGrid = () => {
     queryKey: ['buku'],
     queryFn: () => getAllBuku()
   })  
-  if (isLoading) return <GridLoading />
   
+  if(isLoading) return <h1></h1>
+
   const {buku: books} = buku.data
   if (books.length === 0) {
     return <h1>Oops, tidak ditemukan</h1>

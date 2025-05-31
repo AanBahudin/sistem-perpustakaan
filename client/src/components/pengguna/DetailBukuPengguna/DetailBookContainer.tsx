@@ -7,30 +7,14 @@ import StatsDetailInfo from "./StatsDetailInfo"
 import DetailTags from "./DetailTags"
 import { Label } from "@/components/ui/label"
 import DetailButton from "./DetailButton"
-import { useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
-import { getDetailBuku } from "@/actions/BukuActions"
 
 type DetailBookContainerDataType = {
-    peminjaman: any
+    peminjaman: any,
+    detailBuku: any,
 }
 
-const DetailBookContainer = ({peminjaman} : DetailBookContainerDataType) => {
-    
-    const {id} = useParams()
-    console.log('id dari book container', id);
-    
-
-    const {data:newBookData, isLoading, } = useQuery({
-        queryKey: ['detail-book', id],
-        queryFn: () => getDetailBuku(id as string),
-        refetchOnWindowFocus: true,
-    })
-
-    if (isLoading) {
-        return <h1>Gee</h1>
-    }
-    const {data, durasi} = newBookData
+const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataType) => {
+    const {data, durasi} = detailBuku
     const newTagline = data.tagline.slice(0,76) +"...."
 
     return (
