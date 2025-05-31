@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addOrRemoveSukaNew, getAllSuka } from '@/actions/sukaActions'
+import { useState } from 'react'
 
 const AddLikedButton = ({id} : {id: string}) => {
     const queryClient = useQueryClient()
+    const [loading, setLoading] = useState(false)
 
     const {data, isLoading: reactQueryLoading} = useQuery({
         queryKey: ['suka'],
@@ -14,6 +16,9 @@ const AddLikedButton = ({id} : {id: string}) => {
 
     const {mutateAsync: addOrRemoveLikeMutation} = useMutation({
         mutationFn: () => addOrRemoveSukaNew(id),
+        onMutate: () => {
+            setLoading(true)
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['suka']
@@ -21,6 +26,10 @@ const AddLikedButton = ({id} : {id: string}) => {
             queryClient.invalidateQueries({
                 queryKey: ['detail-book', id]
             })
+            setLoading(false)
+        },
+        onError: () => {
+            setLoading(false)
         }
     })
 
@@ -28,7 +37,7 @@ const AddLikedButton = ({id} : {id: string}) => {
         await addOrRemoveLikeMutation()
     }
 
-    if (reactQueryLoading) {
+    if (reactQueryLoading || loading) {
         return (
             <Button disabled className='w-8 h-8 border p-2 bg-transparent hover:bg-muted'>
                 <Loader2 className="w-8 h-8 stroke-white animate-spin" />
