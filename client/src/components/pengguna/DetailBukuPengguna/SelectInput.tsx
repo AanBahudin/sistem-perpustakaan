@@ -12,7 +12,6 @@ import { setDurasi } from '@/cart/detailBookSlice'
 
 const SelectInput = ({values} : {values: any}) => {
 
-    
     const handleDurasiPeminjaman = (value: string) => {
         store.dispatch(setDurasi(value))
     }

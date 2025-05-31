@@ -9,7 +9,7 @@ import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../
 
 // SUDAH DITESTING
 export const requestPinjaman = async(req: Request | any, res: Response) => {
-    const { idBuku, durasiPeminjaman, judulBuku } = req.body
+    const { idBuku, durasiPeminjaman } = req.body
     const { userId } = req.user
 
     const {data} = await pengajuanPeminjaman({durasiPeminjaman, idBuku, userId})

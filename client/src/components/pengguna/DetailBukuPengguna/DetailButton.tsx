@@ -1,9 +1,10 @@
-import { pembatalanPeminjamanBuku, tambahPeminjaman } from '@/actions/peminjamanActions'
+import { tambahPeminjaman } from '@/actions/peminjamanActions'
 import FormContainer from '@/components/form/FormContainer'
 import { Button } from '@/components/ui/button'
 import { useFormStatus } from '@/context/FormContext'
 import { Loader2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
+import PengajuanCancelButton from './PengajuanCancelButton'
 
 type DetailButtonType = {
     stok: number,
@@ -21,11 +22,7 @@ const DetailButton = ({stok, status, idPeminjaman, idBuku} : DetailButtonType) =
                     <PinjamButton stok={stok} idBuku={idBuku} />
                 </FormContainer>
             )}
-            {status === 'Diajukan' && (
-                <FormContainer action={pembatalanPeminjamanBuku}>
-                    <DiajukanButton idPeminjaman={idPeminjaman!} idBuku={idBuku} />
-                </FormContainer>
-            )}
+            {status === 'Diajukan' && <PengajuanCancelButton idPeminjaman={idPeminjaman!} idBuku={idBuku} />}
             {status === 'Dipinjam' && <DipinjamButton />}
             {status === 'Terlambat' && <TerlambatButton />}
         </>

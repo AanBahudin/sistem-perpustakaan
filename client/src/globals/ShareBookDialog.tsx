@@ -19,8 +19,6 @@ import { setIsCopied } from "@/cart/globalSlice"
 import ShareDialogSocial from "./ShareDialogSocial"
 
 const ShareBookDialog = ({children} : {children: React.ReactNode}) => {
-
-
   const {shareBookLink, isCopied} = useSelector((state:any) => state.globalState)
   const newLink = shareBookLink.slice(7)
 
@@ -30,8 +28,6 @@ const ShareBookDialog = ({children} : {children: React.ReactNode}) => {
     try {
       await navigator.clipboard.writeText(shareBookLink)
       setTimeout(() => {
-        console.log('mwemwe');
-        
         store.dispatch(setIsCopied(false))
       }, 1000);
     } catch (error) {
