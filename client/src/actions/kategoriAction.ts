@@ -1,9 +1,5 @@
-import { QueryClient } from "@tanstack/react-query";
 import { customFetch } from "@/utils/customFetch";
-
-const queryClient = new QueryClient({
-    defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
-})
+import { queryClient } from "@/main";
 
 export const getAllKategori = async() => {
     const response = await queryClient.ensureQueryData({

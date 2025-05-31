@@ -4,10 +4,12 @@ import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useQueryClient } from '@tanstack/react-query';
 
 type ActionFunction = (formData: FormData) => Promise<any>;
 
 const FormContainer = ({action, children, className} : {action: ActionFunction, children: React.ReactNode, className?: string}) => {
+  const queryClient = useQueryClient()
     const navigate = useNavigate()
     const [message, setMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
@@ -19,11 +21,14 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
         onMutate: () => {
           setLoading(true);
         },
-        onSuccess: ({message, deskripsi, redirectTo, showToast = true}) => {
-          
+        onSuccess: ({message, deskripsi, redirectTo, showToast = true, queryKey}) => {
           setMessage(message || '');
           setLoading(false);
           
+          if (queryKey.length > 0) {
+            queryClient.invalidateQueries(queryKey)
+          }
+
           if (showToast) {
             toast(message, {description: deskripsi})
           }

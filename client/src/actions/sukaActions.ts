@@ -6,7 +6,7 @@ const queryClient = new QueryClient({
 })
 
 export const getAllSuka = async() => {
-    const response = await queryClient.ensureQueryData({
+    const response = await queryClient.fetchQuery({
         queryKey: ['suka'],
         queryFn: async() => {
             const response = await customFetch.get('/suka')
@@ -27,13 +27,14 @@ export const addOrRemoveSuka = async(formData: FormData) => {
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
     }
-       
-    await queryClient.setQueryData(['suka'], response.data.data)
+
+    await queryClient.invalidateQueries({ queryKey: ['suka'] })
     
     return {
         message: 'Disukai',
         deskripsi: 'Buku ditambahkan di menu Disukai',
         showToast: false,
+        queryKey: ['suka'],
         redirectTo: '.'
     }
 }

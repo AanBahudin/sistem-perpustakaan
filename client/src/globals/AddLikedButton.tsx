@@ -8,7 +8,7 @@ const AddLikedButton = ({id, likedData} : {id: string, likedData: any}) => {
     const idBukuDisukai : any[]= likedData.map((item: any) => item._id)
     return (
         <>
-            <Button type='submit' className={`w-8 h-8 border p-2 ${idBukuDisukai.includes(id) ? 'bg-primary-foreground hover:bg-primary' : 'bg-transparent hover:bg-muted'}  duration-200 ease-in-out`}>
+            <Button type='submit' className={`w-8 h-8 border p-2 ${idBukuDisukai.includes(id) ? 'bg-primary-foreground hover:bg-primary' : 'bg-transparent hover:bg-muted'}`}>
                 {isLoading ? (
                     <Loader2 className="w-8 h-8 stroke-white animate-spin" />
                 ) : (

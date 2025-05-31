@@ -1,11 +1,7 @@
 import { customFetch } from "@/utils/customFetch";
-import { QueryClient } from "@tanstack/react-query";
 import { redirect } from "react-router-dom";
 import { toast } from "sonner";
-
-const queryClient = new QueryClient({
-    defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
-})
+import {queryClient} from '@/main'
 
 
 export const registerAction = async(formData: FormData) => {

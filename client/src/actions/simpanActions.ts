@@ -6,7 +6,7 @@ const queryClient = new QueryClient({
 })
 
 export const getAllSimpanan = async() => {
-    const response = await queryClient.ensureQueryData({
+    const response = await queryClient.fetchQuery({
         queryKey: ['simpan'],
         queryFn: async() => {
             const response = await customFetch.get(`/simpan`)
@@ -22,15 +22,18 @@ export const getAllSimpanan = async() => {
 
 export const addOrRemoveSimpanan = async(formData: FormData) => {
     const data = Object.fromEntries(formData)
+
+    queryClient.invalidateQueries({ queryKey: ['simpan'] })
     
     const response = await customFetch.post('/simpan', data)
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
     }
         
-    await queryClient.setQueryData(['simpan'], response.data.data)
+
     return {
         redirectTo: '.',
-        showToast: false
+        showToast: false,
+        queryKey: ['simpan']
     }
 }

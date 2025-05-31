@@ -3,7 +3,7 @@ import BookGrid from "../KatalogBukuPengguna/BookGrid"
 type PropsType = {
     books: any,
     liked: any,
-    saved: any
+    saved: any,
 }
 
 const YouMayLIkeBookContainer = ({books, liked, saved} : PropsType) => {

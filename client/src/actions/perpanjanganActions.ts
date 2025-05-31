@@ -1,9 +1,5 @@
-import { QueryClient } from "@tanstack/react-query";
 import { customFetch } from "@/utils/customFetch";
-
-const queryClient = new QueryClient({
-    defaultOptions: {queries: {staleTime: 1000 * 60 * 50}}
-})
+import { queryClient } from "@/main";
 
 export const getPerpanjangan = async(query: string) => {
     const data = await queryClient.ensureQueryData({

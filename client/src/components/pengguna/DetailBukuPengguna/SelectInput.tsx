@@ -7,10 +7,18 @@ import {
     SelectItem,
     SelectLabel
 } from '@/components/ui/select'
+import { store } from '@/store'
+import { setDurasi } from '@/cart/detailBookSlice'
 
 const SelectInput = ({values} : {values: any}) => {
+
+    
+    const handleDurasiPeminjaman = (value: string) => {
+        store.dispatch(setDurasi(value))
+    }
+
   return (
-    <Select name='durasiPeminjaman' required>
+    <Select name='durasiPeminjaman' required onValueChange={handleDurasiPeminjaman}>
         <SelectTrigger className="w-1/2" id='durasiPeminjaman'>
             <SelectValue placeholder='Lama peminjaman buku' />
         </SelectTrigger>

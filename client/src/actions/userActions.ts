@@ -1,11 +1,7 @@
 import { removeSelectedImg } from "@/cart/profileSlice";
 import { store } from "@/store";
 import { customFetch } from "@/utils/customFetch";
-import { QueryClient } from "@tanstack/react-query";
-
-const queryClient = new QueryClient({
-    defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
-})
+import { queryClient } from "@/main";
 
 export const profileAction = async() => {
     const data = await queryClient.ensureQueryData({

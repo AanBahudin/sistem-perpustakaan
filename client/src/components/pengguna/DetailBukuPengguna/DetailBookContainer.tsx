@@ -1,21 +1,22 @@
 import BreadCrumbDetailBuku from "@/components/pengguna/DetailBukuPengguna/BreadCrumbDetailBuku"
 import { Separator } from "@/components/ui/separator"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
-import { Button } from "@/components/ui/button"
 import SelectInput from "@/components/pengguna/DetailBukuPengguna/SelectInput"
 import InformationContainer from "./InformationContainer"
 import StatsDetailInfo from "./StatsDetailInfo"
 import DetailTags from "./DetailTags"
 import { Label } from "@/components/ui/label"
+import DetailButton from "./DetailButton"
 
 type DetailBookContainerDataType = {
     likedData: any,
     savedData: any,
-    bookData: any
+    bookData: any,
+    peminjaman: any
 }
 
-const DetailBookContainer = ({likedData, savedData, bookData} : DetailBookContainerDataType) => {
-
+const DetailBookContainer = ({likedData, savedData, bookData, peminjaman} : DetailBookContainerDataType) => {
+    
     const {data, durasi} = bookData
     const newTagline = data.tagline.slice(0,76) +"...."
 
@@ -49,10 +50,7 @@ const DetailBookContainer = ({likedData, savedData, bookData} : DetailBookContai
                         <Label htmlFor="durasiPeminjaman" className="w-fit mt-3 text-muted-foreground">Durasi Peminjaman : </Label>
                         <div className="flex-1 self-start">
                             <SelectInput values={durasi} />
-                            <div className="flex items-center mt-4 gap-x-8">
-                                <Button variant='default' className="text-white text-center w-1/2">Ajukan Peminjaman</Button>
-                                <p className="text-muted-foreground text-sm">tersisa {data.stok} buku</p>
-                            </div>
+                            <DetailButton idBuku={data._id} idPeminjaman={peminjaman?._id} stok={data.stok} status={peminjaman?.statusPeminjaman || undefined} />
                         </div>
                     </div>
 

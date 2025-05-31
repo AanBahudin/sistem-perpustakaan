@@ -10,7 +10,8 @@ import {
     requestPinjaman,
     getPinjamanUser,
     getSinglePinjamanUser,
-    pembatalanPinjamanUser
+    pembatalanPinjamanUser,
+    getSinglePinjamanUserByBookId
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
@@ -31,10 +32,14 @@ router.route('/request/pinjaman')
 
 router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)
-    .delete(userMiddlewareAuthorized, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
+    .post(userMiddlewareAuthorized, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
+
+router.route('/user/book/:id')
+    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUserByBookId)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUser)
+
 
 // KHUSUS PUSTAKAWAN
 router.route('/pinjaman')

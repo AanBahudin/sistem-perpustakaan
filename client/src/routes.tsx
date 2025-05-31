@@ -21,7 +21,6 @@ import { pengembalianLoader } from "./pages/pengguna/Pengembalian/PengembalianPa
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage, { sukaLoader } from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage, { bukuTersimpanLoader } from "./pages/pengguna/Simpan/SimpanPage";
-import { detailBookLoader } from "./pages/pengguna/DetailBook/DetailBuku";
 
 const router : RouteObject[] = [
     {
@@ -120,7 +119,7 @@ const router : RouteObject[] = [
             {
                 path: 'buku/:id',
                 element: <DetailBuku />,
-                loader: detailBookLoader
+                // loader: detailBookLoader
             },
             {
                 path: 'tersimpan',

@@ -7,18 +7,13 @@ const queryClient = new QueryClient({
 })
 
 export const getAllBuku = async(query?: string) => {
-    const response = await queryClient.ensureQueryData({
-        queryKey: ['buku', query],
-        queryFn: async() => {
-            const data = await customFetch.get(`/buku/user?${query}`)
+    const res = await customFetch.get(`/buku/user?${query ?? ''}`)
 
-            if (data.status >= 400) {
-                return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat mengambil data, periksa koneksi internet Anda'}
-            }
-            return data.data
-        }
-    })
-    return response
+  if (res.status >= 400) {
+    throw new Error('Gagal mengambil data buku.')
+  }
+
+  return res.data
 }
 
 export const getRecommendationsBuku = async() => {

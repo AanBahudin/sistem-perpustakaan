@@ -8,14 +8,68 @@ const queryClient = new QueryClient({
 
 export const getPeminjamanData = async(search? : string) => {
     const data = await queryClient.ensureQueryData({
-            queryKey: ['peminjaman',search],
-            queryFn: async() => {
-                const response = await customFetch.get(`/pinjaman/user?${search}`)
-                if (response.status >= 400) {
-                    return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
-                }
-                return response.data      
+        queryKey: ['peminjaman',search],
+        queryFn: async() => {
+            const response = await customFetch.get(`/pinjaman/user?${search}`)
+            if (response.status >= 400) {
+                return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
             }
-        })
+            return response.data      
+        }
+    })
     return data
+}
+
+export const getPeminjamanByBookId = async(bookId: string) => {
+    const response = await queryClient.fetchQuery({
+        queryKey: ['detail-peminjaman', bookId],
+        queryFn: async() => {
+            const response = await customFetch.get(`/pinjaman/user/book/${bookId}`)
+            if (response.status >= 400) {
+                return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
+            }
+            return response.data.data
+        }
+    })
+    return response || {}
+}
+
+export const tambahPeminjaman = async(formData: FormData) => {
+    const data = Object.fromEntries(formData)
+    const idBuku = formData.get('idBuku')
+
+    const response = await customFetch.post('/pinjaman/request/pinjaman', data)
+    if (response.status >= 400) {
+        return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengajukan peminjaman, coba lagi nanti'}
+    }
+
+    await queryClient.invalidateQueries({ queryKey: ['detail-peminjaman', idBuku] })
+    
+    return {
+        message: 'Peminjaman Diajukkan',
+        deskripsi: 'Silahkan cek menu Peminjaman untuk melihat',
+        queryKey: ['detail-peminjaman', idBuku],
+        redirectTo: '.',
+        showToast: true
+    }
+}
+
+export const pembatalanPeminjamanBuku = async(formData: FormData) => {
+    const data = Object.fromEntries(formData)
+    const idBuku = formData.get('idBook')?.toString()
+
+    const response = await customFetch.post('/pinjaman/user', data)
+    if (response.status >= 400) {
+        return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat membatalkan pengajuan buku'}
+    }
+
+    await queryClient.invalidateQueries({ queryKey: ['detail-peminjaman', idBuku] })
+
+    return {
+        message: 'Proses Berhasil',
+        deskripsi: 'Pengajuan peminjaman berhasil dibatalkan.',
+        queryKey: ['detail-peminjaman', idBuku],
+        showToast: true,
+        redirectTo: `.`
+    }
 }

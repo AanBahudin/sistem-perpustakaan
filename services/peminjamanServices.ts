@@ -2,7 +2,7 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
 import Peminjaman from "../model/Peminjaman";
 import Pengguna from "../model/Pengguna";
-import { GetOnePeminjamanParamsType, GetOnePeminjamanUser, GetSemuaPeminjamanUserParamsType, PembatalanPeminjamanUserParamsType, PengajuanPeminjamanParamsType, PinjamanDikembalikanParamsType, PinjamanUpdatedFieldType, TambahPeminjamanParamsType, TerimaPeminjamanUserParamsType } from "../types/peminjamanTypes";
+import { GetOnePeminjamanParamsType, GetOnePeminjamanUser, GetOnePeminjamanUserByBookId, GetSemuaPeminjamanUserParamsType, PembatalanPeminjamanUserParamsType, PengajuanPeminjamanParamsType, PinjamanDikembalikanParamsType, PinjamanUpdatedFieldType, TambahPeminjamanParamsType, TerimaPeminjamanUserParamsType } from "../types/peminjamanTypes";
 import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../utils/checker";
 import tambahHariKeTanggal from "../utils/tambahHari";
 import { bukuDipinjam } from "./bukuServices";
@@ -53,6 +53,20 @@ export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminja
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
     return {data: peminjaman}
+}
+
+export const getOnePeminjamanUserByIdBook = async({userId, bookId} : GetOnePeminjamanUserByBookId) => {
+    const peminjaman = await Peminjaman.findOne({
+        peminjam: userId, 
+        buku: bookId, 
+        $or: [
+            {statusPeminjaman: 'Dipinjam'},
+            {statusPeminjaman: 'Terlambat'},
+            {statusPeminjaman: 'Diajukan'},
+        ]
+    })
+
+    return peminjaman
 }
 
 // SUDAH DITESTING

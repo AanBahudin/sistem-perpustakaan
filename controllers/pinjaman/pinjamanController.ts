@@ -2,7 +2,7 @@ import { Response, Request } from "express"
 
 import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
-import { getOnePeminjaman, getOnePeminjamanUser, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser } from "../../services/peminjamanServices"
+import { getOnePeminjaman, getOnePeminjamanUser, getOnePeminjamanUserByIdBook, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser } from "../../services/peminjamanServices"
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
 // 4 controller dibawah khusus untuk pengguna
@@ -50,6 +50,19 @@ export const getSinglePinjamanUser = async(req: Request | any, res: Response) =>
     })
 }
 
+export const getSinglePinjamanUserByBookId = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id} = req.params
+
+    const data = await getOnePeminjamanUserByIdBook({bookId: id, userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data Pinjaman',
+        data
+    })
+}
+
 // SUDAH DITESTING
 export const pembatalanPinjamanUser = async(req: Request | any, res: Response) => {
     const {idPeminjaman} = req.body
@@ -61,7 +74,6 @@ export const pembatalanPinjamanUser = async(req: Request | any, res: Response) =
     SendBasicResponse({
         res,
         message: 'Data Pinjaman Dibatalkan',
-
     })
 }
 
