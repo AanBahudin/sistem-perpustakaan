@@ -10,7 +10,7 @@ import {
 import { store } from '@/store'
 import { setDurasi } from '@/cart/detailBookSlice'
 
-const SelectInput = ({values} : {values: any}) => {
+const SelectInput = ({values, status} : {values: any, status: string | undefined}) => {
 
     const handleDurasiPeminjaman = (value: string) => {
         store.dispatch(setDurasi(value))
@@ -18,7 +18,7 @@ const SelectInput = ({values} : {values: any}) => {
 
   return (
     <Select name='durasiPeminjaman' required onValueChange={handleDurasiPeminjaman}>
-        <SelectTrigger className="w-1/2" id='durasiPeminjaman'>
+        <SelectTrigger className={`${!status ? '' : 'hidden'} w-1/2`} id='durasiPeminjaman'>
             <SelectValue placeholder='Lama peminjaman buku' />
         </SelectTrigger>
         <SelectContent>

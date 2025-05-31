@@ -44,9 +44,9 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
                     <InformationContainer data={data} />
 
                     <div className="w-full flex gap-x-20 items-start justify-start mt-8 mb-10">
-                        <Label htmlFor="durasiPeminjaman" className="w-fit mt-3 text-muted-foreground">Durasi Peminjaman : </Label>
+                        <Label htmlFor="durasiPeminjaman" className={`w-fit mt-3 text-muted-foreground ${!peminjaman?.statusPeminjaman ? '' : 'hidden'}`}>Durasi Peminjaman : </Label>
                         <div className="flex-1 self-start">
-                            <SelectInput values={durasi} />
+                            <SelectInput values={durasi} status={peminjaman?.statusPeminjaman || undefined}/>
                             <DetailButton idBuku={data._id} idPeminjaman={peminjaman?._id} stok={data.stok} status={peminjaman?.statusPeminjaman || undefined} />
                         </div>
                     </div>
