@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
-import PengembalianList from "../PengembalianPengguna/PengembalianList"
-import PerpanjanganList from "../PerpanjanganPengguna.tsx/PerpanjanganList"
 import AdditionalDetailTab from "./AdditionalDetailTab"
 import DataContainer from "./DataContainer"
 import PeminjamanList from "../peminjamanPengguna/PeminjamanList"
+import ListPengembalian from "./ListPengembalian"
+import ListPerpanjangan from "./ListPerpanjangan"
 
 type AdditionalDetailType = {
   pengembalian?: any,
@@ -17,12 +17,12 @@ const AdditionalDetail = ({pengembalian, perpanjangan, peminjaman} : AdditionalD
   const {detailPeminjamanTab} = useSelector((state:any) => state.peminjamanState)
 
   return (
-    <section className='col-span-9 w-full'>
+    <section className='col-span-9 w-full border rounded-2xl p-4'>
       <AdditionalDetailTab />
 
       <DataContainer>
-        {detailPeminjamanTab === 'pengembalian' && <PengembalianList data={pengembalian} />}
-        {detailPeminjamanTab === 'perpanjangan' && <PerpanjanganList data={perpanjangan} />}
+        {detailPeminjamanTab === 'pengembalian' && <ListPengembalian data={pengembalian} />}
+        {detailPeminjamanTab === 'perpanjangan' && <ListPerpanjangan data={perpanjangan} />}
         {detailPeminjamanTab === 'peminjaman' && <PeminjamanList data={peminjaman} />}
       </DataContainer>
       

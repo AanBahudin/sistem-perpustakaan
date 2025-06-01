@@ -12,8 +12,7 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
     const {data, durasi} = detailBuku
 
-    const {cover, judul, _id, deskripsi, stok} = data
-    const newTagline = data.tagline.slice(0,76) +"...."
+    const {cover, judul, _id, deskripsi, stok, tagline} = data
 
     return (
         <main className="w-full flex my-10 gap-x-10 mt-10">
@@ -25,7 +24,7 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
                     <GridLayoutButtons id={_id}/>
                 </div>
 
-                <h5 className="text-muted-foreground text-sm w-full trun my-2">{newTagline}</h5>
+                <h5 className="text-muted-foreground text-sm w-full trun my-2">{tagline}</h5>
 
                 <StatsDetailInfo data={data} />
                 <p className="my-4 text-muted-foreground text-sm leading-6">{deskripsi}</p>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const OtherData = ({semuaPeminjaman, currentIdBuku} : {semuaPeminjaman: any, currentIdBuku: string}) => {
 
   return (
-    <section className='col-span-3 w-full border rounded p-4 flex flex-col items-center justify-center gap-y-5 overflow-y-auto'>
+    <section className='col-span-3 w-full border rounded-xl p-4 flex flex-col items-center justify-center gap-y-5 overflow-y-auto'>
       <h1 className="text-left uppercase text-muted-foreground">Peminjaman Lainnya</h1>
       {semuaPeminjaman.filter((item:any) => {
         return item.buku._id !== currentIdBuku
