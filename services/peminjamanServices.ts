@@ -43,13 +43,13 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
     if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
-    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate('buku').sort({createdAt: -1})
+    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate(['buku', 'peminjam']).sort({createdAt: -1})
     return {data: pinjamanUser}
 }
 
 // SUDAH DITESTING
 export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminjamanUser) => {
-    const peminjaman = await Peminjaman.findOne({_id: peminjamanId, peminjam: userId})
+    const peminjaman = await Peminjaman.findOne({_id: peminjamanId, peminjam: userId}).populate(['buku', 'peminjam'])
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
     return {data: peminjaman}

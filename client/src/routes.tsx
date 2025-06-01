@@ -96,7 +96,7 @@ const router : RouteObject[] = [
                 ]
             },
             {
-                path: 'peminjaman/:id',
+                path: 'peminjaman/:id/:idBuku',
                 element: <PeminjamanDetailPage />
             },
             {

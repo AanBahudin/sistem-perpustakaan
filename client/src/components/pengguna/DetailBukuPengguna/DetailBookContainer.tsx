@@ -19,7 +19,7 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
 
     return (
         <section className="w-[80%] mx-auto">
-            <BreadCrumbDetailBuku title={data.judul} />
+            <BreadCrumbDetailBuku title={data.judul} from="Buku" url="/my/buku" />
 
             <main className="w-full flex my-10 gap-x-10">
                 <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={data.cover} alt={data.judul} />

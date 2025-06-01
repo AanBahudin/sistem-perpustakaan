@@ -3,13 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export type DefaultStateType = {
     layout: string,
     activeTab: 1,
+    detailPeminjamanTab: 'peminjaman' | 'perpanjangan' | 'pengembalian' | '',
     peminjamanFilter: string
 }
 
 const defaultState : DefaultStateType = {
     layout: localStorage.getItem('layout') || 'grid',
     activeTab: 1,
-    peminjamanFilter: ''
+    peminjamanFilter: '',
+    detailPeminjamanTab: ''
 }
 
 const peminjamanSlice = createSlice({
@@ -26,9 +28,12 @@ const peminjamanSlice = createSlice({
         },
         setFilter: (state, action) => {
             state.peminjamanFilter = action.payload
+        },
+        setDetailPeminjamanTab: (state, action) => {
+            state.detailPeminjamanTab = action.payload 
         }
     }
 })
 
-export const { setLayout, setTab, setFilter } = peminjamanSlice.actions
+export const { setLayout, setTab, setFilter, setDetailPeminjamanTab } = peminjamanSlice.actions
 export default peminjamanSlice.reducer

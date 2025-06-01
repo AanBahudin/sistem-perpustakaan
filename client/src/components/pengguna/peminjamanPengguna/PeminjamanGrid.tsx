@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import StatusPeminjaman from "./StatusPeminjamanGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
+import { Link } from "react-router-dom"
 
 type PeminjamanGridType = {
     data: any,
@@ -25,7 +26,7 @@ const PeminjamanGrid = ({data = ['default']} : PeminjamanGridType) => {
                     <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
                         <img src={buku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
                         <div className="w-full flex flex-col items-start justify-between ">
-                            <h2 className="text-2xl font-semibold">{newJudul}</h2>
+                            <Link to={`/my/peminjaman/${item._id}/${buku._id}`} className="text-2xl font-semibold hover:underline">{newJudul}</Link>
                             <Separator className="my-2 w-full" />
 
                             <div className="w-full flex gap-x-4 items-center justify-between">

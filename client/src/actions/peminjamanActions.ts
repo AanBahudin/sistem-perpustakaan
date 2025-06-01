@@ -14,18 +14,21 @@ export const getPeminjamanData = async(search? : string) => {
     return response.data
 }
 
+export const getDetailPeminjaman = async(id: string) => {
+    const response = await customFetch.get(`/pinjaman/user/${id}`)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
+    }
+
+    return response.data.data
+}
+
 export const getPeminjamanByBookId = async(bookId: string) => {
-    const response = await queryClient.ensureQueryData({
-        queryKey: ['detail-peminjaman', bookId],
-        queryFn: async() => {
-            const response = await customFetch.get(`/pinjaman/user/book/${bookId}`)
-            if (response.status >= 400) {
-                return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
-            }
-            return response.data.data
-        }
-    })
-    return response || {}
+    const response = await customFetch.get(`/pinjaman/user/book/${bookId}`)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Data tidak ditemukan'}
+    }
+    return response.data.data
 }
 
 export const tambahPeminjaman = async(formData: FormData) => {

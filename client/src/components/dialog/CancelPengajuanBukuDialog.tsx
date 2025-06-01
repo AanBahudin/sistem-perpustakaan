@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import React, { useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 type CancelPengajuanBukuDialogType = {
@@ -21,6 +22,9 @@ type CancelPengajuanBukuDialogType = {
 }
 
 const CancelPengajuanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPengajuanBukuDialogType) => {
+
+  const {pathname} = useLocation()
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -37,6 +41,9 @@ const CancelPengajuanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPeng
       setIsModalOpen(false)
       queryClient.invalidateQueries({queryKey: ['detail-peminjaman', idBuku]})
       toast('Peminjaman Dibatalkan')
+      if (pathname.includes('peminjaman')) {
+        navigate('/my/data/peminjaman')
+      }
     },
     onError: () => {
       setLoading(false)
