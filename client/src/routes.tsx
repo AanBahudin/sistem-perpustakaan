@@ -19,6 +19,7 @@ import PerpanjanganPage from "./pages/pengguna/Perpanjangan/PerpanjanganPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
+import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalianPage";
 
 const router : RouteObject[] = [
     {
@@ -98,6 +99,10 @@ const router : RouteObject[] = [
             {
                 path: 'peminjaman/:id/:idBuku',
                 element: <PeminjamanDetailPage />
+            },
+            {
+                path: 'pengembalian/:id/:idBuku',
+                element: <DetailPengembalian />
             },
             {
                 id: 'disukai-data',

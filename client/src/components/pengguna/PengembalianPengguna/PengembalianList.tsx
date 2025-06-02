@@ -27,7 +27,7 @@ const PengembalianList = ({data} : PengembalianListType) => {
 
               <div className="w-full flex flex-col items-start justify-stretch ">
                 <div className="w-full flex items-center justify-between">
-                  <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
+                  <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
                   <div className="flex items-center gap-x-4">
                     <StatusPengembalianList status={statusPengembalian} />
                     <GridLayoutButtons id={idBuku._id}/>

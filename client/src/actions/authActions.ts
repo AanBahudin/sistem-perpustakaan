@@ -26,28 +26,16 @@ export const registerAction = async(formData: FormData) => {
 
 export const loginAction = async(formData: FormData) => {
     const loginData = Object.fromEntries(formData)
+    const response = await customFetch.post('/auth/login', loginData)
 
-    const response = await queryClient.ensureQueryData({
-        queryKey: ['login'],
-        queryFn: async() => {
-            const response = await customFetch.post('/auth/login', loginData)
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
+    }
 
-            if (response.status >= 400) {
-                return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
-            }
+    const {verifikasiEmail, verifikasiProdi} = response.data.data
+    const url = verifikasiEmail && verifikasiProdi ? '/my' : '/status/account'
 
-            const {verifikasiEmail, verifikasiProdi} = response.data.data 
-            return {
-                message: response.data.message,
-                verifikasiEmail,
-                verifikasiProdi
-            }
-        }
-    })
-
-    const url = response.verifikasiEmail && response.verifikasiProdi ? '/my' : '/status/account'
-
-    return {message: response.message, deskripsi: 'Selamat Datang di Akun Anda', redirectTo: url}
+    return {message: 'Login Berhasil', deskripsi: 'Selamat Datang di Akun Anda', redirectTo: url}
 }
 
 export const logoutAction = async() => {

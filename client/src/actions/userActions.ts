@@ -4,17 +4,11 @@ import { customFetch } from "@/utils/customFetch";
 import { queryClient } from "@/main";
 
 export const profileAction = async() => {
-    const data = await queryClient.ensureQueryData({
-        queryKey: ['profil'],
-        queryFn: async() => {
-            const response = await customFetch.get('/user/profile')
-            if (response.status >= 400) {
-                return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
-            }
-            return response.data.data      
-        }
-    })
-    return data
+    const response = await customFetch.get('/user/profile')
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
+    }
+    return response.data.data
 }
 
 export const updateProfileAction = async(formData: FormData) => {

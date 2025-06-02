@@ -22,7 +22,7 @@ const ListPengembalian = ({data} : PengembalianListType) => {
                     <section key={item._id} className="w-full h-full col-span-6 border rounded-2xl items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
                         <div className="w-full flex flex-col items-start justify-stretch ">
                             <div className="w-full flex items-center justify-between">
-                                <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{formatedDate(createdAt as Date)}</Link>
+                                <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`} className="text-2xl font-semibold group-hover:underline">{formatedDate(createdAt as Date)}</Link>
                                 <StatusPengembalianList status={statusPengembalian} />
                             </div>
 

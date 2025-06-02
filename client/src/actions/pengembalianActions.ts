@@ -7,3 +7,9 @@ export const getPengembalianData = async(search? : string) => {
     }
     return response.data
 }
+
+export const getDetailPengembalianData = async(id: string) => {
+    const response = await customFetch.get(`/pengembalian/user/${id}`)
+
+    return response.data.data
+}

@@ -34,7 +34,7 @@ export const getPengembalianUser = async({ userId, query } : GetAllPengembalianD
 
 // BELUM TESTING
 export const getOnePengembalianUser = async({ pengembalianId, userId } : GetOnePengembalianDataParamsType ) => {
-    const pengembalian = await Pengembalian.findOne({_id: pengembalianId, idPengguna: userId})
+    const pengembalian = await Pengembalian.findOne({_id: pengembalianId, idPengguna: userId}).populate(['idPeminjaman', 'idPengguna', 'idBuku'])
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
 
     return {data: pengembalian}
