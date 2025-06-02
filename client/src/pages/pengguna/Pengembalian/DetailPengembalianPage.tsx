@@ -1,7 +1,6 @@
 import { getDetailBuku } from "@/actions/BukuActions"
-import { getDetailPeminjaman, getPeminjamanByPengembalianId, getPeminjamanData } from "@/actions/peminjamanActions"
+import { getPeminjamanByPengembalianId } from "@/actions/peminjamanActions"
 import { getDetailPengembalianData } from "@/actions/pengembalianActions"
-import { getPerpanjangan } from "@/actions/perpanjanganActions"
 import { profileAction } from "@/actions/userActions"
 import DetailPengembalianContainer from "@/components/pengguna/DetailPengembalian/DetailPengembalianContainer"
 import Container from "@/globals/Container"
@@ -23,10 +22,6 @@ const DetailPengembalian = () => {
         queryKey: ['profil'],
         queryFn: () => profileAction()
       },
-      // {
-      //   queryKey:['pengembalian', id],
-      //   queryFn: () => getDetailPengembalianData('')
-      // },
       {
         queryKey: ['detail-peminjaman', 'pengembalian', id],
         queryFn: () => getPeminjamanByPengembalianId(id!)

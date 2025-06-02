@@ -6,11 +6,10 @@ import ProfilePeminjamanContainer from './ProfilePeminjamanContainer'
 type DetailColumnType = {
   buku: any,
   peminjaman: any,
-  pengembalian: any,
   profileData: any,
 }
 
-const DetailColumn = ({buku, peminjaman, pengembalian, profileData} : DetailColumnType) => {
+const DetailColumn = ({buku, peminjaman, profileData} : DetailColumnType) => {
   return (
     <section className='col-span-8 min-h-[80vh] border rounded-2xl p-6'>
       <ProductReview buku={buku} />
