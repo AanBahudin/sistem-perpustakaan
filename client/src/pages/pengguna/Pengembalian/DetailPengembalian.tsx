@@ -2,6 +2,7 @@ import { getDetailBuku } from "@/actions/BukuActions"
 import { getPeminjamanByPengembalianId } from "@/actions/peminjamanActions"
 import { getDetailPengembalianData } from "@/actions/pengembalianActions"
 import { profileAction } from "@/actions/userActions"
+import DetailPengembalianLoadingPage from "@/components/Loading/DetailPengembalianLoadingPage"
 import DetailPengembalianContainer from "@/components/pengguna/DetailPengembalian/DetailPengembalianContainer"
 import Container from "@/globals/Container"
 import { useQueries } from "@tanstack/react-query"
@@ -29,11 +30,7 @@ const DetailPengembalian = () => {
       {
         queryKey: ['detail-book', idBuku],
         queryFn: () => getDetailBuku(idBuku!)
-      },
-      // {
-      //   queryKey: ['perpanjangan', id],
-      //   queryFn: () => getPerpanjangan(`idPeminjaman=${id}`)
-      // }
+      }
     ]
   })
 
@@ -43,7 +40,7 @@ const DetailPengembalian = () => {
 
   return (
     <Container className="my-20">
-      {isLoading ? <h1>Loading</h1> : <DetailPengembalianContainer detailPinjaman={detailPeminjaman.data} dataDiri={dataDiri.data} detailPengembalian={detailPengembalian.data} detailBuku={detailBuku.data} />}
+      {isLoading ? <DetailPengembalianLoadingPage /> : <DetailPengembalianContainer detailPinjaman={detailPeminjaman.data} dataDiri={dataDiri.data} detailPengembalian={detailPengembalian.data} detailBuku={detailBuku.data} />}
     </Container>
   )
 }

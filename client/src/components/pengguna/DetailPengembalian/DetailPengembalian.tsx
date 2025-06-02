@@ -10,12 +10,7 @@ type DetailPengembalianType = {
 
 const DetailPengembalian = ({data, dataDiri, dataPeminjaman} : DetailPengembalianType) => {
 
-
-    console.log('data pengembalian', data.idPeminjaman._id)
-    console.log('data peminjaman ', dataPeminjaman._id)
-
     const {idBuku: buku} = data
-    // const {_id, judul, stok, tagline, deskripsi, cover} = buku
 
     return (
         <section className="w-full grid grid-cols-12 gap-x-4 mt-10">

@@ -19,7 +19,7 @@ import PerpanjanganPage from "./pages/pengguna/Perpanjangan/PerpanjanganPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
-import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalianPage";
+import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalian";
 
 const router : RouteObject[] = [
     {

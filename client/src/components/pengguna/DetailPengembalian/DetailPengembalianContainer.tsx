@@ -10,7 +10,6 @@ type DetailPengembalianContainerType = {
 
 const DetailPengembalianContainer = ({detailBuku, detailPengembalian, dataDiri, detailPinjaman} : DetailPengembalianContainerType) => {
     const {data} = detailBuku
-    // console.log(st)
 
     return (
         <section className="w-full">
