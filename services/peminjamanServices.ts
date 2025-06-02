@@ -2,7 +2,7 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
 import Peminjaman from "../model/Peminjaman";
 import Pengguna from "../model/Pengguna";
-import { GetOnePeminjamanParamsType, GetOnePeminjamanUser, GetOnePeminjamanUserByBookId, GetSemuaPeminjamanUserParamsType, PembatalanPeminjamanUserParamsType, PengajuanPeminjamanParamsType, PinjamanDikembalikanParamsType, PinjamanUpdatedFieldType, TambahPeminjamanParamsType, TerimaPeminjamanUserParamsType } from "../types/peminjamanTypes";
+import { GetOnePeminjamanParamsType, GetOnePeminjamanUser, GetOnePeminjamanUserByBookId, getOnePeminjamanUserByPengembalianIdType, GetSemuaPeminjamanUserParamsType, PembatalanPeminjamanUserParamsType, PengajuanPeminjamanParamsType, PinjamanDikembalikanParamsType, PinjamanUpdatedFieldType, TambahPeminjamanParamsType, TerimaPeminjamanUserParamsType } from "../types/peminjamanTypes";
 import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../utils/checker";
 import tambahHariKeTanggal from "../utils/tambahHari";
 import { bukuDipinjam } from "./bukuServices";
@@ -49,12 +49,13 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
 
 // SUDAH DITESTING
 export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminjamanUser) => {
-    const peminjaman = await Peminjaman.findOne({_id: peminjamanId, peminjam: userId}).populate(['buku', 'peminjam'])
+    const peminjaman = await Peminjaman.findOne({_id: peminjamanId, peminjam: userId}).populate(['buku', 'peminjam', 'diprosesOleh', 'dataPengembalian'])
     if (!peminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
     return {data: peminjaman}
 }
 
+// SUDAH DITESTING
 export const getOnePeminjamanUserByIdBook = async({userId, bookId} : GetOnePeminjamanUserByBookId) => {
     const peminjaman = await Peminjaman.findOne({
         peminjam: userId, 
@@ -64,9 +65,17 @@ export const getOnePeminjamanUserByIdBook = async({userId, bookId} : GetOnePemin
             {statusPeminjaman: 'Terlambat'},
             {statusPeminjaman: 'Diajukan'},
         ]
-    })
+    }).populate(['buku', 'peminjam', 'diprosesOleh', 'dataPengembalian'])
 
     return peminjaman
+}
+
+// SUDAH DITESTING
+export const getOnePeminjamanUserByPengembalianIdServices = async({userId, pengembalianId} : getOnePeminjamanUserByPengembalianIdType) => {
+    console.log('id pengguna', userId)
+    console.log('id pengembalian', pengembalianId)
+    const data = await Peminjaman.findOne({peminjam:userId,  dataPengembalian: pengembalianId}).populate(['buku', 'peminjam', 'diprosesOleh'])
+    return data
 }
 
 // SUDAH DITESTING

@@ -1,5 +1,5 @@
 import { getDetailBuku } from "@/actions/BukuActions"
-import { getDetailPeminjaman, getPeminjamanData } from "@/actions/peminjamanActions"
+import { getDetailPeminjaman, getPeminjamanByPengembalianId, getPeminjamanData } from "@/actions/peminjamanActions"
 import { getDetailPengembalianData } from "@/actions/pengembalianActions"
 import { getPerpanjangan } from "@/actions/perpanjanganActions"
 import { profileAction } from "@/actions/userActions"
@@ -27,14 +27,10 @@ const DetailPengembalian = () => {
       //   queryKey:['pengembalian', id],
       //   queryFn: () => getDetailPengembalianData('')
       // },
-      // {
-      //   queryKey: ['peminjaman', ''],
-      //   queryFn: () =>  getPeminjamanData(`idPeminjaman${id}`)
-      // },
-      // {
-      //   queryKey: ['detail-peminjaman', id],
-      //   queryFn: () => getDetailPeminjaman(id!)
-      // },
+      {
+        queryKey: ['detail-peminjaman', 'pengembalian', id],
+        queryFn: () => getPeminjamanByPengembalianId(id!)
+      },
       {
         queryKey: ['detail-book', idBuku],
         queryFn: () => getDetailBuku(idBuku!)
@@ -47,12 +43,12 @@ const DetailPengembalian = () => {
   })
 
 
-  const [detailPengembalian, dataDiri, detailBuku] = results
+  const [detailPengembalian, dataDiri, detailPeminjaman, detailBuku] = results
   const isLoading = results.some(q => q.isLoading)
 
   return (
     <Container className="my-20">
-      {isLoading ? <h1>Loading</h1> : <DetailPengembalianContainer dataDiri={dataDiri.data} detailPengembalian={detailPengembalian.data} detailBuku={detailBuku.data} />}
+      {isLoading ? <h1>Loading</h1> : <DetailPengembalianContainer detailPinjaman={detailPeminjaman.data} dataDiri={dataDiri.data} detailPengembalian={detailPengembalian.data} detailBuku={detailBuku.data} />}
     </Container>
   )
 }

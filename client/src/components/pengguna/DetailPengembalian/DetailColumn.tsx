@@ -16,7 +16,9 @@ const DetailColumn = ({buku, peminjaman, pengembalian, profileData} : DetailColu
       <ProductReview buku={buku} />
       <Separator className='my-4' />
       <BookDescription deskripsi={buku.deskripsi} />
-      <ProfilePeminjamanContainer profileData={profileData} />
+      <ProfilePeminjamanContainer 
+        profileData={profileData} 
+        peminjaman={peminjaman} />
     </section>  
   )
 }

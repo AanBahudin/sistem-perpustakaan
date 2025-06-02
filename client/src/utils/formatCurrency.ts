@@ -4,7 +4,7 @@ export function formatRupiah(angka: any, withPrefix = true) {
     if (isNaN(angka)) return withPrefix ? 'Rp0' : '0';
   }
 
-  return (withPrefix ? 'Rp' : '') + angka
+  return (withPrefix ? 'Rp. ' : '') + angka
     .toFixed(0)
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }

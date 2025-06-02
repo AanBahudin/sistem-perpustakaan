@@ -11,7 +11,8 @@ import {
     getPinjamanUser,
     getSinglePinjamanUser,
     pembatalanPinjamanUser,
-    getSinglePinjamanUserByBookId
+    getSinglePinjamanUserByBookId,
+    getSinglePinjamanUserByPengembalianId
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
@@ -36,6 +37,9 @@ router.route('/user')
 
 router.route('/user/book/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUserByBookId)
+
+router.route('/user/pengembalian/:id')
+    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUserByPengembalianId)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUser)

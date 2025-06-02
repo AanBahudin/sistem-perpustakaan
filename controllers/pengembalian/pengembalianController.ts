@@ -13,9 +13,6 @@ import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 export const getAllPengembalianUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     const query = req.query
-
-    console.log(query)
-
     const {data} = await getPengembalianUser({userId, query})
 
     SendDataResponse({

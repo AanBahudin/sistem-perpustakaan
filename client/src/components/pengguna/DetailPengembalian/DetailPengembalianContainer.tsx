@@ -4,15 +4,18 @@ import DetailPengembalian from './DetailPengembalian'
 type DetailPengembalianContainerType = {
     detailPengembalian: any,
     detailBuku: any,
-    dataDiri: any
+    dataDiri: any,
+    detailPinjaman: any
 }
 
-const DetailPengembalianContainer = ({detailBuku, detailPengembalian, dataDiri} : DetailPengembalianContainerType) => {
+const DetailPengembalianContainer = ({detailBuku, detailPengembalian, dataDiri, detailPinjaman} : DetailPengembalianContainerType) => {
     const {data} = detailBuku
+    // console.log(st)
+
     return (
         <section className="w-full">
             <BreadCrumbDetailBuku title={data.judul} from='Pengembalian' url='/my/data/pengembalian' />
-            <DetailPengembalian data={detailPengembalian} dataDiri={dataDiri} />
+            <DetailPengembalian data={detailPengembalian} dataDiri={dataDiri} dataPeminjaman={detailPinjaman} />
         </section>
     )
 }

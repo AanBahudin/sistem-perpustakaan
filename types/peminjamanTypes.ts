@@ -19,6 +19,11 @@ export type GetOnePeminjamanUserByBookId = {
     bookId: string
 }
 
+export type getOnePeminjamanUserByPengembalianIdType = {
+    userId: string,
+    pengembalianId: string
+}
+
 export type PembatalanPeminjamanUserParamsType = {
     idPeminjaman: string,
     userId: string

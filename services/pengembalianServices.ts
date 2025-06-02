@@ -50,7 +50,7 @@ export const pustakawanGetDataPengembalian = async() => {
 
 // SUDAH TESTING
 export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOnePengembalianParamsType) => {
-    const pengembalian = await Pengembalian.findOne({_id: pengembalianId})
+    const pengembalian = await Pengembalian.findOne({_id: pengembalianId}).populate(['idPeminjaman', 'idBuku', 'diprosesOleh'])
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
 
     return {data: pengembalian}
