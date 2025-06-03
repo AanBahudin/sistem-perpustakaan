@@ -5,10 +5,11 @@ import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 
 type PeminjamanSectionType = {
-  peminjaman: any
+  peminjaman: any,
+  linkTarget?: string
 }
 
-const PeminjamanSection = ({peminjaman} : PeminjamanSectionType) => {
+const PeminjamanSection = ({peminjaman, linkTarget='peminjaman'} : PeminjamanSectionType) => {
 
   let { _id, buku:dataBuku, judulBuku, statusPeminjaman, durasiPeminjaman, berakhirPada, diprosesOleh: pustakawan, dataPengembalian } = peminjaman
   berakhirPada = formatedDate(berakhirPada)
@@ -25,7 +26,7 @@ const PeminjamanSection = ({peminjaman} : PeminjamanSectionType) => {
             <PeminjamanDanProfilData label="diproses oleh" value={pustakawan.nama || 'Belum diproses'} />
             <PeminjamanDanProfilData label="data pengambilan" value={dataPengembalian || 'Belum diselesaikan'} />
             <Button size='sm' className="dark:text-white text-[12px] mt-4 flex items-center">
-                <Link to={`/my/peminjaman/${_id}/${dataBuku._id}`} className="flex items-center gap-x-2">
+                <Link to={`/my/${linkTarget}/${_id}/${dataBuku._id}`} className="flex items-center gap-x-2">
                   <ExternalLink className="w-4 h-4" />
                   Data Peminjaman
                 </Link>
