@@ -2,7 +2,7 @@ import { CalendarCheck, CalendarClock } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
-import StatusPerpanjanganList from "../PerpanjanganPengguna.tsx/StatusPerpanjanganList"
+import StatusPerpanjanganList from "../Perpanjangan Pengguna.tsx/StatusPerpanjanganList"
 
 const ListPerpanjangan = ({data} : {data: any}) => {
 

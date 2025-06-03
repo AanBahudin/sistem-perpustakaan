@@ -1,8 +1,8 @@
-import PeminjamanSearch from "@/components/pengguna/peminjamanPengguna/PeminjamanSearch"
-import PeminjamanTab from "@/components/pengguna/peminjamanPengguna/PeminjamanTab"
+import PeminjamanSearch from "@/components/pengguna/peminjaman Pengguna/PeminjamanSearch"
+import PeminjamanTab from "@/components/pengguna/peminjaman Pengguna/PeminjamanTab"
 import { getPeminjamanData } from "@/actions/peminjamanActions"
-import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
-import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
+import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/PeminjamanLoading"
+import PeminjamanDataLayout from "@/components/pengguna/peminjaman Pengguna/PeminjamanDataLayout"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
 

@@ -1,4 +1,4 @@
-import BreadCrumbDetailBuku from "../DetailBukuPengguna/BreadCrumbDetailBuku"
+import BreadCrumbDetailBuku from "../Detail Buku Pengguna/BreadCrumbDetailBuku"
 import AdditionalInfoContainer from "./AdditionalInfoContainer"
 import DetailPeminjaman from "./DetailPeminjaman"
 

@@ -1,8 +1,8 @@
 import Container from '../../../globals/Container'
-import SummaryCard from '@/components/pengguna/DashboardPengguna/SummaryCard'
-import LoanOverview from '@/components/pengguna/DashboardPengguna/LoanOverview'
-import LoanProgress from '@/components/pengguna/DashboardPengguna/LoanProgress'
-import LoanHighlights from '@/components/pengguna/DashboardPengguna/LoanHighlights'
+import SummaryCard from '@/components/pengguna/Dashboard Pengguna/SummaryCard'
+import LoanOverview from '@/components/pengguna/Dashboard Pengguna/LoanOverview'
+import LoanProgress from '@/components/pengguna/Dashboard Pengguna/LoanProgress'
+import LoanHighlights from '@/components/pengguna/Dashboard Pengguna/LoanHighlights'
 
 const KatalogPengguna = () => {
   return (

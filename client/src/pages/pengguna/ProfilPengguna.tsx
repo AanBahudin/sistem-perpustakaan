@@ -1,6 +1,6 @@
 import { profileAction } from "@/actions/userActions"
-import MenuSection from "@/components/pengguna/ProfilPengguna/MenuSection"
-import ProfileCover from "@/components/pengguna/ProfilPengguna/ProfileCover"
+import MenuSection from "@/components/pengguna/Profil Pengguna/MenuSection"
+import ProfileCover from "@/components/pengguna/Profil Pengguna/ProfileCover"
 import Container from "@/globals/Container"
 import { Outlet, redirect } from "react-router-dom"
 

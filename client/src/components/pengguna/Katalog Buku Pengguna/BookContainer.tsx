@@ -1,10 +1,10 @@
 import BookGrid from './BookGrid'
 import BookPagination from './BookPagination'
 
-const BookContainer = ({buku, totalPage, disukai, savedData} : {buku:any, totalPage: number, disukai: any, savedData: any}) => {
+const BookContainer = ({totalPage} : {totalPage: number}) => {
   return (
     <section className='w-full col-span-12'>
-      <BookGrid buku={buku} disukai={disukai} disimpan={savedData} />
+      <BookGrid />
       <BookPagination totalPage={totalPage} />
     </section>
   )

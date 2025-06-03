@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import AdditionalDetailTab from "./AdditionalDetailTab"
 import DataContainer from "./DataContainer"
-import PeminjamanList from "../peminjamanPengguna/PeminjamanList"
+import PeminjamanList from "../peminjaman Pengguna/PeminjamanList"
 import ListPengembalian from "./ListPengembalian"
 import ListPerpanjangan from "./ListPerpanjangan"
 

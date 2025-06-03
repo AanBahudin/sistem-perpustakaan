@@ -1,7 +1,7 @@
 import { Separator } from '@/components/ui/separator'
-import ProfileData from '@/components/pengguna/ProfilPengguna/ProfileData'
+import ProfileData from '@/components/pengguna/Profil Pengguna/ProfileData'
 import { useRouteLoaderData } from 'react-router-dom'
-import PhotoProfile from '@/components/pengguna/ProfilPengguna/PhotoProfile'
+import PhotoProfile from '@/components/pengguna/Profil Pengguna/PhotoProfile'
 import FormContainer from '@/components/form/FormContainer'
 import { updatePhotoAction } from '@/actions/userActions'
 

@@ -19,12 +19,12 @@ import { Eye } from 'lucide-react'
 
 
 export const NoHpDialog = () => {
-  const data = useRouteLoaderData('user-profil')
+  const data = useRouteLoaderData('user-profil') as any
   return (
     <FormContainer action={updateProfileAction} className="grid gap-4 py-4">
         <div className="grid grid-cols-2 items-center gap-4">
           <Label htmlFor='kontak' className="text-right capitalize">Nomor Telepon lama</Label>
-          <Input required id='no_hp' readOnly defaultValue={data.no_hp} className="col-span-3 selection:text-white" />
+          <Input required id='no_hp' readOnly defaultValue={data?.no_hp} className="col-span-3 selection:text-white" />
           <Label htmlFor='kontak' className="text-right capitalize">Nomor Telepon baru</Label>
           <Input required id='no_hp' autoFocus name='no_hp' type='text'  className="col-span-3 selection:text-white" />
         </div>
@@ -34,7 +34,7 @@ export const NoHpDialog = () => {
 }
 
 export const KelasDialog = () => {
-  const data = useRouteLoaderData('user-profil')
+  const data = useRouteLoaderData('user-profil') as any
   return (
     <FormContainer action={updateProfileAction} className="grid gap-4 py-4">
         <div className="grid grid-cols-2 items-center gap-4">
@@ -57,12 +57,12 @@ export const KelasDialog = () => {
 }
 
 export const NamaDialog = () => {
-  const data = useRouteLoaderData('user-profil')
+  const data = useRouteLoaderData('user-profil') as any
   return (
     <FormContainer action={updateProfileAction} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor='nama' className="text-right capitalize"> Nama Lama </Label>
-        <Input readOnly defaultValue={data.nama} className="col-span-3 selection:text-white" />
+        <Input readOnly defaultValue={data?.nama} className="col-span-3 selection:text-white" />
         <Label htmlFor='nama' className="text-right capitalize"> Nama Baru </Label>
         <Input required id='nama' name='nama' autoFocus className="col-span-3 selection:text-white" />
       </div>
@@ -72,7 +72,7 @@ export const NamaDialog = () => {
 }
 
 export const EmailDialog = () => {
-  const data = useRouteLoaderData('user-profil')
+  const data = useRouteLoaderData('user-profil') as any
   return (
     <FormContainer action={updateEmailAction} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">

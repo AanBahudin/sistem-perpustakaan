@@ -4,7 +4,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 import StatusPengembalianList from "./StatusPengembalianList"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
-import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
+import PeminjamanKategori from "../peminjaman Pengguna/PeminjamanKategori"
 
 type PengembalianListType = {
     data: any

@@ -1,8 +1,8 @@
 import { getPerpanjangan } from '@/actions/perpanjanganActions'
-import PeminjamanLoading from '@/components/pengguna/peminjamanPengguna/PeminjamanLoading'
-import PerpanjanganDataLayout from '@/components/pengguna/PerpanjanganPengguna.tsx/PerpanjanganDataLayout'
-import PerpanjanganSearch from '@/components/pengguna/PerpanjanganPengguna.tsx/PerpanjanganSearch'
-import PerpanjanganTab from '@/components/pengguna/PerpanjanganPengguna.tsx/PerpanjanganTab'
+import PeminjamanLoading from '@/components/pengguna/peminjaman Pengguna/PeminjamanLoading'
+import PerpanjanganDataLayout from '@/components/pengguna/Perpanjangan Pengguna.tsx/PerpanjanganDataLayout'
+import PerpanjanganSearch from '@/components/pengguna/Perpanjangan Pengguna.tsx/PerpanjanganSearch'
+import PerpanjanganTab from '@/components/pengguna/Perpanjangan Pengguna.tsx/PerpanjanganTab'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 

@@ -1,5 +1,5 @@
 import { Separator } from '@/components/ui/separator'
-import ProfileData from '@/components/pengguna/ProfilPengguna/ProfileData'
+import ProfileData from '@/components/pengguna/Profil Pengguna/ProfileData'
 import { useRouteLoaderData } from 'react-router-dom'
 
 const CredentialsProfilePage = () => {

@@ -2,7 +2,7 @@ import { CalendarCheck, CalendarClock, CalendarSync } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
-import StatusPengembalianList from "../PengembalianPengguna/StatusPengembalianList"
+import StatusPengembalianList from "../Pengembalian Pengguna/StatusPengembalianList"
 
 type PengembalianListType = {
     data: any

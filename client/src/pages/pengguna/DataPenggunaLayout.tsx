@@ -1,9 +1,9 @@
 
 import Container from "@/globals/Container"
 import { Outlet } from "react-router-dom"
-import ToggleLayout from "@/components/pengguna/peminjamanPengguna/ToggleLayout"
-import ProfilContainer from "@/components/pengguna/peminjamanPengguna/ProfilContainer"
-import MenuContainer from "@/components/pengguna/peminjamanPengguna/MenuContainer"
+import ToggleLayout from "@/components/pengguna/peminjaman Pengguna/ToggleLayout"
+import ProfilContainer from "@/components/pengguna/peminjaman Pengguna/ProfilContainer"
+import MenuContainer from "@/components/pengguna/peminjaman Pengguna/MenuContainer"
 
 
 const DataPenggunaLayout = () => {

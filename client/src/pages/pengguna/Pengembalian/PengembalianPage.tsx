@@ -1,9 +1,9 @@
 import {useSearchParams} from 'react-router-dom'
-import PengembalianTabs from '@/components/pengguna/PengembalianPengguna/PengembalianTabs'
-import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
+import PengembalianTabs from '@/components/pengguna/Pengembalian Pengguna/PengembalianTabs'
+import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/PeminjamanLoading"
 import { getPengembalianData } from '@/actions/pengembalianActions'
-import PengembalianSearch from '@/components/pengguna/PengembalianPengguna/PengembalianSearch'
-import PengembalianDataLayout from '@/components/pengguna/PengembalianPengguna/PengembalianDataLayout'
+import PengembalianSearch from '@/components/pengguna/Pengembalian Pengguna/PengembalianSearch'
+import PengembalianDataLayout from '@/components/pengguna/Pengembalian Pengguna/PengembalianDataLayout'
 import { useQuery } from '@tanstack/react-query'
 
 const PengembalianPage = () => {
