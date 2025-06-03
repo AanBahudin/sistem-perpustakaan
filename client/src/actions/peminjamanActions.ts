@@ -32,10 +32,11 @@ export const getPeminjamanByBookId = async(bookId: string) => {
 }
 
 export const getPeminjamanByPengembalianId = async(idPengembalian: string) => {
-    console.log(idPengembalian)
     const response = await customFetch.get(`/pinjaman/user/pengembalian/${idPengembalian}`)
     return response.data.data
 }
+
+
 
 export const tambahPeminjaman = async(formData: FormData) => {
     const data = Object.fromEntries(formData)

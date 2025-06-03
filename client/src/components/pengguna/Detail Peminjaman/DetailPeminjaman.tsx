@@ -1,6 +1,6 @@
-import DetailButton from "../Detail Buku Pengguna/DetailButton"
+import DetailButton from "../DetailBukuPengguna/DetailButton"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
-import StatsDetailInfo from "../Detail Buku Pengguna/StatsDetailInfo"
+import StatsDetailInfo from "../DetailBukuPengguna/StatsDetailInfo"
 import DetailPeminjamanInfo from "./DetailPeminjamanInfo"
 
 type DetailPeminjamanType = {

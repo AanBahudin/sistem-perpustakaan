@@ -16,7 +16,7 @@ const PerpanjanganPage = () => {
   })
 
   return (
-    <main className='col-span-9'>
+    <main className='min-h-[80vh] col-span-9'>
       <PerpanjanganTab />
       <PerpanjanganSearch />
 

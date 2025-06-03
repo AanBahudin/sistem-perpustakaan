@@ -1,4 +1,4 @@
-import BreadCrumbDetailBuku from '../Detail Buku Pengguna/BreadCrumbDetailBuku'
+import BreadCrumbDetailBuku from '../DetailBukuPengguna/BreadCrumbDetailBuku'
 import DetailPengembalian from './DetailPengembalian'
 
 type DetailPengembalianContainerType = {

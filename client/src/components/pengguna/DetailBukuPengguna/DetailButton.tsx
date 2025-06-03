@@ -52,27 +52,6 @@ const PinjamButton = ({stok, idBuku} : {stok: number, idBuku: string}) => {
     )
 }
 
-const DiajukanButton = ({idPeminjaman, idBuku} : {idPeminjaman: string, idBuku: string}) => {
-
-    const {isLoading} = useFormStatus()
-
-    return (
-        <section className="w-full flex items-center mt-4 gap-x-8">
-            <input type="hidden" name="idPeminjaman" id="idPeminjaman" value={idPeminjaman} />
-            <input type="hidden" name="idBook" id="idBook" value={idBuku} />
-            <Button disabled={isLoading} type='submit' className="text-white bg-destructive/80 hover:bg-destructive text-center w-1/2">
-                {isLoading ? (
-                    <>
-                        <Loader2 className='animate-spin' />
-                        <span>Membatalkan...</span>
-                    </>
-                ) : 'Batalkan Pengajuan'}
-            </Button>
-            <p className="text-muted-foreground text-sm">Anda telah mengajukan peminjaman untuk buku ini</p>
-        </section>
-    )
-}
-
 const DipinjamButton = () => {
     return (
         <div className="flex items-center mt-4 gap-x-8">

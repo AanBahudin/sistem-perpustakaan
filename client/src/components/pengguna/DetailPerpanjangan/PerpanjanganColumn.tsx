@@ -1,0 +1,31 @@
+import { Button } from "@/components/ui/button"
+import TimeDisplay from "../Detail Pengembalian/TimeDisplay"
+import PerpanjanganDetailDisplay from "./PerpanjanganDetailDisplay"
+
+
+type PerpanjanganColumnType = {
+    peminjaman: any,
+    perpanjangan: any
+}
+
+const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType) => {
+
+    let {createdAt: tanggalPeminjaman, berakhirPada} = peminjaman
+    let {disetujui} = perpanjangan
+
+    return (
+        <section className="rounded-2xl h-fit p-6 col-span-4 border">
+            <h1 className='font-bold uppercase'>Detail summary</h1>
+
+            <main className='bg-popover rounded-lg p-4 mt-4 mb-2'>
+                <TimeDisplay tanggalPinjam={tanggalPeminjaman} tanggalKembali={berakhirPada} />
+                <PerpanjanganDetailDisplay peminjaman={peminjaman} perpanjangan={perpanjangan} />
+            </main> 
+
+            <h1 className='font-bold uppercase'>status perpanjangan</h1>
+            <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center text-white'>{disetujui}</Button>
+        </section>
+    )
+}
+
+export default PerpanjanganColumn

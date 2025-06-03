@@ -16,7 +16,7 @@ const DetailPengembalian = ({data, dataDiri, dataPeminjaman} : DetailPengembalia
         <section className="w-full grid grid-cols-12 gap-x-4 mt-10">
             <DetailColumn profileData={dataDiri} buku={buku} peminjaman={dataPeminjaman} />
             <InvoiceColumn dataPengembalian={data} dataPinjaman={dataPeminjaman} />
-        </section>
+        </section> 
     )
 }
 

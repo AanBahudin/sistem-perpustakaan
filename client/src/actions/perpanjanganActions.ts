@@ -7,3 +7,8 @@ export const getPerpanjangan = async(query: string) => {
     }
     return response.data
 }
+
+export const getPerpanjanganDetail = async(id: string) => {
+    const response = await customFetch.get(`/perpanjangan/user/${id}`)
+    return response.data.data
+}
