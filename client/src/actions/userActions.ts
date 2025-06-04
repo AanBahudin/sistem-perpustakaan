@@ -11,6 +11,14 @@ export const profileAction = async() => {
     return response.data.data
 }
 
+export const getStats = async() => {
+    const response = await customFetch.get('/user/profile/stats')
+    if (response.status >= 400) {
+        return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
+    }
+    return response.data.data
+}
+
 export const updateProfileAction = async(formData: FormData) => {
     const inputData = Object.fromEntries(formData)
     const response = await customFetch.patch('/user/update/profil', inputData)
@@ -23,8 +31,6 @@ export const updateProfileAction = async(formData: FormData) => {
 
 export const updatePhotoAction = async(formData: FormData) => {
     const file = formData.get('fotoProfil') as File
-    console.log(file.size)
-
     if (file && file.size > 200000) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Ukuran foto maksimal 4000 MB'}
     }

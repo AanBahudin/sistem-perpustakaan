@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getProfil, updateProfil, updatingPassword, updatingEmail, photoUpdate } from "../../services/penggunaServices";
+import { getProfil, updateProfil, updatingPassword, updatingEmail, photoUpdate, userStats } from "../../services/penggunaServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH DITESTING
@@ -11,6 +11,18 @@ export const getProfile = async(req: any, res: Response) => {
         res,
         message: 'Data profil',
         data: userData
+    })
+}
+
+export const getStats = async(req: any | Request, res: Response) => {
+    const {userId} = req.user
+
+    const data = await userStats({userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data stats',
+        data
     })
 }
 

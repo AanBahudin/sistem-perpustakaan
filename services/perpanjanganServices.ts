@@ -43,7 +43,7 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
 // SUDAH DITESTING
 export const getSemuaPerpanjangan = async({userId, query} : GetSemauPerpanjanganParamsType) => {
 
-    if (query.judulBuku) {
+    if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
 

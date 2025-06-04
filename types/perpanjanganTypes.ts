@@ -10,7 +10,7 @@ export type TambahPerpanjanganParamsType = {
 
 export type GetSemauPerpanjanganParamsType = {
     userId: string,
-    query: any
+    query?: any
 }
 
 export type GetOnePerpanjanganParamsType = {

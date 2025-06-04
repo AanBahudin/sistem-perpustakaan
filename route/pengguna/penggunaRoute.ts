@@ -1,5 +1,5 @@
 import express from 'express'
-import { getProfile, updateProfile, updateEmail, updatePassword, updatePhoto } from '../../controllers/pengguna/penggunaController'
+import { getProfile, updateProfile, updateEmail, updatePassword, updatePhoto, getStats } from '../../controllers/pengguna/penggunaController'
 import { validateUpdateEmailPengguna, validateUpdateInputPengguna, validateUpdatePasswordPengguna, validateUpdatePhoto } from '../../validator/penggunaValidator'
 import { UpdateEmailPermissionMiddleware } from '../../middleware/utilsMiddleware'
 import { userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -8,7 +8,10 @@ import upload from '../../middleware/multerMiddleware'
 const router = express.Router()
 
 router.route('/profile')
-    .get(getProfile)
+    .get(userMiddlewareAuthorized, getProfile)
+
+router.route('/profile/stats')
+    .get(userMiddlewareAuthorized, getStats)
 
 router.route('/update/profil')
     .patch(userMiddlewareAuthorized, validateUpdateInputPengguna, updateProfile)

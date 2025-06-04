@@ -6,6 +6,10 @@ import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, TambahDendaPen
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 import cloudinary from 'cloudinary'
 import { promises as fs } from 'fs'
+import { getSemuaPeminjamanUser } from './peminjamanServices'
+import { getPengembalianUser } from './pengembalianServices'
+import { getAllPerpanjanganUser } from '../controllers/perpanjangan/perpanjanganController'
+import { getSemuaPerpanjangan } from './perpanjanganServices'
 
 
 // SUDAH DITESTING
@@ -113,8 +117,53 @@ export const updatingEmail = async({userId, newEmail} : UpdateEmailParamsService
     }
 }
 
+export const userStats = async({userId} : {userId: string}) => {
+    const peminjaman = await getSemuaPeminjamanUser({userId: userId})
+    const totalPeminjaman = peminjaman.data.length
+
+    const peminjamanAktif = await getSemuaPeminjamanUser({userId: userId, query: {statusPeminjaman: 'Dipinjam'}})
+    const totalPeminjamanAktif = peminjamanAktif.data.length
+
+    const pengembalian = await getPengembalianUser({userId})
+    const totalPengembalian = peminjaman.data.length
+
+    const perpanjangan = await getSemuaPerpanjangan({userId: userId})
+    const totalPerpanjangan = perpanjangan.data.length
+
+    const summaryData = [
+        {
+            title: 'Buku dipinjam',
+            value: totalPeminjaman
+        },
+        {
+            title: 'Peminjaman aktif',
+            value: totalPeminjamanAktif
+        },
+        {
+            title: 'Buku diperpanjang',
+            value: totalPerpanjangan
+        },
+        {
+            title: 'Buku dikembalikan',
+            value: totalPengembalian
+        },
+        
+    ]
+
+    const data = {
+        peminjaman: peminjaman.data,
+        pengembalian: pengembalian.data,
+        perpanjangan: perpanjangan.data,
+        peminjamanAktif: peminjamanAktif.data,
+        summaryData
+    }
+
+    return data
+}
+
 
 // FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN
+
 
 export const penggunaMengembalikan = async({ idPengguna } : PenggunaMeminjamParamsType) => {
     const pengguna = await Pengguna.findOneAndUpdate(

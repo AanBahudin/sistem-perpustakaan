@@ -6,7 +6,7 @@ export type PengajuanPeminjamanParamsType = {
 
 export type GetSemuaPeminjamanUserParamsType = {
     userId: string,
-    query: any
+    query?: any
 }
 
 export type GetOnePeminjamanUser = {

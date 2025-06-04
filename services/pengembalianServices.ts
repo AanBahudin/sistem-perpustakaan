@@ -22,8 +22,7 @@ import {
 
 // SUDAH TESTING
 export const getPengembalianUser = async({ userId, query } : GetAllPengembalianDataParamsType) => {
-
-    if (query.judulBuku) {
+    if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
 
