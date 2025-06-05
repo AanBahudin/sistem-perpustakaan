@@ -1,14 +1,13 @@
 import {
-      Table,
-      TableBody,
-      TableCaption,
-      TableCell,
-      TableHead,
-      TableHeader,
-      TableRow,
-    } from "@/components/ui/table"
-    import { ScrollArea } from '../../ui/scroll-area'
-    import { formatedDate } from "@/utils/formatDate"
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
+import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 
 type TablePengembalianType = {
@@ -17,10 +16,11 @@ type TablePengembalianType = {
 
 const TablePengembalian = ({pengembalian} : TablePengembalianType) => {
     return (
-        <Table className='w-full mt-6'>
-            {pengembalian.length === 0 && <TableCaption className='my-2'>Belum ada pengembalian</TableCaption>}
-            
-            <ScrollArea className='w-full h-[450px] p-2'>
+         <div className="w-full mt-6 overflow-hidden rounded">
+            <Table className='w-full'>
+                {pengembalian.length === 0 && (
+                    <TableCaption className='my-2'>Belum ada pengembalian</TableCaption>
+                )}
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[50px]">No</TableHead>
@@ -31,34 +31,40 @@ const TablePengembalian = ({pengembalian} : TablePengembalianType) => {
                         <TableHead className="text-center">Tanggal</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
-                    {pengembalian.map((item: any, index: number) => {
-                        const {idBuku, statusPengembalian:status} = item
-                        const statusBg = status === 'Dikembalikan' ? 'primary' : 'secondary'
-                        return (
-                        <TableRow key={index} className="group">
-                            <TableCell className="font-medium">{index + 1}</TableCell>
-                            <TableCell className="group-hover:underline">
-                                <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`}>{idBuku.judul}</Link>
-                            </TableCell>
-                            <TableCell className="text-center">
-                            <p className={`w-full bg-${statusBg} flex-1 py-2 rounded text-[12px]`}>
-                                {item.statusPengembalian}
-                            </p>
-                            </TableCell>
-                            <TableCell className="text-center flex">
-                            <p className="bg-popover border flex-1 py-2 rounded text-[12px]">
-                                {item.keadaanBuku}
-                            </p>
-                            </TableCell>
-                            <TableCell className="text-center">{item.durasiKeterlambatan + ' hari' || '-'}</TableCell>
-                            <TableCell className="text-center">{formatedDate(item.createdAt)}</TableCell>
-                        </TableRow>
-                        )
-                    })}
-                </TableBody>
-            </ScrollArea>
-        </Table>
+            </Table>
+
+            <div className="h-[300px] overflow-y-auto scroll-custom">
+                <Table className='w-full mt-6'>
+                    <TableBody>
+                        {pengembalian.map((item: any, index: number) => {
+                            const {idBuku, statusPengembalian:status} = item
+                            const statusBg = status === 'Dikembalikan' ? 'primary' : 'secondary'
+                            return (
+                            <TableRow key={index} className="group">
+                                <TableCell className="font-medium text-center w-[50px]">{index + 1}</TableCell>
+                                <TableCell className="group-hover:underline w-[400px]">
+                                    <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`}>{idBuku.judul.slice(0, 69)}</Link>
+                                </TableCell>
+                                <TableCell className="text-center w-[200px]">
+                                    <p className={`w-full bg-${statusBg} flex-1 py-2 rounded text-[12px]`}>
+                                        {item.statusPengembalian}
+                                    </p>
+                                </TableCell>
+                                <TableCell className="text-center w-[200px]">
+                                <p className="bg-popover border flex-1 py-2 rounded text-[12px]">
+                                    {item.keadaanBuku}
+                                </p>
+                                </TableCell>
+                                <TableCell className="text-center w-[200px]">{item.durasiKeterlambatan + ' hari' || '-'}</TableCell>
+                                <TableCell className="text-center">{formatedDate(item.createdAt)}</TableCell>
+                            </TableRow>
+                            )
+                        })}
+                    </TableBody>
+                </Table>
+            </div>
+            
+         </div>
     )
 }
 
