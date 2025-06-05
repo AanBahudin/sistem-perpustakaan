@@ -1,5 +1,5 @@
 import {
-  Table,
+  Table,  
   TableBody,
   TableCaption,
   TableCell,
@@ -17,7 +17,7 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
           {peminjaman.length === 0 && (
             <TableCaption className="my-2">Belum ada peminjaman</TableCaption>
           )}
-          <TableHeader className="sticky top-0 z-10">
+          <TableHeader>
             <TableRow>
               <TableHead className="w-[50px] text-center">No</TableHead>
               <TableHead className="w-[500px]">Judul Buku</TableHead>
