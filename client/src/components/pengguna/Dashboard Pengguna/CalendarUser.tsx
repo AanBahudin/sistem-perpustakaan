@@ -6,14 +6,12 @@ const CalendarPengguna = () => {
     const [date, setDate] = React.useState<Date | undefined>(new Date())
     
     return (
-        <div className='hidden lg:grid lg:col-span-3 w-full place-self-center bg-primary-foreground dark:bg-card rounded-xl border'>
-            <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                className="w-full flex items-center justify-center rounded-md border"
-            />
-        </div>
+        <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            className="w-fit ml-auto rounded-2xl border bg-primary/20"
+        />
     )
 }
 

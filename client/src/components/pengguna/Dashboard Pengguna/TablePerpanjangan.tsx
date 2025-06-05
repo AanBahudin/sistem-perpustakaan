@@ -29,7 +29,7 @@ const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
             </TableHeader>
         </Table>
 
-        <div className="h-[300px] overflow-y-auto scroll-custom">
+        <div className="h-[300px] overflow-y-auto mnscroll-custom">
             <Table className='w-full mt-6'>
                 <TableBody>
                     {perpanjangan.map((item: any, index: number) => {

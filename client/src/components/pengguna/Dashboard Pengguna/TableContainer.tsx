@@ -15,9 +15,8 @@ type TableContainerType = {
 const TableContainer = ({peminjaman, perpanjangan, pengembalian, peminjamanAktif} : TableContainerType) => {
 
   const {activeTab} = useSelector((state:any) => state.dashboardState)
-  console.log(activeTab === 'deadline')
   return (
-    <section className='min-h-full col-span-12 lg:col-span-12 bg-primary-foreground dark:bg-card rounded-xl border overflow-x-auto'>
+    <section className='min-h-full col-span-12 lg:col-span-12 rounded-xl border-2 overflow-x-auto bg-primary/20'>
         <section className='min-w-[700px]'>
           <section className='p-4'>
             <TableTabs />
