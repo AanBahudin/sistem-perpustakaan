@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/table"
 import { ScrollArea } from '../../ui/scroll-area'
 import { formatedDate } from "@/utils/formatDate"
+import { Link } from "react-router-dom"
 
 const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
   return (
     <Table className='w-full mt-6'>
         {perpanjangan.length === 0 && <TableCaption className='my-2'>Belum ada perpanjangan</TableCaption>}
-        <ScrollArea className='w-full h-[250px] p-2'>
+        <ScrollArea className='w-full h-[450px] p-2'>
         <TableHeader>
             <TableRow>
             <TableHead className="w-[50px]">No</TableHead>
@@ -30,9 +31,11 @@ const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
             const {idBuku, disetujui:status} = item
             const statusBg = status === 'Diterima' ? 'primary' : (status === 'Ditolak' ? 'destructive' : 'secondary')
             return (
-                <TableRow key={index}>
+                <TableRow key={index} className="group">
                     <TableCell className="font-medium">{index + 1}</TableCell>
-                    <TableCell>{idBuku.judul}</TableCell>
+                    <TableCell className="group-hover:underline">
+                        <Link to={`/my/perpanjangan/${item._id}/${idBuku._id}`}>{idBuku.judul}</Link>
+                    </TableCell>
                     <TableCell className="text-center">
                         <p className={`w-full bg-${statusBg} flex-1 py-2 rounded text-[12px]`}>
                         {item.disetujui}
