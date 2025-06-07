@@ -20,8 +20,8 @@ const DeadlineTable = ({peminjamanAktif} : {peminjamanAktif:any}) => {
         )}
 
         <TableHeader>
-          <TableRow>
-            <TableHead className="w-[50px]">No</TableHead>
+          <TableRow className='border-primary/20'>
+            <TableHead className="w-[50px]  text-center">No</TableHead>
             <TableHead className="w-[400px]">Judul Buku</TableHead>
             <TableHead className="w-[150px] text-center">Status</TableHead>
             <TableHead className="text-center w-[150px]">Kondisi</TableHead>
@@ -32,24 +32,24 @@ const DeadlineTable = ({peminjamanAktif} : {peminjamanAktif:any}) => {
       </Table>
 
       <div className="h-[300px] overflow-y-auto scroll-custom">
-         <Table className='w-full mt-6'>
+         <Table className='w-full'>
             <TableBody>
               {peminjamanAktif.reverse().map((item: any, index: number) => {
                 const {buku, statusPeminjaman:status} = item
                 const statusBg = status === 'Dipinjam' ? 'primary' : (status === 'Ditolak' ? 'destructive' : (status === 'Dikembalikan' ? 'primary-foreground' : 'popover' ))
                 return (
-                  <TableRow key={index} className='group'>
+                  <TableRow key={index} className='group border-primary/20'>
                       <TableCell className="font-medium w-[50px] text-center">{index + 1}</TableCell>
                       <TableCell className='group-hover:underline w-[400px]'>
                         <Link to={`/my/peminjaman/${item._id}/${buku._id}`}>{buku.judul} </Link>
                       </TableCell>
                       <TableCell className="text-center w-[150px]">
-                        <p className={`w-full bg-${statusBg} flex-1 py-2 rounded text-[12px] text-white`}>
+                        <p className={`w-full bg-${statusBg} flex-1 py-2 rounded-lg text-[12px] text-white`}>
                           {item.statusPeminjaman}
                         </p>
                       </TableCell>
                       <TableCell className="text-center w-[150px]">
-                        <p className="bg-popover border flex-1 py-2 rounded text-[12px]">
+                        <p className="bg-popover flex-1 py-2 rounded-lg text-[12px]">
                           {item.kondisi}
                         </p>
                       </TableCell>

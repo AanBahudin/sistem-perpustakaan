@@ -49,6 +49,7 @@ export const tambahPeminjaman = async(formData: FormData) => {
     }
 
     await queryClient.invalidateQueries({ queryKey: ['detail-peminjaman', idBuku] })
+    await queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna'] })
     
     return {
         message: 'Peminjaman Diajukkan',

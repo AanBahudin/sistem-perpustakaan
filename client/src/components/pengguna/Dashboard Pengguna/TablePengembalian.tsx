@@ -22,8 +22,8 @@ const TablePengembalian = ({pengembalian} : TablePengembalianType) => {
                     <TableCaption className='my-2'>Belum ada pengembalian</TableCaption>
                 )}
                 <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[50px]">No</TableHead>
+                    <TableRow className="border-primary/20">
+                        <TableHead className="w-[50px] text-center">No</TableHead>
                         <TableHead className="w-[400px]">Judul Buku</TableHead>
                         <TableHead className="w-[200px] text-center">Status</TableHead>
                         <TableHead className="text-center w-[200px]">Kondisi</TableHead>
@@ -34,24 +34,24 @@ const TablePengembalian = ({pengembalian} : TablePengembalianType) => {
             </Table>
 
             <div className="h-[300px] overflow-y-auto scroll-custom">
-                <Table className='w-full mt-6'>
+                <Table className='w-full'>
                     <TableBody>
                         {pengembalian.map((item: any, index: number) => {
                             const {idBuku, statusPengembalian:status} = item
-                            const statusBg = status === 'Dikembalikan' ? 'primary' : 'secondary'
+                            const statusBg = status === 'Dikembalikan' ? 'primary' : 'popover'
                             return (
-                            <TableRow key={index} className="group">
+                            <TableRow key={index} className="group border-primary/20">
                                 <TableCell className="font-medium text-center w-[50px]">{index + 1}</TableCell>
                                 <TableCell className="group-hover:underline w-[400px]">
                                     <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`}>{idBuku.judul.slice(0, 69)}</Link>
                                 </TableCell>
                                 <TableCell className="text-center w-[200px]">
-                                    <p className={`w-full bg-${statusBg} flex-1 py-2 rounded text-[12px]`}>
+                                    <p className={`w-full bg-${statusBg} flex-1 py-2 rounded-lg text-[12px]`}>
                                         {item.statusPengembalian}
                                     </p>
                                 </TableCell>
                                 <TableCell className="text-center w-[200px]">
-                                <p className="bg-popover border flex-1 py-2 rounded text-[12px]">
+                                <p className="bg-popover flex-1 py-2 rounded-lg text-[12px]">
                                     {item.keadaanBuku}
                                 </p>
                                 </TableCell>

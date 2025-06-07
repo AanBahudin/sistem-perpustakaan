@@ -198,3 +198,12 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
     return {data: updatedPengembalian}
     // return {data: pengembalian}
 }
+
+
+
+// digunakan di services lain
+
+export const getTotalBukuHilangByUser = async({idPengguna} : {idPengguna: string}) => {
+    const dataHilang = await Pengembalian.find({idPengguna, isMissing: true})
+    return dataHilang
+}

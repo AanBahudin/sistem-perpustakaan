@@ -17,7 +17,7 @@ const PeminjamanPage = () => {
   })
 
   return (
-    <main className="min-h-[80vh] min-h-[90vh] col-span-9">
+    <main className="min-h-[90vh] col-span-9">
       <PeminjamanTab  />
       <PeminjamanSearch />
       

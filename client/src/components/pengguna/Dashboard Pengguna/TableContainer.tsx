@@ -4,15 +4,17 @@ import TablePerpanjangan from './TablePerpanjangan'
 import { useSelector } from 'react-redux'
 import TablePengembalian from './TablePengembalian'
 import DeadlineTable from './DeadlineTable'
+import TableKehilangan from './TableKehilangan'
 
 type TableContainerType = {
   peminjaman: any,
   perpanjangan: any,
   pengembalian: any,
-  peminjamanAktif: any
+  peminjamanAktif: any,
+  bukuHilang: any
 }
 
-const TableContainer = ({peminjaman, perpanjangan, pengembalian, peminjamanAktif} : TableContainerType) => {
+const TableContainer = ({peminjaman, perpanjangan, pengembalian, peminjamanAktif, bukuHilang} : TableContainerType) => {
 
   const {activeTab} = useSelector((state:any) => state.dashboardState)
   return (
@@ -24,6 +26,7 @@ const TableContainer = ({peminjaman, perpanjangan, pengembalian, peminjamanAktif
             {activeTab === 'perpanjangan' && <TablePerpanjangan perpanjangan={perpanjangan} />}
             {activeTab === 'pengembalian' && <TablePengembalian pengembalian={pengembalian} />}
             {activeTab === 'deadline' && <DeadlineTable peminjamanAktif={peminjamanAktif} />}
+            {activeTab === 'hilang' && <TableKehilangan bukuHilang={bukuHilang}/>}
           </section>
         </section>
     </section>

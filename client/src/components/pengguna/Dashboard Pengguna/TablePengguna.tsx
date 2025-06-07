@@ -18,7 +18,7 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
             <TableCaption className="my-2">Belum ada peminjaman</TableCaption>
           )}
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-primary/20">
               <TableHead className="w-[50px] text-center">No</TableHead>
               <TableHead className="w-[500px]">Judul Buku</TableHead>
               <TableHead className="w-[150px] text-center">Status</TableHead>
@@ -43,7 +43,7 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
                     ? "primary-foreground"
                     : "popover"
                   return (
-                    <TableRow key={index} className="group">
+                    <TableRow key={index} className="group border-primary/20">
                       <TableHead className="font-medium w-[50px] text-center">{index + 1}</TableHead>
                       <TableCell className="group-hover:underline w-[500px]">
                         <Link to={`/my/peminjaman/${item._id}/${buku._id}`}>
@@ -51,13 +51,13 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
                         </Link>
                       </TableCell>
                       <TableCell className="text-center w-[150px]">
-                        <p className={` bg-${statusBg} flex-1 text-center py-2 rounded text-[12px] text-white`}>
+                        <p className={` bg-${statusBg} flex-1 text-center py-2 rounded-lg text-[12px] text-white`}>
                           {item.statusPeminjaman}
                         </p>
                       </TableCell>
                       <TableCell className="text-center w-[150px]">
-                        <p className="bg-popover border w-full  py-2 rounded text-[12px]">
-                          {item.kondisi}
+                        <p className="bg-popover flex-1 w-full py-2 rounded-lg text-[12px]">
+                          {item.kondisi || '-'}
                         </p>
                       </TableCell>
                       <TableCell className="text-center w-[150px] ">

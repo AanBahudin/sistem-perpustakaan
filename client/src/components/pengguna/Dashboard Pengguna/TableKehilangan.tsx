@@ -10,20 +10,17 @@ import {
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
 
-const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
+const TableKehilangan = ({bukuHilang} : {bukuHilang: any}) => {
   return (
     <div className="w-full mt-6 overflow-hidden rounded">
         <Table className='w-full'>
-            {perpanjangan.length === 0 && (
-                <TableCaption className='my-2'>Belum ada perpanjangan</TableCaption>
-            )}
+            
             <TableHeader>
                 <TableRow className="border-primary/20">
                     <TableHead className="w-[50px] text-center">No</TableHead>
                     <TableHead className="w-[350px]">Judul Buku</TableHead>
-                    <TableHead className="w-[200px] text-center">Status Perpanjangan</TableHead>
-                    <TableHead className="text-center w-[400px]">Alasan</TableHead>
-                    <TableHead className="w-[100px] text-center">Durasi</TableHead>
+                    <TableHead className="w-[200px] text-center">ID Peminjaman</TableHead>
+                    <TableHead className="w-[100px] text-center">Denda</TableHead>
                     <TableHead className="text-center">Tanggal</TableHead>
                 </TableRow>
             </TableHeader>
@@ -31,8 +28,11 @@ const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
         <div className="h-[300px] overflow-y-auto mnscroll-custom">
             <Table className='w-full'>
+                {bukuHilang.length === 0 && (
+                    <TableCaption className=''>Belum ada buku dihilangkan</TableCaption>
+                )}
                 <TableBody>
-                    {perpanjangan.map((item: any, index: number) => {
+                    {bukuHilang.map((item: any, index: number) => {
                         const {idBuku, disetujui:status} = item
                         const statusBg = status === 'Diterima' ? 'primary' : (status === 'Ditolak' ? 'destructive' : 'popover')
                         return (
@@ -63,4 +63,4 @@ const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
   )
 }
 
-export default TablePerpanjangan
+export default TableKehilangan

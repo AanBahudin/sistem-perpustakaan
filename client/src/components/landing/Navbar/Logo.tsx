@@ -1,10 +1,9 @@
-import React from 'react'
 import { BookOpenText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const Logo : React.FC = () => {
+const Logo = ({url = '/'} : {url?: string}) => {
   return (
-    <Link to='/' className='w-10 h-10 rounded-md bg-primary flex items-center justify-center'>
+    <Link to={url} className='w-10 h-10 rounded-md bg-primary flex items-center justify-center'>
         <BookOpenText className="text-white" />
     </Link>
   )

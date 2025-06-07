@@ -7,7 +7,7 @@ import { comparePassword, hashPassword } from '../utils/passwordUtils'
 import cloudinary from 'cloudinary'
 import { promises as fs } from 'fs'
 import { getSemuaPeminjamanUser } from './peminjamanServices'
-import { getPengembalianUser } from './pengembalianServices'
+import { getPengembalianUser, getTotalBukuHilangByUser } from './pengembalianServices'
 import { getAllPerpanjanganUser } from '../controllers/perpanjangan/perpanjanganController'
 import { getSemuaPerpanjangan } from './perpanjanganServices'
 
@@ -130,6 +130,9 @@ export const userStats = async({userId} : {userId: string}) => {
     const perpanjangan = await getSemuaPerpanjangan({userId: userId})
     const totalPerpanjangan = perpanjangan.data.length
 
+    const bukuDihilangkan = await getTotalBukuHilangByUser({idPengguna: userId})
+    const totalHilang = bukuDihilangkan.length
+
     const summaryData = [
         {
             title: 'Buku dipinjam',
@@ -147,6 +150,10 @@ export const userStats = async({userId} : {userId: string}) => {
             title: 'Buku dikembalikan',
             value: totalPengembalian
         },
+        {
+            title: 'Buku dihilangkan',
+            value: totalHilang
+        },
         
     ]
 
@@ -155,6 +162,7 @@ export const userStats = async({userId} : {userId: string}) => {
         pengembalian: pengembalian.data,
         perpanjangan: perpanjangan.data,
         peminjamanAktif: peminjamanAktif.data,
+        bukuHilang: bukuDihilangkan,
         summaryData
     }
 
@@ -163,7 +171,6 @@ export const userStats = async({userId} : {userId: string}) => {
 
 
 // FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN
-
 
 export const penggunaMengembalikan = async({ idPengguna } : PenggunaMeminjamParamsType) => {
     const pengguna = await Pengguna.findOneAndUpdate(
