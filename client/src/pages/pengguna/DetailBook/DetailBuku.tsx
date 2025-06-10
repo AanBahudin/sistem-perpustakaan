@@ -36,7 +36,6 @@ const DetailBuku = () => {
     <Container className="my-20">
       <DetailBookContainer peminjaman={peminjamanQuery.data} detailBuku={detailBuku.data}  />
       <YouMayLIkeBookContainer dataBuku={semuaBuku.data} />
-      
     </Container>
   )
 }
