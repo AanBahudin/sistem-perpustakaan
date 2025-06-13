@@ -1,12 +1,11 @@
 import BreadCrumbDetailBuku from "./BreadCrumbDetailBuku"
 import { Separator } from "@/components/ui/separator"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
-import SelectInput from "./SelectInput"
 import InformationContainer from "./InformationContainer"
 import StatsDetailInfo from "./StatsDetailInfo"
 import DetailTags from "./DetailTags"
-import { Label } from "@/components/ui/label"
-import DetailButton from "./DetailButton"
+import { Link } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 type DetailBookContainerDataType = {
     peminjaman: any,
@@ -14,7 +13,7 @@ type DetailBookContainerDataType = {
 }
 
 const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataType) => {
-    const {data, durasi} = detailBuku
+    const {data} = detailBuku
     const newTagline = data.tagline.slice(0,76) +"...."
 
     return (
@@ -34,24 +33,13 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
 
                     <StatsDetailInfo data={data} />
 
-                    <div className="w-full flex gap-x-4">
-                        <p></p>
-                    </div>
-
                     <p className="my-4 text-muted-foreground text-sm leading-6">{data.deskripsi}</p>
-                    <DetailTags kategori={data.kategori} />
-                    <Separator className="w-full my-4" />
                     <InformationContainer data={data} />
 
-                    <div className="w-full flex gap-x-20 items-start justify-start mt-8 mb-10">
-                        <Label htmlFor="durasiPeminjaman" className={`w-fit mt-3 text-muted-foreground ${!peminjaman?.statusPeminjaman ? '' : 'hidden'}`}>Durasi Peminjaman : </Label>
-                        <div className="flex-1 self-start">
-                            <SelectInput values={durasi} status={peminjaman?.statusPeminjaman || undefined}/>
-                            <DetailButton idBuku={data._id} idPeminjaman={peminjaman?._id} stok={data.stok} status={peminjaman?.statusPeminjaman || undefined} />
-                        </div>
-                    </div>
-
-                </div>
+                    <Button className="w-2/3 !text-white mt-6" variant='default' size='sm'>
+                        <Link to={`/my/confirm/peminjaman/${data._id}`}>Pinjam Buku</Link>
+                    </Button>
+                </div> 
             </main>
 
             

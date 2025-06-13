@@ -6,7 +6,7 @@ type YouMayLIkeBookContainerType = {
 
 const YouMayLIkeBookContainer = ({dataBuku} : YouMayLIkeBookContainerType) => {
     return (
-        <section className="w-full my-10">
+        <section className="w-full my-20">
             <SuggestedBook dataBuku={dataBuku} />
         </section>
     )

@@ -17,7 +17,11 @@ export const pengajuanPeminjamanValidator = withValidationErrors([
     body('durasiPeminjaman')
         .notEmpty().withMessage('Durasi peminjaman tidak boleh kosong')
         .isInt({min: 0}).withMessage('Durasi harus angka positif')
-        .toInt()
+        .toInt(),
+    body('alasan')
+        .notEmpty().withMessage('Alasan peminjaman tidak boleh kosong')
+        .isLength({min: 15, max: 300}),
+    
 ])
 
 // validasi untuk req.body pada pembatalan peminjaman oleh user

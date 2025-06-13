@@ -34,6 +34,10 @@ const PeminjamanSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    alasan: {
+        type: String,
+        required: true,
+    },
     catatan: String,
     diprosesOleh: {
         type: mongoose.Types.ObjectId,

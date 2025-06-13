@@ -189,53 +189,6 @@ export const chartConfig = {
   },
 } satisfies ChartConfig
 
-export const kategori = [
-  {
-    title: 'UI/UX',
-    icon: <Figma />
-  },
-  {
-    title: 'Coding',
-    icon: <Code />
-  },
-  {
-    title: 'Web Design',
-    icon: <Layout />
-  },
-  {
-    title: 'Database',
-    icon: <Database />
-  },
-  {
-    title: 'Data Science',
-    icon: <Layers />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  {
-    title: 'Algoritma',
-    icon: <GitGraph />
-  },
-  
-]
 
 export const profileMenulinks = [
   {
@@ -320,4 +273,39 @@ export const dataMenuLinks = [
     title: 'perpanjangan',
     icon: <ClipboardPen size={20} className="stroke-muted-foreground" />
   }, 
+]
+
+export const FAQConfirmation = [
+  {
+    "question": "Berapa lama waktu peminjaman buku yang diperbolehkan?",
+    "answer": "Waktu peminjaman standar adalah 7 hari kalender sejak tanggal peminjaman. Anda dapat memperpanjang masa peminjaman selama buku tersebut belum dipesan oleh pengguna lain."
+  },
+  {
+    "question": "Apa yang harus saya lakukan jika ingin memperpanjang masa pinjam?",
+    "answer": "Anda dapat memperpanjang masa pinjam melalui halaman Riwayat Peminjaman selama status buku belum jatuh tempo atau belum terlambat dikembalikan. Perpanjangan hanya dapat dilakukan satu kali per buku."
+  },
+  {
+    "question": "Apa yang terjadi jika saya terlambat mengembalikan buku?",
+    "answer": "Jika pengembalian melebihi batas waktu, maka akan dikenakan denda keterlambatan sesuai dengan kebijakan perpustakaan yang berlaku. Besaran denda dapat dilihat di halaman detail peminjaman."
+  },
+  {
+    "question": "Bagaimana jika buku yang saya pinjam rusak atau hilang?",
+    "answer": "Jika buku rusak atau hilang, Anda diwajibkan untuk mengganti buku dengan judul dan edisi yang sama atau membayar sejumlah biaya penggantian sesuai harga buku. Segera hubungi petugas perpustakaan untuk proses lebih lanjut."
+  },
+  {
+    "question": "Apakah saya bisa meminjam lebih dari satu buku sekaligus?",
+    "answer": "Ya, Anda dapat meminjam hingga maksimal 3 buku dalam satu waktu, tergantung pada ketersediaan dan status akun Anda."
+  },
+  {
+    "question": "Bagaimana saya tahu apakah pengajuan peminjaman saya sudah disetujui?",
+    "answer": "Setelah mengajukan peminjaman, status permintaan akan ditampilkan di halaman dashboard Anda. Jika disetujui, Anda akan mendapatkan notifikasi dan dapat melihat detail jadwal pengambilan buku."
+  },
+  {
+    "question": "Apakah saya perlu datang langsung ke perpustakaan setelah pengajuan disetujui?",
+    "answer": "Ya, Anda perlu datang untuk mengambil buku secara fisik di perpustakaan sesuai dengan jadwal pengambilan. Pastikan membawa identitas dan bukti peminjaman."
+  },
+  {
+    "question": "Apa yang harus saya lakukan jika saya salah meminjam buku?",
+    "answer": "Silakan segera batalkan pengajuan jika status masih dalam proses. Jika buku sudah dipinjam, Anda tetap bertanggung jawab atas buku tersebut sampai dikembalikan."
+  }
 ]

@@ -1,6 +1,7 @@
 
 import { QueryClient } from "@tanstack/react-query"
 import { customFetch } from "@/utils/customFetch"
+import { toast } from "sonner"
 // import { toast } from "sonner"
 
 const queryClient = new QueryClient({
@@ -38,7 +39,6 @@ export const getPeminjamanByPengembalianId = async(idPengembalian: string) => {
 }
 
 
-
 export const tambahPeminjaman = async(formData: FormData) => {
     const data = Object.fromEntries(formData)
     const idBuku = formData.get('idBuku')
@@ -58,6 +58,25 @@ export const tambahPeminjaman = async(formData: FormData) => {
         redirectTo: '.',
         showToast: true
     }
+}
+
+
+export const tambahPinjamanNew = async({idBuku, alasan, durasi} : {idBuku: string, alasan: string, durasi: number}) => {
+    const response = await customFetch.post('/pinjaman/request/pinjaman', {
+        idBuku,
+        alasan,
+        durasiPeminjaman: durasi
+    })
+
+    if (response.status >= 400) {
+        toast('Tidak dapat mengajukan peminjaman', {description: 'Terjadi kesalahan, silahkan coba lagi'})
+    }
+    
+    await queryClient.invalidateQueries({queryKey: ['confirm', 'peminjaman', idBuku]})
+    await queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna']})
+    await queryClient.invalidateQueries({queryKey: ['confirm', 'pinjaman', idBuku]})
+
+    toast('Berhasil Di Ajukan!', {description: 'Silahkan cek peminjaman anda pada menu Peminjaman'})
 }
 
 export const pembatalanPeminjamanBuku = async(data : { idPeminjaman: string, idBuku: string}) => {

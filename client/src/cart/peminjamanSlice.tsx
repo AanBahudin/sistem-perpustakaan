@@ -4,14 +4,18 @@ export type DefaultStateType = {
     layout: string,
     activeTab: 1,
     detailPeminjamanTab: 'peminjaman' | 'perpanjangan' | 'pengembalian' | '',
-    peminjamanFilter: string
+    peminjamanFilter: string,
+    alasan: string,
+    durasi: '' | number
 }
 
 const defaultState : DefaultStateType = {
     layout: localStorage.getItem('layout') || 'grid',
     activeTab: 1,
     peminjamanFilter: '',
-    detailPeminjamanTab: ''
+    detailPeminjamanTab: '',
+    alasan: '',
+    durasi: ''
 }
 
 const peminjamanSlice = createSlice({
@@ -31,9 +35,15 @@ const peminjamanSlice = createSlice({
         },
         setDetailPeminjamanTab: (state, action) => {
             state.detailPeminjamanTab = action.payload 
+        },
+        setAlasan: (state, action) => {
+            state.alasan = action.payload
+        },
+        setDurasi: (state, action) => {
+            state.durasi = action.payload
         }
     }
 })
 
-export const { setLayout, setTab, setFilter, setDetailPeminjamanTab } = peminjamanSlice.actions
+export const { setLayout, setTab, setFilter, setDetailPeminjamanTab, setAlasan, setDurasi } = peminjamanSlice.actions
 export default peminjamanSlice.reducer

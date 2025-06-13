@@ -13,7 +13,7 @@ import { penggunaMeminjam } from "./penggunaServices";
 // 4 service dibawah khusus pengguna
  
 // SUDAH DITESTING
-export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : PengajuanPeminjamanParamsType) => {
+export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, alasan } : PengajuanPeminjamanParamsType) => {
     // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
     const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, userId)
     if (pinjamanMasihAda) throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses ')
@@ -28,6 +28,7 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId } : 
 
     const pinjaman = await Peminjaman.create({ 
         peminjam: userId,
+        alasan,
         buku: idBuku,
         judulBuku: buku.judul,
         durasiPeminjaman, 
