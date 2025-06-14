@@ -2,7 +2,7 @@ import { tambahPeminjaman } from '@/actions/peminjamanActions'
 import FormContainer from '@/components/form/FormContainer'
 import { Button } from '@/components/ui/button'
 import { useFormStatus } from '@/context/FormContext'
-import { Loader2 } from 'lucide-react'
+import { CircleFadingArrowUp, Loader2, Undo2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import PengajuanCancelButton from './PengajuanCancelButton'
 
@@ -23,7 +23,12 @@ const DetailButton = ({stok, status, idPeminjaman, idBuku} : DetailButtonType) =
                 </FormContainer>
             )}
             {status === 'Diajukan' && <PengajuanCancelButton idPeminjaman={idPeminjaman!} idBuku={idBuku} />}
-            {status === 'Dipinjam' && <DipinjamButton />}
+            {status === 'Dipinjam' && (
+                <main className='flex items-center gap-x-3'>
+                    <PerpanjangButton />
+                    <PengembalianButton />
+                </main>
+            )}
             {status === 'Terlambat' && <TerlambatButton />}
         </>
     )
@@ -51,12 +56,24 @@ const PinjamButton = ({stok, idBuku} : {stok: number, idBuku: string}) => {
         </div>
     )
 }
-
-const DipinjamButton = () => {
+const PerpanjangButton = () => {
     return (
-        <div className="flex items-center mt-4 gap-x-8">
-            <Button variant='secondary' className="text-white text-center w-1/2">Sedang Dipinjam</Button>
-            <p className="text-muted-foreground text-sm w-full">Silahkan perpanjang untuk menggunakan lagi</p>
+        <div className="w-full flex items-center mt-4 gap-x-8">
+            <Button className="flex items-center gap-x-2 text-white bg-primary/30 text-center w-full">
+                <CircleFadingArrowUp />
+                Perpanjang
+            </Button>
+        </div>
+    )
+}
+
+const PengembalianButton = () => {
+    return (
+        <div className="w-full flex items-center mt-4 gap-x-8">
+            <Button className="text-white flex items-center gap-x-2 text-center bg-secondary/50 hover:bg-secondary ring-1 w-full">
+                <Undo2 />
+                Kembalikan
+            </Button>
         </div>
     )
 }

@@ -21,7 +21,7 @@ const PeminjamanDetailPage = () => {
         queryKey: ['peminjaman', ''],
         queryFn: () =>  getPeminjamanData('')
       },
-      {
+      { 
         queryKey: ['detail-peminjaman', id],
         queryFn: () => getDetailPeminjaman(id!)
       },

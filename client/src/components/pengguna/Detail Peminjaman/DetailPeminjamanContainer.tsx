@@ -1,5 +1,4 @@
 import BreadCrumbDetailBuku from "../DetailBukuPengguna/BreadCrumbDetailBuku"
-import AdditionalInfoContainer from "./AdditionalInfoContainer"
 import DetailPeminjaman from "./DetailPeminjaman"
 
 type DetailPeminjamanContainerType = {
@@ -10,7 +9,7 @@ type DetailPeminjamanContainerType = {
     semuaPeminjaman: any
 }
 
-const DetailPeminjamanContainer = ({semuaPeminjaman, peminjaman, perpanjangan, pengembalian, detailBuku} : DetailPeminjamanContainerType) => {
+const DetailPeminjamanContainer = ({ peminjaman, detailBuku } : DetailPeminjamanContainerType) => {
     const {data} = detailBuku
     return (
         <section className="w-full">
@@ -18,7 +17,6 @@ const DetailPeminjamanContainer = ({semuaPeminjaman, peminjaman, perpanjangan, p
                 <BreadCrumbDetailBuku title={data.judul} from='Peminjaman' url='/my/data/peminjaman' />
                 <DetailPeminjaman peminjaman={peminjaman} detailBuku={detailBuku} />
             </main>
-            <AdditionalInfoContainer perpanjangan={perpanjangan.data} pengembalian={pengembalian.data} peminjaman={peminjaman} semuaPeminjaman={semuaPeminjaman} />
         </section>
     )
 }

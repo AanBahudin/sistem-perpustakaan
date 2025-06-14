@@ -30,7 +30,6 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
                 <p className="my-4 text-muted-foreground text-sm leading-6">{deskripsi}</p>
 
                 <DetailPeminjamanInfo peminjaman={peminjaman} />
-                
                 <DetailButton idBuku={_id} idPeminjaman={peminjaman?._id} stok={stok} status={peminjaman?.statusPeminjaman || undefined} />
             </div>
         </main>
