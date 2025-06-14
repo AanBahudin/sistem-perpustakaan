@@ -4,6 +4,7 @@ import LoanOverview from '@/components/pengguna/Dashboard Pengguna/LoanOverview'
 import { useQuery } from '@tanstack/react-query'
 import { getStats } from '@/actions/userActions'
 import StatsOverview from '@/components/pengguna/Dashboard Pengguna/StatsOverview'
+import DashboardLoading from './DashboardLoading'
 
 const KatalogPengguna = () => {
 
@@ -12,9 +13,7 @@ const KatalogPengguna = () => {
     queryFn: getStats
   })
 
-  if (isLoading) {
-    return <h1>Loading .... </h1>
-  }   
+  if (isLoading) return <DashboardLoading />
 
   const {
     peminjaman, 
