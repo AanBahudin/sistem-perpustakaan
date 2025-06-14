@@ -14,9 +14,10 @@ const DetailPeminjamanContainer = ({semuaPeminjaman, peminjaman, perpanjangan, p
     const {data} = detailBuku
     return (
         <section className="w-full">
-            <BreadCrumbDetailBuku title={data.judul} from='Peminjaman' url='/my/data/peminjaman' />
-
-            <DetailPeminjaman peminjaman={peminjaman} detailBuku={detailBuku} />
+            <main className="w-[80%] mx-auto">
+                <BreadCrumbDetailBuku title={data.judul} from='Peminjaman' url='/my/data/peminjaman' />
+                <DetailPeminjaman peminjaman={peminjaman} detailBuku={detailBuku} />
+            </main>
             <AdditionalInfoContainer perpanjangan={perpanjangan.data} pengembalian={pengembalian.data} peminjaman={peminjaman} semuaPeminjaman={semuaPeminjaman} />
         </section>
     )

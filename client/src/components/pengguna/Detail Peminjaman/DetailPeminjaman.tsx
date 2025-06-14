@@ -10,7 +10,7 @@ type DetailPeminjamanType = {
 
 const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
-    const {data, durasi} = detailBuku
+    const {data} = detailBuku
 
     const {cover, judul, _id, deskripsi, stok, tagline} = data
 

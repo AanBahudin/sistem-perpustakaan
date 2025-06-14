@@ -8,6 +8,7 @@ import { getPengembalianData } from '@/actions/pengembalianActions'
 import { getPerpanjangan } from '@/actions/perpanjanganActions'
 import DetailPeminjamanContainer from '@/components/pengguna/Detail Peminjaman/DetailPeminjamanContainer'
 import { getDetailBuku } from '@/actions/BukuActions'
+import DetailBookLoading from '@/components/Loading/DetailBookLoading'
 
 
 const PeminjamanDetailPage = () => {
@@ -43,8 +44,8 @@ const PeminjamanDetailPage = () => {
   const isLoading = results.some(q => q.isLoading)
 
   return (
-    <Container className='my-20'>
-      {isLoading ? <h1>Loading...</h1> : (
+    <Container className='my-20 mx-auto'>
+      {isLoading ? <DetailBookLoading /> : (
         <DetailPeminjamanContainer
           semuaPeminjaman={semuaPeminjaman.data.data}
           detailBuku={detailBuku.data}
