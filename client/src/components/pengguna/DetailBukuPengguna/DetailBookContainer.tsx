@@ -6,6 +6,7 @@ import StatsDetailInfo from "./StatsDetailInfo"
 import DetailTags from "./DetailTags"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
 
 type DetailBookContainerDataType = {
     peminjaman: any,
@@ -33,11 +34,12 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
 
                     <StatsDetailInfo data={data} />
 
-                    <p className="my-4 text-muted-foreground text-sm leading-6">{data.deskripsi}</p>
+                    <p className="my-4 text-muted-foreground text-sm leading-6 bg-muted p-3 rounded-lg">{data.deskripsi}</p>
                     <InformationContainer data={data} />
 
-                    <Button className="w-2/3 !text-white mt-6" variant='default' size='sm'>
-                        <Link to={`/my/confirm/peminjaman/${data._id}`}>Pinjam Buku</Link>
+                    <Button className="w-1/3 !text-white mt-6 flex items-center" variant='secondary'>
+                        <Plus />
+                        <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
                     </Button>
                 </div> 
             </main>
