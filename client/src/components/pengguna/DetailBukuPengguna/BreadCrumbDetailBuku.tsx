@@ -9,7 +9,7 @@ import {
 
 const BreadCrumbDetailBuku = ({title, url, from} : {title: string, from: string, url: string}) => {
   return (
-    <Breadcrumb className="text-2xl">
+    <Breadcrumb className="text-2xl mt-4">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink className="text-lg" href="/my">Beranda</BreadcrumbLink>

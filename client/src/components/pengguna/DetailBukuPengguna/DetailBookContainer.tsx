@@ -1,12 +1,11 @@
 import BreadCrumbDetailBuku from "./BreadCrumbDetailBuku"
-import { Separator } from "@/components/ui/separator"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import InformationContainer from "./InformationContainer"
 import StatsDetailInfo from "./StatsDetailInfo"
-import DetailTags from "./DetailTags"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
+import { CircleAlert, Plus } from "lucide-react"
+import { DangerAlert, DefaultAlert, LinkAlert } from "@/pages/pengguna/Buku/Alert"
 
 type DetailBookContainerDataType = {
     peminjaman: any,
@@ -19,6 +18,20 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
 
     return (
         <section className="w-[80%] mx-auto">
+            {peminjaman?.statusPeminjaman === 'Diajukan' ? (
+                <LinkAlert 
+                    title="Terdapat Peminjaman" 
+                    description="Peminjaman telah di ajukkan untuk buku ini, Silahkan cek peminjaman anda " 
+                    Icon={CircleAlert} 
+                    link={`/my/peminjaman/${peminjaman._id}/${peminjaman.buku._id}`} />
+            ) : ( peminjaman?.statusPeminjaman === 'Dipinjam' ? (
+                <DefaultAlert title="Terdapat Peminjaman" description="Anda memiliki peminjaman pada buku ini, Cek ke menu peminjaman untuk info selengkapnya" />
+            ) : (peminjaman?.statusPeminjaman === 'Terlambat' ? (
+                <DangerAlert 
+                    title="Peminjaman Telah Melewati Batas Waktu" 
+                    description="Untuk menghindari denda, Silahkan lakukan pengembalian buku"/>  
+            ) : null)
+            )}
             <BreadCrumbDetailBuku title={data.judul} from="Buku" url="/my/buku" />
 
             <main className="w-full flex my-10 gap-x-10">
