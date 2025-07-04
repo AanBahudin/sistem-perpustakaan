@@ -10,7 +10,7 @@ type PerpanjanganDetailDisplay = {
 const PerpanjanganDetailDisplay = ({perpanjangan, peminjaman} : PerpanjanganDetailDisplay) => {
 
     const {durasiPeminjaman, kondisi, buku} = peminjaman
-    const {durasi} = perpanjangan
+    const {durasi, alasan} = perpanjangan
 
     return (
         <section>
@@ -28,6 +28,13 @@ const PerpanjanganDetailDisplay = ({perpanjangan, peminjaman} : PerpanjanganDeta
             <main className='w-full mt-4'>
                 <p className='uppercase text-[12px] text-muted-foreground font-bold'>anda meminjam buku</p>
                 <p className='text-sm font-bold text-primary-foreground hover:underline hover:text-primary cursor-default'>{buku.judul}</p>
+            </main>
+
+            <main className='w-full mt-4'>
+                <p className='uppercase text-[12px] text-muted-foreground font-bold'>alasan</p>
+                <div className="w-full rounded-lg border p-4 mt-4">
+                    <p className='text-sm text-muted-foreground bg-popover hover:underline hover:text-primary cursor-default'>{alasan}</p>
+                </div>
             </main>
         </section>
     )

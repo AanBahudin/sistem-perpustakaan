@@ -1,15 +1,14 @@
 import { getDetailBuku } from "@/actions/BukuActions"
 import { profileAction } from "@/actions/userActions"
+import { getPeminjamanByBookId } from "@/actions/peminjamanActions"
 
 import Container from "@/globals/Container"
+import PeminjamanInfo from "../Buku/PeminjamanInfo"
+import KonfirmasiData from "../Buku/KonfirmasiData"
+import FAQ from "../Buku/FAQ"
+
 import { useQueries } from "@tanstack/react-query"
-
 import { useParams } from "react-router-dom"
-import PeminjamanInfo from "./PeminjamanInfo"
-
-import KonfirmasiData from "./KonfirmasiData"
-import { getPeminjamanByBookId } from "@/actions/peminjamanActions"
-import FAQ from "./FAQ"
 
 const KonfirmasiPeminjaman = () => {
 

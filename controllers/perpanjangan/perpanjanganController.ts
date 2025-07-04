@@ -3,7 +3,7 @@ import Perpanjangan from "../../model/Perpanjangan";
 import { StatusCodes } from "http-status-codes";
 import Peminjaman from "../../model/Peminjaman";
 import tambahHariKeTanggal from "../../utils/tambahHari";
-import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, ubahPerpanjangan } from "../../services/perpanjanganServices";
+import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganByPeminjamanId, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, ubahPerpanjangan } from "../../services/perpanjanganServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // untuk pengguna
@@ -49,6 +49,20 @@ export const getSinglePerpanjanganUser = async(req: Request | any, res: Response
         message: 'Data Perpanjangan',
         data
     })
+}
+
+export const getSinglePerpanjanganByPeminjamanIdUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id: idPeminjaman} = req.params
+
+    const data = await getOnePerpanjanganByPeminjamanId({idPeminjaman, userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data perpanjangan',
+        data
+    })
+
 }
 
 // BELUM DITESTING

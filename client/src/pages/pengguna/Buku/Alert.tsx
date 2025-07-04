@@ -42,12 +42,12 @@ export const DangerAlert = ({title, Icon = CheckCircle2Icon, description} : Aler
     )
 }
 
-export const DiajukkanAlert = ({idPinjam} : {idPinjam: string}) => {
+export const DiajukkanAlert = ({title, deskripsi, link} : {title: string, deskripsi: string, link: string}) => {
     return (
         <Alert className="bg-secondary">
             <CheckCheck />
-            <AlertTitle className="font-bold capitalize">Peminjaman Telah Diajukan</AlertTitle>
-            <AlertDescription className='flex'>Anda dapat melihat detail pengajuan anda <Link to={`/my/peminjaman/${idPinjam}`} className='underline'>Disini</Link></AlertDescription>
+            <AlertTitle className="font-bold capitalize">{title}</AlertTitle>
+            <AlertDescription className='flex'>{deskripsi}<Link to={link} className='underline'>Disini</Link></AlertDescription>
         </Alert>
     )
 }

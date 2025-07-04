@@ -7,7 +7,8 @@ import {
     getAllPerpanjanganUser,
     getSinglePerpanjanganUser,
     editPerpanjanganUser,
-    batalPerpanjanganUser
+    batalPerpanjanganUser,
+    getSinglePerpanjanganByPeminjamanIdUser
 } from '../../controllers/perpanjangan/perpanjanganController'
 import {
     editPerpanjanganInputValidator,
@@ -21,6 +22,9 @@ const router = express.Router()
 router.route('/user')
     .get(userMiddlewareAuthorized, getAllPerpanjanganUser)
     .post(userMiddlewareAuthorized, perpanjanganInputValidator, pengajuanPerpanjangan)
+
+router.route('/user/peminjaman/:id')
+    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePerpanjanganByPeminjamanIdUser)
 
 router.route('/user/:id')
     .get(

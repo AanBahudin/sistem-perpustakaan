@@ -5,6 +5,7 @@ import { useFormStatus } from '@/context/FormContext'
 import { CircleFadingArrowUp, Loader2, Undo2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import PengajuanCancelButton from './PengajuanCancelButton'
+import { Link } from 'react-router-dom'
 
 type DetailButtonType = {
     stok: number,
@@ -25,7 +26,7 @@ const DetailButton = ({stok, status, idPeminjaman, idBuku} : DetailButtonType) =
             {status === 'Diajukan' && <PengajuanCancelButton idPeminjaman={idPeminjaman!} idBuku={idBuku} />}
             {status === 'Dipinjam' && (
                 <main className='flex items-center gap-x-3'>
-                    <PerpanjangButton />
+                    <PerpanjangButton idPeminjaman={idPeminjaman} />
                     <PengembalianButton />
                 </main>
             )}
@@ -56,12 +57,12 @@ const PinjamButton = ({stok, idBuku} : {stok: number, idBuku: string}) => {
         </div>
     )
 }
-const PerpanjangButton = () => {
+const PerpanjangButton = ({idPeminjaman} : {idPeminjaman: any}) => {
     return (
         <div className="w-full flex items-center mt-4 gap-x-8">
             <Button className="flex items-center gap-x-2 text-white bg-primary/30 text-center w-full">
                 <CircleFadingArrowUp />
-                Perpanjang
+                <Link to={`/my/confirm/perpanjangan/${idPeminjaman}`}>Perpanjang</Link>
             </Button>
         </div>
     )

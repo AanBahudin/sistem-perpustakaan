@@ -24,7 +24,9 @@ const PeminjamanSection = ({peminjaman, linkTarget='peminjaman'} : PeminjamanSec
             <PeminjamanDanProfilData label="durasi peminjaman" value={`${durasiPeminjaman} Hari`} />
             <PeminjamanDanProfilData label="berakhir pada" value={berakhirPada} />
             <PeminjamanDanProfilData label="diproses oleh" value={pustakawan.nama || 'Belum diproses'} />
-            <PeminjamanDanProfilData label="data pengambilan" value={dataPengembalian || 'Belum diselesaikan'} />
+            {dataPengembalian && (
+              <PeminjamanDanProfilData label="data pengambilan" value={dataPengembalian._id || 'Belum diselesaikan'} />
+            )}
             <Button size='sm' className="dark:text-white text-[12px] mt-4 flex items-center">
                 <Link to={`/my/${linkTarget}/${_id}/${dataBuku._id}`} className="flex items-center gap-x-2">
                   <ExternalLink className="w-4 h-4" />

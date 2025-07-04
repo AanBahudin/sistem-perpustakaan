@@ -11,7 +11,6 @@ type DetailPeminjamanType = {
 const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
     const {data} = detailBuku
-
     const {cover, judul, _id, deskripsi, stok, tagline} = data
 
     return (

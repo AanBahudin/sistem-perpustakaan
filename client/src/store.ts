@@ -5,6 +5,7 @@ import peminjamanReducer from '@/cart/peminjamanSlice'
 import pengembalianReducer from '@/cart/pengembalianSlice'
 import detailBukuReducer from '@/cart/detailBookSlice'
 import dashboardState from '@/cart/dashboardSlice'
+import perpanjanganState from '@/cart/perpanjanganSlice'
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         profileState: profileReducer,
         peminjamanState: peminjamanReducer,
         pengembalianState: pengembalianReducer,
-        detailBukuState: detailBukuReducer
+        detailBukuState: detailBukuReducer,
+        perpanjanganState: perpanjanganState
     }
 })

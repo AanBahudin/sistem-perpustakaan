@@ -4,6 +4,7 @@ import { ModeToggle } from '@/components/navbar/modeToggle'
 import { Button } from '@/components/ui/button'
 import NavbarDropdown from './NavbarDropdown'
 import Logo from './Logo'
+import { Link } from 'react-router-dom'
 
 const Navbar : React.FC= () => {
   return (
@@ -16,7 +17,9 @@ const Navbar : React.FC= () => {
             <Navlink />
             <ModeToggle />
             <NavbarDropdown />
-            <Button className='hidden lg:block text-white px-10 '>Masuk</Button>
+            <Button asChild className='hidden lg:block text-white px-10 '>
+              <Link to='/login'>Masuk</Link>
+            </Button>
 
           </div>
 

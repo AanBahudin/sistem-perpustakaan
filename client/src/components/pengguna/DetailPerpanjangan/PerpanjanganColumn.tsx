@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import TimeDisplay from "../Detail Pengembalian/TimeDisplay"
 import PerpanjanganDetailDisplay from "./PerpanjanganDetailDisplay"
+import CancelPerpanjangan from "@/components/dialog/CancelPerpanjangan"
 
 
 type PerpanjanganColumnType = {
@@ -17,13 +18,17 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
         <section className="rounded-2xl h-fit p-6 col-span-4 border">
             <h1 className='font-bold uppercase'>Detail summary</h1>
 
-            <main className='bg-popover rounded-lg p-4 mt-4 mb-2'>
+            <main className='bg-popover rounded-lg p-4 mt-4 mb-4'>
                 <TimeDisplay tanggalPinjam={tanggalPeminjaman} tanggalKembali={berakhirPada} />
                 <PerpanjanganDetailDisplay peminjaman={peminjaman} perpanjangan={perpanjangan} />
             </main> 
 
             <h1 className='font-bold uppercase'>status perpanjangan</h1>
-            <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center text-white'>{disetujui}</Button>
+            <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center text-white'> Perpanjangan {disetujui}</Button>
+
+            {
+                disetujui && <CancelPerpanjangan perpanjangan={perpanjangan} />
+            }
         </section>
     )
 }

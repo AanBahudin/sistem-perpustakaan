@@ -50,10 +50,14 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
                     <p className="my-4 text-muted-foreground text-sm leading-6 bg-muted p-3 rounded-lg">{data.deskripsi}</p>
                     <InformationContainer data={data} />
 
-                    <Button className="w-1/3 !text-white mt-6 flex items-center" variant='secondary'>
-                        <Plus />
-                        <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
-                    </Button>
+                    {peminjaman?.statusPeminjaman === 'Dipinjam' ? (
+                        null
+                    ) : (
+                        <Button className="w-1/3 !text-white mt-6 flex items-center" variant='secondary'>
+                            <Plus />
+                            <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
+                        </Button>
+                    )}
                 </div> 
             </main>
 

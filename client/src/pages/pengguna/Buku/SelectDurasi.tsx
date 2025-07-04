@@ -10,8 +10,18 @@ import {
 import { Label } from "@/components/ui/label"
 import { setDurasi } from "@/cart/peminjamanSlice"
 import { store } from "@/store"
+import { useQuery } from "@tanstack/react-query"
+import { getDurasi } from "@/actions/durasiActions"
 
-const SelectDurasi = ({durasi, defaultDurasi} : {durasi: any, defaultDurasi: any}) => {
+const SelectDurasi = ({durasi, defaultDurasi} : {durasi?: any, defaultDurasi: any}) => {
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['durasi'],
+    queryFn: getDurasi
+  })
+
+  const durasiPinjam = isLoading ? [] : data
+
   return (
     <div className="w-full flex flex-col gap-y-2">
         <Label className="text-sm">Durasi peminjaman</Label>
@@ -22,7 +32,7 @@ const SelectDurasi = ({durasi, defaultDurasi} : {durasi: any, defaultDurasi: any
             <SelectContent>
                 <SelectGroup>
                     <SelectLabel>Durasi</SelectLabel>
-                    {durasi.map((item: any) => {
+                    {durasiPinjam.map((item: any) => {
                         return <SelectItem key={item._id} value={item.durasi}>{item.durasi} Hari</SelectItem>
                     })}
                 </SelectGroup>

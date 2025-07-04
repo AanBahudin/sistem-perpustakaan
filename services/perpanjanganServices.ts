@@ -58,6 +58,12 @@ export const getOnePerpanjangan = async({idPerpanjangan, userId} : GetOnePerpanj
     return {data: perpanjangan}
 }
 
+export const getOnePerpanjanganByPeminjamanId = async({userId, idPeminjaman} : {userId: string, idPeminjaman: string}) => {
+    const data = await Perpanjangan.findOne({idPengguna: userId, idPeminjaman})
+
+    return data
+}
+
 // SUDAH DITESTING
 export const ubahPerpanjangan = async({idPerpanjangan, userId, dataPerpanjangan} : UpdatePerpanjanganParamsType) => {
 
@@ -78,6 +84,7 @@ export const ubahPerpanjangan = async({idPerpanjangan, userId, dataPerpanjangan}
 
 // SUDAH DITESTING
 export const pembatalanPerpanjangan = async({userId, idPerpanjangan} : PembatalanPerpanjanganParamsType) => {
+    console.log(idPerpanjangan)
     const perpanjangan = await Perpanjangan.findOneAndDelete({
         _id: idPerpanjangan,
         idPengguna: userId,
