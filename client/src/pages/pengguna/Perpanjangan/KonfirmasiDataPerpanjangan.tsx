@@ -22,8 +22,8 @@ const KonfirmasiDataPerpanjangan = ({perpanjangan, peminjaman} : {perpanjangan: 
                 {isLoading ? (
                     <p>Memuat</p>
                 ) : <NamaBox nama={profil.nama} />}
-                <SelectDurasi defaultDurasi={perpanjangan?.durasi} />
-                <AlasanInput defaultAlasan={perpanjangan?.alasan} />
+                <SelectDurasi defaultDurasi={perpanjangan?.durasi} perpanjangan={perpanjangan} />
+                <AlasanInput defaultAlasan={perpanjangan?.alasan} perpanjangan={perpanjangan} />
             </main>
 
             

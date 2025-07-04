@@ -1,5 +1,6 @@
 import { customFetch } from "@/utils/customFetch";
 import { QueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const queryClient = new QueryClient({
     defaultOptions: {queries: {staleTime: 1000 * 60 * 5}}
@@ -41,6 +42,17 @@ export const tambahPerpanjangan = async({
     queryClient.invalidateQueries({queryKey: ['peminjaman', idPeminjaman]})
     queryClient.invalidateQueries({queryKey: ['perpanjangan', 'peminjamnan', idPeminjaman]})
     queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna']})
+}
+
+export const editPerpanjangan = async({idPerpanjangan, data} : {idPerpanjangan: string, data: any}) => {
+    const postEdit = await customFetch.patch(`/perpanjangan/user/${idPerpanjangan}`, data)
+    console.log(postEdit.status === 400)
+    if (postEdit.status === 400) {
+        toast('Terjadi Kesalahan', {description: postEdit.data.message})
+    }
+    // if (postEdit.status >= 400) return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat mengedit data pengajuan perpanjangan saat ini.'}
+
+    queryClient.invalidateQueries({ queryKey: ['detail-perpanjangan', idPerpanjangan] })
 }
 
 export const pembatalanPerpanjangan = async({idPerpanjangan} : {idPerpanjangan: string}) => {

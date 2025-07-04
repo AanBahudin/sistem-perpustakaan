@@ -32,8 +32,8 @@ const PerpanjanganDetailDisplay = ({perpanjangan, peminjaman} : PerpanjanganDeta
 
             <main className='w-full mt-4'>
                 <p className='uppercase text-[12px] text-muted-foreground font-bold'>alasan</p>
-                <div className="w-full rounded-lg border p-4 mt-4">
-                    <p className='text-sm text-muted-foreground bg-popover hover:underline hover:text-primary cursor-default'>{alasan}</p>
+                <div className="w-full rounded-lg border p-4 mt-4 h-[160px] overflow-y-scroll scroll-custom">
+                    <p className='text-sm text-muted-foreground bg-popover cursor-default'>{alasan}</p>
                 </div>
             </main>
         </section>

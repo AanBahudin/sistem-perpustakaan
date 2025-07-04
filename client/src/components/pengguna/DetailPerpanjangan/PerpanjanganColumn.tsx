@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button"
 import TimeDisplay from "../Detail Pengembalian/TimeDisplay"
 import PerpanjanganDetailDisplay from "./PerpanjanganDetailDisplay"
 import CancelPerpanjangan from "@/components/dialog/CancelPerpanjangan"
-
+import { Pen } from "lucide-react"
+import EditPengajuanPerpanjanganDialog from "@/components/dialog/EditPengajuanPerpanjanganDialog"
 
 type PerpanjanganColumnType = {
     peminjaman: any,
@@ -16,7 +17,14 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
 
     return (
         <section className="rounded-2xl h-fit p-6 col-span-4 border">
-            <h1 className='font-bold uppercase'>Detail summary</h1>
+            <main className="flex justify-between items-center">
+                <h1 className='font-bold uppercase'>Detail summary</h1>
+                <EditPengajuanPerpanjanganDialog perpanjangan={perpanjangan}>
+                    <Button className="w-6 h-6 rounded-md bg-primary flex items-center justify-center p-[12px]">
+                        <Pen className="stroke-white" />
+                    </Button>
+                </EditPengajuanPerpanjanganDialog>
+            </main>
 
             <main className='bg-popover rounded-lg p-4 mt-4 mb-4'>
                 <TimeDisplay tanggalPinjam={tanggalPeminjaman} tanggalKembali={berakhirPada} />
