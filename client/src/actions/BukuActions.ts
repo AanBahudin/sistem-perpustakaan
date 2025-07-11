@@ -8,7 +8,6 @@ const queryClient = new QueryClient({
 
 export const getAllBuku = async(query?: string) => {
     const res = await customFetch.get(`/buku/user?${query ?? ''}`)
-
     if (res.status >= 400) {
         throw new Error('Gagal mengambil data buku.')
     }

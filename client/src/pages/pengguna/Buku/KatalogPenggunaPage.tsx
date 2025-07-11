@@ -43,9 +43,8 @@ const KatalogPenggunaPage = () => {
       <AwaitHooks data={kategori} loadingComponent={<BookCategoryLoading />}>
         {data => <KategorySection data={data.data} />}
       </AwaitHooks>
-      <BookSearch />
       <AwaitHooks data={bukuandLikedBuku} loadingComponent={<BookLoading />}>
-        {((data) => <KatalogSection dataBuku={data[0].data} total={data[0].total} page={data[0].page} disukai={data[1]} savedData={data[2].bukuDisimpan} />)}
+        {((data) => <KatalogSection dataBuku={data[0].data} total={data[0].total}/>)}
       </AwaitHooks>
     </Container>
   )

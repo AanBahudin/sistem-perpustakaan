@@ -1,10 +1,10 @@
 import Container from '@/globals/Container'
-import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const DiscoveryPage = () => {
   return (
     <Container>
-        <h1>Discovery Page</h1>
+      <Outlet />
     </Container>
   )
 }

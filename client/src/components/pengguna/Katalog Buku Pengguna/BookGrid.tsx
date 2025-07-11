@@ -1,26 +1,16 @@
-import { getAllBuku } from '@/actions/BukuActions'
 import { Button } from '@/components/ui/button'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
-import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
-const BookGrid = () => {
+type BookGridType = {
+  dataBuku: any
+}
 
-  const {data:buku, isLoading} = useQuery({
-    queryKey: ['buku'],
-    queryFn: () => getAllBuku()
-  })  
-  
-  if(isLoading) return <h1></h1>
+const BookGrid = ({dataBuku} : BookGridType) => {
 
-  const {buku: books} = buku.data
-  if (books.length === 0) {
-    return <h1>Oops, tidak ditemukan</h1>
-    
-  }  
   return (
     <section className='w-full grid grid-cols-12 gap-6'>
-      {books.map((item:any, index: number) => {
+      {dataBuku.map((item:any, index: number) => {
 
         let newJudul: string = item.judul
         if (newJudul.length >= 25) {

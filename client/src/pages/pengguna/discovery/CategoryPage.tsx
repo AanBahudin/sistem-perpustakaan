@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useEffect } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
-const SearchPage = () => {
+
+const CategoryPage = () => {
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const params = searchParams.get('q')
-
+  
   useEffect(() => {
     if (!params) {
       navigate('/my/buku')
     }
-  }, [])
-
+  })
+  
   return (
-    <div>SearchPage</div>
+    <div>CategoryPage</div>
   )
 }
 
-export default SearchPage
+export default CategoryPage

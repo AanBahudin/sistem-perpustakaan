@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router-dom";
 import { HomePage, LandingLayout, LoginPage, RegisterPage } from "./pages/landing";
 import { PenggunaLayout, ProfilPengguna, KatalogPengguna, DetailBuku } from "./pages/pengguna";
 import { ProdiLayout } from "./pages/prodi";
@@ -23,8 +23,10 @@ import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalian
 import DetailPerpanjanganPage from "./pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import ConfirmPerpanjangan from "./pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
-import DiscoveryPage from "./pages/pengguna/discovery/DiscoveryPage";
+import DiscoveryPage from "./pages/pengguna/Discovery/DiscoveryPage";
 import SearchPage from "./pages/pengguna/Search/SearchPage";
+import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
+import AllBook from "./pages/pengguna/Discovery/AllBook";
 
 const router : RouteObject[] = [
     {
@@ -142,7 +144,30 @@ const router : RouteObject[] = [
             },
             {
                 path: 'discovery',
-                element: <DiscoveryPage />
+                element: <DiscoveryPage />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to='/my/buku' replace />
+                    },
+                    {
+                        path: 'category',
+                        element: <CategoryPage />
+                    },
+                    {
+                        path: 'search',
+                        element: <SearchPage />
+                    },
+                    {
+                        path: 'all',
+                        element: <AllBook />
+                    },
+                    {
+                        path: '*',
+                        element: <Navigate to="/my/buku" replace />
+                    }
+                ]
+
             },
             {
                 path: 'search/:title',

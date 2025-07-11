@@ -25,7 +25,7 @@ export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
     const lastAdded = await lastAddedBook()
 
     // for testing purposed
-    const totalPage = 4
+    const totalPage = 1
 
     return {buku, recommendation, totalPage, lastAdded}
 }

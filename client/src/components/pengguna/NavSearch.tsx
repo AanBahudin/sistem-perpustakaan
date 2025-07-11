@@ -36,8 +36,6 @@ const NavSearch = () => {
     navigate(`/my/buku/${id}`)
   }
 
-  const dataLength : number = suggestData.length
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -69,6 +67,7 @@ const NavSearch = () => {
                 <div className="flex-1 flex-col items-start justify-start">
                   <p onClick={() => navigateAction(item._id)} className="text-sm">{item.judul}</p>
                   <p className="text-[12px] text-muted-foreground no-underline">{item.penulis}</p>
+                  <p className="text-[10px] text-muted-foreground no-underline">{item.penerbit}</p>
                 </div>
               </div>
             )
