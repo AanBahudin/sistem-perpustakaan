@@ -23,6 +23,8 @@ import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalian
 import DetailPerpanjanganPage from "./pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import ConfirmPerpanjangan from "./pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
+import DiscoveryPage from "./pages/pengguna/discovery/DiscoveryPage";
+import SearchPage from "./pages/pengguna/Search/SearchPage";
 
 const router : RouteObject[] = [
     {
@@ -133,11 +135,18 @@ const router : RouteObject[] = [
             {
                 path: 'buku/:id',
                 element: <DetailBuku />,
-                // loader: detailBookLoader
             },
             {
                 path: 'tersimpan',
                 element: <SimpanPage />,
+            },
+            {
+                path: 'discovery',
+                element: <DiscoveryPage />
+            },
+            {
+                path: 'search/:title',
+                element: <SearchPage />
             }
         ]
     },

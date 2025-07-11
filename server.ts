@@ -21,6 +21,7 @@ import kondisiRoute from './route/kondisi/kondisiRoute'
 import dendaRoute from './route/denda/dendaRoute'
 import sukaRoute from './route/suka/sukaRoutes'
 import simpanRoute from './route/simpan/simpanRoute'
+import searchRoute from './route/search/searchRoute'
 
 import databaseConnectionFunction from './db/connect'
 
@@ -64,6 +65,7 @@ app.use('/api/v1/kondisi', authenticationMiddleware, pustakawanMiddlewareAuthori
 app.use('/api/v1/denda', authenticationMiddleware, pustakawanMiddlewareAuthorized, dendaRoute)
 app.use('/api/v1/suka', authenticationMiddleware, userMiddlewareAuthorized, sukaRoute)
 app.use('/api/v1/simpan', authenticationMiddleware, userMiddlewareAuthorized, simpanRoute)
+app.use('/api/v1/search', authenticationMiddleware, userMiddlewareAuthorized, searchRoute)
 
 
 app.use(errorHandler)
