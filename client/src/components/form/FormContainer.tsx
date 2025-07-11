@@ -25,6 +25,11 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
           setMessage(message || '');
           setLoading(false);
           
+          if (redirectTo !== '') {
+            console.log('should be navigated')
+            navigate(redirectTo)
+          }
+      
           if (queryKey.length > 0) {
             queryClient.invalidateQueries(queryKey)
           }
@@ -32,9 +37,7 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
           if (showToast) {
             toast(message, {description: deskripsi})
           }
-          if (redirectTo) {
-            navigate(redirectTo)
-          }
+
         },
         onError: (error: any) => {
           setMessage(error.message || 'Something went wrong');
