@@ -40,8 +40,6 @@ const CancelPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
     },
     onSuccess: () => {
       setLoading(false)
-      store.dispatch(setAlasan(''))
-      store.dispatch(setDurasi(''))
       queryClient.invalidateQueries({queryKey: ['detail-peminjaman', 'perpanjangan', idPerpanjangan]})
       if (window.history.length > 2) {
         navigate(-1);

@@ -1,14 +1,13 @@
 import React, { useState } from "react"
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { editPerpanjangan } from "@/actions/perpanjanganActions"
 import { Settings2 } from "lucide-react"
@@ -16,6 +15,7 @@ import SelectDurasi from "@/pages/pengguna/Buku/SelectDurasi"
 import AlasanInput from "@/pages/pengguna/Buku/AlasanInput"
 import { store } from "@/store"
 import { setAlasan, setDurasi } from "@/cart/peminjamanSlice"
+import { Button } from "../ui/button"
 
 type EditPengajuanPerpanjanganDialogType = {
     children: React.ReactNode,
@@ -37,6 +37,7 @@ const EditPengajuanPerpanjanganDialog = ({children, perpanjangan} : EditPengajua
         onSuccess: () => {
             setLoading(false)
             queryClient.invalidateQueries({queryKey: ['detail-perpanjangan', idPerpanjangan]})
+            setModalOpen(false)
             store.dispatch(setAlasan(''))
             store.dispatch(setDurasi(''))
         },
@@ -49,45 +50,41 @@ const EditPengajuanPerpanjanganDialog = ({children, perpanjangan} : EditPengajua
     const [isLoading, setLoading] = useState(false)
 
     const handleSubmit = async(event: any) => {
+        console.log('test')
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
-        const data = Object.fromEntries(formData) as {
-            durasi: string
-            alasan: string
-        }
+        const data = Object.fromEntries(formData) as any
         await editPerpanjanganData(data)
     }
 
     return (
-        <AlertDialog open={isModalOpen} onOpenChange={setModalOpen}>
-            <AlertDialogTrigger asChild>
-                {children}
-            </AlertDialogTrigger>
+        <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
+            <DialogTrigger asChild>{children}</DialogTrigger>
 
-            <AlertDialogContent className="w-full">
-                <form onSubmit={handleSubmit} className="w-full">
+            <DialogContent className="sm:max-w-[425px]">
+                <form onSubmit={handleSubmit}>
                     <section className="flex flex-col items-start justify-start">
                         <main className='w-10 h-10 p-[10px] flex items-center justify-center rounded-full bg-primary/10'>
                             <Settings2 className='stroke-primary' />
                         </main>
 
-                        <AlertDialogTitle className="text-center capitalize text-lg my-2">Edit Data Pengajuan Perpanjangan</AlertDialogTitle>
-                        <AlertDialogDescription className="text-xs mb-4">Silakan perbarui informasi pengajuan perpanjangan Anda. Pastikan data yang dimasukkan sudah benar sebelum menyimpan perubahan.</AlertDialogDescription>
+                        <DialogTitle className="text-center capitalize text-lg my-2">Edit Data Pengajuan Perpanjangan</DialogTitle>
+                        <DialogDescription className="text-xs mb-4">Silakan perbarui informasi pengajuan perpanjangan Anda. Pastikan data yang dimasukkan sudah benar sebelum menyimpan perubahan.</DialogDescription>
 
                         <main className="w-full flex flex-col gap-y-4">
                             <SelectDurasi defaultDurasi={durasi} />
                             <AlasanInput defaultAlasan={alasan} />
                         </main>
                     </section>
-
-
-                    <AlertDialogFooter className="mt-4">
-                        <AlertDialogCancel>Batal</AlertDialogCancel>
-                        <AlertDialogAction type="submit" className="text-white" disabled={isLoading}>{isLoading ? 'Proses...' : 'Perbaharui'}</AlertDialogAction>
-                    </AlertDialogFooter>
+                    <DialogFooter className="mt-4">
+                        <DialogClose asChild>
+                            <Button variant="outline" className="text-xs text-white">Batal</Button>
+                        </DialogClose>
+                        <Button type="submit" className="text-xs text-white" disabled={isLoading}>{isLoading ? 'Proses...' : 'Perbaharui'}</Button>
+                    </DialogFooter>
                 </form>
-            </AlertDialogContent>
-        </AlertDialog>
+            </DialogContent>
+        </Dialog>
     )
 }
 

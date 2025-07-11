@@ -48,7 +48,7 @@ const TablePerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                 </TableCell>
                                 <TableCell className="text-center text-sm w-[400px]">
                                     <p className="flex-1 text-center text-[12px]">
-                                    {item.alasan || '-'}
+                                    {item.alasan.slice(0, 50) || '-'}
                                     </p>
                                 </TableCell>
                                 <TableCell className="text-center w-[100px]">{item.durasi} hari</TableCell>

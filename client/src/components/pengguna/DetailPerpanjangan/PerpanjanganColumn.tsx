@@ -17,13 +17,16 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
 
     return (
         <section className="rounded-2xl h-fit p-6 col-span-4 border">
-            <main className="flex justify-between items-center">
+            <main className="w-full flex justify-between items-center">
                 <h1 className='font-bold uppercase'>Detail summary</h1>
-                <EditPengajuanPerpanjanganDialog perpanjangan={perpanjangan}>
-                    <Button className="w-6 h-6 rounded-md bg-primary flex items-center justify-center p-[12px]">
-                        <Pen className="stroke-white" />
-                    </Button>
-                </EditPengajuanPerpanjanganDialog>
+
+                {disetujui === 'Pending' && (
+                    <EditPengajuanPerpanjanganDialog perpanjangan={perpanjangan}>
+                        <Button className="w-6 h-6 rounded-md bg-primary flex items-center justify-center p-[12px]">
+                            <Pen className="stroke-white" />
+                        </Button>
+                    </EditPengajuanPerpanjanganDialog>
+                )}
             </main>
 
             <main className='bg-popover rounded-lg p-4 mt-4 mb-4'>

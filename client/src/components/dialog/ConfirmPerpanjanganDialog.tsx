@@ -40,17 +40,17 @@ const ConfirmPerpanjanganDialog = ({peminjaman} : {peminjaman: any}) => {
             queryClient.invalidateQueries({queryKey: ['peminjaman', idPeminjaman]})
             queryClient.invalidateQueries({queryKey: ['perpanjangan', 'peminjamnan', idPeminjaman]})
             queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna']})
-            store.dispatch(setAlasan(''))
-            store.dispatch(setDurasi(''))
         },
         onError: () => {
             setLoading(false)
             setIsModalOpen(false)
         }
     })
-
+    
     const handleClick = async() => {
         await tambahPinjaman()
+        store.dispatch(setAlasan(''))
+        store.dispatch(setDurasi(''))
         setIsModalOpen(false)
     }
 

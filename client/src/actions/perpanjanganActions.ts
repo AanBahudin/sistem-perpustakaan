@@ -46,7 +46,6 @@ export const tambahPerpanjangan = async({
 
 export const editPerpanjangan = async({idPerpanjangan, data} : {idPerpanjangan: string, data: any}) => {
     const postEdit = await customFetch.patch(`/perpanjangan/user/${idPerpanjangan}`, data)
-    console.log(postEdit.status === 400)
     if (postEdit.status === 400) {
         toast('Terjadi Kesalahan', {description: postEdit.data.message})
     }
