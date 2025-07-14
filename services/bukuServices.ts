@@ -33,12 +33,10 @@ export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
 export const discoveryBukuServices = async({query} : {query: any}) => {
 
     if (typeof query === undefined) {
-        console.log('gagal')
         return []
     }
     
-    if (query === 'recommendation') {
-        console.log('berhasil tapi tidak dapat')
+    if (query === 'rekomendasi') {
         const data = await Buku.find().sort({totalDipinjam: -1})
         return data
     }

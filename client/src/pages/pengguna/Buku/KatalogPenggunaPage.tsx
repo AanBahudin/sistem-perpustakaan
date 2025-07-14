@@ -8,8 +8,6 @@ import Container from '@/globals/Container'
 import BookLoading from '@/components/Loading/BookLoading'
 import AwaitHooks from '@/hooks/AwaitHooks'
 import { defer, useLoaderData } from 'react-router-dom'
-import { getAllKategori } from '@/actions/kategoriAction'
-import BookCategoryLoading from '@/components/Loading/BookCategoryLoading'
 import LastAddedLoading from '@/components/Loading/LastAddedLoading'
 import { getAllSuka } from '@/actions/sukaActions'
 import { getAllSimpanan } from '@/actions/simpanActions'
@@ -21,7 +19,6 @@ export const katalogPageLoader = async({request} : {request: Request}) => {
 
   return defer({
     buku: getAllBuku(searchParams),
-    kategori: getAllKategori(),
     disukai: getAllSuka(),
     tersimpan: getAllSimpanan()
   })
@@ -29,7 +26,7 @@ export const katalogPageLoader = async({request} : {request: Request}) => {
 
 const KatalogPenggunaPage = () => {
 
-  const {buku, kategori, disukai, tersimpan} = useLoaderData() as { buku: Promise<any>, kategori: Promise<any>, disukai: Promise<any>, tersimpan: Promise<any>}
+  const {buku, disukai, tersimpan} = useLoaderData() as { buku: Promise<any>, disukai: Promise<any>, tersimpan: Promise<any>}
   const bukuandLikedBuku = Promise.all([buku, disukai, tersimpan])
 
   return (
@@ -39,9 +36,7 @@ const KatalogPenggunaPage = () => {
       <AwaitHooks data={buku} loadingComponent={<LastAddedLoading />}>
         {data => <LastAdded buku={data.data} />}
       </AwaitHooks>
-      <AwaitHooks data={kategori} loadingComponent={<BookCategoryLoading />}>
-        {data => <KategorySection data={data.data} />}
-      </AwaitHooks>
+      <KategorySection />
       <AwaitHooks data={bukuandLikedBuku} loadingComponent={<BookLoading />}>
         {((data) => <KatalogSection dataBuku={data[0].data} total={data[0].total}/>)}
       </AwaitHooks>

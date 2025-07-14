@@ -6,13 +6,25 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { useQuery } from '@tanstack/react-query'
+import { getAllKategori } from '@/actions/kategoriAction'
+import BookCategoryLoading from '@/components/Loading/BookCategoryLoading'
+import { cn } from '@/lib/utils'
 
-const KategorySection = ({data} : {data:any}) => {
+const KategorySection = ({className} : {className?: string}) => {
+  const {data, isLoading} = useQuery({
+    queryKey: ['kategori'],
+    queryFn: getAllKategori
+  })
+
+
+  if (isLoading) return <BookCategoryLoading />
+
   return (
-    <Container className='w-[95%] flex gap-x-3 items-center justify-center mt-20 mb-10'>
+    <Container className={cn('w-[95%] flex gap-x-3 items-center justify-center mt-20 mb-10', className)}>
         <Carousel className='w-full'>
             <CarouselContent className='-ml-1'>
-                <KategoryCard data={data} />
+                <KategoryCard data={data.data} />
             </CarouselContent>
 
             <CarouselPrevious />

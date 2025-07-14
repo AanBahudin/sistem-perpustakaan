@@ -50,6 +50,7 @@ export const discoverBuku = async(query: undefined | string) => {
     if (data.status >= 400) {
         return {message: 'Terjadi kesalahan',  deskripsi: 'Tidak dapat mengambil buku'}
     }
-    return data.data.data
 
+    console.log(data.data)
+    return data.data
 }

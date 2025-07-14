@@ -9,7 +9,7 @@ const BookRecomendation = ({buku} : {buku: Promise<any> }) => {
         <main className='w-full flex items-center justify-between'>
             <h1 className='font-semibold text-xl'>Rekomendasi Buku</h1>
             <Button asChild className='px-4 text-[12px] text-white' variant='secondary'>
-                <Link to='/my/discovery/category?q=recommendation' className='text-sm'>View All</Link>
+                <Link to='/my/discovery/category?q=rekomendasi' className='text-sm'>View All</Link>
             </Button>
         </main>
 
