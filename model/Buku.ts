@@ -69,10 +69,6 @@ const BukuSchema = new mongoose.Schema({
     kategori: [{
         type: String
     }],
-    // kategori: {
-    //     type: String,
-    //     default: 'Pemrograman'
-    // },
     status: {
         type: String,
         enum: ['Tidak Tersedia', 'Tersedia'],

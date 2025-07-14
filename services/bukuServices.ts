@@ -30,6 +30,28 @@ export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
     return {buku, recommendation, totalPage, lastAdded}
 }
 
+export const discoveryBukuServices = async({query} : {query: any}) => {
+
+    if (typeof query === undefined) {
+        console.log('gagal')
+        return []
+    }
+    
+    if (query === 'recommendation') {
+        console.log('berhasil tapi tidak dapat')
+        const data = await Buku.find().sort({totalDipinjam: -1})
+        return data
+    }
+
+    const data = await Buku.find({
+        kategori: {
+            $in: query
+        }
+    })
+
+    return data
+}
+
 // SUDAH TESTING
 export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku, dihapus: false, status: 'Tersedia'})

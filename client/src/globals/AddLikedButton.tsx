@@ -4,10 +4,13 @@ import { Input } from '@/components/ui/input'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addOrRemoveSukaNew, getAllSuka } from '@/actions/sukaActions'
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const AddLikedButton = ({id} : {id: string}) => {
     const queryClient = useQueryClient()
     const [loading, setLoading] = useState(false)
+    const [searchParams] = useSearchParams()
+    const params = searchParams.get('q')
 
     const {data, isLoading: reactQueryLoading} = useQuery({
         queryKey: ['suka'],
@@ -25,6 +28,9 @@ const AddLikedButton = ({id} : {id: string}) => {
             })
             queryClient.invalidateQueries({
                 queryKey: ['detail-book', id]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ['discovery', 'category', params]
             })
             setLoading(false)
         },

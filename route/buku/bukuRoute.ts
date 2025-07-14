@@ -7,6 +7,7 @@ import {
     addBuku,
     editBuku,
     hapusBuku,
+    discoveryBuku,
 } from '../../controllers/buku/bukuController'
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -19,6 +20,9 @@ router.route('/user')
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuUser)
+
+router.route('/discovery')
+    .get(discoveryBuku)
 
 router.route('/pustakawan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuPustakawan)
