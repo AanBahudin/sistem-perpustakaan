@@ -2,11 +2,15 @@ import { searchBook } from "@/actions/searchActions"
 import { Input } from "../ui/input"
 import { useDebouncedCallback } from "use-debounce"
 import { useState, useRef, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 
 const NavSearch = () => {
-  const [value, setValue] = useState('')
+
+  const [searchParams] = useSearchParams()
+  const params = searchParams.get('q')
+
+  const [value, setValue] = useState(params || '')
   const [suggestData, setSuggestData] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const navigate = useNavigate()
@@ -36,6 +40,14 @@ const NavSearch = () => {
     navigate(`/my/buku/${id}`)
   }
 
+  const searchAction = (e : any) => {
+    if (e.key === 'Enter' && value) {
+      navigate(`/my/discovery/search?q=${value}`)
+      setShowSuggestions(false)
+      setSuggestData([])
+    }
+  }
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -51,7 +63,9 @@ const NavSearch = () => {
 
   return (
     <section ref={wrapperRef} className="max-w-[500px] flex flex-col items-center justify-center gap-y-4 relative dark:bg-black">
-      <Input 
+      <Input
+        defaultValue={params || ''}
+        onKeyDown={searchAction}
         onChange={(e) => newHandleSearch(e.target.value)}
         onFocus={() => {
           if (suggestData.length > 0) setShowSuggestions(true)

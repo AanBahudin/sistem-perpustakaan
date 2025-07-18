@@ -4,3 +4,8 @@ export const searchBook = async(title: string | any) => {
     const response = await customFetch.get(`/search?title=${title}`)
     return response.data.data
 }
+
+export const searchBookPageDataLoader = async(title: string) => {
+    const response = await customFetch.get(`/search?title=${title}`)
+    return response.data.data
+}

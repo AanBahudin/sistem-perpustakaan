@@ -47,7 +47,7 @@ const BukuSchema = new mongoose.Schema({
         type: String
     },
     jumlahHalaman: {
-        type: Number,
+        type: Number,   
         required: true
     },
     featured: {
