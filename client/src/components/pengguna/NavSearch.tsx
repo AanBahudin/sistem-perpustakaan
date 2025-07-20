@@ -34,15 +34,25 @@ const NavSearch = () => {
 
 
   const navigateAction = (id: string) => {
+    
     setValue('')
     setSuggestData([])
     setShowSuggestions(false)
+
+    
     navigate(`/my/buku/${id}`)
   }
 
   const searchAction = (e : any) => {
     if (e.key === 'Enter' && value) {
-      navigate(`/my/discovery/search?q=${value}`)
+      const params = new URLSearchParams(searchParams)
+      if (value) {
+        params.set('q', value)
+      } else {
+        params.delete('q')
+      }
+
+      navigate(`?${params.toString()}`);
       setShowSuggestions(false)
       setSuggestData([])
     }
