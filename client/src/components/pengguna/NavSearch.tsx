@@ -49,6 +49,12 @@ const NavSearch = () => {
   }
 
   useEffect(() => {
+    if (params) {
+      setValue(params)
+    } else {
+      setValue('')
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
         setShowSuggestions(false)
@@ -59,7 +65,7 @@ const NavSearch = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [params])
 
   return (
     <section ref={wrapperRef} className="max-w-[500px] flex flex-col items-center justify-center gap-y-4 relative dark:bg-black">

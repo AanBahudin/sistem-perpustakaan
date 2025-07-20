@@ -4,7 +4,6 @@ import { Request,  Response } from "express"
 
 
 export const searchController = async(req : Request, res: Response) => {
-
     const title = req.query.title
     const data = await searchServices(title)    
 

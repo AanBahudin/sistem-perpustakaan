@@ -9,6 +9,19 @@ export const allKategori = async() => {
     return {data: kategori}
 }
 
+export const searchKategori = async(title: any) => {
+    let dataKategori = []
+    if (title === undefined || title === '') {
+        dataKategori = await Kategori.find()
+    } else {
+        dataKategori = await Kategori.find({
+            nama: {$regex: title, $options: 'i'}
+        })
+    }
+
+    return dataKategori
+}
+
 // SUDAH DITESTING
 export const addKategori = async({kategoriBaru} : AddKategoriParamsType) => {
     const isKategoriExist = await Kategori.findOne({

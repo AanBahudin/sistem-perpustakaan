@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addKategori, allKategori, deleteKategori } from "../../services/kategoriServices";
+import { addKategori, allKategori, deleteKategori, searchKategori } from "../../services/kategoriServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH DITESTING
@@ -11,6 +11,17 @@ export const getAllKategori = async(req: Request | any, res: Response) => {
         message: 'Daftar Kategori',
         data,
         total: data.length
+    })
+}
+
+export const getSearchKategori = async(req: Request, res: Response) => {
+    const {kategori} = req.query
+    const data = await searchKategori(kategori || '')
+
+    SendDataResponse({
+        res, 
+        message: 'Kategori',
+        data
     })
 }
 
