@@ -16,7 +16,7 @@ const SearchPage = () => {
     queries: [
       {
         queryKey: ['search', params],
-        queryFn: () => searchBookPageDataLoader(params as string)
+        queryFn: () => searchBookPageDataLoader(params as string),
       },
       {
         queryKey: ['search', 'kategori', params],

@@ -1,25 +1,30 @@
 import { Link } from 'react-router-dom'
+import { memo } from 'react'
 
 type SearchBooksType = {
     data: any
 }
 
-const SearchBooks = ({data} : SearchBooksType) => {
+
+const SearchBooks = ({ data }: SearchBooksType) => {
     const isDataEmpty = data.length === 0
+    console.log('ini di re-render')
     return (
         <section className='w-full flex items-center justify-start gap-x-5'>
             {isDataEmpty ? (
-                <h1 className='font-semibold text-muted-foreground mt-20'>Maaf, tidak bisa menemukan buku yang anda cari</h1>
+                <h1 className='font-semibold text-muted-foreground mt-20'>
+                    Maaf, tidak bisa menemukan buku yang anda cari
+                </h1>
             ) : (
-                data.map((item: any, index: number) => {
-                    return <SearchBook item={item} key={index} />
-                })
+                data.map((item: any, index: number) => (
+                    <SearchBook item={item} key={index} />
+                ))
             )}
         </section>
     )
 }
 
-export default SearchBooks
+export default memo(SearchBooks)
 
 const SearchBook = ({item} : {item: any}) => {
     const newTitle =  item.judul.length > 15 ? item.judul.slice(0,15) + '...' : item.judul
