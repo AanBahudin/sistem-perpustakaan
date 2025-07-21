@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 const NavSearch = () => {
 
   const [searchParams] = useSearchParams()
-  const params = searchParams.get('q')
+  const params = searchParams.get('judul')
 
   const [value, setValue] = useState(params || '')
   const [suggestData, setSuggestData] = useState([])
@@ -47,12 +47,12 @@ const NavSearch = () => {
     if (e.key === 'Enter' && value) {
       const params = new URLSearchParams(searchParams)
       if (value) {
-        params.set('q', value)
+        params.set('judul', value)
       } else {
-        params.delete('q')
+        params.delete('judul')
       }
 
-      navigate(`?${params.toString()}`);
+      navigate(`/my/discovery/search/?${params.toString()}`);
       setShowSuggestions(false)
       setSuggestData([])
     }

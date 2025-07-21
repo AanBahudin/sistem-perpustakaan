@@ -10,7 +10,7 @@ const SearchPage = () => {
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const params = searchParams.get('q')
+  const params = new URLSearchParams(searchParams).toString()
 
   const result = useQueries({
     queries: [
@@ -44,7 +44,6 @@ const SearchPage = () => {
       </main>
 
       <main className='w-[80%]'>
-        <h1 className='text-xl mb-6 text-muted-foreground font-semibold'>Menampilkan hasil untuk <span className='italic text-primary underline'>{params}</span></h1>
         <SearchBooks data={searchData.data} />
       </main>
 

@@ -9,7 +9,7 @@ const SearchBooks = ({data} : SearchBooksType) => {
     return (
         <section className='w-full flex items-center justify-start gap-x-5'>
             {isDataEmpty ? (
-                <h1 className='text-2xl text-muted-foreground'>Maaf, tidak bisa menemukan buku yang anda cari</h1>
+                <h1 className='font-semibold text-muted-foreground mt-20'>Maaf, tidak bisa menemukan buku yang anda cari</h1>
             ) : (
                 data.map((item: any, index: number) => {
                     return <SearchBook item={item} key={index} />
