@@ -38,12 +38,12 @@ const SearchPage = () => {
   if (isLoading) return <h1>Loadingg</h1>
 
   return (
-    <section className='w-[90%] mx-auto my-20 flex gap-x-4'>
-      <main className='w-[20%]'>
+    <section className='w-full mx-auto my-20 flex gap-x-4'>
+      <main className='w-[25%]'>
         <SearchFilter kategori={allKategori.data} />
       </main>
 
-      <main className='w-[80%]'>
+      <main className='w-[75%]'>
         <SearchBooks data={searchData.data} />
       </main>
 

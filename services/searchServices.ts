@@ -5,6 +5,8 @@ export const searchServices = async(params: string | any) => {
         dihapus: false
     };
 
+    console.log(params.ISBN)
+
     // looping
     for (const key in params) {
         const value = params[key]

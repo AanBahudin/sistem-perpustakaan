@@ -24,6 +24,7 @@ const SearchCategoryFilter = ({data} : {data: any}) => {
   const [searchParams] = useSearchParams()
   const kategoriParams = searchParams.get('kategori')
 
+  // React Hooks
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
   const newData = data.length === 0 ? [] : data
@@ -49,7 +50,7 @@ const SearchCategoryFilter = ({data} : {data: any}) => {
 
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between" >
+            <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between" >
               {kategoriParams ? newData.find((framework: any) => framework.nama === kategoriParams)?.nama : "Cari kategori"}
               <ChevronsUpDown className="opacity-50" />
             </Button>

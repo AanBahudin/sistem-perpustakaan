@@ -1,5 +1,6 @@
 import { ListFilter } from 'lucide-react'
 import SearchCategoryFilter from './SearchCategoryFilter'
+import ISBNSearchInput from './ISBNSearchInput'
 
 const SearchFilter = ({kategori} : {kategori: any}) => {
 
@@ -9,8 +10,9 @@ const SearchFilter = ({kategori} : {kategori: any}) => {
             <ListFilter className='w-5 h-5'/>
             <h1 className='uppercase font-semibold'>Filter</h1>
         </main>
-        <div className='w-full mt-6'>
+        <div className='w-[90%] mt-6'>
           <SearchCategoryFilter data={kategori.data} />
+          <ISBNSearchInput />
         </div>
     </section>
   )
