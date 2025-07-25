@@ -5,7 +5,5 @@ export const getAllPenulis = async() => {
     if (status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Silahkan periksa koneksi Internet Anda'}
     }
-
-    console.log(response.data)
     return response.data
 }
