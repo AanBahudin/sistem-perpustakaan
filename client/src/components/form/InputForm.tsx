@@ -12,7 +12,7 @@ const InputForm = ({label, type, name, placeholder} : InputFormTypes) => {
   return (
     <div className='grid items-center gap-1.5 w-full'>
         <Label htmlFor={name}>{label}</Label>
-        <Input required type={type} id={name} name={name} placeholder={placeholder} className='mt-2' />
+        <Input autoFocus required type={type} id={name} name={name} placeholder={placeholder} className='mt-2' />
     </div>
   )
 }

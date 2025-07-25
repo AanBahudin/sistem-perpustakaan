@@ -1,7 +1,9 @@
 import { getAllKategori } from '@/actions/kategoriAction'
+import { getAllPenerbit } from '@/actions/penerbitActions'
 import { searchBookPageDataLoader } from '@/actions/searchActions'
 import SearchBooks from '@/components/pengguna/SearchPage/SearchBooks'
 import SearchFilter from '@/components/pengguna/SearchPage/SearchFilter'
+import SearchLoading from '@/components/pengguna/SearchPage/SearchLoading'
 import { useQueries } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -21,12 +23,16 @@ const SearchPage = () => {
       {
         queryKey: ['search', 'kategori', params],
         queryFn: getAllKategori
+      },
+      {
+        queryKey: ['penerbit'],
+        queryFn: getAllPenerbit
       }
     ]
   })
 
 
-  const [searchData, allKategori] = result
+  const [searchData, allKategori, dataPenerbit] = result
   const isLoading = result.some(q => q.isLoading)
 
   useEffect(() => {
@@ -35,12 +41,15 @@ const SearchPage = () => {
     }
   }, [])
 
-  if (isLoading) return <h1>Loadingg</h1>
+  if (isLoading) return <SearchLoading />
 
   return (
     <section className='w-full mx-auto my-20 flex gap-x-4'>
       <main className='w-[25%]'>
-        <SearchFilter kategori={allKategori.data} />
+        <SearchFilter 
+          kategori={allKategori.data}
+          penerbit={dataPenerbit.data}
+          penulis={[]} />
       </main>
 
       <main className='w-[75%]'>

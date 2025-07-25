@@ -46,25 +46,25 @@ const SearchCategoryFilter = ({data} : {data: any}) => {
 
   return (
     <section className='w-full flex flex-col'>
-        <label htmlFor="category" className='uppercase font-semibold text-xs mb-4'>kategori</label>
+        <label htmlFor="category" className='uppercase font-semibold text-xs mb-3'>kategori</label>
 
         <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between" >
+          <PopoverTrigger asChild className="w-full">
+            <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
               {kategoriParams ? newData.find((framework: any) => framework.nama === kategoriParams)?.nama : "Cari kategori"}
               <ChevronsUpDown className="opacity-50" />
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="w-[200px] p-0">
-            <Command>
+          <PopoverContent className="w-full p-0">
+            <Command className="w-full">
               <CommandInput placeholder="Cari kategori..." className="h-9" />
-              <CommandList className="scroll-custom">
+              <CommandList className="scroll-custom w-full">
                 <CommandEmpty>Kategori tidak ditemukan.</CommandEmpty>
-                <CommandGroup className="">
+                <CommandGroup className="w-full">
                   {newData.map((framework: any) => {
                     return (
-                      <CommandItem key={framework.nama} value={framework.nama} onSelect={(currentValue) => handleSelect(currentValue)}>
+                      <CommandItem className="w-full" key={framework.nama} value={framework.nama} onSelect={(currentValue) => handleSelect(currentValue)}>
                         {framework.nama}
                         <Check className={cn("ml-auto",value === framework.nama ? "opacity-100" : "opacity-0")}/>
                       </CommandItem>
@@ -74,7 +74,7 @@ const SearchCategoryFilter = ({data} : {data: any}) => {
               </CommandList>
             </Command>
           </PopoverContent>
-    </Popover>
+        </Popover>
     </section>
   )
 }

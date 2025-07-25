@@ -42,7 +42,7 @@ const ISBNSearchInput = () => {
 
     return (
         <section className='w-full flex flex-col mt-3'>
-            <label htmlFor="ISBN" className='uppercase font-semibold text-xs mb-4'>NOMOR ISBN</label>
+            <label htmlFor="ISBN" className='uppercase font-semibold text-xs mb-3'>NOMOR ISBN</label>
             <main className='w-full flex justify-between items-center gap-x-2'>
                 <Input
                     value={value}
@@ -50,7 +50,7 @@ const ISBNSearchInput = () => {
                     pattern="\d*"
                     onChange={e => setISBNValue(e.target.value)}
                     onKeyDown={submitAction}
-                    className='w-full selection:text-white' 
+                    className='w-full selection:text-white placeholder:text-xs text-xs' 
                     placeholder='3842105724' />
                 {value && <Button className='ease-in-out duration-300' onClick={resetISBN} type='button' size='icon' variant='destructive'><X /></Button>}
             </main>

@@ -8,7 +8,6 @@ type SearchBooksType = {
 
 const SearchBooks = ({ data }: SearchBooksType) => {
     const isDataEmpty = data.length === 0
-    console.log('ini di re-render')
     return (
         <section className='w-full flex items-center justify-start gap-x-5'>
             {isDataEmpty ? (
