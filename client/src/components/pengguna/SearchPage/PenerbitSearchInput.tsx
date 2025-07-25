@@ -16,12 +16,14 @@ import {
 } from "@/components/ui/popover"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useState } from "react"
+import { X } from "lucide-react"
 
 
 const PenerbitSearchInput = ({data} : {data: any}) => {
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const fullParams = new URLSearchParams(searchParams)
   const params = searchParams.get('penerbit')
 
   const [value, setValue] = useState('')
@@ -43,39 +45,50 @@ const PenerbitSearchInput = ({data} : {data: any}) => {
     navigate(`?${params.toString()}`);
   }
 
+  const resetPenerbit = () => {
+    const isParamsExist = searchParams.get('penerbit')
+    if (isParamsExist) {                     
+        fullParams.delete('penerbit')
+        navigate(`/my/discovery/search/?${fullParams.toString()}`);
+    }
+    setValue('')
+  }
 
   return (
     <section className="w-full flex flex-col mt-3">
       <label htmlFor="category" className='uppercase font-semibold text-xs mb-3'>penerbit</label>
 
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild className="w-full">
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
-            {params ? newData.find((framework: any) => framework === params) : "Cari penerbit"}
-            <ChevronsUpDown className="opacity-50" />
-          </Button>
-        </PopoverTrigger>
+      <main className="w-full flex items-center justify-between gap-x-2">
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild className="flex-1">
+            <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
+              {params ? newData.find((framework: any) => framework === params) : "Cari penerbit"}
+              <ChevronsUpDown className="opacity-50" />
+            </Button>
+          </PopoverTrigger>
 
-        <PopoverContent className="w-full p-0">
-          <Command className="w-full">
-            <CommandInput placeholder="Cari penerbit..." className="h-9" />
-            <CommandList className="scroll-custom w-full">
-              <CommandEmpty>Penerbit tidak ditemukan.</CommandEmpty>
-              <CommandGroup className="w-full">
-                {newData.map((penerbit: any) => {
-                  console.log(newData)
-                  return (
-                    <CommandItem className="w-full" key={penerbit} value={penerbit} onSelect={(currentValue) => handleSelect(currentValue)}>
-                      {penerbit}
-                      <Check className={cn("ml-auto",value === penerbit ? "opacity-100" : "opacity-0")}/>
-                    </CommandItem>
-                  )
-                })}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
+          <PopoverContent className="w-full p-0">
+            <Command className="w-full">
+              <CommandInput placeholder="Cari penerbit..." className="h-9" />
+              <CommandList className="scroll-custom w-full">
+                <CommandEmpty>Penerbit tidak ditemukan.</CommandEmpty>
+                <CommandGroup className="w-full">
+                  {newData.map((penerbit: any) => {
+                    return (
+                      <CommandItem className="w-full" key={penerbit} value={penerbit} onSelect={(currentValue) => handleSelect(currentValue)}>
+                        {penerbit}
+                        <Check className={cn("ml-auto",value === penerbit ? "opacity-100" : "opacity-0")}/>
+                      </CommandItem>
+                    )
+                  })}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+
+        {params && <Button className='ease-in-out duration-300' onClick={resetPenerbit} type='button' size='icon' variant='destructive'><X /></Button>}
+      </main>
     </section>
   )
 }

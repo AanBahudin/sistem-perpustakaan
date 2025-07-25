@@ -16,6 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { X } from "lucide-react"
 
 const SearchCategoryFilter = ({data} : {data: any}) => {
 
@@ -44,37 +45,51 @@ const SearchCategoryFilter = ({data} : {data: any}) => {
     navigate(`?${params.toString()}`);
   }
 
+  const resetKategori = () => {
+    const isParamsExist = searchParams.get('kategori')
+      if (isParamsExist) {                     
+          const params = new URLSearchParams(searchParams)
+          params.delete('kategori')
+          navigate(`/my/discovery/search/?${params.toString()}`);
+      }
+    setValue('')
+  }
+
   return (
     <section className='w-full flex flex-col'>
         <label htmlFor="category" className='uppercase font-semibold text-xs mb-3'>kategori</label>
 
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild className="w-full">
-            <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
-              {kategoriParams ? newData.find((framework: any) => framework.nama === kategoriParams)?.nama : "Cari kategori"}
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
-          </PopoverTrigger>
+        <main className="w-full flex items-center justify-between gap-x-2">
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild className="flex-1">
+              <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
+                {kategoriParams ? newData.find((framework: any) => framework.nama === kategoriParams)?.nama : "Cari kategori"}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
 
-          <PopoverContent className="w-full p-0">
-            <Command className="w-full">
-              <CommandInput placeholder="Cari kategori..." className="h-9" />
-              <CommandList className="scroll-custom w-full">
-                <CommandEmpty>Kategori tidak ditemukan.</CommandEmpty>
-                <CommandGroup className="w-full">
-                  {newData.map((framework: any) => {
-                    return (
-                      <CommandItem className="w-full" key={framework.nama} value={framework.nama} onSelect={(currentValue) => handleSelect(currentValue)}>
-                        {framework.nama}
-                        <Check className={cn("ml-auto",value === framework.nama ? "opacity-100" : "opacity-0")}/>
-                      </CommandItem>
-                    )
-                  })}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
+            <PopoverContent className="w-full p-0">
+              <Command className="w-full">
+                <CommandInput placeholder="Cari kategori..." className="h-9" />
+                <CommandList className="scroll-custom w-full">
+                  <CommandEmpty>Kategori tidak ditemukan.</CommandEmpty>
+                  <CommandGroup className="w-full">
+                    {newData.map((framework: any) => {
+                      return (
+                        <CommandItem className="w-full" key={framework.nama} value={framework.nama} onSelect={(currentValue) => handleSelect(currentValue)}>
+                          {framework.nama}
+                          <Check className={cn("ml-auto",value === framework.nama ? "opacity-100" : "opacity-0")}/>
+                        </CommandItem>
+                      )
+                    })}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+
+          {kategoriParams && <Button className='ease-in-out duration-300' onClick={resetKategori} type='button' size='icon' variant='destructive'><X /></Button>}
+        </main>
     </section>
   )
 }

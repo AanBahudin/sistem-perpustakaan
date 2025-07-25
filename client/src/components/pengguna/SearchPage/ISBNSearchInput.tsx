@@ -27,7 +27,7 @@ const ISBNSearchInput = () => {
 
     const resetISBN = () => {
         const isParamsExist = searchParams.get('ISBN')
-        if (isParamsExist) {
+        if (isParamsExist) {                     
             const params = new URLSearchParams(searchParams)
             params.delete('ISBN')
             navigate(`/my/discovery/search/?${params.toString()}`);
