@@ -21,7 +21,7 @@ const SearchFilter = ({kategori, penerbit, penulis} : SearchFilterType) => {
         <div className='w-[90%] mt-6'>
           <SearchCategoryFilter data={kategori.data} />
           <ISBNSearchInput />
-          <PenulisSearchInput data={[]} />
+          <PenulisSearchInput data={penulis} />
           <PenerbitSearchInput data={penerbit} />
         </div>
     </section>

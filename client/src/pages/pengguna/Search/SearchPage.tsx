@@ -1,5 +1,6 @@
 import { getAllKategori } from '@/actions/kategoriAction'
 import { getAllPenerbit } from '@/actions/penerbitActions'
+import { getAllPenulis } from '@/actions/penulistAction'
 import { searchBookPageDataLoader } from '@/actions/searchActions'
 import SearchBooks from '@/components/pengguna/SearchPage/SearchBooks'
 import SearchFilter from '@/components/pengguna/SearchPage/SearchFilter'
@@ -27,12 +28,16 @@ const SearchPage = () => {
       {
         queryKey: ['penerbit'],
         queryFn: getAllPenerbit
+      },
+      {
+        queryKey: ['penulis'],
+        queryFn: getAllPenulis
       }
     ]
   })
 
 
-  const [searchData, allKategori, dataPenerbit] = result
+  const [searchData, allKategori, dataPenerbit, dataPenulis] = result
   const isLoading = result.some(q => q.isLoading)
 
   useEffect(() => {
@@ -49,7 +54,7 @@ const SearchPage = () => {
         <SearchFilter 
           kategori={allKategori.data}
           penerbit={dataPenerbit.data}
-          penulis={[]} />
+          penulis={dataPenulis.data} />
       </main>
 
       <main className='w-[75%]'>

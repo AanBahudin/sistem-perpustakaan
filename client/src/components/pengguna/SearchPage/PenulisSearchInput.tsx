@@ -28,7 +28,7 @@ const PenulisSearchInput = ({data} : {data: any}) => {
     const [value, setValue] = useState('')
     const [open, setOpen] = useState(false)
 
-    const newData = data.length === 0 ? [] : data
+    const newData = data?.length === 0 ? [] : data
 
     const handleSelect = (currentValue: any) => {
         const params = new URLSearchParams(searchParams)
@@ -52,7 +52,7 @@ const PenulisSearchInput = ({data} : {data: any}) => {
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild className="w-full">
                     <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between text-xs" >
-                        {params ? data.find((framework: any) => framework.nama === params)?.nama : "Cari penulis"}
+                        {params ? data.find((penulis: any) => penulis === params) : "Cari penulis"}
                         <ChevronsUpDown className="opacity-50" />
                     </Button>
                 </PopoverTrigger>
@@ -63,11 +63,11 @@ const PenulisSearchInput = ({data} : {data: any}) => {
                     <CommandList className="scroll-custom w-full">
                         <CommandEmpty>Penulis tidak ditemukan.</CommandEmpty>
                         <CommandGroup className="w-full">
-                        {newData.map((framework: any) => {
+                        {newData.map((penulis: any) => {
                             return (
-                            <CommandItem className="w-full" key={framework.nama} value={framework.nama} onSelect={(currentValue) => handleSelect(currentValue)}>
-                                {framework.nama}
-                                <Check className={cn("ml-auto",value === framework.nama ? "opacity-100" : "opacity-0")}/>
+                            <CommandItem className="w-full" key={penulis} value={penulis} onSelect={(currentValue) => handleSelect(currentValue)}>
+                                {penulis}
+                                <Check className={cn("ml-auto",value === penulis ? "opacity-100" : "opacity-0")}/>
                             </CommandItem>
                             )
                         })}

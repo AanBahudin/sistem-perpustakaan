@@ -23,6 +23,7 @@ import sukaRoute from './route/suka/sukaRoutes'
 import simpanRoute from './route/simpan/simpanRoute'
 import searchRoute from './route/search/searchRoute'
 import penerbitRoute from './route/penerbit/penerbitRoutes'
+import penulisRoute from './route/penulis/penulisRoute'
 
 import databaseConnectionFunction from './db/connect'
 
@@ -68,6 +69,7 @@ app.use('/api/v1/suka', authenticationMiddleware, userMiddlewareAuthorized, suka
 app.use('/api/v1/simpan', authenticationMiddleware, userMiddlewareAuthorized, simpanRoute)
 app.use('/api/v1/search', authenticationMiddleware, userMiddlewareAuthorized, searchRoute)
 app.use('/api/v1/penerbit', authenticationMiddleware, penerbitRoute)
+app.use('/api/v1/penulis', authenticationMiddleware, penulisRoute)
 
 
 app.use(errorHandler)
