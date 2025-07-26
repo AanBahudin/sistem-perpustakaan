@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom'
 const KategoryCard = ({data} : {data: any}) => {
 
     const [searchParams] = useSearchParams()
-    const params = searchParams.get('q')
-    const baseURL = '/my/discovery/category?q='
+    const params = searchParams.get('kategori')
+    const baseURL = '/my/discovery/category?kategori='
     return (
         <>
             {data.map((item:any, index:number) => {

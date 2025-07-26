@@ -12,7 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 const CategoryPage = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const params = searchParams.get('q')
+  const params = searchParams.get('kategori')
 
 
   const {data, isLoading} = useQuery({
