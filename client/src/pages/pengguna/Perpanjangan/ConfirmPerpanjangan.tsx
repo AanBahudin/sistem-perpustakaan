@@ -5,6 +5,7 @@ import { useQueries } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import InfoPinjaman from "./InfoPinjaman"
 import KonfirmasiDataPerpanjangan from "./KonfirmasiDataPerpanjangan"
+import ConfirmPerpanjanganLoading from "./ConfirmPerpanjanganLoading"
 
 const ConfirmPerpanjangan = () => {
 
@@ -25,7 +26,7 @@ const ConfirmPerpanjangan = () => {
 
     const [peminjaman, perpanjangan] = results
     const isLoading = results.some(q => q.isLoading)
-    if (isLoading) return <h1>Loading...</h1>
+    if (isLoading) return <ConfirmPerpanjanganLoading />
 
     return (
         <Container className="w-4/5 my-10 flex gap-x-6">
