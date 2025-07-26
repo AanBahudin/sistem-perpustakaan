@@ -27,7 +27,6 @@ const DetailButton = ({stok, status, idPeminjaman, idBuku} : DetailButtonType) =
             {status === 'Dipinjam' && (
                 <main className='flex items-center gap-x-3'>
                     <PerpanjangButton idPeminjaman={idPeminjaman} />
-                    <PengembalianButton />
                 </main>
             )}
             {status === 'Terlambat' && <TerlambatButton />}
@@ -59,23 +58,23 @@ const PinjamButton = ({stok, idBuku} : {stok: number, idBuku: string}) => {
 }
 const PerpanjangButton = ({idPeminjaman} : {idPeminjaman: any}) => {
     return (
-        <div className="w-full flex items-center mt-4 gap-x-8">
+        <Link to={`/my/confirm/perpanjangan/${idPeminjaman}`} className="w-full flex items-center mt-4 gap-x-8 cursor-pointer">
             <Button className="flex items-center gap-x-2 text-white bg-primary/30 text-center w-full">
                 <CircleFadingArrowUp />
-                <Link to={`/my/confirm/perpanjangan/${idPeminjaman}`}>Perpanjang</Link>
+                Perpanjang
             </Button>
-        </div>
+        </Link>
     )
 }
 
-const PengembalianButton = () => {
+const PengembalianButton = ({idPeminjaman} : {idPeminjaman: any}) => {
     return (
-        <div className="w-full flex items-center mt-4 gap-x-8">
+        <Link to={`/my/confirm/pengembalian/${idPeminjaman}`} className="w-full flex items-center mt-4 gap-x-8">
             <Button className="text-white flex items-center gap-x-2 text-center bg-secondary/50 hover:bg-secondary ring-1 w-full">
                 <Undo2 />
                 Kembalikan
             </Button>
-        </div>
+        </Link>
     )
 }
 

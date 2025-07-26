@@ -10,6 +10,11 @@ export type GetOnePengembalianDataParamsType = {
     pengembalianId: string | ObjectId
 }
 
+export type UserCreatePengembalianDataType = {
+    peminjamanId: string | ObjectId,
+    userId: string
+}
+
 export type PustakawanGetOnePengembalianParamsType = {
     pengembalianId: string | ObjectId
 }

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose"
 import { BadRequestError, NotFoundError } from "../errors/errorHandler"
 import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
@@ -8,7 +9,8 @@ import {
     PustakawanAcceptPengembalianParamsType, 
     PustakawanCreatePengembalianParamsType, 
     PustakawanEditPengembalianParamsType,
-    PustakawanGetOnePengembalianParamsType } from "../types/pengembalianTypes"
+    PustakawanGetOnePengembalianParamsType, 
+    UserCreatePengembalianDataType} from "../types/pengembalianTypes"
 import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
@@ -39,6 +41,28 @@ export const getOnePengembalianUser = async({ pengembalianId, userId } : GetOneP
     return {data: pengembalian}
 }
 
+export const userCreatePengembalianInfo = async({peminjamanId, userId} : UserCreatePengembalianDataType) => {
+    // cari data peminjaman
+    const dataPeminjaman = await Peminjaman.findOne({_id: peminjamanId})
+    if (!dataPeminjaman) {
+        throw new NotFoundError('Peminjaman tidak ditemukan')
+    }
+
+    // cek status buku yang di bolehkan untuk dikembalikan
+    const statusDiizinkan = ['Dipinjam', 'Terlambat']
+    if (!statusDiizinkan.includes(dataPeminjaman.statusPeminjaman)) {
+        throw new BadRequestError('Buku tidak dapat dikembalikan')
+    }
+
+    // cek data pengembalian apakah sudah ada atau tidak
+    // jika data pengembalian sudah ada maka perbaharui, tetapi jika data pengembalian belum ada maka dibuat ulang
+    const dataPengembalian = await Pengembalian.findOne({idPeminjaman: peminjamanId})
+    if (!dataPengembalian) {
+        await createPengembalian({dataPeminjaman})
+    } else {
+        await updatePengembalian({idPengembalian : dataPengembalian._id})
+    }
+}
 
 // SUDAH TESTING
 export const pustakawanGetDataPengembalian = async() => {
@@ -200,9 +224,32 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
 }
 
 
+// create pengembalian (MASIH MENJADI PERTIMBANGAN)
+const createPengembalian = async({dataPeminjaman} : {dataPeminjaman: any}) => {
+    const { buku: idBuku, _id: idPeminjaman, berakhirPada } = dataPeminjaman
+    // hitung keterlambatan pengembalian
+    const totalHariTerlambat = hitungKeterlambatan(berakhirPada)
+    // ambil nominal denda yang ditentukan
+    const hargaDenda = await getDenda()
+    // hitung denda keterlambatan
+    const dendaKeterlambatan = hargaDenda as number * totalHariTerlambat
+    // hitung denda kehilangan buku
+    const buku = await Buku.findOne({_id: idBuku})
+    if (!buku) throw new NotFoundError('Buku tidak ditemukan')
+    
+    // akumulasi total denda
+    // akumulasi de
+    // buat data
+    console.log('pengembalian dibuat')
+}
+
+// perbaharui pengembalian
+const updatePengembalian = async({idPengembalian} : {idPengembalian: any}) => {
+    console.log('pengembalian diupdate')
+}
+
 
 // digunakan di services lain
-
 export const getTotalBukuHilangByUser = async({idPengguna} : {idPengguna: string}) => {
     const dataHilang = await Pengembalian.find({idPengguna, isMissing: true})
     return dataHilang

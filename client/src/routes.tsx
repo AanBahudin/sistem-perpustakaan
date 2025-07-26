@@ -27,6 +27,7 @@ import DiscoveryPage from "./pages/pengguna/Discovery/DiscoveryPage";
 import SearchPage from "./pages/pengguna/Search/SearchPage";
 import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
 import AllBook from "./pages/pengguna/Discovery/AllBook";
+import ConfirmPengembalian from "./pages/pengguna/Pengembalian/ConfirmPengembalianPage";
 
 const router : RouteObject[] = [
     {

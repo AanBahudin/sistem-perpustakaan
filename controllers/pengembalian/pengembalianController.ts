@@ -6,7 +6,8 @@ import {
     pustakawanBuatDataPengembalian, 
     pustakawanEditDataPengembalian, 
     pustakawanGetDataPengembalian, 
-    pustakawanTerimaDataPengembalian } from "../../services/pengembalianServices";
+    pustakawanTerimaDataPengembalian, 
+    userCreatePengembalianInfo} from "../../services/pengembalianServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH TESTING
@@ -36,6 +37,15 @@ export const getSinglePengembalianUser = async(req: Request | any, res: Response
         message: 'Data Pengembalian',
         data
     })
+}
+
+export const createPengembalianDataUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id: peminjamanId} = req.params
+
+    const data = await userCreatePengembalianInfo({userId, peminjamanId})
+
+    res.status(200).json({message: 'test'})
 }
 
 // untuk pustakawan
