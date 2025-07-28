@@ -27,7 +27,6 @@ import DiscoveryPage from "./pages/pengguna/Discovery/DiscoveryPage";
 import SearchPage from "./pages/pengguna/Search/SearchPage";
 import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
 import AllBook from "./pages/pengguna/Discovery/AllBook";
-import ConfirmPengembalian from "./pages/pengguna/Pengembalian/ConfirmPengembalianPage";
 import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 
 const router : RouteObject[] = [
@@ -50,15 +49,6 @@ const router : RouteObject[] = [
                 loader: LoginLoader
             },
             
-        ]
-    },
-    {
-        path: '/pustakawan',
-        children: [
-            {
-                index: true,
-                element: <PustakawanLoginPage />
-            }
         ]
     },
     {
@@ -192,7 +182,27 @@ const router : RouteObject[] = [
             {
                 index: true,
                 element: <PustakawanLayout />
-            }
+            },
+            {
+                path: 'login',
+                element: <PustakawanLoginPage />
+            },
+            {
+                path: 'beranda',
+                // element: 
+            },
+            {
+                path: 'profil',
+                // element: 
+            },
+            {
+                path: 'pengguna',
+                // element: 
+            },
+            {
+                path: 'buku',
+                // element: 
+            },
         ]
     },
     {
