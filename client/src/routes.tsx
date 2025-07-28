@@ -28,6 +28,7 @@ import SearchPage from "./pages/pengguna/Search/SearchPage";
 import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
 import AllBook from "./pages/pengguna/Discovery/AllBook";
 import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
+import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
 
 const router : RouteObject[] = [
     {
@@ -189,7 +190,7 @@ const router : RouteObject[] = [
             },
             {
                 path: 'beranda',
-                // element: 
+                element: <PustakawanBerandaPage />
             },
             {
                 path: 'profil',

@@ -7,10 +7,12 @@ import Container from '@/globals/Container'
 import { useMutation } from '@tanstack/react-query'
 import { Eye, Loader } from 'lucide-react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 const PustakawanLoginPage = () => {
 
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -35,6 +37,7 @@ const PustakawanLoginPage = () => {
         onSuccess: () => {
             setLoading(false)
             toast('Login Berhasil', {description: 'Selamat datang kembali di akun anda! '})
+            navigate('/pustakawan/beranda')
         },
         onError: (data: any) => {
             setLoading(false)
