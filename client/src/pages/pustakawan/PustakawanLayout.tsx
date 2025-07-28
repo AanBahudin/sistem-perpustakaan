@@ -1,8 +1,22 @@
 import React from 'react'
+import Container from '@/globals/Container'
+import PustakawanNavbar from '@/components/Pustakawan/PustakawanNavbar'
+import PustakawanSidebar from '@/components/Pustakawan/PustakawanSidebar'
+import { Outlet } from 'react-router-dom'
 
 const DashboardLayout = () => {
   return (
-    <div>DashboardLayout</div>
+    <Container className='w-full h-[100vh] flex items-start'>
+      {/* sidebar */}
+      <PustakawanSidebar />
+      
+      <section className='flex-1 max-h-[100vh] flex flex-col'>
+        <PustakawanNavbar />
+        <section className='w-full min-h-[88vh] overflow-y-auto scroll-custom p-10'>
+          <Outlet />
+        </section>
+      </section>
+    </Container>
   )
 }
 

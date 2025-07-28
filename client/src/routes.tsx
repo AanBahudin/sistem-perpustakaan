@@ -29,6 +29,8 @@ import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
 import AllBook from "./pages/pengguna/Discovery/AllBook";
 import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
+import PustakawanProfilePage from "./pages/pustakawan/profil/PustakawanProfilePage";
+import DaftarPenggunaPustakawan from "./pages/pustakawan/pengguna/DaftarPenggunaPustakawan";
 
 const router : RouteObject[] = [
     {
@@ -178,27 +180,24 @@ const router : RouteObject[] = [
         ]
     },
     {
+        path: '/pustakawan/login',
+        element: <PustakawanLoginPage />
+    },
+    {
         path: '/pustakawan',
+        element: <PustakawanLayout />,
         children: [
             {
                 index: true,
-                element: <PustakawanLayout />
-            },
-            {
-                path: 'login',
-                element: <PustakawanLoginPage />
-            },
-            {
-                path: 'beranda',
                 element: <PustakawanBerandaPage />
             },
             {
                 path: 'profil',
-                // element: 
+                element: <PustakawanProfilePage />
             },
             {
                 path: 'pengguna',
-                // element: 
+                element: <DaftarPenggunaPustakawan />
             },
             {
                 path: 'buku',

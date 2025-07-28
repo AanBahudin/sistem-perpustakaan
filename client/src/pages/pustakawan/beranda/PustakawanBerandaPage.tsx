@@ -1,11 +1,14 @@
+import PustakawanNavbar from '@/components/Pustakawan/PustakawanNavbar'
+import PustakawanSidebar from '@/components/Pustakawan/PustakawanSidebar'
 import Container from '@/globals/Container'
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const PustakawanBerandaPage = () => {
   return (
-    <Container>
-        <h1>Beranda page</h1>
-    </Container>
+    <section>
+      <h1>Beranda page</h1>
+    </section>
   )
 }
 
