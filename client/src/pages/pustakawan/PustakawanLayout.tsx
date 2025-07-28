@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '@/globals/Container'
-import PustakawanNavbar from '@/components/Pustakawan/PustakawanNavbar'
-import PustakawanSidebar from '@/components/Pustakawan/PustakawanSidebar'
+import PustakawanNavbar from '@/components/Pustakawan/Navbar/PustakawanNavbar'
+import PustakawanSidebar from '@/components/Pustakawan/Sidebar/PustakawanSidebar'
 import { Outlet } from 'react-router-dom'
 
 const DashboardLayout = () => {

@@ -6,6 +6,7 @@ import pengembalianReducer from '@/cart/pengembalianSlice'
 import detailBukuReducer from '@/cart/detailBookSlice'
 import dashboardState from '@/cart/dashboardSlice'
 import perpanjanganState from '@/cart/perpanjanganSlice'
+import pustakawanSidebarState from '@/cart/pustakawanSidebar'
 
 export const store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
         peminjamanState: peminjamanReducer,
         pengembalianState: pengembalianReducer,
         detailBukuState: detailBukuReducer,
-        perpanjanganState: perpanjanganState
+        perpanjanganState: perpanjanganState,
+        pustakawanSidebarState: pustakawanSidebarState
     }
 })

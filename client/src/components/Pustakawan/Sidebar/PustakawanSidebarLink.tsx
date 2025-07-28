@@ -4,7 +4,7 @@ import { LucideIcon } from "lucide-react"
 
 const PustakawanSidebarLink = () => {
   return (
-    <main className='w-full overflow-y-auto scroll-custom h-full flex-1 flex flex-col items-start gap-y-1 my-6'>
+    <main className='w-full overflow-y-auto scroll-custom h-full flex-1 flex flex-col items-start gap-y-1 my-8'>
         {pustakanSidebarMenu.map((item: any, index: number) => {
           const Icons : LucideIcon = item.icon
           return (
