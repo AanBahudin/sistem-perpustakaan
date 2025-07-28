@@ -37,7 +37,7 @@ const PustakawanLoginPage = () => {
         onSuccess: () => {
             setLoading(false)
             toast('Login Berhasil', {description: 'Selamat datang kembali di akun anda! '})
-            navigate('/pustakawan/beranda')
+            navigate('/pustakawan')
         },
         onError: (data: any) => {
             setLoading(false)

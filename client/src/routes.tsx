@@ -31,6 +31,10 @@ import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
 import PustakawanProfilePage from "./pages/pustakawan/profil/PustakawanProfilePage";
 import DaftarPenggunaPustakawan from "./pages/pustakawan/pengguna/DaftarPenggunaPustakawan";
+import PustakawanPengajuanLayout from "./pages/pustakawan/pengajuan/PustakawanPengajuanLayout";
+import PustakawanPeminjaman from "./pages/pustakawan/pengajuan/PustakawanPeminjaman";
+import PustakawanPerpanjangan from "./pages/pustakawan/pengajuan/PustakawanPerpanjangan";
+import PustakawanRiwayatPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPage";
 
 const router : RouteObject[] = [
     {
@@ -200,8 +204,33 @@ const router : RouteObject[] = [
                 element: <DaftarPenggunaPustakawan />
             },
             {
+                path: 'pengajuan',
+                element: <PustakawanPengajuanLayout />,
+                children: [
+                    {
+                        path: 'peminjaman',
+                        element: <PustakawanPeminjaman />
+                    },
+                    {
+                        path: 'perpanjangan',
+                        element: <PustakawanPerpanjangan />
+                    }
+                ]
+            },
+            {
                 path: 'buku',
                 // element: 
+            },
+            {
+                path: 'riwayat',
+                element: <PustakawanRiwayatPage />
+            },
+            {
+                path: 'notifikasi',
+                
+            },
+            {
+                path: 'pengaturan'
             },
         ]
     },

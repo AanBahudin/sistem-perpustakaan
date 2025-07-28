@@ -20,7 +20,6 @@ const Navbar : React.FC= () => {
             <Button asChild className='hidden lg:block text-white px-10 '>
               <Link to='/login'>Masuk</Link>
             </Button>
-
           </div>
 
         </section>

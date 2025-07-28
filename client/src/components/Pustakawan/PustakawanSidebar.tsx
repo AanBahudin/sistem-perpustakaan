@@ -1,9 +1,13 @@
-import React from 'react'
+import PustakawanSidebarLink from './PustakawanSidebarLink'
+import PustakawanSidebarHeader from './PustakawanSidebarHeader'
+import PustakawanSidebarFooter from './PustakawanSidebarFooter'
 
 const PustakawanSidebar = () => {
   return (
-    <section className='w-[18%] h-full border-r '>
-        <h1>Sidebar</h1>
+    <section className='w-[18%] h-[100vh] flex items-start flex-col overflow-y-auto scroll-custom border-r p-6'>
+      <PustakawanSidebarHeader />
+      <PustakawanSidebarLink />
+      <PustakawanSidebarFooter />
     </section>
   )
 }
