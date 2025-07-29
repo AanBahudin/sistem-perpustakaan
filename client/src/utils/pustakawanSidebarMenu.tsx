@@ -1,4 +1,4 @@
-import { Bell, CircleUser, Cog, GraduationCap, History, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
+import { Bell, BookCheck, BookCopy, BookDashed, BookDown, BookUp, CircleUser, Cog, FileCheck2, FilePlus, Files, FileSymlink, GraduationCap, History, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
 
 export const pustakanSidebarMenu = [
     {
@@ -36,19 +36,23 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.'
+                url: '.',
+                icon: Files
             },
             {
                 title: 'Peminjaman',
-                url: 'peminjaman'
+                url: 'peminjaman',
+                icon: FileCheck2
             },
             {
                 title: 'Perpanjangan',
-                url: 'perpanjangan'
+                url: 'perpanjangan',
+                icon: FilePlus
             },
             {
                 title: 'Pengembalian',
-                url: 'pengembalian'
+                url: 'pengembalian',
+                icon: FileSymlink
             }
         ],
         icon: Newspaper
@@ -60,23 +64,28 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.'
+                url: '.',
+                icon: BookCopy
             },
             {
                 title: 'Dipinjam',
-                url: 'peminjaman'
+                url: 'peminjaman',
+                icon: BookCheck
             },
             {
                 title: 'Diperpanjang',
-                url: 'perpanjangan'
+                url: 'perpanjangan',
+                icon: BookUp
             },
             {
                 title: 'Dikembalikan',
-                url: 'pengembalian'
+                url: 'pengembalian',
+                icon: BookDown
             },
             {
                 title: 'Hilang',
-                url: 'hilang'
+                url: 'hilang',
+                icon: BookDashed
             }
         ],
         icon: LibraryBig
@@ -88,19 +97,23 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.'
+                url: '.',
+                icon: Files
             },
             {
                 title: 'Peminjaman',
-                url: 'peminjaman'
+                url: 'peminjaman',
+                icon: FileCheck2
             },
             {
                 title: 'Perpanjangan',
-                url: 'perpanjangan'
+                url: 'perpanjangan',
+                icon: FilePlus
             },
             {
                 title: 'Pengembalian',
-                url: 'pengembalian'
+                url: 'pengembalian',
+                icon: FileSymlink
             }
         ],
         icon: History
