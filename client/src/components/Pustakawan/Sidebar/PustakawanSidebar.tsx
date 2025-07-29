@@ -9,7 +9,7 @@ const PustakawanSidebar = () => {
 
   return (
     <section className={`${
-      showSidebar ? 'w-[18%] p-6' : 'w-0 p-0'
+      showSidebar ? 'w-[18%] p-4' : 'w-0 p-0'
     } h-[100vh] flex items-start flex-col overflow-y-auto scroll-custom border-r transition-all duration-500 ease-in-out `}>
       <PustakawanSidebarHeader />
       <PustakawanSidebarLink />

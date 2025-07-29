@@ -9,21 +9,97 @@ export const pustakanSidebarMenu = [
     {
         title: 'Pengguna',
         url: 'pengguna',
+        type: 'collapse',
+        children: [
+            {
+                title: 'Semua',
+                url: '.'
+            },
+            {
+                title: 'Dosen',
+                url: '.dosen'
+            },
+            {
+                title: 'Mahasiswa',
+                url: 'mahasiswa'
+            }
+        ],
         icon: Users
     },
     {
         title: 'Pengajuan',
         url: 'pengajuan',
+        type: 'collapse',
+        children: [
+            {
+                title: 'Semua',
+                url: '.'
+            },
+            {
+                title: 'Peminjaman',
+                url: 'peminjaman'
+            },
+            {
+                title: 'Perpanjangan',
+                url: 'perpanjangan'
+            },
+            {
+                title: 'Pengembalian',
+                url: 'pengembalian'
+            }
+        ],
         icon: Newspaper
     },
     {
         title: 'Buku',
         url: 'buku',
+        type: 'collapse',
+        children: [
+            {
+                title: 'Semua',
+                url: '.'
+            },
+            {
+                title: 'Dipinjam',
+                url: 'peminjaman'
+            },
+            {
+                title: 'Diperpanjang',
+                url: 'perpanjangan'
+            },
+            {
+                title: 'Dikembalikan',
+                url: 'pengembalian'
+            },
+            {
+                title: 'Hilang',
+                url: 'hilang'
+            }
+        ],
         icon: LibraryBig
     },
     {
         title: 'Riwayat',
         url: 'riwayat',
+        type: 'collapse',
+        children: [
+            {
+                title: 'Semua',
+                url: '.'
+            },
+            {
+                title: 'Peminjaman',
+                url: 'peminjaman'
+            },
+            {
+                title: 'Perpanjangan',
+                url: 'perpanjangan'
+            },
+            {
+                title: 'Pengembalian',
+                url: 'pengembalian'
+            }
+        ],
         icon: History
     },
     {
