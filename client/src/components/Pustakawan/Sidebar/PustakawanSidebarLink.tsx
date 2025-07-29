@@ -3,7 +3,7 @@ import PustakawanNavlinkItem from "./PustakawanNavlinkItem"
 
 const PustakawanSidebarLink = () => {
   return (
-    <main className='w-full overflow-y-auto scroll-custom h-full flex-1 flex flex-col items-start gap-y-1 mt-16'>
+    <main className='w-full overflow-y-auto scroll-custom h-full flex-1 flex flex-col items-start gap-y-1 my-12'>
       {pustakanSidebarMenu.map((item: any, index: number) => {
         return (
           <PustakawanNavlinkItem data={item} key={index} />

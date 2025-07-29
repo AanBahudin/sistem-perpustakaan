@@ -36,22 +36,22 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.',
+                url: 'pengajuan',
                 icon: Files
             },
             {
                 title: 'Peminjaman',
-                url: 'peminjaman',
+                url: 'pengajuan/peminjaman',
                 icon: FileCheck2
             },
             {
                 title: 'Perpanjangan',
-                url: 'perpanjangan',
+                url: 'pengajuan/perpanjangan',
                 icon: FilePlus
             },
             {
                 title: 'Pengembalian',
-                url: 'pengembalian',
+                url: 'pengajuan/pengembalian',
                 icon: FileSymlink
             }
         ],
@@ -64,27 +64,27 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.',
+                url: 'buku',
                 icon: BookCopy
             },
             {
                 title: 'Dipinjam',
-                url: 'peminjaman',
+                url: 'buku/peminjaman',
                 icon: BookCheck
             },
             {
                 title: 'Diperpanjang',
-                url: 'perpanjangan',
+                url: 'buku/perpanjangan',
                 icon: BookUp
             },
             {
                 title: 'Dikembalikan',
-                url: 'pengembalian',
+                url: 'buku/pengembalian',
                 icon: BookDown
             },
             {
                 title: 'Hilang',
-                url: 'hilang',
+                url: 'buku/hilang',
                 icon: BookDashed
             }
         ],
@@ -97,22 +97,22 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.',
+                url: 'riwayat',
                 icon: Files
             },
             {
                 title: 'Peminjaman',
-                url: 'peminjaman',
+                url: 'riwayat/peminjaman',
                 icon: FileCheck2
             },
             {
                 title: 'Perpanjangan',
-                url: 'perpanjangan',
+                url: 'riwayat/perpanjangan',
                 icon: FilePlus
             },
             {
                 title: 'Pengembalian',
-                url: 'pengembalian',
+                url: 'riwayat/pengembalian',
                 icon: FileSymlink
             }
         ],

@@ -216,8 +216,11 @@ const router : RouteObject[] = [
             },
             {
                 path: 'pengajuan',
-                element: <PustakawanPengajuanLayout />,
                 children: [
+                    {
+                        index: true,
+                        element: <PustakawanPengajuanLayout />,
+                    },
                     {
                         path: 'peminjaman',
                         element: <PustakawanPeminjaman />
@@ -233,11 +236,45 @@ const router : RouteObject[] = [
             },
             {
                 path: 'buku',
-                // element: 
+                // element: ,
+                children: [
+                    {
+                        index: true
+                    },
+                    {
+                        path: 'peminjaman'
+                    },
+                    {
+                        path: 'perpanjangan'
+                    },
+                    {
+                        path: 'pengembalian'
+                    },
+                    {
+                        path: 'hilang'
+                    }
+                ]
             },
             {
                 path: 'riwayat',
-                element: <PustakawanRiwayatPage />
+                children: [
+                    {
+                        index: true,
+                        element: <PustakawanRiwayatPage />,
+                    },
+                    {
+                        path: 'peminjaman'
+                    },
+                    {
+                        path: 'perpanjangan'
+                    },
+                    {
+                        path: 'pengembalian'
+                    },
+                    {
+                        path: 'hilang'
+                    }
+                ]
             },
             {
                 path: 'notifikasi',
