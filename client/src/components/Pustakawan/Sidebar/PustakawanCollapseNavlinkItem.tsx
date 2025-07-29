@@ -7,7 +7,7 @@ import {
 import { LucideIcon } from "lucide-react"
 import { NavLink, useNavigate } from "react-router-dom"
 
-const PustakawanCollapseNavlinkItem = ({ data, isActive }: { data: any, isActive: boolean }) => {
+const PustakawanCollapseNavlinkItem = ({ data }: { data: any }) => {
   const navigate = useNavigate()
   const Icons: LucideIcon = data.icon
 
@@ -19,7 +19,7 @@ const PustakawanCollapseNavlinkItem = ({ data, isActive }: { data: any, isActive
   const isMatch = locationName.includes(data.url)
 
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className="w-full" defaultValue={isMatch ? data.title : ''}>
       <AccordionItem value={data.title} className="m-0">
         <AccordionTrigger className={`w-full flex items-center justify-between py-3 px-2 group bg-transparent rounded hover:no-underline ${isMatch ? 'bg-primary text-white' : 'hover:bg-muted'}`}>
           <div className="flex items-center gap-x-4">
