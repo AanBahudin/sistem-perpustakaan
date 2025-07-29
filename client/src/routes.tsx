@@ -35,6 +35,18 @@ import PustakawanPengajuanLayout from "./pages/pustakawan/pengajuan/PustakawanPe
 import PustakawanPeminjaman from "./pages/pustakawan/pengajuan/PustakawanPeminjaman";
 import PustakawanPerpanjangan from "./pages/pustakawan/pengajuan/PustakawanPerpanjangan";
 import PustakawanRiwayatPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPage";
+import PustakawanPengembalianPage from "./pages/pustakawan/pengajuan/PustakawanPengembalianPage";
+import DaftarPenggunaDosen from "./pages/pustakawan/pengguna/DaftarPenggunaDosen";
+import DaftarPenggunaMahasiswa from "./pages/pustakawan/pengguna/DaftarPenggunaMahasiswa";
+import PustakawanSemuaBukuPage from "./pages/pustakawan/buku/PustakawanSemuaBukuPage";
+import PustakawanBukuDipinjamPage from "./pages/pustakawan/buku/PustakawanBukuDipinjamPage";
+import PustakawanBukuDikembalikanPage from "./pages/pustakawan/buku/PustakawanBukuDikembalikanPage";
+import PustakawanBukuDiperpanjangPage from "./pages/pustakawan/buku/PustakawanBukuDiperpanjangPage";
+import PustakawanBukuDihilangPage from "./pages/pustakawan/buku/PustakawanBukuDihilangPage";
+import PustakawanRiwayatPeminjamanPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPeminjamanPage";
+import PustakawanRiwayatPerpanjanganPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPerpanjanganPage";
+import PustakawanRiwayatPengembalianPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPengembalianPage";
+import PustakawanRiwayatKehilanganPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatKehilanganPage";
 
 const router : RouteObject[] = [
     {
@@ -207,10 +219,12 @@ const router : RouteObject[] = [
                         element: <DaftarPenggunaPustakawan />,
                     },
                     {
-                        path: 'dosen'
+                        path: 'dosen',
+                        element: <DaftarPenggunaDosen />
                     },
                     {
-                        path: 'mahasiswa'
+                        path: 'mahasiswa',
+                        element: <DaftarPenggunaMahasiswa />
                     }
                 ]
             },
@@ -231,27 +245,32 @@ const router : RouteObject[] = [
                     },
                     {
                         path: 'pengembalian',
+                        element: <PustakawanPengembalianPage />
                     }
                 ]
             },
             {
                 path: 'buku',
-                // element: ,
                 children: [
                     {
-                        index: true
+                        index: true,
+                        element: <PustakawanSemuaBukuPage />
                     },
                     {
-                        path: 'peminjaman'
+                        path: 'peminjaman',
+                        element: <PustakawanBukuDipinjamPage />
                     },
                     {
-                        path: 'perpanjangan'
+                        path: 'perpanjangan',
+                        element: <PustakawanBukuDiperpanjangPage />
                     },
                     {
-                        path: 'pengembalian'
+                        path: 'pengembalian',
+                        element: <PustakawanBukuDikembalikanPage />
                     },
                     {
-                        path: 'hilang'
+                        path: 'hilang',
+                        element: <PustakawanBukuDihilangPage />
                     }
                 ]
             },
@@ -263,16 +282,20 @@ const router : RouteObject[] = [
                         element: <PustakawanRiwayatPage />,
                     },
                     {
-                        path: 'peminjaman'
+                        path: 'peminjaman',
+                        element: <PustakawanRiwayatPeminjamanPage />
                     },
                     {
-                        path: 'perpanjangan'
+                        path: 'perpanjangan',
+                        element: <PustakawanRiwayatPerpanjanganPage />
                     },
                     {
-                        path: 'pengembalian'
+                        path: 'pengembalian',
+                        element: <PustakawanRiwayatPengembalianPage />
                     },
                     {
-                        path: 'hilang'
+                        path: 'hilang',
+                        element: <PustakawanRiwayatKehilanganPage />
                     }
                 ]
             },
