@@ -201,7 +201,18 @@ const router : RouteObject[] = [
             },
             {
                 path: 'pengguna',
-                element: <DaftarPenggunaPustakawan />
+                children: [
+                    {
+                        index: true,
+                        element: <DaftarPenggunaPustakawan />,
+                    },
+                    {
+                        path: 'dosen'
+                    },
+                    {
+                        path: 'mahasiswa'
+                    }
+                ]
             },
             {
                 path: 'pengajuan',
@@ -214,6 +225,9 @@ const router : RouteObject[] = [
                     {
                         path: 'perpanjangan',
                         element: <PustakawanPerpanjangan />
+                    },
+                    {
+                        path: 'pengembalian',
                     }
                 ]
             },

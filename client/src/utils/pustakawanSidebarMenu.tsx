@@ -1,4 +1,4 @@
-import { Bell, Cog, History, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
+import { Bell, CircleUser, Cog, GraduationCap, History, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
 
 export const pustakanSidebarMenu = [
     {
@@ -13,16 +13,19 @@ export const pustakanSidebarMenu = [
         children: [
             {
                 title: 'Semua',
-                url: '.'
+                url: 'pengguna',
+                icon: Users
             },
             {
                 title: 'Dosen',
-                url: '.dosen'
+                url: 'pengguna/dosen',
+                icon: GraduationCap
             },
             {
                 title: 'Mahasiswa',
-                url: 'mahasiswa'
-            }
+                url: 'pengguna/mahasiswa',
+                icon: CircleUser
+            },
         ],
         icon: Users
     },
