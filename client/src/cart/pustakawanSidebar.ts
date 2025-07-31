@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const defaultSidebar = localStorage.getItem('sidebar') || true
 
 const initialState = {
-    showSidebar: defaultSidebar
+    showSidebar: defaultSidebar,
+    userListTabs: 'dosen'
 }
 
 const sidebarSlice = createSlice({
@@ -13,9 +14,12 @@ const sidebarSlice = createSlice({
         setShowSidebar: (state, action) => {
             localStorage.setItem('sidebar', action.payload)
             state.showSidebar = action.payload
+        },
+        setUserList: (state, action) => {
+            state.userListTabs = action.payload
         }
     }
 })
 
-export const {setShowSidebar} = sidebarSlice.actions
+export const {setShowSidebar, setUserList} = sidebarSlice.actions
 export default sidebarSlice.reducer
