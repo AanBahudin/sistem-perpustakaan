@@ -14,7 +14,7 @@ const SummaryCards = () => {
             <main className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4">
                 {Array.from({length: 4}).map((_, index: number) => {
                     return (
-                    <div key={index} className="col-span-1 rounded-xl border min-h-[13vh] bg-accent py-2 px-6 flex items-center justify-between">
+                    <div key={index} className="col-span-1 rounded-xl min-h-[13vh] bg-accent/40 py-2 px-6 flex items-center justify-between">
                         <div className="flex items-center gap-x-6">
                             <h1 className="text-5xl font-bold">7</h1>
                             <div className="flex flex-col">
