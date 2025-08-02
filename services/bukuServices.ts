@@ -133,6 +133,11 @@ export const bukuDihilangkan = async(idBuku: string) => {
     )
 }
 
+export const getBukuHilang = async() => {
+    const buku = await Buku.findOne({isMissing: true})
+    return buku || []
+}
+
 export const recomendationBook = async() => {
     const recommendation = await Buku.find().sort({totalDipinjam: -1}).limit(5)
     return recommendation

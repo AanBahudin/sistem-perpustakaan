@@ -4,7 +4,7 @@ import { setUserList } from "@/cart/pustakawanSidebar"
 
 const PustakawanUserDataTabs = () => {
 
-    const items = ['dosen', 'mahasiswa', 'terbaru']
+    const items = ['mahasiswa', 'dosen', 'terbaru']
     const {userListTabs} = useSelector((state: any)  => state.pustakawanSidebarState)
 
     return (

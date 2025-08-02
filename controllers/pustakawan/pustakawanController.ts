@@ -1,14 +1,20 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import { BukuSchemaType } from "../../model/Buku";
-
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
-import Buku from "../../model/Buku";
-import Kategori from "../../model/Kategori";
 
-import {dataDurasiPeminjaman} from '../../services/durasiServices'
+import { getStatsServices } from "../../services/pustakawanServices";
+import { SendDataResponse } from "../../utils/sendResponse";
+
+export const getStats = async(req: Request | any, res: Response) => {
+    const data = await getStatsServices()
+    SendDataResponse({
+        res,
+        message: 'stats data',
+        data
+    })
+}
 
 export const getAllUsers = async(req: Request, res: Response) => {
     const users = await Pengguna.find({ verifikasiEmail: true, verifikasiProdi: true })

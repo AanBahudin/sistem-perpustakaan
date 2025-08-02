@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom"
 import SummaryCard from "./SummaryCard"
 
-const SummaryCards = () => {
+const SummaryCards = ({data} : {data: any}) => {
+
+    const {peminjaman, pengembalian, perpanjangan, bukuHilang} = data
+    const cardsData = [peminjaman, perpanjangan, pengembalian, bukuHilang]
+
     return (
         <section className='w-full my-8'>
             <main className='flex items-center justify-between'>
@@ -11,7 +15,7 @@ const SummaryCards = () => {
 
             <main className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4">
                 {Array.from({length: 4}).map((_, index: number) => {
-                    return <SummaryCard key={index} id={index} />
+                    return <SummaryCard key={index} id={index} total={cardsData[index].length} />
                 })}
             </main>
         </section>

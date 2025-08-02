@@ -4,7 +4,7 @@ const defaultSidebar = localStorage.getItem('sidebar') || true
 
 const initialState = {
     showSidebar: defaultSidebar,
-    userListTabs: 'dosen'
+    userListTabs: 'mahasiswa'
 }
 
 const sidebarSlice = createSlice({

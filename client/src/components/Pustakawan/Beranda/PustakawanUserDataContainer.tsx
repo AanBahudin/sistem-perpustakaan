@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
 import UserCard from './UserCard'
+import { useSelector } from 'react-redux'
 import PustakawanUserDataTabs from './PustakawanUserDataTabs'
 
-const PustakawanUserDataContainer = () => {
+const PustakawanUserDataContainer = ({data} : {data: any}) => {
+
+    const {pengguna} = data
+    const {userListTabs} = useSelector((state: any)  => state.pustakawanSidebarState)
+
 
     return (
         <section className='w-full bg-accent/40 border my-8 rounded-2xl h-[60vh] px-4 pt-8 pb-4 flex flex-col items-start'>
@@ -15,8 +20,14 @@ const PustakawanUserDataContainer = () => {
             <PustakawanUserDataTabs />
 
             <main className='w-full flex flex-1 overflow-y-scroll scroll-custom flex-col items-start gap-y-4'>
-                {Array.from({length: 6}).map((_, index: number) => {
-                    return <UserCard key={index} />
+                {pengguna.filter((user: any) => {
+                    const userRole : string = user.role
+                    if (userListTabs !== 'terbaru') {
+                        return userRole.toLowerCase() === userListTabs
+                    }
+                    return user
+                }).map((user: any, index: number) => {
+                    return <UserCard key={index} user={user} />
                 })}
             </main>
         </section>

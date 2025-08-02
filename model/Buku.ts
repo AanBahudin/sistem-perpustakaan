@@ -98,6 +98,10 @@ const BukuSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    isMissing: {
+        type: Boolean,
+        default: false
+    },
     dihapus: {
         type: Boolean,
         default: false
