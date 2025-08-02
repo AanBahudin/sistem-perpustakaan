@@ -30,7 +30,7 @@ import AllBook from "./pages/pengguna/Discovery/AllBook";
 import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
 import PustakawanProfilePage from "./pages/pustakawan/profil/PustakawanProfilePage";
-import DaftarPenggunaPustakawan from "./pages/pustakawan/pengguna/DaftarPenggunaPustakawan";
+import DaftarSemuaPengguna from "./pages/pustakawan/pengguna/DaftarSemuaPengguna";
 import PustakawanPengajuanLayout from "./pages/pustakawan/pengajuan/PustakawanPengajuanLayout";
 import PustakawanPeminjaman from "./pages/pustakawan/pengajuan/PustakawanPeminjaman";
 import PustakawanPerpanjangan from "./pages/pustakawan/pengajuan/PustakawanPerpanjangan";
@@ -216,7 +216,7 @@ const router : RouteObject[] = [
                 children: [
                     {
                         index: true,
-                        element: <DaftarPenggunaPustakawan />,
+                        element: <DaftarSemuaPengguna />,
                     },
                     {
                         path: 'dosen',
