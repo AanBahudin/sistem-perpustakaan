@@ -77,7 +77,7 @@ export const getOnePustakawanData = async({pustakawanId} : GetOnePustakawanDataP
 
 // SUDAH DITESTING
 export const getAllPenggunaData = async() => {
-    const pengguna = await Pengguna.find({verifikasiEmail: true}).select('-password')
+    const pengguna = await Pengguna.find().select('-password')
 
     return {data: pengguna}
 }
