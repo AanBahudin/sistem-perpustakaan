@@ -47,6 +47,7 @@ import PustakawanRiwayatPeminjamanPage from "./pages/pustakawan/Riwayat/Pustakaw
 import PustakawanRiwayatPerpanjanganPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPerpanjanganPage";
 import PustakawanRiwayatPengembalianPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPengembalianPage";
 import PustakawanRiwayatKehilanganPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatKehilanganPage";
+import SinglePengguna from "./pages/pustakawan/pengguna/SinglePengguna";
 
 const router : RouteObject[] = [
     {
@@ -217,6 +218,10 @@ const router : RouteObject[] = [
                     {
                         index: true,
                         element: <DaftarSemuaPengguna />,
+                    },
+                    {
+                        path: 'detail/:id', 
+                        element: <SinglePengguna />
                     },
                     {
                         path: 'dosen',

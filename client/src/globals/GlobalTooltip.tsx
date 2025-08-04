@@ -8,17 +8,18 @@ import {
 
 type GlobalTooltipType = {
     children: React.ReactNode,
-    text: string
+    text: string,
+    type?: string
 }
 
-const GlobalTooltip = ({children, text} : GlobalTooltipType) => {
+const GlobalTooltip = ({children, text, type = 'default'} : GlobalTooltipType) => {
   return (
     <TooltipProvider>
         <Tooltip>
             <TooltipTrigger asChild>
                 {children}
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className={`${type === 'danger' ? 'bg-destructive' : 'bg-primary'}`}>
                 <p className='text-white'>{text}</p>
             </TooltipContent>
         </Tooltip>
