@@ -22,13 +22,14 @@ export const getStatsServices = async() => {
 
 export const getAllPengguna = async({query} : {query: any}) => {
     let mongoQuery: any = { ...query }
+    console.log(mongoQuery)
 
     if (query?.query) {
         const searchRegex = { $regex: query.query, $options: "i" }
 
         mongoQuery.$or = [
-        { nama: searchRegex },
-        { idKampus: searchRegex }
+            { nama: searchRegex },
+            { idKampus: searchRegex }
         ]
 
         // Hapus 'query.query' agar tidak ikut dalam pencarian utama
