@@ -5,11 +5,9 @@ import {
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 const RoleFilter = () => {
-
-    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const fullParams = new URLSearchParams(searchParams)
     const initialParams = searchParams.get('role') || 'Semua'
@@ -25,7 +23,6 @@ const RoleFilter = () => {
         } else {
             fullParams.delete('role')
         }
-        navigate(`?${fullParams.toString()}`)
     }
 
     return (

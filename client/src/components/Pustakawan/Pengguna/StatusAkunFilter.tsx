@@ -5,11 +5,10 @@ import {
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 const StatusAkunFilter = () => {
 
-    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const initialParams = searchParams.get('statusAkun') || 'Semua'
 
@@ -33,7 +32,7 @@ const StatusAkunFilter = () => {
                             asChild
                             value={item} 
                             key={index}>
-                            <Button className={`${isActive ? 'bg-primary text-white' : 'hover:bg-muted'} w-[30%] duration-200 ease-in-out border w-fit px-3 text-xs rounded text-white`}>{item}</Button>
+                            <Button className={`${isActive ? 'bg-primary text-white' : 'hover:bg-muted'} w-[30%] duration-200 ease-in-out border px-3 text-xs rounded text-white`}>{item}</Button>
                         </ToggleGroupItem>
                     )
                 })}
