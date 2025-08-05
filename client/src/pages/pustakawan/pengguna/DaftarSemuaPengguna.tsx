@@ -4,6 +4,7 @@ import Container from '@/globals/Container'
 import TableSemuaPengguna from './TableSemuaPengguna'
 import { useQuery } from '@tanstack/react-query'
 import { getAllPengguna } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
+import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 
 const DaftarSemuaPengguna = () => {
 
@@ -13,10 +14,10 @@ const DaftarSemuaPengguna = () => {
   })
 
   if (isLoading) return <h1>Loading...</h1>
-  console.log(data)
 
   return (
     <Container className='w-full'>
+      <PustakawanBreadCrumbs />
       <GrafikPertumbuhanSemuaPengguna />
       <SemuaPenggunaFilter />
       <TableSemuaPengguna dataPengguna={data} />

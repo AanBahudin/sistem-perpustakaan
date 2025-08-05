@@ -1,8 +1,11 @@
+import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import React from 'react'
 
 const DaftarPenggunaDosen = () => {
   return (
-    <div>DaftarPenggunaDosen</div>
+    <section>
+      <PustakawanBreadCrumbs />
+    </section>
   )
 }
 

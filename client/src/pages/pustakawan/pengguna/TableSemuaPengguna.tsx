@@ -19,7 +19,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
     }
 
     return (
-        <section className="w-full mt-6 overflow-hidden rounded-lg border bg-accent/30">
+        <section className="w-full min-h-[50vh] mt-6 overflow-hidden rounded-lg border bg-accent/30">
             <Table className="w-full">
                 <TableHeader>
                 <TableRow className="border-muted">
@@ -39,7 +39,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                         className="group border-muted group not-even:bg-accent-foreground/10"
                         >
                         <TableCell className="w-[250px] text-muted-foreground">
-                            <div className="flex items-center gap-x-2 group-hover:underline">
+                            <div className="flex items-center gap-x-2 group-hover:underline duration-200 ease-in-out">
                                 {item.fotoProfil ? (
                                     <img
                                     src={item.fotoProfil}
