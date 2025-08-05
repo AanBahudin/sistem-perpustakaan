@@ -17,7 +17,7 @@ const VerifikasiEmail = () => {
     const value = ['Semua', 'Sudah', 'Belum']
     const values = ['Semua', 'true', 'false']
     const {verifikasiEmail} = useSelector((state: any) => state.sheetState)
-    const initialParams = searchParams.get('VerifikasiEmail') || verifikasiEmail
+    const initialParams = searchParams.get('verifikasiEmail') || verifikasiEmail
 
     const handleChange = (value: string) => {
         store.dispatch(setVerifikasiEmail(value))

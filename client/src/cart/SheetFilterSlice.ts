@@ -23,12 +23,14 @@ const sheetSlice = createSlice({
         setVerifikasiProdi: (state, action) => {
             state.verifikasiProdi = action.payload
         },
-        // resetFilter: (state) => {
-        //     state = defaultState
-        // }
-        
+        resetFilter: (state) => {
+            state.role = 'Semua'
+            state.statusAkun = 'Semua'
+            state.verifikasiProdi = 'Semua'
+            state.verifikasiEmail = 'Semua'
+        }
     }
 })
 
-export const { setRole, setStatusAkun, setVerifikasiEmail, setVerifikasiProdi } = sheetSlice.actions
+export const { setRole, setStatusAkun, setVerifikasiEmail, setVerifikasiProdi, resetFilter } = sheetSlice.actions
 export default sheetSlice.reducer

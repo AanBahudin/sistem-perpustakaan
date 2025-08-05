@@ -13,12 +13,15 @@ import VerifikasiProdi from "./VerifikasiProdi"
 import { Button } from "@/components/ui/button"
 import { Check, RotateCcw } from "lucide-react"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { store } from "@/store"
+import { resetFilter } from "@/cart/SheetFilterSlice"
 
 
 const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   const useFilteredParams = () => {
     const { role, statusAkun, verifikasiProdi, verifikasiEmail } = useSelector(
@@ -39,8 +42,12 @@ const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
 
   const queryString = useFilteredParams()
   const handleClick = () => {
-    console.log(queryString)
     navigate(`?${queryString.toString()}`)
+  }
+
+  const handleReset = () => {
+    store.dispatch(resetFilter())
+    navigate(location.pathname.toString())
   }
 
   return (
@@ -64,7 +71,7 @@ const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
                   <Check className="w-3 h-3" />
                   Terapkan
                 </Button>
-                <Button className="text-white flex-1 flex items-center gap-x-2" size='sm' variant='destructive'>
+                <Button onClick={handleReset} className="text-white flex-1 flex items-center gap-x-2" size='sm' variant='destructive'>
                   <RotateCcw className="w-2 h-2" />
                   Reset
                 </Button>
