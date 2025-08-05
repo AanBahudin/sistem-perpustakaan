@@ -13,7 +13,7 @@ import VerifikasiProdi from "./VerifikasiProdi"
 import { Button } from "@/components/ui/button"
 import { Check, RotateCcw } from "lucide-react"
 import { useSelector } from "react-redux"
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { store } from "@/store"
 import { resetFilter } from "@/cart/SheetFilterSlice"
 
