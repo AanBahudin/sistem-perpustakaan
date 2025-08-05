@@ -12,9 +12,37 @@ import VerifikasiEmail from "./VerifikasiEmail"
 import VerifikasiProdi from "./VerifikasiProdi"
 import { Button } from "@/components/ui/button"
 import { Check, RotateCcw } from "lucide-react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 
 const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
+
+  const navigate = useNavigate()
+
+  const useFilteredParams = () => {
+    const { role, statusAkun, verifikasiProdi, verifikasiEmail } = useSelector(
+      (state: any) => state.sheetState
+    )
+    const filters = { role, statusAkun, verifikasiProdi, verifikasiEmail }
+    const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
+      if (value && value !== 'Semua') {
+        acc[key] = value
+      }
+      return acc
+    }, {} as Record<string, string>)
+
+    const searchParams = new URLSearchParams(validParams).toString()
+
+    return searchParams
+  }
+
+  const queryString = useFilteredParams()
+  const handleClick = () => {
+    console.log(queryString)
+    navigate(`?${queryString.toString()}`)
+  }
+
   return (
     <Sheet>
         <SheetTrigger asChild>{children}</SheetTrigger>
@@ -32,7 +60,7 @@ const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
               </SheetHeader>
 
               <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
-                <Button className="text-white flex-1 font-normal text-xs flex items-center gap-x-2" size='sm'>
+                <Button onClick={handleClick} className="text-white flex-1 font-normal text-xs flex items-center gap-x-2" size='sm'>
                   <Check className="w-3 h-3" />
                   Terapkan
                 </Button>

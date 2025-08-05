@@ -2,22 +2,24 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { useState } from "react"
+import { useSelector } from "react-redux"
+import { setRole } from "@/cart/SheetFilterSlice"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useSearchParams } from "react-router-dom"
+import { store } from "@/store"
 
 const RoleFilter = () => {
     const [searchParams] = useSearchParams()
     const fullParams = new URLSearchParams(searchParams)
-    const initialParams = searchParams.get('role') || 'Semua'
-
-
+    
+    
     const value = ['Semua', 'Dosen', 'Mahasiswa']
-    const [roleValue, setRoleValue] = useState(initialParams)
+    const { role } = useSelector((state: any) => state.sheetState)
+    const initialParams = searchParams.get('role') || role
 
     const handleChange = (value: string) => {
-        setRoleValue(value)
+        store.dispatch(setRole(value))
         if (value) {
             fullParams.set('role', value)
         } else {
@@ -29,9 +31,9 @@ const RoleFilter = () => {
         <section className="w-full mt-4">
             <h1 className="text-sm font-semibold text-muted-foreground mb-2">Tipe Pengguna</h1>
             <Separator orientation="horizontal" />
-            <ToggleGroup value={roleValue} onValueChange={handleChange} type="single" className="flex gap-x-2 mt-4 w-full rounded-none flex-wrap">
+            <ToggleGroup value={initialParams} onValueChange={handleChange} type="single" className="flex gap-x-2 mt-4 w-full rounded-none flex-wrap">
                 {value.map((item: string, index:number) => {
-                    const isActive = roleValue === item
+                    const isActive = initialParams === item
                     return (
                         <ToggleGroupItem
                             asChild
