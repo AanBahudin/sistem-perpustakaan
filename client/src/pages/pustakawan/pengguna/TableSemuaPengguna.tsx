@@ -2,6 +2,7 @@ import {
   Table,  
   TableBody,
   TableCell,
+  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -19,16 +20,19 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
     }
 
     return (
-        <section className="w-full min-h-[50vh] mt-6 overflow-hidden rounded-lg border bg-accent/30">
-            <Table className="w-full">
+        <section className="w-full min-h-[50vh] mt-6 overflow-hidden rounded-lg border bg-transparent">
+            <Table className="w-full bg-transparent">
+                {dataPengguna.length === 0 && (
+                    <TableCaption className="my-52">Data tidak ditemukan</TableCaption>
+                )}
                 <TableHeader>
-                <TableRow className="border-muted">
-                    <TableHead className="w-[250px]">Nama Pengguna</TableHead>
-                    <TableHead className="w-[150px] text-center">NIM/NIDN</TableHead>
-                    <TableHead className="w-[200px] text-center">Email</TableHead>
-                    <TableHead className="w-[150px] text-center">Status Akun</TableHead>
-                    <TableHead className="w-[200px] text-center">Verifikasi</TableHead>
-                </TableRow>
+                    <TableRow className="border-muted">
+                        <TableHead className="w-[250px]">Nama Pengguna</TableHead>
+                        <TableHead className="w-[150px] text-center">NIM/NIDN</TableHead>
+                        <TableHead className="w-[200px] text-center">Email</TableHead>
+                        <TableHead className="w-[150px] text-center">Status Akun</TableHead>
+                        <TableHead className="w-[200px] text-center">Verifikasi</TableHead>
+                    </TableRow>
                 </TableHeader>
 
                 <TableBody>
@@ -57,14 +61,14 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                         <TableCell className="w-[150px] text-center text-muted-foreground">{item.idKampus}</TableCell>
                         <TableCell className="w-[200px] text-muted-foreground text-sm">{item.email}</TableCell>
                         <TableCell className="w-[150px] text-center">
-                            <div className={`px-4 rounded-full py-1.5 ${item.statusAkun === 'Nonaktif' || item.blocked ? 'bg-destructive/30' : (item.statusAkun === 'Pending' ? 'bg-yellow-300/40' : 'bg-primary-foreground/60')} text-xs`}>
+                            <div className={`px-4 rounded-full py-1.5 ${item.statusAkun === 'Nonaktif' || item.blocked ? 'bg-destructive/30' : (item.statusAkun === 'Pending' ? 'bg-yellow-300/40' : 'bg-primary/60 dark:bg-primary-foreground/60')} text-xs`}>
                                 <p>{item.statusAkun}</p>
                             </div>
                         </TableCell>
                         <TableCell className="w-[200px] text-center">
                             <div className="flex items-center justify-center gap-x-3">
                                 <GlobalTooltip type={`${!item.verifikasiEmail && 'danger'}`} text={`${item.verifikasiEmail ? 'Pengguna telah verifikasi Email' : 'Pengguna belum verifikasi Email'}`}>
-                                    <div className={`flex items-center gap-x-2 ${item.verifikasiEmail ? 'bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
+                                    <div className={`flex items-center gap-x-2 ${item.verifikasiEmail ? 'bg-primary/60 dark:bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
                                         {item.verifikasiEmail ? (
                                             <Check className="w-3 h-3 stroke-primary" />
                                         ) : (
@@ -75,7 +79,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                                 </GlobalTooltip>
 
                                 <GlobalTooltip  type={`${!item.verifikasiProdi && 'danger'}`} text={`${item.verifikasiProdi ? 'Pengguna telah diverifikasi Prodi' : 'Pengguna belum diverifikasi Prodi'}`}>
-                                    <div className={`flex items-center gap-x-2 ${item.verifikasiProdi ? 'bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
+                                    <div className={`flex items-center gap-x-2 ${item.verifikasiProdi ? 'bg-primary/60 dark:bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
                                         {item.verifikasiProdi ? (
                                             <Check className="w-3 h-3 stroke-primary" />
                                         ) : (

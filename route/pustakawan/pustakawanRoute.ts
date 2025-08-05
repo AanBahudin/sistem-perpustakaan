@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllUsers, getSingleUser } from '../../controllers/prodi/prodiController'
+import { getAllUsers, getSingleUser } from '../../controllers/pustakawan/pustakawanController'
 import {getProfile } from '../../controllers/pustakawan/pustakawanController'
 import { verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
 import { getStats } from '../../controllers/pustakawan/pustakawanController'

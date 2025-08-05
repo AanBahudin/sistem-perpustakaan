@@ -5,12 +5,16 @@ import TableSemuaPengguna from './TableSemuaPengguna'
 import { useQuery } from '@tanstack/react-query'
 import { getAllPengguna } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
+import { useSearchParams } from 'react-router-dom'
 
 const DaftarSemuaPengguna = () => {
 
+  const [searchParams] = useSearchParams()
+  const params = new URLSearchParams(searchParams).toString()
+
   const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'pengguna'],
-    queryFn: getAllPengguna
+    queryKey: ['semua', 'pengguna', params],
+    queryFn: () => getAllPengguna(params.toString())
   })
 
   if (isLoading) return <h1>Loading...</h1>

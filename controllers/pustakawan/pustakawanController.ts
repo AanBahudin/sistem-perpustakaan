@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
 
-import { getStatsServices } from "../../services/pustakawanServices";
+import { getAllPengguna, getStatsServices } from "../../services/pustakawanServices";
 import { SendDataResponse } from "../../utils/sendResponse";
 
 export const getStats = async(req: Request | any, res: Response) => {
@@ -17,20 +17,21 @@ export const getStats = async(req: Request | any, res: Response) => {
 }
 
 export const getAllUsers = async(req: Request, res: Response) => {
-    const users = await Pengguna.find({ verifikasiEmail: true, verifikasiProdi: true })
+    const query = req.query
+    const users = await getAllPengguna({query})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Pengguna',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: users
+        data: users,
+        total: users.length,
+        page: 1
     })
 }
 
 export const getSingleUser = async(req: Request, res: Response) => {
 
     const {id} = req.params
-
     const user = await Pengguna.findOne({_id: id})
     
     res.status(StatusCodes.OK).json({
