@@ -63,7 +63,7 @@ export const getAllPenggunaDosen = async({query} : {query: any}) => {
 
     const pengguna = await Pengguna.find({role: 'Dosen', ...mongoQuery}).sort({createdAt: -1})
 
-    const monthlyUserGrowth = await allUserStats()
+    const monthlyUserGrowth = await dosenUserGrowthStats()
     const userAccountStatusRatio = await allUserAccountStatusRatio()
 
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
@@ -71,7 +71,7 @@ export const getAllPenggunaDosen = async({query} : {query: any}) => {
 
 
 
-
+// services pembantu
 export const allUserAccountStatusRatio = async() => {
     const statusAkunCount = await Pengguna.aggregate([
         {
@@ -150,4 +150,60 @@ export const allUserStats = async() => {
         },
     ]);
     return pertumbuhanBulanan
+}
+
+export const dosenUserGrowthStats = async() => {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+    sixMonthsAgo.setDate(1);
+
+    const pertumbuhanDosenBulanan = await Pengguna.aggregate([
+        {
+            $match: {
+            createdAt: { $gte: sixMonthsAgo },
+            role: "Dosen", // 🧠 hanya dosen
+            },
+        },
+        {
+            $group: {
+            _id: {
+                year: { $year: "$createdAt" },
+                month: { $month: "$createdAt" },
+            },
+            jumlah: { $sum: 1 },
+            },
+        },
+        {
+            $sort: {
+            "_id.year": 1,
+            "_id.month": 1,
+            },
+        },
+        {
+            $project: {
+            _id: 0,
+            bulan: {
+                $let: {
+                vars: {
+                    bulanArray: [
+                    "", // agar Januari = index 1
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                },
+                in: {
+                    $concat: [
+                    { $arrayElemAt: ["$$bulanArray", "$_id.month"] },
+                    " ",
+                    { $toString: "$_id.year" },
+                    ],
+                },
+                },
+            },
+            jumlah: 1,
+            },
+        },
+    ]);
+
+    return pertumbuhanDosenBulanan
 }

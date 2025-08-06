@@ -16,6 +16,12 @@ const GrafikPertumbuhanSemuaPengguna = ({title='Statistik Pertumbuhan Pengguna B
               <AlignEndHorizontal className='w-4 h-4 stroke-muted-foreground' /> 
               {title}
             </h1>
+
+            {monthlyUserGrowData?.length === 0 && (
+              <div className='w-full h-full flex items-center justify-center flex-col mt-20'>
+                <h1 className='text-center text-muted-foreground text-sm'>Belum ada pertumbuhan</h1>
+              </div>
+            )}
             <UserGrowthCart monthlyUserGrowData={monthlyUserGrowData} />
             
         </main>
