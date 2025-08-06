@@ -64,7 +64,7 @@ export const getAllPenggunaDosen = async({query} : {query: any}) => {
     const pengguna = await Pengguna.find({role: 'Dosen', ...mongoQuery}).sort({createdAt: -1})
 
     const monthlyUserGrowth = await dosenUserGrowthStats()
-    const userAccountStatusRatio = await allUserAccountStatusRatio()
+    const userAccountStatusRatio = await userDosenRatio()
 
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
@@ -206,4 +206,29 @@ export const dosenUserGrowthStats = async() => {
     ]);
 
     return pertumbuhanDosenBulanan
+}
+
+export const userDosenRatio = async() => {
+    const perbandinganRole = await Pengguna.aggregate([
+        {
+            $group: {
+            _id: "$role",
+            jumlah: { $sum: 1 },
+            },
+        },
+    ]);
+
+    const roleMap = {
+        Mahasiswa: 0,
+        Dosen: 0,
+    };
+
+    perbandinganRole.forEach((item) => {
+        const key = item._id as "Mahasiswa" | "Dosen";
+        roleMap[key] = item.jumlah;
+    });
+
+    const hasilChart = [roleMap.Mahasiswa, roleMap.Dosen];
+
+    return hasilChart
 }
