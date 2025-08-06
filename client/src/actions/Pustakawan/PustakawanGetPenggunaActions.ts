@@ -14,3 +14,8 @@ export const getAllPenggunaMahasiswa = async(params: string) => {
     const {data: response} = await customFetch.get(`/pustakawan/mahasiswa?${params}`)
     return response.data
 }
+
+export const getSinglePengguna = async(id: string) => {
+    const {data: response} = await customFetch.get(`/pustakawan/users/${id}`)
+    return response.data
+}

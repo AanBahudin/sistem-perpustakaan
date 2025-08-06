@@ -58,7 +58,7 @@ export const getAllMahasiswaUser = async(req: Request, res: Response) => {
 export const getSingleUser = async(req: Request, res: Response) => {
 
     const {id} = req.params
-    const user = await Pengguna.findOne({_id: id})
+    const user = await Pengguna.findOne({_id: id}).select('-password')
     
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
