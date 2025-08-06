@@ -22,7 +22,6 @@ export const getStatsServices = async() => {
 
 export const getAllPengguna = async({query} : {query: any}) => {
     let mongoQuery: any = { ...query }
-    console.log(mongoQuery)
 
     if (query?.query) {
         const searchRegex = { $regex: query.query, $options: "i" }
