@@ -16,7 +16,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
 
     const navigate = useNavigate()
     const navigationToUrl = (id: string) => {
-        navigate(`detail/${id}`)
+        navigate(`/pustakawan/pengguna/detail/${id}`)
     }
 
     return (
