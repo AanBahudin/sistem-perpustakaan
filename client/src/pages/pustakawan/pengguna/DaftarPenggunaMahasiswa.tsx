@@ -1,4 +1,4 @@
-import { getAllPenggunaDosen } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
+import { getAllPenggunaMahasiswa } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
@@ -12,8 +12,8 @@ const DaftarPenggunaMahasiswa = () => {
   const params = new URLSearchParams(searchParams).toString()
 
   const {data, isLoading} = useQuery({
-    queryKey: ['dosen', 'pengguna', params],
-    queryFn: () => getAllPenggunaDosen(params)
+    queryKey: ['mahasiswa', 'pengguna', params],
+    queryFn: () => getAllPenggunaMahasiswa(params)
   })
 
   if (isLoading) return <h1>Loading...</h1>
@@ -21,8 +21,8 @@ const DaftarPenggunaMahasiswa = () => {
   return (
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
-      <GrafikPertumbuhanSemuaPengguna graphFor='dosen' title='Statistik Pertumbuhan Dosen Bulanan' monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
-      <SemuaPenggunaFilter usedIn='dosen' />
+      <GrafikPertumbuhanSemuaPengguna graphFor='mahasiswa' title='Statistik Pertumbuhan Dosen Bulanan' monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
+      <SemuaPenggunaFilter usedIn='mahasiswa' />
       <TableSemuaPengguna dataPengguna={data.pengguna} />
     </Container>
   )

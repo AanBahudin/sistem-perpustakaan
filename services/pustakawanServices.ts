@@ -69,6 +69,29 @@ export const getAllPenggunaDosen = async({query} : {query: any}) => {
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
 
+export const getAllPenggunaMahasiswa = async({query} : {query: any}) => {
+    let mongoQuery: any = { ...query }
+
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+
+    const pengguna = await Pengguna.find({role: 'Mahasiswa', ...mongoQuery}).sort({createdAt: -1})
+
+    const monthlyUserGrowth = await mahasiswaUserGrowthStats()
+    const userAccountStatusRatio = await userDosenRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
 
 
 // services pembantu
@@ -231,4 +254,60 @@ export const userDosenRatio = async() => {
     const hasilChart = [roleMap.Mahasiswa, roleMap.Dosen];
 
     return hasilChart
+}
+
+export const mahasiswaUserGrowthStats = async() => {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+    sixMonthsAgo.setDate(1);
+
+    const pertumbuhanMahasiswaBulanan = await Pengguna.aggregate([
+        {
+            $match: {
+            createdAt: { $gte: sixMonthsAgo },
+            role: "Mahasiswa", // 🧠 hanya dosen
+            },
+        },
+        {
+            $group: {
+            _id: {
+                year: { $year: "$createdAt" },
+                month: { $month: "$createdAt" },
+            },
+            jumlah: { $sum: 1 },
+            },
+        },
+        {
+            $sort: {
+            "_id.year": 1,
+            "_id.month": 1,
+            },
+        },
+        {
+            $project: {
+            _id: 0,
+            bulan: {
+                $let: {
+                vars: {
+                    bulanArray: [
+                    "", // agar Januari = index 1
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                },
+                in: {
+                    $concat: [
+                    { $arrayElemAt: ["$$bulanArray", "$_id.month"] },
+                    " ",
+                    { $toString: "$_id.year" },
+                    ],
+                },
+                },
+            },
+            jumlah: 1,
+            },
+        },
+    ]);
+
+    return pertumbuhanMahasiswaBulanan
 }
