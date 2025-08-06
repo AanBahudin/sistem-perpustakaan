@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Badge } from '@/components/ui/badge';
 
 // Daftarkan elemen-elemen yang diperlukan
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -57,18 +58,19 @@ const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: an
 
     return (
         <>
-            <div className='w-[320px] h-[180px] mt-4 flex items-center justify-center'>
+            <main className='w-[320px] h-[180px] mt-4 flex items-center justify-center'>
               <Doughnut ref={chartRef} data={donutData} options={options} />
-            </div>
+            </main>
 
-            <div className='w-full flex items-center justify-center gap-x-4 mt-4'>
+            <main className='w-full flex items-center justify-center gap-x-4 mt-4'>
                 {label.map((item: string, index: number) => {
                   const bgColor = chartColors[index] 
                   return (
-                    <p style={{backgroundColor: bgColor, opacity: 0.9}} className={`bg-[${bgColor}] text-white min-w-20 text-center rounded-full py-1 text-xs`} key={index}>{item}</p>
+                    // <p style={{backgroundColor: bgColor, opacity: 0.9}} className={`bg-[${bgColor}] text-white min-w-20 text-center rounded-full py-1 text-xs`} key={index}>{item}</p>
+                    <Badge style={{backgroundColor: bgColor}} className='text-white'>{userAccountStatusRatio[index]} {item}</Badge>
                   )
                 })}
-            </div>
+            </main>
         </>
     )
 }
