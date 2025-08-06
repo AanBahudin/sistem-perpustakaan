@@ -5,7 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 // Daftarkan elemen-elemen yang diperlukan
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const UserRatioDougnut = () => {
+const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: any}) => {
 
     const getCSSVariable = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     const chartRef = useRef(null);
@@ -39,7 +39,7 @@ const UserRatioDougnut = () => {
         const donutData = {
             labels: label,
             datasets: [{
-            data: [300, 50, 100],
+            data: userAccountStatusRatio,
             backgroundColor: chartColors,
             borderWidth: 0,
         },],

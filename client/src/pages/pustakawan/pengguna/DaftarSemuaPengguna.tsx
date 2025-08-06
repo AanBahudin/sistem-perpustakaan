@@ -22,9 +22,9 @@ const DaftarSemuaPengguna = () => {
   return (
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
-      <GrafikPertumbuhanSemuaPengguna />
+      <GrafikPertumbuhanSemuaPengguna monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
       <SemuaPenggunaFilter />
-      <TableSemuaPengguna dataPengguna={data} />
+      <TableSemuaPengguna dataPengguna={data.pengguna} />
     </Container>
   )
 }

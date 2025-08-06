@@ -2,7 +2,7 @@ import { AlignEndHorizontal, Ratio } from 'lucide-react';
 import UserGrowthCart from '../UserGrowthCart';
 import UserRatioDougnut from '../UserRatioDougnut';
 
-const GrafikPertumbuhanSemuaPengguna = () => {
+const GrafikPertumbuhanSemuaPengguna = ({monthlyUserGrowData, userAccountStatusRatio} : {monthlyUserGrowData: any, userAccountStatusRatio: any}) => {
   return (
     <section className="w-full border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
         <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
@@ -10,7 +10,7 @@ const GrafikPertumbuhanSemuaPengguna = () => {
               <AlignEndHorizontal className='w-4 h-4 stroke-muted-foreground' /> 
               Statistik Pertumbuhan Pengguna Bulanan
             </h1>
-            <UserGrowthCart />
+            <UserGrowthCart monthlyUserGrowData={monthlyUserGrowData} />
             
         </main>
 
@@ -20,7 +20,7 @@ const GrafikPertumbuhanSemuaPengguna = () => {
               Rasio Aktivasi Akun
             </h1>
 
-            <UserRatioDougnut />
+            <UserRatioDougnut userAccountStatusRatio={userAccountStatusRatio} />
         </main>
     </section>
   )
