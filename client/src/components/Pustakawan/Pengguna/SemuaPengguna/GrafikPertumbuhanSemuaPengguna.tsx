@@ -1,14 +1,16 @@
 import { AlignEndHorizontal, Ratio } from 'lucide-react';
 import UserGrowthCart from '../UserGrowthCart';
 import UserRatioDougnut from '../UserRatioDougnut';
+import DosenMahasiswaRatio from '../DosenMahasiswaRatio';
 
 type GrafikPertumbuhanSemuaPenggunaType = {
   monthlyUserGrowData: any, 
   userAccountStatusRatio: any,
-  title?: string
+  title?: string,
+  graphFor?: string
 }
 
-const GrafikPertumbuhanSemuaPengguna = ({title='Statistik Pertumbuhan Pengguna Bulanan', monthlyUserGrowData, userAccountStatusRatio} : GrafikPertumbuhanSemuaPenggunaType) => {
+const GrafikPertumbuhanSemuaPengguna = ({graphFor="default", title='Statistik Pertumbuhan Pengguna Bulanan', monthlyUserGrowData, userAccountStatusRatio} : GrafikPertumbuhanSemuaPenggunaType) => {
   return (
     <section className="w-full border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
         <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
@@ -27,12 +29,17 @@ const GrafikPertumbuhanSemuaPengguna = ({title='Statistik Pertumbuhan Pengguna B
         </main>
 
         <main className="flex-1 max-h-full flex flex-col items-center justify-center">
-            <h1 className='font-semibold items-center flex gap-x-4'>
+            <h1 className='font-semibold items-center flex gap-x-4 capitalize'>
               <Ratio  className='w-4 h-4 stroke-muted-foreground' /> 
-              Rasio Aktivasi Akun
+              {graphFor === 'default' ? 'Rasio Aktivasi Akun' : `Rasio perbanding akun ${graphFor}`}
+              
             </h1>
 
-            <UserRatioDougnut userAccountStatusRatio={userAccountStatusRatio} />
+            {graphFor === 'default' ? (
+              <UserRatioDougnut userAccountStatusRatio={userAccountStatusRatio} />
+            ) : (
+              <DosenMahasiswaRatio userAccountStatusRatio={userAccountStatusRatio} />
+            )}
         </main>
     </section>
   )

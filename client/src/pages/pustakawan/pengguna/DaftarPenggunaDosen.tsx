@@ -22,7 +22,7 @@ const DaftarPenggunaDosen = () => {
   return (
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
-      <GrafikPertumbuhanSemuaPengguna title='Statistik Pertumbuhan Dosen Bulanan' monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
+      <GrafikPertumbuhanSemuaPengguna graphFor='dosen' title='Statistik Pertumbuhan Dosen Bulanan' monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
       <SemuaPenggunaFilter usedIn='dosen' />
       <TableSemuaPengguna dataPengguna={data.pengguna} />
     </Container>

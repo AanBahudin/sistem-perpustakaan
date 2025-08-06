@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 // Daftarkan elemen-elemen yang diperlukan
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: any}) => {
+const DosenMahasiswaRatio = ({userAccountStatusRatio} : {userAccountStatusRatio: any}) => {
+    console.log(userAccountStatusRatio)
 
     const getCSSVariable = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     const chartRef = useRef(null);
@@ -16,7 +17,6 @@ const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: an
       const updateColors = () => {
         const colors = [
           getCSSVariable("--primary"),
-          getCSSVariable("--destructive"),
           getCSSVariable("--chart-4"),
         ];
         setChartColors(colors);
@@ -33,27 +33,26 @@ const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: an
 
         return () => observer.disconnect();
     }, []);
-  
-  
-    const label = ["Aktif", "Nonaktif", "Pending"]
+
+    const label = ["Mahasiswa", "Dosen"]
       // const backgroundColor = 
       const donutData = {
           labels: label,
           datasets: [{
-          data: userAccountStatusRatio,
-          backgroundColor: chartColors,
-          borderWidth: 0,
+            data: userAccountStatusRatio,
+            backgroundColor: chartColors,
+            borderWidth: 0,
       },],
     };
   
     const options = {
-      responsive: true,
-      cutout: "60%",
-      plugins: {
-        legend: {
-            display: false,
+        responsive: true,
+        cutout: "60%",
+        plugins: {
+            legend: {
+                display: false,
+            },
         },
-      },
     };
 
     return (
@@ -75,4 +74,4 @@ const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: an
     )
 }
 
-export default UserRatioDougnut
+export default DosenMahasiswaRatio
