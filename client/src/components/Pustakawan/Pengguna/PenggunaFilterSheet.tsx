@@ -18,7 +18,7 @@ import { store } from "@/store"
 import { resetFilter } from "@/cart/SheetFilterSlice"
 
 
-const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
+const PenggunaFilterSheet = ({children, usedIn} : {children: React.ReactNode, usedIn: string}) => {
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -60,7 +60,7 @@ const PenggunaFilterSheet = ({children} : {children: React.ReactNode}) => {
                     Saring data pengguna sesuai kebutuhanmu.
                 </SheetDescription>
 
-                <RoleFilter />
+                {usedIn === 'default' &&  <RoleFilter />}
                 <StatusAkunFilter />
                 <VerifikasiEmail />
                 <VerifikasiProdi />

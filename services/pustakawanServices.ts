@@ -46,6 +46,32 @@ export const getAllPengguna = async({query} : {query: any}) => {
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
 
+export const getAllPenggunaDosen = async({query} : {query: any}) => {
+    let mongoQuery: any = { ...query }
+
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+
+    const pengguna = await Pengguna.find({role: 'Dosen', ...mongoQuery}).sort({createdAt: -1})
+
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
+
+
+
 export const allUserAccountStatusRatio = async() => {
     const statusAkunCount = await Pengguna.aggregate([
         {
@@ -80,7 +106,7 @@ export const allUserStats = async() => {
     const pertumbuhanBulanan = await Pengguna.aggregate([
         {
             $match: {
-            createdAt: { $gte: sixMonthsAgo },
+                createdAt: { $gte: sixMonthsAgo },
             },
         },
         {

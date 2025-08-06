@@ -1,10 +1,31 @@
+import { getAllPenggunaDosen } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
+import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
+import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
+import Container from '@/globals/Container'
+import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
+import TableSemuaPengguna from './TableSemuaPengguna'
 
 const DaftarPenggunaDosen = () => {
+ 
+  const [searchParams] = useSearchParams()
+  const params = new URLSearchParams(searchParams).toString()
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['dosen', 'pengguna', params],
+    queryFn: () => getAllPenggunaDosen(params)
+  })
+
+  if (isLoading) return <h1>Loading...</h1>
+
   return (
-    <section>
+    <Container className='w-full'>
       <PustakawanBreadCrumbs />
-    </section>
+      <GrafikPertumbuhanSemuaPengguna title='Statistik Pertumbuhan Dosen Bulanan' monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
+      <SemuaPenggunaFilter usedIn='dosen' />
+      <TableSemuaPengguna dataPengguna={data.pengguna} />
+    </Container>
   )
 }
 

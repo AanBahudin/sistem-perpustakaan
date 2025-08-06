@@ -4,3 +4,8 @@ export const getAllPengguna = async(params: string) => {
     const {data: response} = await customFetch.get(`/pustakawan/users?${params}`)
     return response.data
 }
+
+export const getAllPenggunaDosen = async(params: string) => {
+    const {data: response} = await customFetch.get(`/pustakawan/dosen?${params}`)
+    return response.data
+}
