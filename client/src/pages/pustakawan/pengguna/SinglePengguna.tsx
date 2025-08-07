@@ -1,4 +1,5 @@
 import { getSinglePengguna } from "@/actions/Pustakawan/PustakawanGetPenggunaActions"
+import ActivityInfoContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/ActivityInfoContainer"
 import MainProfileContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/MainProfileContainer"
 import PenggunaBreadCrumbs from "@/components/Pustakawan/Pengguna/SinglePengguna/PenggunaBreadCrumbs"
 import StatsProfileContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/StatsProfileContainer"
@@ -28,11 +29,9 @@ const SinglePengguna = () => {
         <Calendar className="border rounded-xl" />
       </section>
 
-      <section className="w-full">
-        <section className="w-[70%] min-h-[35vh] border rounded-2xl ">
-          
-        </section>
-      </section>
+      <ActivityInfoContainer nama={data.nama} />
+
+      
     </Container>
   )
 }
