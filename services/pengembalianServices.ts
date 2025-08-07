@@ -254,3 +254,8 @@ export const getTotalBukuHilangByUser = async({idPengguna} : {idPengguna: string
     const dataHilang = await Pengembalian.find({idPengguna, isMissing: true})
     return dataHilang
 }
+
+export const getPengembalianByUserId = async({idPengguna} : {idPengguna: string}) => {
+    const pengembalian = await Pengembalian.find({idPengguna: idPengguna})
+    return pengembalian
+}

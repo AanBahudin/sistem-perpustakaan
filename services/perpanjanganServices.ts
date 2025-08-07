@@ -173,3 +173,8 @@ export const perpanjangaDitolak = async({userId, idPerpanjangan} : PerpanjanganD
         {new: true, runValidators: true}
     )
 }
+
+export const getPerpanjanganByUserId = async({userId} : {userId: string}) => {
+    const perpanjangan = await Perpanjangan.find({idPengguna: userId})
+    return perpanjangan
+}

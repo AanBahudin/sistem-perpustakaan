@@ -1,8 +1,9 @@
 import Peminjaman from '../model/Peminjaman'
 import Pengguna from '../model/Pengguna'
 import { getBukuHilang } from './bukuServices'
-import { pustakawanGetDataPengembalian } from './pengembalianServices'
-import { getSemuaPerpanjanganUser } from './perpanjanganServices'
+import { getPeminjamanByUserId } from './peminjamanServices'
+import { getPengembalianByUserId, pustakawanGetDataPengembalian } from './pengembalianServices'
+import { getPerpanjanganByUserId, getSemuaPerpanjanganUser } from './perpanjanganServices'
 import { startOfMonth, subMonths } from "date-fns";
 
 type StatusKey = 'Aktif' | 'Nonaktif' | 'Pending';
@@ -44,6 +45,16 @@ export const getAllPengguna = async({query} : {query: any}) => {
     const userAccountStatusRatio = await allUserAccountStatusRatio()
 
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
+export const getSinglePengguna = async({id} : {id: string}) => {
+    const pengguna = await Pengguna.findOne({_id: id}).select('-password')
+    const peminjaman = await getPeminjamanByUserId({userId: id})
+    const perpanjangan = await getPerpanjanganByUserId({userId: id})
+    const pengembalian = await getPengembalianByUserId({idPengguna: id})
+
+
+    return {pengguna, peminjaman, perpanjangan, pengembalian}
 }
 
 export const getAllPenggunaDosen = async({query} : {query: any}) => {

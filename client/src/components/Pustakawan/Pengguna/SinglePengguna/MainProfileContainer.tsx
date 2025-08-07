@@ -4,7 +4,7 @@ import SinglePenggunaDropdown from "@/components/Pustakawan/Pengguna/SinglePengg
 
 const MainProfileContainer = ({data}: {data: any}) => {
   return (
-    <main className="w-[30%] rounded-2xl border min-h-[40vh] flex flex-col items-center justify-center relative">
+    <main className="w-[30%] bg-primary/10 rounded-2xl border min-h-[40vh] flex flex-col items-center justify-center relative">
           <SinglePenggunaDropdown>
             <main className="absolute p-2 rounded-full hover:bg-muted duration-300 ease-in-out top-3 right-3">
               <EllipsisVertical className="w-3 h-3" />

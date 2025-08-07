@@ -4,8 +4,8 @@ import { StatusCodes } from "http-status-codes";
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
 
-import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa } from "../../services/pustakawanServices";
-import { SendDataResponse } from "../../utils/sendResponse";
+import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna } from "../../services/pustakawanServices";
+import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 export const getStats = async(req: Request | any, res: Response) => {
     const data = await getStatsServices()
@@ -58,13 +58,12 @@ export const getAllMahasiswaUser = async(req: Request, res: Response) => {
 export const getSingleUser = async(req: Request, res: Response) => {
 
     const {id} = req.params
-    const user = await Pengguna.findOne({_id: id}).select('-password')
-    
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Data Pengguna - ${user?.nama}`,
-        timestamps: new Date(Date.now()).toISOString(),
-        data: user
+    const data = await getSinglePengguna({id})
+
+    SendOneDataResponse({
+        res,
+        message: `Data Pengguna - ${data.pengguna?.nama}`,
+        data
     })
 }
 
