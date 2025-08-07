@@ -30,7 +30,7 @@ const PenggunaBreadCrumbs = ({title} : {title: string}) => {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     {pathURL.map((item: string, index: number) => {
-                        if (item !== 'pustakawan'   ) {
+                        if (item !== 'pustakawan') {
                             return (
                                 <div key={index} className="flex items-center gap-x-2">
                                     <BreadcrumbItem>
