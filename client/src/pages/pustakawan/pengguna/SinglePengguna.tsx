@@ -30,8 +30,6 @@ const SinglePengguna = () => {
       </section>
 
       <ActivityInfoContainer nama={data.nama} />
-
-      
     </Container>
   )
 }
