@@ -29,13 +29,17 @@ const TabelPengembalianSingleUser = ({pengembalian} : {pengembalian: any}) => {
             ) : (
                 <TableBody>
                     {pengembalian.map((item: any, index: number) => {
-                        const {idBuku: buku, idPengguna: pengguna} = item
+                        const {idBuku: buku, idPengguna: pengguna, statusPengembalian: status} = item
+                        const statusPengembalianBg = status === 'Pending' ? 'bg-yellow-300' : 'bg-primary' 
+
                         return (
                             <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
                                 <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                 <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
-                                <TableCell className="w-[120px] text-center text-xs">{item.statusPengembalian}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">
+                                    <p className={`${statusPengembalianBg} w-[80px] text-center mx-auto px-3 py-1 rounded`}>{status}</p>
+                                </TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{pengguna.nama}</TableCell>
                             </TableRow>
                         )

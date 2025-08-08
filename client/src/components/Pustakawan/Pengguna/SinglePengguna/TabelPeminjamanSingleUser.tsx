@@ -45,7 +45,7 @@ const TabelPeminjamanSingleUser = ({ peminjaman }: { peminjaman: any }) => {
                                     <TableCell className="w-[120px] text-center text-xs">{item.buku.kategori[0]}</TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">
                                         <p className={`${statusPinjamanBackground} w-[80px] text-center mx-auto px-3 py-1 rounded`}>{item.statusPeminjaman}</p>
-                                        </TableCell>
+                                    </TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                 </TableRow>
                             )

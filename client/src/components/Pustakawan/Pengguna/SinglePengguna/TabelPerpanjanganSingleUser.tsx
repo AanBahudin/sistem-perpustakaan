@@ -29,13 +29,17 @@ const TabelPerpanjanganSingleUser = ({perpanjangan} : {perpanjangan: any}) => {
             ) : (
                 <TableBody>
                     {perpanjangan.map((item: any, index: number) => {
-                        const {idPengguna: pengguna, idBuku: buku} = item
+                        const {idPengguna: pengguna, idBuku: buku, disetujui} = item
+                        const statusPerpanjanganBg = disetujui === 'Pending' ? 'bg-yellow-300' : (disetujui === 'Diterima' ? 'bg-primary' : 'bg-destructive')
                         return (
                             <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
                                 <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                 <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{buku.disetujui}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">
+                                    <p className={`${statusPerpanjanganBg} w-[80px] text-center mx-auto px-3 py-1 rounded`}>{disetujui}</p>
+                                </TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{pengguna.nama}</TableCell>
                             </TableRow>
                         )
