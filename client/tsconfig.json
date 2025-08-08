@@ -6,7 +6,7 @@
   ],
   "include": [
     "src/**/*"
-  ],
+, "../utils/hitungPerBulan.ts"  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

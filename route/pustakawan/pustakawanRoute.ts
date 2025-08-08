@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllDosenUser, getAllMahasiswaUser, getAllUsers, getSingleUser } from '../../controllers/pustakawan/pustakawanController'
+import { getAllDosenUser, getAllMahasiswaUser, getAllPengajuan, getAllUsers, getSingleUser } from '../../controllers/pustakawan/pustakawanController'
 import {getProfile } from '../../controllers/pustakawan/pustakawanController'
 import { verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
 import { getStats } from '../../controllers/pustakawan/pustakawanController'
@@ -14,6 +14,9 @@ router.route('/dosen')
 
 router.route('/mahasiswa')
     .get(getAllMahasiswaUser)
+
+router.route('/pengajuan')
+    .get(getAllPengajuan)
 
 router.route('/stats')
     .get(getStats)

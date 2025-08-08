@@ -1,10 +1,13 @@
 import Peminjaman from '../model/Peminjaman'
+import Pengembalian from '../model/Pengembalian'
 import Pengguna from '../model/Pengguna'
+import Perpanjangan from '../model/Perpanjangan'
 import { getBukuHilang } from './bukuServices'
 import { getPeminjamanByUserId } from './peminjamanServices'
 import { getPengembalianByUserId, pustakawanGetDataPengembalian } from './pengembalianServices'
 import { getPerpanjanganByUserId, getSemuaPerpanjanganUser } from './perpanjanganServices'
 import { startOfMonth, subMonths } from "date-fns";
+import { hitungPerBulan } from '../utils/hitungPerBulan'
 
 type StatusKey = 'Aktif' | 'Nonaktif' | 'Pending';
 
@@ -101,6 +104,39 @@ export const getAllPenggunaMahasiswa = async({query} : {query: any}) => {
     const userAccountStatusRatio = await userDosenRatio()
 
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
+export const getAllPengajuanUser = async() => {
+    const peminjaman = await Peminjaman.find({statusPeminjaman: 'Diajukan'})
+    const pengembalian = await Pengembalian.find({statusPengembalian: 'Pending'})
+    const perpanjangan = await Perpanjangan.find({disetujui: 'Pending'})
+
+    const peminjamanPerBulan = hitungPerBulan(peminjaman, 'createdAt');
+    const pengembalianPerBulan = hitungPerBulan(pengembalian, 'createdAt');
+    const perpanjanganPerBulan = hitungPerBulan(perpanjangan, 'createdAt');
+
+    const semuaBulan = new Set<string>([
+    ...Object.keys(peminjamanPerBulan),
+    ...Object.keys(pengembalianPerBulan),
+    ...Object.keys(perpanjanganPerBulan)
+    ]);
+
+    // Tipe untuk data grafik
+    interface DataGrafik {
+        bulan: string;
+        peminjaman: number;
+        perpanjangan: number;
+        pengembalian: number;
+    }
+
+    const dataGrafik: DataGrafik[] = Array.from(semuaBulan).map(bulan => ({
+        bulan,
+        peminjaman: peminjamanPerBulan[bulan] || 0,
+        perpanjangan: perpanjanganPerBulan[bulan] || 0,
+        pengembalian: pengembalianPerBulan[bulan] || 0
+    }));
+
+    return {peminjaman, pengembalian, perpanjangan, dataGrafik}
 }
 
 

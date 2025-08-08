@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
 
-import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna } from "../../services/pustakawanServices";
+import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna, getAllPengajuanUser } from "../../services/pustakawanServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 export const getStats = async(req: Request | any, res: Response) => {
@@ -63,6 +63,16 @@ export const getSingleUser = async(req: Request, res: Response) => {
     SendOneDataResponse({
         res,
         message: `Data Pengguna - ${data.pengguna?.nama}`,
+        data
+    })
+}
+
+export const getAllPengajuan = async(req: Request, res: Response) => {
+    const data = await getAllPengajuanUser()
+    
+    SendOneDataResponse({
+        res,
+        message: 'Semua data pengajuan',
         data
     })
 }
