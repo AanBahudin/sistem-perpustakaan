@@ -34,7 +34,7 @@ const PengajuanRatioDougnut = ({pengajuanRatio} : {pengajuanRatio: any}) => {
     }, []);
   
   
-    const label = ["Aktif", "Nonaktif", "Pending"]
+    const label = ["Peminjaman", "Perpanjangan", "Pengembalian"]
       // const backgroundColor = 
       const donutData = {
           labels: label,
@@ -61,7 +61,7 @@ const PengajuanRatioDougnut = ({pengajuanRatio} : {pengajuanRatio: any}) => {
               <Doughnut ref={chartRef} data={donutData} options={options} />
             </main>
 
-            <main className='w-full flex items-center justify-center gap-x-4 mt-4'>
+            <main className='w-full flex items-center justify-center gap-x-2 mt-4'>
                 {label.map((item: string, index: number) => {
                   const bgColor = chartColors[index] 
                   return (

@@ -4,6 +4,7 @@ const PengajuanGrowthChart = ({monthlyPengajuanGrowth} : {monthlyPengajuanGrowth
   return (
     <ResponsiveContainer width="100%" height="100%">
         <BarChart
+          className='text-xs capitalize'
           width={500}
           height={300}
           data={monthlyPengajuanGrowth}
@@ -17,9 +18,9 @@ const PengajuanGrowthChart = ({monthlyPengajuanGrowth} : {monthlyPengajuanGrowth
           <XAxis dataKey="bulan" />
           <YAxis />
           <Legend />
-          <Bar dataKey="perpanjangan" stackId="a" fill="#8884d8" />
-          <Bar dataKey="pengembalian" stackId="a" fill="#82ca9d" />
-          <Bar dataKey="peminjaman" fill="#ffc658" />
+          <Bar dataKey="perpanjangan" stackId="a" fill="#155DFC" />
+          <Bar dataKey="pengembalian" stackId="a" fill="#FFB900" />
+          <Bar dataKey="peminjaman" fill="#FF6467" />
         </BarChart>
     </ResponsiveContainer>
   )

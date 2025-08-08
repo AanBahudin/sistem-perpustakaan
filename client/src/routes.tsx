@@ -31,7 +31,7 @@ import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
 import PustakawanProfilePage from "./pages/pustakawan/profil/PustakawanProfilePage";
 import DaftarSemuaPengguna from "./pages/pustakawan/pengguna/DaftarSemuaPengguna";
-import PustakawanPengajuanLayout from "./pages/pustakawan/pengajuan/PustakawanPengajuanLayout";
+import PustakawanPengajuanLayout from "./pages/pustakawan/pengajuan/PustakawanSemuaPengajuan";
 import PustakawanPeminjaman from "./pages/pustakawan/pengajuan/PustakawanPeminjaman";
 import PustakawanPerpanjangan from "./pages/pustakawan/pengajuan/PustakawanPerpanjangan";
 import PustakawanRiwayatPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPage";

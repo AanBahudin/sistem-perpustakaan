@@ -13,7 +13,7 @@ const GrafikPertumbuhanPengajuanContainer = ({monthlyPengajuanGrowth, pengajuanR
         <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
             <h1 className="font-semibold text-lg flex items-center gap-x-4 px-6">
                 <AlignEndHorizontal className='w-4 h-4 stroke-muted-foreground' /> 
-                Ini judul
+                Grafik Pertumbuhan Pengajuan Bulanan
             </h1>
 
             {monthlyPengajuanGrowth?.length === 0 && (
@@ -29,7 +29,6 @@ const GrafikPertumbuhanPengajuanContainer = ({monthlyPengajuanGrowth, pengajuanR
             <h1 className='font-semibold items-center flex gap-x-4 capitalize'>
               <Ratio  className='w-4 h-4 stroke-muted-foreground' /> 
               Rasio Perbandingan Pengajuan
-              
             </h1>
 
             <PengajuanRatioDougnut pengajuanRatio={pengajuanRatio} />

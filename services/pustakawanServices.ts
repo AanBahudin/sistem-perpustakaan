@@ -136,7 +136,9 @@ export const getAllPengajuanUser = async() => {
         pengembalian: pengembalianPerBulan[bulan] || 0
     }));
 
-    return {peminjaman, pengembalian, perpanjangan, dataGrafik}
+    const pengajuanRatio = [peminjaman.length, perpanjangan.length, pengembalian.length]
+
+    return {peminjaman, pengembalian, perpanjangan, dataGrafik, pengajuanRatio}
 }
 
 

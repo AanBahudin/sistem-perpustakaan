@@ -4,7 +4,7 @@ import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
 
-const PustakawanPengajuanLayout = () => {
+const SemuaPengajuan = () => {
 
   const {isLoading, data} = useQuery({
     queryKey: ['semua', 'pengajuan'],
@@ -18,9 +18,9 @@ const PustakawanPengajuanLayout = () => {
       <PustakawanBreadCrumbs />
 
       {/* monthlyPengajuanGrowth harus bertipe aggregasi */}
-      <GrafikPertumbuhanPengajuanContainer monthlyPengajuanGrowth={data.dataGrafik} pengajuanRatio={[1,3,4]} />
+      <GrafikPertumbuhanPengajuanContainer monthlyPengajuanGrowth={data.dataGrafik} pengajuanRatio={data.pengajuanRatio} />
     </Container>
   )
 }
 
-export default PustakawanPengajuanLayout
+export default SemuaPengajuan
