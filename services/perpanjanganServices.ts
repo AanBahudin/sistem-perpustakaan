@@ -175,6 +175,6 @@ export const perpanjangaDitolak = async({userId, idPerpanjangan} : PerpanjanganD
 }
 
 export const getPerpanjanganByUserId = async({userId} : {userId: string}) => {
-    const perpanjangan = await Perpanjangan.find({idPengguna: userId})
+    const perpanjangan = await Perpanjangan.find({idPengguna: userId}).populate(['idPengguna', 'idBuku'])
     return perpanjangan
 }

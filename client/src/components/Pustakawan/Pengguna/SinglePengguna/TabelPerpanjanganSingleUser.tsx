@@ -28,15 +28,18 @@ const TabelPerpanjanganSingleUser = ({perpanjangan} : {perpanjangan: any}) => {
                 <TableCaption className="mt-20">Belum ada perpanjangan</TableCaption>
             ) : (
                 <TableBody>
-                    {perpanjangan.map((item: any, index: number) => (
-                        <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
-                            <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                            <TableCell className="w-[200px] text-xs">Mastring React</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Pemrograman</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Diajukan</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Aan Bahudin</TableCell>
-                        </TableRow>
-                    ))}
+                    {perpanjangan.map((item: any, index: number) => {
+                        const {idPengguna: pengguna, idBuku: buku} = item
+                        return (
+                            <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
+                                <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
+                                <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{buku.disetujui}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{pengguna.nama}</TableCell>
+                            </TableRow>
+                        )
+                    })}
                 </TableBody>
             )}
             </Table>

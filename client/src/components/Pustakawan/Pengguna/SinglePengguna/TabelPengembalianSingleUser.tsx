@@ -28,15 +28,19 @@ const TabelPengembalianSingleUser = ({pengembalian} : {pengembalian: any}) => {
                 <TableCaption className="mt-20">Belum ada pengembalian</TableCaption>
             ) : (
                 <TableBody>
-                    {pengembalian.map((item: any, index: number) => (
-                        <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
-                            <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                            <TableCell className="w-[200px] text-xs">Mastring React</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Pemrograman</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Diajukan</TableCell>
-                            <TableCell className="w-[120px] text-center text-xs">Aan Bahudin</TableCell>
-                        </TableRow>
-                    ))}
+                    {pengembalian.map((item: any, index: number) => {
+                        const {idBuku: buku, idPengguna: pengguna} = item
+                        return (
+                            <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
+                                <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
+                                <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{item.statusPengembalian}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{pengguna.nama}</TableCell>
+                            </TableRow>
+                        )
+                    }
+                    )}
                 </TableBody>
             )}
             </Table>

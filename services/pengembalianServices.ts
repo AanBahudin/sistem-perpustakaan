@@ -256,6 +256,6 @@ export const getTotalBukuHilangByUser = async({idPengguna} : {idPengguna: string
 }
 
 export const getPengembalianByUserId = async({idPengguna} : {idPengguna: string}) => {
-    const pengembalian = await Pengembalian.find({idPengguna: idPengguna})
+    const pengembalian = await Pengembalian.find({idPengguna: idPengguna}).populate(['idBuku', 'idPengguna'])
     return pengembalian
 }
