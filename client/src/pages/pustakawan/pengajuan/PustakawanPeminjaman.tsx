@@ -1,8 +1,11 @@
-import React from 'react'
+import Container from '@/globals/Container'
+import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 
 const PustakawanPeminjaman = () => {
   return (
-    <div>PustakawanPeminjaman</div>
+    <Container className='w-full'>
+      <PustakawanBreadCrumbs />
+    </Container>
   )
 }
 
