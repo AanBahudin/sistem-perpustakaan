@@ -11,41 +11,50 @@ import {
 import { formatedDate } from "@/utils/formatDate"
 
 const TabelPeminjamanSingleUser = ({ peminjaman }: { peminjaman: any }) => {
-  return (
-    <TabsContent value="Peminjaman" className="w-full flex-1 overflow-auto scroll-custom">
-        <section className="w-full h-full border rounded overflow-hidden">
-            <Table className="w-full text-sm">
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-[50px] text-xs text-center px-0">No</TableHead>
-                    <TableHead className="w-[200px] text-xs">Judul Buku</TableHead>
-                    <TableHead className="w-[120px] text-xs text-center">Kategori</TableHead>
-                    <TableHead className="w-[120px] text-center text-xs">Status</TableHead>
-                    <TableHead className="w-[120px] text-xs text-center">Tgl Pengajuan</TableHead>
-                </TableRow>
-            </TableHeader>
+    return (
+        <TabsContent value="Peminjaman" className="w-full flex-1 overflow-auto scroll-custom">
+            <section className="w-full h-full border rounded overflow-hidden">
+                <Table className="w-full text-sm">
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[50px] text-xs text-center px-0">No</TableHead>
+                        <TableHead className="w-[200px] text-xs">Judul Buku</TableHead>
+                        <TableHead className="w-[120px] text-xs text-center">Kategori</TableHead>
+                        <TableHead className="w-[120px] text-center text-xs">Status</TableHead>
+                        <TableHead className="w-[120px] text-xs text-center">Tgl Pengajuan</TableHead>
+                    </TableRow>
+                </TableHeader>
 
-            {peminjaman.length === 0 ? (
-                <TableCaption className="mt-20">Belum ada peminjaman</TableCaption>
-            ) : (
-                <TableBody>
-                    {peminjaman.map((item: any, index: number) => {
-                        const {buku} = item
-                        return (
-                            <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
-                                <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                                <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
-                                <TableCell className="w-[120px] text-center text-xs">{item.buku.kategori[0]}</TableCell>
-                                <TableCell className="w-[120px] text-center text-xs">{item.statusPeminjaman}</TableCell>
-                                <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
-                            </TableRow>
-                        )
-                    })}
-                </TableBody>
-            )}
-            </Table>
-        </section>
-    </TabsContent>
+                {peminjaman.length === 0 ? (
+                    <TableCaption className="mt-20">Belum ada peminjaman</TableCaption>
+                ) : (
+                    <TableBody>
+                        {peminjaman.map((item: any, index: number) => {
+                            const {buku} = item
+                            const statusPinjam = item.statusPeminjaman
+                            const statusPinjamanBackground = statusPinjam === 'Dipinjam' ? 'bg-primary' : (
+                                statusPinjam === 'Dikembalikan' ? 'bg-primary/20' : (
+                                    statusPinjam === 'Terlambat' ? 'bg-muted' : (
+                                        statusPinjam === 'Diajukan' ? 'bg-yellow-300' : 'bg-destructive'
+                                    )
+                                ))
+                            return (
+                                <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
+                                    <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
+                                    <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
+                                    <TableCell className="w-[120px] text-center text-xs">{item.buku.kategori[0]}</TableCell>
+                                    <TableCell className="w-[120px] text-center text-xs">
+                                        <p className={`${statusPinjamanBackground} w-[80px] text-center mx-auto px-3 py-1 rounded`}>{item.statusPeminjaman}</p>
+                                        </TableCell>
+                                    <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
+                                </TableRow>
+                            )
+                        })}
+                    </TableBody>
+                )}
+                </Table>
+            </section>
+        </TabsContent>
   )
 }
 
