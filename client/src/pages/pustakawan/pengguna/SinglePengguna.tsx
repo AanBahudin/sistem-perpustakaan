@@ -30,14 +30,14 @@ const SinglePengguna = () => {
     <Container className="w-full">
       <PenggunaBreadCrumbs title={pengguna.nama} />
 
-      <section className="w-full min-h-[40vh] flex justify-start items-start gap-x-4">
+      <section className="w-full min-h-[40vh] flex justify-start items-stretch  gap-x-4">
         <MainProfileContainer data={pengguna} />
         <StatsProfileContainer nama={pengguna.nama} ratioData={ratioData} />
         <Calendar className="border rounded-xl" />
       </section>
 
       <ActivityInfoContainer  
-        nama={pengguna.nama} 
+        pengguna={pengguna} 
         peminjaman={peminjaman}
         perpanjangan={perpanjangan}
         pengembalian={pengembalian}
