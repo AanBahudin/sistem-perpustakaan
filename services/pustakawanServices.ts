@@ -107,9 +107,9 @@ export const getAllPenggunaMahasiswa = async({query} : {query: any}) => {
 }
 
 export const getAllPengajuanUser = async() => {
-    const peminjaman = await Peminjaman.find({statusPeminjaman: 'Diajukan'})
-    const pengembalian = await Pengembalian.find({statusPengembalian: 'Pending'})
-    const perpanjangan = await Perpanjangan.find({disetujui: 'Pending'})
+    const peminjaman = await Peminjaman.find({statusPeminjaman: 'Diajukan'}).populate(['peminjam', 'buku'])
+    const pengembalian = await Pengembalian.find({statusPengembalian: 'Pending'}).populate(['idPengguna', 'idBuku'])
+    const perpanjangan = await Perpanjangan.find({disetujui: 'Pending'}).populate(['idPengguna', 'idBuku'])
 
     const peminjamanPerBulan = hitungPerBulan(peminjaman, 'createdAt');
     const pengembalianPerBulan = hitungPerBulan(pengembalian, 'createdAt');

@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import moment from 'moment'
 
 const TabelPerpanjanganSingleUser = ({perpanjangan} : {perpanjangan: any}) => {
   return (
@@ -21,6 +22,7 @@ const TabelPerpanjanganSingleUser = ({perpanjangan} : {perpanjangan: any}) => {
                     <TableHead className="w-[120px] text-xs text-center">Jenis</TableHead>
                     <TableHead className="w-[120px] text-center text-xs">Status</TableHead>
                     <TableHead className="w-[120px] text-xs text-center">Pengguna</TableHead>
+                    <TableHead className="w-[120px] text-xs text-center">Tanggal Pengajuan</TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -31,16 +33,17 @@ const TabelPerpanjanganSingleUser = ({perpanjangan} : {perpanjangan: any}) => {
                     {perpanjangan.map((item: any, index: number) => {
                         const {idPengguna: pengguna, idBuku: buku, disetujui} = item
                         const statusPerpanjanganBg = disetujui === 'Pending' ? 'bg-yellow-300' : (disetujui === 'Diterima' ? 'bg-primary' : 'bg-destructive')
+                        const newDate = moment(item.createdAt).subtract(10, 'days').calendar();
                         return (
                             <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
                                 <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                 <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
-                                <TableCell className="w-[120px] text-center text-xs">{buku.disetujui}</TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">
                                     <p className={`${statusPerpanjanganBg} w-[80px] text-center mx-auto px-3 py-1 rounded`}>{disetujui}</p>
                                 </TableCell>
                                 <TableCell className="w-[120px] text-center text-xs">{pengguna.nama}</TableCell>
+                                <TableCell className="w-[120px] text-center text-xs">{newDate}</TableCell>
                             </TableRow>
                         )
                     })}
