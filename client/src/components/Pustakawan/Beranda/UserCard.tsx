@@ -1,4 +1,5 @@
 import { EllipsisVertical, GraduationCap } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Card = ({user} : {user: any}) => {
   return (
@@ -6,7 +7,7 @@ const Card = ({user} : {user: any}) => {
         <div className='flex gap-x-5'>
             <div className='w-14 h-14 rounded-full bg-accent/80 flex text-3xl font-semibold items-center justify-center text-accent'>{user.nama[0]}</div>
             <div className='flex flex-col items-start'>
-                <h1 className='text-sm font-semibold hover:underline duration-200 ease-in-out cursor-pointer'>{user.nama}</h1>
+                <Link to={`pengguna/detail/${user._id}`} className='text-sm font-semibold hover:underline duration-200 ease-in-out cursor-pointer'>{user.nama}</Link>
                 <p className='text-xs text-muted-foreground'>{user.email}</p>
                 <div className='flex items-center gap-x-4 mt-1'>
                     <GraduationCap className='w-3 h-3'/>

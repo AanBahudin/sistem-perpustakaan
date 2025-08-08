@@ -43,7 +43,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                         className="group border-muted group not-even:bg-accent-foreground/10"
                         >
                         <TableCell className="w-[250px] text-muted-foreground">
-                            <div className="flex items-center gap-x-2 group-hover:underline duration-200 ease-in-out">
+                            <div className="flex items-center gap-x-2 group-hover:underline cursor-default duration-200 ease-in-out">
                                 {item.fotoProfil ? (
                                     <img
                                     src={item.fotoProfil}
@@ -52,7 +52,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                                     />
                                 ) : (
                                     <div className="w-5 h-5 rounded-full bg-accent/80 flex items-center justify-center text-muted-foreground text-xs uppercase">
-                                    {item.nama[0]}
+                                        {item.nama[0]}
                                     </div>
                                 )}
                                 {item.nama}
