@@ -18,9 +18,13 @@ const SinglePengguna = () => {
   })
 
   if (isLoading) return <h1>Loading ...</h1>
-  
-  console.log(data)
   const {pengguna, peminjaman, perpanjangan, pengembalian} = data
+
+  const ratioData = [
+    peminjaman.length || 0,
+    perpanjangan.length || 0,
+    pengembalian.length || 0
+  ]
 
   return (
     <Container className="w-full">
@@ -28,7 +32,7 @@ const SinglePengguna = () => {
 
       <section className="w-full min-h-[40vh] flex justify-start items-start gap-x-4">
         <MainProfileContainer data={pengguna} />
-        <StatsProfileContainer nama={pengguna.nama} />
+        <StatsProfileContainer nama={pengguna.nama} ratioData={ratioData} />
         <Calendar className="border rounded-xl" />
       </section>
 
