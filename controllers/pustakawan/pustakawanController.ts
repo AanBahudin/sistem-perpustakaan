@@ -83,7 +83,7 @@ export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
         res,
         message: 'Data pengajuan peminjaman',
         data,
-        total: data.length || 0
+        total: data.pengajuanPeminjaman.length || 0
     })
 }
 
