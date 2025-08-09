@@ -1,7 +1,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import TabelPeminjaman from "@/components/Pustakawan/Pengajuan/TabelPeminjaman"
-import TabelPerpanjangan from "@/components/Pustakawan/Pengajuan/TabelPerpanjangan"
-import TabelPengembalian from "@/components/Pustakawan/Pengajuan/TabelPengembalian"
+import TabelPeminjaman from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/TabelPeminjaman"
+import TabelPerpanjangan from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/TabelPerpanjangan"
+import TabelPengembalian from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/TabelPengembalian"
 import { Activity } from "lucide-react"
 
 type ActivitySectionType = {
