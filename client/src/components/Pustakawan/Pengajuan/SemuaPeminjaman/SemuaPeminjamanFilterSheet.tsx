@@ -8,6 +8,10 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Check, RotateCcw } from "lucide-react"
+import StatusPinjamanFilter from "./StatusPinjamanFilter"
+import DurasiPeminjamanFilter from "./DurasiPeminjamanFilter"
+import KondisiPeminjamanFilter from "./KondisiPeminjamanFilter"
+import DisetujuiPeminjamanFilter from "./DisetujuiPeminjamanFilter"
 
 const SemuaPeminjamanFilterSheet = ({children} : {children: React.ReactNode}) => {
 
@@ -28,11 +32,11 @@ const SemuaPeminjamanFilterSheet = ({children} : {children: React.ReactNode}) =>
                 <SheetDescription className="text-sm text-muted-foreground">
                     Saring data peminjaman sesuai kebutuhanmu.
                 </SheetDescription>
-
-                {/* {usedIn === 'default' &&  <RoleFilter />}
-                <StatusAkunFilter />
-                <VerifikasiEmail />
-                <VerifikasiProdi /> */}
+                
+                <StatusPinjamanFilter />
+                <DurasiPeminjamanFilter />
+                <KondisiPeminjamanFilter />
+                <DisetujuiPeminjamanFilter />
               </SheetHeader>
 
               <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
