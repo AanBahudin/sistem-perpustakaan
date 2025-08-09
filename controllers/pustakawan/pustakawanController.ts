@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
 
-import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna, getAllPengajuanUser } from "../../services/pustakawanServices";
+import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna, getAllPengajuanUser, getAllPengajuanPeminjamanUser, getSinglePengajuanPeminjamanUser } from "../../services/pustakawanServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 export const getStats = async(req: Request | any, res: Response) => {
@@ -73,6 +73,26 @@ export const getAllPengajuan = async(req: Request, res: Response) => {
     SendOneDataResponse({
         res,
         message: 'Semua data pengajuan',
+        data
+    })
+}
+
+export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
+    const data = await getAllPengajuanPeminjamanUser()
+    SendDataResponse({
+        res,
+        message: 'Data pengajuan peminjaman',
+        data,
+        total: data.length || 0
+    })
+}
+
+export const getSinglePengajuanPeminjaman = async(req: Request, res: Response) => {
+    const {id: peminjamanId} = req.params
+    const data = await getSinglePengajuanPeminjamanUser({id: peminjamanId})
+    SendOneDataResponse({
+        res, 
+        message: 'Data peminjaman',
         data
     })
 }

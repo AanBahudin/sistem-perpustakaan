@@ -141,6 +141,16 @@ export const getAllPengajuanUser = async() => {
     return {peminjaman, pengembalian, perpanjangan, dataGrafik, pengajuanRatio}
 }
 
+export const getAllPengajuanPeminjamanUser = async() => {
+    const pengajuanPeminjaman = await Peminjaman.find().sort({createdAt: -1}).populate(['peminjam', 'buku']).select('-password -email')
+    return pengajuanPeminjaman
+}
+
+export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
+    const dataPeminjaman = await Peminjaman.findOne({_id: id}).populate(['peminjam', 'buku']).select('-password -email')
+    return dataPeminjaman
+}
+
 
 
 // services pembantu
