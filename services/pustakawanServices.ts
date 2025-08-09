@@ -142,7 +142,16 @@ export const getAllPengajuanUser = async() => {
 }
 
 export const getAllPengajuanPeminjamanUser = async() => {
-    const pengajuanPeminjaman = await Peminjaman.find().sort({createdAt: -1}).populate(['peminjam', 'buku']).select('-password -email')
+    const pengajuanPeminjaman = await Peminjaman.find()
+        .sort({ createdAt: -1 })
+        .populate({
+            path: 'peminjam',
+            select: 'nama email _id fotoProfil' // Hapus password & email di populate peminjam
+        })
+        .populate({
+            path: 'buku',
+            select: 'judul _id kategori'
+        });
     const rasioStatusPeminjaman = await allStatusPeminjamanRatio()
     const statsPeminjaman = await allPeminjamanStats()
     return {pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman}
