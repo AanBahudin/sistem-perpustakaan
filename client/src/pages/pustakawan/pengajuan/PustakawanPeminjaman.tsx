@@ -16,6 +16,7 @@ const PustakawanPeminjaman = () => {
 
   if (isLoading) return <h1>Loading ... </h1>
   const { pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman } = data
+  console.log(pengajuanPeminjaman)
 
   return (
     <Container className='w-full'>

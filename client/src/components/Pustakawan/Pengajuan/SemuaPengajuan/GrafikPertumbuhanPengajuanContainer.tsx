@@ -1,6 +1,6 @@
 import { AlignEndHorizontal, Ratio } from 'lucide-react';
-import PengajuanRatioDougnut from './PengajuanRatioDougnut';
 import PengajuanGrowthChart from './PengajuanGrowthChart';
+import PengajuanRatioDougnut from './PengajuanRatioDougnut';
 
 type GrafikPertumbuhanPengajuanContainerType = {
     monthlyPengajuanGrowth: any,
