@@ -2,9 +2,9 @@ import Container from '@/globals/Container'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { useQuery } from '@tanstack/react-query'
 import { getAllPengajuanPeminjaman } from '@/actions/Pustakawan/pustakawanPengajuanActions'
-import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman'
+import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
 
 const PustakawanPeminjaman = () => {
 
@@ -28,7 +28,7 @@ const PustakawanPeminjaman = () => {
         judulRasio='Rasio Status Peminjaman'
         labelDataRasio={['Dipinjam', 'Dikembalikan', 'Terlambat', 'Diajukan', 'Ditolak']}
       />
-      <SemuaPenggunaFilter />
+      <SemuaPeminjamanFilter />
       <TabelSemuaPeminjaman peminjaman={pengajuanPeminjaman} />
     </Container>
   )
