@@ -1,8 +1,61 @@
-import React from 'react'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useSearchParams } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { store } from "@/store"
+import { setDurasiPeminjaman } from "@/cart/peminjamanFilterSheetSlice"
+import { useEffect } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { getAllDurasiPeminjaman } from "@/actions/Pustakawan/pustakawanDurasiActions"
 
 const DurasiPeminjamanFilter = () => {
+
+  const {isLoading, data: durasi} = useQuery({
+    queryKey: ['durasi'],
+    queryFn: getAllDurasiPeminjaman
+  })
+
+  const data = isLoading ? [{durasi: 'Memuat'}] : durasi
+  console.log(data)
+
+  const [searchParams] = useSearchParams()
+  const {durasiPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
+  const initialParams = searchParams.get('durasiPeminjaman') || durasiPeminjaman
+
+  const handleChange = (value: string) => {
+    store.dispatch(setDurasiPeminjaman(value))
+  }
+
+  useEffect(() => {
+      store.dispatch(setDurasiPeminjaman(initialParams))
+  }, [])
+
   return (
-    <div>DurasiPeminjamanFilter</div>
+    <section className="w-full mt-4">
+      <h1 className="text-sm font-semibold text-muted-foreground mb-2 capitalize">Durasi Peminjaman</h1>
+      <Select onValueChange={(value) => handleChange(value)}>
+        <SelectTrigger className="w-full !text-xs">
+          <SelectValue placeholder="Pilih durasi" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup className="!text-xs">
+            <SelectLabel>Durasi Peminjaman</SelectLabel>
+            {data.map((item: any, index: number) => {
+              return (
+                <SelectItem value={item.durasi} key={index}>{item.durasi} Hari</SelectItem>
+              )
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </section>
   )
 }
 
