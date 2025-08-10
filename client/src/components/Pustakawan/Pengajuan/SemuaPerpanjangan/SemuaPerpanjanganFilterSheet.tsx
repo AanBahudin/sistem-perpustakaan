@@ -21,7 +21,7 @@ const SemuaPerpanjanganFilterSheet = ({children} : {children: React.ReactNode}) 
   const location = useLocation()
 
   const filteredParams = () => {
-    const { durasi, disetujui } = useSelector((state: any) => state.peminjamanFilterSheetState)
+    const { durasi, disetujui } = useSelector((state: any) => state.perpanjanganFilterSheetState)
     const filters = {durasi, disetujui}
     const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
       if (value && (value !== 'Semua' || value === '')) {
@@ -54,10 +54,6 @@ const SemuaPerpanjanganFilterSheet = ({children} : {children: React.ReactNode}) 
                 Saring data perpanjangan sesuai kebutuhanmu.
             </SheetDescription>
             
-            {/* <StatusPinjamanFilter />
-            <DurasiPeminjamanFilter />
-            <KondisiPeminjamanFilter />
-            <DisetujuiPeminjamanFilter /> */}
             <StatusPerpanjangFilter />
             <DurasiPerpanjanganFilter />
           </SheetHeader>
