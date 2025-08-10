@@ -23,11 +23,11 @@ const KondisiPeminjamanFilter = () => {
   })
 
 
-  const newData = isLoading ? ['Memuat'] : data
+  const newData = isLoading ? ['Memuat'] : ['Semua', ...data.map((item: any) => item.kondisi)]
   const [searchParams] = useSearchParams()
 
   const {kondisi} = useSelector((state: any) => state.peminjamanFilterSheetState)
-  const initialParams = searchParams.get('kondisi') || kondisi
+  const initialParams = searchParams.get('kondisi') || kondisi || 'Semua'
 
   const handleChange = (value: string) => {
     store.dispatch(setKondisi(value))
@@ -49,8 +49,9 @@ const KondisiPeminjamanFilter = () => {
           <SelectGroup className="!text-xs">
             <SelectLabel>Durasi Peminjaman</SelectLabel>
             {newData.map((item: any, index: number) => {
+              console.log(item)
               return (
-                <SelectItem value={item.kondisi} key={index}>{item.kondisi}</SelectItem>
+                <SelectItem value={item} key={index}>{item}</SelectItem>
               )
             })}
           </SelectGroup>

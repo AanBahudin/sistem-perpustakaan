@@ -22,7 +22,7 @@ const DurasiPeminjamanFilter = () => {
     queryFn: getAllDurasiPeminjaman
   })
 
-  const data = isLoading ? [{durasi: 'Memuat'}] : durasi
+  const data = isLoading ? [{durasi: 'Memuat'}] : ['Semua', ...durasi.map((item: any) => item.durasi)]
 
   const [searchParams] = useSearchParams()
   const {durasiPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
@@ -48,7 +48,7 @@ const DurasiPeminjamanFilter = () => {
             <SelectLabel>Durasi Peminjaman</SelectLabel>
             {data.map((item: any, index: number) => {
               return (
-                <SelectItem value={item.durasi} key={index}>{item.durasi} Hari</SelectItem>
+                <SelectItem value={item} key={index}>{item} Hari</SelectItem>
               )
             })}
           </SelectGroup>

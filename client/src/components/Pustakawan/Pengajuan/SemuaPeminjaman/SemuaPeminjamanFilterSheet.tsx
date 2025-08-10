@@ -12,15 +12,39 @@ import StatusPinjamanFilter from "./StatusPinjamanFilter"
 import DurasiPeminjamanFilter from "./DurasiPeminjamanFilter"
 import KondisiPeminjamanFilter from "./KondisiPeminjamanFilter"
 import DisetujuiPeminjamanFilter from "./DisetujuiPeminjamanFilter"
+import { useLocation, useNavigate } from "react-router-dom"
+import { store } from "@/store"
+import { useSelector } from "react-redux"
+import { resetFilter } from "@/cart/peminjamanFilterSheetSlice"
 
 const SemuaPeminjamanFilterSheet = ({children} : {children: React.ReactNode}) => {
 
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const filteredParams = () => {
+    const { statusPeminjaman, durasiPeminjaman, kondisi, disetujui } = useSelector((state: any) => state.peminjamanFilterSheetState)
+    const filters = {statusPeminjaman, durasiPeminjaman, kondisi, disetujui}
+    const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
+      if (value && (value !== 'Semua' || value === '')) {
+        acc[key] = value
+      }
+      return acc
+    }, {} as Record<string, string>)
+    const searchParams = new URLSearchParams(validParams).toString()
+    return searchParams
+  }
+
+  const queryString = filteredParams()
+
   const handleClick = () => {
-    console.log('button clicked')
+    navigate(`?${queryString.toString()}`)
   }
 
   const handleReset = () => {
-    console.log('reset button clicked')
+    store.dispatch(resetFilter())
+    navigate(location.pathname.toString())
   }
 
   return (

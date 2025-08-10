@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const defaultState = {
     statusPeminjaman: 'Semua',
-    durasiPeminjaman: 0,
-    kondisi: '',
+    durasiPeminjaman: 'Semua',
+    kondisi: 'Semua',
     disetujui: 'Semua',
 }
 
@@ -23,6 +23,12 @@ const peminjamanFilterSheetSlice = createSlice({
         setDisetujui: (state, action) => {
             state.disetujui = action.payload
         },
+        resetFilter: (state) => {
+            state.statusPeminjaman = 'Semua'
+            state.durasiPeminjaman = 'Semua'
+            state.kondisi = 'Semua'
+            state.disetujui = 'Semua'
+        }
         
     }
 })
@@ -31,5 +37,6 @@ export const {
     setStatusPeminjaman,
     setDurasiPeminjaman,
     setKondisi,
-    setDisetujui } = peminjamanFilterSheetSlice.actions
+    setDisetujui,
+    resetFilter } = peminjamanFilterSheetSlice.actions
 export default peminjamanFilterSheetSlice.reducer
