@@ -4,9 +4,11 @@ import {
     getAllMahasiswaUser, 
     getAllPengajuan, 
     getAllPengajuanPeminjaman, 
+    getAllPengajuanPengembalian, 
     getAllPengajuanPerpanjangan, 
     getAllUsers, 
     getSinglePengajuanPeminjaman, 
+    getSinglePengajuanPengembalian, 
     getSinglePengajuanPerpanjangan, 
     getSingleUser } from '../../controllers/pustakawan/pustakawanController'
 import {getProfile } from '../../controllers/pustakawan/pustakawanController'
@@ -38,6 +40,12 @@ router.route('/perpanjangan')
 
 router.route('/perpanjangan/:id')
     .get(getSinglePengajuanPerpanjangan)
+
+router.route('/pengembalian')
+    .get(getAllPengajuanPengembalian)
+
+router.route('/pengembalian/:id')
+    .get(getSinglePengajuanPengembalian)
 
 router.route('/stats')
     .get(getStats)

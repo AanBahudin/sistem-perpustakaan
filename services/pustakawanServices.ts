@@ -141,6 +141,8 @@ export const getAllPengajuanUser = async() => {
     return {peminjaman, pengembalian, perpanjangan, dataGrafik, pengajuanRatio}
 }
 
+// PEMINJAMAN STATS
+
 export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 
     const searchNama = query.query || ''; // Ambil keyword pencarian
@@ -178,6 +180,8 @@ export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
     return dataPeminjaman
 }
 
+// PERPANJANGAN SERVICES
+
 export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => {
     const searchNama = query.query || ''; // Ambil keyword pencarian
     const mongoQuery: any = { ...query };
@@ -213,6 +217,42 @@ export const getSinglePengajuanPerpanjanganUser = async({id} : {id: string}) => 
     return perpanjangan
 }
 
+// PENGEMBALIAN STATS
+
+export const getAllPengajuanPengembalianUsers = async({query} : {query: any}) => {
+    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const mongoQuery: any = { ...query };
+    delete mongoQuery.query;
+
+    const rawData = await Pengembalian.find(mongoQuery)
+        .sort({ createdAt: -1 })
+        .populate({
+        path: 'idPengguna',
+        select: 'nama email _id fotoProfil',
+        match: searchNama
+            ? { nama: { $regex: searchNama, $options: 'i' } }
+            : {},
+        })
+        .populate({
+            path: 'idBuku',
+            select: 'judul _id kategori',
+        });
+
+    const pengajuanPengembalian = rawData.filter((item) => item.idPengguna !== null);
+        
+    const rasioStatusPengembalian = await allStatusPengembalianRatio()
+    const statsPengembalian = await allPengembalianStats()
+    return {
+        pengajuanPengembalian, 
+        rasioStatusPengembalian, 
+        statsPengembalian
+    }
+}
+
+export const getSinglePengajuanPengembalianUser = async({id} : {id: string}) => {
+    const pengembalian = await Pengembalian.findOne({_id: id})
+    return pengembalian
+}
 
 
 // services pembantu
@@ -433,7 +473,7 @@ export const mahasiswaUserGrowthStats = async() => {
     return pertumbuhanMahasiswaBulanan
 }
 
-// PEMINJAMAN
+// PEMINJAMAN STATS
 export const allStatusPeminjamanRatio = async() => {
     const statusPeminjaman = await Peminjaman.aggregate([
         {
@@ -522,7 +562,7 @@ export const allPeminjamanStats = async() => {
     return pertumbuhanBulanan
 }
 
-// PERPANJANGAN
+// PERPANJANGAN STATS
 export const allStatusPerpanjanganRatio = async() => {
     const statusPerpanjangan = await Perpanjangan.aggregate([
         {
@@ -559,6 +599,87 @@ export const allPerpanjanganStats = async() => {
     const sixMonthsAgo = startOfMonth(subMonths(now, 5));
 
     const pertumbuhanBulanan = await Perpanjangan.aggregate([
+        {
+            $match: {
+                createdAt: { $gte: sixMonthsAgo },
+            },
+        },
+        {
+            $group: {
+            _id: {
+                year: { $year: "$createdAt" },
+                month: { $month: "$createdAt" },
+            },
+            jumlah: { $sum: 1 },
+            },
+        },
+        {
+            $sort: {
+            "_id.year": 1,
+            "_id.month": 1,
+            },
+        },
+        {
+            $project: {
+            _id: 0,
+            bulan: {
+                $let: {
+                vars: {
+                    bulanArray: [
+                    "", // index ke-0 agar Januari = 1
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                },
+                in: {
+                    $concat: [
+                    { $arrayElemAt: ["$$bulanArray", "$_id.month"] },
+                    " ",
+                    { $toString: "$_id.year" },
+                    ],
+                },
+                },
+            },
+            jumlah: 1,
+            },
+        },
+    ]);
+    return pertumbuhanBulanan
+}
+
+// PENGEMBALIAN STATS
+export const allStatusPengembalianRatio = async() => {
+    const statusPengembalian = await Perpanjangan.aggregate([
+        {
+            $group: {
+            _id: "$statusPengembalian",
+            jumlah: { $sum: 1 },
+            },
+        },
+    ]);
+    
+    const statusMap: Record<any, number> = {
+        Dikembalikan: 0,
+        Pending: 0
+    };
+
+    statusPengembalian.forEach((item) => {
+        const key = item._id as StatusKey;
+        statusMap[key] = item.jumlah;
+    });
+
+    const hasilRasio = [
+        statusMap.Dikembalikan, 
+        statusMap.Pending,
+    ];
+    return hasilRasio
+}
+
+export const allPengembalianStats = async() => {
+    const now = new Date();
+    const sixMonthsAgo = startOfMonth(subMonths(now, 5));
+
+    const pertumbuhanBulanan = await Pengembalian.aggregate([
         {
             $match: {
                 createdAt: { $gte: sixMonthsAgo },
