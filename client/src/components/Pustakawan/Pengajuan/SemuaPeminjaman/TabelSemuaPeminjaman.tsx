@@ -44,8 +44,8 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
                                         <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
                                             <div className="w-full flex items-center justify-center gap-x-2">
-                                                {peminjam.fotoProfil ? (
-                                                    <img src={peminjam.fotoProfil} className="w-4 h-4 object-cover rounded-full" />
+                                                {peminjam?.fotoProfil ? (
+                                                    <img src={peminjam?.fotoProfil} className="w-4 h-4 object-cover rounded-full" />
                                                 ) : (
                                                     <div className="w-4 h-4 rounded-full flex items-center justify-center text-[12px]">{peminjam.nama[0]}</div>
                                                 )}

@@ -29,12 +29,13 @@ const SemuaPeminjamanSearchInput = () => {
             fullParams.delete('query')
         }
         navigate(`?${fullParams.toString()}`);
-    }, 400)
+    }, 600)
 
     return (
         <section className='flex-1 flex items-center border group px-2 rounded-lg gap-x-2 bg-accent/40'>
             <Search className='w-4 h-4 text-muted-foreground' />
-            <Input 
+            <Input
+                autoFocus={params ? true : false}
                 value={searchValue}
                 onChange={e => {
                     handleSearchToParams(e.target.value)

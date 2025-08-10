@@ -143,33 +143,34 @@ export const getAllPengajuanUser = async() => {
 
 export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 
-    let mongoQuery: any = {...query}
-    if (query?.query) {
-        const searchRegex = { $regex: query.query, $options: "i" }
-
-        mongoQuery.$or = [
-            { nama: searchRegex },
-            { idKampus: searchRegex }
-        ]
-
-        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
-        delete mongoQuery.query
-    }
-
-    const pengajuanPeminjaman = await Peminjaman.find({...mongoQuery})
+    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const mongoQuery: any = { ...query };
+    delete mongoQuery.query; // Hapus field `query` biar nggak ikut nyampur ke find()
+    // Ambil semua peminjaman + populate peminjam yang cocok
+    const rawData = await Peminjaman.find(mongoQuery)
         .sort({ createdAt: -1 })
         .populate({
-            path: 'peminjam',
-            select: 'nama email _id fotoProfil' // Hapus password & email di populate peminjam
+        path: 'peminjam',
+        select: 'nama email _id fotoProfil',
+        match: searchNama
+            ? { nama: { $regex: searchNama, $options: 'i' } }
+            : {},
         })
         .populate({
             path: 'buku',
-            select: 'judul _id kategori'
+            select: 'judul _id kategori',
         });
+
+    // Filter supaya hanya data yang peminjamnya ketemu
+    const pengajuanPeminjaman = rawData.filter((item) => item.peminjam !== null);
         
     const rasioStatusPeminjaman = await allStatusPeminjamanRatio()
     const statsPeminjaman = await allPeminjamanStats()
-    return {pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman}
+    return {
+        pengajuanPeminjaman, 
+        rasioStatusPeminjaman, 
+        statsPeminjaman
+    }
 }
 
 export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
