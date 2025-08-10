@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
 
-import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna, getAllPengajuanUser, getAllPengajuanPeminjamanUser, getSinglePengajuanPeminjamanUser } from "../../services/pustakawanServices";
+import { getAllPengguna, getAllPenggunaDosen, getStatsServices, getAllPenggunaMahasiswa, getSinglePengguna, getAllPengajuanUser, getAllPengajuanPeminjamanUser, getSinglePengajuanPeminjamanUser, getAllPengajuanPerpanjanganUser, getSinglePengajuanPerpanjanganUser } from "../../services/pustakawanServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 export const getStats = async(req: Request | any, res: Response) => {
@@ -94,6 +94,27 @@ export const getSinglePengajuanPeminjaman = async(req: Request, res: Response) =
     SendOneDataResponse({
         res, 
         message: 'Data peminjaman',
+        data
+    })
+}
+
+export const getAllPengajuanPerpanjangan = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getAllPengajuanPerpanjanganUser({query})
+    SendDataResponse({
+        res,
+        message: 'Data perpanjangan',
+        data
+    })
+}
+
+export const getSinglePengajuanPerpanjangan = async(req: Request, res: Response) => {
+    const {id: idPerpanjangan} = req.params
+    const data = await getSinglePengajuanPerpanjanganUser({id: idPerpanjangan})
+
+    SendOneDataResponse({
+        res, 
+        message: 'Data Perpanjangan',
         data
     })
 }
