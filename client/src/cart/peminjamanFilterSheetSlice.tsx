@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const defaultState = {
-    statusPeminjaman: '',
+    statusPeminjaman: 'Semua',
     durasiPeminjaman: 0,
     kondisi: '',
-    disetujui: '',
+    disetujui: 'Semua',
 }
 
 const peminjamanFilterSheetSlice = createSlice({

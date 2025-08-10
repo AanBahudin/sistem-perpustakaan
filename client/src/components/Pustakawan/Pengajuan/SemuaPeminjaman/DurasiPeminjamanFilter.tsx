@@ -23,7 +23,6 @@ const DurasiPeminjamanFilter = () => {
   })
 
   const data = isLoading ? [{durasi: 'Memuat'}] : durasi
-  console.log(data)
 
   const [searchParams] = useSearchParams()
   const {durasiPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
