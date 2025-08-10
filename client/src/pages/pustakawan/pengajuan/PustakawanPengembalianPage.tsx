@@ -1,5 +1,7 @@
 import { getAllPengembalian } from '@/actions/Pustakawan/pustakawanPengembalianActions'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
+import SemuaPengembalianFilter from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/SemuaPengembalianFilter'
+import TabelSemuaPengembalian from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/TabelSemuaPengembalian'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
@@ -28,6 +30,8 @@ const PustakawanPengembalianPage = () => {
         judulRasio='Rasio Status Pengembalian'
         labelDataRasio={['Dikembalikan', 'Pending']}
       />
+      <SemuaPengembalianFilter />
+      <TabelSemuaPengembalian pengembalian={pengajuanPengembalian} />
     </Container>
   )
 }
