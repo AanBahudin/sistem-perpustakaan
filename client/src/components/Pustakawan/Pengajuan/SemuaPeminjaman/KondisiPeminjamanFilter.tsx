@@ -40,7 +40,7 @@ const KondisiPeminjamanFilter = () => {
     <section className="w-full mt-4">
       <h1 className="text-sm font-semibold text-muted-foreground mb-2 capitalize">Kondisi Buku</h1>
       {/* <Separator orientation="horizontal" /> */}
-      <Select onValueChange={(value) => handleChange(value)}>
+      <Select onValueChange={(value) => handleChange(value)} value={kondisi}>
         <SelectTrigger className="w-full !text-xs">
           <SelectValue placeholder="Pilih durasi" />
         </SelectTrigger>
