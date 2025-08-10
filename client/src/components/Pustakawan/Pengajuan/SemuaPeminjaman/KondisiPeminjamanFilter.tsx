@@ -22,7 +22,6 @@ const KondisiPeminjamanFilter = () => {
     queryFn: getAllKondisi
   })
 
-
   const newData = isLoading ? ['Memuat'] : ['Semua', ...data.map((item: any) => item.kondisi)]
   const [searchParams] = useSearchParams()
 
@@ -49,7 +48,6 @@ const KondisiPeminjamanFilter = () => {
           <SelectGroup className="!text-xs">
             <SelectLabel>Durasi Peminjaman</SelectLabel>
             {newData.map((item: any, index: number) => {
-              console.log(item)
               return (
                 <SelectItem value={item} key={index}>{item}</SelectItem>
               )

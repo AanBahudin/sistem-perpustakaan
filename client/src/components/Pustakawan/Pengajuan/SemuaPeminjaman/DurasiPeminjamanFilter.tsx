@@ -22,35 +22,43 @@ const DurasiPeminjamanFilter = () => {
     queryFn: getAllDurasiPeminjaman
   })
 
-  const data = isLoading ? [{durasi: 'Memuat'}] : ['Semua', ...durasi.map((item: any) => item.durasi)]
-
+  const data = isLoading ? ['Memuat'] : ['Semua', ...durasi.map((item: any) => item.durasi)]
+  
   const [searchParams] = useSearchParams()
   const {durasiPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
-  const initialParams = searchParams.get('durasiPeminjaman') || durasiPeminjaman
+  const initialParams = searchParams.get('durasiPeminjaman')?.toString() || durasiPeminjaman
 
   const handleChange = (value: string) => {
     store.dispatch(setDurasiPeminjaman(value))
   }
-
+  
   useEffect(() => {
-      store.dispatch(setDurasiPeminjaman(initialParams))
+    store.dispatch(setDurasiPeminjaman(initialParams))
   }, [])
-
+  
   return (
     <section className="w-full mt-4">
       <h1 className="text-sm font-semibold text-muted-foreground mb-2 capitalize">Durasi Peminjaman</h1>
-      <Select onValueChange={(value) => handleChange(value)}>
+
+      <Select 
+        value={durasiPeminjaman} 
+        onValueChange={(value) => handleChange(value)}
+      >
         <SelectTrigger className="w-full !text-xs">
           <SelectValue placeholder="Pilih durasi" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup className="!text-xs">
             <SelectLabel>Durasi Peminjaman</SelectLabel>
-            {data.map((item: any, index: number) => {
-              return (
-                <SelectItem value={item} key={index}>{item} Hari</SelectItem>
-              )
-            })}
+              {data.map((item: any, index: number) => {
+                  console.log(item)
+                  return (
+                    <SelectItem value={item.toString()} key={index}>
+                      {item === 'Semua' ? item : `${item} Hari`}
+                    </SelectItem>   
+                )
+              }
+            )}
           </SelectGroup>
         </SelectContent>
       </Select>
