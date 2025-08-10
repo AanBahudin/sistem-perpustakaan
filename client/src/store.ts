@@ -9,6 +9,7 @@ import perpanjanganState from '@/cart/perpanjanganSlice'
 import pustakawanSidebarState from '@/cart/pustakawanSidebar'
 import sheetFilterState from '@/cart/SheetFilterSlice'
 import peminjamanFilterSheetState from '@/cart/peminjamanFilterSheetSlice'
+import perpanjanganFilterSheetState from '@/cart/perpanjanganFilterSheetSlice'
 
 export const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
         perpanjanganState: perpanjanganState,
         pustakawanSidebarState: pustakawanSidebarState,
         sheetState: sheetFilterState,
-        peminjamanFilterSheetState: peminjamanFilterSheetState
+        peminjamanFilterSheetState: peminjamanFilterSheetState,
+        perpanjanganFilterSheetState: perpanjanganFilterSheetState
     }
 })

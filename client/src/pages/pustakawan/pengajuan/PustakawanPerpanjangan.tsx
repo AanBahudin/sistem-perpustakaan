@@ -1,6 +1,6 @@
 import { getAllPerpanjangan } from '@/actions/Pustakawan/pustakawanPerpanjanganActions'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
-import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
+import SemuaPerpanjanganFilter from '@/components/Pustakawan/Pengajuan/SemuaPerpanjangan/SemuaPerpanjanganFilter'
 import TabelSemuaPerpanjangan from '@/components/Pustakawan/Pengajuan/SemuaPerpanjangan/TabelSemuaPerpanjangan'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import Container from '@/globals/Container'
@@ -30,7 +30,7 @@ const PustakawanPerpanjangan = () => {
         judulRasio='Rasio Status Perpanjangan'
         labelDataRasio={['Diterima', 'Pending', 'Ditolak']}
       />
-      <SemuaPeminjamanFilter />
+      <SemuaPerpanjanganFilter />
       <TabelSemuaPerpanjangan perpanjangan={pengajuanPerpanjangan} />
     </Container>
   )
