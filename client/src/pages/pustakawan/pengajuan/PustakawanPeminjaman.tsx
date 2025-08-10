@@ -5,14 +5,17 @@ import { getAllPengajuanPeminjaman } from '@/actions/Pustakawan/pustakawanPengaj
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman'
 import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
+import { useSearchParams } from 'react-router-dom'
 
 const PustakawanPeminjaman = () => {
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'peminjaman'],
-    queryFn: getAllPengajuanPeminjaman
-  })
+  const [searchParams] = useSearchParams()
+  const params = new URLSearchParams(searchParams).toString()
 
+  const {data, isLoading} = useQuery({
+    queryKey: ['semua', 'peminjaman', params],
+    queryFn: () => getAllPengajuanPeminjaman({params})
+  })
 
   if (isLoading) return <h1>Loading ... </h1>
   const { pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman } = data

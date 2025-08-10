@@ -5,7 +5,7 @@ export const getAllPengajuan = async() => {
     return response.data
 }
 
-export const getAllPengajuanPeminjaman = async() => {
-    const {data: response} = await customFetch.get('/pustakawan/peminjaman')
+export const getAllPengajuanPeminjaman = async({params} : {params: string}) => {
+    const {data: response} = await customFetch.get(`/pustakawan/peminjaman?${params}`)
     return response.data
 }

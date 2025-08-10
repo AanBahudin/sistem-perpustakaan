@@ -16,7 +16,7 @@ const StatusPeminjamanFilter = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const fullParams = new URLSearchParams(searchParams)
-  const roleParams = searchParams.get('role') || ''
+  const roleParams = searchParams.get('statusPeminjaman') || ''
 
   const [roleValue, setRoleValue] = useState(roleParams)
   
@@ -24,9 +24,9 @@ const StatusPeminjamanFilter = () => {
     
     setRoleValue(value)
     if (correctValue.includes(value)) {
-      fullParams.set('role', value)
+      fullParams.set('statusPeminjaman', value)
     } else {
-      fullParams.delete('role')
+      fullParams.delete('statusPeminjaman')
     }
     navigate(`?${fullParams.toString()}`)
   }

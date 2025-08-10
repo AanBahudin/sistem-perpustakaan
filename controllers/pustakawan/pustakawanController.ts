@@ -78,7 +78,8 @@ export const getAllPengajuan = async(req: Request, res: Response) => {
 }
 
 export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
-    const data = await getAllPengajuanPeminjamanUser()
+    const query = req.query
+    const data = await getAllPengajuanPeminjamanUser({query})
     SendDataResponse({
         res,
         message: 'Data pengajuan peminjaman',
