@@ -10,38 +10,38 @@ import {
 import { useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { store } from "@/store"
-import { setDurasiPeminjaman } from "@/cart/peminjamanFilterSheetSlice"
+import { setDurasiPerpanjangan } from "@/cart/perpanjanganSlice"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { getAllDurasiPeminjaman } from "@/actions/Pustakawan/pustakawanDurasiActions"
 
-const DurasiPeminjamanFilter = () => {
+const DurasiPerpanjanganFilter = () => {
 
-  const {isLoading, data: durasi} = useQuery({
+  const {isLoading, data} = useQuery({
     queryKey: ['durasi'],
     queryFn: getAllDurasiPeminjaman
   })
 
-  const data = isLoading ? ['Memuat'] : ['Semua', ...durasi.map((item: any) => item.durasi)]
+  const newData = isLoading ? ['Memuat'] : ['Semua', ...data.map((item: any) => item.durasi)]
   
   const [searchParams] = useSearchParams()
-  const {durasiPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
-  const initialParams = searchParams.get('durasiPeminjaman')?.toString() || durasiPeminjaman
+  const {durasi} = useSelector((state: any) => state.perpanjanganFilterSheetState)
+  const initialParams = searchParams.get('durasi')?.toString() || durasi
 
   const handleChange = (value: string) => {
-    store.dispatch(setDurasiPeminjaman(value))
+    store.dispatch(setDurasiPerpanjangan(value))
   }
-  
+
   useEffect(() => {
-    store.dispatch(setDurasiPeminjaman(initialParams))
+    store.dispatch(setDurasiPerpanjangan(initialParams))
   }, [])
-  
+
   return (
     <section className="w-full mt-4">
       <h1 className="text-sm font-semibold text-muted-foreground mb-2 capitalize">Durasi Peminjaman</h1>
 
       <Select 
-        value={durasiPeminjaman} 
+        value={durasi} 
         onValueChange={(value) => handleChange(value)}
       >
         <SelectTrigger className="w-full !text-xs">
@@ -49,8 +49,8 @@ const DurasiPeminjamanFilter = () => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup className="!text-xs">
-            <SelectLabel>Durasi Peminjaman</SelectLabel>
-              {data.map((item: any, index: number) => {
+            <SelectLabel>Durasi Perpanjangan</SelectLabel>
+              {newData.map((item: any, index: number) => {
                   return (
                     <SelectItem value={item.toString()} key={index}>
                       {item === 'Semua' ? item : `${item} Hari`}
@@ -65,4 +65,4 @@ const DurasiPeminjamanFilter = () => {
   )
 }
 
-export default DurasiPeminjamanFilter
+export default DurasiPerpanjanganFilter

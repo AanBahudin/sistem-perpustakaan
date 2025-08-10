@@ -12,6 +12,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
 import { resetPerpanjanganFilter } from "@/cart/perpanjanganFilterSheetSlice"
+import StatusPerpanjangFilter from "./StatusPerpanjangFilter"
+import DurasiPerpanjanganFilter from "./DurasiPerpanjanganFilter"
 
 const SemuaPerpanjanganFilterSheet = ({children} : {children: React.ReactNode}) => {
 
@@ -56,6 +58,8 @@ const SemuaPerpanjanganFilterSheet = ({children} : {children: React.ReactNode}) 
             <DurasiPeminjamanFilter />
             <KondisiPeminjamanFilter />
             <DisetujuiPeminjamanFilter /> */}
+            <StatusPerpanjangFilter />
+            <DurasiPerpanjanganFilter />
           </SheetHeader>
 
           <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
