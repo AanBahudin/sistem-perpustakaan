@@ -1,5 +1,7 @@
 import Buku, { BukuSchemaType } from "../model/Buku";
 import { NotFoundError } from "../errors/errorHandler";
+import Peminjaman from "../model/Peminjaman";
+import Pengembalian from "../model/Pengembalian";
 
 // SUDAH TESTING
 export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
@@ -60,12 +62,17 @@ export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
     return buku
 }
 
-// UNTUK PUSTAKAWAN
+// UNTUK PUSTAKAWAN 
 
-// SUDAH TESTING
-export const getSemuaBukuUntukPustakawan = async() => {
+export const getSemuaBukuUntukPustakawan = async({query} : {query?: string}) => {
     const books = await Buku.find()
-    return books
+    const dataRasio = await allBukuRatio()
+    const dataStats = await allBukuStats()
+    return {
+        dataBuku: books,
+        dataRasio, 
+        dataStats,
+    }
 }
 
 // SUDAH TESTING
@@ -108,6 +115,26 @@ export const hapusDataBuku = async(idBuku: string)  => {
 
 
 // FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN / INI
+
+export const allBukuRatio = async() => {
+    const totalBuku = await Buku.find({isMissing: false}).countDocuments()
+    const totalBukuDipinjam = await Peminjaman.find({$or: [
+        {statusPeminjaman: 'Dipinjam'},
+        {statusPeminjaman: 'Terlambat'},
+    ]}).countDocuments()
+    const totalBukuHilang = await Pengembalian.find({isMissing: true}).countDocuments()
+
+    const hasilRasio = [
+        totalBuku,
+        totalBukuDipinjam,
+        totalBukuHilang
+    ]
+    return hasilRasio
+}
+
+export const allBukuStats = async() => {
+
+}
 
 export const bukuDikembalikan = async(idBuku : string) => {
     const buku = await Buku.findOneAndUpdate(

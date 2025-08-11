@@ -180,7 +180,7 @@ export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
     return dataPeminjaman
 }
 
-// PERPANJANGAN SERVICES
+// PERPANJANGAN STATS
 
 export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => {
     const searchNama = query.query || ''; // Ambil keyword pencarian
