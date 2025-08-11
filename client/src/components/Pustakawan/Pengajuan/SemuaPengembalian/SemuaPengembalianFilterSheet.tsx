@@ -12,15 +12,31 @@ import { Check, RotateCcw } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
-import { resetPerpanjanganFilter } from "@/cart/perpanjanganFilterSheetSlice"
+import StatusPengembaliFilter from './StatusPengembaliFilter'
+import StatusKehilanganFilter from './StatusKehilanganFilter'
+import StatusKeadaaBukuFilter from './StatusKeadaaBukuFilter'
+import StatusPembayaranFilter from './StatusPembayaranFilter'
+import { resetPengembalianFilter } from '@/cart/pengembalianFilterSheetSlice'
+
+
 const SemuaPengembalianFilterSheet = ({children} : {children: React.ReactNode}) => {
 
   const navigate = useNavigate()
   const location = useLocation()
 
   const filteredParams = () => {
-    const { durasi, disetujui } = useSelector((state: any) => state.perpanjanganFilterSheetState)
-    const filters = {durasi, disetujui}
+    const { 
+      statusPengembalian, 
+      keadaanBuku, 
+      statusPembayaran, 
+      isMissing } = useSelector((state: any) => state.pengembalianFilterSheetState)
+    
+    const filters = {
+      statusPengembalian, 
+      keadaanBuku, 
+      statusPembayaran, 
+      isMissing
+    }
     const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
       if (value && (value !== 'Semua' || value === '')) {
         acc[key] = value
@@ -38,7 +54,7 @@ const SemuaPengembalianFilterSheet = ({children} : {children: React.ReactNode}) 
   }
   
   const handleReset = () => {
-    store.dispatch(resetPerpanjanganFilter())
+    store.dispatch(resetPengembalianFilter())
     navigate(location.pathname.toString())
   }
 
@@ -51,9 +67,11 @@ const SemuaPengembalianFilterSheet = ({children} : {children: React.ReactNode}) 
             <SheetDescription className="text-sm text-muted-foreground">
                 Saring data pengembalian sesuai kebutuhanmu.
             </SheetDescription>
-            
-            {/* <StatusPerpanjangFilter />
-            <DurasiPerpanjanganFilter /> */}
+
+            <StatusPengembaliFilter />
+            <StatusKehilanganFilter />
+            <StatusKeadaaBukuFilter />
+            <StatusPembayaranFilter />
           </SheetHeader>
 
           <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
