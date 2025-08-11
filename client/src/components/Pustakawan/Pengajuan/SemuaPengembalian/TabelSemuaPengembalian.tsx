@@ -23,10 +23,11 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
                             <TableHead className="w-[50px] text-xs text-center px-0">No</TableHead>
                             <TableHead className="w-[200px] text-xs">Judul Buku</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Pengguna</TableHead>
-                            <TableHead className="w-[120px] text-xs text-center">Kategori</TableHead>
-                            <TableHead className="w-[120px] text-center text-xs">Durasi</TableHead>
+                            <TableHead className="w-[120px] text-xs text-center">Kondisi</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Status</TableHead>
-                            <TableHead className="w-[120px] text-xs text-center">Tgl Pengajuan</TableHead>
+                            <TableHead className="w-[120px] text-center text-xs">Pembayaran</TableHead>
+                            <TableHead className="w-[120px] text-xs text-center">Pengajuan</TableHead>
+                            <TableHead className="w-[120px] text-xs text-center">Pengembalian</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -38,6 +39,7 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
                         <TableBody>
                             {pengembalian.map((item: any, index: number) => {
                                 const {idBuku, idPengguna} = item
+                                console.log(item)
                                 return (
                                     <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
@@ -52,10 +54,13 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
                                                 {idPengguna.nama}
                                             </div>
                                         </TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs hover:text-primary duration-200 ease-in-o`ut cursor-pointer">{idBuku.kategori[0]}</TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.durasi} Hari </TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.disetujui}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">{item.keadaanBuku}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">{item.statusPengembalian}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">{item.statusPembayaran}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">
+                                            {item.tanggalPengembalian ? formatedDate(item.tanggalPengembalian) : '-'}
+                                        </TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
                                                 <GlobalTooltip text="Lihat Detail">
