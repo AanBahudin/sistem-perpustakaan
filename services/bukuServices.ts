@@ -2,6 +2,7 @@ import Buku, { BukuSchemaType } from "../model/Buku";
 import { NotFoundError } from "../errors/errorHandler";
 import Peminjaman from "../model/Peminjaman";
 import Pengembalian from "../model/Pengembalian";
+import { startOfMonth, subMonths } from "date-fns";
 
 // SUDAH TESTING
 export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
@@ -64,9 +65,9 @@ export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
 
 // UNTUK PUSTAKAWAN 
 
-export const getSemuaBukuUntukPustakawan = async({query} : {query?: string}) => {
+export const getSemuaBukuUntukPustakawan = async({query = 'test'} : {query?: string}) => {
     const books = await Buku.find()
-    const dataRasio = await allBukuRatio()
+    const dataRasio = await rasioKategoriBuku()
     const dataStats = await allBukuStats()
     return {
         dataBuku: books,
@@ -116,24 +117,80 @@ export const hapusDataBuku = async(idBuku: string)  => {
 
 // FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN / INI
 
-export const allBukuRatio = async() => {
+export const rasioKategoriBuku = async() => {
     const totalBuku = await Buku.find({isMissing: false}).countDocuments()
-    const totalBukuDipinjam = await Peminjaman.find({$or: [
-        {statusPeminjaman: 'Dipinjam'},
-        {statusPeminjaman: 'Terlambat'},
-    ]}).countDocuments()
-    const totalBukuHilang = await Pengembalian.find({isMissing: true}).countDocuments()
+    const hasil = await Buku.aggregate([
+        { $unwind: "$kategori" }, // pecah array kategori jadi baris terpisah
+        {
+        $group: {
+            _id: "$kategori", // nama kategori langsung
+            jumlahBuku: { $sum: 1 }
+        }
+        },
+        { $sort: { jumlahBuku: -1 } }, // urutkan dari terbanyak ke sedikit
+        {
+        $project: {
+            _id: 0,
+            kategori: "$_id",
+            jumlahBuku: 1
+        }
+        }
+    ]);
 
-    const hasilRasio = [
-        totalBuku,
-        totalBukuDipinjam,
-        totalBukuHilang
-    ]
-    return hasilRasio
+    return hasil;
 }
 
 export const allBukuStats = async() => {
-
+    const now = new Date();
+    const sixMonthsAgo = startOfMonth(subMonths(now, 5));
+    
+    const pertumbuhanBulanan = await Peminjaman.aggregate([
+        {
+            $match: {
+                createdAt: { $gte: sixMonthsAgo },
+            },
+        },
+        {
+            $group: {
+            _id: {
+                year: { $year: "$createdAt" },
+                month: { $month: "$createdAt" },
+            },
+            jumlah: { $sum: 1 },
+            },
+        },
+        {
+            $sort: {
+            "_id.year": 1,
+            "_id.month": 1,
+            },
+        },
+        {
+            $project: {
+            _id: 0,
+            bulan: {
+                $let: {
+                vars: {
+                    bulanArray: [
+                    "", // index ke-0 agar Januari = 1
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                },
+                in: {
+                    $concat: [
+                    { $arrayElemAt: ["$$bulanArray", "$_id.month"] },
+                    " ",
+                    { $toString: "$_id.year" },
+                    ],
+                },
+                },
+            },
+            jumlah: 1,
+            },
+        },
+    ]);
+    return pertumbuhanBulanan
 }
 
 export const bukuDikembalikan = async(idBuku : string) => {

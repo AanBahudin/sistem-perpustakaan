@@ -5,6 +5,5 @@ export const getStatsPustakawan = async() => {
     if (status >= 400) {
         return {message: 'Error'}
     }
-    console.log(response.data)
     return response.data
 }

@@ -94,13 +94,13 @@ export const editBuku = async(req: Request | any, res: Response) => {
 
 // SUDAH TESTING
 export const getAllBukuPustakawan = async(req: Request | any, res: Response) => {
-    const books = await getSemuaBukuUntukPustakawan()
+    const books = await getSemuaBukuUntukPustakawan({})
 
     SendDataResponse({
         res,
         message: 'Daftar Semua Buku',
         data: books,
-        total: books.length,
+        total: books.dataBuku.length,
         page: 1
 
     })

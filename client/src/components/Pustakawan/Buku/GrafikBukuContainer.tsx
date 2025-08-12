@@ -1,19 +1,20 @@
 import { AlignEndHorizontal, Ratio } from "lucide-react"
-import SpecificPengajuanGrowthChart from "./SpecificPengajuanGrowthChart"
-import StatusPengajuanRatio from "./StatusPengajuanRatio"
+import BukuGrowthChart from "./BukuGrowthChart"
+import KategoriSemuaBukuRatio from "./SemuaBuku/KategoriSemuaBukuRatio"
 
-type GrafikPengajuanContainerType = {
+type GrafikBukuContainerType = {
   judulStatistik: string
   dataStatistik: any,
   judulRasio: string,
   dataRasio: any,
-  labelDataRasio: any,
+  labelDataRasio?: any,
+  type?: string
 }
 
-const GrafikPengajuanContainer = ({
-  judulStatistik, dataStatistik,
-  judulRasio, dataRasio, labelDataRasio
-} : GrafikPengajuanContainerType) => {
+const GrafikBukuContainer = ({
+    judulStatistik, dataStatistik,
+    judulRasio, dataRasio, labelDataRasio
+} : GrafikBukuContainerType) => {
   return (
     <section className="w-full border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
       <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
@@ -27,7 +28,7 @@ const GrafikPengajuanContainer = ({
               <h1 className='text-center text-muted-foreground text-sm'>Belum ada pertumbuhan</h1>
             </div>
           )}
-          <SpecificPengajuanGrowthChart dataStatistik={dataStatistik} />
+          <BukuGrowthChart dataStatistik={dataStatistik} />
       </main>
 
       <main className="flex-1 max-h-full flex flex-col items-center justify-center">
@@ -36,10 +37,10 @@ const GrafikPengajuanContainer = ({
             {judulRasio}
           </h1>
 
-          <StatusPengajuanRatio dataRasio={dataRasio} labelRasio={labelDataRasio} />
+          <KategoriSemuaBukuRatio dataRasio={dataRasio} />
       </main>
     </section>
   )
 }
 
-export default GrafikPengajuanContainer
+export default GrafikBukuContainer

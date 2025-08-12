@@ -1,5 +1,5 @@
 import { getAllBukuPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
-import GrafikPengajuanContainer from "@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer"
+import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
@@ -17,18 +17,18 @@ const PustakawanSemuaBukuPage = () => {
   })
 
   if (isLoading) return <h1>Loading ... </h1>
-  console.log(data)
-
+  
+  const { dataBuku, dataRasio, dataStats } = data
   return (
     <Container className="w-full">
       <PustakawanBreadCrumbs />
-      {/* <GrafikPengajuanContainer 
-        dataRasio={rasioStatusPeminjaman}
-        dataStatistik={statsPeminjaman}
-        judulStatistik='Statistik Pertumbuhan Peminjaman Bulanan'
-        judulRasio='Rasio Status Peminjaman'
-        labelDataRasio={['Dipinjam', 'Dikembalikan', 'Terlambat', 'Diajukan', 'Ditolak']}
-      /> */}
+      <GrafikBukuContainer 
+        dataRasio={dataRasio}
+        dataStatistik={dataStats}
+        judulStatistik='Statistik Penambahan Buku Bulanan'
+        judulRasio='Rasio Kategori Buku'
+        labelDataRasio={[]}
+      />
     </Container>
   )
 }
