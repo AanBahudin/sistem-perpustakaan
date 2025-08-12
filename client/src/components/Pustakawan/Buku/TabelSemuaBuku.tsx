@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { formatedDate } from "@/utils/formatDate"
 import { Link2 } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useSearchParams } from "react-router-dom"
