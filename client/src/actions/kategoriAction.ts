@@ -5,6 +5,7 @@ export const getAllKategori = async() => {
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Gangguan terjadi, silahkan periksa koneksi internet anda'}
     }
+    console.log(response.data)
     return response.data
 }
 

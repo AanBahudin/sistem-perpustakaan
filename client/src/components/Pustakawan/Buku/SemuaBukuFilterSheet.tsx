@@ -11,6 +11,11 @@ import { Check, RotateCcw } from "lucide-react"
 import { useNavigate, useLocation } from 'react-router-dom'
 import { store } from '@/store'
 import { useSelector } from 'react-redux'
+import PenulisFilter from "./PenulisFilter"
+import PenerbitFilter from "./PenerbitFilter"
+import TahunTerbitFilter from "./TahunTerbitFilter"
+import KategoriFilter from "./KategoriFilter"
+import StatusKetersediaanFilter from "./StatusKetersediaanFilter"
 
 
 const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
@@ -39,7 +44,6 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
 
     const handleReset = () => {
         // store.dispatch(resetFilter())
-        console.log('reseting')
         navigate(location.pathname.toString())
     }
 
@@ -48,15 +52,16 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col items-start justify-between w-full">
                 <SheetHeader className="w-full py-10">
-                <SheetTitle className="mt-3">Filter Data Peminjaman</SheetTitle>
+                <SheetTitle className="mt-3">Filter Data Buku</SheetTitle>
                     <SheetDescription className="text-sm text-muted-foreground">
-                        Saring data peminjaman sesuai kebutuhanmu.
+                        Saring data buku sesuai kebutuhanmu.
                     </SheetDescription>
                     
-                    {/* <StatusPinjamanFilter />
-                    <DurasiPeminjamanFilter />
-                    <KondisiPeminjamanFilter />
-                    <DisetujuiPeminjamanFilter /> */}
+                    <StatusKetersediaanFilter />
+                    <PenulisFilter />
+                    <PenerbitFilter />
+                    <TahunTerbitFilter />
+                    <KategoriFilter />
                 </SheetHeader>
 
                 <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
