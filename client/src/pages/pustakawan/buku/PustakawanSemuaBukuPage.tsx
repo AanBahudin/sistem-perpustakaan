@@ -1,6 +1,7 @@
 import { getAllBukuPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
+import TabelSemuaBuku from "@/components/Pustakawan/Buku/TabelSemuaBuku"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
@@ -31,6 +32,7 @@ const PustakawanSemuaBukuPage = () => {
         labelDataRasio={[]}
       />
       <SemuaBukuFilter />
+      <TabelSemuaBuku dataBuku={dataBuku} />
     </Container>
   )
 }
