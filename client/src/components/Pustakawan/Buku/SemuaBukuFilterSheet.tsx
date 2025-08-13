@@ -23,9 +23,17 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
     const location = useLocation()
 
     const filteredParams = () => {
-        const { statusPeminjaman, durasiPeminjaman, kondisi, disetujui } = useSelector((state: any) => state.peminjamanFilterSheetState)
+        const { 
+            penulis, penerbit,
+            tahunTerbit, status,
+            kategori
+         } = useSelector((state: any) => state.bukuFilterSheetState)
 
-        const filters = {statusPeminjaman, durasiPeminjaman, kondisi, disetujui}
+        const filters = { 
+            penulis, penerbit,
+            tahunTerbit, status,
+            kategori
+         }
 
         const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value && (value !== 'Semua' || value === '')) {

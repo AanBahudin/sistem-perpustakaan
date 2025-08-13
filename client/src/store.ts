@@ -11,6 +11,7 @@ import sheetFilterState from '@/cart/SheetFilterSlice'
 import peminjamanFilterSheetState from '@/cart/peminjamanFilterSheetSlice'
 import perpanjanganFilterSheetState from '@/cart/perpanjanganFilterSheetSlice'
 import pengembalianFilterSheetState from '@/cart/pengembalianFilterSheetSlice'
+import bukuFilterSheetState from '@/cart/bukuFilterSheetSlice'
 
 export const store = configureStore({
     reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
         sheetState: sheetFilterState,
         peminjamanFilterSheetState: peminjamanFilterSheetState,
         perpanjanganFilterSheetState: perpanjanganFilterSheetState,
-        pengembalianFilterSheetState: pengembalianFilterSheetState
+        pengembalianFilterSheetState: pengembalianFilterSheetState,
+        bukuFilterSheetState: bukuFilterSheetState
     }
 })

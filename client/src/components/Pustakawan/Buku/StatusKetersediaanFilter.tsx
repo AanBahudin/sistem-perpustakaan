@@ -3,34 +3,34 @@ import {
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
 import { store } from "@/store"
-import { setStatusPeminjaman } from "@/cart/peminjamanFilterSheetSlice"
 import { Button } from "@/components/ui/button"
 import { useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
+import { setStatus } from "@/cart/bukuFilterSheetSlice"
 
 const StatusKetersediaanFilter = () => {
 
     const [searchParams] = useSearchParams()
 
-    const {statusPeminjaman} = useSelector((state: any) => state.peminjamanFilterSheetState)
-    const initialParams = searchParams.get('status') || statusPeminjaman
+    const {status} = useSelector((state: any) => state.bukuFilterSheetState)
+    const initialParams = searchParams.get('status') || status
 
     const value = ['Semua', 'Tersedia', 'Tidak Tersedia']
 
     const handleChange = (value: string) => {
-        store.dispatch(setStatusPeminjaman(value))
+        store.dispatch(setStatus(value))
     }
 
     useEffect(() => {
-        store.dispatch(setStatusPeminjaman(initialParams))
+        store.dispatch(setStatus(initialParams))
     }, [])
 
     return (
        <section className="w-full mt-4">
             <h1 className="text-sm font-semibold text-muted-foreground mb-2 capitalize">Status ketersediaan</h1>
             <ToggleGroup 
-                defaultValue={initialParams} value={statusPeminjaman} 
+                defaultValue={initialParams} value={status} 
                 onValueChange={handleChange} type="single" 
                 className=" flex gap-2 w-full rounded-none flex-wrap">
                 {value.map((item: string, index:number) => {
