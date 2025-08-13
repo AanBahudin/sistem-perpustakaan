@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, X } from "lucide-react"
+import { Check, ChevronsUpDown} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -14,65 +14,46 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { getAllPenulis } from "@/actions/penulistAction"
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
+import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { setPenulis } from "@/cart/bukuFilterSheetSlice"
+import { store } from "@/store"
 
 
 
 const PenulisFilter = () => {
 
-    const location = useLocation()
-    
-    const {isLoading, data: penulis} = useQuery({
+    const {isLoading, data} = useQuery({
         queryKey: ['penulis'],
         queryFn: getAllPenulis
     })
 
-    const navigate = useNavigate()
+    const dataPenulis = isLoading ? ['Memuat'] : ['Semua', ...data]
+
     const [searchParams] = useSearchParams()
-    const fullParams = new URLSearchParams(searchParams)
-    const params = searchParams.get('penerbit')
+    const {penulis} = useSelector((state: any) => state.bukuFilterSheetState)
+    const initialParams = searchParams.get('penulis') || penulis
 
-    const [value, setValue] = useState('')
-    const [open, setOpen] = useState(false)
-
-    const data = isLoading ? ['Semua'] : ['Semua', ...penulis.map((item: any) => item)]
-
-    const handleSelect = (currentValue: any) => {
-    const params = new URLSearchParams(searchParams)
-
-    setValue(currentValue === value ? "" : currentValue)
-    setOpen(false)
-
-    if (currentValue) {
-        params.set('penerbit', currentValue)
-    } else {
-        params.delete('penerbit')
+    const handleChange = (value: string) => {
+        store.dispatch(setPenulis(value))
     }
 
-    navigate(`?${params.toString()}`);
-    }
-
-    const resetPenerbit = () => {
-        const isParamsExist = searchParams.get('penerbit')
-        if (isParamsExist) {                     
-            fullParams.delete('penerbit')
-            navigate(location.pathname.toString());
-        }
-        setValue('')
-    }
+    useEffect(() => {
+        store.dispatch(setPenulis(initialParams))
+    }, [])
 
     return (
         <section className="w-full flex flex-col mt-3">
             <label htmlFor="category" className='text-sm font-semibold text-muted-foreground mb-2 capitalize'>Penulis Buku</label>
 
             <main className="w-full flex items-center justify-between gap-x-2">
-                <Popover open={open} onOpenChange={setOpen}>
+                <Popover>
                     <PopoverTrigger asChild className="w-full flex-1 !text-xs">
-                        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between !text-[12px]" >
-                            {params ? data.find((currentPenulis: any) => currentPenulis === params) : "Cari Penulis"}
+                        <Button variant="outline" role="combobox" className="w-full justify-between !text-[12px]" >
+                            {initialParams ? dataPenulis.find((currentPenulis: any) => currentPenulis === initialParams) : "Cari Penulis"}
                             <ChevronsUpDown className="opacity-50" />
                         </Button>
                     </PopoverTrigger>
@@ -83,11 +64,11 @@ const PenulisFilter = () => {
                             <CommandList className="scroll-custom w-full">
                                 <CommandEmpty className="capitalize !text-xs">penulis tidak ditemukan.</CommandEmpty>
                                 <CommandGroup className="w-full">
-                                    {data.map((item: string) => {
+                                    {dataPenulis.map((item: string) => {
                                         return (
-                                            <CommandItem className="w-full !text-xs" key={item} value={item} onSelect={(currentValue) => handleSelect(currentValue)}>
+                                            <CommandItem className="w-full !text-xs" key={item} value={item} onSelect={(currentValue) => handleChange(currentValue)}>
                                                 {item}
-                                                <Check className={cn("ml-auto",value === item ? "opacity-100" : "opacity-0")}/>
+                                                <Check className={cn("ml-auto",penulis === item ? "opacity-100" : "opacity-0")}/>
                                             </CommandItem>
                                         )
                                     })}
@@ -96,8 +77,6 @@ const PenulisFilter = () => {
                         </Command>
                     </PopoverContent>
                 </Popover>
-
-                {params && <Button className='ease-in-out duration-300' onClick={resetPenerbit} type='button' size='icon' variant='destructive'><X /></Button>}
             </main>
         </section>
     )
