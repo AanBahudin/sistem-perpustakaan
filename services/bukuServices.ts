@@ -65,8 +65,13 @@ export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
 
 // UNTUK PUSTAKAWAN 
 
-export const getSemuaBukuUntukPustakawan = async({query = 'test'} : {query?: string}) => {
-    const books = await Buku.find().sort({createdAt: -1})
+export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
+
+    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const mongoQuery: any = { ...query };
+    delete mongoQuery.query;
+
+    const books = await Buku.find(mongoQuery).sort({createdAt: -1})
     const dataRasio = await rasioKategoriBuku()
     const dataStats = await allBukuStats()
     return {

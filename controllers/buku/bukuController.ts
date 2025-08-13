@@ -94,7 +94,8 @@ export const editBuku = async(req: Request | any, res: Response) => {
 
 // SUDAH TESTING
 export const getAllBukuPustakawan = async(req: Request | any, res: Response) => {
-    const books = await getSemuaBukuUntukPustakawan({})
+    const query = req.query
+    const books = await getSemuaBukuUntukPustakawan({query})
 
     SendDataResponse({
         res,

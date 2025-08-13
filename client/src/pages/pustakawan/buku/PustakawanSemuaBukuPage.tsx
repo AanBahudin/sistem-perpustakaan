@@ -14,7 +14,7 @@ const PustakawanSemuaBukuPage = () => {
   const params = new URLSearchParams(searchParams).toString()
 
   const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'buku'],
+    queryKey: ['semua', 'buku', params],
     queryFn: () => getAllBukuPustakawan({query: params})
   })
 

@@ -16,16 +16,16 @@ const BukuTersediaFilter = () => {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const fullParams = new URLSearchParams(searchParams)
-    const roleParams = searchParams.get('statusPeminjaman') || ''
+    const roleParams = searchParams.get('status') || ''
 
     const [roleValue, setRoleValue] = useState(roleParams)
     
     const setValueToParams = (value: string) => {
         setRoleValue(value)
         if (correctValue.includes(value)) {
-            fullParams.set('statusPeminjaman', value)
+            fullParams.set('status', value)
         } else {
-            fullParams.delete('statusPeminjaman')
+            fullParams.delete('status')
         }
         navigate(`?${fullParams.toString()}`)
     }
