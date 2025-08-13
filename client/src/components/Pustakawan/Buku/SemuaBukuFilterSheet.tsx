@@ -15,6 +15,8 @@ import PenerbitFilter from "./PenerbitFilter"
 import TahunTerbitFilter from "./TahunTerbitFilter"
 import KategoriFilter from "./KategoriFilter"
 import StatusKetersediaanFilter from "./StatusKetersediaanFilter"
+import { store } from "@/store"
+import { resetFilterBuku } from "@/cart/bukuFilterSheetSlice"
 
 
 const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
@@ -53,7 +55,7 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
     }
 
     const handleReset = () => {
-        // store.dispatch(resetFilter())
+        store.dispatch(resetFilterBuku())
         navigate(location.pathname.toString())
     }
 
@@ -76,12 +78,12 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
 
                 <main className="w-full flex gap-x-4 items-center justify-stretch self-baseline p-4">
                     <Button onClick={handleClick} className="text-white flex-1 font-normal text-xs flex items-center gap-x-2" size='sm'>
-                    <Check className="w-3 h-3" />
-                    Terapkan
+                        <Check className="w-3 h-3" />
+                        Terapkan
                     </Button>
                     <Button onClick={handleReset} className="text-white flex-1 flex items-center gap-x-2" size='sm' variant='destructive'>
-                    <RotateCcw className="w-2 h-2" />
-                    Reset
+                        <RotateCcw className="w-2 h-2" />
+                        Reset
                     </Button>
                 </main>
             </SheetContent>
