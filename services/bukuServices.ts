@@ -92,7 +92,7 @@ export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
         {statusPeminjaman: 'Dipinjam'},
         {statusPeminjaman: 'Terlambat'}
     ]})
-        .select('buku peminjam _id')
+        .select('buku peminjam _id berakhirPada')
         .sort({createdAt: -1})
         .populate({
             path: 'buku',
