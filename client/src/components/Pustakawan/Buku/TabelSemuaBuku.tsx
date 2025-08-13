@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Link2 } from "lucide-react"
+import { Ellipsis } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useSearchParams } from "react-router-dom"
 
@@ -40,7 +40,7 @@ const TabelSemuaBuku = ({dataBuku} : {dataBuku: any}) => {
                             {dataBuku.map((item: any, index: number) => {
                                 const newDate = new Date(item.tahunTerbit).getFullYear()
                                 return (
-                                    <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10 text-muted-foreground" >
+                                    <TableRow key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                         <TableCell className="w-[200px] text-xs">{item.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.penulis}</TableCell>
@@ -51,7 +51,7 @@ const TabelSemuaBuku = ({dataBuku} : {dataBuku: any}) => {
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
                                                 <GlobalTooltip text="Lihat Detail">
-                                                    <Link2 className="w-3 h-3" />
+                                                    <Ellipsis className="w-3 h-3" />
                                                 </GlobalTooltip>
                                             </div>
                                         </TableCell>
