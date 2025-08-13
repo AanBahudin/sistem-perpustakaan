@@ -14,62 +14,43 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
-import { useState } from "react"
-import { X } from "lucide-react"
+import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { getAllKategori } from "@/actions/kategoriAction"
+import { useSelector } from "react-redux"
+import { setKategori } from "@/cart/bukuFilterSheetSlice"
+import { store } from "@/store"
+import { useEffect } from "react"
 
 const KategoriFilter = () => {
-    const location = useLocation()
 
-    const {isLoading, data: kategori} = useQuery({
+    const {isLoading, data: kategoriData} = useQuery({
         queryKey: ['kategori'],
         queryFn: getAllKategori
     })
+    const data = isLoading ? ['Semua'] : ['Semua', ...kategoriData.data.map((item: any) => item.nama)]
 
-    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
-    const fullParams = new URLSearchParams(searchParams)
-    const params = searchParams.get('penerbit')
+    const {kategori} = useSelector((state: any) => state.bukuFilterSheetState)
+    const initialParams = searchParams.get('kategori') || kategori
 
-    const [value, setValue] = useState('')
-    const [open, setOpen] = useState(false)
-    const data = isLoading ? ['Semua'] : ['Semua', ...kategori.data.map((item: any) => item.nama)]
-
-    const handleSelect = (currentValue: any) => {
-    const params = new URLSearchParams(searchParams)
-
-    setValue(currentValue === value ? "" : currentValue)
-    setOpen(false)
-
-    if (currentValue) {
-        params.set('penerbit', currentValue)
-    } else {
-        params.delete('penerbit')
+    const handleChange = (value: string) => {
+        store.dispatch(setKategori(value))
     }
 
-    navigate(`?${params.toString()}`);
-    }
-
-    const resetPenerbit = () => {
-        const isParamsExist = searchParams.get('penerbit')
-        if (isParamsExist) {                     
-            fullParams.delete('penerbit')
-            navigate(location.pathname.toString());
-        }
-        setValue('')
-    }
+    useEffect(() => {
+        store.dispatch(setKategori(initialParams))
+    }, [])
 
     return (
         <section className="w-full flex flex-col mt-3">
             <label htmlFor="category" className='text-sm font-semibold text-muted-foreground mb-2 capitalize'>Kategori Buku</label>
 
             <main className="w-full flex items-center justify-between gap-x-2">
-                <Popover open={open} onOpenChange={setOpen}>
+                <Popover>
                     <PopoverTrigger asChild className="w-full flex-1 !text-xs">
-                        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between !text-[12px]" >
-                            {params ? data.find((framework: any) => framework === params) : "Cari kategori"}
+                        <Button variant="outline" role="combobox" className="w-full justify-between !text-[12px]" >
+                            {initialParams ? data.find((item: any) => item === initialParams) : "Cari kategori"}
                             <ChevronsUpDown className="opacity-50" />
                         </Button>
                     </PopoverTrigger>
@@ -80,11 +61,11 @@ const KategoriFilter = () => {
                             <CommandList className="scroll-custom w-full">
                                 <CommandEmpty className="capitalize !text-xs">Kategori tidak ditemukan.</CommandEmpty>
                                 <CommandGroup className="w-full">
-                                    {data.map((penerbit: any) => {
+                                    {data.map((item: any) => {
                                         return (
-                                        <CommandItem className="w-full !text-xs" key={penerbit} value={penerbit} onSelect={(currentValue) => handleSelect(currentValue)}>
-                                            {penerbit}
-                                            <Check className={cn("ml-auto",value === penerbit ? "opacity-100" : "opacity-0")}/>
+                                        <CommandItem className="w-full !text-xs" key={item} value={item} onSelect={(currentValue) => handleChange(currentValue)}>
+                                            {item}
+                                            <Check className={cn("ml-auto",kategori === item ? "opacity-100" : "opacity-0")}/>
                                         </CommandItem>
                                         )
                                     })}
@@ -93,8 +74,6 @@ const KategoriFilter = () => {
                         </Command>
                     </PopoverContent>
                 </Popover>
-
-                {params && <Button className='ease-in-out duration-300' onClick={resetPenerbit} type='button' size='icon' variant='destructive'><X /></Button>}
             </main>
         </section>
     )
