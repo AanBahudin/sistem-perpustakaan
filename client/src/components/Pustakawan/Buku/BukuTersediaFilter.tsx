@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { store } from "@/store"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 const BukuTersediaFilter = () => {
