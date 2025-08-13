@@ -7,6 +7,8 @@ import { Plus } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
+import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
+import SpecificTabelSemuaBuku from '@/components/Pustakawan/Buku/SpecificTabelSemuaBuku'
 
 const PustakawanBukuDipinjamPage = () => {
 
@@ -14,15 +16,13 @@ const PustakawanBukuDipinjamPage = () => {
   const params = new URLSearchParams(searchParams).toString()
 
   const {isLoading, data} = useQuery({
-    queryKey: ['buku', 'dipinjam'],
+    queryKey: ['buku', 'dipinjam', params],
     queryFn: () => getAllBukuDipinjamPustakawan({query : params})
   })
 
 
   if (isLoading) return <h1>Loading .... </h1>
   const { bukuDipinjam, ratioBukuDipinjam, statsBukuPinjam } = data
-
-  console.log(bukuDipinjam)
 
   return (
     <Container className='w-full'>
@@ -39,6 +39,8 @@ const PustakawanBukuDipinjamPage = () => {
         dataStatistik={statsBukuPinjam}
         labelDataRasio={['Total Buku', 'Buku Dipinjam']}
       />
+      <SemuaBukuFilter />
+      <SpecificTabelSemuaBuku dataBuku={bukuDipinjam} />
     </Container>
   )
 }

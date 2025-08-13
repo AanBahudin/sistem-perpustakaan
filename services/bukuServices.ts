@@ -84,23 +84,31 @@ export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
 
 export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
 
-    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const searchNama = query.query || '';// Ambil keyword pencarian
     const mongoQuery: any = { ...query };
     delete mongoQuery.query;
 
-    const bukuDipinjam = await Peminjaman.find({$or: [
+    const bukuDipinjamRaw = await Peminjaman.find({$or: [
         {statusPeminjaman: 'Dipinjam'},
         {statusPeminjaman: 'Terlambat'}
-    ]}).sort({createdAt: -1}).populate({
-        path: 'buku',
-        match: searchNama
-            ? { nama: { $regex: searchNama, $options: 'i' } }
+    ]})
+        .select('buku peminjam _id')
+        .sort({createdAt: -1})
+        .populate({
+            path: 'buku',
+            match: searchNama
+            ? { judul: { $regex: searchNama, $options: 'i' } }
             : {},
-    })
+        })
+        .populate({
+            path: 'peminjam',
+            select: 'fotoProfil _id nama'
+        })
+
+    const bukuDipinjam = bukuDipinjamRaw.filter((item) => item.buku !== null);
 
     const ratioBukuDipinjam = await rasioPeminjamanBuku()
     const statsBukuPinjam = await statsBukuDipinjam()
-    
 
     return {
         bukuDipinjam,
