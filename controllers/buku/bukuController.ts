@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import {dataDurasiPeminjaman} from '../../services/durasiServices'
 import { SendDataResponse, SendDataWithDurasiResponse, SendOneDataResponse } from "../../utils/sendResponse"
-import { discoveryBukuServices, editDataBuku, getAllBookYear, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
+import { discoveryBukuServices, editDataBuku, getAllBookYear, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuDipinjam, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
 
 
 // khusus yang diakses user
@@ -105,7 +105,19 @@ export const getAllBukuPustakawan = async(req: Request | any, res: Response) => 
         page: 1
 
     })
-} 
+}
+
+export const getAllBukuDipinjamPustakawan = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getSemuaBukuDipinjam({query})
+
+    SendDataResponse({
+        res,
+        message: 'Data buku dipinjam',
+        data,
+        total: data.bukuDipinjam.length
+    })
+}
 
 // SUDAH TESTING
 export const getSingleBukuPustakawan = async(req: Request | any, res: Response) => {

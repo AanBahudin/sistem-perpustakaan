@@ -9,6 +9,7 @@ import {
     hapusBuku,
     discoveryBuku,
     getAllBukuYearPustakawan,
+    getAllBukuDipinjamPustakawan,
 } from '../../controllers/buku/bukuController'
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -30,6 +31,9 @@ router.route('/discovery')
 
 router.route('/pustakawan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuPustakawan)
+
+router.route('/pustakawan/dipinjam')
+    .get(pustakawanMiddlewareAuthorized, getAllBukuDipinjamPustakawan)
 
 router.route('/create')
     .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)

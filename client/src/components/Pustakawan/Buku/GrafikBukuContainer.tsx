@@ -1,6 +1,7 @@
 import { AlignEndHorizontal, Ratio } from "lucide-react"
 import BukuGrowthChart from "./BukuGrowthChart"
 import KategoriSemuaBukuRatio from "./SemuaBuku/KategoriSemuaBukuRatio"
+import SpecificBukuRatioChart from "./SpecificBukuRatioChart"
 
 type GrafikBukuContainerType = {
   judulStatistik: string
@@ -13,7 +14,8 @@ type GrafikBukuContainerType = {
 
 const GrafikBukuContainer = ({
     judulStatistik, dataStatistik,
-    judulRasio, dataRasio, labelDataRasio
+    judulRasio, dataRasio, labelDataRasio,
+    type = 'Spesifik'
 } : GrafikBukuContainerType) => {
   return (
     <section className="w-full border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
@@ -36,8 +38,12 @@ const GrafikBukuContainer = ({
             <Ratio  className='w-4 h-4 stroke-muted-foreground' /> 
             {judulRasio}
           </h1>
-
-          <KategoriSemuaBukuRatio dataRasio={dataRasio} />
+          
+          {type === 'Semua' ? (
+            <KategoriSemuaBukuRatio dataRasio={dataRasio} />
+          ) : (
+            <SpecificBukuRatioChart dataRasio={dataRasio} labelRasio={labelDataRasio} />
+          )}
       </main>
     </section>
   )

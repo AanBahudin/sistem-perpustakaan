@@ -3,6 +3,7 @@ import { NotFoundError } from "../errors/errorHandler";
 import Peminjaman from "../model/Peminjaman";
 import Pengembalian from "../model/Pengembalian";
 import { startOfMonth, subMonths } from "date-fns";
+import { allPeminjamanStats, allPerpanjanganStats } from "./pustakawanServices";
 
 // SUDAH TESTING
 export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
@@ -81,6 +82,33 @@ export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
     }
 }
 
+export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
+
+    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const mongoQuery: any = { ...query };
+    delete mongoQuery.query;
+
+    const bukuDipinjam = await Peminjaman.find({$or: [
+        {statusPeminjaman: 'Dipinjam'},
+        {statusPeminjaman: 'Terlambat'}
+    ]}).sort({createdAt: -1}).populate({
+        path: 'buku',
+        match: searchNama
+            ? { nama: { $regex: searchNama, $options: 'i' } }
+            : {},
+    })
+
+    const ratioBukuDipinjam = await rasioPeminjamanBuku()
+    const statsBukuPinjam = await statsBukuDipinjam()
+    
+
+    return {
+        bukuDipinjam,
+        ratioBukuDipinjam,
+        statsBukuPinjam
+    }
+}
+
 // SUDAH TESTING
 export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku})
@@ -122,6 +150,8 @@ export const hapusDataBuku = async(idBuku: string)  => {
 
 // FUNGSI PEMBANTU YANG DIGUNAKAN DI SERVICES LAIN / INI
 
+
+// STATS UNTUK HALAMAN SEMUA BUKU PUSTAKAWAN
 export const rasioKategoriBuku = async() => {
     const totalBuku = await Buku.find({isMissing: false}).countDocuments()
     const hasil = await Buku.aggregate([
@@ -198,6 +228,76 @@ export const allBukuStats = async() => {
     return pertumbuhanBulanan
 }
 
+// STATS UNTUK HALAMAN SEMUA BUKU DIPINJAM PUSTAKAWAN
+export const rasioPeminjamanBuku = async() => {
+    const totalBuku = await getTotalBukuByItem()
+    const totalBukuDipinjam = await Peminjaman.find({$or : [
+        {statusPeminjaman: 'Dipinjam'},
+        {statusPeminjaman: 'Terlambat'}
+    ]}).countDocuments()
+
+    return [totalBuku, totalBukuDipinjam]
+}
+
+export const statsBukuDipinjam = async() => {
+    const statistikPinjaman = await Peminjaman.aggregate([
+        {
+            $match: {
+            statusPeminjaman: { $in: ["Dipinjam", "Dikembalikan"] }
+            }
+        },
+        {
+            $group: {
+            _id: {
+                tahun: { $year: "$createdAt" },
+                bulan: { $month: "$createdAt" }
+            },
+            jumlah: { $sum: 1 }
+            }
+        },
+        {
+            $sort: {
+            "_id.tahun": -1,
+            "_id.bulan": -1
+            }
+        },
+        {
+            $limit: 6
+        },
+        {
+            $addFields: {
+            bulan: {
+                $concat: [
+                {
+                    $arrayElemAt: [
+                    [
+                        "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                    "$_id.bulan"
+                    ]
+                },
+                " ",
+                { $toString: "$_id.tahun" }
+                ]
+            }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                bulan: 1,
+                jumlah: 1
+            }
+        },
+        {
+            $sort: { bulan: 1 }
+        }
+    ]);
+
+    return statistikPinjaman
+}
+
 export const bukuDikembalikan = async(idBuku : string) => {
     const buku = await Buku.findOneAndUpdate(
         {_id: idBuku},
@@ -269,4 +369,23 @@ export const getAllBookYear = async() => {
   }
 
   return { minYear: null, maxYear: null, yearRange: [] };
+}
+
+export const getTotalBukuByItem = async() => {
+    const totalBukuFisik = await Buku.aggregate([
+        {
+            $group: {
+            _id: null,
+            total: { $sum: "$stok" } // Menjumlahkan semua stok
+            }
+        },
+        {
+            $project: {
+            _id: 0,
+            total: 1
+            }
+        }
+    ]);
+
+    return totalBukuFisik[0]?.total || 0
 }

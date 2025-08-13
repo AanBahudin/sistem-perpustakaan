@@ -14,6 +14,7 @@ const GrafikPengajuanContainer = ({
   judulStatistik, dataStatistik,
   judulRasio, dataRasio, labelDataRasio
 } : GrafikPengajuanContainerType) => {
+
   return (
     <section className="w-full border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
       <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
