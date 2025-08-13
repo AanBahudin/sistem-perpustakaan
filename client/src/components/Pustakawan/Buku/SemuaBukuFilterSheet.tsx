@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { Check, RotateCcw } from "lucide-react"
 import { useNavigate, useLocation } from 'react-router-dom'
-import { store } from '@/store'
 import { useSelector } from 'react-redux'
 import PenulisFilter from "./PenulisFilter"
 import PenerbitFilter from "./PenerbitFilter"
@@ -25,13 +24,16 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
 
     const filteredParams = () => {
         const { statusPeminjaman, durasiPeminjaman, kondisi, disetujui } = useSelector((state: any) => state.peminjamanFilterSheetState)
+
         const filters = {statusPeminjaman, durasiPeminjaman, kondisi, disetujui}
+
         const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
-        if (value && (value !== 'Semua' || value === '')) {
-            acc[key] = value
-        }
-        return acc
+            if (value && (value !== 'Semua' || value === '')) {
+                acc[key] = value
+            }
+            return acc
         }, {} as Record<string, string>)
+
         const searchParams = new URLSearchParams(validParams).toString()
         return searchParams
     }

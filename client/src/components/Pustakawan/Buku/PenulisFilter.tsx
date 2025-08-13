@@ -84,7 +84,6 @@ const PenulisFilter = () => {
                                 <CommandEmpty className="capitalize !text-xs">penulis tidak ditemukan.</CommandEmpty>
                                 <CommandGroup className="w-full">
                                     {data.map((item: string) => {
-                                        console.log(item)
                                         return (
                                             <CommandItem className="w-full !text-xs" key={item} value={item} onSelect={(currentValue) => handleSelect(currentValue)}>
                                                 {item}

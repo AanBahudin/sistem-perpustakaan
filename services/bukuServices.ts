@@ -231,3 +231,37 @@ export const lastAddedBook = async() => {
     const lastAdded = await Buku.findOne().sort({ createdAt: -1 });
     return lastAdded
 }
+
+export const getAllBookYear = async() => {
+    const result = await Buku.aggregate([
+    {
+      $addFields: {
+        tahunNumeric: {
+          $cond: [
+            { $eq: [{ $type: "$tahunTerbit" }, "date"] },
+            { $year: "$tahunTerbit" },
+            { $toInt: "$tahunTerbit" }
+          ]
+        }
+      }
+    },
+    {
+      $group: {
+        _id: null,
+        minYear: { $min: "$tahunNumeric" },
+        maxYear: { $max: "$tahunNumeric" }
+      }
+    }
+  ]);
+
+  if (result.length > 0) {
+    const { minYear, maxYear } = result[0];
+    const yearRange = Array.from(
+      { length: maxYear - minYear + 1 },
+      (_, i) => minYear + i
+    );
+    return { minYear, maxYear, yearRange };
+  }
+
+  return { minYear: null, maxYear: null, yearRange: [] };
+}

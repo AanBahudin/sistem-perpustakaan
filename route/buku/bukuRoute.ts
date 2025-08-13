@@ -8,6 +8,7 @@ import {
     editBuku,
     hapusBuku,
     discoveryBuku,
+    getAllBukuYearPustakawan,
 } from '../../controllers/buku/bukuController'
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -17,6 +18,9 @@ const router = express.Router()
 
 router.route('/user')
     .get(userMiddlewareAuthorized, getAllBukuUser)
+
+router.route('/year')
+    .get(pustakawanMiddlewareAuthorized, getAllBukuYearPustakawan)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuUser)
