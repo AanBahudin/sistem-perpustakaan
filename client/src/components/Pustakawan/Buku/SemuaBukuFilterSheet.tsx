@@ -30,12 +30,7 @@ const SemuaBukuFilterSheet = ({children} : {children: React.ReactNode}) => {
             tahunTerbit, status,
             kategori
          } = useSelector((state: any) => state.bukuFilterSheetState)
-
-        const filters = { 
-            penulis, penerbit,
-            tahunTerbit, status,
-            kategori
-         }
+        const filters = {penulis, penerbit, tahunTerbit, status, kategori }
 
         const validParams = Object.entries(filters).reduce((acc, [key, value]) => {
             if (value && (value !== 'Semua' || value === '')) {

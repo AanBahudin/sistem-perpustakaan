@@ -33,18 +33,18 @@ const StatusPeminjamanFilter = () => {
 
   return (
     <Select onValueChange={value => setValueToParams(value)} value={roleValue}>
-      <SelectTrigger className="w-[40%] bg-accent/30">
+      <SelectTrigger className="w-[40%] bg-accent/30 !text-xs">
         <SelectValue className="!text-xs" placeholder="Status peminjaman" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel className="text-xs">Pilih salah satu</SelectLabel>
           <SelectItem value="All">Semua</SelectItem>
-          {correctValue.map((item: string, index: number) => {
-            return (
-              <SelectItem key={index} value={item}>{item}</SelectItem>
-            )
-          })}
+            {correctValue.map((item: string, index: number) => {
+              return (
+                <SelectItem className="!text-xs" key={index} value={item}>{item}</SelectItem>
+              )
+            })}
         </SelectGroup>
       </SelectContent>
     </Select>
