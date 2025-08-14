@@ -7,6 +7,11 @@ export const getAllBukuPustakawan = async({query} : {query: string}) => {
 
 export const getAllBukuDipinjamPustakawan = async({query} : {query: string}) => {
     const {data: response} = await customFetch.get(`/buku/pustakawan/dipinjam?${query}`)
+    return response.data
+}
+
+export const getAllBukuDiperpanjanganPustakawan = async({query} : {query: string}) => {
+    const {data: response} = await customFetch.get(`/buku/pustakawan/diperpanjang?${query}`)
     console.log(response.data)
     return response.data
 }

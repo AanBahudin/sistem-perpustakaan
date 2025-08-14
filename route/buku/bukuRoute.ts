@@ -10,6 +10,7 @@ import {
     discoveryBuku,
     getAllBukuYearPustakawan,
     getAllBukuDipinjamPustakawan,
+    getAllBukuDiperpanjangPustakawan,
 } from '../../controllers/buku/bukuController'
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -34,6 +35,9 @@ router.route('/pustakawan')
 
 router.route('/pustakawan/dipinjam')
     .get(pustakawanMiddlewareAuthorized, getAllBukuDipinjamPustakawan)
+
+router.route('/pustakawan/diperpanjang')
+    .get(pustakawanMiddlewareAuthorized, getAllBukuDiperpanjangPustakawan)
 
 router.route('/create')
     .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)

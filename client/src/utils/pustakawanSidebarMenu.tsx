@@ -90,34 +90,34 @@ export const pustakanSidebarMenu = [
         ],
         icon: LibraryBig
     },
-    {
-        title: 'Riwayat',
-        url: 'riwayat',
-        type: 'collapse',
-        children: [
-            {
-                title: 'Semua',
-                url: 'riwayat',
-                icon: Files
-            },
-            {
-                title: 'Peminjaman',
-                url: 'riwayat/peminjaman',
-                icon: FileCheck2
-            },
-            {
-                title: 'Perpanjangan',
-                url: 'riwayat/perpanjangan',
-                icon: FilePlus
-            },
-            {
-                title: 'Pengembalian',
-                url: 'riwayat/pengembalian',
-                icon: FileSymlink
-            }
-        ],
-        icon: History
-    },
+    // {
+    //     title: 'Riwayat',
+    //     url: 'riwayat',
+    //     type: 'collapse',
+    //     children: [
+    //         {
+    //             title: 'Semua',
+    //             url: 'riwayat',
+    //             icon: Files
+    //         },
+    //         {
+    //             title: 'Peminjaman',
+    //             url: 'riwayat/peminjaman',
+    //             icon: FileCheck2
+    //         },
+    //         {
+    //             title: 'Perpanjangan',
+    //             url: 'riwayat/perpanjangan',
+    //             icon: FilePlus
+    //         },
+    //         {
+    //             title: 'Pengembalian',
+    //             url: 'riwayat/pengembalian',
+    //             icon: FileSymlink
+    //         }
+    //     ],
+    //     icon: History
+    // },
     {
         title: 'Notifikasi',
         url: 'notifikasi',
