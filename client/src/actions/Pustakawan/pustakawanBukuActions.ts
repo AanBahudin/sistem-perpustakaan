@@ -20,6 +20,11 @@ export const getAllBukuDikembalikanPustakawan = async({query} : {query: string})
     return response.data
 }
 
+export const getAllBukuDihilangkanPustakawan = async({query} : {query: string}) => {
+    const {data: response} = await customFetch.get(`/buku/pustakawan/dihilangkan?${query}`)
+    return response.data
+}
+
 export const getAllBooksPublishedYear = async() => {
     const {data: response} = await customFetch.get('/buku/year')
     return response.data.yearRange

@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import {dataDurasiPeminjaman} from '../../services/durasiServices'
 import { SendDataResponse, SendDataWithDurasiResponse, SendOneDataResponse } from "../../utils/sendResponse"
-import { discoveryBukuServices, editDataBuku, getAllBookYear, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuDikembalikan, getSemuaBukuDiperpanjang, getSemuaBukuDipinjam, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
+import { discoveryBukuServices, editDataBuku, getAllBookYear, getSatuBukuTersediaUntukUser, getSatuBukuUntukPustakawan, getSemuaBukuDikembalikan, getSemuaBukuDiperpanjang, getSemuaBukuDipinjam, getSemuaBukuHilang, getSemuaBukuTersediaUntukUser, getSemuaBukuUntukPustakawan, hapusDataBuku, tambahDataBuku } from "../../services/bukuServices"
 
 
 // khusus yang diakses user
@@ -140,6 +140,18 @@ export const getAllBukuDikembalikanPustakawan = async(req: Request, res: Respons
         message: 'Data buku dikembalikan',
         data, 
         total: data.bukuDikembalikan.length
+    })
+}
+
+export const getAllBukuDihilangkanPustakawan = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getSemuaBukuHilang({query})
+
+    SendDataResponse({
+        res,
+        message: 'Data buku dihilangkan',
+        data,
+        total: data.bukuDihilangkan.length
     })
 }
 
