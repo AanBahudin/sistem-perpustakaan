@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { Plus } from 'lucide-react'
+import TabelBukuHilang from '@/components/Pustakawan/Buku/BukuDihilangkan/TabelBukuHIlang'
 
 const PustakawanBukuDihilangPage = () => {
 
@@ -39,6 +40,7 @@ const PustakawanBukuDihilangPage = () => {
       />
 
       <SemuaBukuFilter />
+      <TabelBukuHilang dataBuku={bukuDihilangkan} />
     </Container>
   )
 }
