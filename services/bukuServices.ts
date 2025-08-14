@@ -84,21 +84,42 @@ export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
 
 export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
 
-    const searchNama = query.query || '';// Ambil keyword pencarian
-    const mongoQuery: any = { ...query };
-    delete mongoQuery.query;
+    let bukuMatch: any = {}
 
+    if (query?.query) {
+        bukuMatch.judul = {$regex: query.query, $options: 'i'}
+    }
+
+    if (query?.status) {
+        bukuMatch.status = {$regex: query.status, $options: 'i'}
+    }
+
+    if (query?.penulis) {
+        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
+    }
+
+    if (query?.penerbit) {
+        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
+    }
+
+    if (query?.tahunTerbit) {
+        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
+    }
+
+    if (query?.kategori) {
+        bukuMatch.kategori = {
+            $in: [new RegExp(query.kategori, "i")]
+        };
+    }
     const bukuDipinjamRaw = await Peminjaman.find({$or: [
         {statusPeminjaman: 'Dipinjam'},
         {statusPeminjaman: 'Terlambat'}
     ]})
-        .select('buku peminjam _id berakhirPada')
+        .select('buku peminjam _id berakhirPada durasiPeminjaman')
         .sort({createdAt: -1})
         .populate({
             path: 'buku',
-            match: searchNama
-            ? { judul: { $regex: searchNama, $options: 'i' } }
-            : {},
+            match: bukuMatch
         })
         .populate({
             path: 'peminjam',

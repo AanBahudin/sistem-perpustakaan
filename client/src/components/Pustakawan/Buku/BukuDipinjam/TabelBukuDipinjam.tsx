@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table"
 import { Ellipsis } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { Link, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { formatedDate } from "@/utils/formatDate"
 
 const TabelBukuDipinjam = ({dataBuku} : {dataBuku: any}) => {
@@ -27,7 +27,7 @@ const TabelBukuDipinjam = ({dataBuku} : {dataBuku: any}) => {
                             <TableHead className="w-[120px] text-xs text-center">ISBN</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Kategori</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Pengguna</TableHead>
-                            <TableHead className="w-[120px] text-center text-xs">Data Peminjaman</TableHead>
+                            <TableHead className="w-[120px] text-center text-xs">Durasi Peminjaman</TableHead>
                             <TableHead className="w-[120px] text-xs text-center">Tanggal Berakhir</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -56,9 +56,7 @@ const TabelBukuDipinjam = ({dataBuku} : {dataBuku: any}) => {
                                             )}
                                             {peminjam.nama}
                                         </TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">
-                                            <Link to={'/'} className="hover:text-primary duration-200 ease-in-out">Lihat data</Link>
-                                        </TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">{data.durasiPeminjaman} Hari</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{newDate}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
