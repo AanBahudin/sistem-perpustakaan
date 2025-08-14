@@ -8,7 +8,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
-import SpecificTabelSemuaBuku from '@/components/Pustakawan/Buku/SpecificTabelSemuaBuku'
 import TabelBukuDipinjam from '@/components/Pustakawan/Buku/BukuDipinjam/TabelBukuDipinjam'
 
 const PustakawanBukuDipinjamPage = () => {

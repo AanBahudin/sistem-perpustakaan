@@ -173,11 +173,11 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
-            select: 'judul kategori',
+            select: 'judul kategori ISBN',
             match: bukuMatch
         })
         .populate({
-            path: 'peminjam',
+            path: 'idPengguna',
             select: 'fotoProfil _id nama'
         })
         .populate({
@@ -188,12 +188,12 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
     const bukuDiperpanjang = bukuDiperpanjangRaw.filter((item) => item.idBuku !== null);
 
     const ratioBukuDiperpanjang = await rasioPerpanjanganBuku()
-    const statsBukuDiperpanjang = await statsBukuDiPerpanjang()
+    const statsBukuDiperpanjangan = await statsBukuDiPerpanjang()
 
     return {
         bukuDiperpanjang,
         ratioBukuDiperpanjang,
-        statsBukuDiPerpanjang
+        statsBukuDiperpanjangan
     }
 }
 
