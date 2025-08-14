@@ -18,7 +18,6 @@ const PustakawanPengembalianPage = () => {
   })
 
   if (isLoading) return <h1>Loading ....</h1>
-  console.log(data)
   const {pengajuanPengembalian, rasioStatusPengembalian, statsPengembalian} = data
 
   return (

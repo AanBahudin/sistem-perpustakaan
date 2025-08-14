@@ -12,9 +12,10 @@ import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useSearchParams } from "react-router-dom"
 import { formatedDate } from "@/utils/formatDate"
 
-const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
+const TabelBukuDikembalikan = ({dataBuku} : {dataBuku: any}) => {
 
     const [searchParams] = useSearchParams()
+    const params = new URLSearchParams(searchParams).toString()
 
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
@@ -28,19 +29,19 @@ const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
                             <TableHead className="w-[120px] text-center text-xs">Kategori</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Pengguna</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Durasi Perpanjangan</TableHead>
-                            <TableHead className="w-[120px] text-xs text-center">Tanggal Berakhir</TableHead>
+                            <TableHead className="w-[120px] text-xs text-center">Tanggal Pengembalian</TableHead>
                         </TableRow>
                     </TableHeader>
 
                     {dataBuku.length === 0 ? (
                         <TableCaption className="mt-20">
-                            {searchParams ? 'Data tidak ditemukan' : 'Belum ada perpanjangan'}
+                            {params ? 'Data tidak ditemukan' : 'Belum ada pengembalian'}
                         </TableCaption>
                     ) : (
                         <TableBody>
                             {dataBuku.map((data: any, index: number) => {
                                 const item = data.idBuku
-                                const newDate = formatedDate(data.idPeminjaman.berakhirPada) 
+                                const newDate = formatedDate(data.tanggalPengembalian)
                                 const { idPengguna } = data
                                 return (
                                     <TableRow key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
@@ -76,4 +77,4 @@ const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
     )
 }
 
-export default TabelBukuDiperpanjang
+export default TabelBukuDikembalikan

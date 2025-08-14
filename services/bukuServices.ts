@@ -245,13 +245,13 @@ export const getSemuaBukuDikembalikan = async({query} : {query: any}) => {
 
     const bukuDikembalikan = bukuDikembalikanRaw.filter((item) => item.idBuku !== null);
 
-    const ratioBukuDikembalikan = await rasioPerpanjanganBuku()
-    const statsBukuDikembalikan = await statsBukuDiPerpanjang()
+    const ratioBukuDikembalikan = await rasioPengembalianBuku()
+    const statsBukuPengembalian = await stastBukuDikembalikan()
 
     return {
         bukuDikembalikan,
         ratioBukuDikembalikan,
-        statsBukuDikembalikan
+        statsBukuPengembalian
     }
 }
 
