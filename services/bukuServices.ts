@@ -197,6 +197,64 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
     }
 }
 
+export const getSemuaBukuDikembalikan = async({query} : {query: any}) => {
+    let bukuMatch: any = {}
+
+    if (query?.query) {
+        bukuMatch.judul = {$regex: query.query, $options: 'i'}
+    }
+
+    if (query?.status) {
+        bukuMatch.status = {$regex: query.status, $options: 'i'}
+    }
+
+    if (query?.penulis) {
+        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
+    }
+
+    if (query?.penerbit) {
+        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
+    }
+
+    if (query?.tahunTerbit) {
+        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
+    }
+
+    if (query?.kategori) {
+        bukuMatch.kategori = {
+            $in: [new RegExp(query.kategori, "i")]
+        };
+    }
+
+    const bukuDikembalikanRaw = await Pengembalian.find({statusPengembalian: 'Dikembalikan'})
+        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian keadaanBuku')
+        .sort({createdAt: -1})
+        .populate({
+            path: 'idBuku',
+            select: 'judul kategori ISBN',
+            match: bukuMatch
+        })
+        .populate({
+            path: 'idPengguna',
+            select: 'fotoProfil _id nama'
+        })
+        .populate({
+            path: 'idPeminjaman',
+            select: 'berakhirPada _id'
+        })
+
+    const bukuDikembalikan = bukuDikembalikanRaw.filter((item) => item.idBuku !== null);
+
+    const ratioBukuDikembalikan = await rasioPerpanjanganBuku()
+    const statsBukuDikembalikan = await statsBukuDiPerpanjang()
+
+    return {
+        bukuDikembalikan,
+        ratioBukuDikembalikan,
+        statsBukuDikembalikan
+    }
+}
+
 // SUDAH TESTING
 export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku})
@@ -387,7 +445,6 @@ export const statsBukuDipinjam = async() => {
 }
 
 // STATS UNTUK HALAMAN SEMUA BUKU DIPERPANJANG PUSTAKAWAN
-
 export const rasioPerpanjanganBuku = async() => {
     const totalBuku = await getTotalBukuByItem()
     const totalBukuDiperpanjang = await Perpanjangan.find({disetujui: 'Diterima'}).countDocuments()
@@ -452,6 +509,75 @@ export const statsBukuDiPerpanjang = async() => {
     ]);
 
     return statistikPerpanjangan    
+}
+
+// STATS UNTUK HALAMAN SEMUA BUKU DIKEMBALIKAN PUSTAKAWAN
+export const rasioPengembalianBuku = async() => {
+    const totalBuku = await getTotalBukuByItem()
+    const totalBukuDikembalikan = await Pengembalian.find({
+        statusPengembalian: 'Dikembalikan'
+    }).countDocuments()
+
+    return [totalBuku, totalBukuDikembalikan]
+}
+
+export const stastBukuDikembalikan = async() => {
+    const statistikPengembalian = await Perpanjangan.aggregate([
+        {
+            $match: {
+                statusPengembalian: 'Diterima'
+            }
+        },
+        {
+            $group: {
+            _id: {
+                tahun: { $year: "$createdAt" },
+                bulan: { $month: "$createdAt" }
+            },
+            jumlah: { $sum: 1 }
+            }
+        },
+        {
+            $sort: {
+            "_id.tahun": -1,
+            "_id.bulan": -1
+            }
+        },
+        {
+            $limit: 6
+        },
+        {
+            $addFields: {
+            bulan: {
+                $concat: [
+                {
+                    $arrayElemAt: [
+                    [
+                        "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ],
+                    "$_id.bulan"
+                    ]
+                },
+                " ",
+                { $toString: "$_id.tahun" }
+                ]
+            }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                bulan: 1,
+                jumlah: 1
+            }
+        },
+        {
+            $sort: { bulan: 1 }
+        }
+    ]);
+
+    return statistikPengembalian
 }
 
 export const bukuDikembalikan = async(idBuku : string) => {
