@@ -33,43 +33,41 @@ const DetailPeminjamanConfirmDialog = ({children} : {children: React.ReactNode})
 
     return (
         <Dialog>
-            <form>
-                <DialogTrigger asChild>{children}</DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>Terima Peminjaman</DialogTitle>
-                        <DialogDescription className="text-xs mt-4">Pilih kondisi awal buku sebelum menyetujui peminjaman. Data ini akan dicatat sebagai acuan saat pengembalian.</DialogDescription>
-                    </DialogHeader>
+            <DialogTrigger asChild>{children}</DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>Terima Peminjaman?</DialogTitle>
+                    <DialogDescription className="text-xs mt-4">Pilih kondisi awal buku sebelum menyetujui peminjaman. Informasi ini akan dicatat sebagai acuan saat pengembalian untuk memastikan kondisi buku tetap terjaga</DialogDescription>
+                </DialogHeader>
 
-                    <div className="grid gap-4">
-                        <div className="grid gap-3">
-                            <Label htmlFor="name-1" className="text-sm">Kondisi Buku</Label>
-                            <Select>
-                                <SelectTrigger className="w-full !text-xs">
-                                    <SelectValue placeholder="Kondisi Awal Buku"/>
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup className="!text-xs">
-                                        <SelectLabel>Pilih Kondisi</SelectLabel>
-                                            {newData.map((item: any, index: number) => {
-                                                return (
-                                                    <SelectItem className="!text-xs" value={item} key={index}>{item}</SelectItem>
-                                                )
-                                            })}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
+                <div className="grid gap-4">
+                    <div className="grid gap-1">
+                        <Label htmlFor="name-1" className="text-xs">Kondisi Buku</Label>
+                        <Select>
+                            <SelectTrigger className="w-full !text-xs">
+                                <SelectValue placeholder="Kondisi Awal Buku"/>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup className="!text-xs">
+                                    <SelectLabel>Pilih Kondisi</SelectLabel>
+                                        {newData.map((item: any, index: number) => {
+                                            return (
+                                                <SelectItem className="!text-xs" value={item} key={index}>{item}</SelectItem>
+                                            )
+                                        })}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
-                    
-                    <DialogFooter className="mt-4">
-                        <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
-                        </DialogClose>
-                        <Button type="submit" className="text-white">Save changes</Button>
-                    </DialogFooter>
-                </DialogContent>
-            </form>
+                </div>
+                
+                <DialogFooter className="mt-4">
+                    <DialogClose asChild>
+                        <Button variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <Button type="submit" className="text-white">Save changes</Button>
+                </DialogFooter>
+            </DialogContent>
         </Dialog>
     )
 }

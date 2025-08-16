@@ -2,6 +2,7 @@ import { Alert } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Check, CircleAlert, CircleCheck, TriangleAlert, X } from "lucide-react"
 import DetailPeminjamanConfirmDialog from "./DetailPeminjamanConfirmDialog"
+import DetailPeminjamanTolakDialog from "./DetailPeminjamanTolakDialog"
 
 
 const  PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
@@ -20,7 +21,9 @@ const  PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
             </h1>
 
             <main className='flex items-center gap-x-4'>
-                <Button size='icon' className='bg-destructive hover:bg-destructive/50 ease-in-out duration-200 text-center text-xs text-white'><X /></Button>
+                <DetailPeminjamanTolakDialog>
+                    <Button size='icon' className='bg-destructive hover:bg-destructive/50 ease-in-out duration-200 text-center text-xs text-white'><X /></Button>
+                </DetailPeminjamanTolakDialog>
 
                 <DetailPeminjamanConfirmDialog>
                     <Button className='text-center text-white hover:bg-primary/50 ease-in-out duration-200'><Check /></Button>
