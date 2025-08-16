@@ -70,7 +70,7 @@ router.route('/requested/pinjaman')
 router.route('/accept/pinjaman')
     .post(pustakawanMiddlewareAuthorized, terimaPinjamanValidator, terimaPinjaman)
 
-router.route('/decline')
+router.route('/decline/:id')
     .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, tolakPeminjamanPustakawan)
 
 export default router

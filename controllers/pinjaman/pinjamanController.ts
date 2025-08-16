@@ -111,7 +111,7 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
 }
 
 export const tolakPeminjamanPustakawan = async(req: Request | any, res: Response) => {
-    const {idPeminjaman} = req.params
+    const {id: idPeminjaman} = req.params
     const {userId} = req.user
 
     const pengajuanPeminjaman = await Peminjaman.findOneAndUpdate({_id: idPeminjaman}, {
@@ -124,7 +124,6 @@ export const tolakPeminjamanPustakawan = async(req: Request | any, res: Response
         res,
         message: 'Data pengajuan peminjaman telah ditolak'
     })
-
 }
 
 // SUDAH DITESTING

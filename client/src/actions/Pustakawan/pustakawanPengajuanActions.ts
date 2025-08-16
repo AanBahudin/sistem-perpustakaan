@@ -15,3 +15,8 @@ export const getDetailPengajuanPeminjaman = async({id} : {id: string}) => {
     console.log(response.data)
     return response.data
 }
+
+export const tolakPengajuanPeminjaman = async({idPeminjaman} : {idPeminjaman: string}) => {
+    const response = await customFetch.get(`/pinjaman/decline/${idPeminjaman}`)
+    return response
+}
