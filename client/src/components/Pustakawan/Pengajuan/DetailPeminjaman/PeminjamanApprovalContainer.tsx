@@ -1,12 +1,17 @@
 import { Alert } from "@/components/ui/alert"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { Button } from "@/components/ui/button"
-import { Check, X } from "lucide-react"
+import { Check, CircleAlert, CircleCheck, TriangleAlert, X } from "lucide-react"
 
 
-const PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
+const  PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
 
     const { peminjam } = peminjaman
+
+    if (peminjaman.statusPeminjaman === 'Dipinjam') return <AcceptedPengajuanBanner />
+    if (peminjaman.statusPeminjaman === 'Ditolak') return <DeclinePengajuanBanner />
+    if (peminjam.statusPeminjaman === 'Terlambat') return <TerlambatPengajuanBanner />
+    if (peminjam.statusPeminjaman === 'Dikembalikan') return <ReturnedPengajuanBanner />
 
     return (
         <Alert className='w-full flex items-center justify-between my-6'>
@@ -23,6 +28,42 @@ const PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
                     <Button className='text-center text-white hover:bg-primary/50 ease-in-out duration-200'><Check /></Button>
                 </GlobalTooltip>
             </main>
+        </Alert>
+    )
+}
+
+export const AcceptedPengajuanBanner = () => {
+    return (
+        <Alert className="w-full my-6 flex bg-primary">
+            <CircleCheck />
+            <h1 className="text-sm font-semibold">Pengajuan telah diterima</h1>
+        </Alert>
+    )
+}
+
+export const DeclinePengajuanBanner = () => {
+    return (
+        <Alert className="w-full my-6 flex bg-destructive">
+            <CircleAlert />
+            <h1 className="text-sm font-semibold">Pengajuan telah ditolak</h1>
+        </Alert>
+    )
+}
+
+export const TerlambatPengajuanBanner = () => {
+    return (
+        <Alert className="w-full my-6 flex bg-muted">
+            <TriangleAlert />
+            <h1 className="text-sm font-semibold">Pengajuan telah terlambat, Segera hubungi pengguna untuk pengembalian</h1>
+        </Alert>
+    )
+}
+
+export const ReturnedPengajuanBanner = () => {
+    return (
+        <Alert className="w-full my-6 flex bg-primary/60">
+            <Check />
+            <h1 className="text-sm font-semibold">Pengajuan telah dikembalikan</h1>
         </Alert>
     )
 }

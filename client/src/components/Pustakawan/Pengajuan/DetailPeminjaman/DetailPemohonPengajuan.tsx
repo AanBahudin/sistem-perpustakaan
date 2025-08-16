@@ -13,7 +13,11 @@ const DetailPemohonPengajuan = ({dataPemohon} : {dataPemohon: any}) => {
         </div>
 
         <div className='flex items-start justify-start gap-x-4 my-6'>
-            <img className='w-14 h-14 rounded-full object-cover' src={dataPemohon.fotoProfil} alt={dataPemohon.nama} />
+            {dataPemohon.fotoProfil ? (
+                <img className='w-14 h-14 rounded-full object-cover' src={dataPemohon.fotoProfil} alt={dataPemohon.nama} />
+            ) : (
+                <div className='w-14 h-14 rounded-full bg-muted flex items-center justify-center font-semibold text-xl'>{dataPemohon.nama[0]}</div>
+            )}
 
             <div className='flex flex-col items-start justify-start'>
                 <h1 className='font-bold capitalize text-md'>{dataPemohon.nama}</h1>
@@ -28,7 +32,7 @@ const DetailPemohonPengajuan = ({dataPemohon} : {dataPemohon: any}) => {
                 <DetailPengajuanInformation label='ID Universitas' value={dataPemohon.idKampus} />
                 <DetailPengajuanInformation label='Status' value={dataPemohon.role} />
                 <DetailPengajuanInformation label='Jurusan' value={dataPemohon.jurusan} />
-                <DetailPengajuanInformation label='Jurusan' value={dataPemohon.no_hp || '-'} />
+                <DetailPengajuanInformation label='Nomor Telepon' value={dataPemohon.no_hp || '-'} />
             </div>
         </div>
     </section>

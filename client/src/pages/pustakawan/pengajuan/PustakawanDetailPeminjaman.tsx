@@ -19,13 +19,13 @@ const PustakawanDetailPeminjaman = () => {
     
     
     if (isLoading) return <h1>Loading ... </h1>
-    const {statusPeminjaman, buku, peminjam} = data
+    const {buku, peminjam} = data
 
     return (
         <Container className='w-full'>
             <DetailPengajuanBreadCrumbs text={data.buku.judul} />
 
-            {statusPeminjaman === 'Diajukan' && <PeminjamanApprovalContainer peminjaman={data} />}
+            <PeminjamanApprovalContainer peminjaman={data} />
             
             <section className='w-full flex items-start gap-x-8'>
                 <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
