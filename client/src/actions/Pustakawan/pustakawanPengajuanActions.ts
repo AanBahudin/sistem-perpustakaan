@@ -9,3 +9,9 @@ export const getAllPengajuanPeminjaman = async({params} : {params: string}) => {
     const {data: response} = await customFetch.get(`/pustakawan/peminjaman?${params}`)
     return response.data
 }
+
+export const getDetailPengajuanPeminjaman = async({id} : {id: string}) => {
+    const {data: response} = await customFetch.get(`/pustakawan/peminjaman/${id}`)
+    console.log(response.data)
+    return response.data
+}

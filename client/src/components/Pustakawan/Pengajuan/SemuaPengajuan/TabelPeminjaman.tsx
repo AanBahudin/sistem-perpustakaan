@@ -11,8 +11,15 @@ import {
 import { formatedDate } from "@/utils/formatDate"
 import { Link2 } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
+import { useNavigate } from "react-router-dom"
 
 const TabelPeminjaman = ({peminjaman} : {peminjaman: any}) => {
+
+    const navigate = useNavigate()
+    const navigateHandler = (id: string) => {
+        navigate(`/pustakawan/pengajuan/peminjaman/${id}`)
+    }
+
   return (
     <TabsContent value="Peminjaman" className="w-full flex-1 overflow-auto scroll-custom">
         <section className="w-full h-full border rounded overflow-hidden">
@@ -35,7 +42,7 @@ const TabelPeminjaman = ({peminjaman} : {peminjaman: any}) => {
                         {peminjaman.map((item: any, index: number) => {
                             const {buku, peminjam} = item
                             return (
-                                <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
+                                <TableRow onClick={() => navigateHandler(item._id as string)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200" >
                                     <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                     <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">

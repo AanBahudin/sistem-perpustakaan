@@ -48,6 +48,7 @@ import PustakawanRiwayatPerpanjanganPage from "./pages/pustakawan/Riwayat/Pustak
 import PustakawanRiwayatPengembalianPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatPengembalianPage";
 import PustakawanRiwayatKehilanganPage from "./pages/pustakawan/Riwayat/PustakawanRiwayatKehilanganPage";
 import SinglePengguna from "./pages/pustakawan/pengguna/SinglePengguna";
+import PustakawanDetailPeminjaman from "./pages/pustakawan/pengajuan/PustakawanDetailPeminjaman";
 
 const router : RouteObject[] = [
     {
@@ -243,6 +244,10 @@ const router : RouteObject[] = [
                     {
                         path: 'peminjaman',
                         element: <PustakawanPeminjaman />
+                    },
+                    {
+                        path: 'peminjaman/:idPeminjaman',
+                        element: <PustakawanDetailPeminjaman />
                     },
                     {
                         path: 'perpanjangan',
