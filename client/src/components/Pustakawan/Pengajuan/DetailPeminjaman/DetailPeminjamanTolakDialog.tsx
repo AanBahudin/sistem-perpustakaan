@@ -10,21 +10,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
-import { useState } from "react"
+import { toast } from "sonner"
 
 const DetailPeminjamanTolakDialog = ({children, idPeminjaman} : {children: React.ReactNode, idPeminjaman: string}) => {
 
-    const [loading, setLoading] = useState(false)
     const queryClient = useQueryClient()
-
-    const handleSubmit = async() => {
-        setLoading(true)
-        await tolakPengajuanPeminjaman({idPeminjaman})
-        queryClient.invalidateQueries({queryKey: ['detail', 'peminjaman', idPeminjaman]})
-        setLoading(false)
-    }
+    const mutation = useMutation({
+        mutationFn: () => tolakPengajuanPeminjaman({idPeminjaman}),
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ['detail', 'peminjaman', idPeminjaman]})
+        },
+        onError: () => {
+            toast('Terjadi Gangguan', {description: 'Tidak dapat memperbaharui pengajan, Silahkan coba lagi'})
+        }
+    })
 
     return (
         <AlertDialog>
@@ -38,8 +39,8 @@ const DetailPeminjamanTolakDialog = ({children, idPeminjaman} : {children: React
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Batalkan</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleSubmit} className="text-white bg-destructive hover:bg-destructive/80" disabled={loading}>
-                        {loading ? <Loader2 className="animate-spin" /> : 'Tolak'}
+                    <AlertDialogAction onClick={() => mutation.mutate()} className="text-white bg-destructive hover:bg-destructive/80" disabled={mutation.isPending}>
+                        {mutation.isPending ? <Loader2 className="animate-spin" /> : 'Tolak'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
