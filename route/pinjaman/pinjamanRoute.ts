@@ -12,7 +12,8 @@ import {
     getSinglePinjamanUser,
     pembatalanPinjamanUser,
     getSinglePinjamanUserByBookId,
-    getSinglePinjamanUserByPengembalianId
+    getSinglePinjamanUserByPengembalianId,
+    tolakPeminjamanPustakawan
  } from '../../controllers/pinjaman/pinjamanController'
 
 import { 
@@ -68,5 +69,8 @@ router.route('/requested/pinjaman')
 
 router.route('/accept/pinjaman')
     .post(pustakawanMiddlewareAuthorized, terimaPinjamanValidator, terimaPinjaman)
+
+router.route('/decline')
+    .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, tolakPeminjamanPustakawan)
 
 export default router
