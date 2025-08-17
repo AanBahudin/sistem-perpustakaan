@@ -11,11 +11,11 @@ const DetailPerpanjanganTabs = () => {
     }
 
     return (
-        <section className="w-full flex items-center justify-start gap-x-4 mb-3">
+        <section className="w-full flex items-center justify-start gap-x-2 mb-3">
             {menu.map((item: string, index: number) => {
                 const isActive = perpanjanganDetailTabsPustakawan === item
                 return (
-                    <p onClick={() => handleChangeMenu(item)} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isActive ? 'bg-muted' : 'border'} px-4 py-2 rounded cursor-default`}key={index}>{item}</p>
+                    <p onClick={() => handleChangeMenu(item)} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isActive ? 'bg-muted' : 'border'} px-4 py-2 rounded-lg cursor-default`}key={index}>{item}</p>
                 )
             })}
         </section>

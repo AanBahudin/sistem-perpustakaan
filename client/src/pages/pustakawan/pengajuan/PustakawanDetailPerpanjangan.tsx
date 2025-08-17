@@ -10,9 +10,10 @@ import DetailPemohonPengajuan from "@/components/Pustakawan/Pengajuan/DetailPemi
 import DetailPengajuanPerpanjangan from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/DetailPengajuanPerpanjangan"
 import DetailPerpanjanganTabs from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/DetailPerpanjanganTabs"
 import { useSelector } from "react-redux"
+import { Calendar } from "@/components/ui/calendar"
+import PerpanjanganDetailPeminjamanSection from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/PerpanjanganDetailPeminjamanSection"
 
 const PustakawanDetailPerpanjanganPage = () => {
-
 
     const { perpanjanganDetailTabsPustakawan } = useSelector((state: any) => state.perpanjanganState)
     const { idPerpanjangan } = useParams()
@@ -42,7 +43,12 @@ const PustakawanDetailPerpanjanganPage = () => {
                 </section>
             ) : (
                 <section className='w-full flex items-start gap-x-8'>
-                    <h1>Hello mother</h1>
+                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
+                        <DetailPengajuanHeader />
+                        <PerpanjanganDetailPeminjamanSection dataBuku={buku} dataPeminjaman={dataPeminjaman} pengguna={dataPengguna} />
+                        <DetailBukuPengajuan dataBuku={buku} /> 
+                    </main>
+                    <Calendar className="border rounded-lg" />
                 </section>
             )}
 
