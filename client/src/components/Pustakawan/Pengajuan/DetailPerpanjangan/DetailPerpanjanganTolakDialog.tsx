@@ -26,9 +26,11 @@ const DetailPerpanjanganTolakDialog = ({idPerpanjangan, children} : DetailPerpan
         mutationFn: () => tolakPerpanjanganPustakawan(idPerpanjangan),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['detail', 'perpanjangan', idPerpanjangan]})
+            toast('Pengajuan Diperbaharui', {description: 'Pengajuan Perpanjangan berhasil ditolak'})
+
         },
         onError: () => {
-            toast('Terjadi Gangguan', {description: 'Tidak dapat memperbaharui pengajan, Silahkan coba lagi'})
+            toast('Terjadi Gangguan', {description: 'Tidak dapat memperbaharui pengajuan, Silahkan coba lagi'})
         }
     })
 

@@ -152,6 +152,15 @@ export const acceptPerpanjangan = async({dataPerpanjangan, userId} : AcceptPerpa
     }
 }
 
+export const tolakPerpanjanganPustakawan = async({idPerpanjangan, idPustakawan} : {idPerpanjangan: string, idPustakawan: string}) => {
+    const dataPerpanjangan = await Perpanjangan.findOneAndUpdate(
+        {_id: idPerpanjangan, disetujui: 'Pending'},
+        {disetujui: 'Ditolak', diprosesOleh: idPustakawan}
+    )
+    if (!dataPerpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan!')
+
+    return dataPerpanjangan
+}
 
 
 // ================================= DIGUNAKAN DITEMPAT LAIN =================================

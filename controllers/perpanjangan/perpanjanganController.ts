@@ -3,7 +3,7 @@ import Perpanjangan from "../../model/Perpanjangan";
 import { StatusCodes } from "http-status-codes";
 import Peminjaman from "../../model/Peminjaman";
 import tambahHariKeTanggal from "../../utils/tambahHari";
-import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganByPeminjamanId, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, ubahPerpanjangan } from "../../services/perpanjanganServices";
+import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganByPeminjamanId, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, tolakPerpanjanganPustakawan, ubahPerpanjangan } from "../../services/perpanjanganServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // untuk pengguna
@@ -97,9 +97,7 @@ export const batalPerpanjanganUser = async(req: Request | any, res: Response) =>
 }
 
 
-// untuk pustakawan
-
-// BELUM DITESTING
+// UNTUK PUSTAKAWAN
 export const getAllPerpanjangan = async(req: Request, res: Response) => {
     const {data} = await getSemuaPerpanjanganUser()
 
@@ -112,7 +110,6 @@ export const getAllPerpanjangan = async(req: Request, res: Response) => {
     })
 }
 
-// BELUM DITESTING
 export const getSinglePerpanjangan = async(req: Request, res: Response) => {
     const {data} = await getOnePerpanjanganUser({idPerpanjangan: req.params.id})
 
@@ -138,5 +135,17 @@ export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
         res,
         message,
         data
+    })
+}
+
+export const tolakPerpanjangan = async(req: Request | any, res: Response) => {
+    const {id: idPerpanjangan} = req.params
+    const {userId: idPustakawan} = req.user
+
+    await tolakPerpanjanganPustakawan({idPerpanjangan, idPustakawan})
+
+    SendBasicResponse({
+        res, 
+        message: 'Penolakan pengajuan peminjaman'
     })
 }

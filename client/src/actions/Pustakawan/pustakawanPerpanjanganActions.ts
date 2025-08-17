@@ -16,6 +16,6 @@ export const terimaPengajuanPerpanjanganPustakawan = async({idPerpanjangan} : {i
 }
 
 export const tolakPerpanjanganPustakawan = async(id: string) => {
-    const response = await customFetch.get(`/pustakawan/perpanjangan/decline/${id}`)
+    const response = await customFetch.get(`/perpanjangan/decline/${id}`)
     return response
 }

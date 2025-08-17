@@ -8,7 +8,8 @@ import {
     getSinglePerpanjanganUser,
     editPerpanjanganUser,
     batalPerpanjanganUser,
-    getSinglePerpanjanganByPeminjamanIdUser
+    getSinglePerpanjanganByPeminjamanIdUser,
+    tolakPerpanjangan
 } from '../../controllers/perpanjangan/perpanjanganController'
 import {
     editPerpanjanganInputValidator,
@@ -16,6 +17,7 @@ import {
     terimaPerpanjanganValidator, } from '../../validator/perpanjanganValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
+import { isValidMongooseId } from '../../utils/checker'
 
 const router = express.Router()
 
@@ -54,5 +56,8 @@ router.route('/data/:id')
 
 router.route('/accept')
     .post(pustakawanMiddlewareAuthorized, terimaPerpanjanganValidator, terimaPerpanjangan)
+
+router.route('/decline/:id')
+    .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, tolakPerpanjangan)
 
 export default router

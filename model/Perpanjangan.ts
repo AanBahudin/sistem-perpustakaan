@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const PerpanjanganSchema = new mongoose.Schema({
-    idPeminjaman: {
+        idPeminjaman: {
         type: mongoose.Types.ObjectId,
         ref: 'Peminjaman',
         required: true
