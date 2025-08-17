@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom"
 import DetailPengajuanInformation from "../DetailPeminjaman/DetailPengajuanInformation"
 import { formatedDate } from "@/utils/formatDate"
+import { Link2 } from "lucide-react"
 
 type PerpanjanganDetailPeminjamanSectionType = {
     dataBuku: any,
@@ -11,7 +13,10 @@ const PerpanjanganDetailPeminjamanSection = ({dataBuku, dataPeminjaman, pengguna
   return (
     <section className='w-fuil p-4 bg-muted my-4 rounded-sm flex items-start gap-x-8'>
         <main className='w-1/2'>
-            <h1 className='text-sm font-light'>Detail Peminjaman</h1>
+            <Link to={`/pustakawan/pengajuan/peminjaman/${dataPeminjaman._id}`} className="flex items-center gap-x-4">
+                <h1 className='text-sm font-light'>Detail Peminjaman</h1>
+                <Link2 />
+            </Link>
             <p className='text-xs text-muted-foreground mt-2'>Peminjaman - {dataPeminjaman._id}</p>
 
             <div className='w-full text-muted-foreground text-xs mt-4 gap-y-1 flex flex-col'>
