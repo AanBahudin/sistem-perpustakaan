@@ -95,11 +95,11 @@ export const pembatalanPeminjamanUser = async({idPeminjaman, userId} : Pembatala
 // service dibawah khusus pustakawan
 
 // SUDAH DITESTING
-export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, kondisiBuku, userId} : TerimaPeminjamanUserParamsType) => {
+export const terimaPeminjamanUser = async({idPeminjaman, kondisiBuku, userId} : TerimaPeminjamanUserParamsType) => {
     // objek yang akan digunakan untuk meng-update data pinjaman
     let updatedField : PinjamanUpdatedFieldType = {
-        statusPeminjaman : statusPeminjaman ? 'Dipinjam' : 'Ditolak',
-        disetujui: statusPeminjaman,
+        statusPeminjaman : 'Dipinjam',
+        disetujui: true,
         diprosesOleh: userId,
         kondisi: kondisiBuku
     }
@@ -109,7 +109,7 @@ export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, kondi
         _id: idPeminjaman, 
         disetujui: false,
         statusPeminjaman: 'Diajukan',
-        berakhirPada: null
+        // berakhirPada: null
     })
     if (!dataPeminjaman) throw new NotFoundError('Data peminjaman tidak ditemukan')
 
@@ -122,10 +122,7 @@ export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, kondi
      if (pinjamanMasihAda) throw new BadRequestError('kamu masih memiliki pinjaman aktif atau dalam proses untuk buku ini')
 
     // jika data peminjaman diterima, maka tambahkan field berakhirPada untuk menandai masa selesainya peminjaman
-    if (statusPeminjaman) {
-        updatedField.berakhirPada = tambahHariKeTanggal(new Date, dataPeminjaman.durasiPeminjaman as number)
-
-    }    
+    updatedField.berakhirPada = tambahHariKeTanggal(new Date, dataPeminjaman.durasiPeminjaman as number)
 
     // update data peminjaman dengan objek updatedField
     const dataPinjaman = await Peminjaman.findOneAndUpdate(
@@ -134,14 +131,22 @@ export const terimaPeminjamanUser = async({idPeminjaman, statusPeminjaman, kondi
         {new: true, runValidators: true}
     )
 
-    if (statusPeminjaman) {
-        // update attribute jumlahPinjaman di model Pengguna
-        await penggunaMeminjam({idPengguna: dataPeminjaman.peminjam as string})
-        // update attribute stok buku di model Buku
-        await bukuDipinjam(dataPeminjaman.buku as string)
-    }
+    // update attribute jumlahPinjaman di model Pengguna
+    await penggunaMeminjam({idPengguna: dataPeminjaman.peminjam as string})
+    // update attribute stok buku di model Buku
+    await bukuDipinjam(dataPeminjaman.buku as string)
 
     return {data: dataPinjaman}
+}
+
+export const tolakPinjamanPustakawan = async({idPeminjaman, idPengguna} : {idPeminjaman: string, idPengguna: string}) => {
+    const pengajuanPeminjaman = await Peminjaman.findOneAndUpdate({_id: idPeminjaman}, {
+        statusPeminjaman: 'Ditolak', 
+        disetujui: 'false',
+        diprosesOleh: idPengguna
+    }, {runValidators: true, new: true})
+
+    return {message: 'success'}
 }
 
 // SUDAH DITESTING

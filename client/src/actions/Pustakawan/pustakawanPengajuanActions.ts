@@ -12,11 +12,15 @@ export const getAllPengajuanPeminjaman = async({params} : {params: string}) => {
 
 export const getDetailPengajuanPeminjaman = async({id} : {id: string}) => {
     const {data: response} = await customFetch.get(`/pustakawan/peminjaman/${id}`)
-    console.log(response.data)
     return response.data
+}
+
+export const terimaPengajuanPeminjaman = async({data} : {data: {idPeminjaman: string, kondisiBuku: string}}) => {
+    const {data: fetchData} = await customFetch.post('/pinjaman/accept', data)
+    return fetchData
 }
 
 export const tolakPengajuanPeminjaman = async({idPeminjaman} : {idPeminjaman: string}) => {
     const response = await customFetch.get(`/pinjaman/decline/${idPeminjaman}`)
-    return response
+    return response 
 }

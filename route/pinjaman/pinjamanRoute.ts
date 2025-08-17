@@ -67,7 +67,7 @@ router.route('/pinjaman/:id')
 router.route('/requested/pinjaman')
     .get(pustakawanMiddlewareAuthorized, getAllRequestedPinjaman)
 
-router.route('/accept/pinjaman')
+router.route('/accept')
     .post(pustakawanMiddlewareAuthorized, terimaPinjamanValidator, terimaPinjaman)
 
 router.route('/decline/:id')

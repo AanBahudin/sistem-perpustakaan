@@ -25,7 +25,7 @@ const  PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
                     <Button size='icon' className='bg-destructive hover:bg-destructive/50 ease-in-out duration-200 text-center text-xs text-white'><X /></Button>
                 </DetailPeminjamanTolakDialog>
 
-                <DetailPeminjamanConfirmDialog>
+                <DetailPeminjamanConfirmDialog idPeminjaman={peminjaman._id}>
                     <Button className='text-center text-white hover:bg-primary/50 ease-in-out duration-200'><Check /></Button>
                 </DetailPeminjamanConfirmDialog>
             </main>

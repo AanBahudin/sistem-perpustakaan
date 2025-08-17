@@ -2,7 +2,7 @@ import { Response, Request } from "express"
 
 import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
-import { getOnePeminjaman, getOnePeminjamanUser, getOnePeminjamanUserByIdBook, getOnePeminjamanUserByPengembalianIdServices, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser } from "../../services/peminjamanServices"
+import { getOnePeminjaman, getOnePeminjamanUser, getOnePeminjamanUserByIdBook, getOnePeminjamanUserByPengembalianIdServices, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser, tolakPinjamanPustakawan } from "../../services/peminjamanServices"
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
 // 4 controller dibawah khusus untuk pengguna
@@ -95,30 +95,26 @@ export const pembatalanPinjamanUser = async(req: Request | any, res: Response) =
 
 // controller ini khusus untuk pustakawan
 export const terimaPinjaman = async(req: Request | any, res: Response) => {
-    const { idPeminjaman, statusPeminjaman, kondisiBuku } = req.body
+    const { idPeminjaman, kondisiBuku } = req.body
     const {userId} = req.user
 
-    const {data} = await terimaPeminjamanUser({idPeminjaman, statusPeminjaman, userId, kondisiBuku})
+    // console.log(idPeminjaman, kondisiBuku)
+    // res.send(200)
+    const {data} = await terimaPeminjamanUser({idPeminjaman, userId, kondisiBuku})
 
     // pemintaan ditolak/terima akan dikirim melalu notifikasi
-
     SendOneDataResponse({
         res,
-        message: statusPeminjaman ? 'Pinjaman diterima' : 'Pinjaman ditolak',
+        message: 'Pinjaman diterima',
         data
     })
-    
 }
 
 export const tolakPeminjamanPustakawan = async(req: Request | any, res: Response) => {
     const {id: idPeminjaman} = req.params
     const {userId} = req.user
 
-    const pengajuanPeminjaman = await Peminjaman.findOneAndUpdate({_id: idPeminjaman}, {
-        statusPeminjaman: 'Ditolak', 
-        disetujui: 'false',
-        diprosesOleh: userId
-    }, {runValidators: true, new: true})
+    await tolakPinjamanPustakawan({idPeminjaman, idPengguna: userId})
 
     SendOneDataResponse({
         res,

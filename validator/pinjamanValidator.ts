@@ -40,10 +40,6 @@ export const terimaPinjamanValidator = withValidationErrors([
         .custom(async(id) => {
             return isValidMongooseId(id)
         }),
-    body('statusPeminjaman')
-        .notEmpty().withMessage('Status penerimaan tidak boleh kosong')
-        .isBoolean().withMessage('Data harus boolean')
-        .toBoolean(),
     body('kondisiBuku')
         .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
         .custom(async(kondisiBuku) => {

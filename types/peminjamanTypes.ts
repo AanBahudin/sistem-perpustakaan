@@ -33,7 +33,6 @@ export type PembatalanPeminjamanUserParamsType = {
 export type TerimaPeminjamanUserParamsType = {
     userId: string,
     idPeminjaman: string,
-    statusPeminjaman: boolean,
     kondisiBuku: string
 }
 

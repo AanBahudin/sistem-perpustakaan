@@ -20,16 +20,37 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
+import { terimaPengajuanPeminjaman } from "@/actions/Pustakawan/pustakawanPengajuanActions"
+import { toast } from "sonner"
+import { Loader2 } from "lucide-react"
 
-const DetailPeminjamanConfirmDialog = ({children} : {children: React.ReactNode}) => {
+const DetailPeminjamanConfirmDialog = ({children, idPeminjaman} : {children: React.ReactNode, idPeminjaman: string}) => {
 
+    const queryClient = useQueryClient()
+    const [kondisiBuku, setKondisiBuku] = useState('')
     const {isLoading, data} = useQuery({
         queryKey: ['kondisi'],
         queryFn: getAllKondisi
     })
 
     const newData = isLoading ? ['memuat'] : [...data.map((item: any) => item.kondisi)]
+
+    const mutation = useMutation({
+        mutationFn: (payload: { idPeminjaman: string; kondisiBuku: string }) => terimaPengajuanPeminjaman({ data: payload }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ["detail", "peminjaman", idPeminjaman]})
+            toast('Peminjaman Berhasil Diterima!')
+        },
+        onError: () => {
+            toast('Gagal menerima peminjaman!')
+        }
+    })
+
+    const handleSubmit = () => {
+        mutation.mutate({idPeminjaman, kondisiBuku})
+    }
 
     return (
         <Dialog>
@@ -43,7 +64,8 @@ const DetailPeminjamanConfirmDialog = ({children} : {children: React.ReactNode})
                 <div className="grid gap-4">
                     <div className="grid gap-1">
                         <Label htmlFor="name-1" className="text-xs">Kondisi Buku</Label>
-                        <Select>
+                        <input type="hidden" name="idPeminjaman" id="idPeminjaman" value={idPeminjaman} />
+                        <Select required value={kondisiBuku} onValueChange={(value: string) => setKondisiBuku(value)} name="kondisiBuku">
                             <SelectTrigger className="w-full !text-xs">
                                 <SelectValue placeholder="Kondisi Awal Buku"/>
                             </SelectTrigger>
@@ -63,9 +85,11 @@ const DetailPeminjamanConfirmDialog = ({children} : {children: React.ReactNode})
                 
                 <DialogFooter className="mt-4">
                     <DialogClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline" className="text-xs" disabled={mutation.isPending}>Batal</Button>
                     </DialogClose>
-                    <Button type="submit" className="text-white">Save changes</Button>
+                    <Button type="submit" className="text-white text-xs" disabled={mutation.isPending || !kondisiBuku} onClick={handleSubmit}>
+                        {mutation.isPending ? <Loader2 className="animate-spin" /> : "Terima"}
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
