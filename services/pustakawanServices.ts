@@ -214,6 +214,16 @@ export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => 
 
 export const getSinglePengajuanPerpanjanganUser = async({id} : {id: string}) => {
     const perpanjangan = await Perpanjangan.findOne({_id: id})
+        .populate({
+            path: 'idPeminjaman'
+        })
+        .populate({
+            path: 'idPengguna',
+            select: '-password'
+        })
+        .populate({
+            path: 'idBuku'
+        })
     return perpanjangan
 }
 

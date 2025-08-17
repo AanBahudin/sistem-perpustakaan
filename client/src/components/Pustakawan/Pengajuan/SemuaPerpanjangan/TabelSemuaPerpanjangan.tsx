@@ -10,11 +10,15 @@ import {
 import { formatedDate } from "@/utils/formatDate"
 import { Link2 } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
+    const navigate = useNavigate()
     const [searchParams] = useSearchParams()
+    const handleNavigate = (id: string) => {
+         navigate(id)
+    }
 
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
@@ -41,7 +45,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                             {perpanjangan.map((item: any, index: number) => {
                                 const {idBuku, idPengguna} = item
                                 return (
-                                    <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
+                                    <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                         <TableCell className="w-[200px] text-xs">{idBuku.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
