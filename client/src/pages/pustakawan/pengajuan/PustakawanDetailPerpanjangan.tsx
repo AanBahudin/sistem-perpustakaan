@@ -39,6 +39,7 @@ const PustakawanDetailPerpanjanganPage = () => {
                         <DetailPengajuanPerpanjangan dataPerpanjangan={data} />
                         <DetailBukuPengajuan dataBuku={buku} />
                     </main>
+
                     <DetailPemohonPengajuan dataPemohon={dataPengguna} />
                 </section>
             ) : (
