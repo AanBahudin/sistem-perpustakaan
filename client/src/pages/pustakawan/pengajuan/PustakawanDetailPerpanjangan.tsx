@@ -8,9 +8,13 @@ import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import DetailPemohonPengajuan from "@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPemohonPengajuan"
 import DetailPengajuanPerpanjangan from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/DetailPengajuanPerpanjangan"
+import DetailPerpanjanganTabs from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/DetailPerpanjanganTabs"
+import { useSelector } from "react-redux"
 
 const PustakawanDetailPerpanjanganPage = () => {
 
+
+    const { perpanjanganDetailTabsPustakawan } = useSelector((state: any) => state.perpanjanganState)
     const { idPerpanjangan } = useParams()
     const {data, isLoading} = useQuery({
         queryKey: ['detail', 'perpanjangan', idPerpanjangan],
@@ -18,22 +22,31 @@ const PustakawanDetailPerpanjanganPage = () => {
     })
 
     if (isLoading) return <h1>Loading ...</h1>
-    const { idBuku: buku, idPengguna: dataPengguna } = data
+    const { idBuku: buku, idPengguna: dataPengguna, idPeminjaman: dataPeminjaman } = data
 
     return (
         <Container className="w-full">
             <DetailPengajuanBreadCrumbs text={buku.judul} />
             <PerpanjanganApprovalContainer perpanjangan={data} />
 
-            <section className='w-full flex items-start gap-x-8'>
-                <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
-                    <DetailPengajuanHeader />
-                    <DetailPengajuanPerpanjangan dataPerpanjangan={data} />
-                    <DetailBukuPengajuan dataBuku={buku} />
-                </main>
+            <DetailPerpanjanganTabs />
 
-                <DetailPemohonPengajuan dataPemohon={dataPengguna} />
-            </section>
+            {perpanjanganDetailTabsPustakawan === 'Pengajuan' ? (
+                <section className='w-full flex items-start gap-x-8'>
+                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
+                        <DetailPengajuanHeader />
+                        <DetailPengajuanPerpanjangan dataPerpanjangan={data} />
+                        <DetailBukuPengajuan dataBuku={buku} />
+                    </main>
+                    <DetailPemohonPengajuan dataPemohon={dataPengguna} />
+                </section>
+            ) : (
+                <section className='w-full flex items-start gap-x-8'>
+                    <h1>Hello mother</h1>
+                </section>
+            )}
+
+
         </Container>
     )
 }

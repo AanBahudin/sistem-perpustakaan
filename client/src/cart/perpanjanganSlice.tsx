@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const defaultState = {
     alasan: '',
-    durasi: ''
+    durasi: '',
+    perpanjanganDetailTabsPustakawan: 'Pengajuan'
 }
 
 const PerpanjanganSlice = createSlice({
@@ -14,9 +15,12 @@ const PerpanjanganSlice = createSlice({
         },
         setDurasiPerpanjangan: (state, action) => {
             state.durasi = action.payload
+        },
+        setPerpanjanganDetailTabsPustakawan: (state, action) => {
+            state.perpanjanganDetailTabsPustakawan = action.payload
         }
     }
 })
 
-export const {setAlasanPerpanjangan, setDurasiPerpanjangan} = PerpanjanganSlice.actions
+export const {setAlasanPerpanjangan, setDurasiPerpanjangan, setPerpanjanganDetailTabsPustakawan} = PerpanjanganSlice.actions
 export default PerpanjanganSlice.reducer
