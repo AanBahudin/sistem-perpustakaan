@@ -43,7 +43,7 @@ const DetailPerpanjanganConfirmDialog = ({children, idPerpanjangan} : DetailPerp
             <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Terima Peminjaman?</DialogTitle>
+                    <DialogTitle>Terima Perpanjangan?</DialogTitle>
                     <DialogDescription className="text-xs mt-4">Pilih kondisi awal buku sebelum menyetujui peminjaman. Informasi ini akan dicatat sebagai acuan saat pengembalian untuk memastikan kondisi buku tetap terjaga</DialogDescription>
                 </DialogHeader>
 

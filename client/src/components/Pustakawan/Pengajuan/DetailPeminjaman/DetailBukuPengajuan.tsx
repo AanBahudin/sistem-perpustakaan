@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
 import { Separator } from "@/components/ui/separator"
 import DetailPengajuanInformation from "./DetailPengajuanInformation"
+import { Link } from "react-router-dom"
 
 const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
 
@@ -20,7 +21,7 @@ const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
                 <img className='w-40 h-44 rounded-xl object-cover border' src={dataBuku.cover} alt={dataBuku.judul} />
 
                 <main className='flex-1'>
-                    <h1 className='text-xl font-semibold'>{dataBuku.judul}</h1>
+                    <Link to={`/pustakawan/buku/${dataBuku._id}`} className='text-xl font-semibold hover:underline ease-in-out duration-200'>{dataBuku.judul}</Link>
                     <p className='text-xs text-muted-foreground'>{dataBuku.tagline.slice(0, 80)}...</p>
                     <div className='w-full flex flex-wrap gap-2 my-1'>
                         {dataBuku.kategori.map((item: string, index: number) => {

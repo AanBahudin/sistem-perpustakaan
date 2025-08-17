@@ -6,7 +6,7 @@ import DetailPerpanjanganConfirmDialog from "./DetailPerpanjanganConfirmDialog"
 
 const PerpanjanganApprovalContainer = ({perpanjangan} : {perpanjangan: any}) => {
 
-    const { disetujui, idPengguna: peminjam } = perpanjangan
+    const { disetujui, idPengguna: peminjam, idBuku: buku } = perpanjangan
 
     if (disetujui === 'Diterima') return <AcceptedPengajuanBanner />
     if (disetujui === 'Ditolak') return <DeclinePengajuanBanner />
@@ -14,7 +14,7 @@ const PerpanjanganApprovalContainer = ({perpanjangan} : {perpanjangan: any}) => 
     return (
         <Alert className='w-full flex items-center justify-between my-6'>
             <h1 className='text-sm font-light'>
-                <span className='text-primary font-bold underline'>{peminjam.nama}</span> mengajukan peminjaman, Terima pengajuan?
+                <span className='text-primary font-bold underline'>{peminjam.nama}</span> mengajukan perpanjangan pada buku <span className="text-primary font-semibold">{buku.judul}</span>, Terima pengajuan?
             </h1>
 
             <main className='flex items-center gap-x-4'>
