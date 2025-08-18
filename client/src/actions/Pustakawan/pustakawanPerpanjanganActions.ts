@@ -1,5 +1,6 @@
 import { customFetch } from "@/utils/customFetch";
 
+
 export const getAllPerpanjangan = async({query} : {query: string}) => {
     const {data: response} = await customFetch.get(`/pustakawan/perpanjangan?${query}`)
     return response.data
@@ -11,7 +12,7 @@ export const getSinglePerpanjanganPustakawan = async(id: string) => {
 }
 
 export const terimaPengajuanPerpanjanganPustakawan = async({idPerpanjangan} : {idPerpanjangan: string}) => {
-    const response = await customFetch.get(`/pustakawan/perpanjangan/accept/${idPerpanjangan}`)
+    const response = await customFetch.get(`/perpanjangan/accept/${idPerpanjangan}`)
     return response
 }
 

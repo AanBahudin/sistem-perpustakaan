@@ -38,10 +38,7 @@ export type GetOnePerpanjanganUserParamsType = {
 
 export type AcceptPerpanjanganParamsType = {
     userId: string,
-    dataPerpanjangan: {
-        idPerpanjangan: string,
-        disetujui: boolean
-    }
+    idPerpanjangan: string,
 }
 
 export type PenambahanPerpanjanganParamsType = {

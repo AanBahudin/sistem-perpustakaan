@@ -28,6 +28,8 @@ const ConfirmPerpanjangan = () => {
     const isLoading = results.some(q => q.isLoading)
     if (isLoading) return <ConfirmPerpanjanganLoading />
 
+    console.log(perpanjangan)
+    
     return (
         <Container className="w-4/5 my-10 flex gap-x-6">
             <section className="w-2/3 flex flex-col">

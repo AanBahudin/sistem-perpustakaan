@@ -15,8 +15,6 @@ import { Button } from "../ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { pembatalanPerpanjangan } from "@/actions/perpanjanganActions"
 import { useNavigate } from "react-router-dom"
-import { store } from "@/store"
-import { setAlasan, setDurasi } from "@/cart/peminjamanSlice"
 
 
 const CancelPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {

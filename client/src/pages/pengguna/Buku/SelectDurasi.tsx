@@ -31,11 +31,12 @@ const SelectDurasi = ({defaultDurasi, perpanjangan} : SelectDurasiType) => {
   const isObjectEmpty = (Object.keys(perpanjangan || {}).length) === 0
 
   const durasi = useSelector((state: any) => state.peminjamanState.durasi)
+  const newDefaultDurasi = perpanjangan?.disetujui === 'Diterima' ? defaultDurasi : durasi
 
   return (
     <div className="w-full flex flex-col gap-y-2">
         <Label className="text-sm">Durasi peminjaman</Label>
-        <Select required disabled={!isObjectEmpty} defaultValue={defaultDurasi || durasi.toString()} name="durasi" onValueChange={(val) => store.dispatch(setDurasi(Number(val)))}>
+        <Select required disabled={newDefaultDurasi} defaultValue={newDefaultDurasi} name="durasi" onValueChange={(val) => store.dispatch(setDurasi(Number(val)))}>
           <SelectTrigger className="w-full" id="durasi" name="durasi"> 
             <SelectValue placeholder="Pilih durasi peminjaman" />
           </SelectTrigger>

@@ -122,14 +122,13 @@ export const getSinglePerpanjangan = async(req: Request, res: Response) => {
 
 // SUDAH DITESTING
 export const terimaPerpanjangan = async(req: Request | any, res: Response) => {
-    const {data, message} = await acceptPerpanjangan({
-        userId: req.user.userId,
-        dataPerpanjangan: {
-            disetujui: req.body.disetujui,
-            idPerpanjangan: req.body.idPerpanjangan
-        }
-    })
+    const {id: idPerpanjangan} = req.params
+    const {userId} = req.user
 
+    const {data, message} = await acceptPerpanjangan({
+        userId,
+        idPerpanjangan
+    })
 
     SendOneDataResponse({
         res,

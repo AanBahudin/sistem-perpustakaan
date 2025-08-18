@@ -54,8 +54,8 @@ router.route('/')
 router.route('/data/:id')
     .get(pustakawanMiddlewareAuthorized, getSinglePerpanjangan)
 
-router.route('/accept')
-    .post(pustakawanMiddlewareAuthorized, terimaPerpanjanganValidator, terimaPerpanjangan)
+router.route('/accept/:id')
+    .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, terimaPerpanjangan)
 
 router.route('/decline/:id')
     .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, tolakPerpanjangan)

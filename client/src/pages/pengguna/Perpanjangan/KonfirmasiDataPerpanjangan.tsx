@@ -27,7 +27,8 @@ const KonfirmasiDataPerpanjangan = ({perpanjangan, peminjaman} : {perpanjangan: 
             </main>
 
             
-            {perpanjangan?.disetujui === 'Ditolak' || !perpanjangan?.disetujui && <ConfirmPerpanjanganDialog peminjaman={peminjaman} />}
+            {(perpanjangan?.disetujui === 'Ditolak' || !perpanjangan?.disetujui) && <ConfirmPerpanjanganDialog peminjaman={peminjaman} />}
+            {/* <ConfirmPerpanjanganDialog peminjaman={peminjaman} /> */}
             {perpanjangan?.disetujui === 'Pending' || perpanjangan?.disetujui === 'Diterima' && <DiajukkanStatus link={`/my/perpanjangan/${perpanjangan._id}/${perpanjangan.idBuku._id}`} />}
         </section>
     )

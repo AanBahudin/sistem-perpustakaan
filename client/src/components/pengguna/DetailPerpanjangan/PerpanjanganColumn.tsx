@@ -14,6 +14,7 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
 
     let {createdAt: tanggalPeminjaman, berakhirPada} = peminjaman
     let {disetujui} = perpanjangan
+    console.log(disetujui)
 
     return (
         <section className="rounded-2xl h-fit p-6 col-span-4 border">
@@ -38,7 +39,7 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
             <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center text-white'> Perpanjangan {disetujui}</Button>
 
             {
-                disetujui && <CancelPerpanjangan perpanjangan={perpanjangan} />
+                disetujui === 'Pending' && <CancelPerpanjangan perpanjangan={perpanjangan} />
             }
         </section>
     )

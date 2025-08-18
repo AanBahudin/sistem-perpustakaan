@@ -115,41 +115,31 @@ export const getOnePerpanjanganUser = async({idPerpanjangan} : GetOnePerpanjanga
 }
 
 // SUDAH DITESTING
-export const acceptPerpanjangan = async({dataPerpanjangan, userId} : AcceptPerpanjanganParamsType) => {
-    let message: string | null;
-    const { idPerpanjangan, disetujui } = dataPerpanjangan
+export const acceptPerpanjangan = async({idPerpanjangan, userId} : AcceptPerpanjanganParamsType) => {
 
     // cek apakah data perpanjangan tidak tersedia
     const perpanjangan = await Perpanjangan.findOne({_id: idPerpanjangan, disetujui: 'Pending'})
     if (!perpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan')
 
-    // cek apakah status disetujui
-    if (disetujui) {
-        message = 'Perpanjangan pinjaman diterima'
-        // ambil data peminjaman
-        const pinjaman = await Peminjaman.findOne({_id: perpanjangan.idPeminjaman, statusPeminjaman: 'Dipinjam', disetujui: true})
-        if (!pinjaman) throw new NotFoundError('Data pinjaman tidak ditemukan')
-        const {durasiPeminjaman, berakhirPada} = pinjaman!
+    // ambil data peminjaman
+    const pinjaman = await Peminjaman.findOne({_id: perpanjangan.idPeminjaman, statusPeminjaman: 'Dipinjam', disetujui: true})
+    if (!pinjaman) throw new NotFoundError('Data pinjaman tidak ditemukan')
+    const {durasiPeminjaman, berakhirPada} = pinjaman!
 
-        // perpanjangan masa durasi.
-        let penambahanDurasiPeminjaman = durasiPeminjaman + perpanjangan.durasi
-        let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, perpanjangan.durasi)
+    // perpanjangan masa durasi.
+    let penambahanDurasiPeminjaman = durasiPeminjaman + perpanjangan.durasi
+    let penambahanTanggalPinjaman = tambahHariKeTanggal(berakhirPada as Date, perpanjangan.durasi)
 
-        // update data perpanjangan
-        await penambahanPerpanjangan({userId, idPerpanjangan: idPerpanjangan})
+    // update data perpanjangan
+    await penambahanPerpanjangan({userId, idPerpanjangan: idPerpanjangan})
 
-        // update data pinjaman
-        const perpanjanganDiterima = await updateDurasiPinjaman({
-            idPinjaman: pinjaman._id,
-            berakhirPada: penambahanTanggalPinjaman,
-            durasiPeminjaman: penambahanDurasiPeminjaman
-        })
-        return {data: perpanjanganDiterima, message}
-    } else {
-        message = 'Perpanjangan peminjaman ditolak'
-        const tertolak = await perpanjangaDitolak({userId, idPerpanjangan: perpanjangan._id.toString()})
-        return {data: tertolak, message}
-    }
+    // update data pinjaman
+    const perpanjanganDiterima = await updateDurasiPinjaman({
+        idPinjaman: pinjaman._id,
+        berakhirPada: penambahanTanggalPinjaman,
+        durasiPeminjaman: penambahanDurasiPeminjaman
+    })
+    return {data: perpanjanganDiterima, message: 'Perpanjangan pinjaman diterima'}
 }
 
 export const tolakPerpanjanganPustakawan = async({idPerpanjangan, idPustakawan} : {idPerpanjangan: string, idPustakawan: string}) => {
