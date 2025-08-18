@@ -7,8 +7,6 @@ const ConfirmPengembalian = () => {
 
   const {id} = useParams()
 
-  console.log(id)
-
   const {data, isLoading} = useQuery({
     queryKey: ['confirm', 'pengembalian', id],
     queryFn: () => createPengembalianUser(id as string)

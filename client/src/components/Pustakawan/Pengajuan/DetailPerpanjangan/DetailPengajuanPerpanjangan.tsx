@@ -3,8 +3,6 @@ import { formatedDate } from '@/utils/formatDate'
 
 const DetailPengajuanPerpanjangan = ({dataPerpanjangan} : {dataPerpanjangan: any}) => {
 
-    console.log(dataPerpanjangan)
-
     const {idBuku: buku, idPengguna: peminjam} = dataPerpanjangan
 
     return (

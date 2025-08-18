@@ -50,7 +50,6 @@ const EditPengajuanPerpanjanganDialog = ({children, perpanjangan} : EditPengajua
     const [isLoading, setLoading] = useState(false)
 
     const handleSubmit = async(event: any) => {
-        console.log('test')
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const data = Object.fromEntries(formData) as any

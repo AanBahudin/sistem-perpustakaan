@@ -8,9 +8,6 @@ type StatsContainerType = {
 
 const StatsContainer = ({peminjaman, bukuHilang} : StatsContainerType) => {
 
-    console.log(peminjaman)
-
-
     const totalDipinjam = peminjaman.filter((item: any) => item.statusPeminjaman === 'Dipinjam').length
     const totalDikembalikan = peminjaman.filter((item: any) => item.statusPeminjaman === 'Dikembalikan').length
     const totalTerlambat = peminjaman.filter((item: any) => item.statusPeminjaman === 'Terlambat').length

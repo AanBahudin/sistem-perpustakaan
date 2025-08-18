@@ -26,7 +26,6 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
           setLoading(false);
           
           if (redirectTo !== '') {
-            console.log('should be navigated')
             navigate(redirectTo)
           }
       

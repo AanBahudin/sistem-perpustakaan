@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DosenMahasiswaRatio = ({userAccountStatusRatio} : {userAccountStatusRatio: any}) => {
-    console.log(userAccountStatusRatio)
 
     const getCSSVariable = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     const chartRef = useRef(null);

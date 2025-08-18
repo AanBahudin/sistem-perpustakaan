@@ -10,7 +10,6 @@ const perpanjanganFilterSheetSlice = createSlice({
     initialState: defaultState,
     reducers: {
         setDurasiPerpanjangan: (state, action) => {
-            console.log(action)
             state.durasi = action.payload
         },
         setDisetujuiPerpanjangan: (state, action) => {

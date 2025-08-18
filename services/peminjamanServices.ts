@@ -73,8 +73,6 @@ export const getOnePeminjamanUserByIdBook = async({userId, bookId} : GetOnePemin
 
 // SUDAH DITESTING
 export const getOnePeminjamanUserByPengembalianIdServices = async({userId, pengembalianId} : getOnePeminjamanUserByPengembalianIdType) => {
-    console.log('id pengguna', userId)
-    console.log('id pengembalian', pengembalianId)
     const data = await Peminjaman.findOne({peminjam:userId,  dataPengembalian: pengembalianId}).populate(['buku', 'peminjam', 'diprosesOleh'])
     return data
 }

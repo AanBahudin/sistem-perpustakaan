@@ -84,7 +84,6 @@ export const ubahPerpanjangan = async({idPerpanjangan, userId, dataPerpanjangan}
 
 // SUDAH DITESTING
 export const pembatalanPerpanjangan = async({userId, idPerpanjangan} : PembatalanPerpanjanganParamsType) => {
-    console.log(idPerpanjangan)
     const perpanjangan = await Perpanjangan.findOneAndDelete({
         _id: idPerpanjangan,
         idPengguna: userId,

@@ -31,7 +31,7 @@ const ShareBookDialog = ({children} : {children: React.ReactNode}) => {
         store.dispatch(setIsCopied(false))
       }, 1000);
     } catch (error) {
-      console.log('error')
+        return error
     }
   }
 

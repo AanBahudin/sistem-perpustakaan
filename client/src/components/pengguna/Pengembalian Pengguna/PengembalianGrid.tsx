@@ -18,7 +18,6 @@ const PengembalianGrid = ({data=['default']} : PeminjamanGridType) => {
      <div className="w-full grid grid-cols-12 gap-4">
         {data.map((item:any) => {
             const {idBuku, idPeminjaman, statusPengembalian, createdAt, tanggalPengembalian} = item
-            // console.log(newJudul)
             let newJudul = idBuku.judul
             if (newJudul?.length > 27) {
                 newJudul = newJudul.slice(0,27) + '....'

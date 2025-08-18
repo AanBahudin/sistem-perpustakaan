@@ -13,8 +13,6 @@ const PengembalianTabs = () => {
     const filter = searchParams.get('statusPengembalian') || 'Semua';
 
     const handleTab = ({title, value} : {title: string, value: string}) => {
-
-        console.log(value)
         const params = new URLSearchParams(searchParams)
         if (value) {    
             params.set('statusPengembalian', value)

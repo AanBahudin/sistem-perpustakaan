@@ -11,7 +11,6 @@ type sendUpdateEmailVerificationParamsType = {
 }
 
 const sendUpdateEmailVerification = async({userId, nama, oldEmail, newEmail} : sendUpdateEmailVerificationParamsType) => {
-    console.log(newEmail)
     const token = generateToken({userId, newEmail, oldEmail} as DataVerifyEmailUpdateType)
     const linkVerifikasi = generateVerificationLink({ credentialName: 'token', url: '/verify/email', credentials: token })
 

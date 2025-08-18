@@ -39,7 +39,6 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
                         <TableBody>
                             {pengembalian.map((item: any, index: number) => {
                                 const {idBuku, idPengguna} = item
-                                console.log(item)
                                 return (
                                     <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>

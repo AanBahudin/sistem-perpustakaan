@@ -14,8 +14,6 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
 
     let {createdAt: tanggalPeminjaman, berakhirPada} = peminjaman
     let {disetujui} = perpanjangan
-    console.log(disetujui)
-
     return (
         <section className="rounded-2xl h-fit p-6 col-span-4 border">
             <main className="w-full flex justify-between items-center">
