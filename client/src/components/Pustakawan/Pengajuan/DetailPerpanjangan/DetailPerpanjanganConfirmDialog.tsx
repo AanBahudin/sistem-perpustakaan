@@ -27,7 +27,7 @@ const DetailPerpanjanganConfirmDialog = ({children, idPerpanjangan} : DetailPerp
         mutationFn: ({idPerpanjangan} : {idPerpanjangan: string}) => terimaPengajuanPerpanjanganPustakawan({ idPerpanjangan }),
         onSuccess: () => {
             toast('Perpanjangan Berhasil Diterima!')
-            queryClient.invalidateQueries({queryKey: ["detail", "peminjaman", idPerpanjangan]})
+            queryClient.invalidateQueries({queryKey: ["detail", "perpanjangan", idPerpanjangan]})
         },
         onError: () => {
             toast('Gagal menerima perpanjangan!')
