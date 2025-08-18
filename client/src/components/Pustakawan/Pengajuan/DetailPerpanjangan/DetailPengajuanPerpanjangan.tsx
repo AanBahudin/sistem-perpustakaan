@@ -3,6 +3,8 @@ import { formatedDate } from '@/utils/formatDate'
 
 const DetailPengajuanPerpanjangan = ({dataPerpanjangan} : {dataPerpanjangan: any}) => {
 
+    console.log(dataPerpanjangan)
+
     const {idBuku: buku, idPengguna: peminjam} = dataPerpanjangan
 
     return (
@@ -15,7 +17,7 @@ const DetailPengajuanPerpanjangan = ({dataPerpanjangan} : {dataPerpanjangan: any
                     <DetailPengajuanInformation label="Tanggal Pengajuan" value={formatedDate(dataPerpanjangan.createdAt)} />
                     <DetailPengajuanInformation label="Durasi Peminjaman" value={dataPerpanjangan.durasi + ' Hari'} />
                     <DetailPengajuanInformation label="Status Pengajuan" value={dataPerpanjangan.disetujui} />
-                    <DetailPengajuanInformation label="Judul Buku" value={buku.judul.slice(0, 22)} />
+                    <DetailPengajuanInformation label="Judul Buku" value={buku?.judul?.slice(0, 22)} />
                     <div className='w-full flex'>
                         <p className='w-1/2'>Alasan Pengajuan</p>
                         <p className='w-1/2 min-h-10 border rounded p-1 overflow-y-scroll ml-2 scroll-custom'>{dataPerpanjangan.alasan}</p>

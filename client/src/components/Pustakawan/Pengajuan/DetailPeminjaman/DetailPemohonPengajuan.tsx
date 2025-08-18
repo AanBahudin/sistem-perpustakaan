@@ -14,14 +14,14 @@ const DetailPemohonPengajuan = ({dataPemohon} : {dataPemohon: any}) => {
 
         <div className='flex items-start justify-start gap-x-4 my-6'>
             {dataPemohon.fotoProfil ? (
-                <img className='w-14 h-14 rounded-full object-cover' src={dataPemohon.fotoProfil} alt={dataPemohon.nama} />
+                <img className='w-14 h-14 rounded-full object-cover' src={dataPemohon?.fotoProfil} alt={dataPemohon?.nama} />
             ) : (
-                <div className='w-14 h-14 rounded-full bg-muted flex items-center justify-center font-semibold text-xl'>{dataPemohon.nama[0]}</div>
+                <div className='w-14 h-14 rounded-full bg-muted flex items-center justify-center font-semibold text-xl'>{dataPemohon?.nama[0]}</div>
             )}
 
             <div className='flex flex-col items-start justify-start'>
-                <h1 className='font-bold capitalize text-md'>{dataPemohon.nama}</h1>
-                <h5 className='text-xs text-muted-foreground'>{dataPemohon.email}</h5>
+                <h1 className='font-bold capitalize text-md'>{dataPemohon?.nama}</h1>
+                <h5 className='text-xs text-muted-foreground'>{dataPemohon?.email}</h5>
             </div>
         </div>
 
@@ -29,10 +29,10 @@ const DetailPemohonPengajuan = ({dataPemohon} : {dataPemohon: any}) => {
             <h5 className='font-semibold uppercase text-xs mb-3'>Informasi Tambahan</h5>
 
             <div className='my-2 text-xs flex flex-col gap-y-2 text-muted-foreground'>
-                <DetailPengajuanInformation label='ID Universitas' value={dataPemohon.idKampus} />
-                <DetailPengajuanInformation label='Status' value={dataPemohon.role} />
-                <DetailPengajuanInformation label='Jurusan' value={dataPemohon.jurusan} />
-                <DetailPengajuanInformation label='Nomor Telepon' value={dataPemohon.no_hp || '-'} />
+                <DetailPengajuanInformation label='ID Universitas' value={dataPemohon?.idKampus} />
+                <DetailPengajuanInformation label='Status' value={dataPemohon?.role} />
+                <DetailPengajuanInformation label='Jurusan' value={dataPemohon?.jurusan} />
+                <DetailPengajuanInformation label='Nomor Telepon' value={dataPemohon?.no_hp || '-'} />
             </div>
         </div>
     </section>

@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
 const PerpanjanganSchema = new mongoose.Schema({
-        idPeminjaman: {
+    idPeminjaman: {
         type: mongoose.Types.ObjectId,
         ref: 'Peminjaman',
         required: true
+    },
+    isOpen: {
+        type: Boolean,
+        default: false,
     },
     idPengguna: {
         type: mongoose.Types.ObjectId,

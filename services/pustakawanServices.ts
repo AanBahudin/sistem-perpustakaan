@@ -224,6 +224,23 @@ export const getSinglePengajuanPerpanjanganUser = async({id} : {id: string}) => 
         .populate({
             path: 'idBuku'
         })
+
+    if (perpanjangan?.isOpen === false) {
+        const updatedPerpanjangan = await Perpanjangan.findOneAndUpdate({_id: id}, {isOpen: true}, {runValidators: true, new: true})
+            .populate({
+                path: 'idPeminjaman'
+            })
+            .populate({
+                path: 'idPengguna',
+                select: '-password'
+            })
+            .populate({
+                path: 'idBuku'
+            })
+        return updatedPerpanjangan
+    }
+
+
     return perpanjangan
 }
 

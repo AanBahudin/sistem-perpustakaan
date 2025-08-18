@@ -25,6 +25,8 @@ const PustakawanDetailPerpanjanganPage = () => {
     if (isLoading) return <h1>Loading ...</h1>
     const { idBuku: buku, idPengguna: dataPengguna, idPeminjaman: dataPeminjaman } = data
 
+    console.log(data)
+
     return (
         <Container className="w-full">
             <DetailPengajuanBreadCrumbs text={buku.judul} />

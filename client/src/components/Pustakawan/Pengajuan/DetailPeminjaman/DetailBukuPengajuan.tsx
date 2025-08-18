@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
 
     const [showAllText, setShowAllText] = useState(false)
-    const newText = showAllText ? dataBuku.deskripsi : dataBuku.deskripsi.slice(0, 250) + '...'
+    const newText = showAllText ? dataBuku.deskripsi : dataBuku?.deskripsi?.slice(0, 250) + '...'
 
     return (
         <section className='w-full'>
@@ -22,9 +22,9 @@ const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
 
                 <main className='flex-1'>
                     <Link to={`/pustakawan/buku/${dataBuku._id}`} className='text-xl font-semibold hover:underline ease-in-out duration-200'>{dataBuku.judul}</Link>
-                    <p className='text-xs text-muted-foreground'>{dataBuku.tagline.slice(0, 80)}...</p>
+                    <p className='text-xs text-muted-foreground'>{dataBuku?.tagline?.slice(0, 80)}...</p>
                     <div className='w-full flex flex-wrap gap-2 my-1'>
-                        {dataBuku.kategori.map((item: string, index: number) => {
+                        {dataBuku?.kategori?.map((item: string, index: number) => {
                             return (
                                 <Badge key={index} className='text-white'>{item}</Badge>
                             )

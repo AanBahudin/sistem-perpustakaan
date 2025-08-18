@@ -17,9 +17,8 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const handleNavigate = (id: string) => {
-         navigate(id)
+        navigate(id)
     }
-
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
             <section className="w-full min-h-[50vh] border rounded overflow-hidden">
@@ -44,10 +43,14 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                         <TableBody>
                             {perpanjangan.map((item: any, index: number) => {
                                 const {idBuku, idPengguna} = item
+
                                 return (
                                     <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                                        <TableCell className="w-[200px] text-xs">{idBuku.judul}</TableCell>
+                                        <TableCell className="w-[200px] text-xs flex flex-row-reverse items-center justify-end gap-x-2">
+                                            {item.isOpen ? null : <div className=" p-1 rounded-xl bg-primary flex items-center justify-center text-[8px]">baru</div>}
+                                            {idBuku.judul.slice(0,25)}...
+                                        </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
                                             <div className="w-full flex items-center justify-center gap-x-2">
                                                 {idPengguna?.fotoProfil ? (

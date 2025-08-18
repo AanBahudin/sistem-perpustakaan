@@ -17,6 +17,7 @@ import {
     getAllPengajuanPengembalianUsers,
     getSinglePengajuanPengembalianUser} from "../../services/pustakawanServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import Perpanjangan from "../../model/Perpanjangan";
 
 export const getStats = async(req: Request | any, res: Response) => {
     const data = await getStatsServices()
