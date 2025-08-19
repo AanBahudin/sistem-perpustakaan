@@ -7,15 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuItem
-} from "@/components/ui/dropdown-menu"
+
 import { formatedDate } from "@/utils/formatDate"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Ellipsis, FileCheck, FileSymlink, User } from "lucide-react"
+
+import TabelDropdownMenu from "../TabelDropdownMenu"
 
 const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
@@ -48,7 +44,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                         <TableBody>
                             {perpanjangan.map((item: any, index: number) => {
                                 const {idBuku, idPengguna, idPeminjaman} = item
-                                const { _id, statusPeminjaman, dataPengembalian } = idPeminjaman
+                                const { dataPengembalian: idPengembalian } = idPeminjaman
 
                                 return (
                                     <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
@@ -72,52 +68,10 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                         <TableCell className="w-[120px] text-center text-xs">{item.disetujui}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
-                                            <DropdownMenu>
-                                                <DropdownMenuTrigger asChild>
-                                                    <div className='w-8 h-8 flex items-center justify-center hover:bg-muted p-1 rounded-full'>
-                                                        <Ellipsis className="w-3 h-3" />
-                                                    </div>
-                                                </DropdownMenuTrigger>
-                                                <DropdownMenuContent className="w-48" align="start">
-                                                    <DropdownMenuItem
-                                                        onClick={(e) => {
-                                                            e.stopPropagation()
-                                                            navigate(`/pustakawan/pengajuan/peminjaman/${idPeminjaman}`)
-                                                        }}
-                                                         className=' flex items-center gap-x-2 text-xs p-2'>
-                                                            <>
-                                                                <FileCheck className='w-3 h-3 ' /> 
-                                                                Lihat Pinjaman
-                                                            </>
-                                                    </DropdownMenuItem>
-
-                                                    {(statusPeminjaman === 'Dikembalikan' && dataPengembalian) && (
-                                                        <DropdownMenuItem
-                                                            onClick={(e) => {
-                                                                e.stopPropagation()
-                                                                navigate(`/pustakawan/pengajuan/pengembalian/${_id}`)
-                                                            }}
-                                                            className=' flex items-center gap-x-2 text-xs p-2'>
-                                                                <>
-                                                                    <FileSymlink className='w-3 h-3 ' /> 
-                                                                    Lihat Pengembalian
-                                                                </>
-                                                        </DropdownMenuItem>
-                                                    )}
-
-                                                    <DropdownMenuItem
-                                                        onClick={(e) => {
-                                                            e.stopPropagation()
-                                                            navigate(`/pustakawan/pengguna/detail/${idPengguna._id}`)
-                                                        }}
-                                                         className=' flex items-center gap-x-2 text-xs p-2'>
-                                                            <>
-                                                                <User className='w-3 h-3 ' /> 
-                                                                Lihat pengguna
-                                                            </>
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuContent> 
-                                            </DropdownMenu>
+                                            <TabelDropdownMenu 
+                                                idPeminjaman={idPeminjaman._id} 
+                                                idPengembalian={idPengembalian}
+                                                idPengguna={idPengguna._id}/>
                                         </TableCell>
                                     </TableRow>
                                 )
