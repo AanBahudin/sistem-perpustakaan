@@ -190,11 +190,15 @@ export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => 
     const rawData = await Perpanjangan.find(mongoQuery)
         .sort({ createdAt: -1 })
         .populate({
-        path: 'idPengguna',
-        select: 'nama email _id fotoProfil',
-        match: searchNama
+            path: 'idPengguna',
+            select: 'nama email _id fotoProfil',
+            match: searchNama
             ? { nama: { $regex: searchNama, $options: 'i' } }
             : {},
+        })
+        .populate({
+            path: 'idPeminjaman',
+            select: '_id statusPeminjaman dataPengembalian'
         })
         .populate({
             path: 'idBuku',

@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { formatedDate } from "@/utils/formatDate"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { Ellipsis, FileCheck, User } from "lucide-react"
+import { Ellipsis, FileCheck, FileSymlink, User } from "lucide-react"
 
 const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
@@ -48,7 +48,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                         <TableBody>
                             {perpanjangan.map((item: any, index: number) => {
                                 const {idBuku, idPengguna, idPeminjaman} = item
-                                console.log(idPeminjaman)
+                                const { _id, statusPeminjaman, dataPengembalian } = idPeminjaman
 
                                 return (
                                     <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
@@ -91,6 +91,20 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                                             </>
                                                     </DropdownMenuItem>
 
+                                                    {(statusPeminjaman === 'Dikembalikan' && dataPengembalian) && (
+                                                        <DropdownMenuItem
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                navigate(`/pustakawan/pengajuan/pengembalian/${_id}`)
+                                                            }}
+                                                            className=' flex items-center gap-x-2 text-xs p-2'>
+                                                                <>
+                                                                    <FileSymlink className='w-3 h-3 ' /> 
+                                                                    Lihat Pengembalian
+                                                                </>
+                                                        </DropdownMenuItem>
+                                                    )}
+
                                                     <DropdownMenuItem
                                                         onClick={(e) => {
                                                             e.stopPropagation()
@@ -102,7 +116,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                                                 Lihat pengguna
                                                             </>
                                                     </DropdownMenuItem>
-                                                </DropdownMenuContent>
+                                                </DropdownMenuContent> 
                                             </DropdownMenu>
                                         </TableCell>
                                     </TableRow>
