@@ -10,8 +10,15 @@ import {
 } from "@/components/ui/table"
 import moment from "moment"
 import { Ellipsis } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 const TabelPengembalian = ({pengembalian} : {pengembalian: any}) => {
+
+  const navigate = useNavigate()
+  const handleNavigate = (id: string) => {
+    navigate(`/pustakawan/pengajuan/pengembalian/${id}`)
+  }
+
   return (
     <TabsContent value="Pengembalian" className="w-full flex-1 overflow-auto scroll-custom">
         <section className="w-full h-full border rounded overflow-hidden">
@@ -36,7 +43,7 @@ const TabelPengembalian = ({pengembalian} : {pengembalian: any}) => {
                       const newDate = moment(item.createdAt).subtract(10, 'days').calendar();
 
                       return (
-                        <TableRow key={index} className="border-accent-foreground/10 even:bg-accent/10">
+                        <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default">
                           <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                           <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                           <TableCell className="w-[120px] text-center text-xs">

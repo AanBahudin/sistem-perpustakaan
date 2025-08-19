@@ -256,16 +256,16 @@ const router : RouteObject[] = [
                         element: <PustakawanPerpanjangan />
                     },
                     {
-                        path: 'perpanjangan/:id',
-                        element: <PustakawanDetailPengembalian />
-                    },
-                    {
                         path: 'perpanjangan/:idPerpanjangan',
                         element: <PustakawanDetailPerpanjanganPage />
                     },
                     {
                         path: 'pengembalian',
                         element: <PustakawanPengembalianPage />
+                    },
+                    {
+                        path: 'pengembalian/:idPengembalian',
+                        element: <PustakawanDetailPengembalian />
                     }
                 ]
             },
