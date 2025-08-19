@@ -51,6 +51,5 @@ export const discoverBuku = async(query: undefined | string) => {
         return {message: 'Terjadi kesalahan',  deskripsi: 'Tidak dapat mengambil buku'}
     }
 
-    console.log(data.data)
     return data.data
 }

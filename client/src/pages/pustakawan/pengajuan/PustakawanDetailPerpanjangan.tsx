@@ -24,6 +24,9 @@ const PustakawanDetailPerpanjanganPage = () => {
 
     if (isLoading) return <h1>Loading ...</h1>
     const { idBuku: buku, idPengguna: dataPengguna, idPeminjaman: dataPeminjaman } = data
+    
+    const tanggalBerakhir = new Date(dataPeminjaman.berakhirPada)
+    const tanggalMulai = new Date(dataPeminjaman.diterimaTanggal || dataPeminjaman.createdAt)
 
     return (
         <Container className="w-full">
@@ -49,7 +52,16 @@ const PustakawanDetailPerpanjanganPage = () => {
                         <PerpanjanganDetailPeminjamanSection dataBuku={buku} dataPeminjaman={dataPeminjaman} pengguna={dataPengguna} />
                         <DetailBukuPengajuan dataBuku={buku} /> 
                     </main>
-                    <Calendar className="border rounded-lg" />
+                    <Calendar
+                        classNames={{day_selected: 'bg-destructive !hover:bg-destructive'}}
+                        modifiers={{finish: tanggalBerakhir, start: tanggalMulai}}
+                        selected={tanggalBerakhir}
+                        defaultMonth={tanggalBerakhir}
+                        modifiersClassNames={{
+                            start: "bg-primary text-white rounded-full !hover:bg-primary",
+                            finish: "bg-destructive text-white rounded-full"
+                        }}
+                        className="border rounded-lg" />
                 </section>
             )}
 
