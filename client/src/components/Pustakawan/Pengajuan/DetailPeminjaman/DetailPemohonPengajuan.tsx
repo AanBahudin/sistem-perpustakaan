@@ -1,14 +1,36 @@
+import { Ellipsis, User } from 'lucide-react'
 import DetailPengajuanInformation from './DetailPengajuanInformation'
-import { Ellipsis } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu"
+import { Link } from 'react-router-dom'
 
 const DetailPemohonPengajuan = ({dataPemohon} : {dataPemohon: any}) => {
   return (
     <section className='w-1/4 border rounded-xl min-h-[40vh] p-4'>
         <div className='flex items-center justify-between'>
             <h1 className='uppercase text-sm font-semibold'>Detail Pengguna</h1>
-            <div className='w-8 h-8 flex items-center justify-center hover:bg-muted p-1 rounded-full'>
-                <Ellipsis className='w-4 h-4 stroke-muted-foreground' />
-            </div>
+
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <div className='w-8 h-8 flex items-center justify-center hover:bg-muted p-1 rounded-full'>
+                        <Ellipsis className='w-4 h-4 stroke-muted-foreground' />
+                    </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48" align="start">
+                    <DropdownMenuItem className='text-xs p-2'>
+                        <Link to={`/pustakawan/pengguna/detail/${dataPemohon?._id}`} className='flex items-center gap-x-2'>
+                            <>
+                                <User className='w-3 h-3 ' /> 
+                                Lihat pengguna
+                            </>
+                        </Link>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
 
         </div>
 
