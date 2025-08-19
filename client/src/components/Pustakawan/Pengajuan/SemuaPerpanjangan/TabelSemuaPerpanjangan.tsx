@@ -7,10 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu"
 import { formatedDate } from "@/utils/formatDate"
-import { Link2 } from "lucide-react"
-import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { Ellipsis, FileCheck, User } from "lucide-react"
 
 const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
@@ -21,7 +26,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
     }
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
-            <section className="w-full min-h-[50vh] border rounded overflow-hidden">
+            <section className="w-full min-h-[50vh] border rounded overflow-hidden flex items-center">
                 <Table className="w-full text-sm">
                     <TableHeader>
                         <TableRow>
@@ -42,7 +47,8 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                     ) : (
                         <TableBody>
                             {perpanjangan.map((item: any, index: number) => {
-                                const {idBuku, idPengguna} = item
+                                const {idBuku, idPengguna, idPeminjaman} = item
+                                console.log(idPeminjaman)
 
                                 return (
                                     <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
@@ -66,11 +72,38 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                         <TableCell className="w-[120px] text-center text-xs">{item.disetujui}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
-                                            <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
-                                                <GlobalTooltip text="Lihat Detail">
-                                                    <Link2 className="w-3 h-3" />
-                                                </GlobalTooltip>
-                                            </div>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <div className='w-8 h-8 flex items-center justify-center hover:bg-muted p-1 rounded-full'>
+                                                        <Ellipsis className="w-3 h-3" />
+                                                    </div>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent className="w-48" align="start">
+                                                    <DropdownMenuItem
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            navigate(`/pustakawan/pengajuan/peminjaman/${idPeminjaman}`)
+                                                        }}
+                                                         className=' flex items-center gap-x-2 text-xs p-2'>
+                                                            <>
+                                                                <FileCheck className='w-3 h-3 ' /> 
+                                                                Lihat Pinjaman
+                                                            </>
+                                                    </DropdownMenuItem>
+
+                                                    <DropdownMenuItem
+                                                        onClick={(e) => {
+                                                            e.stopPropagation()
+                                                            navigate(`/pustakawan/pengguna/detail/${idPengguna._id}`)
+                                                        }}
+                                                         className=' flex items-center gap-x-2 text-xs p-2'>
+                                                            <>
+                                                                <User className='w-3 h-3 ' /> 
+                                                                Lihat pengguna
+                                                            </>
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
                                         </TableCell>
                                     </TableRow>
                                 )
