@@ -3,6 +3,8 @@ import DetailPengajuanBreadCrumbs from "@/components/Pustakawan/Pengajuan/Detail
 import { useQuery } from "@tanstack/react-query"
 import { getSinglePengembalianPustakawan } from "@/actions/Pustakawan/pustakawanPengembalianActions"
 import { useParams } from "react-router-dom"
+import DetailPengembalianTabs from "@/components/Pustakawan/Pengajuan/DetailPengembalian/DetailPengembalianTabs"
+import PengembalianApprovalContainer from "@/components/Pustakawan/Pengajuan/DetailPengembalian/PengembalianApprovalContainer"
 
 
 const PustakawanDetailPengembalian = () => {
@@ -21,9 +23,12 @@ const PustakawanDetailPengembalian = () => {
     return (
         <Container className="w-full">
             <DetailPengajuanBreadCrumbs text={buku.judul} />
+            <PengembalianApprovalContainer pengembalian={data} />
+            <DetailPengembalianTabs />
             {/* <PerpanjanganApprovalContainer perpanjangan={data} />
 
             <DetailPerpanjanganTabs />
+            
 
             {perpanjanganDetailTabsPustakawan === 'Pengajuan' ? (
                 <section className='w-full flex items-start gap-x-8'>

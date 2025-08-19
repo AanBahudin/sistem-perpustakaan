@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from '@/cart/globalSlice'
 import profileReducer from '@/cart/profileSlice'
 import peminjamanReducer from '@/cart/peminjamanSlice'
-import pengembalianReducer from '@/cart/pengembalianSlice'
 import detailBukuReducer from '@/cart/detailBookSlice'
 import dashboardState from '@/cart/dashboardSlice'
 import perpanjanganState from '@/cart/perpanjanganSlice'
@@ -12,6 +11,7 @@ import peminjamanFilterSheetState from '@/cart/peminjamanFilterSheetSlice'
 import perpanjanganFilterSheetState from '@/cart/perpanjanganFilterSheetSlice'
 import pengembalianFilterSheetState from '@/cart/pengembalianFilterSheetSlice'
 import bukuFilterSheetState from '@/cart/bukuFilterSheetSlice'
+import pengembalianState from '@/cart/pengembalianSlice'
 
 export const store = configureStore({
     reducer: {
@@ -19,7 +19,7 @@ export const store = configureStore({
         dashboardState: dashboardState,
         profileState: profileReducer,
         peminjamanState: peminjamanReducer,
-        pengembalianState: pengembalianReducer,
+        pengembalianState: pengembalianState,
         detailBukuState: detailBukuReducer,
         perpanjanganState: perpanjanganState,
         pustakawanSidebarState: pustakawanSidebarState,
