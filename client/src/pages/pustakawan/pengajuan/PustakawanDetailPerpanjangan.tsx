@@ -64,8 +64,6 @@ const PustakawanDetailPerpanjanganPage = () => {
                         className="border rounded-lg" />
                 </section>
             )}
-
-
         </Container>
     )
 }

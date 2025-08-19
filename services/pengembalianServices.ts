@@ -73,7 +73,22 @@ export const pustakawanGetDataPengembalian = async() => {
 
 // SUDAH TESTING
 export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOnePengembalianParamsType) => {
-    const pengembalian = await Pengembalian.findOne({_id: pengembalianId}).populate(['idPeminjaman', 'idBuku', 'diprosesOleh'])
+    const pengembalian = await Pengembalian.findOne({_id: pengembalianId})
+        .populate({
+            path: 'idPengguna',
+            select: 'nama email idKampus role jurusan noHp fotoProfil'
+        })
+        .populate({
+            path: 'idPeminjaman',
+        })
+        .populate({
+            path: 'idBuku'
+        })
+        .populate({
+            path: 'diprosesOleh',
+            select: 'nama email'
+        })
+        .populate(['idPeminjaman', 'idBuku', 'diprosesOleh'])
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
 
     return {data: pengembalian}
