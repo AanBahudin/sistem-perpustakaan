@@ -9,3 +9,7 @@ export const getSinglePengembalianPustakawan = async(id: string) => {
     const {data: response} = await customFetch.get(`/pengembalian/${id}`)
     return response.data
 }
+
+export const createPengembalianDataPustakawan = async(idPeminjaman: string) => {
+    return ''
+}

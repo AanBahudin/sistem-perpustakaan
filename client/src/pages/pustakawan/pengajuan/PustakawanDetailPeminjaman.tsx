@@ -8,6 +8,7 @@ import DetailPengajuanHeader from '@/components/Pustakawan/Pengajuan/DetailPenga
 import DetailPengajuanPeminjaman from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPengajuanPeminjaman'
 import DetailBukuPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailBukuPengajuan'
 import DetailPemohonPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPemohonPengajuan'
+import BuatPengembalianButton from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/BuatPengembalianButton'
 
 const PustakawanDetailPeminjaman = () => {
 
@@ -17,12 +18,14 @@ const PustakawanDetailPeminjaman = () => {
         queryFn: () => getDetailPengajuanPeminjaman({id: idPeminjaman as string})
     })
     
-    
     if (isLoading) return <h1>Loading ... </h1>
     const {buku, peminjam} = data
+    const {statusPeminjaman} = data
 
     return (
         <Container className='w-full'>
+            
+            {(statusPeminjaman === 'Dipinjam' || statusPeminjaman === 'Terlambat') && <BuatPengembalianButton idPeminjaman={data._id} />}
             <DetailPengajuanBreadCrumbs text={data.buku.judul} />
 
             <PeminjamanApprovalContainer peminjaman={data} />
