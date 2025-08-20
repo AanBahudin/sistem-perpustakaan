@@ -29,9 +29,7 @@ const PustakawanDetailPeminjaman = () => {
         <Container className='w-full'>
             
             <DetailPengajuanBreadCrumbs text={data.buku.judul} />
-
             <PeminjamanApprovalContainer peminjaman={data} />
-            
             <DetailPeminjamanTabs idPengembalian={data.dataPengembalian} />
 
             {/* JIKA TAB PEMINJAMAN AKTIF */}
