@@ -6,7 +6,8 @@ export type DefaultStateType = {
     detailPeminjamanTab: 'peminjaman' | 'perpanjangan' | 'pengembalian' | '',
     peminjamanFilter: string,
     alasan: string,
-    durasi: '' | number
+    durasi: '' | number,
+    pustakawanDetailPeminjamanActiveTabs: string
 }
 
 const defaultState : DefaultStateType = {
@@ -15,7 +16,8 @@ const defaultState : DefaultStateType = {
     peminjamanFilter: '',
     detailPeminjamanTab: '',
     alasan: '',
-    durasi: ''
+    durasi: '',
+    pustakawanDetailPeminjamanActiveTabs: 'Peminjaman'
 }
 
 const peminjamanSlice = createSlice({
@@ -41,9 +43,12 @@ const peminjamanSlice = createSlice({
         },
         setDurasi: (state, action) => {
             state.durasi = action.payload
+        },
+        setDetailPeminjamanActiveTabs: (state, action) => {
+            state.pustakawanDetailPeminjamanActiveTabs = action.payload
         }
     }
 })
 
-export const { setLayout, setTab, setFilter, setDetailPeminjamanTab, setAlasan, setDurasi } = peminjamanSlice.actions
+export const { setLayout, setTab, setFilter, setDetailPeminjamanTab, setAlasan, setDurasi, setDetailPeminjamanActiveTabs } = peminjamanSlice.actions
 export default peminjamanSlice.reducer

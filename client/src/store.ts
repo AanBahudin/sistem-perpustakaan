@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from '@/cart/globalSlice'
 import profileReducer from '@/cart/profileSlice'
-import peminjamanReducer from '@/cart/peminjamanSlice'
+import peminjamanState from '@/cart/peminjamanSlice'
 import detailBukuReducer from '@/cart/detailBookSlice'
 import dashboardState from '@/cart/dashboardSlice'
 import perpanjanganState from '@/cart/perpanjanganSlice'
@@ -18,7 +18,7 @@ export const store = configureStore({
         globalState: globalReducer,
         dashboardState: dashboardState,
         profileState: profileReducer,
-        peminjamanState: peminjamanReducer,
+        peminjamanState: peminjamanState,
         pengembalianState: pengembalianState,
         detailBukuState: detailBukuReducer,
         perpanjanganState: perpanjanganState,

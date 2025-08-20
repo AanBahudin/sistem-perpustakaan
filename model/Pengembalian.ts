@@ -44,6 +44,9 @@ const PengembalianSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    catatan: {
+        type: String
+    },
     dendaKehilangan: {
         type: Number,
         default: 0
