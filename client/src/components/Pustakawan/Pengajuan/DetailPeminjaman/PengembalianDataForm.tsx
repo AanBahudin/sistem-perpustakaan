@@ -20,7 +20,8 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
         onSuccess: () => {
             toast('Data Pengembalian Dibuat')
         },
-        onError: () => {
+        onError: (error) => {
+            console.log(error)
             toast('Gagal membuat data pengembalian')
         }
     })

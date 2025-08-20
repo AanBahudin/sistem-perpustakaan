@@ -20,7 +20,7 @@ export const dataPengembalianValidator = withValidationErrors([
             if (!dataKondisi.includes(kondisiBuku)) throw new BadRequestError('Kondisi tidak tersedia')
         }),
     body('statusHilang')
-        .notEmpty().withMessage('status kehilangan tidak boleh kosong')
+        .optional()
         .toBoolean()
         .isBoolean().withMessage('Data harus berupa boolean')
 ])

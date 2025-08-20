@@ -41,28 +41,28 @@ export const getOnePengembalianUser = async({ pengembalianId, userId } : GetOneP
     return {data: pengembalian}
 }
 
-export const userCreatePengembalianInfo = async({peminjamanId, userId} : UserCreatePengembalianDataType) => {
-    // cari data peminjaman
-    const dataPeminjaman = await Peminjaman.findOne({_id: peminjamanId})
-    if (!dataPeminjaman) {
-        throw new NotFoundError('Peminjaman tidak ditemukan')
-    }
+// export const userCreatePengembalianInfo = async({peminjamanId, userId} : UserCreatePengembalianDataType) => {
+//     // cari data peminjaman
+//     const dataPeminjaman = await Peminjaman.findOne({_id: peminjamanId})
+//     if (!dataPeminjaman) {
+//         throw new NotFoundError('Peminjaman tidak ditemukan')
+//     }
 
-    // cek status buku yang di bolehkan untuk dikembalikan
-    const statusDiizinkan = ['Dipinjam', 'Terlambat']
-    if (!statusDiizinkan.includes(dataPeminjaman.statusPeminjaman)) {
-        throw new BadRequestError('Buku tidak dapat dikembalikan')
-    }
+//     // cek status buku yang di bolehkan untuk dikembalikan
+//     const statusDiizinkan = ['Dipinjam', 'Terlambat']
+//     if (!statusDiizinkan.includes(dataPeminjaman.statusPeminjaman)) {
+//         throw new BadRequestError('Buku tidak dapat dikembalikan')
+//     }
 
-    // cek data pengembalian apakah sudah ada atau tidak
-    // jika data pengembalian sudah ada maka perbaharui, tetapi jika data pengembalian belum ada maka dibuat ulang
-    const dataPengembalian = await Pengembalian.findOne({idPeminjaman: peminjamanId})
-    if (!dataPengembalian) {
-        await createPengembalian({dataPeminjaman})
-    } else {
-        await updatePengembalian({idPengembalian : dataPengembalian._id})
-    }
-}
+//     // cek data pengembalian apakah sudah ada atau tidak
+//     // jika data pengembalian sudah ada maka perbaharui, tetapi jika data pengembalian belum ada maka dibuat ulang
+//     const dataPengembalian = await Pengembalian.findOne({idPeminjaman: peminjamanId})
+//     if (!dataPengembalian) {
+//         await createPengembalian({dataPeminjaman})
+//     } else {
+//         await updatePengembalian({idPengembalian : dataPengembalian._id})
+//     }
+// }
 
 // SUDAH TESTING
 export const pustakawanGetDataPengembalian = async() => {
@@ -116,59 +116,60 @@ export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreat
     const isPengembalianAlreadyExists = await Pengembalian.findOne({
         _id: pinjaman.dataPengembalian,
         idPeminjaman,
-        idPengguna: pinjaman.peminjam
-    });
-    if (isPengembalianAlreadyExists) {
-        return {
-            success: true, 
-            message: 'Data pengembalian ditemukan',
-            data: isPengembalianAlreadyExists
-        }
-    }
-
-    // menghitung jumlah hari dan denda keterlambatan
-    const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
-    const nominalDenda = await getDenda()
-    const totalDendaKeterlambatan = nominalDenda as number * totalHariTerlambat
-
-    // menghitung denda fisik
-    const dendaFisik = await hitungDendaFisik({
-        kondisiAwal: pinjaman.kondisi as string,
-        kondisiAkhir: kondisiBuku,
-        idBuku: pinjaman.buku as string,
-        statusHilang
-    })
-
-    // gabung semua jenis denda
-    let totalDenda = totalDendaKeterlambatan + dendaFisik
-
-    // buat data pengembalian
-    const dataPengembalian = await Pengembalian.create({
-        idPeminjaman: idPeminjaman,
         idPengguna: pinjaman.peminjam,
-        idBuku: pinjaman.buku,
-        isMissing: statusHilang,
-        durasiKeterlambatan: totalHariTerlambat,
-        keadaanBuku: kondisiBuku,
-        dendaKeterlambatan: totalDendaKeterlambatan,
-        dendaFisik,
-        judulBuku: buku.judul,
-        totalDenda
-    })
+        idBuku: buku._id
+    });
 
-    // update data peminjaman dengan memasukan id pengembalian
-    await Peminjaman.findOneAndUpdate(
-        {_id: idPeminjaman, peminjam: pinjaman.peminjam},
-        {dataPengembalian: dataPengembalian?._id},
-        {new: true, runValidators: true}
-    )
-
-    return {
-        success: true,
-        message: 'Data Pengembalian dibuat',
-        data: dataPengembalian
-        // data: []
+    // JIKA ADA MAKA PENGEMBALIAN DI UPDATE
+    if (isPengembalianAlreadyExists) {
+        return updatePengembalian({dataPeminjaman: pinjaman, dataBuku: buku, idPengembalian: isPengembalianAlreadyExists._id})
+    } else {
+        return createPengembalian(dataBody)
     }
+
+    // // menghitung jumlah hari dan denda keterlambatan
+    // const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
+    // const nominalDenda = await getDenda()
+    // const totalDendaKeterlambatan = nominalDenda as number * totalHariTerlambat
+
+    // // menghitung denda fisik
+    // const dendaFisik = await hitungDendaFisik({
+    //     kondisiAwal: pinjaman.kondisi as string,
+    //     kondisiAkhir: kondisiBuku,
+    //     idBuku: pinjaman.buku as string,
+    //     statusHilang
+    // })
+
+    // // gabung semua jenis denda
+    // let totalDenda = totalDendaKeterlambatan + dendaFisik
+
+    // // buat data pengembalian
+    // const dataPengembalian = await Pengembalian.create({
+    //     idPeminjaman: idPeminjaman,
+    //     idPengguna: pinjaman.peminjam,
+    //     idBuku: pinjaman.buku,
+    //     isMissing: statusHilang,
+    //     durasiKeterlambatan: totalHariTerlambat,
+    //     keadaanBuku: kondisiBuku,
+    //     dendaKeterlambatan: totalDendaKeterlambatan,
+    //     dendaFisik,
+    //     judulBuku: buku.judul,
+    //     totalDenda
+    // })
+
+    // // update data peminjaman dengan memasukan id pengembalian
+    // await Peminjaman.findOneAndUpdate(
+    //     {_id: idPeminjaman, peminjam: pinjaman.peminjam},
+    //     {dataPengembalian: dataPengembalian?._id},
+    //     {new: true, runValidators: true}
+    // )
+
+    // return {
+    //     success: true,
+    //     message: 'Data Pengembalian dibuat',
+    //     data: dataPengembalian
+    //     // data: []
+    // }
 }
 
 // SUDAH TESTING
@@ -240,27 +241,23 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
 
 
 // create pengembalian (MASIH MENJADI PERTIMBANGAN)
-const createPengembalian = async({dataPeminjaman} : {dataPeminjaman: any}) => {
-    const { buku: idBuku, _id: idPeminjaman, berakhirPada } = dataPeminjaman
-    // hitung keterlambatan pengembalian
-    const totalHariTerlambat = hitungKeterlambatan(berakhirPada)
-    // ambil nominal denda yang ditentukan
-    const hargaDenda = await getDenda()
-    // hitung denda keterlambatan
-    const dendaKeterlambatan = hargaDenda as number * totalHariTerlambat
-    // hitung denda kehilangan buku
-    const buku = await Buku.findOne({_id: idBuku})
-    if (!buku) throw new NotFoundError('Buku tidak ditemukan')
-    
-    // akumulasi total denda
-    // akumulasi de
-    // buat data
-    console.log('pengembalian dibuat')
+const createPengembalian = async({dataPengembalian} : {dataPengembalian: any}) => {
+    console.log('data pengembalian dibuat')
+    return {
+        success: true, 
+        message: 'Data pengembalian ditemukan',
+        data: []
+    }
 }
 
 // perbaharui pengembalian
-const updatePengembalian = async({idPengembalian} : {idPengembalian: any}) => {
-    console.log('pengembalian diupdate')
+const updatePengembalian = async({idPengembalian} : {dataPeminjaman: any, dataBuku: any, idPengembalian: any}) => {
+    console.log('data pengembalian diupdate')
+    return {
+        success: true, 
+        message: 'Data pengembalian ditemukan',
+        data: []
+    }
 }
 
 

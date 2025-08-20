@@ -7,7 +7,7 @@ import {
     buatDataPengembalian,
     terimaDataPengembalian,
     editDataPengembalian,
-    createPengembalianDataUser
+    // createPengembalianDataUser
 } from '../../controllers/pengembalian/pengembalianController'
 
 import { userMiddlewareAuthorized, pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
@@ -20,8 +20,8 @@ const router = express.Router()
 router.route('/user')
     .get(userMiddlewareAuthorized, getAllPengembalianUser)
 
-router.route('/user/create/:id')
-    .get(userMiddlewareAuthorized, createPengembalianDataUser)
+// router.route('/user/create/:id')
+//     .get(userMiddlewareAuthorized, createPengembalianDataUser)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePengembalianUser)

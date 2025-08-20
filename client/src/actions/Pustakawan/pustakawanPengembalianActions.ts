@@ -12,4 +12,6 @@ export const getSinglePengembalianPustakawan = async(id: string) => {
 
 export const createPengembalianDataPustakawan = async(formData: any) => {
     console.log(formData)
+    const {data: response} = await customFetch.post(`/pengembalian/create`, formData)
+    return response.data
 }
