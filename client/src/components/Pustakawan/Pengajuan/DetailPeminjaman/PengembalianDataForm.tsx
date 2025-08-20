@@ -40,7 +40,7 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
                 <div className='flex flex-col'>
                     <Label className='text-sm mb-1'>Kondisi Buku</Label>
                     <p className='text-xs text-muted-foreground mb-1'>Tentukan keadaan buku saat dikembalikan.</p>
-                    <Select defaultValue={kondisi}>
+                    <Select defaultValue={kondisi} name='kondisiBuku'>
                         <SelectTrigger className="w-full text-xs">
                             <SelectValue placeholder="Pilih Kondisi Buku" className='!text-xs' />
                         </SelectTrigger>
@@ -63,11 +63,14 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
                     <Textarea placeholder="Catatan pengembalian" className='!text-xs placeholder:text-xs' />
                 </div>
 
+                <input type="hidden" name='idPeminjaman' id='idPeminjaman' value={dataPeminjaman._id} />
+
                 <div className='flex flex-col'>
                     <Label className='text-sm mb-1'>Buku Hilang</Label>
                     <p className='text-xs text-muted-foreground mb-2'>Laporan jika buku yang dikembalikan hilang</p>
                     <div className="flex items-center space-x-2">
                         <Switch
+                            name='statusHilang'
                             onCheckedChange={handleSwitchChange}
                             // onChange={handleSwitchChange}
                             id="airplane-mode"  />
