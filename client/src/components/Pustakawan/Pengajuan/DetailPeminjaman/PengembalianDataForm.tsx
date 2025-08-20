@@ -15,7 +15,6 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
     
     if (isLoading) return <h1>Loading ... </h1>
     const selectData = isLoading ? ['Memuat'] : data.map((item: any) => item.kondisi)
-    
 
     return (
         <section className='w-full my-4'>
