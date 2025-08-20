@@ -20,9 +20,7 @@ export type PustakawanGetOnePengembalianParamsType = {
 }
 
 export type PustakawanCreatePengembalianParamsType = {
-    idPeminjaman: string,
-    kondisiBuku: string,
-    statusHilang: boolean,
+    dataBody: any
 }
 
 export type PustakawanAcceptPengembalianParamsType = {

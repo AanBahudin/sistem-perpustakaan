@@ -10,6 +10,6 @@ export const getSinglePengembalianPustakawan = async(id: string) => {
     return response.data
 }
 
-export const createPengembalianDataPustakawan = async(idPeminjaman: string) => {
-    return ''
+export const createPengembalianDataPustakawan = async(formData: any) => {
+    console.log(formData)
 }

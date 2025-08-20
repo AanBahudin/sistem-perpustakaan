@@ -95,11 +95,11 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
 }
 
 // SUDAH TESTING
-export const pustakawanBuatDataPengembalian = async({ 
-    idPeminjaman, 
-    kondisiBuku,
-    statusHilang,
-} : PustakawanCreatePengembalianParamsType) => {
+export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreatePengembalianParamsType) => {
+
+    // pecah data dari req.body
+    const {idPeminjaman, kondisiBuku, statusHilang, catatan} = dataBody 
+
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
     if (!pinjaman) throw new NotFoundError('Data pinjaman tidak ditemukan')
