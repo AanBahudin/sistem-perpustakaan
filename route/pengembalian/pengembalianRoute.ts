@@ -7,6 +7,7 @@ import {
     buatDataPengembalian,
     terimaDataPengembalian,
     editDataPengembalian,
+    setujuiDataPengembalian,
     // createPengembalianDataUser
 } from '../../controllers/pengembalian/pengembalianController'
 
@@ -36,6 +37,9 @@ router.route('/create')
 
 router.route('/accept/:id')
     .post(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, terimaDataPengembalian)
+
+router.route('/approve/:id')
+    .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, setujuiDataPengembalian)
 
 router.route('/:id')
     .get(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, getSingleDataPengembalian)

@@ -17,3 +17,8 @@ export const createPengembalianDataPustakawan = async(formData: any) => {
     store.dispatch(setIsMissingSwitch(false))
     return response.data
 }
+
+export const approvePengembalianDataPustakawan = async({idPengembalian} : {idPengembalian: string}) => {
+    const {data: response} = await customFetch.get(`/pengembalian/approve/${idPengembalian}`)
+    return response.data
+}

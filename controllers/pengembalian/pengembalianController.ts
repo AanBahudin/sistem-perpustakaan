@@ -6,8 +6,9 @@ import {
     pustakawanBuatDataPengembalian, 
     pustakawanEditDataPengembalian, 
     pustakawanGetDataPengembalian, 
-    pustakawanTerimaDataPengembalian} from "../../services/pengembalianServices";
-import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+    pustakawanTerimaDataPengembalian,
+    setujuiPengembalianPutakawan} from "../../services/pengembalianServices";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH TESTING
 export const getAllPengembalianUser = async(req: Request | any, res: Response) => {
@@ -100,6 +101,16 @@ export const terimaDataPengembalian = async(req: Request | any, res: Response) =
         res,
         message: 'Pengembalian diterima',
         data
+    })
+}
+
+export const setujuiDataPengembalian = async(req: Request | any, res: Response) => {
+    const {id: idPengembalian} = req.params
+    await setujuiPengembalianPutakawan({pustakawanId: req.user.userId, idPengembalian})
+
+    SendBasicResponse({
+        res,
+        message: 'Approved!'
     })
 }
 

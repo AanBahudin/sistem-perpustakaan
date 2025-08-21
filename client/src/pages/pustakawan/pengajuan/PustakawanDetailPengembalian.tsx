@@ -30,7 +30,6 @@ const PustakawanDetailPengembalian = () => {
             <DetailPengajuanBreadCrumbs text={buku.judul} />
             <DetailPengembalianTabs />
             
-
             {pustakawanPengembalianTab === 'Pengajuan' ? (
                 <PengembalianDetailContainer buku={buku} pengembalian={data} pengguna={pengguna} peminjaman={peminjaman} />
             ) : (

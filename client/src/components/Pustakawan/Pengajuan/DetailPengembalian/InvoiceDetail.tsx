@@ -1,6 +1,7 @@
 import { formatRupiah } from "@/utils/formatCurrency"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import ConfirmPengembalianDialog from "./ConfirmPengembalianDialog"
 
 const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
 
@@ -37,7 +38,9 @@ const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
 
                 {/* TOMBOL BAYAR HANYA KELIHATAN JIKA PENGEMBALIAN SUDAH DIBAYAR */}
                 {(pengembalian.statusPembayaran === 'Belum Bayar' && pengembalian.statusPengembalian === 'Pending') && (
-                    <Button className="mt-4 text-xs text-white">Bayar dan Simpan</Button>
+                    <ConfirmPengembalianDialog>
+                        <Button className="mt-4 text-xs text-white">Bayar dan Simpan</Button>
+                    </ConfirmPengembalianDialog>
                 )}
             </main>
         </section>
