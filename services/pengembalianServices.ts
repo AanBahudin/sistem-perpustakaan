@@ -64,6 +64,7 @@ export const getOnePengembalianUser = async({ pengembalianId, userId } : GetOneP
 //     }
 // }
 
+
 // SUDAH TESTING
 export const pustakawanGetDataPengembalian = async() => {
     const pengembalian = await Pengembalian.find()
@@ -114,48 +115,27 @@ export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreat
 
     // mengecek apakah pinjaman sudah diproses sebelumnya / pinjaman sudah memiliki data pengembalian
     const isPengembalianAlreadyExists = await Pengembalian.findOne({
-        _id: pinjaman.dataPengembalian,
-        idPeminjaman,
+        idPeminjaman: pinjaman._id,
+        idBuku: buku._id,
         idPengguna: pinjaman.peminjam,
-        idBuku: buku._id
+        statusPengembalian: 'Pending'
     });
 
     // JIKA ADA MAKA PENGEMBALIAN DI UPDATE
     if (isPengembalianAlreadyExists) {
-        return updatePengembalian({dataPeminjaman: pinjaman, dataBuku: buku, idPengembalian: isPengembalianAlreadyExists._id})
+        return updatePengembalian({
+            dataPengembalian: dataBody,
+            dataPeminjaman: pinjaman, 
+            dataBuku: buku, 
+            idPengembalian: isPengembalianAlreadyExists._id})
     } else {
-        return createPengembalian(dataBody)
+        return createPengembalian({
+            dataPengembalian: dataBody,
+            dataPeminjaman: pinjaman,
+            dataBuku: buku
+        })
     }
 
-    // // menghitung jumlah hari dan denda keterlambatan
-    // const totalHariTerlambat = hitungKeterlambatan(pinjaman.berakhirPada as Date)
-    // const nominalDenda = await getDenda()
-    // const totalDendaKeterlambatan = nominalDenda as number * totalHariTerlambat
-
-    // // menghitung denda fisik
-    // const dendaFisik = await hitungDendaFisik({
-    //     kondisiAwal: pinjaman.kondisi as string,
-    //     kondisiAkhir: kondisiBuku,
-    //     idBuku: pinjaman.buku as string,
-    //     statusHilang
-    // })
-
-    // // gabung semua jenis denda
-    // let totalDenda = totalDendaKeterlambatan + dendaFisik
-
-    // // buat data pengembalian
-    // const dataPengembalian = await Pengembalian.create({
-    //     idPeminjaman: idPeminjaman,
-    //     idPengguna: pinjaman.peminjam,
-    //     idBuku: pinjaman.buku,
-    //     isMissing: statusHilang,
-    //     durasiKeterlambatan: totalHariTerlambat,
-    //     keadaanBuku: kondisiBuku,
-    //     dendaKeterlambatan: totalDendaKeterlambatan,
-    //     dendaFisik,
-    //     judulBuku: buku.judul,
-    //     totalDenda
-    // })
 
     // // update data peminjaman dengan memasukan id pengembalian
     // await Peminjaman.findOneAndUpdate(
@@ -240,23 +220,92 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
 }
 
 
-// create pengembalian (MASIH MENJADI PERTIMBANGAN)
-const createPengembalian = async({dataPengembalian} : {dataPengembalian: any}) => {
-    console.log('data pengembalian dibuat')
+const createPengembalian = async({dataPengembalian, dataPeminjaman, dataBuku} : {dataPengembalian: any, dataPeminjaman: any, dataBuku: any}) => {
+
+    const { idPeminjaman, kondisiBuku, statusHilang } = dataPengembalian
+
+    // menghitung jumlah hari dan denda keterlambatan
+    const totalHariTerlambat = hitungKeterlambatan(dataPeminjaman.berakhirPada as Date)
+    const nominalDendaTerlambat = await getDenda()
+    const totalDendaKeterlambatan = nominalDendaTerlambat as number * totalHariTerlambat
+
+    // menghitung denda fisik
+    const dendaFisik = await hitungDendaFisik({
+        kondisiAwal: dataPeminjaman.kondisi as string,
+        kondisiAkhir: kondisiBuku,
+        idBuku: dataPeminjaman.buku as string,
+        statusHilang
+    })
+
+    // cek apakah buku yang dikembalikan hilang. jika buku yang dikembalikan hilang, maka denda fisik diganti dengan denda kehilangan buku / harga buku
+    const isDendaHilangExist = statusHilang ? Number(dataBuku.hargaGanti) : dendaFisik
+
+    // gabung semua jenis denda
+    let totalDenda = totalDendaKeterlambatan + isDendaHilangExist
+
+    // // buat data pengembalian
+    const pengembalian = await Pengembalian.create({
+        idPeminjaman: idPeminjaman,
+        idPengguna: dataPeminjaman.peminjam,
+        idBuku: dataPeminjaman.buku,
+        isMissing: statusHilang,
+        durasiKeterlambatan: totalHariTerlambat,
+        keadaanBuku: statusHilang ? 'Hilang' : kondisiBuku,
+        dendaKeterlambatan: totalDendaKeterlambatan,
+        dendaFisik: isDendaHilangExist,
+        judulBuku: dataBuku.judul,
+        totalDenda
+    })
+
     return {
         success: true, 
         message: 'Data pengembalian ditemukan',
-        data: []
+        data: pengembalian
     }
 }
 
 // perbaharui pengembalian
-const updatePengembalian = async({idPengembalian} : {dataPeminjaman: any, dataBuku: any, idPengembalian: any}) => {
-    console.log('data pengembalian diupdate')
+const updatePengembalian = async({dataPengembalian, idPengembalian, dataPeminjaman, dataBuku} : {dataPeminjaman: any, dataBuku: any, idPengembalian: any, dataPengembalian: any}) => {
+    
+    const { idPeminjaman, kondisiBuku, statusHilang } = dataPengembalian
+
+    // menghitung jumlah hari dan denda keterlambatan
+    const totalHariTerlambat = hitungKeterlambatan(dataPeminjaman.berakhirPada as Date)
+    const nominalDendaTerlambat = await getDenda()
+    const totalDendaKeterlambatan = nominalDendaTerlambat as number * totalHariTerlambat
+
+    // menghitung denda fisik
+    const dendaFisik = await hitungDendaFisik({
+        kondisiAwal: dataPeminjaman.kondisi as string,
+        kondisiAkhir: kondisiBuku,
+        idBuku: dataPeminjaman.buku as string,
+        statusHilang
+    })
+
+    // cek apakah buku yang dikembalikan hilang. jika buku yang dikembalikan hilang, maka denda fisik diganti dengan denda kehilangan buku / harga buku
+    const isDendaHilangExist = statusHilang ? Number(dataBuku.hargaGanti) : dendaFisik
+
+    // gabung semua jenis denda
+    let totalDenda = totalDendaKeterlambatan + isDendaHilangExist
+
+    // // buat data pengembalian
+    const pengembalian = await Pengembalian.findOneAndUpdate({_id: idPengembalian}, {
+        idPeminjaman: idPeminjaman,
+        idPengguna: dataPeminjaman.peminjam,
+        idBuku: dataPeminjaman.buku,
+        isMissing: statusHilang,
+        durasiKeterlambatan: totalHariTerlambat,
+        keadaanBuku: statusHilang ? 'Hilang' : kondisiBuku,
+        dendaKeterlambatan: totalDendaKeterlambatan,
+        dendaFisik: isDendaHilangExist,
+        judulBuku: dataBuku.judul,
+        totalDenda
+    }, {new: true, runValidators: true})
+
     return {
         success: true, 
         message: 'Data pengembalian ditemukan',
-        data: []
+        data: pengembalian
     }
 }
 

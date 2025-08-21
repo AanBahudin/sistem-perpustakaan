@@ -1,3 +1,5 @@
+import { setIsMissingSwitch } from "@/cart/pengembalianSlice";
+import { store } from "@/store";
 import { customFetch } from "@/utils/customFetch";
 
 export const getAllPengembalian = async({query} : {query: string}) => {
@@ -11,7 +13,7 @@ export const getSinglePengembalianPustakawan = async(id: string) => {
 }
 
 export const createPengembalianDataPustakawan = async(formData: any) => {
-    console.log(formData)
     const {data: response} = await customFetch.post(`/pengembalian/create`, formData)
+    store.dispatch(setIsMissingSwitch(false))
     return response.data
 }

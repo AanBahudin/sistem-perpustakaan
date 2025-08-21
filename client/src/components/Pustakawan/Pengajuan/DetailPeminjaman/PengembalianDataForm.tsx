@@ -6,9 +6,12 @@ import TextAreaCreatePengembalianData from './TextAreaCreatePengembalianData'
 import SwitchCreatePengembalianData from './SwitchCreatePengembalianData'
 import { createPengembalianDataPustakawan } from '@/actions/Pustakawan/pustakawanPengembalianActions'
 import { toast } from 'sonner'
+import { Loader } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
 
+    const navigate = useNavigate()
     const { kondisi } = dataPeminjaman
     const {data, isLoading} = useQuery({
         queryKey: ['kondisi'],
@@ -17,11 +20,11 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
     
     const mutation = useMutation({
         mutationFn: (formData: any) => createPengembalianDataPustakawan(formData),
-        onSuccess: () => {
+        onSuccess: (data) => {
             toast('Data Pengembalian Dibuat')
+            navigate(`/pustakawan/pengajuan/pengembalian/${data._id}`)
         },
-        onError: (error) => {
-            console.log(error)
+        onError: () => {
             toast('Gagal membuat data pengembalian')
         }
     })
@@ -46,7 +49,9 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
                 <TextAreaCreatePengembalianData />
                 <input type="hidden" name='idPeminjaman' id='idPeminjaman' value={dataPeminjaman._id} />
                 <SwitchCreatePengembalianData />
-                <Button type='submit' className='text-xs text-white'>Buat Data Pengembalian</Button>
+                <Button disabled={mutation.isPending} type='submit' className='text-xs text-white'>
+                    {mutation.isPending ? <Loader className='animate-spin' /> : 'Buat Data Pengembalian'}
+                </Button>
             </form>
         </section>
     )

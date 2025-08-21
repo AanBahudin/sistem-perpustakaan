@@ -74,6 +74,10 @@ const BukuSchema = new mongoose.Schema({
         enum: ['Tidak Tersedia', 'Tersedia'],
         default: 'Tersedia'
     },
+    hargaGanti: {
+        type: Number,
+        required: true
+    },
     totalDipinjam: {
         type: Number,
         default: 0
@@ -93,10 +97,6 @@ const BukuSchema = new mongoose.Schema({
     totalDihilangkan: {
         type: Number,
         default: 0
-    },
-    hargaGanti: {
-        type: Number,
-        required: true
     },
     isMissing: {
         type: Boolean,
