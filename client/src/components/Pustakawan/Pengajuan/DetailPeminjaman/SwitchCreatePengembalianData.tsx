@@ -1,12 +1,14 @@
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { useState } from "react"
+import { useSelector } from "react-redux"
+import { store } from "@/store"
+import { setIsMissingSwitch } from "@/cart/pengembalianSlice"
 
 const SwitchCreatePengembalianData = () => {
 
-    const [switchValue, setSwitchValue] = useState(false)
+    const { isMissingSwitch } = useSelector((state: any) => state.pengembalianState)
     const handleSwitchChange = () => {
-        setSwitchValue(!switchValue)
+        store.dispatch(setIsMissingSwitch(!isMissingSwitch))
     }
 
     return (
@@ -18,7 +20,7 @@ const SwitchCreatePengembalianData = () => {
                     name='statusHilang'
                     onCheckedChange={handleSwitchChange}
                     id="airplane-mode"  />
-                <Label htmlFor="airplane-mode" className={`text-xs  ${switchValue ? 'text-destructive' : 'text-destructive/50'}`}>Buku Hilang</Label>
+                <Label htmlFor="airplane-mode" className={`text-xs  ${isMissingSwitch ? 'text-destructive' : 'text-destructive/50'}`}>Buku Hilang</Label>
             </main>
         </section>
     )

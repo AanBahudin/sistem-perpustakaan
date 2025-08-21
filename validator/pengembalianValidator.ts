@@ -12,7 +12,7 @@ export const dataPengembalianValidator = withValidationErrors([
             return isValidMongooseId(idPeminjaman)
         }),
     body('kondisiBuku')
-        .notEmpty().withMessage('Kondisi buku tidak boleh kosong')
+        .optional()
         .custom(async(kondisiBuku) => {
             const {data} = await getDataKondisi()
             const dataKondisi = data.map(item => item.kondisi)
@@ -22,7 +22,9 @@ export const dataPengembalianValidator = withValidationErrors([
     body('statusHilang')
         .optional()
         .toBoolean()
-        .isBoolean().withMessage('Data harus berupa boolean')
+        .isBoolean().withMessage('Data harus berupa boolean'),
+    body('catatan')
+        .optional()
 ])
 
 export const editDataPengembalianValidator = withValidationErrors([

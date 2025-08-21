@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const defaultState = {
     activeTab: '',
-    pustakawanPengembalianTab: 'Pengajuan'
+    pustakawanPengembalianTab: 'Pengajuan',
+    isMissingSwitch: false
 }
 
 const pengembalianSlice = createSlice({
@@ -14,9 +15,12 @@ const pengembalianSlice = createSlice({
         },
         setPustakawanPengembalianTab: (state, action) => {
             state.pustakawanPengembalianTab = action.payload
+        },
+        setIsMissingSwitch: (state, action) => {
+            state.isMissingSwitch = action.payload
         }
     }
 })
 
-export const { setActiveTab, setPustakawanPengembalianTab } = pengembalianSlice.actions
+export const { setActiveTab, setPustakawanPengembalianTab, setIsMissingSwitch } = pengembalianSlice.actions
 export default pengembalianSlice.reducer
