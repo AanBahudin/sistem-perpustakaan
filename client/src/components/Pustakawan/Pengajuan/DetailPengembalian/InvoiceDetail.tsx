@@ -20,19 +20,14 @@ const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
                 <div className="w-full flex items-start justify-between">
                     <p>Denda Fisik</p>
                     <div className="flex flex-col justify-end items-end">
-                        <p>{formatRupiah(pengembalian.dendaFisik)}</p>
-                        <p className="text-[10px] text-white font-semibold">{formatRupiah(pengembalian.dendaFisik)}</p>
+                        <p className="text-white font-semibold">{formatRupiah(pengembalian.dendaFisik)}</p>
+                        {pengembalian.isMissing ? (
+                            <p className="text-[10px] text-destructive/70 font-semibold">Harga buku</p>
+                        ) : (
+                            <p className="text-[10px] text-destructive/70 font-semibold">kondisi {pengembalian.keadaanBuku}</p>
+                        )}
                     </div>
                 </div>
-
-                <div className="w-full flex items-start justify-between">
-                    <p>Denda Kehilangan</p>
-                    <div className="flex flex-col justify-end items-end">
-                        <p>{formatRupiah(pengembalian.dendakKehilangan)}</p>
-                        <p className="text-[10px] text-white font-semibold">{formatRupiah(pengembalian.dendaKehilangan)}</p>
-                    </div>
-                </div>
-
                 <Separator />
 
                 <div className="w-full flex items-start justify-between text-sm font-semibold text-white">
