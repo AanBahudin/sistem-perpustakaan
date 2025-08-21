@@ -92,6 +92,40 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
         .populate(['idPeminjaman', 'idBuku', 'diprosesOleh'])
     if (!pengembalian) throw new NotFoundError('Data pengembalian tidak ditemukan')
 
+
+    if (pengembalian.statusPengembalian === 'Pending' || pengembalian.statusPembayaran === 'Belum Bayar') {
+        const peminjaman = await Peminjaman.findOne({_id: pengembalian.idPeminjaman})
+
+        const totalHariTerlambat = hitungKeterlambatan(peminjaman?.berakhirPada as Date)
+        const nominalDendaTerlambat = await getDenda()
+        const totalDendaKeterlambatan = nominalDendaTerlambat as number * totalHariTerlambat
+
+        const totalDenda = totalDendaKeterlambatan + pengembalian.dendaFisik
+
+        const newPengembalian = await Pengembalian.findOneAndUpdate({_id: pengembalianId}, {
+            totalDenda,
+            durasiKeterlambatan: totalHariTerlambat,
+            dendaKeterlambatan: totalDendaKeterlambatan
+        }, {new: true, runValidators: true})
+            .populate({
+                path: 'idPengguna',
+                select: 'nama email idKampus role jurusan noHp fotoProfil'
+            })
+            .populate({
+                path: 'idPeminjaman',
+            })
+            .populate({
+                path: 'idBuku'
+            })
+            .populate({
+                path: 'diprosesOleh',
+                select: 'nama email'
+            })
+            .populate(['idPeminjaman', 'idBuku', 'diprosesOleh'])
+
+        return {data: newPengembalian}
+    }
+    
     return {data: pengembalian}
 }
 
@@ -99,7 +133,7 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
 export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreatePengembalianParamsType) => {
 
     // pecah data dari req.body
-    const {idPeminjaman, kondisiBuku, statusHilang, catatan} = dataBody 
+    const {idPeminjaman} = dataBody 
 
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
