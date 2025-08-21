@@ -6,7 +6,7 @@ const TextAreaCreatePengembalianData = () => {
     <div className='flex flex-col'>
         <Label className='text-sm mb-1'>Catatan Pengembalian</Label>
         <p className='text-xs text-muted-foreground mb-1'>Catatan mengenai pengembalian</p>
-        <Textarea placeholder="Catatan pengembalian" className='!text-xs placeholder:text-xs' name='alasan' />
+        <Textarea placeholder="Catatan pengembalian" className='!text-xs placeholder:text-xs' name='catatan' />
     </div>
   )
 }

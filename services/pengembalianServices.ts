@@ -222,7 +222,7 @@ export const pustakawanEditDataPengembalian = async({kondisiBuku, idPengembalian
 
 const createPengembalian = async({dataPengembalian, dataPeminjaman, dataBuku} : {dataPengembalian: any, dataPeminjaman: any, dataBuku: any}) => {
 
-    const { idPeminjaman, kondisiBuku, statusHilang } = dataPengembalian
+    const { idPeminjaman, kondisiBuku, statusHilang, catatan } = dataPengembalian
 
     // menghitung jumlah hari dan denda keterlambatan
     const totalHariTerlambat = hitungKeterlambatan(dataPeminjaman.berakhirPada as Date)
@@ -248,6 +248,7 @@ const createPengembalian = async({dataPengembalian, dataPeminjaman, dataBuku} : 
         idPeminjaman: idPeminjaman,
         idPengguna: dataPeminjaman.peminjam,
         idBuku: dataPeminjaman.buku,
+        catatan,
         isMissing: statusHilang,
         durasiKeterlambatan: totalHariTerlambat,
         keadaanBuku: statusHilang ? 'Hilang' : kondisiBuku,
@@ -267,7 +268,7 @@ const createPengembalian = async({dataPengembalian, dataPeminjaman, dataBuku} : 
 // perbaharui pengembalian
 const updatePengembalian = async({dataPengembalian, idPengembalian, dataPeminjaman, dataBuku} : {dataPeminjaman: any, dataBuku: any, idPengembalian: any, dataPengembalian: any}) => {
     
-    const { idPeminjaman, kondisiBuku, statusHilang } = dataPengembalian
+    const { idPeminjaman, kondisiBuku, statusHilang, catatan } = dataPengembalian
 
     // menghitung jumlah hari dan denda keterlambatan
     const totalHariTerlambat = hitungKeterlambatan(dataPeminjaman.berakhirPada as Date)
@@ -294,6 +295,7 @@ const updatePengembalian = async({dataPengembalian, idPengembalian, dataPeminjam
         idPengguna: dataPeminjaman.peminjam,
         idBuku: dataPeminjaman.buku,
         isMissing: statusHilang,
+        catatan: catatan,
         durasiKeterlambatan: totalHariTerlambat,
         keadaanBuku: statusHilang ? 'Hilang' : kondisiBuku,
         dendaKeterlambatan: totalDendaKeterlambatan,

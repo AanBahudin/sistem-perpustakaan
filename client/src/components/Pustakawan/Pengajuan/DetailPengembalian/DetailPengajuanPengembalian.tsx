@@ -1,3 +1,4 @@
+import { Textarea } from "@/components/ui/textarea"
 import DetailPengajuanInformation from "../DetailPeminjaman/DetailPengajuanInformation"
 import DetailUserInformationPengembalian from "./DetailUserInformationPengembalian"
 import { formatedDate } from "@/utils/formatDate"
@@ -5,6 +6,7 @@ import { formatedDate } from "@/utils/formatDate"
 const DetailPengajuanPengembalian = ({dataPengembalian, peminjaman, pengguna} : {dataPengembalian: any, peminjaman: any, pengguna: any}) => {
 
     const pengembalian = dataPengembalian
+    console.log(pengembalian)
 
     return (
          <section className="w-full">
@@ -22,6 +24,10 @@ const DetailPengajuanPengembalian = ({dataPengembalian, peminjaman, pengguna} : 
                         <DetailPengajuanInformation label="Total Hari Terlambat" value={pengembalian.durasiKeterlambatan + ' Hari'}  />
                         <DetailPengajuanInformation label="Status Pengembalian" value={pengembalian.statusPengembalian} /> 
                         <DetailPengajuanInformation label="Kondisi Buku Pengembalian" value={pengembalian.keadaanBuku} /> 
+                        <div className='w-full flex flex-col'>
+                            <p className='w-1/2 mb-1'>Catatan</p>
+                            <Textarea className="!text-[12px]" readOnly>{pengembalian.catatan}</Textarea>
+                        </div>
                     </section>
                 </div>
                 <DetailUserInformationPengembalian pengguna={pengguna} />
