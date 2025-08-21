@@ -4,8 +4,12 @@ import { useQuery } from "@tanstack/react-query"
 import { getSinglePengembalianPustakawan } from "@/actions/Pustakawan/pustakawanPengembalianActions"
 import { useParams } from "react-router-dom"
 import DetailPengembalianTabs from "@/components/Pustakawan/Pengajuan/DetailPengembalian/DetailPengembalianTabs"
-import PengembalianApprovalContainer from "@/components/Pustakawan/Pengajuan/DetailPengembalian/PengembalianApprovalContainer"
-
+import PengembalianDetailContainer from "@/components/Pustakawan/Pengajuan/DetailPengembalian/PengembalianDetailContainer"
+import { useSelector } from "react-redux"
+import DetailPengajuanHeader from "@/components/Pustakawan/Pengajuan/DetailPengajuanHeader"
+import DetailBukuPengajuan from "@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailBukuPengajuan"
+import { Calendar } from "@/components/ui/calendar"
+import DetailPengajuanPeminjaman from "@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPengajuanPeminjaman"
 
 const PustakawanDetailPengembalian = () => {
 
@@ -15,36 +19,26 @@ const PustakawanDetailPengembalian = () => {
         queryFn: () => getSinglePengembalianPustakawan(idPengembalian as string)
     })
 
+    const { pustakawanPengembalianTab } = useSelector((state: any) => state.pengembalianState)
+
     if (isLoading) return <h1>Loading .... </h1>
-    
-    const {idBuku: buku} = data
-    console.log(data)
+    const {idBuku: buku, idPeminjaman: peminjaman, idPengguna: pengguna} = data
+    const {createdAt: tanggalMulai, berakhirPada: tanggalBerakhir} = peminjaman
 
     return (
         <Container className="w-full">
             <DetailPengajuanBreadCrumbs text={buku.judul} />
-            <PengembalianApprovalContainer pengembalian={data} />
             <DetailPengembalianTabs />
-            {/* <PerpanjanganApprovalContainer perpanjangan={data} />
-
-            <DetailPerpanjanganTabs />
             
 
-            {perpanjanganDetailTabsPustakawan === 'Pengajuan' ? (
-                <section className='w-full flex items-start gap-x-8'>
-                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
-                        <DetailPengajuanHeader />
-                        <DetailPengajuanPerpanjangan dataPerpanjangan={data} />
-                        <DetailBukuPengajuan dataBuku={buku} />
-                    </main>
-
-                    <DetailPemohonPengajuan dataPemohon={dataPengguna} />
-                </section>
+            {pustakawanPengembalianTab === 'Pengajuan' ? (
+                <PengembalianDetailContainer buku={buku} pengembalian={data} pengguna={pengguna} peminjaman={peminjaman} />
             ) : (
                 <section className='w-full flex items-start gap-x-8'>
-                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
+                    <main className='w-3/4 border rounded-xl min-h-[50vh] p-8'>
                         <DetailPengajuanHeader />
-                        <PerpanjanganDetailPeminjamanSection dataBuku={buku} dataPeminjaman={dataPeminjaman} pengguna={dataPengguna} />
+                        <DetailPengajuanPeminjaman dataPeminjaman={peminjaman} />
+                        {/* <PeminjamanDetailPage dataBuku={buku} dataPeminjaman={dataPeminjaman} pengguna={dataPengguna} /> */}
                         <DetailBukuPengajuan dataBuku={buku} /> 
                     </main>
                     <Calendar
@@ -58,7 +52,7 @@ const PustakawanDetailPengembalian = () => {
                         }}
                         className="border rounded-lg" />
                 </section>
-            )} */}
+            )}
         </Container>
     )
 }
