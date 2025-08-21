@@ -284,10 +284,10 @@ const updatePengembalian = async({dataPengembalian, idPengembalian, dataPeminjam
     })
 
     // cek apakah buku yang dikembalikan hilang. jika buku yang dikembalikan hilang, maka denda fisik diganti dengan denda kehilangan buku / harga buku
-    const isDendaHilangExist = statusHilang ? Number(dataBuku.hargaGanti || 100000) : dendaFisik
+    // const isDendaHilangExist = statusHilang ? Number(dataBuku.hargaGanti || 100000) : dendaFisik
 
     // gabung semua jenis denda
-    let totalDenda = totalDendaKeterlambatan + isDendaHilangExist
+    let totalDenda = totalDendaKeterlambatan + dendaFisik
 
     // // buat data pengembalian
     const pengembalian = await Pengembalian.findOneAndUpdate({_id: idPengembalian}, {
@@ -299,7 +299,7 @@ const updatePengembalian = async({dataPengembalian, idPengembalian, dataPeminjam
         durasiKeterlambatan: totalHariTerlambat,
         keadaanBuku: statusHilang ? 'Hilang' : kondisiBuku,
         dendaKeterlambatan: totalDendaKeterlambatan,
-        dendaFisik: isDendaHilangExist,
+        dendaFisik: dendaFisik,
         judulBuku: dataBuku.judul,
         totalDenda
     }, {new: true, runValidators: true})

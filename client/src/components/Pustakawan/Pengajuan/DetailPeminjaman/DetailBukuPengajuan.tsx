@@ -10,7 +10,7 @@ const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
     const newText = showAllText ? dataBuku.deskripsi : dataBuku?.deskripsi?.slice(0, 250) + '...'
 
     return (
-        <section className='w-full'>
+        <section className='w-full h-fit'>
             <h1 className='text-sm font-semibold'>Detail buku</h1>
             <p className='text-muted-foreground text-xs'>Detail buku untuk informasi lanjutan</p>
             <Separator className='my-4'/>

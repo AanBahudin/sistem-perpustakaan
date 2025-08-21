@@ -1,5 +1,5 @@
 import { getAllKondisi } from '@/actions/Pustakawan/pustakawanKondisiActionts'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
 import SelectInputCreatePengembalianData from './SelectInputCreatePengembalianData'
 import TextAreaCreatePengembalianData from './TextAreaCreatePengembalianData'
@@ -17,11 +17,13 @@ const PengembalianDataForm = ({dataPeminjaman} : {dataPeminjaman: any}) => {
         queryKey: ['kondisi'],
         queryFn: getAllKondisi
     })
+    const queryClient = useQueryClient()
     
     const mutation = useMutation({
         mutationFn: (formData: any) => createPengembalianDataPustakawan(formData),
         onSuccess: (data) => {
             toast('Data Pengembalian Dibuat')
+            queryClient.invalidateQueries({queryKey: ['detail', 'pengembalian', data._id]})
             navigate(`/pustakawan/pengajuan/pengembalian/${data._id}`)
         },
         onError: () => {

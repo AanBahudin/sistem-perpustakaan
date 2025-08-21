@@ -77,6 +77,7 @@ export const getSingleDataPengembalian = async(req: Request, res: Response) => {
 // SUDAH TESTING
 export const buatDataPengembalian = async(req: Request, res: Response) => {
     const dataBody = req.body
+    console.log(dataBody)
     const {data, message} = await pustakawanBuatDataPengembalian({dataBody})
 
     SendOneDataResponse({
