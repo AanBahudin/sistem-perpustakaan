@@ -18,8 +18,10 @@ import { getDenda } from "./dendaServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
 import { 
     penggunaMengembalikan, 
+    penggunaMengembalikanNew, 
     penggunaMenghilangkan, 
     tambahDendaPengguna } from "./penggunaServices"
+import Pengguna from "../model/Pengguna"
 
 
 // SUDAH TESTING
@@ -228,6 +230,39 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
 
     // return agar diakses oleh controller
     return {data: updatedPengembalian}
+}
+
+export const setujuiPengembalianPutakawan = async({idPengembalian, pustakawanId} : {idPengembalian: string, pustakawanId: string}) => {
+    // perbaharui data pengembalian
+    const updatePengembalian = await Pengembalian.findOneAndUpdate(
+        {_id: idPengembalian},
+        {statusPembayaran: 'Dibayar', diprosesOleh: pustakawanId, statusPengembalian: 'Dikembalikan', tanggalPengembalian: new Date(Date.now())},
+        {new: true, runValidators: true}
+    )
+
+    if (!updatePengembalian) {
+        throw new NotFoundError('Data pengembalian tidak ditemukan')
+    }
+    // perbaharui total pinjaman pengguna di model Pengguna
+    await penggunaMengembalikanNew({
+        idPengguna: updatePengembalian.idPengguna as string, 
+        dataPengembalian: updatePengembalian
+    })
+
+    // perbahraui data peminjaman
+    await Peminjaman.findOne(
+        {_id: updatePengembalian.idPeminjaman},
+        {statusPeminjaman: 'Dikembalikan', dataPengembalian: updatePengembalian._id}
+    )
+    
+    // perbaharaui buku, jika buku dikembalikan dalam kondisi hilang
+    if (updatePengembalian.isMissing) {
+        await bukuDihilangkan(updatePengembalian.idBuku as string)
+    } else {
+        await bukuDikembalikan(updatePengembalian.idBuku as string)
+    }
+    
+    return updatePengembalian
 }
 
 // SUDAH TESTING

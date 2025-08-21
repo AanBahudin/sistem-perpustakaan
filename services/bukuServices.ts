@@ -726,7 +726,7 @@ export const bukuDipinjam = async(idBuku : string) => {
 export const bukuDihilangkan = async(idBuku: string) => {
     const buku = await Buku.findOneAndUpdate(
         {_id: idBuku},
-        {$inc: {totalDipinjam: -1}},
+        {$inc: {totalDipinjam: -1, totalDihilangkan: 1}},
         {new: true, runValidators: true}
     )
 }

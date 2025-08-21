@@ -180,6 +180,27 @@ export const penggunaMengembalikan = async({ idPengguna } : PenggunaMeminjamPara
     )
 }
 
+export const penggunaMengembalikanNew = async({idPengguna, dataPengembalian} : {idPengguna: string, dataPengembalian: any}) => {
+    await Pengguna.findOneAndUpdate(
+        { _id: idPengguna },
+        [
+            {
+            $set: {
+                jumlah_pinjaman: {
+                $cond: [
+                    { $gt: ["$jumlah_pinjaman", 0] }, 
+                    { $subtract: ["$jumlah_pinjaman", 1] }, 
+                    0
+                ]
+                },
+                totalDenda: { $add: ["$totalDenda", dataPengembalian.totalDenda] }
+            }
+            }
+        ],
+        { new: true }
+    )
+}
+
 export const penggunaMenghilangkan = async({idPengguna} : PenggunaMeminjamParamsType) => {
     await Pengguna.findOneAndUpdate(
         {_id: idPengguna},
