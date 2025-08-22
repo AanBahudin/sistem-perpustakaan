@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { StatusPeminjamanBadge } from "../Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman"
 
 const RiwayatBukuTable = ({data} : {data: any}) => {
     const {peminjaman} = data
@@ -16,7 +17,7 @@ const RiwayatBukuTable = ({data} : {data: any}) => {
     }
 
     return (
-        <section className="flex flex-col items-start justify-start border bg-accent/40 w-full rounded-2xl max-h-[40vh] overflow-y-clip px-3 py-5 ">
+        <section className="flex flex-col items-start justify-start border  w-full rounded-2xl max-h-[60vh] overflow-y-clip px-3 py-5 ">
             <main className="w-full flex items-center h-fit justify-between">
                 <h3 className="font-semibold capitalize">Riwayat Buku dipinjam</h3>
                 <Link to={'/pustakawan/buku'} className="text-xs text-muted-foreground hover:underline ease-in-out duration-200">Lihat semua</Link>
@@ -26,7 +27,7 @@ const RiwayatBukuTable = ({data} : {data: any}) => {
             <main className="w-full h-fit mt-4">
                 <Table className="w-full text-sm">
                     <TableHeader>
-                        <TableRow className="border-accent-foreground/20">
+                        <TableRow className="">
                             <TableHead className="w-[50px] text-xs text-center px-0">No</TableHead>
                             <TableHead className="w-[200px] text-xs">Judul Buku</TableHead>
                             <TableHead className="w-[120px] text-xs text-center">Jenis</TableHead>
@@ -49,7 +50,9 @@ const RiwayatBukuTable = ({data} : {data: any}) => {
                                     <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                     <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
-                                    <TableCell className="w-[120px] text-center text-xs">{item.statusPeminjaman}</TableCell>
+                                    <TableCell className="w-[120px] text-center text-xs">
+                                        <StatusPeminjamanBadge statusPeminjaman={item.statusPeminjaman} />
+                                    </TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">{peminjam.nama}</TableCell>
                                 </TableRow>
                             )

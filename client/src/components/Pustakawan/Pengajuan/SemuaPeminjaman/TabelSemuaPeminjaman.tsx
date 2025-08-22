@@ -86,7 +86,7 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
 
 export default TabelSemuaPeminjaman
 
-const StatusPeminjamanBadge = ({statusPeminjaman} : {statusPeminjaman: string}) => {
+export const StatusPeminjamanBadge = ({statusPeminjaman} : {statusPeminjaman: string}) => {
 
     if (statusPeminjaman === 'Ditolak') return <Badge variant='destructive' className="w-[80%] text-center text-white">{statusPeminjaman}</Badge>
     if (statusPeminjaman === 'Dikembalikan') return <Badge  className="w-[80%] text-center text-white bg-primary/60">{statusPeminjaman}</Badge>

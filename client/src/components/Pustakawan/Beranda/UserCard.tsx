@@ -17,7 +17,11 @@ const Card = ({user} : {user: any}) => {
     return (
         <section className='w-full border rounded-lg min-h-[10vh] hover:bg-accent/50 flex items-center justify-between px-4 py-2 gap-x-5 duration-200 ease-in-out'>
             <main className='flex gap-x-5'>
-                <div className='w-14 h-14 rounded-full bg-accent/80 flex text-3xl font-semibold items-center justify-center text-accent'>{user.nama[0]}</div>
+                {user.fotoProfil ? (
+                    <img src={user.fotoProfil} className='w-14 h-14 rounded-full object-cover' />
+                ) : (
+                    <div className='w-14 h-14 rounded-full bg-accent/80 flex text-3xl font-semibold items-center justify-center text-muted-foreground'>{user.nama[0]}</div>
+                )}
                 <div className='flex flex-col items-start'>
                     <Link to={`pengguna/detail/${user._id}`} className='text-sm font-semibold hover:underline duration-200 ease-in-out cursor-pointer'>{user.nama}</Link>
                     <p className='text-xs text-muted-foreground'>{user.email}</p>

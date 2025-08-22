@@ -10,7 +10,7 @@ const PustakawanUserDataContainer = ({data} : {data: any}) => {
 
 
     return (
-        <section className='w-full bg-accent/40 border my-8 rounded-2xl h-[60vh] px-4 pt-8 pb-4 flex flex-col items-start'>
+        <section className='w-full border my-8 rounded-2xl h-[60vh] px-4 pt-8 pb-4 flex flex-col items-start'>
             <main className='w-full flex items-center justify-between'>
                 <h1 className='text-lg'>Ringkasan Daftar Pengguna</h1>
                 <Link to='/pustakawan/pengguna' className='text-xs hover:underline duration-200 ease-in-out cursor-default'>Lihat semua</Link>
