@@ -9,6 +9,7 @@ import { useSearchParams } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
 import TabelBukuDipinjam from '@/components/Pustakawan/Buku/BukuDipinjam/TabelBukuDipinjam'
+import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
 
 const PustakawanBukuDipinjamPage = () => {
 
@@ -21,7 +22,7 @@ const PustakawanBukuDipinjamPage = () => {
   })
 
 
-  if (isLoading) return <h1>Loading .... </h1>
+  if (isLoading) return <BukuLoading />
   const { bukuDipinjam, ratioBukuDipinjam, statsBukuPinjam } = data
 
   return (

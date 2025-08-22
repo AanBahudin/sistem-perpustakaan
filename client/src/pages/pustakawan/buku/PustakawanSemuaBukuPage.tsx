@@ -1,4 +1,5 @@
 import { getAllBukuPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
+import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import TabelSemuaBuku from "@/components/Pustakawan/Buku/TabelSemuaBuku"
@@ -20,7 +21,7 @@ const PustakawanSemuaBukuPage = () => {
     queryFn: () => getAllBukuPustakawan({query: params})
   })
 
-  if (isLoading) return <h1>Loading ... </h1>
+  if (isLoading) return <BukuLoading />
   
   const { dataBuku, dataRasio, dataStats } = data
   return (

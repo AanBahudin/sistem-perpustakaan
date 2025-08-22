@@ -8,6 +8,7 @@ import { getAllBukuDiperpanjanganPustakawan } from "@/actions/Pustakawan/pustaka
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import TabelBukuDiperpanjang from "@/components/Pustakawan/Buku/BukuDiperpanjang/TabelBukuDiperpanjang"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
+import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 
 const PustakawanBukuDiperpanjangPage = () => {
 
@@ -19,7 +20,7 @@ const PustakawanBukuDiperpanjangPage = () => {
     queryFn: () =>  getAllBukuDiperpanjanganPustakawan({query})
   })
 
-  if (isLoading) return <h1>Loading .....</h1>
+  if (isLoading) return <BukuLoading />
   const { bukuDiperpanjang, ratioBukuDiperpanjang, statsBukuDiperpanjangan } = data
 
   return (

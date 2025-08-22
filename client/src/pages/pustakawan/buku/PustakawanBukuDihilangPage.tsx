@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { Plus } from 'lucide-react'
 import TabelBukuHilang from '@/components/Pustakawan/Buku/BukuDihilangkan/TabelBukuHIlang'
+import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
 
 const PustakawanBukuDihilangPage = () => {
 
@@ -19,7 +20,7 @@ const PustakawanBukuDihilangPage = () => {
     queryFn: () => getAllBukuDihilangkanPustakawan({query})
   })
 
-  if (isLoading) return <h1>Loading .... </h1>
+  if (isLoading) return <BukuLoading />
   const { bukuDihilangkan, ratioBukuDihilangkan, statsBukuDihilangkan } = data
 
   return (

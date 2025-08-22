@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getAllBukuDikembalikanPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import TabelBukuDikembalikan from "@/components/Pustakawan/Buku/BukuDIkembalikan/TabelBukuDikembalikan"
+import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 
 const PustakawanBukuDikembalikanPage = () => {
 
@@ -19,7 +20,7 @@ const PustakawanBukuDikembalikanPage = () => {
     queryFn: () => getAllBukuDikembalikanPustakawan({query})
   })
 
-  if (isLoading) return <h1>Loading .... </h1>
+  if (isLoading) return <BukuLoading />
   const { bukuDikembalikan, ratioBukuDikembalikan, statsBukuDikembalikan } = data
 
   return (
