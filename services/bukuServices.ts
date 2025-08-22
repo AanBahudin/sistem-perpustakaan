@@ -732,7 +732,7 @@ export const bukuDihilangkan = async(idBuku: string) => {
 }
 
 export const getBukuHilang = async() => {
-    const buku = await Buku.findOne({isMissing: true})
+    const buku = await Pengembalian.find({isMissing: true, statusPembayaran: 'Dibayar', statusPengembalian: 'Dikembalikan'})
     return buku || []
 }
 
