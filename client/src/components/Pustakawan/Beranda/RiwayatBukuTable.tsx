@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {
   Table,  
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -11,6 +10,11 @@ import {
 
 const RiwayatBukuTable = ({data} : {data: any}) => {
     const {peminjaman} = data
+    const navigate = useNavigate()
+    const handleNavigate = (id: string) => {
+        navigate(`/pustakawan/pengajuan/peminjaman/${id}`)
+    }
+
     return (
         <section className="flex flex-col items-start justify-start border bg-accent/40 w-full rounded-2xl max-h-[40vh] overflow-y-clip px-3 py-5 ">
             <main className="w-full flex items-center h-fit justify-between">
@@ -41,7 +45,7 @@ const RiwayatBukuTable = ({data} : {data: any}) => {
                             const {buku} = item
                             const {peminjam} = item
                             return (
-                                <TableRow key={index} className="border-accent-foreground/10 not-even:bg-accent-foreground/10">
+                                <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default">
                                     <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                     <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
                                     <TableCell className="w-[120px] text-center text-xs">{buku.kategori[0]}</TableCell>
