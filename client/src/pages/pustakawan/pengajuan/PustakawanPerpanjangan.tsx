@@ -1,4 +1,5 @@
 import { getAllPerpanjangan } from '@/actions/Pustakawan/pustakawanPerpanjanganActions'
+import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import SemuaPerpanjanganFilter from '@/components/Pustakawan/Pengajuan/SemuaPerpanjangan/SemuaPerpanjanganFilter'
 import TabelSemuaPerpanjangan from '@/components/Pustakawan/Pengajuan/SemuaPerpanjangan/TabelSemuaPerpanjangan'
@@ -17,7 +18,7 @@ const PustakawanPerpanjangan = () => {
     queryFn: () => getAllPerpanjangan({query: params})
   })
 
-  if (isLoading) return <h1>Loading ....</h1>
+  if (isLoading) return <DetailPengajuanLoading />
   const {pengajuanPerpanjangan, rasioStatusPerpanjangan, statsPerpanjangan} = data
 
   return (

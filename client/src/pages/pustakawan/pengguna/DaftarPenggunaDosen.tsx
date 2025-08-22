@@ -6,6 +6,7 @@ import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import TableSemuaPengguna from './TableSemuaPengguna'
+import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'
 
 const DaftarPenggunaDosen = () => {
  
@@ -17,7 +18,7 @@ const DaftarPenggunaDosen = () => {
     queryFn: () => getAllPenggunaDosen(params)
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PenggunaPageLoading />
 
   return (
     <Container className='w-full'>

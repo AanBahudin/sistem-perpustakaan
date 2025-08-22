@@ -1,6 +1,7 @@
 import { getAllPengajuan } from "@/actions/Pustakawan/pustakawanPengajuanActions"
 import ActivitySection from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/ActivitySection"
 import GrafikPertumbuhanPengajuanContainer from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/GrafikPertumbuhanPengajuanContainer"
+import SemuaPengajuanLoading from "@/components/Pustakawan/Pengajuan/SemuaPengajuanLoading"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
@@ -13,7 +14,7 @@ const SemuaPengajuan = () => {
     queryFn: getAllPengajuan
   })
 
-  if (isLoading) return <h1>Loading ... </h1>
+  if (isLoading) return <SemuaPengajuanLoading />
 
   const {peminjaman, perpanjangan, pengembalian} = data
 

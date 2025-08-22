@@ -6,6 +6,7 @@ import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPe
 import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman'
 import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
 import { useSearchParams } from 'react-router-dom'
+import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 
 const PustakawanPeminjaman = () => {
 
@@ -17,7 +18,7 @@ const PustakawanPeminjaman = () => {
     queryFn: () => getAllPengajuanPeminjaman({params})
   })
 
-  if (isLoading) return <h1>Loading ... </h1>
+  if (isLoading) return <DetailPengajuanLoading />
   const { pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman } = data
 
   return (

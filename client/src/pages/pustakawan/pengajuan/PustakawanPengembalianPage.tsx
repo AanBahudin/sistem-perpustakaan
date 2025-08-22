@@ -1,4 +1,5 @@
 import { getAllPengembalian } from '@/actions/Pustakawan/pustakawanPengembalianActions'
+import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import SemuaPengembalianFilter from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/SemuaPengembalianFilter'
 import TabelSemuaPengembalian from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/TabelSemuaPengembalian'
@@ -17,7 +18,7 @@ const PustakawanPengembalianPage = () => {
     queryFn: () => getAllPengembalian({query: params})
   })
 
-  if (isLoading) return <h1>Loading ....</h1>
+  if (isLoading) return <DetailPengajuanLoading />
   const {pengajuanPengembalian, rasioStatusPengembalian, statsPengembalian} = data
 
   return (

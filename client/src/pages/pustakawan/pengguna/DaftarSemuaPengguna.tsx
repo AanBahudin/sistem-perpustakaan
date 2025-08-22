@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllPengguna } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { useSearchParams } from 'react-router-dom'
+import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'
 
 const DaftarSemuaPengguna = () => {
 
@@ -17,7 +18,7 @@ const DaftarSemuaPengguna = () => {
     queryFn: () => getAllPengguna(params.toString())
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PenggunaPageLoading />
 
   return (
     <Container className='w-full'>
