@@ -154,7 +154,7 @@ export const getSinglePengajuanPengembalian = async(req: Request, res: Response)
 export const getProfile = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
-    const profile = await Pustakawan.findOne({_id: userId})
+    const profile = await Pustakawan.findOne({_id: userId}).select('-password')
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,

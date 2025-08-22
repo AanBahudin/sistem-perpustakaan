@@ -29,6 +29,7 @@ const PustakawanSchema = new mongoose.Schema({
         default: 'Aktif'
     },
     fotoProfil: String,
+    fotoPublicId: String,
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'Prodi',
