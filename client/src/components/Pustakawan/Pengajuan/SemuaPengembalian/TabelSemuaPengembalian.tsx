@@ -11,6 +11,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { Link2 } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { Badge } from "@/components/ui/badge"
 
 const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
     const [searchParams] = useSearchParams()
@@ -60,8 +61,12 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
                                             </div>
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.keadaanBuku}</TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.statusPengembalian}</TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.statusPembayaran}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">
+                                            <StatusPengembalianBadge status={item.statusPengembalian} />
+                                        </TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">
+                                            <StatusPembayaranBadge status={item.statusPembayaran} />
+                                        </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
                                             {item.tanggalPengembalian ? formatedDate(item.tanggalPengembalian) : '-'}
@@ -85,3 +90,19 @@ const TabelSemuaPengembalian = ({pengembalian} : {pengembalian: any}) => {
 }
 
 export default TabelSemuaPengembalian
+
+const StatusPengembalianBadge = ({status} : {status: string}) => {
+
+    if (status === 'Pending') return <Badge variant='secondary' className="w-[80%] text-white text-center">{status}</Badge>
+    
+    return (
+        <Badge className="w-[80%] text-white text-center">{status}</Badge>
+    )
+}
+
+const StatusPembayaranBadge = ({status} : {status: string}) => {
+    if (status === 'elum Bayar') return <Badge variant='secondary' className="w-[80%] text-white text-center">{status}</Badge>
+    return (
+        <Badge className="w-[80%] text-white text-center">{status}</Badge>
+    )
+}

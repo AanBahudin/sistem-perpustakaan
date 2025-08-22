@@ -12,6 +12,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 import TabelDropdownMenu from "../TabelDropdownMenu"
+import { Badge } from "@/components/ui/badge"
 
 const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
@@ -65,7 +66,9 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs hover:text-primary duration-200 ease-in-o`ut cursor-pointer">{item.alasan.slice(0, 14)}...</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.durasi} Hari </TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.disetujui}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">
+                                            <StatusPerpanjanganBadge statusPerpanjangan={item.disetujui} />
+                                        </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <TabelDropdownMenu 
@@ -85,3 +88,12 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 }
 
 export default TabelSemuaPerpanjangan
+
+const StatusPerpanjanganBadge = ({statusPerpanjangan} : {statusPerpanjangan: string}) => {
+    if (statusPerpanjangan  === 'Ditolak') return <Badge variant='destructive' className="w-[80%] text-white text-center">{statusPerpanjangan}</Badge>
+    if (statusPerpanjangan  === 'Pending') return <Badge variant='secondary' className="w-[80%] text-white text-center">{statusPerpanjangan}</Badge>
+
+    return (
+        <Badge className="w-[80%] text-white text-center">{statusPerpanjangan}</Badge>
+    )
+}

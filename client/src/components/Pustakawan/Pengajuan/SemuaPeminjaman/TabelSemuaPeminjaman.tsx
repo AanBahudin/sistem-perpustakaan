@@ -11,6 +11,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { Link2 } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { Badge } from "@/components/ui/badge"
 
 const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
 
@@ -61,7 +62,9 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.buku.kategori[0]}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.durasiPeminjaman} Hari </TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.statusPeminjaman}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">
+                                            <StatusPeminjamanBadge statusPeminjaman={item.statusPeminjaman} />
+                                        </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
@@ -82,3 +85,15 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
 }
 
 export default TabelSemuaPeminjaman
+
+const StatusPeminjamanBadge = ({statusPeminjaman} : {statusPeminjaman: string}) => {
+
+    if (statusPeminjaman === 'Ditolak') return <Badge variant='destructive' className="w-[80%] text-center text-white">{statusPeminjaman}</Badge>
+    if (statusPeminjaman === 'Dikembalikan') return <Badge  className="w-[80%] text-center text-white bg-primary/60">{statusPeminjaman}</Badge>
+    if (statusPeminjaman === 'Pending') return <Badge variant='secondary' className="w-[80%] text-center text-white">{statusPeminjaman}</Badge>
+    if (statusPeminjaman === 'Terlambat') return <Badge variant='outline' className="w-[80%] text-center text-white">{statusPeminjaman}</Badge>
+
+    return (
+        <Badge className="w-[80%] text-center text-white">{statusPeminjaman}</Badge>
+    )
+}
