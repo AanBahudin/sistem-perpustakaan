@@ -250,7 +250,7 @@ export const setujuiPengembalianPutakawan = async({idPengembalian, pustakawanId}
     })
 
     // perbahraui data peminjaman
-    await Peminjaman.findOne(
+    await Peminjaman.findOneAndUpdate(
         {_id: updatePengembalian.idPeminjaman},
         {statusPeminjaman: 'Dikembalikan', dataPengembalian: updatePengembalian._id}
     )

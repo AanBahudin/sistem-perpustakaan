@@ -11,8 +11,8 @@ const  PeminjamanApprovalContainer = ({peminjaman} : {peminjaman: any}) => {
 
     if (peminjaman.statusPeminjaman === 'Dipinjam') return <AcceptedPengajuanBanner />
     if (peminjaman.statusPeminjaman === 'Ditolak') return <DeclinePengajuanBanner />
-    if (peminjam.statusPeminjaman === 'Terlambat') return <TerlambatPengajuanBanner />
-    if (peminjam.statusPeminjaman === 'Dikembalikan') return <ReturnedPengajuanBanner />
+    if (peminjaman.statusPeminjaman === 'Terlambat') return <TerlambatPengajuanBanner />
+    if (peminjaman.statusPeminjaman === 'Dikembalikan') return <ReturnedPengajuanBanner />
 
     return (
         <Alert className='w-full flex items-center justify-between my-6'>

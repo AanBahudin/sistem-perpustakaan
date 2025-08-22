@@ -30,7 +30,7 @@ const PustakawanDetailPeminjaman = () => {
             
             <DetailPengajuanBreadCrumbs text={data.buku.judul} />
             <PeminjamanApprovalContainer peminjaman={data} />
-            <DetailPeminjamanTabs idPengembalian={data.dataPengembalian} />
+            <DetailPeminjamanTabs peminjaman={data} idPengembalian={data.dataPengembalian} />
 
             {/* JIKA TAB PEMINJAMAN AKTIF */}
             {pustakawanDetailPeminjamanActiveTabs === 'Peminjaman' && (
@@ -59,8 +59,6 @@ const PustakawanDetailPeminjaman = () => {
 
             {/* JIKA TAB BUAT PENGEMBALIAN AKTIF */}
             {pustakawanDetailPeminjamanActiveTabs === 'Buat Pengembalian' && <BuatPengembalianSection buku={buku} peminjaman={data} />}
-    
-
         </Container>
     )
 }
