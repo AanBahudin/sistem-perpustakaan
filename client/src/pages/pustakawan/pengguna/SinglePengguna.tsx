@@ -1,4 +1,5 @@
 import { getSinglePengguna } from "@/actions/Pustakawan/PustakawanGetPenggunaActions"
+import DetailPenggunaLoading from "@/components/Pustakawan/Pengguna/DetailPenggunaLoading"
 import ActivityInfoContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/ActivityInfoContainer"
 import MainProfileContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/MainProfileContainer"
 import PenggunaBreadCrumbs from "@/components/Pustakawan/Pengguna/SinglePengguna/PenggunaBreadCrumbs"
@@ -17,7 +18,7 @@ const SinglePengguna = () => {
     queryFn: () => getSinglePengguna(idParams as string)
   })
 
-  if (isLoading) return <h1>Loading ...</h1>
+  if (isLoading) return <DetailPenggunaLoading />
   const {pengguna, peminjaman, perpanjangan, pengembalian} = data
 
   const ratioData = [

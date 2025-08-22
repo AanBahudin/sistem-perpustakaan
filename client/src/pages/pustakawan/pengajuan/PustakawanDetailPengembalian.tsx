@@ -10,6 +10,7 @@ import DetailPengajuanHeader from "@/components/Pustakawan/Pengajuan/DetailPenga
 import DetailBukuPengajuan from "@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailBukuPengajuan"
 import { Calendar } from "@/components/ui/calendar"
 import DetailPengajuanPeminjaman from "@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPengajuanPeminjaman"
+import SinglePengajuanLoading from "@/components/Pustakawan/Pengajuan/SinglePengajuanLoading"
 
 const PustakawanDetailPengembalian = () => {
 
@@ -21,7 +22,7 @@ const PustakawanDetailPengembalian = () => {
 
     const { pustakawanPengembalianTab } = useSelector((state: any) => state.pengembalianState)
 
-    if (isLoading) return <h1>Loading .... </h1>
+    if (isLoading) return <SinglePengajuanLoading />
     const {idBuku: buku, idPeminjaman: peminjaman, idPengguna: pengguna} = data
     const {createdAt: tanggalMulai, berakhirPada: tanggalBerakhir} = peminjaman
 

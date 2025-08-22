@@ -12,6 +12,7 @@ import DetailPerpanjanganTabs from "@/components/Pustakawan/Pengajuan/DetailPerp
 import { useSelector } from "react-redux"
 import { Calendar } from "@/components/ui/calendar"
 import PerpanjanganDetailPeminjamanSection from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/PerpanjanganDetailPeminjamanSection"
+import SinglePengajuanLoading from "@/components/Pustakawan/Pengajuan/SinglePengajuanLoading"
 
 const PustakawanDetailPerpanjanganPage = () => {
 
@@ -22,7 +23,7 @@ const PustakawanDetailPerpanjanganPage = () => {
         queryFn: () => getSinglePerpanjanganPustakawan(idPerpanjangan as string)
     })
 
-    if (isLoading) return <h1>Loading ...</h1>
+    if (isLoading) return <SinglePengajuanLoading />
     const { idBuku: buku, idPengguna: dataPengguna, idPeminjaman: dataPeminjaman } = data
     
     const tanggalBerakhir = new Date(dataPeminjaman.berakhirPada)

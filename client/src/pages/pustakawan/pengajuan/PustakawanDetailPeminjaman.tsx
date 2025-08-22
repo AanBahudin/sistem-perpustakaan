@@ -11,6 +11,7 @@ import DetailBukuPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminja
 import DetailPemohonPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPemohonPengajuan'
 import DetailPeminjamanTabs from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPeminjamanTabs'
 import BuatPengembalianSection from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/BuatPengembalianSection'
+import SinglePengajuanLoading from '@/components/Pustakawan/Pengajuan/SinglePengajuanLoading'
 
 const PustakawanDetailPeminjaman = () => {
 
@@ -22,7 +23,7 @@ const PustakawanDetailPeminjaman = () => {
 
     const { pustakawanDetailPeminjamanActiveTabs } = useSelector((state: any) => state.peminjamanState)
     
-    if (isLoading) return <h1>Loading ... </h1>
+    if (isLoading) return <SinglePengajuanLoading />
     const {buku, peminjam} = data
 
     return (
