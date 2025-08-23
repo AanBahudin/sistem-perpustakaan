@@ -38,7 +38,6 @@ const PustakawanDetailPengembalian = () => {
                     <main className='w-3/4 border rounded-xl min-h-[50vh] p-8'>
                         <DetailPengajuanHeader />
                         <DetailPengajuanPeminjaman dataPeminjaman={peminjaman} />
-                        {/* <PeminjamanDetailPage dataBuku={buku} dataPeminjaman={dataPeminjaman} pengguna={dataPengguna} /> */}
                         <DetailBukuPengajuan dataBuku={buku} /> 
                     </main>
                     <Calendar

@@ -176,7 +176,15 @@ export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 }
 
 export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
-    const dataPeminjaman = await Peminjaman.findOne({_id: id}).populate(['peminjam', 'buku']).select('-password -email')
+    const dataPeminjaman = await Peminjaman.findOne({_id: id})
+        .populate(['peminjam', 'buku']).select('-password -email')
+        .populate({
+            path: 'dataPengembalian'
+        })
+        .populate({
+            path: 'diprosesOleh',
+            select: 'nama email'
+        })
     return dataPeminjaman
 }
 

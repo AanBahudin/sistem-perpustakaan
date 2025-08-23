@@ -31,8 +31,8 @@ export default PustakawanSidebarHeader
 const SidebarHeaderLoading = () => {
   return (
     <div className="flex-1">
-      <Skeleton className="w-[80px] h-8" />
-      <Skeleton className="w-[40px] h-6" />
+      <Skeleton className="w-[200px] h-4" />
+      <Skeleton className="w-[150px] h-3 mt-2" />
     </div>
   )
 }

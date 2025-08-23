@@ -1,6 +1,6 @@
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getDetailPengajuanPeminjaman } from '@/actions/Pustakawan/pustakawanPengajuanActions'
 import DetailPengajuanBreadCrumbs from '@/components/Pustakawan/Pengajuan/DetailPengajuanBreadCrumbs'
@@ -12,6 +12,7 @@ import DetailPemohonPengajuan from '@/components/Pustakawan/Pengajuan/DetailPemi
 import DetailPeminjamanTabs from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPeminjamanTabs'
 import BuatPengembalianSection from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/BuatPengembalianSection'
 import SinglePengajuanLoading from '@/components/Pustakawan/Pengajuan/SinglePengajuanLoading'
+import { Alert } from '@/components/ui/alert'
 
 const PustakawanDetailPeminjaman = () => {
 
@@ -28,7 +29,6 @@ const PustakawanDetailPeminjaman = () => {
 
     return (
         <Container className='w-full'>
-            
             <DetailPengajuanBreadCrumbs text={data.buku.judul} />
             <PeminjamanApprovalContainer peminjaman={data} />
             <DetailPeminjamanTabs peminjaman={data} idPengembalian={data.dataPengembalian} />
@@ -49,8 +49,11 @@ const PustakawanDetailPeminjaman = () => {
             {/* JIKA TAB DATA PENGEMBALIAN AKTIF */}
             {pustakawanDetailPeminjamanActiveTabs === 'Data Pengembalian' && (
                 <section className='w-full flex items-start gap-x-8'>
-                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
+                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8 flex flex-col'>
                         <DetailPengajuanHeader />
+                        <Alert className='w-full flex my-5 py-4 text-xs'>
+                            <Link className='w-full underline' to={`/pustakawan/pengajuan/pengembalian/${data?.dataPengembalian?._id}`}>Lihat Data Pengembalian</Link>
+                        </Alert>
                         <DetailBukuPengajuan dataBuku={buku} />
                     </main>
 
