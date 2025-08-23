@@ -8,10 +8,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { formatedDate } from "@/utils/formatDate"
-import { Link2 } from "lucide-react"
-import GlobalTooltip from "@/globals/GlobalTooltip"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { Badge } from "@/components/ui/badge"
+import TabelDropdownMenu from "../TabelDropdownMenu"
 
 const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
 
@@ -20,7 +19,6 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
     const handleNavigate = (id: string) => {
         navigate(`${id}`)
     }
-
 
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
@@ -67,11 +65,11 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{formatedDate(item.createdAt)}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
-                                            <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
-                                                <GlobalTooltip text="Lihat Detail">
-                                                    <Link2 className="w-3 h-3" />
-                                                </GlobalTooltip>
-                                            </div>
+                                            <TabelDropdownMenu
+                                                idPeminjaman={item._id}
+                                                idPengembalian={item.dataPengembalian}
+                                                idPengguna={peminjam._id}
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 )

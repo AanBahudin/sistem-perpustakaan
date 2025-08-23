@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { Check, X } from "lucide-react"
+import { Check, LucideIcon, X } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 
@@ -68,29 +68,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                                             <StatusAkunBadge statusAkun={item.statusAkun} />
                                         </TableCell>
                                         <TableCell className="w-[200px] text-center text-xs">
-                                            <div className="flex items-center justify-center gap-x-3">
-                                                <GlobalTooltip type={`${!item.verifikasiEmail && 'danger'}`} text={`${item.verifikasiEmail ? 'Pengguna telah verifikasi Email' : 'Pengguna belum verifikasi Email'}`}>
-                                                    <div className={`flex items-center gap-x-2  text-xs ${item.verifikasiEmail ? 'bg-primary/60 dark:bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
-                                                        {item.verifikasiEmail ? (
-                                                            <Check className="w-3 h-3 stroke-primary" />
-                                                        ) : (
-                                                            <X className="w-3 h-3 stroke-destructive" />
-                                                        )}
-                                                        <p className="cursor-default text-xs">Email</p>
-                                                    </div>
-                                                </GlobalTooltip>
-
-                                                <GlobalTooltip  type={`${!item.verifikasiProdi && 'danger'}`} text={`${item.verifikasiProdi ? 'Pengguna telah diverifikasi Prodi' : 'Pengguna belum diverifikasi Prodi'}`}>
-                                                    <div className={`flex items-center gap-x-2 ${item.verifikasiProdi ? 'bg-primary/60 dark:bg-primary-foreground/60' : 'bg-destructive/30'} rounded-full text-xs py-1 px-2`}>
-                                                        {item.verifikasiProdi ? (
-                                                            <Check className="w-3 h-3 stroke-primary" />
-                                                        ) : (
-                                                            <X className="w-3 h-3 stroke-destructive" />
-                                                        )}
-                                                        <p>Prodi</p>
-                                                    </div>
-                                                </GlobalTooltip>
-                                            </div>
+                                            <VerifikasiBadge emailVerify={item.verifikasiEmail} prodiVerify={item.verifikasiProdi} />
                                         </TableCell>
                                     </TableRow>
                                 )
@@ -117,5 +95,31 @@ const StatusAkunBadge = ({statusAkun} : {statusAkun: string}) => {
 
     return (
         <Badge className="text-white text-center w-[80%]">{statusAkun}</Badge>
+    )
+}
+
+const VerifikasiBadge = ({emailVerify, prodiVerify} : {emailVerify: boolean, prodiVerify: boolean}) => {
+
+    const EmailVerifyIcon: LucideIcon = emailVerify ? Check : X
+    const EmailVerifyMsg: string = emailVerify ? 'Pengguna telah verifikasi Email' : 'Pengguna belum verifikasi Email'
+    const ProdiVerifyIcon: LucideIcon = prodiVerify ? Check : X
+    const ProdiVerifyMsg: string = prodiVerify ? 'Pengguna telah diverifikasi Prodi' : 'Pengguna belum diverifikasi Prodi'
+
+    return (
+        <section className="flex items-center justify-center gap-x-3">
+            <GlobalTooltip type={!emailVerify ? 'danger' : 'default'} text={EmailVerifyMsg}>
+                <Badge variant={emailVerify ? 'default' : 'destructive'} className="flex items-center justify-center gap-x-1 text-white text-xs">
+                    <EmailVerifyIcon className="stroke-white" />
+                    {'Email'}
+                </Badge>
+            </GlobalTooltip>
+
+            <GlobalTooltip text={ProdiVerifyMsg} type={!prodiVerify ? 'danger' : 'default'} >
+                <Badge variant={prodiVerify ? 'default' : 'destructive'} className="flex items-center justify-center gap-x-1 text-white text-xs">
+                    <ProdiVerifyIcon />
+                    {'Prodi'}
+                </Badge>
+            </GlobalTooltip>
+        </section>
     )
 }
