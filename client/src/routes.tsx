@@ -51,6 +51,7 @@ import SinglePengguna from "./pages/pustakawan/pengguna/SinglePengguna";
 import PustakawanDetailPeminjaman from "./pages/pustakawan/pengajuan/PustakawanDetailPeminjaman";
 import PustakawanDetailPerpanjanganPage from "./pages/pustakawan/pengajuan/PustakawanDetailPerpanjangan";
 import PustakawanDetailPengembalian from "./pages/pustakawan/pengajuan/PustakawanDetailPengembalian";
+import PustakawanDetailBuku from "./pages/pustakawan/buku/PustakawanDetailBuku";
 
 const router : RouteObject[] = [
     {
@@ -275,6 +276,10 @@ const router : RouteObject[] = [
                     {
                         index: true,
                         element: <PustakawanSemuaBukuPage />
+                    },
+                    {
+                        path: 'detail/:idBuku',
+                        element: <PustakawanDetailBuku />
                     },
                     {
                         path: 'peminjaman',

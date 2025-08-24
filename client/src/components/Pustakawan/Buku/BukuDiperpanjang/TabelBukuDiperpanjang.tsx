@@ -7,14 +7,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Ellipsis } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { formatedDate } from "@/utils/formatDate"
+import TabelDropdownMenu from "../../Pengajuan/TabelDropdownMenu"
 
 const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
 
+    const navigete = useNavigate()
     const [searchParams] = useSearchParams()
+    const handleNavigate = (id: string) => {
+        navigete(`/pustakawan/buku/detail/${id}`)
+    }
 
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
@@ -43,7 +47,7 @@ const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
                                 const newDate = formatedDate(data.idPeminjaman.berakhirPada) 
                                 const { idPengguna } = data
                                 return (
-                                    <TableRow key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
+                                    <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                         <TableCell className="w-[200px] text-xs">{item.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.ISBN}</TableCell>
@@ -61,7 +65,10 @@ const TabelBukuDiperpanjang = ({dataBuku} : {dataBuku: any}) => {
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
                                                 <GlobalTooltip text="Opsi">
-                                                    <Ellipsis className="w-3 h-3" />
+                                                    <TabelDropdownMenu 
+                                                        idBuku={item._id}
+                                                        idPengguna={idPengguna._id}
+                                                        idPengembalian={data.idPeminjaman.dataPengembalian} />
                                                 </GlobalTooltip>
                                             </div>
                                         </TableCell>

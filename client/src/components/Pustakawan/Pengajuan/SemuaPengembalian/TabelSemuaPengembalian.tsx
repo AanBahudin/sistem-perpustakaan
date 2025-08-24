@@ -100,7 +100,7 @@ const StatusPengembalianBadge = ({status} : {status: string}) => {
     )
 }
 
-const StatusPembayaranBadge = ({status} : {status: string}) => {
+export const StatusPembayaranBadge = ({status} : {status: string}) => {
     if (status === 'elum Bayar') return <Badge variant='secondary' className="w-[80%] text-white text-center">{status}</Badge>
     return (
         <Badge className="w-[80%] text-white text-center">{status}</Badge>

@@ -1,4 +1,4 @@
-import { Ellipsis, FileCheck, FileSymlink, User } from "lucide-react"
+import { Ellipsis, FileCheck, FileSymlink, SquareLibrary, User } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +10,11 @@ import { useNavigate } from "react-router-dom"
 type TabelDropdownMenuType = {
     idPengguna?: string,
     idPeminjaman?: string,
-    idPengembalian?: string
+    idPengembalian?: string,
+    idBuku?: string
 }
 
-const TabelDropdownMenu = ({ idPengguna, idPeminjaman, idPengembalian } : TabelDropdownMenuType) => {
+const TabelDropdownMenu = ({ idPengguna, idPeminjaman, idPengembalian, idBuku } : TabelDropdownMenuType) => {
 
     const navigate = useNavigate()
     const navigatePengguna = (event: any) => {
@@ -29,6 +30,11 @@ const TabelDropdownMenu = ({ idPengguna, idPeminjaman, idPengembalian } : TabelD
     const navigatePengembalian = (event: any) => {
         event.stopPropagation()
         navigate(`/pustakawan/pengajuan/pengembalian/${idPengembalian}`)
+    }
+
+    const navigateDetailBuku = (event: any) => {
+        event.stopPropagation()
+        navigate(`/pustakawan/buku/detail/${idBuku}`)
     }
 
     return (
@@ -73,6 +79,18 @@ const TabelDropdownMenu = ({ idPengguna, idPeminjaman, idPengembalian } : TabelD
                             <>
                                 <User className='w-3 h-3 ' /> 
                                 Lihat pengguna
+                            </>
+                    </DropdownMenuItem>
+                )}
+
+                {/* MENU DATA PENGGUNA */}
+                {idBuku && (
+                    <DropdownMenuItem
+                        onClick={(e) => navigateDetailBuku(e)}
+                            className=' flex items-center gap-x-2 text-xs p-2'>
+                            <>
+                                <SquareLibrary className='w-3 h-3 ' /> 
+                                Lihat Buku
                             </>
                     </DropdownMenuItem>
                 )}

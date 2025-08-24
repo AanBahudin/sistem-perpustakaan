@@ -116,7 +116,7 @@ export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
         {statusPeminjaman: 'Dipinjam'},
         {statusPeminjaman: 'Terlambat'}
     ]})
-        .select('buku peminjam _id berakhirPada durasiPeminjaman')
+        .select('buku peminjam _id berakhirPada durasiPeminjaman statusPeminjaman dataPengembalian')
         .sort({createdAt: -1})
         .populate({
             path: 'buku',
@@ -173,7 +173,7 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
-            select: 'judul kategori ISBN',
+            select: '_id judul kategori ISBN',
             match: bukuMatch
         })
         .populate({
@@ -182,7 +182,7 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
         })
         .populate({
             path: 'idPeminjaman',
-            select: 'berakhirPada _id'
+            select: 'berakhirPada _id dataPengembalian'
         })
 
     const bukuDiperpanjang = bukuDiperpanjangRaw.filter((item) => item.idBuku !== null);
@@ -227,7 +227,7 @@ export const getSemuaBukuDikembalikan = async({query} : {query: any}) => {
     }
 
     const bukuDikembalikanRaw = await Pengembalian.find({statusPengembalian: 'Dikembalikan'})
-        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian keadaanBuku')
+        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian keadaanBuku isMissing')
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
@@ -285,11 +285,11 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
     }
 
     const bukuDihilangkaRaw = await Pengembalian.find({isMissing: true})
-        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian statusPembayaran, totalDenda')
+        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian statusPembayaran, totalDenda statusPembayaran')
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
-            select: 'judul kategori ISBN',
+            select: 'judul kategori ISBN stok',
             match: bukuMatch
         })
         .populate({
