@@ -9,7 +9,6 @@ import GeneralInfoContainer from '@/components/Pustakawan/Buku/DetailBuku/Genera
 import StatistikPeminjamanDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatsPeminjamanDetailBuku'
 import StatistikHilangDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikHilangDetailBuku'
 import StatistikPengembalianDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikPengembalianDetailBuku'
-import AdministratifGeneralInfoContainer from '@/components/Pustakawan/Buku/DetailBuku/AdministratifGeneralInfoContainer'
 
 const PustakawanDetailBuku = () => {
 
@@ -29,7 +28,6 @@ const PustakawanDetailBuku = () => {
       <DetailBukuTabs />
 
       {isActive === 'Umum' && <GeneralInfoContainer data={data.buku} />}     
-      {isActive === 'Administratif' && <AdministratifGeneralInfoContainer data={data.buku} />}
       {isActive === 'Peminjaman' && <StatistikPeminjamanDetailBuku data={data} />}   
       {isActive === 'Riwayat Pengembalian' && <StatistikPengembalianDetailBuku data={data} />}
       {isActive === 'Riwayat Hilang' && <StatistikHilangDetailBuku data={data} />}

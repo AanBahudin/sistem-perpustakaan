@@ -9,7 +9,7 @@ const DetailBukuTabs = () => {
     const handleTabsValue = (value: string) => {
         store.dispatch(setPustakawanDetailBukuTabs(value))
     }
-    const menus: Array<string> = ['Umum', 'Administratif', 'Peminjaman', 'Riwayat Pengembalian', 'Riwayat Hilang']
+    const menus: Array<string> = ['Umum', 'Peminjaman', 'Riwayat Pengembalian', 'Riwayat Hilang']
 
     return (
         <section className='w-full flex items-center justify-start gap-x-4'>

@@ -32,6 +32,10 @@ export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
 
 export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku})
+        .populate({
+            path: 'createdBy',
+            select: 'nama _id'
+        })
     const dataStatsPeminjamanBuku = await statsDetailBukuTelahDipinjam({idBuku})
     const peminjamanAktifBuku = await getPeminjamanAktifByBukuId({idBuku})
 
