@@ -9,6 +9,7 @@ import GeneralInfoContainer from '@/components/Pustakawan/Buku/DetailBuku/Genera
 import StatistikPeminjamanDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatsPeminjamanDetailBuku'
 import StatistikHilangDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikHilangDetailBuku'
 import StatistikPengembalianDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikPengembalianDetailBuku'
+import DetailBukuDropdownMenu from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuDropdownMenu'
 
 const PustakawanDetailBuku = () => {
 
@@ -24,7 +25,10 @@ const PustakawanDetailBuku = () => {
 
   return (
     <Container className='w-full'>
-      <DetailBukuBreadcrumbs text={data.buku.judul} />
+      <section className='w-full flex items-center justify-between'>
+        <DetailBukuBreadcrumbs text={data.buku.judul} />
+        <DetailBukuDropdownMenu idBuku={data.buku._id} />
+      </section>
       <DetailBukuTabs />
 
       {isActive === 'Umum' && <GeneralInfoContainer data={data.buku} />}     
