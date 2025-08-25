@@ -5,11 +5,13 @@ import { AlignEndHorizontal } from 'lucide-react'
 type GrafikDetailBukuType = {
   judulStatistik: string
   dataStatistik: any,
+  judulRasio: string,
+  dataRasio: string,
   dataBuku: any,
   type?: string
 } 
 
-const GrafikDetailBuku = ({ judulStatistik, dataStatistik, dataBuku, type} : GrafikDetailBukuType) => {
+const GrafikDetailBuku = ({ judulStatistik, dataStatistik, judulRasio, dataRasio, dataBuku} : GrafikDetailBukuType) => {
   return (
     <section className="w-full mb-4 border rounded-2xl bg-transparent h-[40vh] p-3 flex items-start justify-center">
       <main className="w-[70%] border-r h-full flex flex-col justify-between gap-y-5 items-start">
@@ -32,7 +34,7 @@ const GrafikDetailBuku = ({ judulStatistik, dataStatistik, dataBuku, type} : Gra
             <p className='text-8xl font-bold'>{dataBuku.stok}</p>
         </div>
         <p className='text-muted-foreground text-xs mt-1'>Buku tersedia</p>
-        <Badge className='text-white mt-8'>Jumlah buku yang dipinjam saat ini : {dataBuku.totalDipinjam}</Badge>
+        <Badge className='text-white mt-8'>{judulRasio} : {dataRasio}</Badge>
       </main>
     </section>
   )

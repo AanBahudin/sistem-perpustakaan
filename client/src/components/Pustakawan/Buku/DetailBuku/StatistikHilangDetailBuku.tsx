@@ -8,7 +8,12 @@ const StatistikHilangDetailBuku = ({data} : {data: any}) => {
 
     return (
         <Container className='w-full my-4'>
-            <GrafikDetailBuku dataBuku={buku} dataStatistik={statsHilangBuku} judulStatistik={`Kehilangan ${buku.judul}`} />
+            <GrafikDetailBuku 
+                dataBuku={buku} 
+                dataStatistik={statsHilangBuku} 
+                judulStatistik={`Kehilangan ${buku.judul}`}
+                judulRasio='Total Buku Hilang'
+                dataRasio={bukuHilang.length} />
             <DetailBukuTabelKehilangan dataBuku={bukuHilang} />
         </Container>
   )
