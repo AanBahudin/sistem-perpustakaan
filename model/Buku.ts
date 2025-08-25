@@ -58,9 +58,10 @@ const BukuSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    halaman: {
-        type: Number,
-        required: true
+    bahasa: {
+        type: String,
+        required: true,
+        default: 'Indonesia'
     },
     ukuranBuku: {
         lebar: {
