@@ -3,8 +3,8 @@ import { NotFoundError } from "../errors/errorHandler";
 import Peminjaman from "../model/Peminjaman";
 import Pengembalian from "../model/Pengembalian";
 import { startOfMonth, subMonths } from "date-fns";
-import { allPeminjamanStats, allPerpanjanganStats } from "./pustakawanServices";
 import Perpanjangan from "../model/Perpanjangan";
+
 
 // SUDAH TESTING
 export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
@@ -316,7 +316,9 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
 // SUDAH TESTING
 export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku})
-    if (!buku) throw new NotFoundError('Buku tidak ditemukan!')
+    if (!buku) {
+        throw new NotFoundError('Buku tidak ditemukan!')
+    }
     return buku
 }
 

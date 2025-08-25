@@ -5,6 +5,11 @@ export const getAllBukuPustakawan = async({query} : {query: string}) => {
     return response.data
 }
 
+export const getSingleBukuPustakawan = async({idBuku} : {idBuku: string}) => {
+    const {data: response} = await customFetch.get(`/buku/pustakawan/${idBuku}`)
+    return response.data
+}
+
 export const getAllBukuDipinjamPustakawan = async({query} : {query: string}) => {
     const {data: response} = await customFetch.get(`/buku/pustakawan/dipinjam?${query}`)
     return response.data

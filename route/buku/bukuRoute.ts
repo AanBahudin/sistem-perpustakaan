@@ -50,7 +50,7 @@ router.route('/pustakawan/dihilangkan')
 router.route('/create')
     .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)
 
-router.route('/:id')
+router.route('/pustakawan/:id')
     .get(pustakawanMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)
     .delete(pustakawanMiddlewareAuthorized, mongoIdMiddleware, hapusBuku)
     .patch(pustakawanMiddlewareAuthorized, mongoIdMiddleware, bukuInputValidator, editBuku)

@@ -62,6 +62,20 @@ const BukuSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    ukuranBuku: {
+        lebar: {
+            type: Number,
+            default: 0
+        },
+        panjang: {
+            type: Number,
+            default: 0
+        }
+    },
+    sumberPengadaan: {
+        type: String,
+        default: 'Beli',
+    },
     stok: {
         type: Number,
         default: 1

@@ -48,7 +48,7 @@ const TabelBukuDipinjam = ({dataBuku} : {dataBuku: any}) => {
                                 const newDate = formatedDate(data.berakhirPada)
                                 const { peminjam } = data
                                 return (
-                                    <TableRow onClick={() => handleNavigate(data._id)} key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
+                                    <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                         <TableCell className="w-[200px] text-xs">{item.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.ISBN}</TableCell>

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/breadcrumb"
 
 const DetailPengajuanBreadCrumbs = ({text} : {text: string}) => {
-  const location = useLocation().pathname.replace('/', ' ').trim().split('/')
+    const location = useLocation().pathname.replace('/', ' ').trim().split('/')
     const navigate = useNavigate()
     const toPreviousPage = () => {
         navigate(-1)
