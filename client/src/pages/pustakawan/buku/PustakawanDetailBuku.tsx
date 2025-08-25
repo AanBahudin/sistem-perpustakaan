@@ -6,6 +6,10 @@ import { getSingleBukuPustakawan } from '@/actions/Pustakawan/pustakawanBukuActi
 import DetailBukuTabs from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuTabs'
 import { useSelector } from 'react-redux'
 import GeneralInfoContainer from '@/components/Pustakawan/Buku/DetailBuku/GeneralInfoContainer'
+import StatistikPeminjamanDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatsPeminjamanDetailBuku'
+import StatistikHilangDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikHilangDetailBuku'
+import StatistikPengembalianDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikPengembalianDetailBuku'
+import AdministratifGeneralInfoContainer from '@/components/Pustakawan/Buku/DetailBuku/AdministratifGeneralInfoContainer'
 
 const PustakawanDetailBuku = () => {
 
@@ -17,20 +21,18 @@ const PustakawanDetailBuku = () => {
   })
 
   const { pustakawanDetailBukuTabs: isActive } = useSelector((state: any) => state.detailBukuState)
-
   if (isLoading) return <h1>Loading....</h1>
 
   return (
     <Container className='w-full'>
-      <DetailBukuBreadcrumbs text={data.judul} />
+      <DetailBukuBreadcrumbs text={data.buku.judul} />
       <DetailBukuTabs />
 
-      {isActive === 'Umum' ? (
-        <GeneralInfoContainer data={data} />
-      ) : (
-        <h1>Test</h1>
-      )}
-      
+      {isActive === 'Umum' && <GeneralInfoContainer data={data.buku} />}     
+      {isActive === 'Administratif' && <AdministratifGeneralInfoContainer data={data.buku} />}
+      {isActive === 'Peminjaman' && <StatistikPeminjamanDetailBuku data={data} />}   
+      {isActive === 'Riwayat Pengembalian' && <StatistikPengembalianDetailBuku data={data} />}
+      {isActive === 'Riwayat Hilang' && <StatistikHilangDetailBuku data={data} />}
     </Container>
   )
 }

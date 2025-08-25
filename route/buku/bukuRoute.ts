@@ -1,19 +1,19 @@
 import express from 'express'
+
+import { getAllBukuUser, getSingleBukuUser, discoveryBuku } from '../../controllers/buku/userBukuController'
+import { getAllBukuYearPustakawan } from '../../controllers/buku/pustakawanBukuController'
 import {
-    getAllBukuPustakawan, 
-    getSingleBukuPustakawan,
-    getAllBukuUser,
-    getSingleBukuUser,
-    addBuku,
-    editBuku,
-    hapusBuku,
-    discoveryBuku,
-    getAllBukuYearPustakawan,
+    getAllBukuPustakawan,
     getAllBukuDipinjamPustakawan,
     getAllBukuDiperpanjangPustakawan,
-    getAllBukuDikembalikanPustakawan,
     getAllBukuDihilangkanPustakawan,
-} from '../../controllers/buku/bukuController'
+    addBuku,
+    getAllBukuDikembalikanPustakawan,
+    getSingleBukuPustakawan,
+    hapusBuku,
+    editBuku
+} from '../../controllers/buku/pustakawanBukuController'
+
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongoIdMiddleware from '../../middleware/validateMongoIdMiddleware'

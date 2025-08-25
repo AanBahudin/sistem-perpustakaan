@@ -13,7 +13,7 @@ import {
     UserCreatePengembalianDataType} from "../types/pengembalianTypes"
 import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
-import { bukuDihilangkan, bukuDikembalikan } from "./bukuServices"
+import { bukuDihilangkan, bukuDikembalikan } from "./BukuServices/UtilsBukuServices"
 import { getDenda } from "./dendaServices"
 import { pinjamanDikembalikan } from "./peminjamanServices"
 import { 
@@ -387,7 +387,45 @@ export const getTotalBukuHilangByUser = async({idPengguna} : {idPengguna: string
     return dataHilang
 }
 
+export const getPengembalianHilangByBukuId = async({idBuku} : {idBuku: string}) => {
+    const buku = await Pengembalian.find({idBuku, isMissing: true})
+        .sort({createdAt: -1})
+        .populate({
+            path: 'idBuku',
+            select: 'judul kategori ISBN stok',
+        })
+        .populate({
+            path: 'idPengguna',
+            select: 'fotoProfil _id nama'
+        })
+        .populate({
+            path: 'idPeminjaman',
+            select: 'berakhirPada _id'
+        })
+    return buku
+}
+
 export const getPengembalianByUserId = async({idPengguna} : {idPengguna: string}) => {
     const pengembalian = await Pengembalian.find({idPengguna: idPengguna}).populate(['idBuku', 'idPengguna'])
+    return pengembalian
+}
+
+export const getPengembalianByBukuId = async({idBuku} : {idBuku: string}) => {
+    const pengembalian = await Pengembalian.find({idBuku})
+        .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian keadaanBuku isMissing')
+        .sort({createdAt: -1})
+        .populate({
+            path: 'idBuku',
+            select: 'judul kategori ISBN',
+        })
+        .populate({
+            path: 'idPengguna',
+            select: 'fotoProfil _id nama'
+        })
+        .populate({
+            path: 'idPeminjaman',
+            select: 'berakhirPada _id'
+        })
+    
     return pengembalian
 }

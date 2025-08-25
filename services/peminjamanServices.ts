@@ -5,7 +5,7 @@ import Pengguna from "../model/Pengguna";
 import { GetOnePeminjamanParamsType, GetOnePeminjamanUser, GetOnePeminjamanUserByBookId, getOnePeminjamanUserByPengembalianIdType, GetSemuaPeminjamanUserParamsType, PembatalanPeminjamanUserParamsType, PengajuanPeminjamanParamsType, PinjamanDikembalikanParamsType, PinjamanUpdatedFieldType, TambahPeminjamanParamsType, TerimaPeminjamanUserParamsType } from "../types/peminjamanTypes";
 import { mencegahBukuDipinjamBerulang, mencegahBukuDiterimaBerulang } from "../utils/checker";
 import tambahHariKeTanggal from "../utils/tambahHari";
-import { bukuDipinjam } from "./bukuServices";
+import { bukuDipinjam } from "./BukuServices/UtilsBukuServices";
 import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
 
@@ -249,4 +249,24 @@ export const updateDurasiPinjaman = async({idPinjaman, berakhirPada, durasiPemin
 export const getPeminjamanByUserId = async({userId} : {userId: string}) => {
     const pinjaman = await Peminjaman.find({peminjam: userId}).populate(['peminjam', 'buku'])
     return pinjaman
+}
+
+export const getPeminjamanAktifByBukuId = async({idBuku} : {idBuku: string}) => {
+    const peminjaman = await Peminjaman.find(
+        {buku: idBuku, $or: [
+            {statusPeminjaman: 'Dipinjam'},
+            {statusPeminjaman: 'Terlambat'},
+        ]}
+    )
+        .select('buku peminjam _id berakhirPada durasiPeminjaman statusPeminjaman dataPengembalian')
+        .sort({createdAt: -1})
+        .populate({
+            path: 'buku',
+        })
+        .populate({
+            path: 'peminjam',
+            select: 'fotoProfil _id nama'
+        })
+
+    return peminjaman
 }

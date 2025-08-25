@@ -22,11 +22,11 @@ const DetailBukuBreadcrumbs = ({text} : {text: string}) => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/buku" className="flex items-center gap-x-2"><Home className="stroke-muted-foreground w-4 h-4" /> Dashboard</BreadcrumbLink>
+                        <BreadcrumbLink href="/pustakawan" className="flex items-center gap-x-2"><Home className="stroke-muted-foreground w-4 h-4" /> Dashboard</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/buku" className="flex items-center gap-x-2">Buku</BreadcrumbLink>
+                        <BreadcrumbLink href="/pustakawan/buku" className="flex items-center gap-x-2">Buku</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem className="text-primary flex items-center gap-x-2">

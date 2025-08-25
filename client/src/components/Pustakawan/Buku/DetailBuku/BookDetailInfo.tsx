@@ -4,6 +4,8 @@ import DetailBukuInfo from "./DetailBukuInfo"
 
 const BookDetailInfo = ({data} : {data: any}) => {
 
+    const newTahun = new Date(data.tahunTerbit).getFullYear()
+    
     return (
         <section className='flex-1'>
         <main className='flex items-center justify-between w-full'>
@@ -12,7 +14,7 @@ const BookDetailInfo = ({data} : {data: any}) => {
         </main>
 
         <h1 className='text-xl font-semibold'>{data.judul}</h1>
-        <p className='text-xs text-muted-foreground'>Oleh {data.penulis}, {data.tahunTerbit}</p>
+        <p className='text-xs text-muted-foreground'>Oleh {data.penulis}, Tahun {newTahun}</p>
 
         <main className='my-2'>
             <p className='text-xs font-semibold'>Tagline</p>

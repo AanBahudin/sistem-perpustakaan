@@ -9,14 +9,14 @@ const DetailBukuTabs = () => {
     const handleTabsValue = (value: string) => {
         store.dispatch(setPustakawanDetailBukuTabs(value))
     }
-    const menus: Array<string> = ['Umum', 'Informasi Tambahan']
+    const menus: Array<string> = ['Umum', 'Administratif', 'Peminjaman', 'Riwayat Pengembalian', 'Riwayat Hilang']
 
     return (
         <section className='w-full flex items-center justify-start gap-x-4'>
             {menus.map((item: string, index: number) => {
                 const activeMenu: boolean = item === isActive
                 return (
-                    <Button onClick={() => handleTabsValue(item)} className={`text-white duration-200 ease-in-out text-xs min-w-[150px] border ${activeMenu ? 'bg-accent/40 hover:bg-accent/40' : 'bg-transparent  hover:bg-accent'}`} key={index}>{item}</Button>
+                    <Button onClick={() => handleTabsValue(item)} className={`text-white duration-200 ease-in-out text-xs min-w-[150px] border ${activeMenu ? 'bg-primary/40 hover:bg-primary/40' : 'bg-transparent  hover:bg-accent'}`} key={index}>{item}</Button>
                 )
             })}
         </section>

@@ -8,23 +8,14 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import GlobalTooltip from "@/globals/GlobalTooltip"
-import { useNavigate, useSearchParams } from "react-router-dom"
 import { formatedDate } from "@/utils/formatDate"
+import { StatusPeminjamanBadge } from "../../Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman"
 import TabelDropdownMenu from "../../Pengajuan/TabelDropdownMenu"
-import { Badge } from "@/components/ui/badge"
 
-const TabelBukuDikembalikan = ({dataBuku} : {dataBuku: any}) => {
-
-    const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
-    const params = new URLSearchParams(searchParams).toString()
-    const handleNavigate = (idBuku: string) => {
-        navigate(`/pustakawan/buku/detail/${idBuku}`)
-    }
-
+const DetailBukuTabelPeminjaman = ({dataBuku} : {dataBuku: any}) => {
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
-            <section className="w-full min-h-[50vh] border rounded overflow-hidden">
+            <section className="w-full min-h-[50vh] border rounded-2xl overflow-hidden">
                 <Table className="w-full text-sm">
                     <TableHeader>
                         <TableRow>
@@ -33,43 +24,42 @@ const TabelBukuDikembalikan = ({dataBuku} : {dataBuku: any}) => {
                             <TableHead className="w-[120px] text-xs text-center">ISBN</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Kategori</TableHead>
                             <TableHead className="w-[120px] text-center text-xs">Pengguna</TableHead>
-                            <TableHead className="w-[120px] text-center text-xs">Status Hilang</TableHead>
-                            <TableHead className="w-[120px] text-xs text-center">Tanggal Pengembalian</TableHead>
+                            <TableHead className="w-[120px] text-center text-xs">Status Peminjaman</TableHead>
+                            <TableHead className="w-[120px] text-xs text-center">Tanggal Berakhir</TableHead>
                         </TableRow>
                     </TableHeader>
-
                     {dataBuku.length === 0 ? (
                         <TableCaption className="mt-20">
-                            {params ? 'Data tidak ditemukan' : 'Belum ada buku'}
+                          Belum ada peminjaman
                         </TableCaption>
                     ) : (
                         <TableBody>
                             {dataBuku.map((data: any, index: number) => {
-                                const item = data.idBuku
-                                const newDate = formatedDate(data.tanggalPengembalian)
-                                const { idPengguna, idPeminjaman } = data
+                                const item = data.buku
+                                const newDate = formatedDate(data.berakhirPada)
+                                const { peminjam } = data
                                 return (
-                                    <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
+                                    <TableRow key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
                                         <TableCell className="w-[200px] text-xs">{item.judul}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.ISBN}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.kategori[0]} </TableCell>
                                         <TableCell className="w-full flex items-center justify-center gap-x-2 text-xs">
-                                            {idPengguna?.fotoProfil ? (
-                                                <img src={idPengguna.fotoProfil} className="w-4 h-4 object-cover rounded-full" />
+                                            {peminjam?.fotoProfil ? (
+                                                <img src={peminjam.fotoProfil} className="w-4 h-4 object-cover rounded-full" />
                                             ) : (
-                                                <div className="w-4 h-4 rounded-full flex items-center justify-center text-[12px]">{idPengguna.nama[0]}</div>
+                                                <div className="w-4 h-4 rounded-full flex items-center justify-center text-[12px]">{peminjam.nama[0]}</div>
                                             )}
-                                            {idPengguna.nama}
+                                            {peminjam.nama}
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
-                                            <StatusHilangBuku status={data.isMissing} />
+                                            <StatusPeminjamanBadge statusPeminjaman={data.statusPeminjaman} />
                                         </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{newDate}</TableCell>
                                         <TableCell className="w-[50px] text-center text-xs">
-                                            <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
+                                            <div className="w-6 h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
                                                 <GlobalTooltip text="Opsi">
-                                                    <TabelDropdownMenu idBuku={item._id} idPengguna={idPengguna._id} idPengembalian={data._id} idPeminjaman={idPeminjaman._id} />
+                                                    <TabelDropdownMenu idPeminjaman={data._id} idPengguna={peminjam} idPengembalian={data.dataPengembalian} />
                                                 </GlobalTooltip>
                                             </div>
                                         </TableCell>
@@ -84,11 +74,4 @@ const TabelBukuDikembalikan = ({dataBuku} : {dataBuku: any}) => {
     )
 }
 
-export const StatusHilangBuku = ({status} : {status: boolean}) => {
-    const text = status ? 'Hilang' : 'Dikembalikan'
-    return (
-        <Badge variant={status ? 'destructive' : 'default'} className="w-[80%] text-center text-white font-xs">{text}</Badge>
-    )
-}
-
-export default TabelBukuDikembalikan
+export default DetailBukuTabelPeminjaman
