@@ -29,7 +29,7 @@ const PustakawanSemuaBukuPage = () => {
       <section className="w-full flex items-center justify-between">
         <PustakawanBreadCrumbs />
         <Button className="w-fit h-8 rounded border mb-4">
-          <Link to='/' className="flex items-center gap-x-2 text-xs text-white"><Plus className="stroke-white" /> Tambah Buku</Link>
+          <Link to='/pustakawan/buku/buat' className="flex items-center gap-x-2 text-xs text-white"><Plus className="stroke-white" /> Tambah Buku</Link>
         </Button>
       </section>
       <GrafikBukuContainer 
