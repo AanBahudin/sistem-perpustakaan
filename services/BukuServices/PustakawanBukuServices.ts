@@ -34,7 +34,7 @@ export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
     const buku = await Buku.findOne({_id: idBuku})
         .populate({
             path: 'createdBy',
-            select: 'nama _id'
+            select: '_id nama fotoProfil'
         })
     const dataStatsPeminjamanBuku = await statsDetailBukuTelahDipinjam({idBuku})
     const peminjamanAktifBuku = await getPeminjamanAktifByBukuId({idBuku})
