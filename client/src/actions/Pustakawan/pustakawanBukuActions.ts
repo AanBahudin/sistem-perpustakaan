@@ -1,4 +1,13 @@
 import { customFetch } from "@/utils/customFetch";
+import { toast } from "sonner";
+
+export const tambahBukuPustakawan = async({data} : {data: any}) => {
+    const {data: response} = await customFetch.post('/buku/create', data)
+    if (response.status >= 400) {
+        toast('Terjadi kesalahan', {description: 'Tidak dapat menambahkan buku saat ini'})
+    }
+    return response.data
+}
 
 export const getAllBukuPustakawan = async({query} : {query: string}) => {
     const {data: response} = await customFetch.get(`/buku/pustakawan?${query}`)

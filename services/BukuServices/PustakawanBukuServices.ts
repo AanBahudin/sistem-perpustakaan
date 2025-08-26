@@ -290,8 +290,9 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
 }
 
 export const tambahDataBuku = async(dataBukuTerbaru: BukuSchemaType) => {
-    const bukuTerbaru = await Buku.create(dataBukuTerbaru)
-    return bukuTerbaru
+    console.log(dataBukuTerbaru)
+    // const bukuTerbaru = await Buku.create(dataBukuTerbaru)
+    return {}
 }
 
 export const editDataBuku = async(idBuku: string, dataBuku: BukuSchemaType) => {
