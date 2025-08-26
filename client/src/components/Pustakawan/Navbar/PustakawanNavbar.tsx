@@ -20,7 +20,7 @@ const PustakawanNavbar = () => {
   }
 
   return (
-    <section className='w-full h-[12vh] border-b flex items-center justify-between p-6'>
+    <section className='w-full sticky h-[12vh] border-b flex items-center justify-between p-6'>
         <PanelRightOpen 
           onClick={handleSidebar} 
           className={`w-5 h-5 stroke-muted-foreground hover:stroke-white duration-300 ease-in-out ${!showSidebar ? 'rotate-180' : 'rotate-0'}`} />

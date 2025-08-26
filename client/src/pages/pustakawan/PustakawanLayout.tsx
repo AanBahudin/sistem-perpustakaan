@@ -1,4 +1,3 @@
-import React from 'react'
 import Container from '@/globals/Container'
 import PustakawanNavbar from '@/components/Pustakawan/Navbar/PustakawanNavbar'
 import PustakawanSidebar from '@/components/Pustakawan/Sidebar/PustakawanSidebar'
@@ -12,7 +11,7 @@ const DashboardLayout = () => {
       
       <section className='flex-1 max-h-[100vh] flex flex-col'>
         <PustakawanNavbar />
-        <section className='w-full min-h-[88vh] overflow-y-auto scroll-custom p-10'>
+        <section className='w-full min-h-[88vh] relative overflow-y-auto scroll-custom p-10'>
           <Outlet />
         </section>
       </section>

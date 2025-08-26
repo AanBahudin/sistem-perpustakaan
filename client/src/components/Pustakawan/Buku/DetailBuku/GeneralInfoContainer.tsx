@@ -6,7 +6,6 @@ import { formatedDate } from "@/utils/formatDate"
 const GeneralInfoContainer = ({data} : {data: any}) => {
 
   const { createdBy: pustakawan } = data
-  console.log(pustakawan)
   
   return (
     <section className='w-full flex items-start gap-x-8 my-4'>
