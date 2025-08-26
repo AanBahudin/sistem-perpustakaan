@@ -17,6 +17,7 @@ import {
 import { bukuInputValidator } from '../../validator/bukuValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongoIdMiddleware from '../../middleware/validateMongoIdMiddleware'
+import upload from '../../middleware/multerMiddleware'
 
 const router = express.Router()
 
@@ -48,7 +49,7 @@ router.route('/pustakawan/dihilangkan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuDihilangkanPustakawan)
 
 router.route('/create')
-    .post(pustakawanMiddlewareAuthorized, bukuInputValidator, addBuku)
+    .post(pustakawanMiddlewareAuthorized, bukuInputValidator, upload.single('cover'), addBuku)
 
 router.route('/pustakawan/:id')
     .get(pustakawanMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)

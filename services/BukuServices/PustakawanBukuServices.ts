@@ -289,8 +289,17 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
     }
 }
 
-export const tambahDataBuku = async(dataBukuTerbaru: BukuSchemaType) => {
-    console.log(dataBukuTerbaru)
+export const tambahDataBuku = async(dataBukuTerbaru: any) => {
+    let dataBuku = dataBukuTerbaru
+    dataBuku.ukuranBuku = {
+        panjang: dataBuku.panjang,
+        lebar: dataBuku.lebar
+    }
+    delete dataBuku.panjang
+    delete dataBuku.lebar
+
+    // proses buku untuk diupload di cloudinary
+
     // const bukuTerbaru = await Buku.create(dataBukuTerbaru)
     return {}
 }

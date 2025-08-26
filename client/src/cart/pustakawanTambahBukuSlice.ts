@@ -4,15 +4,15 @@ const initialState = {
     judulBuku: '',
     taglineBuku: '',
     deskripsiBuku: '',
-    penulisBuku: '',
-    penerbitBuku: '',
-    ISBNBuku: '',
-    tahunTerbitBuku: new Date().getFullYear(),
-    jumlahHalamanBuku: 0,
-    bahasaBuku: 'Indonesia',
-    panjangBuku: 0,
-    lebarBuku: 0,
-    sumberPengadaan: 'Beli'
+    // penulisBuku: '',
+    // penerbitBuku: '',
+    // ISBNBuku: '',
+    // tahunTerbitBuku: new Date().getFullYear(),
+    // jumlahHalamanBuku: 0,
+    // bahasaBuku: 'Indonesia',
+    // panjangBuku: 0,
+    // lebarBuku: 0,
+    // sumberPengadaan: 'Beli'
 }
 
 const pustakawanTambahBukuSlice = createSlice({

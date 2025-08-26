@@ -10,8 +10,8 @@ export const bukuInputValidator = withValidationErrors([
     body('judul')
         .notEmpty()
         .withMessage('Judul tidak boleh kosong')
-        .isLength({min: 3, max: 100})
-        .withMessage('Judul 3 sampai 100 Karakter')
+        .isLength({min: 3, max: 200})
+        .withMessage('Judul 3 sampai 200 Karakter')
         .customSanitizer((judul : string) => {
             return capitalizeWords(judul)
         }),
@@ -32,13 +32,15 @@ export const bukuInputValidator = withValidationErrors([
             return penerbit
         }),
     body('tahunTerbit')
-        .optional()
         .isLength({ min: 4, max: 4 }).withMessage('Tahun terbit harus terdiri dari 4 digit')
         .isInt({ min: 1000, max: new Date().getFullYear() })
         .withMessage('Tahun terbit tidak valid'),
     body('deskripsi')
         .notEmpty().withMessage('Deskripsi tidak boleh kosong')
         .isLength({min: 15, max: 1000}).withMessage('Deskripsi 15 - 1000 karakter'),
+    body('tagline')
+        .notEmpty().withMessage('tagline tidak boleh kosong')
+        .isLength({min: 15, max: 500}).withMessage('Deskripsi 15 - 500 karakter'),
     body('cover')
         .optional(),
     body('ISBN')
@@ -48,8 +50,12 @@ export const bukuInputValidator = withValidationErrors([
         .optional()
         .isInt({min: 0}).withMessage('Stok harus berupa angka'),
     body('kategori')
-        .isArray({min: 1}).withMessage('Kategori minimal 1')
-        .custom(async(kategori : string[]) => {
+        .customSanitizer((kategori: any) => {
+            const newKategori = kategori.split(",").map((item: string) => item.trim())
+            return newKategori 
+        })
+        .isArray().withMessage('Kategori minimal 1')
+        .custom(async(kategori : string[]) => {        
             const dbKategori = await Kategori.find().lean()
 
             const allowedKategori = dbKategori.map(item => item.nama)

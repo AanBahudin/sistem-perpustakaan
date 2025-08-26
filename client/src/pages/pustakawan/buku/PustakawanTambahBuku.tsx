@@ -4,11 +4,22 @@ import InputDataContainer from '@/components/Pustakawan/Buku/TambahBuku/InputDat
 import PustakawanTambahBukuHeader from '@/components/Pustakawan/Buku/TambahBuku/PustakawanTambahBukuHeader'
 import { useMutation } from '@tanstack/react-query'
 import { tambahBukuPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
+import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
 
 const PustakawanTambahBuku = () => {
 
+  const navigate = useNavigate()
   const mutation = useMutation({
-    mutationFn: (data: any) => tambahBukuPustakawan({data})
+    mutationFn: (data: any) => tambahBukuPustakawan({data}),
+    onSuccess: () => {
+      toast('Berhasil Ditambahkan', {description: 'Buku berhasil ditambahkan!'})
+      navigate('/pustakawan/buku')
+    },
+    onError: (error: any) => {
+      console.log(error)
+      toast('Terjadi kesalahan', {description: 'Tidak dapat menambahkan buku'})
+    }
   })
 
   const handleSubmit = async(e: any) => {
@@ -22,7 +33,7 @@ const PustakawanTambahBuku = () => {
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
       <form onSubmit={handleSubmit} encType='multipart/form-data' className="w-full flex flex-col flex-1 space-y-4">
-        <PustakawanTambahBukuHeader />
+        <PustakawanTambahBukuHeader isLoading={mutation.isPending} />
         <InputDataContainer />
       </form>
     </Container>
