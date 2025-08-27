@@ -19,6 +19,11 @@ export const getSingleBukuPustakawan = async({idBuku} : {idBuku: string}) => {
     return response.data
 }
 
+export const editBukuPustakawan = async(data: FormData, idBuku: string) => {
+    const {data: response} = await customFetch.patch(`/buku/pustakawan/${idBuku}`, data)
+    return response.data
+}
+
 export const getAllBukuDipinjamPustakawan = async({query} : {query: string}) => {
     const {data: response} = await customFetch.get(`/buku/pustakawan/dipinjam?${query}`)
     return response.data
