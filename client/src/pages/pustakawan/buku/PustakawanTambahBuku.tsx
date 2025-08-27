@@ -16,8 +16,7 @@ const PustakawanTambahBuku = () => {
       toast('Berhasil Ditambahkan', {description: 'Buku berhasil ditambahkan!'})
       navigate('/pustakawan/buku')
     },
-    onError: (error: any) => {
-      console.log(error)
+    onError: () => {
       toast('Terjadi kesalahan', {description: 'Tidak dapat menambahkan buku'})
     }
   })
