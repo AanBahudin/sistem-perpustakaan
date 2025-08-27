@@ -4,6 +4,9 @@ import Pengembalian from "../../model/Pengembalian";
 import Perpanjangan from "../../model/Perpanjangan";
 import { BukuSchemaType } from "../../model/Buku";
 
+import cloudinary from 'cloudinary'
+import {promises as fs} from 'fs'
+
 import { rasioKategoriBuku, rasioPeminjamanBuku, rasioBukuHilang, rasioPengembalianBuku, rasioPerpanjanganBuku } from "./RatioBukuServices";
 
 import { statsBukuHilang, statsBukuDipinjam, stastBukuDikembalikan, statsBukuDiPerpanjang, statsDetailBukuTelahDipinjam, statsDetailBukuTelahHilang, statsDetailBukuDikembalian } from "./StatsBukuServices";
@@ -289,7 +292,9 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
     }
 }
 
-export const tambahDataBuku = async(dataBukuTerbaru: any) => {
+export const tambahDataBuku = async(dataBukuTerbaru: any, reqFile: any) => {
+    // console.log(dataBukuTerbaru);
+    
     let dataBuku = dataBukuTerbaru
     dataBuku.ukuranBuku = {
         panjang: dataBuku.panjang,
@@ -299,9 +304,16 @@ export const tambahDataBuku = async(dataBukuTerbaru: any) => {
     delete dataBuku.lebar
 
     // proses buku untuk diupload di cloudinary
+    if (reqFile) {
+        const response = await cloudinary.v2.uploader.upload(reqFile.path)
+        await fs.unlink(reqFile.path)
 
-    // const bukuTerbaru = await Buku.create(dataBukuTerbaru)
-    return {}
+        dataBuku.cover = response.secure_url
+        dataBuku.coverPublicId = response.public_id
+    }
+
+    const bukuTerbaru = await Buku.create(dataBuku)
+    return bukuTerbaru
 }
 
 export const editDataBuku = async(idBuku: string, dataBuku: BukuSchemaType) => {

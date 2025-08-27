@@ -11,8 +11,6 @@ import {
     getSemuaBukuDikembalikan,
     getSatuBukuUntukPustakawan} from "../../services/BukuServices/PustakawanBukuServices"
 import { getAllBookYear } from "../../services/BukuServices/UtilsBukuServices"
-    
-
 
 export const getAllBukuDihilangkanPustakawan = async(req: Request, res: Response) => {
     const query = req.query
@@ -94,7 +92,7 @@ export const addBuku = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     req.body.createdBy = userId
     
-    const buku = await tambahDataBuku(req.body)
+    const buku = await tambahDataBuku(req.body, req.file)
     
     SendOneDataResponse({
         res,

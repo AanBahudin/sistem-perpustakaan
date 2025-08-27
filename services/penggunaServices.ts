@@ -37,6 +37,7 @@ export const photoUpdate = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
     if (req.file) {
+        console.log(req.file)
         const response = await cloudinary.v2.uploader.upload(req.file.path)
         await fs.unlink(req.file.path)
 

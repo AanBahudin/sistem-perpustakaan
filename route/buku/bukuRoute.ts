@@ -49,7 +49,7 @@ router.route('/pustakawan/dihilangkan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuDihilangkanPustakawan)
 
 router.route('/create')
-    .post(pustakawanMiddlewareAuthorized, bukuInputValidator, upload.single('cover'), addBuku)
+    .post(pustakawanMiddlewareAuthorized, upload.single('cover'), bukuInputValidator, addBuku)
 
 router.route('/pustakawan/:id')
     .get(pustakawanMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)

@@ -46,6 +46,9 @@ const BukuSchema = new mongoose.Schema({
     cover: {
         type: String
     },
+    coverPublicId: {
+        type: String
+    },
     jumlahHalaman: {
         type: Number,   
         required: true

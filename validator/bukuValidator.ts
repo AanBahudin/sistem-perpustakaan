@@ -13,12 +13,14 @@ export const bukuInputValidator = withValidationErrors([
         .isLength({min: 3, max: 200})
         .withMessage('Judul 3 sampai 200 Karakter')
         .customSanitizer((judul : string) => {
+            console.log('judul', judul);
             return capitalizeWords(judul)
         }),
-    body('penulis')
+        body('penulis')
         .optional()
         .customSanitizer((penulis) => {
             if (penulis) {
+                console.log('penulis', penulis);
                 return capitalizeWords(penulis)
             }
             return penulis
@@ -27,6 +29,7 @@ export const bukuInputValidator = withValidationErrors([
         .optional()
         .customSanitizer((penerbit : string) => {
             if (penerbit) {
+                console.log('penerbit', penerbit);
                 return capitalizeWords(penerbit)
             }
             return penerbit
@@ -41,8 +44,6 @@ export const bukuInputValidator = withValidationErrors([
     body('tagline')
         .notEmpty().withMessage('tagline tidak boleh kosong')
         .isLength({min: 15, max: 500}).withMessage('Deskripsi 15 - 500 karakter'),
-    body('cover')
-        .optional(),
     body('ISBN')
         .notEmpty().withMessage('Kode ISBN tidak boleh kosong')
         .isLength({min: 10, max: 13}).withMessage('kode ISBN 10 - 13 karakter'),

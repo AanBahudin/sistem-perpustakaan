@@ -1,7 +1,7 @@
 import { customFetch } from "@/utils/customFetch";
 import { toast } from "sonner";
 
-export const tambahBukuPustakawan = async({data} : {data: any}) => {
+export const tambahBukuPustakawan = async({data} : {data: FormData}) => {
     const {data: response} = await customFetch.post('/buku/create', data)
     if (response.status >= 400) {
         toast('Terjadi kesalahan', {description: 'Tidak dapat menambahkan buku saat ini'})

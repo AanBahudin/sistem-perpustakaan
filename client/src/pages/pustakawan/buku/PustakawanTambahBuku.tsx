@@ -11,7 +11,7 @@ const PustakawanTambahBuku = () => {
 
   const navigate = useNavigate()
   const mutation = useMutation({
-    mutationFn: (data: any) => tambahBukuPustakawan({data}),
+    mutationFn: (data: FormData) => tambahBukuPustakawan({data}),
     onSuccess: () => {
       toast('Berhasil Ditambahkan', {description: 'Buku berhasil ditambahkan!'})
       navigate('/pustakawan/buku')
@@ -25,8 +25,7 @@ const PustakawanTambahBuku = () => {
   const handleSubmit = async(e: any) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const data = Object.fromEntries(formData)
-    mutation.mutate(data)
+    mutation.mutate(formData)
   }
 
   return (
