@@ -1,5 +1,10 @@
 import { customFetch } from "@/utils/customFetch";
 
+export const createKategori = async(data: any) => {
+    const response = await customFetch.post('/kategori', data)
+    return response.data.data
+}
+
 export const getAllKategori = async() => {
     const response = await customFetch.get('/kategori')
     if (response.status >= 400) {
