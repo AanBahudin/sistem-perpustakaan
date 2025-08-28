@@ -65,7 +65,7 @@ const dataSelect = isLoading ? ['memuat'] : response.data.map((item: any) => ite
           <div className='w-full flex flex-wrap gap-2 items-center justify-start'>
             {selectedValue.map((item: string, index: number) => {
               return (
-                <div className='flex justify-center px-2 items-center gap-x-0.5 bg-primary rounded-lg p-0.5'>
+                <div key={index} className='flex justify-center px-2 items-center gap-x-0.5 bg-primary rounded-lg p-0.5'>
                   <Badge key={index} className='text-xs text-white p-0'>
                     {item}
                   </Badge>

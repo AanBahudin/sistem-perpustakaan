@@ -10,6 +10,7 @@ import StatistikPeminjamanDetailBuku from '@/components/Pustakawan/Buku/DetailBu
 import StatistikHilangDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikHilangDetailBuku'
 import StatistikPengembalianDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikPengembalianDetailBuku'
 import DetailBukuDropdownMenu from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuDropdownMenu'
+import PustakawanDetailBukuLoading from '@/components/Pustakawan/Buku/DetailBuku/PustakawanDetailBukuLoading'
 
 const PustakawanDetailBuku = () => {
 
@@ -21,7 +22,7 @@ const PustakawanDetailBuku = () => {
   })
 
   const { pustakawanDetailBukuTabs: isActive } = useSelector((state: any) => state.detailBukuState)
-  if (isLoading) return <h1>Loading....</h1>
+  if (isLoading) return <PustakawanDetailBukuLoading />
 
   return (
     <Container className='w-full'>

@@ -55,6 +55,7 @@ const BukuSchema = new mongoose.Schema({
     },
     featured: {
         type: Boolean,
+        default: false
     },
     ISBN: {
         type: String,

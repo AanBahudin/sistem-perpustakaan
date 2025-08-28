@@ -11,6 +11,7 @@ const PriceDanStockContainerEdit = ({buku} : {buku: any}) => {
 
   const statusKetersediaan = ['Tersedia', 'Tidak Tersedia']
   const featured = ['true', 'false']
+  console.log(buku)
 
   return (
     <section className='w-full p-4 rounded-xl bg-accent/10'>
@@ -51,7 +52,7 @@ const PriceDanStockContainerEdit = ({buku} : {buku: any}) => {
         <div className='w-1/2 flex flex-col gap-y-1 mb-2'>
           <Label className='text-xs font-normal'>Featured</Label>
           <p className='text-[10px] text-muted-foreground'>Masukan buku ke status unggulan</p>
-          <Select name='featured' required  defaultValue={buku.featured.toString()}>
+          <Select name='featured' required  defaultValue={buku.featured?.toString() || 'false'}>
             <SelectTrigger className="w-full border-none !text-xs">
               <SelectValue className='!text-xs' placeholder="Pilih tahun" />
             </SelectTrigger>
