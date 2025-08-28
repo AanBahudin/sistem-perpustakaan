@@ -115,7 +115,7 @@ export const hapusBuku = async(req: Request | any, res: Response) => {
 export const editBuku = async(req: Request | any, res: Response) => {
     const {id} = req.params
 
-    const buku = await editDataBuku(id, req.body)
+    const buku = await editDataBuku(id, req.body, req.file)
 
     SendOneDataResponse({
         res,

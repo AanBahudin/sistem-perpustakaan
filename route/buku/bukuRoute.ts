@@ -54,7 +54,7 @@ router.route('/create')
 router.route('/pustakawan/:id')
     .get(pustakawanMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)
     .delete(pustakawanMiddlewareAuthorized, mongoIdMiddleware, hapusBuku)
-    .patch(pustakawanMiddlewareAuthorized, mongoIdMiddleware, bukuInputValidator, editBuku)
+    .patch(pustakawanMiddlewareAuthorized, mongoIdMiddleware, upload.single('cover'), bukuInputValidator, editBuku)
 
 
 export default router

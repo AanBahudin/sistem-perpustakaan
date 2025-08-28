@@ -15,6 +15,7 @@ import { allBukuStats } from "./StatsBukuServices";
 import { NotFoundError } from "../../errors/errorHandler";
 import { getPeminjamanAktifByBukuId } from "../peminjamanServices";
 import { getPengembalianByBukuId, getPengembalianHilangByBukuId } from "../pengembalianServices";
+import { bukuMatch } from "../../utils/bukuQuery";
 
 
 export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
@@ -64,33 +65,8 @@ export const getSatuBukuUntukPustakawan = async(idBuku: string) => {
 
 export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
 
-    let bukuMatch: any = {}
+    const bukuQuery = bukuMatch(query)
 
-    if (query?.query) {
-        bukuMatch.judul = {$regex: query.query, $options: 'i'}
-    }
-
-    if (query?.status) {
-        bukuMatch.status = {$regex: query.status, $options: 'i'}
-    }
-
-    if (query?.penulis) {
-        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
-    }
-
-    if (query?.penerbit) {
-        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
-    }
-
-    if (query?.tahunTerbit) {
-        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
-    }
-
-    if (query?.kategori) {
-        bukuMatch.kategori = {
-            $in: [new RegExp(query.kategori, "i")]
-        };
-    }
     const bukuDipinjamRaw = await Peminjaman.find({$or: [
         {statusPeminjaman: 'Dipinjam'},
         {statusPeminjaman: 'Terlambat'}
@@ -99,7 +75,7 @@ export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
         .sort({createdAt: -1})
         .populate({
             path: 'buku',
-            match: bukuMatch
+            match: bukuQuery
         })
         .populate({
             path: 'peminjam',
@@ -119,41 +95,15 @@ export const getSemuaBukuDipinjam = async({query} : {query: any}) => {
 }
 
 export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
-    let bukuMatch: any = {}
-
-    if (query?.query) {
-        bukuMatch.judul = {$regex: query.query, $options: 'i'}
-    }
-
-    if (query?.status) {
-        bukuMatch.status = {$regex: query.status, $options: 'i'}
-    }
-
-    if (query?.penulis) {
-        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
-    }
-
-    if (query?.penerbit) {
-        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
-    }
-
-    if (query?.tahunTerbit) {
-        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
-    }
-
-    if (query?.kategori) {
-        bukuMatch.kategori = {
-            $in: [new RegExp(query.kategori, "i")]
-        };
-    }
-
+    const bukuQuery = bukuMatch(query)
+   
     const bukuDiperpanjangRaw = await Perpanjangan.find({disetujui: 'Diterima'})
         .select('idBuku idPengguna idPeminjaman _id durasi alasan')
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
             select: '_id judul kategori ISBN',
-            match: bukuMatch
+            match: bukuQuery
         })
         .populate({
             path: 'idPengguna',
@@ -177,41 +127,15 @@ export const getSemuaBukuDiperpanjang = async({query} : {query: any}) => {
 }
 
 export const getSemuaBukuDikembalikan = async({query} : {query: any}) => {
-    let bukuMatch: any = {}
-
-    if (query?.query) {
-        bukuMatch.judul = {$regex: query.query, $options: 'i'}
-    }
-
-    if (query?.status) {
-        bukuMatch.status = {$regex: query.status, $options: 'i'}
-    }
-
-    if (query?.penulis) {
-        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
-    }
-
-    if (query?.penerbit) {
-        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
-    }
-
-    if (query?.tahunTerbit) {
-        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
-    }
-
-    if (query?.kategori) {
-        bukuMatch.kategori = {
-            $in: [new RegExp(query.kategori, "i")]
-        };
-    }
-
+    const bukuQuery = bukuMatch(query)
+    
     const bukuDikembalikanRaw = await Pengembalian.find({statusPengembalian: 'Dikembalikan'})
         .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian keadaanBuku isMissing')
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
             select: 'judul kategori ISBN',
-            match: bukuMatch
+            match: bukuQuery
         })
         .populate({
             path: 'idPengguna',
@@ -235,41 +159,14 @@ export const getSemuaBukuDikembalikan = async({query} : {query: any}) => {
 }
 
 export const getSemuaBukuHilang = async({query} : {query: any}) => {
-    let bukuMatch: any = {}
-
-    if (query?.query) {
-        bukuMatch.judul = {$regex: query.query, $options: 'i'}
-    }
-
-    if (query?.status) {
-        bukuMatch.status = {$regex: query.status, $options: 'i'}
-    }
-
-    if (query?.penulis) {
-        bukuMatch.penulis = {$regex: query.penulis, $options: 'i'}
-    }
-
-    if (query?.penerbit) {
-        bukuMatch.penerbit = {$regex: query.penerbit, $options: 'i'}
-    }
-
-    if (query?.tahunTerbit) {
-        bukuMatch.tahunTerbit = {$regex: query.tahunTerbit, $options: 'i'}
-    }
-
-    if (query?.kategori) {
-        bukuMatch.kategori = {
-            $in: [new RegExp(query.kategori, "i")]
-        };
-    }
-
+    const bukuQuery = bukuMatch(query)
     const bukuDihilangkaRaw = await Pengembalian.find({isMissing: true})
         .select('idBuku idPengguna idPeminjaman _id tanggalPengembalian statusPembayaran, totalDenda statusPembayaran')
         .sort({createdAt: -1})
         .populate({
             path: 'idBuku',
             select: 'judul kategori ISBN stok',
-            match: bukuMatch
+            match: bukuQuery
         })
         .populate({
             path: 'idPengguna',
@@ -316,10 +213,32 @@ export const tambahDataBuku = async(dataBukuTerbaru: any, reqFile: any) => {
     return bukuTerbaru
 }
 
-export const editDataBuku = async(idBuku: string, dataBuku: BukuSchemaType) => {
-    const buku = await Buku.findOneAndUpdate(
+export const editDataBuku = async(idBuku: string, dataBuku: any, reqFile: any) => {
+    let dataBukuBaru = dataBuku
+    dataBukuBaru.ukuranBuku = {
+        panjang: dataBukuBaru.panjang,
+        lebar: dataBukuBaru.lebar
+    }
+    delete dataBukuBaru.panjang
+    delete dataBukuBaru.lebar
+
+    // jika pengguna memperbaharui foto buku
+    if (reqFile) {
+        const response = await cloudinary.v2.uploader.upload(reqFile.path)
+        await fs.unlink(reqFile.path)
+
+        dataBukuBaru.cover = response.secure_url
+        dataBukuBaru.coverPublicId = response.public_id
+    }
+
+    const buku = await Buku.findOne({_id: idBuku})
+    if (reqFile && buku && buku.coverPublicId) {
+        await cloudinary.v2.uploader.destroy(buku.coverPublicId)
+    }
+
+    const updatedBuku = await Buku.findOneAndUpdate(
         {_id: idBuku},
-        {...dataBuku},
+        {...dataBukuBaru},
         {new: true, runValidators: true}
     )
 
