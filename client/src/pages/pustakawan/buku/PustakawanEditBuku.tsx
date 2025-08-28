@@ -1,6 +1,7 @@
 import { editBukuPustakawan, getSingleBukuPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
 import DetailBukuBreadcrumbs from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuBreadcrumbs'
 import InputDataContainerEdit from '@/components/Pustakawan/Buku/EditBuku/InputDataContainerEdit'
+import PustakawanEditBukuLoading from '@/components/Pustakawan/Buku/EditBuku/PustakawanEditBukuLoading'
 import PustakawanTambahBukuHeaderEdit from '@/components/Pustakawan/Buku/EditBuku/PustakawanTambahBukuHeaderEdit'
 import Container from '@/globals/Container'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -43,7 +44,7 @@ const PustakawanEditBuku = () => {
     }
   }, [idBuku])
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PustakawanEditBukuLoading />
 
   return (
     <Container className='w-full'>

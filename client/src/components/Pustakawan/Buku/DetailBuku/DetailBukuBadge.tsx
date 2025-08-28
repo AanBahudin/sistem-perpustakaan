@@ -12,7 +12,7 @@ const DetailBukuBadge = ({like = 0, lihat = 0, simpan = 0} : {like: number, liha
             {value.map((item: number, index: number) => {
                 const Icon: LucideIcon = Icons[index]
                 return (
-                    <GlobalTooltip text={text[index]}>
+                    <GlobalTooltip key={index} text={text[index]}>
                         <Badge className='text-white flex items-center'>
                             <Icon />
                             {item}

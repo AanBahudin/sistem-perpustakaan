@@ -16,7 +16,6 @@ const DetailBukuInfo = ({buku} : {buku: any}) => {
 const DetailInfoBukuTabel = ({buku} : {buku: any}) => {
 
     const { ISBN, penerbit, jumlahHalaman, ukuranBuku, stok, status, sumberPengadaan, hargaGanti, createdBy } = buku
-    console.log(buku)
     const judul: Array<string> = ['ISBN', 'Penerbit', 'Jumlah Halaman', 'Ukuran Buku', 'Stok', 'Ketersediaan', 'Sumber Pengadaan', 'Harga Ganti', 'Diinput Oleh']
     const newUkuran = `${ukuranBuku.panjang} cm x ${ukuranBuku.lebar} cm`
     const newHalaman = `${jumlahHalaman} Halaman`

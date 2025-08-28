@@ -118,16 +118,16 @@ export const pustakanSidebarMenu = [
     //     ],
     //     icon: History
     // },
-    {
-        title: 'Notifikasi',
-        url: 'notifikasi',
-        icon: Bell
-    },
-    {
-        title: 'Pengaturan',
-        url: 'pengaturan',
-        icon: Cog
-    },
+    // {
+    //     title: 'Notifikasi',
+    //     url: 'notifikasi',
+    //     icon: Bell
+    // },
+    // {
+    //     title: 'Pengaturan',
+    //     url: 'pengaturan',
+    //     icon: Cog
+    // },
     {
         title: 'Profil',
         url: 'profil',
