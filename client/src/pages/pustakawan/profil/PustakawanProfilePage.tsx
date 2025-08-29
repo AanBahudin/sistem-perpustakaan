@@ -3,6 +3,7 @@ import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
 import PustakawanMainProfileContainer from "@/components/Pustakawan/Profil/PustakawanMainProfileContainer"
+import PustakawanLoading from "@/components/Pustakawan/Profil/PustakawanLoading"
 
 const PustakawanProfilePage = () => {
 
@@ -11,7 +12,7 @@ const PustakawanProfilePage = () => {
     queryFn: getProfilePustakawan
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PustakawanLoading />
 
   return (
     <Container className="w-full ">
