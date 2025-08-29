@@ -18,6 +18,10 @@ import {
     getSinglePengajuanPengembalianUser} from "../../services/pustakawanServices";
 import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 import Perpanjangan from "../../model/Perpanjangan";
+import Buku from "../../model/Buku";
+import Peminjaman from "../../model/Peminjaman";
+import Pengembalian from "../../model/Pengembalian";
+import { getBukuDiprosesPustakawanStats, getPeminjamanDiprosesPustakawanStats, getPengembalianDiprosesPustakawanStats, getPerpanjanganDiprosesPustakawanStats } from "../../services/PustakawanServices/PustakawanStatsServices";
 
 export const getStats = async(req: Request | any, res: Response) => {
     const data = await getStatsServices()
@@ -155,12 +159,34 @@ export const getProfile = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
     const profile = await Pustakawan.findOne({_id: userId}).select('-password')
+    const getBukuDiproses = await Buku.find({createdBy: req.user.userId}).countDocuments()
+    const getPeminjamanDiproses = await Peminjaman.find({diprosesOleh: req.user.userId}).countDocuments()
+    const perpanjanganDiproses = await Perpanjangan.find({diprosesOleh: req.user.userId}).countDocuments()
+    const pengembalianDiproses = await Pengembalian.find({statusPengembalian: 'Dikembalikan', diprosesOleh: req.user.userId}).countDocuments()
+
+    // DATA STATS
+    const statsBuku = await getBukuDiprosesPustakawanStats(req.user.userId)
+    const statsPeminjaman = await getPeminjamanDiprosesPustakawanStats(req.user.userId)
+    const statsPerpanjangan = await getPerpanjanganDiprosesPustakawanStats(req.user.userId)
+    const statusPengembalian = await getPengembalianDiprosesPustakawanStats(req.user.userId)
+
+
+    const dataValue: Array<number> = [getBukuDiproses, getPeminjamanDiproses, perpanjanganDiproses, pengembalianDiproses]
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
         message: 'Data Profil',
         timestamps: new Date(Date.now()).toString(),
-        data: profile
+        data: {
+            profile, 
+            dataValue,
+            stats: {
+                statsBuku,
+                statsPeminjaman,
+                statsPerpanjangan,
+                statusPengembalian
+            }
+        }
     })
 }
 

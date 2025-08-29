@@ -123,11 +123,11 @@ export const pustakanSidebarMenu = [
     //     url: 'notifikasi',
     //     icon: Bell
     // },
-    // {
-    //     title: 'Pengaturan',
-    //     url: 'pengaturan',
-    //     icon: Cog
-    // },
+    {
+        title: 'Pengaturan',
+        url: 'pengaturan',
+        icon: Cog
+    },
     {
         title: 'Profil',
         url: 'profil',

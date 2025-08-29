@@ -20,6 +20,7 @@ const PustakawanNavbar = () => {
   }
 
   return (
+
     <section className='w-full sticky h-[12vh] border-b flex items-center justify-between p-6'>
         <PanelRightOpen 
           onClick={handleSidebar} 
@@ -31,10 +32,10 @@ const PustakawanNavbar = () => {
           {isLoading ? (
             <Skeleton className='rounded-full w-7 h-7' />
           ) : 
-            data.fotoProfil ? (
-              <img className='rounded-full w-7 h-7 bg-muted flex items-center justify-center text-muted-foreground font-semibold' src={data.fotoProfil} alt={data.nama} />
+            data.profile.fotoProfil ? (
+              <img className='rounded-full w-7 h-7 bg-muted flex items-center justify-center text-muted-foreground font-semibold' src={data.profile.fotoProfil} alt={data.profile.nama} />
             ) : (
-              <div className='rounded-full w-7 h-7 bg-muted flex items-center justify-center text-muted-foreground font-semibold hover:border-2 duration-200 ease-in-out cursor-default'>{data.nama[0]}</div>
+              <div className='rounded-full w-7 h-7 bg-muted flex items-center justify-center text-muted-foreground font-semibold hover:border-2 duration-200 ease-in-out cursor-default'>{data.profile.nama[0]}</div>
             )}
       
         </main>
