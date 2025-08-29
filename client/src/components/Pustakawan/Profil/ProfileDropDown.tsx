@@ -10,7 +10,7 @@ import { store } from "@/store"
 import EditEmailDialog from "./EditEmailDialog"
 import EditPasswordDialog from "./EditPasswordDialog"
 
-const ProfileDropDown = () => {
+const ProfileDropDown = ({profil} : {profil: any}) => {
     return (
         <>
             <DropdownMenu>
@@ -36,7 +36,7 @@ const ProfileDropDown = () => {
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            <EditEmailDialog />
+            <EditEmailDialog profile={profil} />
             <EditPasswordDialog />
         </>
     )

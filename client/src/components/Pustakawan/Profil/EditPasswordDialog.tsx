@@ -39,9 +39,8 @@ const EditPasswordDialog = () => {
       toast('Berhasil Diperbaharui', {description: 'Kata sandi akun anda telah diperbaharui'})
       handleOpen(false)
     },
-    onError: (error: any) => {
-      console.log(error)
-      toast('Terjadi kesalahan', {description: 'Gagal memperbaharui passsword, Coba lagi nanti'})
+    onError: () => {
+      toast('Terjadi kesalahan', {description: 'Gagal memperbaharui kata sandi, Coba lagi nanti'})
       handleOpen(false)
     }
   })
@@ -52,7 +51,6 @@ const EditPasswordDialog = () => {
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
     mutation.mutate(data)
-    console.log(data)
   }
 
   return (
@@ -87,9 +85,9 @@ const EditPasswordDialog = () => {
 
           <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button type="submit" disabled={mutation.isPending} size='sm' className="text-xs" variant="outline">Batal</Button>
+              <Button disabled={mutation.isPending} size='sm' className="text-xs" variant="outline">Batal</Button>
             </DialogClose>
-            <Button disabled={mutation.isPending} size='sm' className="text-xs text-white flex items-center gap-x-2" type="submit">
+            <Button type="submit" disabled={mutation.isPending} size='sm' className="text-xs text-white flex items-center gap-x-2">
               {mutation.isPending ? (
                 <>
                   <Loader className="w-4 h-4 animate-spin" />

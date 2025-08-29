@@ -13,47 +13,79 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { updateEmailPustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { Loader } from "lucide-react"
+import { toast } from "sonner"
 
-const EditEmailDialog = () => {
+const EditEmailDialog = ({profile} : {profile: any}) => {
 
+  const queryClient = useQueryClient()
   const { isEmailDialogOpen } = useSelector((state: any) => state.pustakawanProfilePageSlice)
   const handleOpen = (value: boolean) => {
     store.dispatch(setEmailDialog(value))
   }
 
+  const mutation = useMutation({
+    mutationFn: (data: any) => updateEmailPustakawan(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pustakawan', 'profil']})
+      toast('Berhasil Diperbaharui', {description: 'Email akun anda telah diperbaharui'})
+      handleOpen(false)
+    },
+    onError: (error: any) => {
+      console.log(error)
+      const errMsg = error.response.data.message || 'Gagal memperbaharui email, Coba lagi nanti'
+      toast('Terjadi kesalahan', {description: errMsg})
+      handleOpen(false)
+    }
+  })
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData)
+    
+    mutation.mutate(data)
+  }
+
   return (
     <Dialog open={isEmailDialogOpen} onOpenChange={handleOpen}>
-      <form>
-       
-        <DialogContent className="sm:max-w-[425px]">
-
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={handleSubmit}>
+          <DialogHeader className="mb-4">
+            <DialogTitle>Perbaharui Email</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+             Ganti alamat email Anda dengan yang terbaru agar tetap terhubung dengan semua informasi penting.
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4">
             <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
+              <Label htmlFor="emailLama">Email Lama</Label>
+              <Input required type="email" id="emailLama" name="emailLama" defaultValue={profile.email} />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
+              <Label htmlFor="emailBaru">Email Baru</Label>
+              <Input required type="email" id="emailBaru" name="emailBaru" autoFocus />
             </div>
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button disabled={mutation.isPending} size='sm' className="text-xs" variant="outline">Batal</Button>
             </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" disabled={mutation.isPending} size='sm' className="text-xs text-white flex items-center gap-x-2">
+              {mutation.isPending ? (
+                <>
+                  <Loader className="w-4 h-4 animate-spin" />
+                  <p>Memperbaharui....</p>
+                </>
+              ) : 'Perbaharui'}
+            </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   )
 }

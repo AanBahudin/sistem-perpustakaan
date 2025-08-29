@@ -8,7 +8,7 @@ const PustakawanMainProfile = ({profil} : {profil: any}) => {
 
   return (
     <section className="w-[30%] min-h-[40vh] p-4 border rounded-xl relative flex flex-col items-center justify-center">
-      <ProfileDropDown />      
+      <ProfileDropDown profil={profil} />      
       <main className="bg-muted w-24 h-24 rounded-full relative">
         <GlobalTooltip text="Edit Profil">
           <div className="w-8 h-8 absolute p-2 bg-primary flex items-center justify-center rounded-full bottom-0 right-0">

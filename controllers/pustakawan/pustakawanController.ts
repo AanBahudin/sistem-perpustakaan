@@ -22,7 +22,7 @@ import Buku from "../../model/Buku";
 import Peminjaman from "../../model/Peminjaman";
 import Pengembalian from "../../model/Pengembalian";
 import { getBukuDiprosesPustakawanStats, getPeminjamanDiprosesPustakawanStats, getPengembalianDiprosesPustakawanStats, getPerpanjanganDiprosesPustakawanStats } from "../../services/PustakawanServices/PustakawanStatsServices";
-import { pustakawanUpdatePasswword } from "../../services/PustakawanServices/PustakawanServices";
+import { pustakawanUpdateEmail, pustakawanUpdatePasswword } from "../../services/PustakawanServices/PustakawanServices";
 
 export const getStats = async(req: Request | any, res: Response) => {
     const data = await getStatsServices()
@@ -203,3 +203,14 @@ export const updatePasswordPustakawan = async(req: Request | any, res: Response)
     })
 }
 
+export const updateEmailPustakawan = async(req: Request | any, res: Response) => {
+    const {userId: pustakawanId} = req.user
+    const data = req.body
+
+    await pustakawanUpdateEmail({data, pustakawanId})
+
+    SendBasicResponse({
+        res,
+        message: 'Email berhasil diupdate'
+    })
+}

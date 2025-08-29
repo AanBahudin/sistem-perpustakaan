@@ -11,11 +11,12 @@ import {
     getSinglePengajuanPengembalian, 
     getSinglePengajuanPerpanjangan, 
     getSingleUser, 
+    updateEmailPustakawan, 
     updatePasswordPustakawan} from '../../controllers/pustakawan/pustakawanController'
 import {getProfile } from '../../controllers/pustakawan/pustakawanController'
 import { verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
 import { getStats } from '../../controllers/pustakawan/pustakawanController'
-import { updatePasswordValidator } from '../../validator/pustakawanValidator'
+import { updateEmailValidator, updatePasswordValidator } from '../../validator/pustakawanValidator'
 
 const router = express.Router()
 
@@ -60,4 +61,8 @@ router.route('/profile')
 
 router.route('/auth/password')
     .post(updatePasswordValidator, updatePasswordPustakawan)
+
+router.route('/auth/email')
+    .post(updateEmailValidator, updateEmailPustakawan)
+
 export default router
