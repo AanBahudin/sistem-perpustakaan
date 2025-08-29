@@ -1,4 +1,4 @@
-import { setEmailDialog } from "@/cart/pustakawanProfilePageSlice"
+import { setPasswordDialog } from "@/cart/pustakawanProfilePageSlice"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -14,21 +14,21 @@ import { Label } from "@/components/ui/label"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
 
-const EditEmailDialog = () => {
+const EditPasswordDialog = () => {
 
-  const { isEmailDialogOpen } = useSelector((state: any) => state.pustakawanProfilePageSlice)
+  const { isPasswordDialogOpen } = useSelector((state: any) => state.pustakawanProfilePageSlice)
   const handleOpen = (value: boolean) => {
-    store.dispatch(setEmailDialog(value))
+    store.dispatch(setPasswordDialog(value))
   }
 
   return (
-    <Dialog open={isEmailDialogOpen} onOpenChange={handleOpen}>
+    <Dialog open={isPasswordDialogOpen} onOpenChange={handleOpen}>
       <form>
        
         <DialogContent className="sm:max-w-[425px]">
 
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Ubah Password</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when you&apos;re
               done.
@@ -58,4 +58,4 @@ const EditEmailDialog = () => {
   )
 }
 
-export default EditEmailDialog
+export default EditPasswordDialog

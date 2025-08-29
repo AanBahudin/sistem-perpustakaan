@@ -5,27 +5,40 @@ import {
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
 import { EllipsisVertical, KeyRound, MailPlus } from "lucide-react"
+import { setEmailDialog, setPasswordDialog } from "@/cart/pustakawanProfilePageSlice"
+import { store } from "@/store"
+import EditEmailDialog from "./EditEmailDialog"
+import EditPasswordDialog from "./EditPasswordDialog"
 
 const ProfileDropDown = () => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <main className="w-8 absolute h-8 rounded-full hover:bg-accent/40 p-2 flex items-center justify-center top-4 right-4">
-            <EllipsisVertical className="stroke-white" />
-        </main>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="start">
-        <DropdownMenuItem className='flex items-center gap-x-2 text-xs p-2'>
-            <MailPlus />
-            Ubah Email
-            </DropdownMenuItem>
-        <DropdownMenuItem className='flex items-center gap-x-2 text-xs p-2'>
-            <KeyRound className="w-2 h-2" />
-            Ubah Password
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+    return (
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <main className="w-8 absolute h-8 rounded-full hover:bg-accent/40 p-2 flex items-center justify-center top-4 right-4">
+                        <EllipsisVertical className="stroke-white" />
+                    </main>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="start">
+
+                    <DropdownMenuItem className="text-xs" onSelect={() => store.dispatch(setEmailDialog(true))}>
+                        <MailPlus className="mr-2 h-4 w-4" />
+                        Ubah Email
+                    </DropdownMenuItem>
+
+                    
+                     <DropdownMenuItem className="text-xs" onSelect={() => store.dispatch(setPasswordDialog(true))}>
+                        <KeyRound className="w-2 h-2" />
+                        Ubah Password
+                    </DropdownMenuItem>
+
+                </DropdownMenuContent>
+            </DropdownMenu>
+
+            <EditEmailDialog />
+            <EditPasswordDialog />
+        </>
+    )
 }
 
 export default ProfileDropDown
