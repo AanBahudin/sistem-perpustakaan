@@ -16,12 +16,13 @@ import {
     getSinglePengajuanPerpanjanganUser, 
     getAllPengajuanPengembalianUsers,
     getSinglePengajuanPengembalianUser} from "../../services/pustakawanServices";
-import { SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 import Perpanjangan from "../../model/Perpanjangan";
 import Buku from "../../model/Buku";
 import Peminjaman from "../../model/Peminjaman";
 import Pengembalian from "../../model/Pengembalian";
 import { getBukuDiprosesPustakawanStats, getPeminjamanDiprosesPustakawanStats, getPengembalianDiprosesPustakawanStats, getPerpanjanganDiprosesPustakawanStats } from "../../services/PustakawanServices/PustakawanStatsServices";
+import { pustakawanUpdatePasswword } from "../../services/PustakawanServices/PustakawanServices";
 
 export const getStats = async(req: Request | any, res: Response) => {
     const data = await getStatsServices()
@@ -187,6 +188,18 @@ export const getProfile = async(req: Request | any, res: Response) => {
                 statusPengembalian
             }
         }
+    })
+}
+
+export const updatePasswordPustakawan = async(req: Request | any, res: Response) => {
+    const {userId: pustakawanId} = req.user
+    const data = req.body
+
+    await pustakawanUpdatePasswword({data, pustakawanId})
+
+    SendBasicResponse({
+        res,
+        message: 'Password berhasil diupdate'
     })
 }
 

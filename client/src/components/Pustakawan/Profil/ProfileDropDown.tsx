@@ -19,6 +19,7 @@ const ProfileDropDown = () => {
                         <EllipsisVertical className="stroke-white" />
                     </main>
                 </DropdownMenuTrigger>
+                
                 <DropdownMenuContent className="w-56" align="start">
 
                     <DropdownMenuItem className="text-xs" onSelect={() => store.dispatch(setEmailDialog(true))}>
@@ -28,7 +29,7 @@ const ProfileDropDown = () => {
 
                     
                      <DropdownMenuItem className="text-xs" onSelect={() => store.dispatch(setPasswordDialog(true))}>
-                        <KeyRound className="w-2 h-2" />
+                        <KeyRound className="mr-2 w-2 h-2" />
                         Ubah Password
                     </DropdownMenuItem>
 

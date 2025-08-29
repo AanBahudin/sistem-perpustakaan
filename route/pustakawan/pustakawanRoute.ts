@@ -10,10 +10,12 @@ import {
     getSinglePengajuanPeminjaman, 
     getSinglePengajuanPengembalian, 
     getSinglePengajuanPerpanjangan, 
-    getSingleUser } from '../../controllers/pustakawan/pustakawanController'
+    getSingleUser, 
+    updatePasswordPustakawan} from '../../controllers/pustakawan/pustakawanController'
 import {getProfile } from '../../controllers/pustakawan/pustakawanController'
 import { verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
 import { getStats } from '../../controllers/pustakawan/pustakawanController'
+import { updatePasswordValidator } from '../../validator/pustakawanValidator'
 
 const router = express.Router()
 
@@ -56,4 +58,6 @@ router.route('/users/:id')
 router.route('/profile')
     .get(getProfile)
 
+router.route('/auth/password')
+    .post(updatePasswordValidator, updatePasswordPustakawan)
 export default router
