@@ -1,18 +1,15 @@
-import { EllipsisVertical, Pen, User } from "lucide-react"
+import { Pen, User } from "lucide-react"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { formatedDate } from "@/utils/formatDate"
+import ProfileDropDown from "./ProfileDropDown"
 
 
 const PustakawanMainProfile = ({profil} : {profil: any}) => {
 
   return (
     <section className="w-[30%] min-h-[40vh] p-4 border rounded-xl relative flex flex-col items-center justify-center">
-      <main className="w-8 absolute h-8 rounded-full hover:bg-accent/40 p-2 flex items-center justify-center top-4 right-4">
-        <EllipsisVertical className="stroke-white" />
-      </main>
-
+      <ProfileDropDown />      
       <main className="bg-muted w-24 h-24 rounded-full relative">
-
         <GlobalTooltip text="Edit Profil">
           <div className="w-8 h-8 absolute p-2 bg-primary flex items-center justify-center rounded-full bottom-0 right-0">
             <Pen   />

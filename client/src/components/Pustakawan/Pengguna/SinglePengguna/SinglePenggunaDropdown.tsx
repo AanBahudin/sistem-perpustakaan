@@ -3,9 +3,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
 import { Ban } from 'lucide-react'
-import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 
 const SinglePenggunaDropdown = ({children} : {children: React.ReactNode}) => {
   return (
