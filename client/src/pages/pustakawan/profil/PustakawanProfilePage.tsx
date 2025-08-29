@@ -4,7 +4,13 @@ import Container from "@/globals/Container"
 import GlobalTooltip from "@/globals/GlobalTooltip"
 import { formatedDate } from "@/utils/formatDate"
 import { useQuery } from "@tanstack/react-query"
-import { EllipsisVertical, Info, Pen, User } from "lucide-react"
+import { EllipsisVertical, Info, LucideIcon, Pen, User, BookCopy, FileCheck2, FilePlus, FileSymlink } from "lucide-react"
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  ResponsiveContainer } from 'recharts';
 
 const PustakawanProfilePage = () => {
 
@@ -28,9 +34,12 @@ const PustakawanProfilePage = () => {
 
 const PustakawanMainProfileContainer = ({data} : {data: any}) => {
   return (
-    <section className="w-full flex items-start justify-start gap-x-6 my-6">
-      <PustakawanMainProfile profil={data.profile} />
-      <PustakawanDetailStats data={data} />
+    <section className="w-full flex flex-col items-start justify-start gap-x-6 my-6">
+      <main className="w-full flex items-start justify-start gap-x-6">
+        <PustakawanMainProfile profil={data.profile} />
+        <PustakawanDetailStats data={data} />
+      </main>
+      <PustakawanGraphStatsContainer data={data.stats} />
     </section>
   )
 }
@@ -114,6 +123,51 @@ const PustakawanDetailStats = ({data}: {data: any}) => {
         </div>
       </main>
     </section>
+  )
+}
+
+const PustakawanGraphStatsContainer = ({data} : {data: any}) => {
+
+  const { statsBuku, statsPeminjaman, statsPerpanjangan, statusPengembalian } = data
+
+  return (
+    <section className="w-full my-4 flex flex-col gap-y-4">
+      <PustakawanGraphStats data={statsBuku} title='Grafik Pengelolaan Buku' Icon={BookCopy} />
+      <PustakawanGraphStats data={statsPeminjaman} title='Grafik Pengelolaan Peminjaman' Icon={FileCheck2} />
+      <PustakawanGraphStats data={statsPerpanjangan} title='Grafik Pengelolaan Perpanjangan' Icon={FilePlus} />
+      <PustakawanGraphStats data={statusPengembalian} title='Grafik Pengelolaan Pengembalian' Icon={FileSymlink} />
+    </section>
+  )
+}
+
+const PustakawanGraphStats = ({data, title, Icon} : {data: any, title: string, Icon: LucideIcon}) => {
+  return (
+    <main className="w-full border rounded-xl p-4 h-full flex flex-col justify-between gap-y-5 items-start">
+        <h1 className="font-semibold text-lg flex items-center gap-x-4 px-6">
+          <Icon className='w-4 h-4 stroke-muted-foreground' /> 
+          {title}
+        </h1>
+
+        {data?.length === 0 && (
+          <div className='w-full h-full flex items-center justify-center flex-col mt-20'>
+            <h1 className='text-center text-muted-foreground text-sm'>Belum ada pertumbuhan</h1>
+          </div>
+        )}
+        <ResponsiveContainer width="100%" height={210}>
+          <AreaChart data={data}
+              margin={{
+                  top: 10,
+                  right: 30,
+                  left: 0,
+                  bottom: 0,
+              }} >
+              {/* <CartesianGrid strokeDasharray="2 2" /> */}
+              <XAxis dataKey="bulan" className='text-xs ' />
+              <YAxis className='text-xs' />
+              <Area type="monotone" dataKey="jumlah" fill='#155DFC' className='stroke-[#155DFC]' />
+          </AreaChart>
+        </ResponsiveContainer>
+      </main>
   )
 }
 
