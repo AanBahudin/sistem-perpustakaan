@@ -23,7 +23,7 @@ const PustakawanPengaturanPage = () => {
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
       <PustakawanPengaturanTabsMenu />
-      {currentParams === 'Kondisi Buku' && <PustakawanKondisiBukuSection />}
+      {(currentParams === 'Kondisi Buku' || !currentParams) && <PustakawanKondisiBukuSection />}
       {currentParams === 'Denda' && <PustakawanDendaSection />}
       {currentParams === 'Kategori' && <PustakawanKategoriSection />}
       {currentParams === 'Durasi' && <PustakawanDurasiSection />}
@@ -35,7 +35,7 @@ const PustakawanPengaturanTabsMenu = () => {
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const currentParams = searchParams.get('menu') || 'Umum'
+  const currentParams = searchParams.get('menu') || 'Kondisi Buku'
   const fullParams = new URLSearchParams(searchParams)
   const values: Array<string> = ['Kondisi Buku', 'Denda', 'Kategori', 'Durasi']
 
