@@ -54,6 +54,7 @@ import PustakawanDetailPengembalian from "./pages/pustakawan/pengajuan/Pustakawa
 import PustakawanDetailBuku from "./pages/pustakawan/buku/PustakawanDetailBuku";
 import PustakawanTambahBuku from "./pages/pustakawan/buku/PustakawanTambahBuku";
 import PustakawanEditBuku from "./pages/pustakawan/buku/PustakawanEditBuku";
+import PustakawanPengaturanPage from "./pages/pustakawan/pengaturan/PustakawanPengaturanPage";
 
 const router : RouteObject[] = [
     {
@@ -339,7 +340,8 @@ const router : RouteObject[] = [
                 
             },
             {
-                path: 'pengaturan'
+                path: 'pengaturan',
+                element: <PustakawanPengaturanPage />
             },
         ]
     },

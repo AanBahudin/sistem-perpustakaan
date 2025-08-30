@@ -18,8 +18,8 @@ const PustakawanSidebarHeader = () => {
           <SidebarHeaderLoading />
         ) : (
           <div className='flex-1'>
-            <Link to='/pustakawan/profil' className='text-sm font-bold ch3apitalize hover:underline cursor-pointer duration-300 ease-in-out'>{data.nama}</Link>
-            <h3 className='text-muted-foreground text-xs truncate'>{data.email}</h3>
+            <Link to='/pustakawan/profil' className='text-sm font-bold ch3apitalize hover:underline cursor-pointer duration-300 ease-in-out'>{data?.profile?.nama}</Link>
+            <h3 className='text-muted-foreground text-xs truncate'>{data?.profile?.email}</h3>
           </div>
         )}
     </section>
