@@ -34,7 +34,6 @@ const EditEmailDialog = ({profile} : {profile: any}) => {
       handleOpen(false)
     },
     onError: (error: any) => {
-      console.log(error)
       const errMsg = error.response.data.message || 'Gagal memperbaharui email, Coba lagi nanti'
       toast('Terjadi kesalahan', {description: errMsg})
       handleOpen(false)
