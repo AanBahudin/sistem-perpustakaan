@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
 import { Edit, Trash } from 'lucide-react'
+import PengaturanDurasiPinjamAlert from './PengaturanDurasiPinjamAlert'
 
 
 const PustakawanDurasiSection = () => {
@@ -26,7 +27,9 @@ const PustakawanDurasiSection = () => {
 
               <div className='w-fit flex items-center gap-x-4'>
                 <Button size='icon'><Edit /></Button>
-                <Button size='icon' variant='destructive'><Trash /></Button>
+                <PengaturanDurasiPinjamAlert idDurasi={item._id}>
+                  <Button size='icon' variant='destructive'><Trash /></Button>
+                </PengaturanDurasiPinjamAlert>
               </div>
             </main>
           )

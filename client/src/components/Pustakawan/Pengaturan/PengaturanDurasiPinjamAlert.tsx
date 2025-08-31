@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader } from 'lucide-react'
-import { pustakawanHapusKondisi } from '@/actions/Pustakawan/pustakawanKondisiActionts'
 
 import { toast } from 'sonner'
 import {
@@ -16,8 +15,9 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from 'react'
+import { pustakawanHapusDurasi } from '@/actions/Pustakawan/pustakawanDurasiActions'
 
-const PengaturanKondisiBukuAlert = ({children, idKondisi} : {children: React.ReactNode, idKondisi: string}) => {
+const PengaturanDurasiPinjamAlert = ({children, idDurasi} : {children: React.ReactNode, idDurasi: string}) => {
 
   const [openDialog, setOpenDialog] = useState(false)
   const handleOpen = (value: boolean) => {
@@ -27,14 +27,14 @@ const PengaturanKondisiBukuAlert = ({children, idKondisi} : {children: React.Rea
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: () => pustakawanHapusKondisi(idKondisi),
+    mutationFn: () => pustakawanHapusDurasi(idDurasi),
     onSuccess: () => {
-      toast('Kondisi Berhasil Dihapus!')
-      queryClient.invalidateQueries({queryKey: ['kondisi']})
+      toast('Durasi Berhasil Dihapus!')
+      queryClient.invalidateQueries({queryKey: ['durasi']})
       handleOpen(false)
     },
     onError: (error: any) => {
-      const errMsg = error.response.data.message || 'Gagal menghapus kondisi, Coba lagi nanti'
+      const errMsg = error.response.data.message || 'Gagal menghapus durasi, Coba lagi nanti'
       toast('Terjadi kesalahan', {description: errMsg})
       handleOpen(false)
     }
@@ -51,16 +51,16 @@ const PengaturanKondisiBukuAlert = ({children, idKondisi} : {children: React.Rea
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Anda yakin menghapus kondisi ini?</AlertDialogTitle>
+          <AlertDialogTitle>Anda yakin menghapus durasi ini?</AlertDialogTitle>
           <AlertDialogDescription>
-            Tindakan ini tidak dapat dipulihkan, Dengan menekan <strong>Hapus</strong>, kondisi akan terhapus secara permanen
+            Tindakan ini tidak dapat dipulihkan, Dengan menekan <strong>Hapus</strong>, opsi durasi peminjaman akan terhapus secara permanen
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel  disabled={mutation.isPending}>Batal</AlertDialogCancel>
           <Button disabled={mutation.isPending} variant='destructive' type='submit' onClick={handleClick} className='flex items-center gap-x-2'>
             {mutation.isPending && <Loader className='animate-spin' />}
-            {mutation.isPending ? 'Menyimpan...' : 'Simpan'}
+            {mutation.isPending ? 'Menghapus...' : 'Hapus'}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -68,4 +68,4 @@ const PengaturanKondisiBukuAlert = ({children, idKondisi} : {children: React.Rea
   )
 } 
 
-export default PengaturanKondisiBukuAlert
+export default PengaturanDurasiPinjamAlert
