@@ -16,7 +16,7 @@ export const buatKondisi = async({denda, kondisi, deskripsi, userId} : BuatKondi
 
 // SUDAH DITESTING
 export const getDataKondisi = async() => {
-    const kondisi = await Kondisi.find()
+    const kondisi = await Kondisi.find().sort({denda: 1})
 
     return {data: kondisi}
 }

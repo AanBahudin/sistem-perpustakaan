@@ -11,9 +11,9 @@ export const kondisiValidator = withValidationErrors([
         }),
     body('denda')
         .notEmpty().withMessage('Denda tidak boleh kosong')
-        .isInt({min: 0}).withMessage('Denda tidak boleh kurang dari 0')
+        .isInt({min: 1000}).withMessage('Denda tidak boleh kurang dari 1000')
         .toInt(),
     body('deskripsi')
         .notEmpty().withMessage('Deskripsi tidak boleh kosong')
-        .isLength({min: 10, max: 70}).withMessage('Deskripsi 10 - 70 karakter')
+        .isLength({min: 10, max: 100}).withMessage('Deskripsi 10 - 100 karakter')
 ])
