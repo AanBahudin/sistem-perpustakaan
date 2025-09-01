@@ -1,8 +1,5 @@
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 import withValidationErrors from "./withValidationErrors";
-import { BadRequestError, NotFoundError } from "../errors/errorHandler";
-import DurasiPeminjaman from "../model/DurasiPeminjaman";
-import mongoose from "mongoose";
 
 export const durasiInputValidator = withValidationErrors([
     body('durasi')

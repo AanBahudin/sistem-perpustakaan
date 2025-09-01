@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import {dataDurasiPeminjaman, hapusDataDurasi, tambahDurasiPeminjaman} from "../../services/durasiServices"
 import { StatusCodes } from "http-status-codes"
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
+import DurasiPeminjaman from "../../model/DurasiPeminjaman"
 
 // SUDAH DITESTING
 export const tambahDurasi = async(req : Request, res: Response) => {
@@ -24,6 +25,20 @@ export const semuaDurasi = async(req : Request, res: Response) => {
         data,
         message: 'Data Durasi Peminjaman',
         total: data.length
+    })
+}
+
+export const editDurasi = async(req: Request, res: Response) => {
+    const {id: idDurasi} = req.params
+    const data = await DurasiPeminjaman.findOneAndUpdate(
+        {_id: idDurasi},
+        {...req.body},
+        {new: true, runValidators: true}
+    )
+
+    SendBasicResponse({
+        res, 
+        message: 'Durasi berhasil diperbaharui'
     })
 }
 

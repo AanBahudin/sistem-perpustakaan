@@ -1,5 +1,5 @@
 import express from 'express'
-import { hapusDurasi, semuaDurasi, tambahDurasi } from '../../controllers/durasi/durasiController'
+import { editDurasi, hapusDurasi, semuaDurasi, tambahDurasi } from '../../controllers/durasi/durasiController'
 import { pustakawanMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import { durasiInputValidator } from '../../validator/durasiValidator'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
@@ -11,6 +11,7 @@ router.route('/')
     .post(pustakawanMiddlewareAuthorized, durasiInputValidator, tambahDurasi)
 
 router.route('/:id')
+    .patch(pustakawanMiddlewareAuthorized, durasiInputValidator, editDurasi)
     .delete(pustakawanMiddlewareAuthorized, mongooseIdMiddleware, hapusDurasi)
 
 
