@@ -4,8 +4,8 @@ import Container from "@/globals/Container"
 import { Label } from "@/components/ui/label"
 import { formatRupiah } from "@/utils/formatCurrency"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Edit } from "lucide-react"
+import PengaturanEditDendaDialog from "./PengaturanEditDendaDialog"
 
 const PustakawanDendaSection = () => {
 
@@ -24,8 +24,11 @@ const PustakawanDendaSection = () => {
       <section className='w-full flex items-center justify-between my-10'>
         <Label className='capitalize text-md text-muted-foreground'>Nominal denda keterlambatan</Label>
         <main className='w-fit flex items-center justify-center gap-x-4'>
-          <Input type='text' defaultValue={formatRupiah(data)} readOnly />
-          <Button size='sm'><Edit /></Button>
+          <p className="border w-[300px] h-9  rounded-lg bg-accent/40 flex items-center px-4 text-sm font-semibold text-muted-foreground">{formatRupiah(data.denda)}</p>
+
+          <PengaturanEditDendaDialog dataDenda={data}>
+            <Button size='sm' className="hover:bg-primary/70 duration-200 ease-in-out"><Edit /></Button>
+          </PengaturanEditDendaDialog>
         </main>
       </section>
     </Container>
