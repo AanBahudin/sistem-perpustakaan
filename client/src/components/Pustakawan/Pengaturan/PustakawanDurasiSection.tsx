@@ -18,8 +18,8 @@ const PustakawanDurasiSection = () => {
 
   return (
     <Container className='w-full my-6 min-h-[80vh]'>
-      <section className='w-full flex items-center justify-between'>
-        <h1 className='text-3xl font-bold mt-10'>Durasi Peminjaman Buku</h1>
+      <section className='w-full flex mt-10 items-center justify-between'>
+        <h1 className='text-3xl font-bold'>Durasi Peminjaman Buku</h1>
         <PengaturanTambahDurasiDialog>
           <Button className='text-xs flex items-center gap-x-2 hover:bg-primary/40 ease-in-out duration-200'>
             <PlusCircle />

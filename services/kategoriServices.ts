@@ -34,8 +34,18 @@ export const addKategori = async({kategoriBaru} : AddKategoriParamsType) => {
     return {data: kategori}
 }
 
+export const editKategoriServices = async({data, idKategori} : {data: any, idKategori: string}) => {
+    const updatedKategori = await Kategori.findOneAndUpdate(
+        {_id: idKategori},
+        {nama: data.kategoriBaru},
+        {new: true, runValidators: true}
+    )
+
+    return updatedKategori
+}
+
 // SUDAH DITESTING
-export const deleteKategori = async({idKategori} : DeleteKategoriParamsType) => {
+export const deleteKategori = async({idKategori} : {idKategori: string}) => {
     const kategori = await Kategori.findOneAndDelete({_id: idKategori})
     if (!kategori) throw new NotFoundError('Kategori tidak ditemukan')
 }

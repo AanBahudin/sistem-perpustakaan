@@ -3,5 +3,5 @@ export type AddKategoriParamsType = {
 }
 
 export type DeleteKategoriParamsType = {
-    idKategori: string
+    namaKategori: string
 }

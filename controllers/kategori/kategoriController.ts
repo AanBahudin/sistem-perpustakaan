@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addKategori, allKategori, deleteKategori, searchKategori } from "../../services/kategoriServices";
+import { addKategori, allKategori, deleteKategori, editKategoriServices, searchKategori } from "../../services/kategoriServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
 // SUDAH DITESTING
@@ -38,10 +38,24 @@ export const createKategori = async(req: Request | any, res: Response) => {
     })
 }
 
+export const editKategori = async(req: Request, res: Response) => {
+    const data = req.body
+    const idKategori = req.params.id
+
+    const updatedData = await editKategoriServices({data, idKategori})
+
+    SendOneDataResponse({
+        res,
+        message: 'Kategori berhasil diupdate',
+        data: updatedData
+    })
+    
+}
+
 // SUDAH DITESTING
 export const hapusKategori = async(req: Request | any, res: Response) => {
-    const {id} = req.params
-    await deleteKategori({idKategori: id})
+    const {id: idKategori} = req.params
+    await deleteKategori({idKategori})
 
     SendBasicResponse({
         res,

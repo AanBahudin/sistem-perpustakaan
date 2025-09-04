@@ -21,3 +21,14 @@ export const getSingleSearchKategory = async(kategori: string) => {
 
     return response.data
 }
+
+export const editSingleKategori = async(idKategori: string, data: any) => {
+    console.log(data)
+    const { data:response } = await customFetch.patch(`/kategori/${idKategori}`, data)
+    return response.data
+}
+
+export const pustakawanHapusKategori = async(idKategori: string) => {
+    const {data: response} = await customFetch.delete(`/kategori/${idKategori}`)
+    return response.data
+}
