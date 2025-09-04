@@ -9,4 +9,12 @@ const Logo = ({url = '/'} : {url?: string}) => {
   )
 }
 
+export const SecondaryLogo = () => {
+  return (
+    <Link to='/' className='w-10 h-10 rounded-md bg-accent flex items-center justify-center'>
+        <BookOpenText className="text-white" />
+    </Link>
+  )
+}
+
 export default Logo

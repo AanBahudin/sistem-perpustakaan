@@ -55,6 +55,14 @@ import PustakawanDetailBuku from "./pages/pustakawan/buku/PustakawanDetailBuku";
 import PustakawanTambahBuku from "./pages/pustakawan/buku/PustakawanTambahBuku";
 import PustakawanEditBuku from "./pages/pustakawan/buku/PustakawanEditBuku";
 import PustakawanPengaturanPage from "./pages/pustakawan/pengaturan/PustakawanPengaturanPage";
+import ProdiLoginPage from "./pages/prodi/auth/ProdiLoginPage";
+import ProdiSemuaPenggunaPage from "./pages/prodi/pengguna/ProdiSemuaPenggunaPage";
+import ProdiPenggunaMahasiswaPage from "./pages/prodi/pengguna/ProdiPenggunaMahasiswaPage";
+import ProdiPenggunaDosenPage from "./pages/prodi/pengguna/ProdiPenggunaDosenPage";
+import ProdiPengajuanPenggunaPage from "./pages/prodi/pengguna/ProdiPengajuanPenggunaPage";
+import ProdiTambahPengguna from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
+import ProdiTambahPenggunaPage from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
+import ProdiBerandaPage from "./pages/beranda/ProdiBerandaPage";
 
 const router : RouteObject[] = [
     {
@@ -346,11 +354,47 @@ const router : RouteObject[] = [
         ]
     },
     {
+        path: '/prodi/login',
+        element: <ProdiLoginPage />
+    },
+    {
         path: '/prodi',
+        element: <ProdiLayout />,
         children: [
             {
                 index: true,
-                element: <ProdiLayout />
+                element: <ProdiBerandaPage />
+            },
+            {
+                path: 'pengguna',
+                children: [
+                    {
+                        index: true,
+                        element: <ProdiSemuaPenggunaPage />
+                    },
+                    {
+                        path: 'mahasiswa',
+                        element: <ProdiPenggunaMahasiswaPage />
+                    },
+                    {
+                        path: 'dosen',
+                        element: <ProdiPenggunaDosenPage />
+                    },
+                    {
+                        path: 'pemintaan',
+                        element: <ProdiPengajuanPenggunaPage />
+                    },
+                    {
+                        path: 'tambah',
+                        element: <ProdiTambahPenggunaPage />
+                    },
+                    {
+                        path: 'permintaan'
+                    },
+                    {
+                        path: 'blokir'
+                    }
+                ]
             }
         ]
     }

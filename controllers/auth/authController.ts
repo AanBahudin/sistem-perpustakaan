@@ -1,7 +1,17 @@
 import { Request, Response } from "express"
 import { StatusCodes } from 'http-status-codes'
-import { loginProdi, loginPustakawan, loginUser, registerUser, verifyEmailUpdateUser, verifyPustakawanEmailAndAuthData, verifyRegisterUser } from "../../services/authServices"
-import { SendBasicResponse, sendResponseWithPage, sendResponseWithToken } from "../../utils/sendResponse"
+import { 
+    loginProdi, 
+    loginPustakawan, 
+    loginUser, 
+    registerUser, 
+    verifyEmailUpdateUser, 
+    verifyPustakawanEmailAndAuthData, 
+    verifyRegisterUser } from "../../services/authServices"
+import { 
+    SendBasicResponse, 
+    sendResponseWithPage, 
+    sendResponseWithToken } from "../../utils/sendResponse"
 
 
 // controller unutuk registrasi pengguna/dosen - SUDAH DITESTING
