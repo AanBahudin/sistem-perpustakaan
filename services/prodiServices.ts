@@ -6,6 +6,7 @@ import { hashPassword } from "../utils/passwordUtils"
 import { CreateAdminParamsType, CreatePustakawanParamsType, GetOnePenggunaDataParamsType, GetOnePustakawanDataParamsType, GetOneRequestedPenggunaParamsType, GetProdiProfileParamsType, VerifyRegisteredAccountParamsType } from "../types/prodiTypes"
 import sendVerifyEmailPustakawan from "../helpers/sendVerifyEmailPustakawan"
 import renderError from "../utils/renderError"
+import { allUserAccountStatusRatio, allUserStats } from "./pustakawanServices"
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -76,10 +77,26 @@ export const getOnePustakawanData = async({pustakawanId} : GetOnePustakawanDataP
 }
 
 // SUDAH DITESTING
-export const getAllPenggunaData = async() => {
-    const pengguna = await Pengguna.find().select('-password')
+export const getAllPenggunaData = async({query} : {query: any}) => {
+    let mongoQuery: any = { ...query }
 
-    return {data: pengguna}
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+
+    const pengguna = await Pengguna.find(mongoQuery).select('-password').sort({createdAt: -1})
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
 
 // SUDAH DITESTING

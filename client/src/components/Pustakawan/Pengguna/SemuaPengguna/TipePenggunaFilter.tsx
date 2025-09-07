@@ -16,6 +16,7 @@ const TipePenggunaFilter = () => {
   const [searchParams] = useSearchParams()
   const fullParams = new URLSearchParams(searchParams)
   const roleParams = searchParams.get('role') || ''
+  const selectValues: Array<string> = ['Semua', 'Dosen', 'Mahasiswa']
 
   const [roleValue, setRoleValue] = useState(roleParams)
   
@@ -34,15 +35,18 @@ const TipePenggunaFilter = () => {
 
   return (
     <Select onValueChange={value => setValueToParams(value)} value={roleValue}>
-      <SelectTrigger className="w-[40%] bg-accent/30">
-        <SelectValue className="!text-xs" placeholder="Jenis pengguna" />
+      <SelectTrigger className="w-[40%] bg-accent/30 !text-xs">
+        <SelectValue className="" placeholder="Jenis pengguna" />
       </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
+      <SelectContent className="!text-xs !placeholder:text-xs">
+        <SelectGroup className="!text-xs !placeholder:text-xs">
           <SelectLabel className="text-xs">Pilih salah satu</SelectLabel>
-          <SelectItem value="All">Semua</SelectItem>
-          <SelectItem value="Dosen">Dosen</SelectItem>
-          <SelectItem value="Mahasiswa">Mahasiswa</SelectItem>
+          {selectValues.map((item: string, index: number) => {
+            const value: string = item === 'Semua' ? 'All' : item
+            return (
+              <SelectItem key={index} value={value} className="!text-xs">{item}</SelectItem>
+            )
+          })}
         </SelectGroup>
       </SelectContent>
     </Select>

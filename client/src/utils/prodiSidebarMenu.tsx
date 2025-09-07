@@ -40,34 +40,6 @@ export const prodiSidebarMenu = [
         icon: Users
     },
     {
-        title: 'Pengajuan',
-        url: 'pengajuan',
-        type: 'collapse',
-        children: [
-            {
-                title: 'Semua',
-                url: 'pengajuan',
-                icon: Files
-            },
-            {
-                title: 'Peminjaman',
-                url: 'pengajuan/peminjaman',
-                icon: FileCheck2
-            },
-            {
-                title: 'Perpanjangan',
-                url: 'pengajuan/perpanjangan',
-                icon: FilePlus
-            },
-            {
-                title: 'Pengembalian',
-                url: 'pengajuan/pengembalian',
-                icon: FileSymlink
-            }
-        ],
-        icon: Newspaper
-    },
-    {
         title: 'Buku',
         url: 'buku',
         type: 'collapse',

@@ -63,6 +63,8 @@ import ProdiPengajuanPenggunaPage from "./pages/prodi/pengguna/ProdiPengajuanPen
 import ProdiTambahPengguna from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
 import ProdiTambahPenggunaPage from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
 import ProdiBerandaPage from "./pages/beranda/ProdiBerandaPage";
+import ProdiBlockedPenggunPage from "./pages/prodi/pengguna/ProdiBlockedPenggunPage";
+import DetailPengguna from "./pages/prodi/pengguna/DetailPengguna";
 
 const router : RouteObject[] = [
     {
@@ -373,6 +375,10 @@ const router : RouteObject[] = [
                         element: <ProdiSemuaPenggunaPage />
                     },
                     {
+                        path: 'detail/:id',
+                        element: <DetailPengguna />
+                    },
+                    {
                         path: 'mahasiswa',
                         element: <ProdiPenggunaMahasiswaPage />
                     },
@@ -389,10 +395,12 @@ const router : RouteObject[] = [
                         element: <ProdiTambahPenggunaPage />
                     },
                     {
-                        path: 'permintaan'
+                        path: 'permintaan',
+                        element: <ProdiPengajuanPenggunaPage />
                     },
                     {
-                        path: 'blokir'
+                        path: 'blokir',
+                        element: <ProdiBlockedPenggunPage />
                     }
                 ]
             }

@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge"
 import {
   Table,  
   TableBody,
@@ -8,17 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import GlobalTooltip from "@/globals/GlobalTooltip"
-import { Check, LucideIcon, X } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { StatusAkunBadge, VerifikasiBadge } from "@/components/Pustakawan/Pengguna/SemuaPengguna/TableSemuaPengguna"
 
-
-const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
+const ProdiSemuaPenggunaTable = ({dataPengguna} : {dataPengguna: any}) => {
 
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const navigationToUrl = (id: string) => {
-        navigate(`/pustakawan/pengguna/detail/${id}`)
+        navigate(`/prodi/pengguna/detail/${id}`)
     }
 
     return (
@@ -44,7 +41,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                         <TableBody>
                             {dataPengguna.map((item: any, index: number) => {
                                 return (
-                                    <TableRow key={index} onClick={() => navigationToUrl(item._id)} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
+                                    <TableRow key={index} onClick={() => navigationToUrl(item._id)} className="border-accent-foreground/10 text-muted-foreground even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1 }</TableCell>
                                         <TableCell className="w-[250px] text-xs">
                                             <div className="flex items-center gap-x-2 group-hover:underline cursor-default duration-200 ease-in-out">
@@ -63,7 +60,7 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
                                             </div>
                                         </TableCell>
                                         <TableCell className="w-[150px] text-center text-xs">{item.idKampus}</TableCell>
-                                        <TableCell className="w-[200px] text-xs">{item.email}</TableCell>
+                                        <TableCell className="w-[200px] text-xs text-center">{item.email}</TableCell>
                                         <TableCell className="w-[150px] text-center text-xs">
                                             <StatusAkunBadge statusAkun={item.statusAkun} />
                                         </TableCell>
@@ -81,45 +78,4 @@ const TableSemuaPengguna = ({dataPengguna} : {dataPengguna: any}) => {
     )
 }
 
-export default TableSemuaPengguna
-
-const StatusAkunBadge = ({statusAkun} : {statusAkun: string}) => {
-
-    if (statusAkun === 'Nonaktif') {
-        return <Badge variant='destructive' className="text-white text-center w-[80%]">{statusAkun}</Badge>
-    }
-
-    if (statusAkun === 'Pending') {
-        return <Badge variant='secondary' className="text-white text-center w-[80%]">{statusAkun}</Badge>
-    }
-
-    return (
-        <Badge className="text-white text-center w-[80%]">{statusAkun}</Badge>
-    )
-}
-
-const VerifikasiBadge = ({emailVerify, prodiVerify} : {emailVerify: boolean, prodiVerify: boolean}) => {
-
-    const EmailVerifyIcon: LucideIcon = emailVerify ? Check : X
-    const EmailVerifyMsg: string = emailVerify ? 'Pengguna telah verifikasi Email' : 'Pengguna belum verifikasi Email'
-    const ProdiVerifyIcon: LucideIcon = prodiVerify ? Check : X
-    const ProdiVerifyMsg: string = prodiVerify ? 'Pengguna telah diverifikasi Prodi' : 'Pengguna belum diverifikasi Prodi'
-
-    return (
-        <section className="flex items-center justify-center gap-x-3">
-            <GlobalTooltip type={!emailVerify ? 'danger' : 'default'} text={EmailVerifyMsg}>
-                <Badge variant={emailVerify ? 'default' : 'destructive'} className="flex items-center justify-center gap-x-1 text-white text-xs">
-                    <EmailVerifyIcon className="stroke-white" />
-                    {'Email'}
-                </Badge>
-            </GlobalTooltip>
-
-            <GlobalTooltip text={ProdiVerifyMsg} type={!prodiVerify ? 'danger' : 'default'} >
-                <Badge variant={prodiVerify ? 'default' : 'destructive'} className="flex items-center justify-center gap-x-1 text-white text-xs">
-                    <ProdiVerifyIcon />
-                    {'Prodi'}
-                </Badge>
-            </GlobalTooltip>
-        </section>
-    )
-}
+export default ProdiSemuaPenggunaTable

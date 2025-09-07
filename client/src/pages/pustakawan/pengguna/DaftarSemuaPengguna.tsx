@@ -1,7 +1,7 @@
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
 import Container from '@/globals/Container'
-import TableSemuaPengguna from './TableSemuaPengguna'
+import TableSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/TableSemuaPengguna'
 import { useQuery } from '@tanstack/react-query'
 import { getAllPengguna } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'

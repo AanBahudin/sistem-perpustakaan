@@ -5,7 +5,7 @@ import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
-import TableSemuaPengguna from './TableSemuaPengguna'
+import TableSemuaPengguna from '../../../components/Pustakawan/Pengguna/SemuaPengguna/TableSemuaPengguna'
 import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'
 
 const DaftarPenggunaMahasiswa = () => {

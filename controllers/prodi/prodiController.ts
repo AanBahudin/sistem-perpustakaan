@@ -82,14 +82,14 @@ export const getSinglePustakawan = async(req: any | Request, res: Response) => {
 
 // controller untuk mengambil data semua pengguna
 export const getAllUsers = async(req: any | Request, res: Response) => {
-    const getAllUsersData = await getAllPenggunaData()
+    const getAllUsersData = await getAllPenggunaData({query: req.query})
     
     SendDataResponse({
         res,
-        data: getAllUsersData.data,
+        data: getAllUsersData,
         message: 'Data Pengguna',
         page: 1,
-        total: getAllUsersData.data.length
+        total: getAllUsersData.pengguna.length
     })
 }
 
