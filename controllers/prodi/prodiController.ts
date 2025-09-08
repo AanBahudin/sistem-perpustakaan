@@ -9,6 +9,8 @@ import {
     getOnePustakawanData, 
     getOneRequestedPengguna, 
     getProdiProfile, 
+    prodiBlokirPengguna, 
+    prodiBukaBlokir, 
     verifyRegisteredAccount } from "../../services/prodiServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
@@ -142,5 +144,27 @@ export const verifiedUserAccount = async(req: Request, res: Response) => {
         res,
         message: 'Akun pengguna berhasil diaktfikan',
         data: verifyServices.data,
+    })
+}
+
+export const blokirPengguna = async(req: Request, res: Response) => {
+    const {id: idPengguna} = req.params
+    const data = await prodiBlokirPengguna({idPengguna})
+
+    SendOneDataResponse({
+        res,
+        message: 'Pengguna berhasil diblokir',
+        data
+    })
+}
+
+export const bukaBlokirPengguna = async(req: Request, res: Response) => {
+    const {id: idPengguna} = req.params
+    const data = await prodiBukaBlokir({idPengguna})
+
+    SendOneDataResponse({
+        res,
+        message: 'Pengguna aktif kembali',
+        data
     })
 }

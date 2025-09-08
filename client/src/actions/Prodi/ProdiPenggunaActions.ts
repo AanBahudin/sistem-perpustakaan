@@ -40,6 +40,11 @@ export const prodiBlockedUser = async(id: string) => {
     return response.data
 }
 
+export const prodiUnblockedUser = async(id: string) => {
+    const {data: response} = await customFetch.patch(`/prodi/user/unblocked/${id}`)
+    return response.data
+}
+
 export const prodiGetUserBlocked = async(params: string) => {
     const {data: response} = await customFetch.get(`/prodi/user/blocked?${params}`)
     return response.data

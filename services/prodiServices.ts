@@ -92,7 +92,7 @@ export const getAllPenggunaData = async({query} : {query: any}) => {
         delete mongoQuery.query
     }
 
-    const pengguna = await Pengguna.find(mongoQuery).select('-password').sort({createdAt: -1})
+    const pengguna = await Pengguna.find({...mongoQuery , verifikasiEmail: true}).select('-password').sort({createdAt: -1})
     const monthlyUserGrowth = await allUserStats()
     const userAccountStatusRatio = await allUserAccountStatusRatio()
 
@@ -144,4 +144,42 @@ export const verifyRegisteredAccount = async({userId} : VerifyRegisteredAccountP
     ).select('-password')
 
     return {data: updatedData}
+}
+
+export const prodiBlokirPengguna = async({idPengguna} : {idPengguna: string}) => {
+    const pengguna = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {
+            statusAkun: 'Nonaktif',
+            blocked: true
+        },
+        {new: true, runValidators: true}
+    ).select('-password')
+
+    return pengguna
+}
+
+export const prodiBukaBlokir = async({idPengguna} : {idPengguna: string}) => {
+    const pengguna = await Pengguna.findOne({_id: idPengguna})
+    if (!pengguna) throw new NotFoundError('Pengguna tidak ditemukan')
+
+    let statusPengguna = ''
+    if (pengguna.verifikasiEmail && pengguna.verifikasiProdi) {
+        statusPengguna = 'Aktif'
+    } else if (pengguna.verifikasiEmail || pengguna.verifikasiProdi) {
+        statusPengguna = 'Pending'
+    } else {
+        statusPengguna = 'Nonaktif'
+    }
+
+    const updatedPengguna = await Pengguna.findOneAndUpdate(
+        {_id: idPengguna},
+        {
+            statusAkun: statusPengguna,
+            blocked: false
+        },
+        {new: true, runValidators: true}
+    ).select('-password')
+
+    return updatedPengguna
 }

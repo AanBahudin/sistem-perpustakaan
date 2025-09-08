@@ -9,7 +9,9 @@ import {
     getSingleUser, 
     getRequestedUser,
     verifiedUserAccount,
-    getSingleRequestedUser
+    getSingleRequestedUser,
+    blokirPengguna,
+    bukaBlokirPengguna
 } from '../../controllers/prodi/prodiController'
 import { createPustakawanValidator } from '../../validator/adminValidator'
 import { createAdminValidator } from '../../validator/adminValidator'
@@ -46,5 +48,12 @@ router.route('/requested/user/:id')
 
 router.route('/profile')
     .get(getProfile)
+    
+router.route('/user/unblocked/:id')
+    .patch(mongooseIdMiddleware, bukaBlokirPengguna)
+    
+router.route('/user/:id')
+    .patch(mongooseIdMiddleware, blokirPengguna)
+
 
 export default router
