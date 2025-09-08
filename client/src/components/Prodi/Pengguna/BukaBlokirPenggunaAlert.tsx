@@ -33,6 +33,7 @@ const BukaBlokirPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
         mutationFn: () => prodiUnblockedUser(idPengguna),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pengguna', params]})
+            toast('Akun Pengguna Diaktifkan')
             handleOpenAlert(false)
         },
         onError: (error: any) => {
