@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'
 import { prodiGetAllPengguna } from '@/actions/Prodi/ProdiPenggunaActions'
 import ProdiSemuaPenggunaTable from '@/components/Prodi/Pengguna/SemuaPengguna/ProdiSemuaPenggunaTable'
+import TambahPenggunaBaruDialog from './TambahPenggunaBaruDialog'
 
 const ProdiSemuaPenggunaPage = () => {
 
@@ -22,7 +23,12 @@ const ProdiSemuaPenggunaPage = () => {
 
   return (
     <Container className='w-full'>
-      <PustakawanBreadCrumbs />
+
+      <section className='w-full flex items-center justify-between'>
+        <PustakawanBreadCrumbs />
+        <TambahPenggunaBaruDialog />
+      </section>
+
       <GrafikPertumbuhanSemuaPengguna monthlyUserGrowData={data.monthlyUserGrowth} userAccountStatusRatio={data.userAccountStatusRatio}/>
       <SemuaPenggunaFilter />
       <ProdiSemuaPenggunaTable dataPengguna={data.pengguna} />
