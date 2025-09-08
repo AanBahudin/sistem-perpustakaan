@@ -26,7 +26,7 @@ const BukaBlokirPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
 
     const { bukaBlokirPenggunaAlert } = useSelector((state: any) => state.prodiPenggunaSlice)
     const handleOpenAlert = (value: boolean) => {
-        store.dispatch(setBukuBlokirPenggunaAlert(value))
+        store.dispatch(setBukuBlokirPenggunaAlert({value, id: idPengguna}))
     }
 
     const mutation = useMutation({

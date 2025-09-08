@@ -13,20 +13,20 @@ import BukaBlokirPenggunaAlert from "./BukaBlokirPenggunaAlert"
 
 const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
 
-  const { verifikasiProdi, blocked } = dataPengguna
-  const { blokirPenggunaAlert, bukaBlokirPenggunaAlert } = useSelector((state: any) => state.prodiPenggunaSlice)
+  const { verifikasiProdi, blocked, _id: idPengguna } = dataPengguna
+  const { activeUserId, blokirPenggunaAlert, bukaBlokirPenggunaAlert } = useSelector((state: any) => state.prodiPenggunaSlice)
 
-  const handleBlokirPengguna = (e: any) => {
-    store.dispatch(setBlokirPenggunaAlert(true))
+  const handleBlokirPengguna = () => {
+    store.dispatch(setBlokirPenggunaAlert({value: true, id: idPengguna}))
   }
 
   const handleBukaBlokirPengguna = () => {
-    store.dispatch(setBukuBlokirPenggunaAlert(true))
+    store.dispatch(setBukuBlokirPenggunaAlert({value: true, id:idPengguna}))
   }
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu >
         <DropdownMenuTrigger asChild>
           <div className='w-6 h-6 flex items-center justify-center hover:bg-muted rounded-full'>
             <Ellipsis className="hover:bg-accent/40 duration-200 ease-in-out w-6 h-6 rounded-full p-1" />
@@ -60,7 +60,7 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
                 </div>
               </DropdownMenuItem>
             ) : (
-              <DropdownMenuItem onClick={(e: any) => handleBlokirPengguna(e)} variant="destructive" className=' flex items-center gap-x-2 text-xs p-2 bg-destructive !hover:bg-destructive/70'>
+              <DropdownMenuItem onClick={handleBlokirPengguna} variant="destructive" className=' flex items-center gap-x-2 text-xs p-2 bg-destructive !hover:bg-destructive/70'>
                 <div className="flex items-center justify-center gap-x-4 text-white">
                   <UserRoundX className='w-3 h-3 stroke-white' /> 
                   Blokir Pengguna
@@ -71,8 +71,8 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
         </DropdownMenuContent> 
       </DropdownMenu>
 
-      {blokirPenggunaAlert && <BlokirPenggunaAlert dataPengguna={dataPengguna} />}
-      {bukaBlokirPenggunaAlert && <BukaBlokirPenggunaAlert dataPengguna={dataPengguna} />}
+      {(blokirPenggunaAlert && activeUserId  === idPengguna) && <BlokirPenggunaAlert dataPengguna={dataPengguna} />}
+      {(bukaBlokirPenggunaAlert && activeUserId  === idPengguna) && <BukaBlokirPenggunaAlert dataPengguna={dataPengguna} />}
       
     </>
   )

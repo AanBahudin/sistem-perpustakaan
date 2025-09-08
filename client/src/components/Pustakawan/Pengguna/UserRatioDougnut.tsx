@@ -67,7 +67,7 @@ const UserRatioDougnut = ({userAccountStatusRatio} : {userAccountStatusRatio: an
                 const bgColor = chartColors[index] 
                 return (
                   // <p style={{backgroundColor: bgColor, opacity: 0.9}} className={`bg-[${bgColor}] text-white min-w-20 text-center rounded-full py-1 text-xs`} key={index}>{item}</p>
-                  <Badge style={{backgroundColor: bgColor}} className='text-white'>{userAccountStatusRatio[index]} {item}</Badge>
+                  <Badge key={index} style={{backgroundColor: bgColor}} className='text-white'>{userAccountStatusRatio[index]} {item}</Badge>
                 )
               })}
           </main>

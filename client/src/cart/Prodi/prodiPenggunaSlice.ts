@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     blokirPenggunaAlert: false,
     verifikasiPenggunaAlert: false,
-    bukaBlokirPenggunaAlert: false
+    bukaBlokirPenggunaAlert: false,
+    activeUserId: ''
 }
 
 const prodiPenggunaSlice = createSlice({
@@ -11,13 +12,19 @@ const prodiPenggunaSlice = createSlice({
     initialState,
     reducers: {
         setBlokirPenggunaAlert: (state, action) => {
-            state.blokirPenggunaAlert = action.payload
+            const {id, value} = action.payload
+            state.blokirPenggunaAlert = value
+            state.activeUserId = id
         },
         setVerifikasiPenggunaAlert: (state, action) => {
-            state.verifikasiPenggunaAlert = action.payload
+            const {id, value} = action.payload
+            state.verifikasiPenggunaAlert = value
+            state.activeUserId = id
         },
         setBukuBlokirPenggunaAlert: (state, action) => {
-            state.bukaBlokirPenggunaAlert = action.payload
+            const {id, value} = action.payload
+            state.bukaBlokirPenggunaAlert = value
+            state.activeUserId = id
         }
     }
 })
