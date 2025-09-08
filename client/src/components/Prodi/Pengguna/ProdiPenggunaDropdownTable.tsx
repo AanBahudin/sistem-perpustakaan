@@ -11,6 +11,7 @@ import { store } from "@/store"
 import { setBlokirPenggunaAlert, setBukuBlokirPenggunaAlert, setVerifikasiPenggunaAlert } from "@/cart/Prodi/prodiPenggunaSlice"
 import BukaBlokirPenggunaAlert from "./BukaBlokirPenggunaAlert"
 import VerifikasiPenggunaAlert from "./VerifikasiPenggunaAlert"
+import { useNavigate } from "react-router-dom"
 
 const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
 
@@ -20,6 +21,8 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
     verifikasiPenggunaAlert,
     blokirPenggunaAlert, 
     bukaBlokirPenggunaAlert } = useSelector((state: any) => state.prodiPenggunaSlice)  
+  
+  const navigate = useNavigate()
 
   const handleVerifikasiAlert = () => {
     store.dispatch(setVerifikasiPenggunaAlert({value: true, id: idPengguna}))
@@ -33,6 +36,10 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
     store.dispatch(setBukuBlokirPenggunaAlert({value: true, id:idPengguna}))
   }
 
+  const handleDetailPengguna = () => {
+    navigate(`/prodi/pengguna/detail/${idPengguna}`)
+  }
+
   return (
     <>
       <DropdownMenu >
@@ -44,7 +51,7 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
 
         <DropdownMenuContent className="w-48" align="start">
       
-          <DropdownMenuItem className=' flex items-center gap-x-2 text-xs p-2'>
+          <DropdownMenuItem onClick={handleDetailPengguna} className=' flex items-center gap-x-2 text-xs p-2'>
             <div className="flex items-center justify-center gap-x-4">
               <CircleUserRound className='w-3 h-3 ' /> 
               Detail Pengguna

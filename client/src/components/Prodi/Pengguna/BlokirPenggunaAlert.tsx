@@ -60,12 +60,9 @@ const BlokirPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
                 </AlertDialogHeader>
 
                 <AlertDialogFooter>
-                    <AlertDialogCancel disabled={isLoading} onClick={(e) => {
-                        e.stopPropagation()
-                        handleOpenAlert(false)
-                    }}>Batal</AlertDialogCancel>
-                    <Button disabled={isLoading} onClick={handleMutate} className="bg-destructive hover:bg-destructive/70">
-                        {isLoading ? 'Sedang Proses...' : 'Blokir'}
+                    <AlertDialogCancel className="text-xs" disabled={isLoading}>Batal</AlertDialogCancel>
+                    <Button disabled={isLoading} onClick={handleMutate} className="bg-destructive text-xs hover:bg-destructive/70">
+                        {isLoading ? 'Sedang Proses...' : 'Blokir Pengguna'}
                     </Button>
                 </AlertDialogFooter>
             </AlertDialogContent>
