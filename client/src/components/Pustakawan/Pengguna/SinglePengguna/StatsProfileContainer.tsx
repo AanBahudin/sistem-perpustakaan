@@ -3,7 +3,7 @@ import SinglePenggunaDougnut from "./SinglePenggunaDougnut"
 
 type StatsProfileContainerType = {
   nama: string,
-  ratioData: any
+  ratioData?: any
 }
 
 const StatsProfileContainer = ({nama, ratioData} : StatsProfileContainerType) => {

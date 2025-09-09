@@ -109,12 +109,12 @@ export const getAllUsers = async(req: any | Request, res: Response) => {
 export const getSingleUser = async(req: any | Request, res: Response) => {
     const {id} = req.params
 
-    const user = await getOnePenggunaData({penggunaId: id})
+    const data = await getOnePenggunaData({penggunaId: id})
 
     SendOneDataResponse({
         res,
         message: 'Data Pengguna',
-        data: user.data
+        data: data
     })
 }
 

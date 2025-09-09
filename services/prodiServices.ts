@@ -8,6 +8,9 @@ import sendVerifyEmailPustakawan from "../helpers/sendVerifyEmailPustakawan"
 import renderError from "../utils/renderError"
 import { allUserAccountStatusRatio, allUserStats } from "./pustakawanServices"
 import sendEmailVerificationWithLoginData from "../helpers/sendEmailVerificationWithLoginData"
+import { getPeminjamanByUserId } from "./peminjamanServices"
+import { getPerpanjanganByUserId } from "./perpanjanganServices"
+import { getPengembalianByUserId } from "./pengembalianServices"
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -131,9 +134,12 @@ export const getAllPenggunaData = async({query} : {query: any}) => {
 // SUDAH DITESTING
 export const getOnePenggunaData = async({penggunaId} : GetOnePenggunaDataParamsType) => {
     const pengguna = await Pengguna.findOne({_id: penggunaId}).select('-password')
-    if (!pengguna) throw new NotFoundError('Data pengguna tidak ditemukan')
-
-    return {data: pengguna}
+    const peminjaman = await getPeminjamanByUserId({userId: penggunaId})
+    const perpanjangan = await getPerpanjanganByUserId({userId: penggunaId})
+    const pengembalian = await getPengembalianByUserId({idPengguna: penggunaId})
+    
+    
+    return {pengguna, peminjaman, perpanjangan, pengembalian}
 }
 
 // SUDAH DITESTING
