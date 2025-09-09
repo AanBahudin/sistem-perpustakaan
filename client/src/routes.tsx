@@ -417,6 +417,9 @@ const router : RouteObject[] = [
                         element: <ProdiSemuaBukuPage />
                     },
                     {
+                        path: 'detail/:id'
+                    },
+                    {
                         path: 'dipinjam',
                         element: <ProdiSemuaBukuDipinjam />
                     },
