@@ -1,5 +1,12 @@
 import { customFetch } from "@/utils/customFetch";
 
+export const prodiCreatePengguna = async(data: any) => {
+    console.log(data)
+    // const {data: response} = await customFetch.post('/prodi/create/pengguna', data)
+    // return response
+    return {}
+}
+
 export const prodiGetAllPengguna = async(params: string) => {
     const {data: response} = await customFetch.get(`/prodi/pengguna?${params}`)
     return response.data
