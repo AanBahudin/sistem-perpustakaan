@@ -15,7 +15,7 @@ const ProdiPenggunaDosenPage = () => {
   const params = new URLSearchParams(searchParams).toString()
 
   const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'pengguna', params],
+    queryKey: ['semua', 'dosen', params],
     queryFn: () => prodiGetPenggunaDosen(params.toString())
   })
 

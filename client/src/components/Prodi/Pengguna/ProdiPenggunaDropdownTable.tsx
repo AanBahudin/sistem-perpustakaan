@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom"
 
 const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
 
-  const { verifikasiProdi, blocked, _id: idPengguna } = dataPengguna
+  const { verifikasiProdi, verifikasiEmail, blocked, _id: idPengguna } = dataPengguna
   const { 
     activeUserId,
     verifikasiPenggunaAlert,
@@ -58,7 +58,7 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
             </div>
           </DropdownMenuItem>
 
-          {(!verifikasiProdi && !blocked) && (
+          {(!verifikasiProdi && !blocked && verifikasiEmail) && (
             <DropdownMenuItem onClick={handleVerifikasiAlert} className='flex items-center gap-x-2 text-xs p-2'>
               <div className="flex items-center justify-center gap-x-4">
                 <CheckCircle className='w-3 h-3 stroke-primary' /> 
@@ -67,23 +67,23 @@ const ProdiPenggunaDropdownTable = ({dataPengguna} : {dataPengguna: any}) => {
             </DropdownMenuItem>
           )}
 
-          {
-            blocked ? (
-              <DropdownMenuItem onClick={handleBukaBlokirPengguna} variant="default" className=' flex items-center gap-x-2 text-xs p-2 bg-primary !focus:bg-primary/70'>
-                <div className="flex items-center justify-center gap-x-4 text-white">
-                  <UserRoundX className='w-3 h-3 stroke-white' /> 
-                  Buka Blokir
-                </div>
-              </DropdownMenuItem>
-            ) : (
-              <DropdownMenuItem onClick={handleBlokirPengguna} variant="destructive" className=' flex items-center gap-x-2 text-xs p-2 bg-destructive !hover:bg-destructive/70'>
-                <div className="flex items-center justify-center gap-x-4 text-white">
-                  <UserRoundX className='w-3 h-3 stroke-white' /> 
-                  Blokir Pengguna
-                </div>
-              </DropdownMenuItem>
-            )
-          }
+          {blocked && (
+            <DropdownMenuItem onClick={handleBukaBlokirPengguna} variant="default" className=' flex items-center gap-x-2 text-xs p-2 bg-primary !focus:bg-primary/70'>
+              <div className="flex items-center justify-center gap-x-4 text-white">
+                <UserRoundX className='w-3 h-3 stroke-white' /> 
+                Buka Blokir
+              </div>
+            </DropdownMenuItem>
+          )}
+
+          {(verifikasiEmail && !blocked) && (
+            <DropdownMenuItem onClick={handleBlokirPengguna} variant="destructive" className=' flex items-center gap-x-2 text-xs p-2 bg-destructive !hover:bg-destructive/70'>
+              <div className="flex items-center justify-center gap-x-4 text-white">
+                <UserRoundX className='w-3 h-3 stroke-white' /> 
+                Blokir Pengguna
+              </div>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent> 
       </DropdownMenu>
 

@@ -3,7 +3,9 @@ import {
     createAdmin, 
     createNewPengguna, 
     createNewPustakawan, 
+    getAllBlockedUserData, 
     getAllDosenData, 
+    getAllMahasiswaData, 
     getAllPenggunaData, 
     getAllPustakawanData, 
     getAllRequestedPengguna, 
@@ -113,7 +115,19 @@ export const getAllDosen = async(req: Request, res: Response) => {
         res,
         message: 'Data Dosen',
         data,
-        total: data.pengguna.length,
+        total: data.pengguna.length ,
+        page: 1
+    })
+}
+
+export const getAllMahasiswa = async(req: Request, res: Response) => {
+    const data = await getAllMahasiswaData({query: req.query})
+
+    SendDataResponse({
+        res,
+        message: 'Data Mahasiswa',
+        data,
+        total: data.pengguna.length ,
         page: 1
     })
 }
@@ -133,14 +147,26 @@ export const getSingleUser = async(req: any | Request, res: Response) => {
 
 // controller untuk mengambil data permintaan pembuatan akun
 export const getRequestedUser = async (req: any | Request, res: Response) => {
-    const requestedUser = await getAllRequestedPengguna()
+    const data = await getAllRequestedPengguna({query: req.query})
 
     SendDataResponse({
         res,
         message: 'Daftar permintaan pendaftaran',
-        total: requestedUser.data.length,
+        total: data.pengguna.length,
         page: 1,
-        data: requestedUser.data,
+        data: data
+    })
+}
+
+export const getAllBlockedUser = async (req: any | Request, res: Response) => {
+    const data = await getAllBlockedUserData({query: req.query})
+
+    SendDataResponse({
+        res,
+        message: 'Daftar pengguna diblokir',
+        total: data.pengguna.length,
+        page: 1,
+        data: data
     })
 }
 

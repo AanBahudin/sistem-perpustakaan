@@ -153,6 +153,73 @@ export const getAllDosenData = async({query} : {query: any}) => {
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
 
+export const getAllMahasiswaData = async({query} : {query: any}) => {
+
+    let mongoQuery: any = { ...query }
+
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+    const pengguna = await Pengguna.find({...mongoQuery, role: 'Mahasiswa'}).select('-password')
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
+// SUDAH DITESTING
+export const getAllRequestedPengguna = async({query} : {query: any}) => {
+
+    let mongoQuery: any = { ...query }
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+
+    const pengguna = await Pengguna.find({...mongoQuery, verifikasiEmail: false, verifikasiProdi: false, blocked: false}).select('-password')
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
+export const getAllBlockedUserData = async({query} : {query: any}) => {
+
+    let mongoQuery: any = { ...query }
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+
+    const pengguna = await Pengguna.find({...mongoQuery, blocked: true}).select('-password')
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
 // SUDAH DITESTING
 export const getOnePenggunaData = async({penggunaId} : GetOnePenggunaDataParamsType) => {
     const pengguna = await Pengguna.findOne({_id: penggunaId}).select('-password')
@@ -162,13 +229,6 @@ export const getOnePenggunaData = async({penggunaId} : GetOnePenggunaDataParamsT
     
     
     return {pengguna, peminjaman, perpanjangan, pengembalian}
-}
-
-// SUDAH DITESTING
-export const getAllRequestedPengguna = async() => {
-    const pengguna = await Pengguna.find({verifikasiEmail: true, verifikasiProdi: false, blocked: false}).select('-password')
-
-    return {data: pengguna}
 }
 
 // SUDAH DITESTING
