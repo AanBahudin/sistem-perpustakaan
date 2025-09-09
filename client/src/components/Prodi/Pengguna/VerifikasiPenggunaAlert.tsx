@@ -13,11 +13,12 @@ import { Button } from "@/components/ui/button"
 import { store } from "@/store"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useSelector } from "react-redux"
-import { useSearchParams } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 
 const VerifikasiPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
   
+  const {pathname} = useLocation()
   const {_id: idPengguna, nama} = dataPengguna
   const { verifikasiPenggunaAlert} = useSelector((state: any) => state.prodiPenggunaSlice)
 
@@ -32,7 +33,13 @@ const VerifikasiPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
   const mutation = useMutation({
     mutationFn: () => prodiVerifyUserAccount(idPengguna),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['semua', 'pengguna', params]})
+
+      if (pathname.includes('dosen')) queryClient.invalidateQueries({queryKey: ['semua', 'dosen', params]})
+      else if (pathname.includes('mahasiswa')) queryClient.invalidateQueries({queryKey: ['semua', 'mahasiswa', params]})
+      else if (pathname.includes('permintaan')) queryClient.invalidateQueries({queryKey: ['pengajuan', 'pengguna', params]})
+      else if (pathname.includes('blokir')) queryClient.invalidateQueries({queryKey: ['semua', 'blokir', params]})
+      else queryClient.invalidateQueries({queryKey: ['semua', 'pengguna', params]})
+
       toast('Berhasil Diverifikasi', {description: 'Akun Pengguna Berhasil Diverifikasi'})
       handleAlertChange(false)
     },
