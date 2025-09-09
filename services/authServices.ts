@@ -164,6 +164,36 @@ export const verifyRegisterUser = async({token, res} : VerifyServicesParamsType)
     }
 }
 
+// SERVICE UNTUK VERIFIKASI EMAIL YANG DIDAFTARKAN OLEH PROGRAM STUDI
+export const verifyRegisteredUserEmailByProdi = async({token, res} : VerifyServicesParamsType) => {
+    if (!token || typeof token !== 'string') return { success: false, message: 'Terjadi kesalahan saat meng-verifikasi', data: null }
+
+    try {
+        // membuka isi dari token
+        const dataToken = jwt.verify(token, process.env.JWT_SECRET as string) as {id: string, email: string}
+        // mencari data pengguna berdasarkan userId dari token
+        const user = await Pengguna.findOne({_id: dataToken.id, email: dataToken.email})
+
+        if (!user) return { success: false, message: 'Data Anda tidak dapat ditemukan', data: null }
+        // cek apakah sudah menggunakan link verifikasi sebelumnya atau akunnya sudah di-verifikasi
+        if (user.verifikasiEmail || user.statusAkun === 'Aktif') return { success: false, message: 'Akun anda telah diverifikasi', data: null }
+        if (!user.verifikasiProdi) return { success: false, message: 'Akun anda belum diverifikasi oleh program studi', data: null }
+
+        // cari pengguna dengan id nya lalu update verifikasiEmail menjadi true
+         await Pengguna.findOneAndUpdate({_id: dataToken.id}, {verifikasiEmail: true, statusAkun: 'Aktif'}, {new: true, runValidators: true})
+
+        // kembalikan data pengguna baru
+        return {
+            success: true,
+            message: 'Berhasil diverifikasi',
+            data: user.nama
+        }
+    } catch (error) {
+        const errorMsg = renderError(error)
+        return { success: false, message: errorMsg, data: null }
+    }
+}
+
 // SUDAH TESTING - SET TOKEN BARU DENGAN EMAIL YANG BARU DIUPDATE
 export const verifyEmailUpdateUser = async({token, res} : VerifyServicesParamsType) => {
     // cek apakah token tersedia atau bertipe string

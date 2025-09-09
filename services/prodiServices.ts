@@ -70,8 +70,6 @@ export const createNewPengguna = async({dataPengguna} : {dataPengguna: any}) => 
             ...dataPengguna
     }
         
-    console.log(dataPengguna)
-
     try {
         await sendEmailVerificationWithLoginData(dataForEmailVerificationLink)
     } catch (error) {

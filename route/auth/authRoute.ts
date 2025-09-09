@@ -8,7 +8,8 @@ import {
     verifyEmail, 
     verifyEmailUpdate, 
     logout, 
-    verifyPustakawanEmail } from '../../controllers/auth/authController'
+    verifyPustakawanEmail, 
+    verifyEmailPenggunaFromProdi} from '../../controllers/auth/authController'
 import { 
     loginInputValidator, 
     registerInputValidator } from '../../validator/authValidator'
@@ -36,8 +37,8 @@ route.route('/verify/account')
 route.route('/verify/email')
     .get(verifyEmailUpdate)
 
-// route.route('verify/registered/email')
-//     .get()
+route.route('/verify/registered/email')
+    .get(verifyEmailPenggunaFromProdi)
 
 route.route('/verify/pustakawan/account')
     .get(verifyPustakawanEmail)

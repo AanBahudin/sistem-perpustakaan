@@ -7,6 +7,7 @@ import {
     registerUser, 
     verifyEmailUpdateUser, 
     verifyPustakawanEmailAndAuthData, 
+    verifyRegisteredUserEmailByProdi, 
     verifyRegisterUser } from "../../services/authServices"
 import { 
     SendBasicResponse, 
@@ -130,6 +131,20 @@ export const verifyPustakawanEmail = async(req : Request, res : Response) => {
     sendResponseWithPage({
         res,
         pageName: 'konfirmasiEmailPustakawan',
+        pageData: {
+            name: data
+        }
+    })
+}
+
+export const verifyEmailPenggunaFromProdi = async(req: Request, res: Response) => {
+    const {success, message, data} = await verifyRegisteredUserEmailByProdi({res, token: req.query.token as string})
+
+    if (!success) return res.render('rejected', {message})
+
+    sendResponseWithPage({
+        res,
+        pageName: 'accepted',
         pageData: {
             name: data
         }
