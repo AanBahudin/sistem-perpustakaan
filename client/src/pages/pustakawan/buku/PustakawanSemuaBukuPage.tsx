@@ -36,7 +36,7 @@ const PustakawanSemuaBukuPage = () => {
         dataRasio={dataRasio}
         dataStatistik={dataStats}
         judulStatistik='Statistik Penambahan Buku Bulanan'
-        judulRasio='Rasio Kategori Buku'
+        judulRasio='Rasio Kategori Terbanyak'
         labelDataRasio={[]}
         type="Semua"
       />

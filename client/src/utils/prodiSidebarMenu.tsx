@@ -1,4 +1,10 @@
-import { Bell, BookCheck, BookCopy, BookDashed, BookDown, BookUp, CircleUser, Cog, FileCheck2, FilePlus, Files, FileSymlink, GraduationCap, History, House, LibraryBig, Newspaper, User, UserRoundPlus, UserRoundX, Users } from "lucide-react"
+import { Bell, BookCheck, BookCopy, 
+    BookDashed, BookDown, BookUp, 
+    CircleUser, Cog, FileCheck2, 
+    FilePlus, Files, FileSymlink, 
+    GraduationCap, History, House, 
+    LibraryBig, Newspaper, User, 
+    UserRoundPlus, UserRoundX, Users } from "lucide-react"
 
 export const prodiSidebarMenu = [
     {
@@ -51,17 +57,17 @@ export const prodiSidebarMenu = [
             },
             {
                 title: 'Dipinjam',
-                url: 'buku/peminjaman',
+                url: 'buku/dipinjam',
                 icon: BookCheck
             },
             {
                 title: 'Diperpanjang',
-                url: 'buku/perpanjangan',
+                url: 'buku/diperpanjang',
                 icon: BookUp
             },
             {
                 title: 'Dikembalikan',
-                url: 'buku/pengembalian',
+                url: 'buku/dikembalikan',
                 icon: BookDown
             },
             {

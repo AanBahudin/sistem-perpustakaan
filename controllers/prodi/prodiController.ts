@@ -115,7 +115,7 @@ export const getAllDosen = async(req: Request, res: Response) => {
         res,
         message: 'Data Dosen',
         data,
-        total: data.pengguna.length ,
+        total: data.pengguna.length,
         page: 1
     })
 }

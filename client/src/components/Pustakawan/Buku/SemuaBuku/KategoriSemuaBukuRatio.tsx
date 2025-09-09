@@ -11,8 +11,8 @@ type KategoriSemuaBukuRatioType = {
 
 const KategoriSemuaBukuRatio = ({dataRasio} : KategoriSemuaBukuRatioType) => {
 
-    const ratioData = dataRasio.map((item: any) => item.jumlahBuku)
-    const ratioDataLabel = dataRasio.map((item: any) => item.kategori)
+    const ratioData = (dataRasio.map((item: any) => item.jumlahBuku)).slice(0, 5)
+    const ratioDataLabel : string[] = (dataRasio.map((item: any) => item.kategori)).slice(0, 5)
 
     const getCSSVariable = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     const chartRef = useRef(null);

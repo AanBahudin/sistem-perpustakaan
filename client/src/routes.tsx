@@ -65,6 +65,11 @@ import ProdiTambahPenggunaPage from "./pages/prodi/pengguna/ProdiTambahPenggunaP
 import ProdiBerandaPage from "./pages/beranda/ProdiBerandaPage";
 import ProdiBlockedPenggunPage from "./pages/prodi/pengguna/ProdiBlockedPenggunPage";
 import DetailPengguna from "./pages/prodi/pengguna/DetailPengguna";
+import ProdiSemuaBukuPage from "./pages/prodi/buku/ProdiSemuaBukuPage";
+import ProdiSemuaBukuDipinjam from "./pages/prodi/buku/ProdiSemuaBukuDipinjam";
+import ProdiSemuaBukuDiperpanjang from "./pages/prodi/buku/ProdiSemuaBukuDiperpanjang";
+import ProdiSemuaBukuHilangPage from "./pages/prodi/buku/ProdiSemuaBukuHilangPage";
+import ProdiSemuaBukuDikembalikan from "./pages/prodi/buku/ProdiSemuaBukuDikembalikan";
 
 const router : RouteObject[] = [
     {
@@ -401,6 +406,31 @@ const router : RouteObject[] = [
                     {
                         path: 'blokir',
                         element: <ProdiBlockedPenggunPage />
+                    }
+                ]
+            },
+            {
+                path: 'buku',
+                children: [
+                    {
+                        index: true,
+                        element: <ProdiSemuaBukuPage />
+                    },
+                    {
+                        path: 'dipinjam',
+                        element: <ProdiSemuaBukuDipinjam />
+                    },
+                    {
+                        path: 'diperpanjang',
+                        element: <ProdiSemuaBukuDiperpanjang />
+                    },
+                    {
+                        path: 'dikembalikan',
+                        element: <ProdiSemuaBukuDikembalikan />
+                    },
+                    {
+                        path: 'hilang',
+                        element: <ProdiSemuaBukuHilangPage />
                     }
                 ]
             }
