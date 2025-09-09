@@ -12,7 +12,8 @@ import {
     getSingleRequestedUser,
     blokirPengguna,
     bukaBlokirPengguna,
-    prodiCreatePengguna
+    prodiCreatePengguna,
+    getAllDosen
 } from '../../controllers/prodi/prodiController'
 import { createPenggunaValidator, createPustakawanValidator } from '../../validator/adminValidator'
 import { createAdminValidator } from '../../validator/adminValidator'
@@ -38,6 +39,9 @@ router.route('/pustakawan/:id')
 router.route('/pengguna')
     .get(getAllUsers)
 
+router.route('/dosen')
+    .get(getAllDosen)
+    
 router.route('/pengguna/verify/:id')
     .patch(mongooseIdMiddleware, verifiedUserAccount)
 

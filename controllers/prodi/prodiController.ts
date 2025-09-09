@@ -3,6 +3,7 @@ import {
     createAdmin, 
     createNewPengguna, 
     createNewPustakawan, 
+    getAllDosenData, 
     getAllPenggunaData, 
     getAllPustakawanData, 
     getAllRequestedPengguna, 
@@ -102,6 +103,18 @@ export const getAllUsers = async(req: any | Request, res: Response) => {
         message: 'Data Pengguna',
         page: 1,
         total: getAllUsersData.pengguna.length
+    })
+}
+
+export const getAllDosen = async(req: Request, res: Response) => {
+    const data = await getAllDosenData({query: req.query})
+
+    SendDataResponse({
+        res,
+        message: 'Data Dosen',
+        data,
+        total: data.pengguna.length,
+        page: 1
     })
 }
 

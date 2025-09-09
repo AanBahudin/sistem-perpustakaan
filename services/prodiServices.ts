@@ -131,6 +131,28 @@ export const getAllPenggunaData = async({query} : {query: any}) => {
     return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
 }
 
+export const getAllDosenData = async({query} : {query: any}) => {
+
+    let mongoQuery: any = { ...query }
+
+    if (query?.query) {
+        const searchRegex = { $regex: query.query, $options: "i" }
+
+        mongoQuery.$or = [
+            { nama: searchRegex },
+            { idKampus: searchRegex }
+        ]
+
+        // Hapus 'query.query' agar tidak ikut dalam pencarian utama
+        delete mongoQuery.query
+    }
+    const pengguna = await Pengguna.find({...mongoQuery, role: 'Dosen'}).select('-password')
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    return {pengguna, monthlyUserGrowth, userAccountStatusRatio}
+}
+
 // SUDAH DITESTING
 export const getOnePenggunaData = async({penggunaId} : GetOnePenggunaDataParamsType) => {
     const pengguna = await Pengguna.findOne({_id: penggunaId}).select('-password')
