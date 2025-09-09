@@ -7,6 +7,7 @@ import { CreateAdminParamsType, CreatePustakawanParamsType, GetOnePenggunaDataPa
 import sendVerifyEmailPustakawan from "../helpers/sendVerifyEmailPustakawan"
 import renderError from "../utils/renderError"
 import { allUserAccountStatusRatio, allUserStats } from "./pustakawanServices"
+import sendEmailVerificationWithLoginData from "../helpers/sendEmailVerificationWithLoginData"
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -51,6 +52,36 @@ export const createNewPustakawan = async({ nama, email, password, adminId, no_hp
         const errorMsg = renderError(error)
         throw new BadRequestError(errorMsg)
     }
+}
+
+export const createNewPengguna = async({dataPengguna} : {dataPengguna: any}) => {
+    
+    const newDataPengguna = {...dataPengguna}
+    newDataPengguna.password = await hashPassword(newDataPengguna.password)
+    
+    // cek apakah email sudah digunakan
+    const isEmailAlreadyUsed = await Pengguna.findOne({email: dataPengguna.email})
+    if (isEmailAlreadyUsed) throw new BadRequestError('Email sudah digunakan')
+        
+        const pengguna = await Pengguna.create({...dataPengguna, verifikasiProdi: true, statusAkun: 'Pending'})
+        
+        const dataForEmailVerificationLink = {
+            id: pengguna._id,
+            ...dataPengguna
+    }
+        
+    console.log(dataPengguna)
+
+    try {
+        await sendEmailVerificationWithLoginData(dataForEmailVerificationLink)
+    } catch (error) {
+        const errorMsg = renderError(error)
+        throw new BadRequestError(errorMsg)
+    }
+
+
+
+    return pengguna
 }
 
 // SUDAH DITESTING

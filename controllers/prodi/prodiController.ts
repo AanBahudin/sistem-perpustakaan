@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { 
     createAdmin, 
+    createNewPengguna, 
     createNewPustakawan, 
     getAllPenggunaData, 
     getAllPustakawanData, 
@@ -41,6 +42,15 @@ export const createPustakawan = async(req : any | Request, res: Response) => {
     })
 
     SendBasicResponse({res, message: 'Proses pendaftaran berhasil, menunggu verifikasi akun'})
+}
+
+export const prodiCreatePengguna = async(req: any | Request, res: Response) => {
+    await createNewPengguna({dataPengguna: req.body})
+
+    SendBasicResponse({
+        res,
+        message: 'Pengguna Dibuat'
+    })
 }
 
 // controller untuk menampilkan informasi profil

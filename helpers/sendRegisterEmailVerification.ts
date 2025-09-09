@@ -1,4 +1,3 @@
-import Pengguna from "../model/Pengguna"
 import sendVerficationEmail from "../utils/emailVerification"
 import generateVerificationLink from "../utils/generateVerificationLink"
 import { generateToken } from "../utils/jwt"

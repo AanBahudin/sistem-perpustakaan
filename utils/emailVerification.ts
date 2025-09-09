@@ -30,6 +30,7 @@ const sendVerficationEmail = async({ templateName, subject, to, emailData }: Sen
   try {
     await sgMail.send(emailMsg);
   } catch (error) {
+    console.log(error)
     throw new BadRequestError('Terjadi kesalahan');
   }
 };

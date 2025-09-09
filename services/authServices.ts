@@ -203,8 +203,8 @@ export const verifyEmailUpdateUser = async({token, res} : VerifyServicesParamsTy
 
 // SUDAH DITESTING
 export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServicesParamsType) => {
-     // cek apakah token tersedia atau bertipe string
-     if (!token || typeof token !== 'string') return {success: false, message: 'Terjadi kesalahan saat meng-verifikasi', data: null}
+    // cek apakah token tersedia atau bertipe string
+    if (!token || typeof token !== 'string') return {success: false, message: 'Terjadi kesalahan saat meng-verifikasi', data: null}
 
     try {
         // verify token yang dikirim
@@ -248,5 +248,42 @@ export const verifyPustakawanEmailAndAuthData = async({token, res} : VerifyServi
     } catch (error) {
         const errorMsg = renderError(error)
         return {success: false, message: errorMsg, data: null}
+    }
+}
+
+// SERVICE UNTUK MENG-VERIFIKASI EMAIL PENGGUNA YANG TELAH DIDAFTARKAN OLEH PRODI
+export const verifyPenggunaEmailRegisteredByProdi = async({token, res} : VerifyServicesParamsType) => {
+    // cek apakah token tersedia atau bertipe string
+    if (!token || typeof token !== 'string') return {success: false, message: 'Terjadi kesalahan saat meng-verifikasi', data: null}
+
+    try {
+        const dataToken = jwt.verify(token, process.env.JWT_SECRET as string) as {email: string, id: string}
+        const {id, email} = dataToken
+
+        // ambil data pengguna dari DB
+        const pengguna = await Pengguna.findOne({_id: id, email})
+        if (!pengguna) throw new NotFoundError("Pengguna tidak ditemukan")
+        
+
+        // cek jika statusAkun pengguna sudah aktif dan verifikasi Emailnya sudah untuk mencegah verifikasi berulang
+        if (pengguna.statusAkun === 'Aktif' || pengguna.verifikasiEmail) {
+            return {
+                success: false, 
+                message: `Tidak dapat melakukan verifikasi, akun anda sudah diverifikasi atau sudah dalam keadaan aktif`, 
+                data: null
+            }
+        }
+
+        // UPDATE STATUS AKUN PENGGUNA DAN VERIFIKASIEMAIL  
+        const updatedPengguna = await Pengguna.findOneAndUpdate(
+            {_id: id},
+            {verifikasiEmail: true, statusAkun: 'Aktif'},
+            {new: true, runValidators: true}
+        )
+
+        return updatedPengguna
+    } catch (error) {
+        const errorMsg = renderError(error)
+        throw new BadRequestError(errorMsg)
     }
 }

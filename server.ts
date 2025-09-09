@@ -49,8 +49,8 @@ cloudinary.config({
 })
 
 
-app.get('/api/test', async(req, res) => {
-    res.status(StatusCodes.OK).json({msg: 'Success'})
+app.get('/', async(req, res) => {
+    res.render('verifikasiEmailDenganLoginData')
 })
 
 app.use('/api/v1/auth', authRoute)

@@ -47,3 +47,32 @@ export const createPustakawanValidator = withValidationErrors([
             return no_hp
         })
 ])
+
+export const createPenggunaValidator = withValidationErrors([
+    body('nama')
+        .notEmpty().withMessage('Nama tidak boleh kosong')
+        .isLength({min: 3, max: 100}).withMessage('Nama 3 - 100 karakter'),
+    body('idKampus')
+        .notEmpty().withMessage('NIM atau NIDN tidak boleh kosong'),
+    body('jurusan')
+        .notEmpty().withMessage('Jurusan tidak boleh kosong'),
+    body('angkatan')
+        .notEmpty().withMessage('Angkatan tidak boleh ksoong'),
+    body('email')
+        .notEmpty().withMessage('Email tidak boleh kosong')
+        .isEmail().withMessage('Format email tidak didukung'),
+    body('no_hp')
+        .notEmpty().withMessage('Nomor telepon tidak boleh kosong')
+        .isLength({min: 11, max: 12}).withMessage('Nomor telepon 11 - 12 karakter')
+        .customSanitizer((noHP : string) => {
+            if (!noHP.startsWith('8')) {
+                throw new BadRequestError('Nomor telepon harus diawali dengan 8')
+            }
+        }),
+    body('password')
+        .notEmpty().withMessage('Password tidak boleh kosong')
+        .isLength({min: 8, max: 25}).withMessage('Password 8 - 25 karakter'),
+    body('role')
+        .notEmpty().withMessage('Jenis pengguna tidak boleh kosong')
+        .isIn(['Dosen', 'Mahasiswa']),
+])

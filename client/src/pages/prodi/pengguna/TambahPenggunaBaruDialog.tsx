@@ -40,9 +40,9 @@ const TambahPenggunaBaruDialog = () => {
             handleOpenDialog(false)
         },
         onError: (error: any) => {
+            console.log(error)
             const errMsg = error.response.data.message || 'Gagal menambahakan pengguna, Coba lagi nanti'
             toast('Terjadi kesalahan', {description: errMsg})
-            handleOpenDialog(false)
         }
     })
 

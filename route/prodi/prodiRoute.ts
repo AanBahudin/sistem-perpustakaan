@@ -11,9 +11,10 @@ import {
     verifiedUserAccount,
     getSingleRequestedUser,
     blokirPengguna,
-    bukaBlokirPengguna
+    bukaBlokirPengguna,
+    prodiCreatePengguna
 } from '../../controllers/prodi/prodiController'
-import { createPustakawanValidator } from '../../validator/adminValidator'
+import { createPenggunaValidator, createPustakawanValidator } from '../../validator/adminValidator'
 import { createAdminValidator } from '../../validator/adminValidator'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
@@ -24,6 +25,9 @@ router.route('/create/admin')
 
 router.route('/create/pustakawan')
     .post(createPustakawanValidator, createPustakawan)
+
+router.route('/create/pengguna')
+    .post(createPenggunaValidator, prodiCreatePengguna)
 
 router.route('/pustakawan')
     .get(getAllPustakawan)

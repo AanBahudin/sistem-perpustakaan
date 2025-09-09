@@ -36,6 +36,9 @@ route.route('/verify/account')
 route.route('/verify/email')
     .get(verifyEmailUpdate)
 
+// route.route('verify/registered/email')
+//     .get()
+
 route.route('/verify/pustakawan/account')
     .get(verifyPustakawanEmail)
 
