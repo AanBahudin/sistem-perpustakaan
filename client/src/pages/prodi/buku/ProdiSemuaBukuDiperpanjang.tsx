@@ -6,7 +6,7 @@ import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContaine
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
 import { prodiGetAllBukuDiperpanjang } from '@/actions/Prodi/prodiBukuActions'
-import TabelBukuDiperpanjang from '@/components/Pustakawan/Buku/BukuDiperpanjang/TabelBukuDiperpanjang'
+import ProdiBukuDiperpanjangTable from '@/components/Prodi/Buku/BukuDiperpanjang/ProdiBukuDiperpanjangTable'
 
 const ProdiSemuaBukuDiperpanjang = () => {
 
@@ -36,7 +36,7 @@ const ProdiSemuaBukuDiperpanjang = () => {
 
       <SemuaBukuFilter />
 
-      <TabelBukuDiperpanjang dataBuku={bukuDiperpanjang} />
+      <ProdiBukuDiperpanjangTable dataBuku={bukuDiperpanjang} />
     </Container>
   )
 }
