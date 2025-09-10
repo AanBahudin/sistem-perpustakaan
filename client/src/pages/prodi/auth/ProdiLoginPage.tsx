@@ -75,7 +75,7 @@ const ProdiLoginPage = () => {
                                 name='password' id='password'
                                 value={password} onChange={e => setPassword(e.target.value)} min={8} />
                             {password && (
-                                <Button size='icon' variant='secondary' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
+                                <Button type="button" size='icon' variant='secondary' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
                                     <Eye className={showPassword ? 'stroke-primary' : ''} />
                                 </Button>
                             )}
