@@ -14,7 +14,6 @@ const SemuaPustakawan = () => {
   })
 
   if (isLoading) return <h1>Loading...</h1>
-  console.log(data)
 
   return (
     <Container className='w-full'>
