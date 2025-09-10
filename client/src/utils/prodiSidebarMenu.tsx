@@ -1,9 +1,9 @@
-import { Bell, BookCheck, BookCopy, 
+import { BookCheck, BookCopy, 
     BookDashed, BookDown, BookUp, 
-    CircleUser, Cog, FileCheck2, 
-    FilePlus, Files, FileSymlink, 
-    GraduationCap, History, House, 
-    LibraryBig, Newspaper, User, 
+    CircleUser,
+    GraduationCap, House, 
+    LibraryBig, User, 
+    UserCog, 
     UserRoundPlus, UserRoundX, Users } from "lucide-react"
 
 export const prodiSidebarMenu = [
@@ -112,9 +112,9 @@ export const prodiSidebarMenu = [
     //     icon: Bell
     // },
     {
-        title: 'Pengaturan',
-        url: 'pengaturan',
-        icon: Cog
+        title: 'Pustakawan',
+        url: 'pustakawan',
+        icon: UserCog
     },
     {
         title: 'Profil',

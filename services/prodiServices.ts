@@ -95,14 +95,14 @@ export const getProdiProfile = async({prodiId} : GetProdiProfileParamsType) => {
 
 // SUDAH DITESTING
 export const getAllPustakawanData = async() => {
-    const pustakawan = await Pustakawan.find()
+    const pustakawan = await Pustakawan.find().select('-password -email')
 
     return {data: pustakawan}
 }
 
 // SUDAH DITESTING
 export const getOnePustakawanData = async({pustakawanId} : GetOnePustakawanDataParamsType) => {
-    const pustakawan = await Pustakawan.findOne({_id: pustakawanId}).select('-password')
+    const pustakawan = await Pustakawan.findOne({_id: pustakawanId}).select('-password -email')
     if (!pustakawan) throw new NotFoundError('Data pustakawan tidak ditemukan')
     
     return {data: pustakawan}

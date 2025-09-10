@@ -71,6 +71,8 @@ import ProdiSemuaBukuDiperpanjang from "./pages/prodi/buku/ProdiSemuaBukuDiperpa
 import ProdiSemuaBukuHilangPage from "./pages/prodi/buku/ProdiSemuaBukuHilangPage";
 import ProdiSemuaBukuDikembalikan from "./pages/prodi/buku/ProdiSemuaBukuDikembalikan";
 import ProdiDetailBuku from "./pages/prodi/buku/ProdiDetailBuku";
+import SemuaPustakawan from "./pages/prodi/pustakawan/SemuaPustakawan";
+import DetailPustakawan from "./pages/prodi/pustakawan/DetailPustakawan";
 
 const router : RouteObject[] = [
     {
@@ -438,6 +440,14 @@ const router : RouteObject[] = [
                         element: <ProdiSemuaBukuHilangPage />
                     }
                 ]
+            },
+            {
+                path: 'pustakawan',
+                element: <SemuaPustakawan />
+            },
+            {
+                path: 'pustakawan/:id',
+                element: <DetailPustakawan />
             }
         ]
     }
