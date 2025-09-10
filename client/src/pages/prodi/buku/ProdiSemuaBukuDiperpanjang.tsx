@@ -14,7 +14,7 @@ const ProdiSemuaBukuDiperpanjang = () => {
   const params = new URLSearchParams(searchParams).toString()
   
   const {isLoading, data} = useQuery({
-    queryKey: ['buku', 'dipinjam', params],
+    queryKey: ['buku', 'diperpanjang', params],
     queryFn: () => prodiGetAllBukuDiperpanjang(params)
   })
   

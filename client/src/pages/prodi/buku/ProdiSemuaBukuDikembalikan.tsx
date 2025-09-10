@@ -4,9 +4,9 @@ import { useSearchParams } from "react-router-dom"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import { useQuery } from "@tanstack/react-query"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
-import TabelBukuDikembalikan from "@/components/Pustakawan/Buku/BukuDIkembalikan/TabelBukuDikembalikan"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import { prodiGetAllBukuDikembalikan } from "@/actions/Prodi/prodiBukuActions"
+import ProdiBukuDikembalikanTable from "@/components/Prodi/Buku/BukuDIkembalikan/ProdiBukuDikembalikanTable"
 
 const ProdiSemuaBukuDikembalikan = () => {
 
@@ -33,7 +33,7 @@ const ProdiSemuaBukuDikembalikan = () => {
       />
 
       <SemuaBukuFilter />
-      <TabelBukuDikembalikan dataBuku={bukuDikembalikan} />
+      <ProdiBukuDikembalikanTable dataBuku={bukuDikembalikan} />
     </Container>
   )
 }
