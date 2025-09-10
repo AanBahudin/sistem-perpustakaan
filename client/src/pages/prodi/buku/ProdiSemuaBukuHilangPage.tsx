@@ -4,7 +4,7 @@ import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContaine
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
 import { useQuery } from '@tanstack/react-query'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
-import TabelBukuHilang from '@/components/Pustakawan/Buku/BukuDihilangkan/TabelBukuHIlang'
+import ProdiBukuDihilangkanTable from '@/components/Prodi/Buku/BukuHilang/ProdiBukuDihilangkanTable'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
 import { prodiGetAllBukuDihilangkan } from '@/actions/Prodi/prodiBukuActions'
 
@@ -34,7 +34,7 @@ const ProdiSemuaBukuHilangPage = () => {
       />
     
       <SemuaBukuFilter />
-      <TabelBukuHilang dataBuku={bukuDihilangkan} />
+      <ProdiBukuDihilangkanTable dataBuku={bukuDihilangkan} />
     </Container>
   )
 }
