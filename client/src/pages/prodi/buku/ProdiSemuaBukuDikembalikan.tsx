@@ -1,8 +1,40 @@
-import React from 'react'
+import Container from "@/globals/Container"
+import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
+import { useSearchParams } from "react-router-dom"
+import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
+import { useQuery } from "@tanstack/react-query"
+import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
+import TabelBukuDikembalikan from "@/components/Pustakawan/Buku/BukuDIkembalikan/TabelBukuDikembalikan"
+import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
+import { prodiGetAllBukuDikembalikan } from "@/actions/Prodi/prodiBukuActions"
 
 const ProdiSemuaBukuDikembalikan = () => {
+
+  const [searchParams] = useSearchParams()
+  const query = new URLSearchParams(searchParams).toString()
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['buku', 'dikembalikan', query],
+    queryFn: () => prodiGetAllBukuDikembalikan(query)
+  })
+
+  if (isLoading) return <BukuLoading />
+  const { bukuDikembalikan, ratioBukuDikembalikan, statsBukuDikembalikan } = data
+
   return (
-    <div>ProdiSemuaBukuDikembalikan</div>
+    <Container className="w-full">
+      <PustakawanBreadCrumbs />
+      <GrafikBukuContainer 
+        judulStatistik='Pertumbuhan Pengembalian Buku Bulanan'
+        judulRasio='Rasio Pengembalian Buku'
+        dataRasio={ratioBukuDikembalikan}
+        dataStatistik={statsBukuDikembalikan}
+        labelDataRasio={['Total Buku', 'Buku Dikembalikan']}
+      />
+
+      <SemuaBukuFilter />
+      <TabelBukuDikembalikan dataBuku={bukuDikembalikan} />
+    </Container>
   )
 }
 
