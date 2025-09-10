@@ -24,7 +24,8 @@ const DetailPengguna = () => {
   const ratioData = [
     peminjaman.length || 0,
     perpanjangan.length || 0,
-    pengembalian.length || 0
+    pengembalian.length || 0,
+    pengguna.bukuDihilangkan
   ]
 
   return (

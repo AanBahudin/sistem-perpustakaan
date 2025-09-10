@@ -38,10 +38,10 @@ const SinglePenggunaDougnut = ({userAccountStatusRatio} : {userAccountStatusRati
   }, []);
 
 
-  const label = ["Peminjaman", "Perpanjangan", "Pengembalian", "Total Data"]
+  const label = ["Peminjaman", "Perpanjangan", "Pengembalian", "Buku Dihilangkan", "Total Data"]
     // const backgroundColor = 
     const donutData = {
-        labels: ["Peminjaman", "Perpanjangan", "Pengembalian"],
+        labels: ["Peminjaman", "Perpanjangan", "Pengembalian", "Buku Dihilangkan", "Total Data"],
         datasets: [{
         data: userAccountStatusRatio,
         backgroundColor: chartColors,

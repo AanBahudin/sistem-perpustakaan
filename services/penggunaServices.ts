@@ -203,10 +203,12 @@ export const penggunaMengembalikanNew = async({idPengguna, dataPengembalian} : {
 }
 
 export const penggunaMenghilangkan = async({idPengguna} : PenggunaMeminjamParamsType) => {
-    await Pengguna.findOneAndUpdate(
+    const data = await Pengguna.findOneAndUpdate(
         {_id: idPengguna},
         {$inc: {bukuDihilangkan: 1}},
+        {new: true, runValidators: true}
     )
+    console.log(data)
 }
 
 export const penggunaMeminjam = async({ idPengguna } : PenggunaMeminjamParamsType) => {

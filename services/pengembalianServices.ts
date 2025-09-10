@@ -15,7 +15,7 @@ import { hitungDendaFisik } from "../utils/hitungDendaFisik"
 import { hitungKeterlambatan } from "../utils/selisihHari"
 import { bukuDihilangkan, bukuDikembalikan } from "./BukuServices/UtilsBukuServices"
 import { getDenda } from "./dendaServices"
-import { pinjamanDikembalikan } from "./peminjamanServices"
+import { pinjamanDikembalikan, updateDurasiPinjaman } from "./peminjamanServices"
 import { 
     penggunaMengembalikan, 
     penggunaMengembalikanNew, 
@@ -215,7 +215,7 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
     // update data buku - jika dihilangkan maka update saja totalDipinjam
     if (updatedPengembalian?.isMissing) {
         await bukuDihilangkan(pengembalian.idBuku as string)
-        await penggunaMenghilangkan({idPengguna: pengembalian.idPengguna as string})
+        await penggunaMenghilangkan({idPengguna: updatedPengembalian.idPengguna as string})
     } else {
         await bukuDikembalikan(pengembalian.idBuku as string)
     }
@@ -258,6 +258,7 @@ export const setujuiPengembalianPutakawan = async({idPengembalian, pustakawanId}
     // perbaharaui buku, jika buku dikembalikan dalam kondisi hilang
     if (updatePengembalian.isMissing) {
         await bukuDihilangkan(updatePengembalian.idBuku as string)
+        await penggunaMenghilangkan({idPengguna: updatePengembalian.idPengguna as string})
     } else {
         await bukuDikembalikan(updatePengembalian.idBuku as string)
     }
