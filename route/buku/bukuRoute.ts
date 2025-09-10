@@ -64,6 +64,11 @@ router.route('/prodi/dikembalikan')
 router.route('/prodi/dihilangkan')
     .get(prodiMiddlewareAuthorized, getAllBukuDihilangkanPustakawan)
 
+router.route('/prodi/detail/:id')
+    .get(prodiMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuPustakawan)
+
+
+
 router.route('/create')
     .post(pustakawanMiddlewareAuthorized, upload.single('cover'), bukuInputValidator, addBuku)
 

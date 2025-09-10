@@ -24,3 +24,8 @@ export const prodiGetAllBukuDihilangkan = async(query: string) => {
     const {data: response} = await customFetch.get(`/buku/prodi/dihilangkan?${query}`)
     return response.data
 }
+
+export const prodiGetSingleBuku = async(id: string) => {
+    const {data: response} = await customFetch.get(`/buku/prodi/detail/${id}`)
+    return response.data
+}

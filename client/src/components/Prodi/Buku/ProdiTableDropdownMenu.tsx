@@ -8,8 +8,8 @@ import {
 import { useNavigate } from "react-router-dom"
 
 type ProdiTableDropdownMenuType = {
-    idPengguna: string,
-    idBuku: string
+    idPengguna?: string,
+    idBuku?: string
 }
 
 const ProdiTableDropdownMenu = ({ idBuku, idPengguna } : ProdiTableDropdownMenuType) => {

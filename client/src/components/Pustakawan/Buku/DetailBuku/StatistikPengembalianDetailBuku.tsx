@@ -2,7 +2,7 @@ import Container from '@/globals/Container'
 import GrafikDetailBuku from './GrafikDetailBuku'
 import DetailBukuTabelPengembalian from './DetailBukuTabelPengembalian'
 
-const StatistikPengembalianDetailBuku = ({data} : {data: any}) => {
+const StatistikPengembalianDetailBuku = ({data, untuk} : {data: any, untuk?: string}) => {
 
   const { buku, dataStatsPengembalianBuku, dataPengembalian } = data
 
@@ -14,7 +14,7 @@ const StatistikPengembalianDetailBuku = ({data} : {data: any}) => {
         judulStatistik={`Peminjaman ${buku.judul}`} 
         judulRasio='Total Data pengembalian'
         dataRasio={dataPengembalian.length}/>
-      <DetailBukuTabelPengembalian dataBuku={dataPengembalian} />
+      <DetailBukuTabelPengembalian dataBuku={dataPengembalian} untuk={untuk} />
     </Container>
   )
 }

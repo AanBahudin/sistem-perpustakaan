@@ -11,8 +11,9 @@ import GlobalTooltip from "@/globals/GlobalTooltip"
 import { formatedDate } from "@/utils/formatDate"
 import TabelDropdownMenu from "../../Pengajuan/TabelDropdownMenu"
 import { StatusHilangBuku } from "../BukuDIkembalikan/TabelBukuDikembalikan"
+import ProdiTableDropdownMenu from "@/components/Prodi/Buku/ProdiTableDropdownMenu"
 
-const DetailBukuTabelPengembalian = ({dataBuku} : {dataBuku: any}) => {
+const DetailBukuTabelPengembalian = ({dataBuku, untuk} : {dataBuku: any, untuk?: string}) => {
 
 
     return (
@@ -62,7 +63,11 @@ const DetailBukuTabelPengembalian = ({dataBuku} : {dataBuku: any}) => {
                                         <TableCell className="w-[50px] text-center text-xs">
                                             <div className="w-6  h-6 p-1 rounded-full hover:bg-muted duration-200 ease-in-out flex items-center justify-center">
                                                 <GlobalTooltip text="Opsi">
-                                                    <TabelDropdownMenu  idPengguna={idPengguna._id} idPengembalian={data._id} idPeminjaman={idPeminjaman._id} />
+                                                    {untuk === 'prodi' ? (
+                                                        <ProdiTableDropdownMenu idPengguna={idPengguna._id} />
+                                                    ) : (
+                                                        <TabelDropdownMenu  idPengguna={idPengguna._id} idPengembalian={data._id} idPeminjaman={idPeminjaman._id} />
+                                                    )}
                                                 </GlobalTooltip>
                                             </div>
                                         </TableCell>

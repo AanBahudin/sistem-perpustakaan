@@ -70,6 +70,7 @@ import ProdiSemuaBukuDipinjam from "./pages/prodi/buku/ProdiSemuaBukuDipinjam";
 import ProdiSemuaBukuDiperpanjang from "./pages/prodi/buku/ProdiSemuaBukuDiperpanjang";
 import ProdiSemuaBukuHilangPage from "./pages/prodi/buku/ProdiSemuaBukuHilangPage";
 import ProdiSemuaBukuDikembalikan from "./pages/prodi/buku/ProdiSemuaBukuDikembalikan";
+import ProdiDetailBuku from "./pages/prodi/buku/ProdiDetailBuku";
 
 const router : RouteObject[] = [
     {
@@ -417,7 +418,8 @@ const router : RouteObject[] = [
                         element: <ProdiSemuaBukuPage />
                     },
                     {
-                        path: 'detail/:id'
+                        path: 'detail/:id',
+                        element: <ProdiDetailBuku />
                     },
                     {
                         path: 'dipinjam',
