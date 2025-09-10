@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
-import TabelBukuDipinjam from '@/components/Pustakawan/Buku/BukuDipinjam/TabelBukuDipinjam'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
 import { prodiGetAllBukuDipinjam } from '@/actions/Prodi/prodiBukuActions'
+import ProdiBukuDipinjamTable from '@/components/Prodi/Buku/BukuDipinjam/ProdiBukuDipinjamTable'
 
 const ProdiSemuaBukuDipinjam = () => {
 
@@ -33,7 +33,7 @@ const ProdiSemuaBukuDipinjam = () => {
         labelDataRasio={['Total Buku', 'Buku Dipinjam']}
       />
       <SemuaBukuFilter />
-      <TabelBukuDipinjam dataBuku={bukuDipinjam} />
+      <ProdiBukuDipinjamTable dataBuku={bukuDipinjam} />
     </Container>
   )
 }
