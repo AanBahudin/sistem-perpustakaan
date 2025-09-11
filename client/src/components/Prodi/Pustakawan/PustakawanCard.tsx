@@ -1,6 +1,7 @@
 import { EllipsisVertical } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { formatedDate } from "@/utils/formatDate"
+import { Link } from "react-router-dom"
 
 const PustakawanCard = ({pustakawan} : {pustakawan: any}) => {
   return (
@@ -13,7 +14,7 @@ const PustakawanCard = ({pustakawan} : {pustakawan: any}) => {
       ) : (
         <div className='w-16 h-16 text-2xl mx-auto rounded-full flex items-center justify-center bg-accent/40'>{pustakawan.nama[0]}</div>
       )}
-      <h1 className='mt-4 font-semibold group-hover:underline'>{pustakawan.nama}</h1>
+      <Link to={pustakawan._id} className='mt-4 font-semibold group-hover:underline'>{pustakawan.nama}</Link>
       <Badge className='text-xs text-white mt-1'>{pustakawan.statusAkun}</Badge>
       <p className='text-xs text-muted-foreground mt-2'>Sejak {formatedDate(pustakawan.createdAt)}</p>
     </section>
