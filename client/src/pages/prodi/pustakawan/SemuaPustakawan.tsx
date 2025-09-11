@@ -1,23 +1,17 @@
-import { prodiGetAllPustakawanData } from '@/actions/Prodi/ProdiPustakawanActions'
+
+import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import Container from '@/globals/Container'
-import { useQuery } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom'
+
+import SearchAndFilterPustakawanDataContainer from '@/components/Prodi/Pustakawan/SearchAndFilterPustakawanDataContainer'
+import PustakawanDataContainer from '@/components/Prodi/Pustakawan/PustakawanDataContainer'
 
 const SemuaPustakawan = () => {
-
-  const [searchParams] = useSearchParams()
-  const params = new URLSearchParams(searchParams).toString()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'pustakawan', params],
-    queryFn: () => prodiGetAllPustakawanData(params)
-  })
-
-  if (isLoading) return <h1>Loading...</h1>
-
   return (
     <Container className='w-full'>
-      <h1>SemuaPustakawan</h1>
+      <PustakawanBreadCrumbs />
+      <h4 className='mt-10 mb-4 text-2xl font-semibold'>Daftar Pustakawan Aktif</h4>
+      <SearchAndFilterPustakawanDataContainer />
+      <PustakawanDataContainer />
     </Container>
 
   )
