@@ -11,11 +11,11 @@ export const prodiGetSinglePustakawanData = async(id: string) => {
 }
 
 export const prodiNonaktifAkun = async(id: string) => {
-    const {data: response} = await customFetch.get(`/prodi/pustakawan/nonaktif/${id}`)
+    const {data: response} = await customFetch.patch(`/prodi/pustakawan/nonaktif/${id}`)
     return response.data
 }
 
 export const prodiAktifkan = async(id: string) => {
-    const {data: response} = await customFetch.get(`/prodi/pustakawan/aktifkan/${id}`)
+    const {data: response} = await customFetch.patch(`/prodi/pustakawan/aktifkan/${id}`)
     return response.data
 }

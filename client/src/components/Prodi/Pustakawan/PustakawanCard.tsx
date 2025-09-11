@@ -7,7 +7,7 @@ const PustakawanCard = ({pustakawan} : {pustakawan: any}) => {
   return (
     <section className='w-full border rounded-xl px-4 py-8 flex flex-col items-center justify-center relative hover:shadow-2xl duration-200 ease-in-out group'>
       
-      <ProdiPustakawanDropdownMenu idPustakawan={pustakawan._id} />
+      <ProdiPustakawanDropdownMenu pustakawan={pustakawan} />
 
       {pustakawan.fotoProfil ? (
         <img src={pustakawan.fotoProfil} alt={'foto ' + pustakawan.nama} />

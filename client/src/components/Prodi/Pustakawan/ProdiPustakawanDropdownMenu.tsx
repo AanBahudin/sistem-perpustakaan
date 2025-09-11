@@ -4,13 +4,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
-import { EllipsisVertical, User, UserX } from "lucide-react"
+import { EllipsisVertical, User, UserCheck, UserX } from "lucide-react"
 import { store } from "@/store"
 import NonaktifkanPustakawanAlert from "./NonaktifkanPustakawanAlert"
 import { setNonaktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
 import { useNavigate } from "react-router-dom"
+import AktifkanPustakawanAlert from "./AktifkanPustakawanAlert"
 
-const ProdiPustakawanDropdownMenu = ({idPustakawan} : {idPustakawan: string}) => {
+const ProdiPustakawanDropdownMenu = ({pustakawan} : {pustakawan: any}) => {
 
     const navigate = useNavigate()
     const handleNavigate = (id: string) => {
@@ -26,20 +27,29 @@ const ProdiPustakawanDropdownMenu = ({idPustakawan} : {idPustakawan: string}) =>
                 
                 <DropdownMenuContent className="w-56" align="start">
 
-                    <DropdownMenuItem className="text-xs" onSelect={() => handleNavigate(idPustakawan)}>
+                    <DropdownMenuItem className="text-xs" onSelect={() => handleNavigate(pustakawan._id)}>
                         <User className="mr-2 h-4 w-4" />
                         Detail Pustakawan
                     </DropdownMenuItem>
 
-                    
-                    <DropdownMenuItem className="text-xs text-destructive focus:text-destructive" onSelect={() => store.dispatch(setNonaktifAlert(true))}>
-                        <UserX className="mr-2 w-2 h-2" />
-                        Nonaktifkan Pustakawan
-                    </DropdownMenuItem>
+                    {pustakawan.statusAkun === 'Aktif' && (
+                        <DropdownMenuItem className="text-xs bg-destructive focus:bg-destructive/70" onSelect={() => store.dispatch(setNonaktifAlert(true))}>
+                            <UserX className="mr-2 w-2 h-2" />
+                            Nonaktifkan Pustakawan
+                        </DropdownMenuItem>
+                    )}
+
+                    {pustakawan.statusAkun === 'Nonaktif' && (
+                        <DropdownMenuItem className="text-xs bg-primary focus:bg-primary/70" onSelect={() => store.dispatch(setNonaktifAlert(true))}>
+                            <UserCheck className="mr-2 w-2 h-2" />
+                            Aktifkan Pustakawan
+                        </DropdownMenuItem>
+                    )}
 
                 </DropdownMenuContent>
             </DropdownMenu>
-            <NonaktifkanPustakawanAlert idPustakawan={idPustakawan} />
+            <NonaktifkanPustakawanAlert idPustakawan={pustakawan._id} />
+            <AktifkanPustakawanAlert idPustakawan={pustakawan._id} />
         </>
     )
 }

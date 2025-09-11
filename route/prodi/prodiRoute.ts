@@ -38,11 +38,11 @@ router.route('/pustakawan')
     .get(getAllPustakawan)
 
 router.route('/pustakawan/nonaktif/:id')
-    .get(mongooseIdMiddleware, nonaktifkanPustakawan)
+    .patch(mongooseIdMiddleware, nonaktifkanPustakawan)
 
 
 router.route('/pustakawan/aktifkan/:id')
-    .get(mongooseIdMiddleware, aktifkanPustakawan)
+    .patch(mongooseIdMiddleware, aktifkanPustakawan)
 
 router.route('/pustakawan/:id')
     .get(mongooseIdMiddleware, getSinglePustakawan)

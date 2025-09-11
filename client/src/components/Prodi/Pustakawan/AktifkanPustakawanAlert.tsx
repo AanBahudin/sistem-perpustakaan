@@ -17,12 +17,11 @@ import { useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 
-const NonaktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
+const AktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
 
     const queryClient = useQueryClient()
     const [searchParams] = useSearchParams()
-    const params = new URLSearchParams(searchParams).toString()
-    
+    const params = new URLSearchParams(searchParams)
     const { nonaktifAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
     const handleOpenAlert = (value: boolean) => {
         store.dispatch(setNonaktifAlert(value))
@@ -31,8 +30,8 @@ const NonaktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => 
     const mutation = useMutation({
         mutationFn: () => prodiNonaktifAkun(idPustakawan),
         onSuccess: () => {
-            toast('Akun pustakawan dinonaktifkan')
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
+            toast('Akun pustakawan dinonaktifkan')
             handleOpenAlert(false)
         },
         onError: (error: any) => {
@@ -49,7 +48,7 @@ const NonaktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => 
         <AlertDialog open={nonaktifAlert} onOpenChange={handleOpenAlert}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Nonaktifkan Akun Pustakawan?</AlertDialogTitle>
+                    <AlertDialogTitle>Nonaktifkan Akun Pustakawan?</AlertDialogTitle>   
                     <AlertDialogDescription>
                         Apakah Anda yakin ingin menonaktifkan akun pustakawan ini? Setelah dinonaktifkan, pustakawan tidak dapat lagi mengakses sistem perpustakaan hingga akun diaktifkan kembali oleh admin.
                     </AlertDialogDescription>
@@ -66,4 +65,4 @@ const NonaktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => 
     )
 }
 
-export default NonaktifkanPustakawanAlert
+export default AktifkanPustakawanAlert
