@@ -114,6 +114,28 @@ export const getOnePustakawanData = async({pustakawanId} : GetOnePustakawanDataP
     return {data: pustakawan}
 }
 
+export const prodiNonaktifPustakawan = async(idPustakawan: string) => {
+    const pustakawan = await Pustakawan.findOneAndUpdate(
+        {_id: idPustakawan, statusAkun: 'Aktif'},
+        {statusAkun: 'Nonaktif'}
+    )
+    
+    if (!pustakawan) throw new NotFoundError('Akun tidak dapat diproses atau ditemukan')
+
+    return pustakawan
+}
+
+export const prodiAktfikanPustakawan = async(idPustakawan: string) => {
+    const pustakawan = await Pustakawan.findOneAndUpdate(
+        {_id: idPustakawan, statusAkun: 'Nonaktif'},
+        {statusAkun: 'Aktif'}
+    )
+    
+    if (!pustakawan) throw new NotFoundError('Akun tidak dapat diproses atau ditemukan')
+
+    return pustakawan
+}
+
 // SUDAH DITESTING
 export const getAllPenggunaData = async({query} : {query: any}) => {
     let mongoQuery: any = { ...query }

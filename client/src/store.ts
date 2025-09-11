@@ -16,6 +16,7 @@ import pustakawanTambahBukuState from '@/cart/pustakawanTambahBukuSlice'
 import pustakawanProfilePageSlice from '@/cart/pustakawanProfilePageSlice'
 import pustakawanPengaturanPageSlice from '@/cart/pustakawanPengaturanSlice'
 import prodiPenggunaSlice from '@/cart/Prodi/prodiPenggunaSlice'
+import prodiPustakawanSlice from '@/cart/Prodi/prodiPustakawanSlice'
 
 export const store = configureStore({
     reducer: {
@@ -35,6 +36,7 @@ export const store = configureStore({
         pustakawanTambahBukuState,
         pustakawanProfilePageSlice,
         pustakawanPengaturanPageSlice,
-        prodiPenggunaSlice
+        prodiPenggunaSlice,
+        prodiPustakawanSlice
     }
 })

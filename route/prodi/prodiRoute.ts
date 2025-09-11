@@ -15,7 +15,9 @@ import {
     prodiCreatePengguna,
     getAllDosen,
     getAllMahasiswa,
-    getAllBlockedUser
+    getAllBlockedUser,
+    nonaktifkanPustakawan,
+    aktifkanPustakawan
 } from '../../controllers/prodi/prodiController'
 import { createPenggunaValidator, createPustakawanValidator } from '../../validator/adminValidator'
 import { createAdminValidator } from '../../validator/adminValidator'
@@ -35,8 +37,16 @@ router.route('/create/pengguna')
 router.route('/pustakawan')
     .get(getAllPustakawan)
 
+router.route('/pustakawan/nonaktif/:id')
+    .get(mongooseIdMiddleware, nonaktifkanPustakawan)
+
+
+router.route('/pustakawan/aktifkan/:id')
+    .get(mongooseIdMiddleware, aktifkanPustakawan)
+
 router.route('/pustakawan/:id')
     .get(mongooseIdMiddleware, getSinglePustakawan)
+
 
 router.route('/pengguna')
     .get(getAllUsers)
@@ -64,7 +74,7 @@ router.route('/requested/user/:id')
 
 router.route('/profile')
     .get(getProfile)
-    
+
 router.route('/user/unblocked/:id')
     .patch(mongooseIdMiddleware, bukaBlokirPengguna)
     

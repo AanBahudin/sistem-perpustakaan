@@ -1,13 +1,13 @@
-import { EllipsisVertical } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
+import ProdiPustakawanDropdownMenu from "./ProdiPustakawanDropdownMenu"
 
 const PustakawanCard = ({pustakawan} : {pustakawan: any}) => {
   return (
     <section className='w-full border rounded-xl px-4 py-8 flex flex-col items-center justify-center relative hover:shadow-2xl duration-200 ease-in-out group'>
       
-      <EllipsisVertical className='absolute w-6 h-6 p-1.5 duration-200 ease-in-out top-2 right-5 rounded-full hover:bg-accent/50 ' />
+      <ProdiPustakawanDropdownMenu idPustakawan={pustakawan._id} />
 
       {pustakawan.fotoProfil ? (
         <img src={pustakawan.fotoProfil} alt={'foto ' + pustakawan.nama} />

@@ -23,6 +23,8 @@ const PustakawanDataContainer = () => {
     )
   }
 
+  console.log(data)
+
   return (
     <section className='w-full grid grid-cols-4 my-4 gap-4'>
       {data.map((item: any, index: number) => {

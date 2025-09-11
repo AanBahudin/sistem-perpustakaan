@@ -13,10 +13,13 @@ import {
     getOnePustakawanData, 
     getOneRequestedPengguna, 
     getProdiProfile, 
+    prodiAktfikanPustakawan, 
     prodiBlokirPengguna, 
     prodiBukaBlokir, 
+    prodiNonaktifPustakawan, 
     verifyRegisteredAccount } from "../../services/prodiServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import { prodiNonaktifAkun } from "../../client/src/actions/Prodi/ProdiPustakawanActions";
 
 // controller untuk buat/tambah administrator
 export const createAdministrator = async(req: any | Request, res: Response) => {
@@ -92,6 +95,22 @@ export const getSinglePustakawan = async(req: any | Request, res: Response) => {
         res,
         message: 'Data Pustakawan',
         data: pustakawan.data
+    })
+}
+
+export const nonaktifkanPustakawan = async(req: Request, res: Response) => {
+    const pustakawan = await prodiNonaktifPustakawan(req.params.id)
+    SendBasicResponse({
+        res,
+        message: 'Pustakawan Dinonakifkan'
+    })
+}
+
+export const aktifkanPustakawan = async(req: Request, res: Response) => {
+    const pustakawan = await prodiAktfikanPustakawan(req.params.id)
+    SendBasicResponse({
+        res,
+        message: 'Pustakawan Diaktifkan'
     })
 }
 
