@@ -19,8 +19,6 @@ import { bukuMatch } from "../../utils/bukuQuery";
 
 
 export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
-
-    const searchNama = query.query || ''; // Ambil keyword pencarian
     const mongoQuery: any = { ...query };
     delete mongoQuery.query;
 

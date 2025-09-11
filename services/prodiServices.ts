@@ -94,9 +94,15 @@ export const getProdiProfile = async({prodiId} : GetProdiProfileParamsType) => {
 }
 
 // SUDAH DITESTING
-export const getAllPustakawanData = async() => {
-    const pustakawan = await Pustakawan.find().select('-password -email')
+export const getAllPustakawanData = async(query: any) => {
 
+    const pustakawanQuery = {...query}
+
+    if (query.nama) {
+        pustakawanQuery.nama = {$regex: query.nama, $options: 'i'}
+    }
+
+    const pustakawan = await Pustakawan.find(pustakawanQuery).select('-password -email')
     return {data: pustakawan}
 }
 

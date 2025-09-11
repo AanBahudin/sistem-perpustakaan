@@ -71,8 +71,8 @@ export const getProfile = async(req: any | Request, res: Response) => {
 }
 
 // controller untuk mengambil data semua pustakawan
-export const getAllPustakawan = async(req: any | Request, res: Response) => {
-    const pustakawan = await getAllPustakawanData()
+export const getAllPustakawan = async(req: Request, res: Response) => {
+    const pustakawan = await getAllPustakawanData(req.query)
 
     SendDataResponse({
         res,
