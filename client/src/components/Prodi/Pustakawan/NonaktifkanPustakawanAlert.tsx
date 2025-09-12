@@ -23,13 +23,13 @@ const NonaktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => 
     const [searchParams] = useSearchParams()
     const params = new URLSearchParams(searchParams).toString()
     
-    const { nonaktifAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
+    const { activePustakawanId, nonaktifAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
     const handleOpenAlert = (value: boolean) => {
-        store.dispatch(setNonaktifAlert(value))
+        store.dispatch(setNonaktifAlert({pustakawanId: idPustakawan, alertState: value}))
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiNonaktifAkun(idPustakawan),
+        mutationFn: () => prodiNonaktifAkun(activePustakawanId),
         onSuccess: () => {
             toast('Akun pustakawan dinonaktifkan')
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})

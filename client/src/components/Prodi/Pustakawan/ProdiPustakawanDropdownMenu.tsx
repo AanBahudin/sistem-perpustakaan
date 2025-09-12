@@ -7,7 +7,7 @@ import {
 import { EllipsisVertical, User, UserCheck, UserX } from "lucide-react"
 import { store } from "@/store"
 import NonaktifkanPustakawanAlert from "./NonaktifkanPustakawanAlert"
-import { setNonaktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
+import { setAktifAlert, setNonaktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
 import { useNavigate } from "react-router-dom"
 import AktifkanPustakawanAlert from "./AktifkanPustakawanAlert"
 
@@ -33,14 +33,14 @@ const ProdiPustakawanDropdownMenu = ({pustakawan} : {pustakawan: any}) => {
                     </DropdownMenuItem>
 
                     {pustakawan.statusAkun === 'Aktif' && (
-                        <DropdownMenuItem className="text-xs bg-destructive focus:bg-destructive/70" onSelect={() => store.dispatch(setNonaktifAlert(true))}>
+                        <DropdownMenuItem className="text-xs bg-destructive focus:bg-destructive/70" onSelect={() => store.dispatch(setNonaktifAlert({pustakawanId: pustakawan._id, alertState: true}))}>
                             <UserX className="mr-2 w-2 h-2" />
                             Nonaktifkan Pustakawan
                         </DropdownMenuItem>
                     )}
 
                     {pustakawan.statusAkun === 'Nonaktif' && (
-                        <DropdownMenuItem className="text-xs bg-primary focus:bg-primary/70" onSelect={() => store.dispatch(setNonaktifAlert(true))}>
+                        <DropdownMenuItem className="text-xs bg-primary focus:bg-primary/70" onSelect={() => store.dispatch(setAktifAlert({pustakawanId: pustakawan._id, alertState: true}))}>
                             <UserCheck className="mr-2 w-2 h-2" />
                             Aktifkan Pustakawan
                         </DropdownMenuItem>

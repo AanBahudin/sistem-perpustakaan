@@ -1,5 +1,5 @@
-import { prodiNonaktifAkun } from "@/actions/Prodi/ProdiPustakawanActions"
-import { setNonaktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
+import { prodiAktifkan } from "@/actions/Prodi/ProdiPustakawanActions"
+import { setAktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -22,20 +22,20 @@ const AktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
     const queryClient = useQueryClient()
     const [searchParams] = useSearchParams()
     const params = new URLSearchParams(searchParams)
-    const { nonaktifAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
+    const { aktifkanAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
     const handleOpenAlert = (value: boolean) => {
-        store.dispatch(setNonaktifAlert(value))
+        store.dispatch(setAktifAlert({pustakawanId: idPustakawan, alertState: value}))
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiNonaktifAkun(idPustakawan),
+        mutationFn: () => prodiAktifkan(idPustakawan),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
-            toast('Akun pustakawan dinonaktifkan')
+            toast('Akun pustakawan Diaktifkan')
             handleOpenAlert(false)
         },
         onError: (error: any) => {
-            const errMsg = error.response.data.message || 'Gagal menonaktifkan akun, Coba lagi nanti'
+            const errMsg = error.response.data.message || 'Gagal mengaktifkan akun, Coba lagi nanti'
             toast('Terjadi kesalahan', {description: errMsg})
         }
     })
@@ -45,7 +45,7 @@ const AktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
     }
 
     return (
-        <AlertDialog open={nonaktifAlert} onOpenChange={handleOpenAlert}>
+        <AlertDialog open={aktifkanAlert} onOpenChange={handleOpenAlert}>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Nonaktifkan Akun Pustakawan?</AlertDialogTitle>   

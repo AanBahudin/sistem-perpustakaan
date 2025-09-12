@@ -121,11 +121,11 @@ export const prodiNonaktifPustakawan = async(idPustakawan: string) => {
     )
     
     if (!pustakawan) throw new NotFoundError('Akun tidak dapat diproses atau ditemukan')
-
-    return pustakawan
-}
-
-export const prodiAktfikanPustakawan = async(idPustakawan: string) => {
+        
+        return pustakawan
+    }
+    
+    export const prodiAktfikanPustakawan = async(idPustakawan: string) => {
     const pustakawan = await Pustakawan.findOneAndUpdate(
         {_id: idPustakawan, statusAkun: 'Nonaktif'},
         {statusAkun: 'Aktif'}

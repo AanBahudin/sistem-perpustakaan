@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    nonaktifAlert: false
+    nonaktifAlert: false,
+    aktifkanAlert: false,
+    activePustakawanId: ''
 }
 
 const prodiPustakawanSlice = createSlice({
@@ -9,12 +11,28 @@ const prodiPustakawanSlice = createSlice({
     initialState,
     reducers: {
         setNonaktifAlert: (state, action) => {
-            state.nonaktifAlert = action.payload
+            const {pustakawanId, alertState} = action.payload
+            if (alertState) {
+                state.activePustakawanId = pustakawanId
+            } else {
+                state.activePustakawanId = ''
+            }
+            state.nonaktifAlert = alertState
+        },
+        setAktifAlert: (state, action) => {
+            const {pustakawanId, alertState} = action.payload
+            if (alertState) {
+                state.activePustakawanId = pustakawanId
+            } else {
+                state.activePustakawanId = ''
+            }
+            state.aktifkanAlert = alertState
         }
     }
 })
 
 export const {
+    setAktifAlert,
     setNonaktifAlert
 } = prodiPustakawanSlice.actions
 export default prodiPustakawanSlice.reducer
