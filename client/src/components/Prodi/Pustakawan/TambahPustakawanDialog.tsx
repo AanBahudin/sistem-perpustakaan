@@ -1,9 +1,6 @@
-import { prodiCreatePengguna } from "@/actions/Prodi/ProdiPenggunaActions"
-import TambahPenggunaAngkatanSelectInput from "@/components/Prodi/Pengguna/TambahPenggunaAngkatanSelectInput"
+import { prodiCreatePustakawan } from "@/actions/Prodi/ProdiPenggunaActions"
 import TambahPenggunaInput from "@/components/Prodi/Pengguna/TambahPenggunaInput"
-import TambahPenggunaInputPassword from "@/components/Prodi/Pengguna/TambahPenggunaInputPassword"
 import TambahPenggunaNomorHpInput from "@/components/Prodi/Pengguna/TambahPenggunaNomorHpInput"
-import TambahPenggunaRoleSelectInput from "@/components/Prodi/Pengguna/TambahPenggunaRoleSelectInput"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -21,7 +18,7 @@ import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 
-const TambahPenggunaBaruDialog = () => {
+const TambahPustakawanDialog = () => {
 
     const [openDialog, setOpenDialog] = useState(false)
     const handleOpenDialog = (value: boolean) => {
@@ -33,14 +30,15 @@ const TambahPenggunaBaruDialog = () => {
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: (data: any) => prodiCreatePengguna(data),
+        mutationFn: (data: any) => prodiCreatePustakawan(data),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['semua', 'pengguna', params]})
-            toast('Pengguna Ditambahkan!', {description: 'Pengguna berhasil ditambahkan'})
+            queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
+            toast('Pustakawan Ditambahkan!', {description: 'Pustakawan berhasil didaftarkan'})
             handleOpenDialog(false)
         },
         onError: (error: any) => {
-            const errMsg = error.response.data.message || 'Gagal menambahakan pengguna, Coba lagi nanti'
+            console.log(error)
+            const errMsg = error.response.data.message || 'Gagal menambahakan pustakawan, Coba lagi nanti'
             toast('Terjadi kesalahan', {description: errMsg})
         }
     })
@@ -60,37 +58,29 @@ const TambahPenggunaBaruDialog = () => {
             <DialogTrigger asChild>
                 <Button className='text-xs mb-4 flex items-center justify-center gap-x-2 hover:bg-primary/70 ease-in-out duration-200'>
                     <PlusCircle />
-                    <p>Pengguna Baru</p>
+                    <p>Pustakawan Baru</p>
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-[700px]">
+            <DialogContent className="sm:max-w-[6   00px]">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
-                        <DialogTitle>Tambah Pengguna Baru</DialogTitle>
+                        <DialogTitle>Tambah Pustakawan Baru</DialogTitle>
                         <DialogDescription className="text-xs">
-                        Silakan lengkapi data pengguna baru yang akan ditambahkan ke dalam sistem perpustakaan. Pastikan informasi yang dimasukkan sesuai agar akun dapat digunakan dengan baik.
+                        Silakan lengkapi data pustakawan baru yang akan ditambahkan ke dalam sistem perpustakaan. Pastikan informasi yang dimasukkan sesuai agar akun dapat digunakan dengan baik.
                         </DialogDescription>
                     </DialogHeader>
 
                     <section className="my-6 flex flex-col gap-y-3 !text-xs">
                         <main className="w-full flex gap-x-2 items-center justify-center">
-                            <TambahPenggunaInput label="Nama Lengkap" name="nama" placeholder="Nama lengkap pengguna" autofocus />
-                            <TambahPenggunaInput label="NIM atau NIDN" name="idKampus" placeholder="21761398" />
+                            <TambahPenggunaInput label="Nama Lengkap" name="nama" placeholder="Nama lengkap pustakawan" autofocus />
+                            <TambahPenggunaInput label="E-mail" name="email" placeholder="pustakawana@gmail.com" type="email" />
                         </main>
 
                         <main className="w-full flex gap-x-2 items-center justify-center">
-                            <TambahPenggunaInput label="Jurusan" name="jurusan" readonly defaultValue="Teknik Informatika" />
-                            <TambahPenggunaAngkatanSelectInput />
-                        </main>
-                    
-                        <main className="w-full flex gap-x-2 items-center justify-center">
-                            <TambahPenggunaInput label="Email Aktif" name="email" placeholder="Email aktif pengguna" type="email" />
                             <TambahPenggunaNomorHpInput />
                         </main>
 
-                        <TambahPenggunaInputPassword />
-                        <TambahPenggunaRoleSelectInput />
                     </section>
 
                     <DialogFooter>
@@ -99,7 +89,7 @@ const TambahPenggunaBaruDialog = () => {
                         </DialogClose>
                         <Button type="submit" disabled={isLoading} className="text-xs flex items-center justify-center gap-x-2">
                             {isLoading && <Loader className="animate-spin" />}
-                            <p>{isLoading ? 'Menambahkan' : 'Tambah Pengguna'}</p>
+                            <p>{isLoading ? 'Menambahkan' : 'Tambah Pustakawan'}</p>
                         </Button>
                     </DialogFooter>
                 </form>
@@ -108,4 +98,4 @@ const TambahPenggunaBaruDialog = () => {
     )
 }
 
-export default TambahPenggunaBaruDialog
+export default TambahPustakawanDialog

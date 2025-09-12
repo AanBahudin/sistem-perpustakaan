@@ -40,11 +40,8 @@ export const createPustakawan = async(req : any | Request, res: Response) => {
     const {userId} = req.user
 
     const newPustakawan = await createNewPustakawan({
-        adminId: userId,
-        nama: req.body.nama,
-        email: req.body.email,
-        password: req.body.password,
-        no_hp: req.body.no_hp
+        prodiId: userId,
+        data: req.body
     })
 
     SendBasicResponse({res, message: 'Proses pendaftaran berhasil, menunggu verifikasi akun'})

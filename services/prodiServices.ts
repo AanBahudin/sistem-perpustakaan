@@ -11,6 +11,7 @@ import sendEmailVerificationWithLoginData from "../helpers/sendEmailVerification
 import { getPeminjamanByUserId } from "./peminjamanServices"
 import { getPerpanjanganByUserId } from "./perpanjanganServices"
 import { getPengembalianByUserId } from "./pengembalianServices"
+import crypto from 'crypto'
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -27,29 +28,30 @@ export const createAdmin = async({ nama, email, password } : CreateAdminParamsTy
 }
 
 // SUDAH DITESTING
-export const createNewPustakawan = async({ nama, email, password, adminId, no_hp} : CreatePustakawanParamsType) => {
-    const existingPustakawan = await Pustakawan.findOne({email})
+export const createNewPustakawan = async({prodiId, data} : CreatePustakawanParamsType) => {
+    const existingPustakawan = await Pustakawan.findOne({email: data.email})
     if (existingPustakawan) throw new BadRequestError('Akun Pustakawan sudah digunakan')
 
     // pengacakkan password
-    const hashedPassword = await hashPassword(password)
+    const plainRandomPassword : string = crypto.randomBytes(8).toString('hex')
+    const hashedPassword = await hashPassword(plainRandomPassword)
+
+    const validData = {
+        ...data,
+        statusAkun: 'Pending',
+        password: hashedPassword,
+        createdBy: prodiId
+    }
 
     // membuat data pustakawan
-    const pustakawan = await Pustakawan.create({
-        nama,
-        email,
-        password: hashedPassword,
-        statusAkun: 'Pending',
-        no_hp,
-        createdBy: adminId
-    })
+    const pustakawan = await Pustakawan.create(validData)
 
     try {
         await sendVerifyEmailPustakawan({
             pustakawanId: pustakawan._id.toString(),
             nama: pustakawan.nama,
             email: pustakawan.email,
-            password
+            password: plainRandomPassword
         })
     } catch (error) {
         const errorMsg = renderError(error)

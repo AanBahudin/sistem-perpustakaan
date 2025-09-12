@@ -34,9 +34,6 @@ export const createPustakawanValidator = withValidationErrors([
     body('email')
         .notEmpty().withMessage('Email tidak boleh kosong')
         .isEmail().withMessage('Format email tidak benar'),
-    body('password')
-        .notEmpty().withMessage('Password tidak boleh kosong')
-        .isLength({min : 6, max: 25}).withMessage('password harus 6 - 25 karakter'),
     body('no_hp')
         .notEmpty().withMessage('Nomor hp tidak boleh kosong')
         .customSanitizer((no_hp) => {

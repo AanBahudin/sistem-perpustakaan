@@ -5,11 +5,12 @@ export interface CreateAdminParamsType {
 }
 
 export interface CreatePustakawanParamsType {
-    nama: string,
-    email: string,
-    password: string,
-    adminId: string,
-    no_hp?: string
+    prodiId: string,
+    data: {
+        email: string,
+        nama: string,
+        no_hp: string
+    }
 }
 
 export interface GetProdiProfileParamsType {

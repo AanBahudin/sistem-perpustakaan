@@ -19,3 +19,8 @@ export const prodiAktifkan = async(id: string) => {
     const {data: response} = await customFetch.patch(`/prodi/pustakawan/aktifkan/${id}`)
     return response.data
 }
+
+export const prodiTambahPustakawan = async(data: any) => {
+    const {data: response} = await customFetch.post('/prodi/create/pustakawan', data)
+    return response.data
+}
