@@ -91,7 +91,7 @@ export const getSinglePustakawan = async(req: any | Request, res: Response) => {
     SendOneDataResponse({
         res,
         message: 'Data Pustakawan',
-        data: pustakawan.data
+        data: pustakawan
     })
 }
 

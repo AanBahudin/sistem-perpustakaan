@@ -12,6 +12,10 @@ import { getPeminjamanByUserId } from "./peminjamanServices"
 import { getPerpanjanganByUserId } from "./perpanjanganServices"
 import { getPengembalianByUserId } from "./pengembalianServices"
 import crypto from 'crypto'
+import Buku from "../model/Buku"
+import Peminjaman from "../model/Peminjaman"
+import Pengembalian from "../model/Pengembalian"
+import Perpanjangan from "../model/Perpanjangan"
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -112,8 +116,18 @@ export const getAllPustakawanData = async(query: any) => {
 export const getOnePustakawanData = async({pustakawanId} : GetOnePustakawanDataParamsType) => {
     const pustakawan = await Pustakawan.findOne({_id: pustakawanId}).select('-password -email')
     if (!pustakawan) throw new NotFoundError('Data pustakawan tidak ditemukan')
+
+    const getBukuDiproses = await Buku.find({createdBy: pustakawanId}).countDocuments()
+    const getPeminjamanDiproses = await Peminjaman.find({diprosesOleh: pustakawanId}).countDocuments()
+    const perpanjanganDiproses = await Perpanjangan.find({diprosesOleh: pustakawanId}).countDocuments()
+    const pengembalianDiproses = await Pengembalian.find({statusPengembalian: 'Dikembalikan', diprosesOleh: pustakawanId}).countDocuments()
+
+    const dataValue: Array<number> = [getBukuDiproses, getPeminjamanDiproses, perpanjanganDiproses, pengembalianDiproses]
     
-    return {data: pustakawan}
+    return {
+        profile: pustakawan,
+        dataValue
+    }
 }
 
 export const prodiNonaktifPustakawan = async(idPustakawan: string) => {
