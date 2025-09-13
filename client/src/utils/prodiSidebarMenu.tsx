@@ -116,9 +116,4 @@ export const prodiSidebarMenu = [
         url: 'pustakawan',
         icon: UserCog
     },
-    {
-        title: 'Profil',
-        url: 'profil',
-        icon: User
-    }
 ]

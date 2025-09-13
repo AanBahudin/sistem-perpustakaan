@@ -29,7 +29,6 @@ route.route('/login/pustakawan')
 route.route('/logout')
     .get(logout)
 
-
     
 route.route('/verify/account')
     .get(verifyEmail)

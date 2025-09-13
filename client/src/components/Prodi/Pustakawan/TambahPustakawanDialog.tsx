@@ -37,7 +37,6 @@ const TambahPustakawanDialog = () => {
             handleOpenDialog(false)
         },
         onError: (error: any) => {
-            console.log(error)
             const errMsg = error.response.data.message || 'Gagal menambahakan pustakawan, Coba lagi nanti'
             toast('Terjadi kesalahan', {description: errMsg})
         }
