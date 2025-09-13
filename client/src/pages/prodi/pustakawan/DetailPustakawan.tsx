@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import ProdiPustakawanMainProfileContainer from '@/components/Prodi/Pustakawan/ProdiPustakawanMainProfileContainer'
 import ProdiPustakawanDetailStats from '@/components/Prodi/Pustakawan/ProdiPustakawanDetailStats'
+import PustakawanLoading from '@/components/Pustakawan/Profil/PustakawanLoading'
 
 const DetailPustakawan = () => {
 
@@ -15,7 +16,7 @@ const DetailPustakawan = () => {
     queryFn: () => prodiGetSinglePustakawanData(id as string)
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PustakawanLoading />
 
   return (
     <Container className='w-full'>
