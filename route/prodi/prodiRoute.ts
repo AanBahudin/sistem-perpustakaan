@@ -17,13 +17,17 @@ import {
     getAllMahasiswa,
     getAllBlockedUser,
     nonaktifkanPustakawan,
-    aktifkanPustakawan
+    aktifkanPustakawan,
+    statsBerandaProdi
 } from '../../controllers/prodi/prodiController'
 import { createPenggunaValidator, createPustakawanValidator } from '../../validator/adminValidator'
 import { createAdminValidator } from '../../validator/adminValidator'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 
 const router = express.Router()
+
+router.route('/beranda/stats')
+    .get(statsBerandaProdi)
 
 router.route('/create/admin')
     .post(createAdminValidator, createAdministrator)

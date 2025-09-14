@@ -16,6 +16,8 @@ import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Pengembalian from "../model/Pengembalian"
 import Perpanjangan from "../model/Perpanjangan"
+import { rasioKategoriBuku } from "./BukuServices/RatioBukuServices"
+import { allBukuStats } from "./BukuServices/StatsBukuServices"
 
 // TESTING ROUTE INI
 export const createAdmin = async({ nama, email, password } : CreateAdminParamsType) => {
@@ -343,4 +345,25 @@ export const prodiBukaBlokir = async({idPengguna} : {idPengguna: string}) => {
     ).select('-password')
 
     return updatedPengguna
+}
+
+export const prodiGetStatsData = async() => {
+    // ambil data ringkasan dari pengguna
+    const monthlyUserGrowth = await allUserStats()
+    const userAccountStatusRatio = await allUserAccountStatusRatio()
+
+    // ambil data ringkasan dari buku
+    const dataRasio = await rasioKategoriBuku()
+    const dataStats = await allBukuStats()
+
+    return {
+        pengguna: {
+            monthlyUserGrowth,
+            userAccountStatusRatio
+        },
+        buku: {
+            dataRasio,
+            dataStats
+        }
+    }
 }

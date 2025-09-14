@@ -16,6 +16,7 @@ import {
     prodiAktfikanPustakawan, 
     prodiBlokirPengguna, 
     prodiBukaBlokir, 
+    prodiGetStatsData, 
     prodiNonaktifPustakawan, 
     verifyRegisteredAccount } from "../../services/prodiServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
@@ -230,6 +231,16 @@ export const bukaBlokirPengguna = async(req: Request, res: Response) => {
     SendOneDataResponse({
         res,
         message: 'Pengguna aktif kembali',
+        data
+    })
+}
+
+export const statsBerandaProdi = async(req: Request, res: Response) => {
+    const data = await prodiGetStatsData()
+    
+    SendOneDataResponse({
+        res,
+        message: 'OK',
         data
     })
 }
