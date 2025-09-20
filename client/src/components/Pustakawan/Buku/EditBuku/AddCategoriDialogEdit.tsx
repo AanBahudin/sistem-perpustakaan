@@ -27,7 +27,6 @@ const AddCategoriDialogEdit = () => {
   const mutation = useMutation({
     mutationFn: (data: any) => createKategori(data),
     onSuccess: (data: any) => {
-      console.log(data)
       toast('Berhasil Ditambahkan', {description: `kategori Baru ditambahkan`})
       queryClient.invalidateQueries({queryKey: ['kategori']})
       setOpen(false)

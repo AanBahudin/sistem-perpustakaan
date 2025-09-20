@@ -13,14 +13,12 @@ export const bukuInputValidator = withValidationErrors([
         .isLength({min: 3, max: 200})
         .withMessage('Judul 3 sampai 200 Karakter')
         .customSanitizer((judul : string) => {
-            console.log('judul', judul);
             return capitalizeWords(judul)
         }),
         body('penulis')
         .optional()
         .customSanitizer((penulis) => {
             if (penulis) {
-                console.log('penulis', penulis);
                 return capitalizeWords(penulis)
             }
             return penulis
@@ -29,7 +27,6 @@ export const bukuInputValidator = withValidationErrors([
         .optional()
         .customSanitizer((penerbit : string) => {
             if (penerbit) {
-                console.log('penerbit', penerbit);
                 return capitalizeWords(penerbit)
             }
             return penerbit

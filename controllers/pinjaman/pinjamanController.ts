@@ -98,8 +98,6 @@ export const terimaPinjaman = async(req: Request | any, res: Response) => {
     const { idPeminjaman, kondisiBuku } = req.body
     const {userId} = req.user
 
-    // console.log(idPeminjaman, kondisiBuku)
-    // res.send(200)
     const {data} = await terimaPeminjamanUser({idPeminjaman, userId, kondisiBuku})
 
     // pemintaan ditolak/terima akan dikirim melalu notifikasi

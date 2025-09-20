@@ -6,7 +6,6 @@ import { formatedDate } from "@/utils/formatDate"
 const DetailPengajuanPengembalian = ({dataPengembalian, peminjaman, pengguna} : {dataPengembalian: any, peminjaman: any, pengguna: any}) => {
 
     const pengembalian = dataPengembalian
-    console.log(pengembalian)
 
     return (
          <section className="w-full">

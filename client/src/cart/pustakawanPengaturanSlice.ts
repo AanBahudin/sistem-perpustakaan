@@ -8,7 +8,6 @@ const pustakawanPengaturanPageSlice = createSlice({
     },
     reducers: {
         setOpenEditDialog: (state, action) => {
-            console.log(action.payload)
             state.isEditDialogOpen = action.payload
         },
         setOpenDeleteAlert: (state, action) => {

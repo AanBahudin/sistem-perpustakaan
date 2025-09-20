@@ -23,7 +23,6 @@ export const getSingleSearchKategory = async(kategori: string) => {
 }
 
 export const editSingleKategori = async(idKategori: string, data: any) => {
-    console.log(data)
     const { data:response } = await customFetch.patch(`/kategori/${idKategori}`, data)
     return response.data
 }

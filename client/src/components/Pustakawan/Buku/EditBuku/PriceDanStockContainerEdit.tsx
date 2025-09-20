@@ -11,7 +11,6 @@ const PriceDanStockContainerEdit = ({buku} : {buku: any}) => {
 
   const statusKetersediaan = ['Tersedia', 'Tidak Tersedia']
   const featured = ['true', 'false']
-  console.log(buku)
 
   return (
     <section className='w-full p-4 rounded-xl bg-accent/10'>

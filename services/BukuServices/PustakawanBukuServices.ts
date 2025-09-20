@@ -188,7 +188,6 @@ export const getSemuaBukuHilang = async({query} : {query: any}) => {
 }
 
 export const tambahDataBuku = async(dataBukuTerbaru: any, reqFile: any) => {
-    // console.log(dataBukuTerbaru);
     
     let dataBuku = dataBukuTerbaru
     dataBuku.ukuranBuku = {
