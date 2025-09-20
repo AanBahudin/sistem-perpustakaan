@@ -16,6 +16,7 @@ export const getStats = async() => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
     }
+    console.log(response)
     return response.data.data
 }
 

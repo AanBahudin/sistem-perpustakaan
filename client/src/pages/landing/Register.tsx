@@ -2,14 +2,15 @@ import React from 'react'
 import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 
-import { Link, redirect } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import InputForm from '@/components/form/InputForm'
 import SelectForm from '@/components/form/SelectForm'
 import PasswordInput from '@/components/form/PasswordInput'
 import { registerSelectInput } from '@/utils/SelectInputValue'
-import FormContainer from '@/components/form/FormContainer'
 import { accountStatus, registerAction } from '@/actions/authActions'
-import SubmitButton from '@/components/form/SubmitButton'
+import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
 
 export const loader = async() => {
   try {
@@ -24,6 +25,28 @@ export const loader = async() => {
 
 const Register : React.FC = () => {
 
+  const navigate = useNavigate()
+
+  const mutation = useMutation({
+    mutationFn: (data: FormData) => registerAction(data),
+    onSuccess: () => {
+      toast('Berhasil melakukan pendaftaran')
+      navigate('/status/account')
+    },
+    onError: (error: any) => {
+      const errMsg = error.response.data.message || 'Gagal melakukan pendaftaran, Coba lagi nanti'
+      toast('Tidak dapat melakukan pendaftaran', {description: errMsg})
+    }
+  })
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    mutation.mutate(formData)
+  }
+
+  const isLoading = mutation.isPending
+
   return (
     <Container className='flex items-center flex-col justify-center py-10'>
       <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2  rounded-xl'>
@@ -33,7 +56,7 @@ const Register : React.FC = () => {
           <h1 className='text-foreground dark:text-white font-semibold text-3xl lg:text-4xl mt-2'>Ayo Bergabung</h1>
           <h5 className='text-muted-foreground mt-2 '>Silahkan daftarkan akun anda untuk mengakses layanan perpustakaan Teknik Informatika</h5>
 
-          <FormContainer action={registerAction}>
+          <form onSubmit={handleSubmit}>
             <div className='mt-6 w-full flex flex-col gap-y-4'>
 
               <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
@@ -48,10 +71,12 @@ const Register : React.FC = () => {
 
               <PasswordInput />
 
-              <SubmitButton text='Daftar' />
+              <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full'>
+                {isLoading ? 'Loading...' : 'Daftar'}
+              </Button>
               <p className='text-center text-sm text-muted-foreground'>Sudah punya akun? <Link to='/login' className='text-foreground underline'>Masuk Disini</Link></p>
             </div>
-          </FormContainer>
+          </form>
         </main>
 
         <main className='col-span-1 hidden xl:flex items-center justify-end'>

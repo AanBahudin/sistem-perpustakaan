@@ -3,25 +3,26 @@ import Logo from '@/components/landing/Navbar/Logo';
 import loginImage from '@/assets/images/loginImg.png'
 import Container from '@/globals/Container';
 import React from 'react'
-import { redirect, useLoaderData } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
 import LogoutButton from '@/components/form/LogoutButton';
-
-export const loader = async() => {
-    try {
-        const {verifikasiEmail, verifikasiProdi, nama} = await accountStatus()
-        if (verifikasiEmail && verifikasiProdi) {
-            return redirect('/user')
-        }
-        return {verifikasiEmail, verifikasiProdi, nama}
-    } catch (error) {
-        return redirect('/login')
-    }
-}
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const Verify : React.FC = () => {
 
-    const {verifikasiEmail, verifikasiProdi, nama} = useLoaderData() 
+    const navigate = useNavigate()
+    const {data, isLoading} = useQuery({
+        queryKey: ['no-cache'],
+        queryFn: accountStatus,
+        gcTime: 0,
+    })
+
+    if (isLoading) return <h1>Loading... </h1>
+    const { verifikasiEmail, verifikasiProdi, nama} = data
+
+    if (verifikasiEmail && verifikasiProdi) {
+        navigate('/my')
+    }
 
     return (
         <Container className='h-fit lg:h-[100vh] lg:p-20'>

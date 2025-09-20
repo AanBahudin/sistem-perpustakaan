@@ -4,9 +4,6 @@ import { PenggunaLayout, ProfilPengguna, KatalogPengguna, DetailBuku } from "./p
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
-import {loader as VerifyLoader} from '@/pages/Verify'
-import {loader as LoginLoader} from '@/pages/landing/Login'
-import {loader as RegisterLoader} from '@/pages/landing/Register'
 import KatalogPenggunaPage, { katalogPageLoader } from "./pages/pengguna/Buku/KatalogPenggunaPage";
 import GeneralProfilePage from "./pages/pengguna/Profil/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/Profil/CredentialsProfilePage";
@@ -60,7 +57,6 @@ import ProdiSemuaPenggunaPage from "./pages/prodi/pengguna/ProdiSemuaPenggunaPag
 import ProdiPenggunaMahasiswaPage from "./pages/prodi/pengguna/ProdiPenggunaMahasiswaPage";
 import ProdiPenggunaDosenPage from "./pages/prodi/pengguna/ProdiPenggunaDosenPage";
 import ProdiPengajuanPenggunaPage from "./pages/prodi/pengguna/ProdiPengajuanPenggunaPage";
-import ProdiTambahPengguna from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
 import ProdiTambahPenggunaPage from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
 import ProdiBerandaPage from "./pages/beranda/ProdiBerandaPage";
 import ProdiBlockedPenggunPage from "./pages/prodi/pengguna/ProdiBlockedPenggunPage";
@@ -85,28 +81,24 @@ const router : RouteObject[] = [
             },
             {
                 path: 'register',
-                element: <RegisterPage />,
-                loader: RegisterLoader
+                element: <RegisterPage />
             },
             {
                 path: 'login',
-                element: <LoginPage />,
-                loader: LoginLoader
+                element: <LoginPage />
             },
             
         ]
     },
     {
         path:'status/account',
-        element: <Verify />,
-        loader: VerifyLoader
+        element: <Verify />
     },
     {
         path: '/my',
         element: <PenggunaLayout />,
         children: [
             {
-                id: 'data-layout',
                 index: true,
                 element: <KatalogPengguna />,
             },

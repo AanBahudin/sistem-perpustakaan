@@ -11,8 +11,11 @@ import {
     verifyRegisterUser } from "../../services/authServices"
 import { 
     SendBasicResponse, 
+    SendOneDataResponse, 
     sendResponseWithPage, 
     sendResponseWithToken } from "../../utils/sendResponse"
+import Pengguna from "../../model/Pengguna"
+import { NotFoundError } from "../../errors/errorHandler"
 
 
 // controller unutuk registrasi pengguna/dosen - SUDAH DITESTING

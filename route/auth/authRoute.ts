@@ -13,6 +13,7 @@ import {
 import { 
     loginInputValidator, 
     registerInputValidator } from '../../validator/authValidator'
+import { checkUserAccountStatus } from '../../controllers/pengguna/penggunaController'
 
 route.route('/register')
     .post(registerInputValidator, register)
@@ -29,6 +30,8 @@ route.route('/login/pustakawan')
 route.route('/logout')
     .get(logout)
 
+route.route('/check/account/user')
+    .get(checkUserAccountStatus)
     
 route.route('/verify/account')
     .get(verifyEmail)

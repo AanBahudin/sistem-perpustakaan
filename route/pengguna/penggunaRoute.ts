@@ -1,17 +1,22 @@
 import express from 'express'
-import { getProfile, updateProfile, updateEmail, updatePassword, updatePhoto, getStats } from '../../controllers/pengguna/penggunaController'
+import { getProfile, updateProfile, updateEmail, updatePassword, updatePhoto, getStats, checkUserAccountStatus } from '../../controllers/pengguna/penggunaController'
 import { validateUpdateEmailPengguna, validateUpdateInputPengguna, validateUpdatePasswordPengguna, validateUpdatePhoto } from '../../validator/penggunaValidator'
 import { UpdateEmailPermissionMiddleware } from '../../middleware/utilsMiddleware'
 import { userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import upload from '../../middleware/multerMiddleware'
 
-const router = express.Router()
 
-router.route('/profile')
-    .get(userMiddlewareAuthorized, getProfile)
+const router = express.Router()
 
 router.route('/profile/stats')
     .get(userMiddlewareAuthorized, getStats)
+    
+router.route('/profile')
+    .get(userMiddlewareAuthorized, getProfile)
+
+router.route('/check/account/user')
+    .get(checkUserAccountStatus)
+
 
 router.route('/update/profil')
     .patch(userMiddlewareAuthorized, validateUpdateInputPengguna, updateProfile)

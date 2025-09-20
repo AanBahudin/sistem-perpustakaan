@@ -13,7 +13,9 @@ const KatalogPengguna = () => {
     queryFn: getStats
   })
 
-  if (isLoading) return <DashboardLoading />
+  if (isLoading) return <DashboardLoading />  
+
+  console.log(statsData)
 
   const {
     peminjaman, 

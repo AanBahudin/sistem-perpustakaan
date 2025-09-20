@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { getProfil, updateProfil, updatingPassword, updatingEmail, photoUpdate, userStats } from "../../services/penggunaServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import { NotFoundError } from "../../errors/errorHandler";
+import Pengguna from "../../model/Pengguna";
 
 // SUDAH DITESTING
 export const getProfile = async(req: any, res: Response) => {
@@ -16,6 +18,7 @@ export const getProfile = async(req: any, res: Response) => {
 
 export const getStats = async(req: any | Request, res: Response) => {
     const {userId} = req.user
+    console.log(userId)
 
     const data = await userStats({userId})
 
@@ -23,6 +26,18 @@ export const getStats = async(req: any | Request, res: Response) => {
         res,
         message: 'Data stats',
         data
+    })
+}
+
+export const checkUserAccountStatus = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const dataPengguna = await Pengguna.findOne({_id: userId}).select('verifikasiProdi verifikasiEmail nama')
+    if (!dataPengguna) throw new NotFoundError('Data pengguna tidak ditemukan')
+    
+    SendOneDataResponse({
+        res,
+        data: dataPengguna,
+        message: 'Data Pengguna'
     })
 }
 

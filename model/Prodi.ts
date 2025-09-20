@@ -19,6 +19,7 @@ const ProdiSchema = new mongoose.Schema({
         default: 'Pending'
     },
     fotoProfil: String,
+    photoPublicId: String
 }, {timestamps: true})
 
 export interface ProdiInterfaceModel {

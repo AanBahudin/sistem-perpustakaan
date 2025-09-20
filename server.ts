@@ -48,11 +48,6 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-
-app.get('/', async(req, res) => {
-    res.render('verifikasiEmailDenganLoginData')
-})
-
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/user', authenticationMiddleware, userRoute)
 app.use('/api/v1/pustakawan', authenticationMiddleware, pustakawanMiddlewareAuthorized, pustakawanRoute)
