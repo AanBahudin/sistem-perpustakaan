@@ -1,17 +1,7 @@
-import { profileAction } from "@/actions/userActions"
 import MenuSection from "@/components/pengguna/Profil Pengguna/MenuSection"
 import ProfileCover from "@/components/pengguna/Profil Pengguna/ProfileCover"
 import Container from "@/globals/Container"
-import { Outlet, redirect } from "react-router-dom"
-
-export const profileLoader = async() => {
-  const response = await profileAction()
-
-  // jika belum login
-  if (!response) return redirect('/')
-  return response
-}
-
+import { Outlet } from "react-router-dom"
 
 const ProfilPengguna = () => {
   return (

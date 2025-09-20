@@ -1,7 +1,4 @@
-import { removeSelectedImg } from "@/cart/profileSlice";
-import { store } from "@/store";
 import { customFetch } from "@/utils/customFetch";
-import { queryClient } from "@/main";
 
 export const profileAction = async() => {
     const response = await customFetch.get('/user/profile')
@@ -16,7 +13,6 @@ export const getStats = async() => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Email tidak ditemukan'}
     }
-    console.log(response)
     return response.data.data
 }
 
@@ -26,8 +22,6 @@ export const updateProfileAction = async(formData: FormData) => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui nama'}
     }
-    queryClient.setQueryData(['profil'], response.data.data)
-    return {message: 'Profil Diperbaharui', deskripsi: 'Data telah diperbaharui', redirectTo: '/user/profil'}
 }
 
 export const updatePhotoAction = async(formData: FormData) => {
@@ -41,9 +35,7 @@ export const updatePhotoAction = async(formData: FormData) => {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui foto'}
     }
 
-    queryClient.setQueryData(['profil'], response.data.data)
-    store.dispatch(removeSelectedImg())
-    return {message: 'Foto diupload', deskripsi: 'Photo telah diperbaharui', redirectTo: '/user/profil'}
+    return response.data.data
 }
 
 export const updateEmailAction = async(formData: FormData) => {
@@ -52,9 +44,6 @@ export const updateEmailAction = async(formData: FormData) => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui email'}
     }
-
-    queryClient.setQueryData(['profil'], response.data.data)
-    return {message: 'Email Menunggu Diperbaharui', deskripsi: 'Silahkan cek email anda untuk verifikasi', redirectTo: '/user/profil'}
 }
 
 export const updatePasswordAction = async(formData: FormData) => {
@@ -64,7 +53,4 @@ export const updatePasswordAction = async(formData: FormData) => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat memperbaharui password'}
     }
-
-    queryClient.setQueryData(['profil'], response.data.data)
-    return {message: 'Diperbaharui', deskripsi: 'Password telah diubah', redirectTo: '/user/profil/credentials'}
 }

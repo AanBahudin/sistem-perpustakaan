@@ -18,7 +18,6 @@ export const getProfile = async(req: any, res: Response) => {
 
 export const getStats = async(req: any | Request, res: Response) => {
     const {userId} = req.user
-    console.log(userId)
 
     const data = await userStats({userId})
 

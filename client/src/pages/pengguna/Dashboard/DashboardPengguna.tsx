@@ -14,9 +14,7 @@ const KatalogPengguna = () => {
   })
 
   if (isLoading) return <DashboardLoading />  
-
-  console.log(statsData)
-
+  
   const {
     peminjaman, 
     peminjamanAktif, 

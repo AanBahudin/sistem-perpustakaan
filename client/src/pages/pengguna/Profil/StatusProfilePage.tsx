@@ -1,10 +1,17 @@
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
-import { useRouteLoaderData } from 'react-router-dom'
+import { profileAction } from '@/actions/userActions'
+import { useQuery } from '@tanstack/react-query'
 
 const StatusProfilePage = () => {
 
-  const data = useRouteLoaderData('user-profil')
+  const {data, isLoading} = useQuery({
+    queryKey: ['pengguna', 'profil'],
+    queryFn: profileAction
+  })
+  
+  
+  if (isLoading) return <h1>Loading...</h1>
 
   return (
      <section className='w-full grid-cols-9 flex flex-col justify-start'>

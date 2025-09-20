@@ -16,7 +16,7 @@ const MenuSection = () => {
           const variant = url === pathname ? 'secondary' : 'ghost'
           return (
             <div className='w-full' key={link.id}>
-              <Button asChild variant={variant} className='w-full text-left flex items-start text-white justify-start' >
+              <Button asChild variant={variant} className='w-full text-left flex items-start text-accent-foreground dark:text-white justify-start' >
                 <Link to={link.url} className='py-2 capitalize text-left'>{link.title}</Link>
               </Button>
               <Separator />

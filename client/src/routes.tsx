@@ -8,7 +8,6 @@ import KatalogPenggunaPage, { katalogPageLoader } from "./pages/pengguna/Buku/Ka
 import GeneralProfilePage from "./pages/pengguna/Profil/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/Profil/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/Profil/StatusProfilePage";
-import { profileLoader } from "./pages/pengguna/ProfilPengguna";
 import PeminjamanPage from "./pages/pengguna/Peminjaman/PeminjamanPage";
 import DataPenggunaLayout from "./pages/pengguna/DataPenggunaLayout";
 import PengembalianPage from "./pages/pengguna/Pengembalian/PengembalianPage";
@@ -103,10 +102,8 @@ const router : RouteObject[] = [
                 element: <KatalogPengguna />,
             },
             {
-                id: 'user-profil',
                 path: 'profil',
                 element: <ProfilPengguna />,
-                loader: profileLoader,
                 children: [
                     {
                         index: true,

@@ -1,13 +1,22 @@
 import { Separator } from '@/components/ui/separator'
 import ProfileData from '@/components/pengguna/Profil Pengguna/ProfileData'
-import { useRouteLoaderData } from 'react-router-dom'
 import PhotoProfile from '@/components/pengguna/Profil Pengguna/PhotoProfile'
-import FormContainer from '@/components/form/FormContainer'
-import { updatePhotoAction } from '@/actions/userActions'
+import { profileAction } from '@/actions/userActions'
+import { useQuery } from '@tanstack/react-query'
+import EditNamaDialog from '@/components/pengguna/Profil Pengguna/EditNamaDialog'
+import EditKelasDialog from '@/components/pengguna/Profil Pengguna/EditKelasDialog'
+import EditNomorTeleponDialog from '@/components/pengguna/Profil Pengguna/EditNomorTeleponDialog'
 
 const GeneralProfilePage = () => {
 
-  const data = useRouteLoaderData('user-profil')
+  const {data, isLoading} = useQuery({
+    queryKey: ['pengguna', 'profil'],
+    queryFn: profileAction
+  })
+
+
+  if (isLoading) return <h1>Loading...</h1>
+
 
   return (
     <section className='w-full grid-cols-9 flex flex-col justify-start'>
@@ -15,14 +24,12 @@ const GeneralProfilePage = () => {
       <Separator className='my-2' />
       <p className='text-muted-foreground'>Data profil utama yang digunakan untuk keperluan akademik dan identifikasi akun.</p>
 
-      <FormContainer action={updatePhotoAction} className="my-10 w-full flex items-center gap-x-8" >
-        <PhotoProfile />
-      </FormContainer>
+      <PhotoProfile fotoProfil={data.fotoProfil} />
 
       <main className='w-full grid grid-cols-2 gap-4'>
-        <ProfileData label='Nama Lengkap' value={data.nama} isEditable={true} name='nama' />
-        <ProfileData label='Kelas' value={data.kelas || '-'} isEditable={true} name='kelas' />
-        <ProfileData label='Angkatan' value={data.angkatan} />
+        <EditNamaDialog data={data} />
+        {data.role === 'Mahasiswa' && <EditKelasDialog data={data} />}
+        {data.role === 'Mahasiswa' && <ProfileData label='Angkatan' value={data.angkatan} />}
         <ProfileData label='Jurusan' value={data.jurusan} />
       </main>
 
@@ -32,7 +39,7 @@ const GeneralProfilePage = () => {
 
       <main className='w-full grid grid-cols-2 gap-4 mt-10'>
         
-        <ProfileData label='Telepon' value={data.no_hp || '-'} isEditable={true} name='no_hp'/>
+        <EditNomorTeleponDialog data={data} />
       </main>
 
       <h1 className='w-full text-2xl font-semibold mt-10'>Identitas Kampus</h1>

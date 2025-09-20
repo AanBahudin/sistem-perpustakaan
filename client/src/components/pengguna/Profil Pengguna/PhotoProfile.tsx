@@ -1,17 +1,38 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useFormStatus } from "@/context/FormContext"
 import { Check, Loader, X } from "lucide-react"
 import { useRef } from "react"
-import { useRouteLoaderData } from "react-router-dom"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
-import { setSelectedImg } from "@/cart/profileSlice"
+import { removeSelectedImg, setSelectedImg } from "@/cart/profileSlice"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { updatePhotoAction } from "@/actions/userActions"
+import { toast } from "sonner"
+import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 
 
-const PhotoProfile = () => {
-    const data = useRouteLoaderData('user-profil') as any
-    const {isLoading}  = useFormStatus()
+const PhotoProfile = ({fotoProfil} : {fotoProfil: string | undefined}) => {
+
+    const queryClient = useQueryClient()
+    const mutation = useMutation({
+        mutationFn: (data: FormData) => updatePhotoAction(data),
+        onSuccess: () => {
+            store.dispatch(removeSelectedImg())
+            queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})
+            toast('Diperbaharui', {description: 'Foto profil anda berhasil diperbaharui'})
+        },
+        onError: (error: any) => {
+            const errMsg = errorMsgGenerator(error)
+            toast('Gagal memperbaharui', {description: errMsg})
+        }
+    })
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        mutation.mutate(formData)
+    }
+
     const {selectedImg} = useSelector((state: any) =>  state.profileState)
     const inputImg = useRef<HTMLInputElement>(null)
 
@@ -30,9 +51,11 @@ const PhotoProfile = () => {
         }
     }
 
+    const isLoading = mutation.isPending
+
     return (
-        <>
-            <img className="w-[100px] border-2 h-[100px] bg-muted rounded-full object-cover" src={selectedImg ? selectedImg : (data.fotoProfil ? data.fotoProfil : 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746624245/uk3h7ilkoo7wm2axglsd.jpg')} alt="" />
+        <form onSubmit={handleSubmit} encType='multipart/form-data' className="w-full relative flex items-center gap-x-4 my-6">
+            <img className="w-[100px] border-2 h-[100px] bg-muted rounded-full object-cover" src={selectedImg ? selectedImg : (fotoProfil ? fotoProfil : 'https://res.cloudinary.com/dhthnjizr/image/upload/v1746624245/uk3h7ilkoo7wm2axglsd.jpg')} alt="" />
 
             <main className="flex gap-x-4">
                 <Input ref={inputImg} name="fotoProfil" id="fotoProfil" type="file" accept='image/*'  className="w-[250px]" placeholder="Upload foto profil" onChange={handleImgInput}/>
@@ -44,7 +67,7 @@ const PhotoProfile = () => {
                     </Button>
                 </div>
             </main>
-        </>
+        </form >
     )
 }
 
