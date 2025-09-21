@@ -24,6 +24,8 @@ type ConfirmPeminjamanType = {
 
 const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
 
+    console.log(buku)
+
     const {alasan, durasi} = useSelector((state: any) => state.peminjamanState)
     const [isModalOpen, setIsModalOpen]= useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
@@ -44,7 +46,8 @@ const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
             store.dispatch(setAlasan(''))
             store.dispatch(setDurasi(''))
         },
-        onError: () => {
+        onError: (error: any) => {
+            console.log(error)
             setLoading(false)
             setIsModalOpen(false)
         }

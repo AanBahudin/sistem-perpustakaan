@@ -4,7 +4,7 @@ import { PenggunaLayout, ProfilPengguna, KatalogPengguna, DetailBuku } from "./p
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
-import KatalogPenggunaPage, { katalogPageLoader } from "./pages/pengguna/Buku/KatalogPenggunaPage";
+import KatalogPenggunaPage from "./pages/pengguna/Buku/KatalogPenggunaPage";
 import GeneralProfilePage from "./pages/pengguna/Profil/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/Profil/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/Profil/StatusProfilePage";
@@ -166,8 +166,7 @@ const router : RouteObject[] = [
             {
                 id: 'buku-data',
                 path: 'buku',
-                element: <KatalogPenggunaPage />,
-                loader: katalogPageLoader
+                element: <KatalogPenggunaPage />
             },
             {
                 path: 'buku/:id',

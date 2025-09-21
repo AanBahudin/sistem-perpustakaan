@@ -20,7 +20,7 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, ala
     
     // cek apakah buku ada dan masih tersedia
     const buku = await Buku.findOne({_id: idBuku, stok: { $gte: 1 }, status: 'Tersedia', dihapus: false})
-    if (!buku) throw new NotFoundError('Buku tidak ditemukan')
+    if (!buku) throw new NotFoundError('Buku tidak ditemukan atau buku telah habis')
 
     // cek apakah durasi yang dipilih tersedia
     const durasiTersedia = (await dataDurasiPeminjaman()).map(item => item.durasi)

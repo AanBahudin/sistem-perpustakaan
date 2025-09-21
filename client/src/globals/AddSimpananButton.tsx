@@ -46,11 +46,11 @@ const AddSimpananButton = ({id} : {id: string}) => {
 
     return (
         <>
-            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${idBukuTersimpan.includes(id) ? 'bg-primary-foreground hover:bg-primary' : 'bg-transparent hover:bg-muted'}  duration-200 ease-in-out`}>
+            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${idBukuTersimpan.includes(id) ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}  duration-200 ease-in-out`}>
                 {dataLoading ? (
-                    <Loader2 className="w-8 h-8 stroke-white animate-spin" />
+                    <Loader2 className="w-8 h-8 dark:stroke-white stroke-black animate-spin" />
                 ) : (
-                    <BookMarked className="w-8 h-8 stroke-white" />
+                    <BookMarked className="w-8 h-8 dark:stroke-white stroke-black" />
                 )}
             </Button>
             <input type="hidden" name="bookId" id="bookId" value={id}  />

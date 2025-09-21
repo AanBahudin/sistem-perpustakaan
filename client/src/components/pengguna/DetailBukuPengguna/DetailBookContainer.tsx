@@ -53,10 +53,14 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
                     {peminjaman?.statusPeminjaman === 'Dipinjam' ? (
                         null
                     ) : (
-                        <Button className="w-1/3 !text-white mt-6 flex items-center" variant='secondary'>
-                            <Plus />
-                            <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
-                        </Button>
+                        data.stok <= 0 ? (
+                            <Button variant='destructive' className="!dark:text-white mt-6 flex items-center">Buku Telah Habis</Button>
+                        ) : (
+                            <Button className="w-1/3 !dark:text-white mt-6 flex items-center" variant='secondary'>
+                                <Plus />
+                                <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
+                            </Button>
+                        )
                     )}
                 </div> 
             </main>

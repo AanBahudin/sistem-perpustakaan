@@ -34,7 +34,7 @@ const PerpanjanganColumn = ({peminjaman, perpanjangan} : PerpanjanganColumnType)
             </main> 
 
             <h1 className='font-bold uppercase'>status perpanjangan</h1>
-            <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center text-white'> Perpanjangan {disetujui}</Button>
+            <Button variant={disetujui === 'Diterima' ? 'default' : (disetujui === 'Ditolak' ? 'destructive' : 'secondary')} disabled className='my-4 w-full text-center dark:text-white text-black'> Perpanjangan {disetujui}</Button>
 
             {
                 disetujui === 'Pending' && <CancelPerpanjangan perpanjangan={perpanjangan} />

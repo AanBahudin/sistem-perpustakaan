@@ -36,7 +36,7 @@ const PengembalianTabs = () => {
             {tabPengembalian.map((item, index) => {
                 return (
                 <div onClick={() => handleTab({title: item.title, value: item.value})} key={index} className={`${activeTab === item.title ? 'bg-muted text-primary-foreground' : ''} w-full cursor-default col-span-1 py-4 first:rounded-l last:rounded-l hover:text-primary-foreground duration-300 ease-in-out`}>
-                    <h3 className="capitalize text-center">{item.title}</h3>
+                    <h3 className="capitalize text-center dark:text-white text-black">{item.title}</h3>
                 </div>
                 )
             })}

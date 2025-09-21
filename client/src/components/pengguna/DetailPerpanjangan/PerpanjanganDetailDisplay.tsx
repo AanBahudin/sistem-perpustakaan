@@ -27,7 +27,7 @@ const PerpanjanganDetailDisplay = ({perpanjangan, peminjaman} : PerpanjanganDeta
 
             <main className='w-full mt-4'>
                 <p className='uppercase text-[12px] text-muted-foreground font-bold'>anda meminjam buku</p>
-                <p className='text-sm font-bold text-primary-foreground hover:underline hover:text-primary cursor-default'>{buku.judul}</p>
+                <p className='text-sm font-bold dark:text-primary-foreground text-primary hover:underline hover:text-primary cursor-default'>{buku.judul}</p>
             </main>
 
             <main className='w-full mt-4'>

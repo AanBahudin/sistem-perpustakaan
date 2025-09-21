@@ -5,41 +5,29 @@ import KatalogSection from '@/components/pengguna/Katalog Buku Pengguna/KatalogS
 import KategorySection from '@/components/pengguna/Katalog Buku Pengguna/KategorySection'
 import LastAdded from '@/components/pengguna/Katalog Buku Pengguna/LastAdded'
 import Container from '@/globals/Container'
+import { useSearchParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import BookLoading from '@/components/Loading/BookLoading'
-import AwaitHooks from '@/hooks/AwaitHooks'
-import { defer, useLoaderData } from 'react-router-dom'
-import LastAddedLoading from '@/components/Loading/LastAddedLoading'
-import { getAllSuka } from '@/actions/sukaActions'
-import { getAllSimpanan } from '@/actions/simpanActions'
-
-export const katalogPageLoader = async({request} : {request: Request}) => {
-
-  const url = new URL(request.url)
-  const searchParams = url.searchParams.toString()
-
-  return defer({
-    buku: getAllBuku(searchParams),
-    disukai: getAllSuka(),
-    tersimpan: getAllSimpanan()
-  })
-}
 
 const KatalogPenggunaPage = () => {
 
-  const {buku, disukai, tersimpan} = useLoaderData() as { buku: Promise<any>, disukai: Promise<any>, tersimpan: Promise<any>}
-  const bukuandLikedBuku = Promise.all([buku, disukai, tersimpan])
+  const [searchParams] = useSearchParams()
+  const fullParams = new URLSearchParams(searchParams).toString()
+  
+  const {data: dataBuku, isLoading} = useQuery({
+    queryKey: ['buku'],
+    queryFn: () => getAllBuku(fullParams)
+  })
+
+  if (isLoading) return <BookLoading />
 
   return (
     <Container className='my-20'>
       <KatalogCover />
-      <BookRecomendation buku={buku} />
-      <AwaitHooks data={buku} loadingComponent={<LastAddedLoading />}>
-        {data => <LastAdded buku={data.data} />}
-      </AwaitHooks>
+      <BookRecomendation buku={dataBuku.data} />
+      <LastAdded buku={dataBuku.data} />
       <KategorySection />
-      <AwaitHooks data={bukuandLikedBuku} loadingComponent={<BookLoading />}>
-        {((data) => <KatalogSection dataBuku={data[0].data} total={data[0].total}/>)}
-      </AwaitHooks>
+      <KatalogSection dataBuku={dataBuku.data} total={dataBuku.total}/>
     </Container>
   )
 }

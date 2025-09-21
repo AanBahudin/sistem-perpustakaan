@@ -6,43 +6,12 @@ const queryClient = new QueryClient({
 })
 
 export const getAllSuka = async() => {
-    const response = await queryClient.fetchQuery({
-        queryKey: ['suka'],
-        queryFn: async() => {
-            const response = await customFetch.get('/suka')
-            if (response.status >= 400) {
-                return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
-            }
-
-            return response.data.data
-        }
-    })
-    return response
-}
-
-export const addOrRemoveSuka = async(formData: FormData) => {
-    const data = Object.fromEntries(formData)
-    const idBuku = formData.get('bukuId') as string
-    
-    const response = await customFetch.post('/suka', data)
+    const {data: response} = await customFetch.get('/suka')
     if (response.status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data, silahkan periksa koneksi internet Anda'}
     }
 
-    await queryClient.invalidateQueries({ queryKey: ['suka']})
-    await queryClient.invalidateQueries({ queryKey: ['detail-book', idBuku]})
-    
-    return {
-        message: 'Disukai',
-        deskripsi: 'Buku ditambahkan di menu Disukai',
-        showToast: false,
-        queryKey: ['detail-book', idBuku],
-        // queryKey: [
-        //     ['suka'],
-        //     ['detail-book', idBuku]
-        // ],
-        redirectTo: '.'
-    }
+    return response.data
 }
 
 export const addOrRemoveSukaNew = async(id: string) => {

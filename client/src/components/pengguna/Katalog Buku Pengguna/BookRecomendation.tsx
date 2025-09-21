@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import RecomendationBook from './RecomendationBook'
 
-const BookRecomendation = ({buku} : {buku: Promise<any> }) => {
+const BookRecomendation = ({buku} : {buku: any }) => {
   return (
     <section className='w-full flex flex-col items-center justify-center mt-10'>
 

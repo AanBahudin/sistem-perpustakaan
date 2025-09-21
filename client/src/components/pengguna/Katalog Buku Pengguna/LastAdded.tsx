@@ -20,7 +20,7 @@ const LastAdded = ({buku} : {buku:any}) => {
                     <div className='flex gap-x-4'>
                         {book.kategori.map((item:string, index:number) => {
                             return (
-                                <p key={index} className='text-white px-4 rounded py-1 bg-muted border text-center w-fit'>{item}</p>
+                                <p key={index} className='text-white px-4 rounded py-1 bg-primary dark:bg-muted border text-center w-fit'>{item}</p>
                             )
                         })}
                     </div>

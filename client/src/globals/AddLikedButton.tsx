@@ -54,11 +54,11 @@ const AddLikedButton = ({id} : {id: string}) => {
     const idBukuDisukai : any[]= data.bukuDisukai.map((item: any) => item._id)
     return (
         <>
-            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${idBukuDisukai.includes(id) ? 'bg-primary-foreground hover:bg-primary' : 'bg-transparent hover:bg-muted'}`}>
+            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${idBukuDisukai.includes(id) ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}`}>
                 {reactQueryLoading ? (
-                    <Loader2 className="w-8 h-8 stroke-white animate-spin" />
+                    <Loader2 className="w-8 h-8 dark:stroke-white stroke-black animate-spin" />
                 ) : (
-                    <ThumbsUp className={`stroke-white w-8 h-8`} />
+                    <ThumbsUp className={`dark:stroke-white stroke-black w-8 h-8`} />
                 )}
             </Button>
             <Input type="hidden" id="bukuId" name='bukuId' value={id} />

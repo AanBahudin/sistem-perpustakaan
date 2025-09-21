@@ -24,7 +24,7 @@ const PerpanjanganTab = () => {
         {tabPerpanjangan.map((item, index) => {
             return (
             <div key={index} onClick={() => handleTabs(item)} className={`${item === kondisiPerpanjangan ? 'bg-muted text-primary-foreground' : ''} w-full cursor-default col-span-1 py-4 first:rounded-l last:rounded-l hover:text-primary-foreground duration-300 ease-in-out`}>
-                <h3 className="capitalize text-center">{item}</h3>
+                <h3 className="capitalize text-center dark:text-white text-black">{item}</h3>
             </div>
             )
         })}
