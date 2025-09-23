@@ -13,7 +13,7 @@ const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
                 <div className="w-full flex items-start justify-between">
                     <p>Denda Terlambat</p>
                     <div className="flex flex-col justify-end items-end">
-                        <p>{formatRupiah(1500)} x {pengembalian.durasiKeterlambatan} Hari</p>
+                        <p className="dark:text-white text-black">{formatRupiah(1500)} x {pengembalian.durasiKeterlambatan} Hari</p>
                         <p className="text-[10px] text-white font-semibold">{formatRupiah(pengembalian.dendaKeterlambatan)}</p>
                     </div>
                 </div>
@@ -21,7 +21,7 @@ const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
                 <div className="w-full flex items-start justify-between">
                     <p>Denda Fisik</p>
                     <div className="flex flex-col justify-end items-end">
-                        <p className="text-white font-semibold">{formatRupiah(pengembalian.dendaFisik)}</p>
+                        <p className="dark:text-white text-black font-semibold">{formatRupiah(pengembalian.dendaFisik)}</p>
                         {pengembalian.isMissing ? (
                             <p className="text-[10px] text-destructive/70 font-semibold">Harga buku</p>
                         ) : (
@@ -31,7 +31,7 @@ const InvoiceDetail = ({pengembalian} : {pengembalian: any}) => {
                 </div>
                 <Separator />
 
-                <div className="w-full flex items-start justify-between text-sm font-semibold text-white">
+                <div className="w-full flex items-start justify-between text-sm font-semibold dark:text-white text-black">
                     <p>Total Pembayaran</p>
                     <p>{formatRupiah(pengembalian.totalDenda)}</p>
                 </div>

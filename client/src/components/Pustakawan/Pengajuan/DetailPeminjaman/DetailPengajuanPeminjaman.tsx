@@ -11,6 +11,7 @@ const DetailPengajuanPeminjaman = ({dataPeminjaman} : {dataPeminjaman: any}) => 
 
                 <div className='w-full text-muted-foreground text-xs mt-4 gap-y-1 flex flex-col'>
                     <DetailPengajuanInformation label="Tanggal Pengajuan" value={formatedDate(dataPeminjaman.createdAt)} />
+                    <DetailPengajuanInformation label="Kondisi" value={dataPeminjaman.kondisi} />
                     <DetailPengajuanInformation label="Durasi Peminjaman" value={dataPeminjaman.durasiPeminjaman + ' Hari'} />
                     <DetailPengajuanInformation label="Status Pengajuan" value={dataPeminjaman.statusPeminjaman} />
                     <DetailPengajuanInformation label="Judul Buku" value={buku?.judul?.slice(0, 22) || dataPeminjaman.judulBuku.slice(0, 22)} />

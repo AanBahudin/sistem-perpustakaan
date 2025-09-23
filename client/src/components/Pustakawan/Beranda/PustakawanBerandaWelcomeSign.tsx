@@ -16,11 +16,11 @@ const PustakawanBerandaWelcomeSign = () => {
       {isLoading ? (
         <Skeleton className="w-[40px] h-4" />
       ) : (
-        <h1 className='text-white font-semibold text-2xl'>Hallo, {data.nama}🙌</h1>
+        <h1 className='dark:text-white text-shadow-black font-semibold text-2xl'>Hallo, {data.nama}🙌</h1>
       )}
-      <p className='text-xs mt-4 text-white'>Selamat datang di Dashboard Pustakawan. Di sini Anda dapat mengelola koleksi buku, memantau peminjaman, serta memastikan setiap layanan perpustakaan berjalan dengan lancar. Mari wujudkan pengalaman terbaik bagi mahasiswa dan dosen dalam mencari serta mengakses sumber pengetahuan</p>
+      <p className='text-xs mt-4 dark:text-white text-muted-foreground'>Selamat datang di Dashboard Pustakawan. Di sini Anda dapat mengelola koleksi buku, memantau peminjaman, serta memastikan setiap layanan perpustakaan berjalan dengan lancar. Mari wujudkan pengalaman terbaik bagi mahasiswa dan dosen dalam mencari serta mengakses sumber pengetahuan</p>
 
-      <Button size='sm' className='w-[20%] text-xs mt-5 font-normal border text-white bg-accent/40' asChild >
+      <Button variant='default' size='sm' className='w-[20%] text-xs mt-5 font-normal' asChild >
         <Link to={'/pustakawan/pengajuan'}>Lihat</Link>
       </Button>
     </section>
