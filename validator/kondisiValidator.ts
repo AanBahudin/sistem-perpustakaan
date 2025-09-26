@@ -11,8 +11,11 @@ export const kondisiValidator = withValidationErrors([
         }),
     body('denda')
         .notEmpty().withMessage('Denda tidak boleh kosong')
-        .isInt({min: 1000}).withMessage('Denda tidak boleh kurang dari 1000')
-        .toInt(),
+        .customSanitizer((denda: string) => {
+            const newDenda = Number(denda.replace('.', ''))
+            return newDenda
+        })
+        .isInt({min: 1000}).withMessage('Denda tidak boleh kurang dari 1000'),
     body('deskripsi')
         .notEmpty().withMessage('Deskripsi tidak boleh kosong')
         .isLength({min: 10, max: 100}).withMessage('Deskripsi 10 - 100 karakter')

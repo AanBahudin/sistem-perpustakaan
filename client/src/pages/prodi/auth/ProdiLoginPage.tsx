@@ -44,8 +44,8 @@ const ProdiLoginPage = () => {
     }
 
     return (
-        <Container className='min-h-[100vh] w-full flex items-center justify-center bg-accent/10'>
-            <form onSubmit={handleSubmit} className='w-full border rounded-2xl max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl bg-accent/10'>
+        <Container className='min-h-[100vh] w-full flex items-center justify-center dark:bg-accent/10 bg-primary/20'>
+            <form onSubmit={handleSubmit} className='w-full border rounded-2xl max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl dark:bg-accent/10 bg-primary/30'>
                 <main className='w-full flex items-center justify-center mb-2'>
                     <SecondaryLogo />
                 </main>
@@ -75,7 +75,7 @@ const ProdiLoginPage = () => {
                                 name='password' id='password'
                                 value={password} onChange={e => setPassword(e.target.value)} min={8} />
                             {password && (
-                                <Button type="button" size='icon' variant='secondary' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
+                                <Button type="button" size='icon' variant='secondary' className='dark:border duration-200 ease-in-out' onClick={handleShowPassword}>
                                     <Eye className={showPassword ? 'stroke-primary' : ''} />
                                 </Button>
                             )}
@@ -84,7 +84,7 @@ const ProdiLoginPage = () => {
 
                     <Button
                         type='submit'
-                        className='text-white mt-6 bg-accent'
+                        className='text-white mt-6 bg-primary dark:bg-accent'
                         disabled={mutation.isPending}>
                             {mutation.isPending ? <Loader className='animate-spin duration-300' /> : 'Masuk'}
                     </Button>

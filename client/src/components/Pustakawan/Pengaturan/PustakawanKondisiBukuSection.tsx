@@ -35,7 +35,7 @@ const PustakawanKondisiBukuSection = () => {
           return (
             <main key={index} className='w-full flex-1 py-4 border-b flex items-center justify-between'>
               <div>
-                <h4 className='text-sm font-semibold text-white'>{item.kondisi}</h4>
+                <h4 className='text-sm font-semibold text-black dark:text-white'>{item.kondisi}</h4>
                 <p className='text-sm text-muted-foreground '>{formatRupiah(item.denda)}</p>
                 <p className='text-xs my-2 text-muted-foreground'>{item.deskripsi}</p>
               </div>

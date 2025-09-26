@@ -12,6 +12,7 @@ const prodiPustakawanSlice = createSlice({
     reducers: {
         setNonaktifAlert: (state, action) => {
             const {pustakawanId, alertState} = action.payload
+            // jika alert state = true atau terbuka. maka Id pustakawan diatur
             if (alertState) {
                 state.activePustakawanId = pustakawanId
             } else {

@@ -1,5 +1,4 @@
-import { Pen, User } from "lucide-react"
-import GlobalTooltip from "@/globals/GlobalTooltip"
+import { User } from "lucide-react"
 import { formatedDate } from "@/utils/formatDate"
 import ProfileDropDown from "./ProfileDropDown"
 
@@ -10,12 +9,7 @@ const PustakawanMainProfile = ({profil} : {profil: any}) => {
     <section className="w-[30%] min-h-[40vh] p-4 border rounded-xl relative flex flex-col items-center justify-center">
       <ProfileDropDown profil={profil} />      
       <main className="bg-muted w-24 h-24 rounded-full relative">
-        <GlobalTooltip text="Edit Profil">
-          <div className="w-8 h-8 absolute p-2 bg-primary flex items-center justify-center rounded-full bottom-0 right-0">
-            <Pen   />
-          </div>
-        </GlobalTooltip>
-
+        
         {profil?.fotoProfil ? (
           <img className="w-full h-full rounded-full object-cover" src={profil.fotoProfile} alt={profil.nama} />
         ) : (

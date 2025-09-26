@@ -22,7 +22,7 @@ const GeneralInfoContainer = () => {
   }
 
   return (
-    <section className='w-full p-4 rounded-xl bg-accent/10'>
+    <section className='w-full p-4 rounded-xl dark:bg-accent/10 bg-muted'>
       <h1 className='text-lg font-semibold mb-4'>Informasi Umum</h1>
 
       <main className='w-full flex flex-col gap-y-2 mb-2'>
@@ -30,7 +30,7 @@ const GeneralInfoContainer = () => {
           <Label htmlFor='judul' className='text-xs font-normal'>Judul Buku</Label>
           <p className='text-muted-foreground text-[11px]'>{judulBuku.length} / 200</p>
         </div>
-        <Input max={200} name='judul' id='judul' value={judulBuku} onChange={handleJudulBuku} required autoFocus className='w-full !text-xs placeholder:text-xs border-none' placeholder='Algoritma dan Struktur Data' />
+        <Input max={200} name='judul' id='judul' value={judulBuku} onChange={handleJudulBuku} required autoFocus className='w-full !text-xs placeholder:text-xs border dark:border-none' placeholder='Algoritma dan Struktur Data' />
       </main>
 
       <main className='w-full flex flex-col gap-y-2 mb-2'>
@@ -38,7 +38,7 @@ const GeneralInfoContainer = () => {
           <Label htmlFor='tagline' className='text-xs font-normal'>Tagline Buku</Label>
           <p className='text-muted-foreground text-[11px]'>{taglineBuku.length} / 500</p>
         </div>
-        <Textarea maxLength={500} value={taglineBuku} onChange={handleTaglineBuku} name='tagline' id='tagline' required className='w-full !text-xs border-none resize-none' placeholder='Ringkasan unik yang menggambarkan inti buku'></Textarea>
+        <Textarea maxLength={500} value={taglineBuku} onChange={handleTaglineBuku} name='tagline' id='tagline' required className='w-full !text-xs border dark:border-none resize-none' placeholder='Ringkasan unik yang menggambarkan inti buku'></Textarea>
       </main>
 
       <main className='w-full flex flex-col gap-y-2 mb-4'>
@@ -46,20 +46,20 @@ const GeneralInfoContainer = () => {
           <Label className='text-xs font-normal'>Deskripsi Buku</Label>
           <p className='text-muted-foreground text-[11px]'>{deskripsiBuku.length} / 1000</p>
         </div>
-        <Textarea maxLength={1000} value={deskripsiBuku} onChange={handleDeskripsiBuku} name='deskripsi' id='deskripsi' required placeholder='Jelaskan secara singkat topik, alur, atau pesan utama yang disampaikan' className='w-full !text-xs border-none min-h-[25vh]'></Textarea>
+        <Textarea maxLength={1000} value={deskripsiBuku} onChange={handleDeskripsiBuku} name='deskripsi' id='deskripsi' required placeholder='Jelaskan secara singkat topik, alur, atau pesan utama yang disampaikan' className='w-full !text-xs border dark:border-none min-h-[25vh]'></Textarea>
       </main>
 
       <main className='w-full flex items-center justify-between gap-x-4'>
         <div className='w-1/2 flex flex-col gap-y-1 mb-2'>
           <Label htmlFor='penulis' className='text-xs font-normal'>Penulis Buku</Label>
           <p className='text-[10px] text-muted-foreground'>Tambahkan informasi penulis buku</p>
-          <Input name='penulis' id='penulis' required className='w-full !text-xs placeholder:text-xs border-none' placeholder='Pramoedya Ananta Toer' />
+          <Input name='penulis' id='penulis' required className='w-full !text-xs placeholder:text-xs border dark:border-none' placeholder='Pramoedya Ananta Toer' />
         </div>
 
         <div className='w-1/2 flex flex-col gap-y-1 mb-2'>
           <Label htmlFor='penerbit' className='text-xs font-normal'>Penerbit Buku</Label>
           <p className='text-[10px] text-muted-foreground'>Tambahkan informasi penerbit buku</p>
-          <Input name='penerbit' id='penerbit' required className='w-full !text-xs placeholder:text-xs border-none' placeholder='Gramedia Pustaka Utama' />
+          <Input name='penerbit' id='penerbit' required className='w-full !text-xs placeholder:text-xs border dark:border-none' placeholder='Gramedia Pustaka Utama' />
         </div>
       </main> 
     </section>

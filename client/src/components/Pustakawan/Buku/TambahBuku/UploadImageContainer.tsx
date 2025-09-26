@@ -16,7 +16,7 @@ const UploadImageContainer = () => {
   }
 
   return (
-    <section className='w-full p-4 bg-accent/10 rounded-xl'>
+    <section className='w-full p-4 bg-muted dark:bg-accent/10 rounded-xl'>
       <h1 className='text-lg font-semibold mb-4'>Upload Gambar</h1>
       <main className='w-full min-h-[40vh] rounded-lg bg-accent/40 flex items-center justify-center'>
         {selectedImg ? (

@@ -16,7 +16,7 @@ const ProfileDropDown = ({profil} : {profil: any}) => {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <main className="w-8 absolute h-8 rounded-full hover:bg-accent/40 p-2 flex items-center justify-center top-4 right-4">
-                        <EllipsisVertical className="stroke-white" />
+                        <EllipsisVertical className="stroke-black dark:stroke-white" />
                     </main>
                 </DropdownMenuTrigger>
                 

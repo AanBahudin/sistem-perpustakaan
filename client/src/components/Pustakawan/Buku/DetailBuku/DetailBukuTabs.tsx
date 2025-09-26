@@ -16,7 +16,7 @@ const DetailBukuTabs = () => {
             {menus.map((item: string, index: number) => {
                 const activeMenu: boolean = item === isActive
                 return (
-                    <Button onClick={() => handleTabsValue(item)} className={`text-white duration-200 ease-in-out text-xs min-w-[150px] border ${activeMenu ? 'bg-primary/40 hover:bg-primary/40' : 'bg-transparent  hover:bg-accent'}`} key={index}>{item}</Button>
+                    <Button onClick={() => handleTabsValue(item)} className={`dark:text-white text-muted-foreground duration-200 ease-in-out text-xs min-w-[150px] border ${activeMenu ? 'dark:bg-primary/40 dark:hover:bg-primary/40 bg-primary/80 text-white' : 'bg-transparent  hover:bg-accent'}`} key={index}>{item}</Button>
                 )
             })}
         </section>

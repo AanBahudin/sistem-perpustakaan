@@ -1,7 +1,5 @@
 const RecomendationBook = ({data} : {data:any}) => {
 
-  console.log(data)
-
   return (
     <main className='flex gap-x-8 my-8'>
       {data.recommendation.map((item:any, index:number) => {

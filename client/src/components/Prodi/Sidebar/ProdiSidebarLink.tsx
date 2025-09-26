@@ -21,7 +21,7 @@ const ProdiSidebarLink = () => {
               end={data.title === 'Dashboard'}
               className={({ isActive }) =>
                 `w-full flex items-center gap-x-4 py-3 px-2 rounded ${
-                  isActive ? 'bg-primary/30' : 'hover:bg-muted duration-200 ease-in-out'
+                  isActive ? 'bg-primary dark:bg-primary/30' : 'hover:bg-muted duration-200 ease-in-out'
                 }`
               }
             >

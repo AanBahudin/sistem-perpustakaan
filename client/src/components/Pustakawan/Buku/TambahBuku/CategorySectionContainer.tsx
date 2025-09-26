@@ -57,7 +57,7 @@ const dataSelect = isLoading ? ['memuat'] : response.data.map((item: any) => ite
   }
   
   return (
-    <section className='w-full p-4 bg-accent/10 rounded-xl'>
+    <section className='w-full p-4 bg-muted dark:bg-accent/10 rounded-xl'>
       <h1 className='text-lg font-semibold mb-4'>Kategori</h1>
       <main className='w-full flex flex-col gap-y-2 mb-2'>
         <Label className='text-xs font-normal'>Kategori Buku</Label>

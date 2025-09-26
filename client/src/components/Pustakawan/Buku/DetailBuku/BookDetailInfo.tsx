@@ -9,7 +9,7 @@ const BookDetailInfo = ({data} : {data: any}) => {
     return (
         <section className='flex-1'>
             <main className='flex items-center justify-between w-full'>
-                <Badge variant='secondary' className='text-xs text-white'>Detail Buku</Badge>
+                <Badge variant='secondary' className='text-xs dark:text-white text-black'>Detail Buku</Badge>
                 <DetailBukuBadge lihat={data.totalDilihat} like={data.totalDisukai} simpan={data.totalDisimpan} />
             </main>
 

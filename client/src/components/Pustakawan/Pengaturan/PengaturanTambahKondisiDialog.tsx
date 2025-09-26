@@ -67,7 +67,7 @@ const PengaturanTambahKondisiDialog = ({children} : {children: React.ReactNode})
   const handleSubmit = (e: any) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const data = Object.fromEntries(formData)
+    let data = Object.fromEntries(formData)
     mutation.mutate(data)
   }
   

@@ -22,13 +22,14 @@ const AktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
     const queryClient = useQueryClient()
     const [searchParams] = useSearchParams()
     const params = new URLSearchParams(searchParams).toString()
-    const { aktifkanAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
+
+    const { activePustakawanId, aktifkanAlert } = useSelector((state: any) => state.prodiPustakawanSlice)
     const handleOpenAlert = (value: boolean) => {
         store.dispatch(setAktifAlert({pustakawanId: idPustakawan, alertState: value}))
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiAktifkan(idPustakawan),
+        mutationFn: () => prodiAktifkan(activePustakawanId),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
             toast('Akun pustakawan Diaktifkan')

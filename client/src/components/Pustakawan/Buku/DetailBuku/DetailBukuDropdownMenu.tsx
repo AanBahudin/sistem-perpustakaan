@@ -11,8 +11,8 @@ const DetailBukuDropdownMenu = ({idBuku} : {idBuku: string}) => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <main className='w-8 h-8 p-2 flex items-center justify-center rounded-full hover:bg-accent/40 bg-transparent border'>
-                <Ellipsis className='stroke-white' />
+            <main className='w-8 h-8 p-2 flex items-center justify-center rounded-full dark:hover:bg-accent/40 dark:bg-transparent bg-primary/10 hover:bg-primary/20 border'>
+                <Ellipsis className='dark:stroke-white stroke-black' />
             </main>
         </DropdownMenuTrigger>
 
