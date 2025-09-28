@@ -36,13 +36,15 @@
     "node-vibrant": "^4.0.3",
     "pug": "^3.0.3",
     "react-day-picker": "^8.10.1",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/date-fns": "^2.5.3",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "@types/ws": "^8.18.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript": "^5.9.2"

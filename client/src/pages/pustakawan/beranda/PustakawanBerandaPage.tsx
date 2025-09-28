@@ -3,6 +3,7 @@ import { getStatsPustakawan } from "@/actions/Pustakawan/pustakawanStatsAction"
 import BerandaLeftSideContainer from "@/components/Pustakawan/Beranda/BerandaLeftSideContainer"
 import BerandaRightSideContainer from "@/components/Pustakawan/Beranda/BerandaRightSideContainer"
 import BerandaLoading from "@/components/Pustakawan/Beranda/BerandaLoading"
+import { useEffect } from "react"
 
 const PustakawanBerandaPage = () => {
 
@@ -10,6 +11,19 @@ const PustakawanBerandaPage = () => {
     queryKey: ['pustakawan', 'beranda'],
     queryFn: getStatsPustakawan
   })
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:4000?username=Aan");
+  
+    socket.onopen = () => {
+      socket.send('hallo server')
+    }
+  
+    socket.onmessage = (event: any) => {
+      console.log(`pesan dari server ${event.data}`)
+    }
+  }, [])
+
 
   if (isLoading) return <BerandaLoading />
 

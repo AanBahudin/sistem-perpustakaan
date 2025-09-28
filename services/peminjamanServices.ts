@@ -1,3 +1,4 @@
+import { WebSocketServer } from "ws";
 import { BadRequestError, NotFoundError } from "../errors/errorHandler";
 import Buku from "../model/Buku";
 import Peminjaman from "../model/Peminjaman";
@@ -8,6 +9,7 @@ import tambahHariKeTanggal from "../utils/tambahHari";
 import { bukuDipinjam } from "./BukuServices/UtilsBukuServices";
 import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
+import { getWss, sendNotificationToUser } from "../sockets/socketConnection";
 
 
 // 4 service dibawah khusus pengguna
@@ -33,6 +35,19 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, ala
         judulBuku: buku.judul,
         durasiPeminjaman, 
         statusPeminjaman: 'Diajukan' 
+    })
+
+    const webSocketServer = getWss()
+    webSocketServer.clients.forEach((client: any) => {
+        if (client.readyState === 1) {
+            client.send(JSON.stringify({
+                pengajuan: 'peminjaman',
+                type: 'PUSTKAWAN_PEMINJAMAN_BARU',
+                title: 'Terdapat Peminjaman Baru',
+                deskripsi: 'Periksa pengajuan peminjaman baru',
+                data: pinjaman
+            }))
+        }
     })
 
     return {data: pinjaman} 
@@ -133,6 +148,14 @@ export const terimaPeminjamanUser = async({idPeminjaman, kondisiBuku, userId} : 
     await penggunaMeminjam({idPengguna: dataPeminjaman.peminjam as string})
     // update attribute stok buku di model Buku
     await bukuDipinjam(dataPeminjaman.buku as string)
+
+    sendNotificationToUser(userId, {
+        pengajuan: 'peminjaman',
+        type: 'PENGGUNA_PEMINJAMAN_DITERIMA',
+        title: `Peminjaman ${dataPinjaman?.judulBuku} Diterima`,
+        deskripsi: 'Periksa peminjaman baru anda',
+        data: dataPinjaman
+    })
 
     return {data: dataPinjaman}
 }
@@ -269,4 +292,4 @@ export const getPeminjamanAktifByBukuId = async({idBuku} : {idBuku: string}) => 
         })
 
     return peminjaman
-}
+}   
