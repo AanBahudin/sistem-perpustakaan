@@ -96,7 +96,7 @@ const router : RouteObject[] = [
     {
         path: '/my',
         element: <PenggunaLayout />,
-        children: [
+        children: [ 
             {
                 index: true,
                 element: <KatalogPengguna />,

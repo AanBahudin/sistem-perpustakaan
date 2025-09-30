@@ -10,6 +10,8 @@ import { bukuDipinjam } from "./BukuServices/UtilsBukuServices";
 import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
 import { getWss, sendNotificationToUser } from "../sockets/socketConnection";
+import { notifyPustakawan, notifyUser } from "../sockets/soket";
+import { title } from "process";
 
 
 // 4 service dibawah khusus pengguna
@@ -37,21 +39,19 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, ala
         statusPeminjaman: 'Diajukan' 
     })
 
-    const webSocketServer = getWss()
-    webSocketServer.clients.forEach((client: any) => {
-        if (client.readyState === 1) {
-            client.send(JSON.stringify({
-                pengajuan: 'peminjaman',
-                type: 'PUSTKAWAN_PEMINJAMAN_BARU',
-                title: 'Terdapat Peminjaman Baru',
-                deskripsi: 'Periksa pengajuan peminjaman baru',
-                data: pinjaman
-            }))
+    // kirim notifikasi ke pustakawan via websocket
+    notifyPustakawan({
+        event: 'PENGGUNA_MENGAJUKAN_PEMINJAMAN',
+        payload: {
+            untuk: 'PUSTAKAWAN',
+            tipe: 'PEMINJAMAN',
+            title: 'Pengajuan Baru',
+            deskripsi: 'Terdapat pengajuan peminjaman baru',
+            data: pinjaman
         }
     })
 
-    return {data: pinjaman} 
-    // return {data: []}
+    return {data: pinjaman}
 }
 
 // SUDAH DITESTING
@@ -149,12 +149,19 @@ export const terimaPeminjamanUser = async({idPeminjaman, kondisiBuku, userId} : 
     // update attribute stok buku di model Buku
     await bukuDipinjam(dataPeminjaman.buku as string)
 
-    sendNotificationToUser(userId, {
-        pengajuan: 'peminjaman',
-        type: 'PENGGUNA_PEMINJAMAN_DITERIMA',
-        title: `Peminjaman ${dataPinjaman?.judulBuku} Diterima`,
-        deskripsi: 'Periksa peminjaman baru anda',
-        data: dataPinjaman
+
+    console.log(dataPinjaman?.peminjam.toString())
+
+    notifyUser({
+        userId: dataPinjaman?.peminjam.toString() as string,
+        event: 'PEMINJAMAN_DITERIMA',
+        payload: {
+            untuk: 'PENGGUNA',
+            tipe: 'PEMINJAMAN',
+            title: 'Peminjaman anda telah diproses',
+            deskripsi: 'Lihat status penerimaan peminjaman anda',
+            data: dataPinjaman
+        }
     })
 
     return {data: dataPinjaman}
@@ -166,6 +173,19 @@ export const tolakPinjamanPustakawan = async({idPeminjaman, idPengguna} : {idPem
         disetujui: 'false',
         diprosesOleh: idPengguna
     }, {runValidators: true, new: true})
+
+
+    notifyUser({
+        userId: pengajuanPeminjaman?.peminjam.toString() as string,
+        event: 'PEMINJAMAN_DITOLAK',
+        payload: {
+            untuk: 'PENGGUNA',
+            tipe: 'PEMINJAMAN',
+            title: 'Peminjaman anda telah diproses',
+            deskripsi: 'Lihat status penerimaan peminjaman anda',
+            data: pengajuanPeminjaman
+        }
+    })
 
     return {message: 'success'}
 }

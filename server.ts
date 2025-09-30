@@ -11,9 +11,8 @@ import databaseConnectionFunction from './db/connect'
 import path from 'path'
 import http from 'http'
 import { routeWrapper } from './routeWrapper'
-import { WebSocketServer } from 'ws'
-import { connection } from 'mongoose'
-import { ServeSocketConnection } from './sockets/socketConnection'
+import { initSocket } from './sockets/soket'
+
 
 const app = express()
 app.set('view engine', 'pug')
@@ -36,7 +35,9 @@ const startServer = async() => {
     try {
         await databaseConnectionFunction(process.env.MONGO_URL as string)
         const server = http.createServer(app)
-        
+
+        initSocket(server)
+         
         // serving server on PORT 4000
         server.listen(4000, () => {
             console.log('server is running')
