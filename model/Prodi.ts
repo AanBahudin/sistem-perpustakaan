@@ -4,7 +4,8 @@ const ProdiSchema = new mongoose.Schema({
     nama: String,
     email: {
         type: String,
-        unique: String
+        unique: true,
+        required: true
     },
     password: String,
     role: {
@@ -18,6 +19,7 @@ const ProdiSchema = new mongoose.Schema({
         default: 'Pending'
     },
     fotoProfil: String,
+    photoPublicId: String
 }, {timestamps: true})
 
 export interface ProdiInterfaceModel {

@@ -1,0 +1,22 @@
+import Container from '@/globals/Container'
+import GrafikDetailBuku from './GrafikDetailBuku'
+import DetailBukuTabelPengembalian from './DetailBukuTabelPengembalian'
+
+const StatistikPengembalianDetailBuku = ({data, untuk} : {data: any, untuk?: string}) => {
+
+  const { buku, dataStatsPengembalianBuku, dataPengembalian } = data
+
+  return (
+    <Container className='w-full my-4'>
+      <GrafikDetailBuku 
+        dataBuku={buku} 
+        dataStatistik={dataStatsPengembalianBuku} 
+        judulStatistik={`Peminjaman ${buku.judul}`} 
+        judulRasio='Total Data pengembalian'
+        dataRasio={dataPengembalian.length}/>
+      <DetailBukuTabelPengembalian dataBuku={dataPengembalian} untuk={untuk} />
+    </Container>
+  )
+}
+
+export default StatistikPengembalianDetailBuku

@@ -1,37 +1,19 @@
 import { body, param } from "express-validator";
 import withValidationErrors from "./withValidationErrors";
 import Kategori from "../model/Kategori";
-import { BadRequestError, NotFoundError } from "../errors/errorHandler";
-import mongoose from "mongoose";
+import { capitalizeWords } from "../utils/formatText";
+import { BadRequestError } from "../errors/errorHandler";
 
 export const kategoriInputValidator = withValidationErrors([
-    body('nama')
+    body('kategoriBaru')
         .notEmpty().withMessage('Judul kategori tidak boleh kosong')
-        .isLength({min: 3, max: 100}).withMessage('Kategori 3 - 100 karakter')
+        .isLength({min: 2, max: 100}).withMessage('Kategori 2 - 100 karakter')
         .trim()
-        .custom(async(nama) => {
-            const kategoriExist = await Kategori.findOne({
-                nama: { $regex: new RegExp('^' + nama + '$', 'i') }
-            })
-
-            if (kategoriExist) {
-                throw new BadRequestError('Kategori sudah ada')
-            }
-
+        .customSanitizer((kategoriBaru) => {
+            return capitalizeWords(kategoriBaru)
         })
-])
-
-export const kategoriIdValidator = withValidationErrors([
-    param('id')
-        .custom(async(id) => {
-            const isValidId = mongoose.Types.ObjectId.isValid(id)
-            if (!isValidId) {
-                throw new BadRequestError('ID tidak valid')
-            }
-            
-            const kategoriExist = await Kategori.findOne({_id: id})
-            if (!kategoriExist) {
-                throw new NotFoundError('Kategori tidak ditemukan')
-            }
+        .custom( async (kategoriBaru: string) => {
+            const kategori = await Kategori.findOne({nama: kategoriBaru})
+            if (kategori) throw new BadRequestError('Kategori sudah ada')
         })
 ])

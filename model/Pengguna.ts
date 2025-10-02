@@ -39,21 +39,29 @@ const PenggunaSchema = new mongoose.Schema({
     angkatan: Number,
     email: {
         type: String,
+        required: true,
         unique: true
     },
     statusAkun: {
         type: String,
         enum: ['Nonaktif', 'Pending', 'Aktif'],
-        default: 'Nonaktif'
+        default: 'Nonaktif',
+        required: true
     },
     password: String,
     fotoProfil: String,
+    photoPublicId: String,
     no_hp: String,
     role: {
         type: String,
-        enum: ['Dosen', 'Mahasiswa']
+        enum: ['Dosen', 'Mahasiswa'],
+        required: true
     },
     jumlah_pinjaman: {
+        type: Number,
+        default: 0
+    },
+    bukuDihilangkan: {
         type: Number,
         default: 0
     },

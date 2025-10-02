@@ -1,23 +1,35 @@
 import mongoose, { ObjectId } from "mongoose";
 
 const PustakawanSchema = new mongoose.Schema({
-    nama: String,
+    nama: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
+        required: true,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     role: {
         type: String,
-        default: 'Pustakawan'
+        default: 'Pustakawan',
+        required: true
     },
-    no_hp: String,
+    no_hp: {
+        type: String,
+        required: true
+    },
     statusAkun: {
         type: String,
         enum: ['Nonaktif', 'Pending', 'Aktif'],
         default: 'Aktif'
     },
     fotoProfil: String,
+    fotoPublicId: String,
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'Prodi',

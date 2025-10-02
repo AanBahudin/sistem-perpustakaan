@@ -1,151 +1,216 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import { BukuSchemaType } from "../../model/Buku";
-
-import Pengguna from "../../model/Pengguna";
 import Pustakawan from "../../model/Pustakawan";
+
+import { 
+    getAllPengguna, 
+    getAllPenggunaDosen, 
+    getStatsServices, 
+    getAllPenggunaMahasiswa, 
+    getSinglePengguna, 
+    getAllPengajuanUser, 
+    getAllPengajuanPeminjamanUser, 
+    getSinglePengajuanPeminjamanUser, 
+    getAllPengajuanPerpanjanganUser, 
+    getSinglePengajuanPerpanjanganUser, 
+    getAllPengajuanPengembalianUsers,
+    getSinglePengajuanPengembalianUser} from "../../services/pustakawanServices";
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
+import Perpanjangan from "../../model/Perpanjangan";
 import Buku from "../../model/Buku";
-import Kategori from "../../model/Kategori";
+import Peminjaman from "../../model/Peminjaman";
+import Pengembalian from "../../model/Pengembalian";
+import { getBukuDiprosesPustakawanStats, getPeminjamanDiprosesPustakawanStats, getPengembalianDiprosesPustakawanStats, getPerpanjanganDiprosesPustakawanStats } from "../../services/PustakawanServices/PustakawanStatsServices";
+import { pustakawanUpdateEmail, pustakawanUpdatePasswword } from "../../services/PustakawanServices/PustakawanServices";
+
+export const getStats = async(req: Request | any, res: Response) => {
+    const data = await getStatsServices()
+    SendDataResponse({
+        res,
+        message: 'stats data',
+        data
+    })
+}
 
 export const getAllUsers = async(req: Request, res: Response) => {
-    const users = await Pengguna.find({ verifikasiEmail: true, verifikasiProdi: true })
+    const query = req.query
+    const users = await getAllPengguna({query})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Pengguna',
-        timestamps: new Date(Date.now()).toISOString(),
-        data: users
+        data: users,
+        total: users.pengguna.length,
+        page: 1
+    })
+}
+
+export const getAllDosenUser = async(req: Request, res: Response) => {
+    const query = req.query
+    const users = await getAllPenggunaDosen({query})
+
+    SendDataResponse({
+        res,
+        message: 'Data Dosen',
+        data: users,
+        total: users.pengguna.length,
+        page: 1
+    })
+}
+
+export const getAllMahasiswaUser = async(req: Request, res: Response) => {
+    const query = req.query
+    const users = await getAllPenggunaMahasiswa({query})
+
+    SendDataResponse({
+        res,
+        message: 'Data Dosen',
+        data: users,
+        total: users.pengguna.length,
+        page: 1
     })
 }
 
 export const getSingleUser = async(req: Request, res: Response) => {
 
     const {id} = req.params
+    const data = await getSinglePengguna({id})
 
-    const user = await Pengguna.findOne({_id: id})
+    SendOneDataResponse({
+        res,
+        message: `Data Pengguna - ${data.pengguna?.nama}`,
+        data
+    })
+}
+
+export const getAllPengajuan = async(req: Request, res: Response) => {
+    const data = await getAllPengajuanUser()
     
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Data Pengguna - ${user?.nama}`,
-        timestamps: new Date(Date.now()).toISOString(),
-        data: user
+    SendOneDataResponse({
+        res,
+        message: 'Semua data pengajuan',
+        data
+    })
+}
+
+export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getAllPengajuanPeminjamanUser({query})
+    SendDataResponse({
+        res,
+        message: 'Data pengajuan peminjaman',
+        data,
+        total: data.pengajuanPeminjaman.length || 0
+    })
+}
+
+export const getSinglePengajuanPeminjaman = async(req: Request, res: Response) => {
+    const {id: peminjamanId} = req.params
+    const data = await getSinglePengajuanPeminjamanUser({id: peminjamanId})
+    SendOneDataResponse({
+        res, 
+        message: 'Data peminjaman',
+        data
+    })
+}
+
+export const getAllPengajuanPerpanjangan = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getAllPengajuanPerpanjanganUser({query})
+    SendDataResponse({
+        res,
+        message: 'Data perpanjangan',
+        data
+    })
+}
+
+export const getSinglePengajuanPerpanjangan = async(req: Request, res: Response) => {
+    const {id: idPerpanjangan} = req.params
+    const data = await getSinglePengajuanPerpanjanganUser({id: idPerpanjangan})
+
+    SendOneDataResponse({
+        res, 
+        message: 'Data Perpanjangan',
+        data
+    })
+}
+
+export const getAllPengajuanPengembalian = async(req: Request, res: Response) => {
+    const query = req.query
+    const data = await getAllPengajuanPengembalianUsers({query})
+    SendDataResponse({
+        res,
+        message: 'Data pengembalian',
+        data
+    })
+}
+
+export const getSinglePengajuanPengembalian = async(req: Request, res: Response) => {
+    const {id: idPengembalian} = req.params
+    const data = await getSinglePengajuanPengembalianUser({id: idPengembalian})
+    SendOneDataResponse({
+        res, 
+        message: 'Data Pengembalian',
+        data
     })
 }
 
 export const getProfile = async(req: Request | any, res: Response) => {
     const {userId} = req.user
 
-    const profile = await Pustakawan.findOne({_id: userId})
+    const profile = await Pustakawan.findOne({_id: userId}).select('-password')
+    const getBukuDiproses = await Buku.find({createdBy: req.user.userId}).countDocuments()
+    const getPeminjamanDiproses = await Peminjaman.find({diprosesOleh: req.user.userId}).countDocuments()
+    const perpanjanganDiproses = await Perpanjangan.find({diprosesOleh: req.user.userId}).countDocuments()
+    const pengembalianDiproses = await Pengembalian.find({statusPengembalian: 'Dikembalikan', diprosesOleh: req.user.userId}).countDocuments()
+
+    // DATA STATS
+    const statsBuku = await getBukuDiprosesPustakawanStats(req.user.userId)
+    const statsPeminjaman = await getPeminjamanDiprosesPustakawanStats(req.user.userId)
+    const statsPerpanjangan = await getPerpanjanganDiprosesPustakawanStats(req.user.userId)
+    const statusPengembalian = await getPengembalianDiprosesPustakawanStats(req.user.userId)
+
+
+    const dataValue: Array<number> = [getBukuDiproses, getPeminjamanDiproses, perpanjanganDiproses, pengembalianDiproses]
 
     res.status(StatusCodes.OK).json({
         status: StatusCodes.OK,
         message: 'Data Profil',
         timestamps: new Date(Date.now()).toString(),
-        data: profile
+        data: {
+            profile, 
+            dataValue,
+            stats: {
+                statsBuku,
+                statsPeminjaman,
+                statsPerpanjangan,
+                statusPengembalian
+            }
+        }
     })
 }
 
-export const addBuku = async(req: Request | any, res: Response) => {
-    const {userId} = req.user
-    const dataBuku : BukuSchemaType = req.body
-    dataBuku.createdBy = userId
-    
-    const buku = await Buku.create(dataBuku);
-    
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Buku ditambahkan',
-        timestamps: new Date(Date.now()).toString(),
-        data: buku
-    })  
-}
+export const updatePasswordPustakawan = async(req: Request | any, res: Response) => {
+    const {userId: pustakawanId} = req.user
+    const data = req.body
 
-export const hapusBuku = async(req: Request | any, res: Response) => {
-    const {id} = req.params
+    await pustakawanUpdatePasswword({data, pustakawanId})
 
-    const buku = await Buku.findOneAndDelete({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Buku ${buku?.judul} Dihapus`,
-        timestamps: new Date(Date.now()).toString(),
-        data: buku
+    SendBasicResponse({
+        res,
+        message: 'Password berhasil diupdate'
     })
 }
 
-export const editBuku = async(req: Request | any, res: Response) => {
-    const {id} = req.params
+export const updateEmailPustakawan = async(req: Request | any, res: Response) => {
+    const {userId: pustakawanId} = req.user
+    const data = req.body
 
-    const buku = await Buku.findOneAndUpdate({_id: id}, req.body, {new: true, runValidators: true})
+    await pustakawanUpdateEmail({data, pustakawanId})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Buku ${buku?.judul} Diubah`,
-        timestamps: new Date(Date.now()).toString(),
-        data: buku
-    })
-}
-
-export const getAllBuku = async(req: Request | any, res: Response) => {
-    const books = await Buku.find()
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Daftar Semua Buku',
-        timestamps: new Date(Date.now()).toString(),
-        data: books,
-        total: books.length,
-        page: 1
-    })
-}
-
-export const getSingleBuku = async(req: Request | any, res: Response) => {
-    const { id } = req.params
-
-    const buku = await Buku.findOne({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: `Data Buku ${buku?.judul}`,
-        timestamps: new Date(Date.now()).toString(),
-        data: buku
-    })
-}
-
-export const getAllKategori = async(req: Request | any, res: Response) => {
-    const kategori = await Kategori.find()
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Daftar Kategori',
-        timestamps: new Date(Date.now()).toString(),
-        data: kategori,
-        total: kategori.length
-    })
-}
-
-export const createKategori = async(req: Request | any, res: Response) => {
-    const dataKategori = req.body
-
-    const kategori = await Kategori.create(dataKategori)
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Kategori Dibuat',
-        timestamps: new Date(Date.now()).toString(),
-        data: kategori
-    })
-}
-
-export const hapusKategori = async(req: Request | any, res: Response) => {
-    const {id} = req.params
-
-    await Kategori.findOneAndDelete({_id: id})
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Kategori Dihapus',
-        timestamp: new Date(Date.now()).toString()
+    SendBasicResponse({
+        res,
+        message: 'Email berhasil diupdate'
     })
 }

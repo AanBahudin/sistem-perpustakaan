@@ -1,0 +1,46 @@
+import mongoose from "mongoose";
+
+const PerpanjanganSchema = new mongoose.Schema({
+    idPeminjaman: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Peminjaman',
+        required: true
+    },
+    isOpen: {
+        type: Boolean,
+        default: false,
+    },
+    idPengguna: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Pengguna',
+        required: true
+    },
+    idBuku: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Buku',
+        required: true
+    },
+    judulBuku: {
+        type: String,
+        required: true
+    },
+    durasi: {
+        type: Number,
+        required: true
+    },
+    disetujui: {
+        type: String,
+        enum: ['Diterima', 'Pending', 'Ditolak'],
+        default: 'Pending'
+    },
+    diprosesOleh: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Pustakawan'
+    },
+    alasan: {
+        type: String,
+        required: true
+    }
+}, {timestamps: true})
+
+export default mongoose.model('Perpanjangan', PerpanjanganSchema)

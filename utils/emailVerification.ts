@@ -29,8 +29,8 @@ const sendVerficationEmail = async({ templateName, subject, to, emailData }: Sen
 
   try {
     await sgMail.send(emailMsg);
-  } catch (error: any) {
-    console.error('SendGrid Error:', error.response?.body || error.message);
+  } catch (error) {
+    console.log(error)
     throw new BadRequestError('Terjadi kesalahan');
   }
 };

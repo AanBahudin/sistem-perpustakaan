@@ -1,0 +1,84 @@
+{
+  "title": "Pengguna",
+  "bsonType": "object",
+  "required": ["email", "statusAkun", "role"],
+  "properties": {
+    "_id": {
+      "bsonType": "objectId",
+      "description": "Primary key dari MongoDB"
+    },
+    "nama": {
+      "bsonType": "string"
+    },
+    "kelas": {
+      "bsonType": "string",
+      "default": "A"
+    },
+    "idKampus": {
+      "bsonType": "string",
+      "description": "must be unique"
+    },
+    "jurusan": {
+      "bsonType": "string",
+      "default": "Teknik Informatika"
+    },
+    "angkatan": {
+      "bsonType": "int"
+    },
+    "email": {
+      "bsonType": "string",
+      "description": "required and unique"
+    },
+    "statusAkun": {
+      "bsonType": "string",
+      "enum": ["Nonaktif", "Pending", "Aktif"],
+      "default": "Nonaktif"
+    },
+    "password": {
+      "bsonType": "string"
+    },
+    "fotoProfil": {
+      "bsonType": "string"
+    },
+    "photoPublicId": {
+      "bsonType": "string"
+    },
+    "no_hp": {
+      "bsonType": "string"
+    },
+    "role": {
+      "bsonType": "string",
+      "enum": ["Dosen", "Mahasiswa"]
+    },
+    "jumlah_pinjaman": {
+      "bsonType": "int",
+      "default": 0
+    },
+    "bukuDihilangkan": {
+      "bsonType": "int",
+      "default": 0
+    },
+    "totalDenda": {
+      "bsonType": "int",
+      "default": 0
+    },
+    "verifikasiEmail": {
+      "bsonType": "bool",
+      "default": false
+    },
+    "verifikasiProdi": {
+      "bsonType": "bool",
+      "default": false
+    },
+    "blocked": {
+      "bsonType": "bool",
+      "default": false
+    },
+    "createdAt": {
+      "bsonType": "date"
+    },
+    "updatedAt": {
+      "bsonType": "date"
+    }
+  }
+}

@@ -2,121 +2,197 @@ import { Response, Request } from "express"
 
 import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
-import Buku from "../../model/Buku"
-import { BadRequestError } from "../../errors/errorHandler"
-import Pengguna from "../../model/Pengguna"
-import sendVerficationEmail from "../../utils/emailVerification"
+import { getOnePeminjaman, getOnePeminjamanUser, getOnePeminjamanUserByIdBook, getOnePeminjamanUserByPengembalianIdServices, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser, tolakPinjamanPustakawan } from "../../services/peminjamanServices"
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
-// 2 controller dibawah khusus untuk pengguna
+// 4 controller dibawah khusus untuk pengguna
+
+// SUDAH DITESTING
 export const requestPinjaman = async(req: Request | any, res: Response) => {
-    const { id : idBuku, lamaPeminjaman } = req.body
+    const { idBuku, durasiPeminjaman, alasan } = req.body
     const { userId } = req.user
 
-    const pinjaman = await Peminjaman.create({ peminjam: userId, buku: idBuku, lamaPeminjaman, statusPeminjaman: 'Diajukan' })
+    const {data} = await pengajuanPeminjaman({durasiPeminjaman, idBuku, userId, alasan})
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: `Peminjaman buku telah diajukan, silahkan tunggu email verifikasi`,
-        timestamps: new Date(Date.now()).toString(),
-        data: pinjaman
+        data 
+    })
+}
+
+// SUDAH DITESTING
+export const getPinjamanUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const query = req.query
+
+    const {data} = await getSemuaPeminjamanUser({userId, query})
+
+    SendDataResponse({
+        res,
+        message: 'Data Peminjaman',
+        data,
+        total: data.length,
+        page: 1
+    })
+}
+
+// SUDAH DITESTING
+export const getSinglePinjamanUser = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id} = req.params
+
+    const {data} = await getOnePeminjamanUser({userId, peminjamanId: id})
+    SendOneDataResponse({
+        res,
+        message: 'Data Pinjaman',
+        data
+    })
+}
+
+// SUDAH DITESTING
+export const getSinglePinjamanUserByBookId = async(req: Request | any, res: Response) => {
+    const {userId} = req.user
+    const {id} = req.params
+
+    const data = await getOnePeminjamanUserByIdBook({bookId: id, userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data Pinjaman',
+        data
+    })
+}
+
+// SUDAH DITESTING
+export const getSinglePinjamanUserByPengembalianId = async(req: Request | any, res: Response) => {
+    const {id} = req.params
+    const {userId} = req.user
+
+    const data = await getOnePeminjamanUserByPengembalianIdServices({userId, pengembalianId: id})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data Peminjaman',
+        data
+    })
+}
+
+
+// SUDAH DITESTING
+export const pembatalanPinjamanUser = async(req: Request | any, res: Response) => {
+    const {idPeminjaman} = req.body
+    const {userId} = req.user
+
+    // ambil data pinjama terlebih dahulu
+    const dataPinjaman = await pembatalanPeminjamanUser({idPeminjaman, userId})
+
+    SendBasicResponse({
+        res,
+        message: 'Data Pinjaman Dibatalkan',
     })
 }
 
 // controller ini khusus untuk pustakawan
-export const terimaPinjaman = async(req: Request, res: Response) => {
-    const { id: pinjamanId, status } = req.body
+export const terimaPinjaman = async(req: Request | any, res: Response) => {
+    const { idPeminjaman, kondisiBuku } = req.body
+    const {userId} = req.user
 
-    const dataPinjaman = await Peminjaman.findOneAndUpdate(
-        {_id: pinjamanId},
-        { 
-            statusPeminjaman: status ? 'Dipinjam' : 'Ditolak',
-            disetujui: status
-        },
-        {new: true, runValidators: true}
-    )
-
-
-    // update attribute jumlahPinjaman di model Pengguna
-    const user = await Pengguna.findOneAndUpdate(
-        {_id: dataPinjaman?.peminjam},
-        {$inc: {jumlah_pinjaman: 1}},
-        {new: true, runValidators: true}
-    )
-
-    // update attribute stok buku di model Buku
-    const dataBuku = await Buku.findOneAndUpdate(
-        {_id: dataPinjaman?.buku},
-        {$inc: {stok: -1}},
-        {new: true, runValidators: true}
-    )
-
+    const {data} = await terimaPeminjamanUser({idPeminjaman, userId, kondisiBuku})
 
     // pemintaan ditolak/terima akan dikirim melalu notifikasi
-
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: status ? 'Pinjaman diterima' : 'Pinjaman ditolak',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman
-    }) 
-    
+    SendOneDataResponse({
+        res,
+        message: 'Pinjaman diterima',
+        data
+    })
 }
 
-export const tambahPinjaman = async(req: Request, res: Response) => {
-    res.send('tambah pinjaman controller')
+export const tolakPeminjamanPustakawan = async(req: Request | any, res: Response) => {
+    const {id: idPeminjaman} = req.params
+    const {userId} = req.user
+
+    await tolakPinjamanPustakawan({idPeminjaman, idPengguna: userId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data pengajuan peminjaman telah ditolak'
+    })
 }
 
+// SUDAH DITESTING
+export const tambahPinjaman = async(req: Request | any, res: Response) => {
+    const {
+        idBuku,
+        idPengguna,
+        durasiPeminjaman,
+        kondisi
+    } = req.body
+    const {userId} = req.user
+
+    const {data} = await tambahPinjamanUser({
+        idBuku,
+        idPengguna,
+        durasiPeminjaman,
+        kondisi,
+        userId
+    })
+
+    SendOneDataResponse({
+        res,
+        message: 'Data Pinjaman Dibuat',
+        data
+    })
+}
+
+// SUDAH DITESTING
 export const getAllPinjaman = async(req: Request, res: Response) => {
-    const dataPinjaman = await Peminjaman.find()
+    const {data} = await getSemuaPinjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Seluruh Data Peminjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman,
-        total: dataPinjaman.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
+// SUDAH DITESTING
 export const getAllPinjamanAktif = async(req: Request, res: Response) => {
-    const dataPinjaman = await Peminjaman.find({statusPeminjaman: 'Dipinjam', disetujui: true})
+    const {data} = await getSemuaPinjamanAktif()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendDataResponse({
+        res,
         message: 'Data Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman,
-        total: dataPinjaman.length
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
+// SUDAH DITESTING
 export const getAllRequestedPinjaman = async(req: Request, res: Response) => {
-    const dataPermintaanPeminjaman = await Peminjaman.find(
-        {statusPeminjaman: 'Diajukan', disetujui: 'false'}
-    ).populate([
-        {path: 'peminjam', select: '-password -role'},
-        {path: 'buku'}
-    ])
+    const {data} = await getSemuaPengajuanPeminjaman()
 
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
-        message: 'Data Permintaan Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPermintaanPeminjaman,
-        total: dataPermintaanPeminjaman.length
+    SendDataResponse({
+        res,
+        message: 'Data Pinjaman',
+        data,
+        total: data.length,
+        page: 1
     })
 }
 
+// SUDAH DITESTING
 export const getSinglePinjaman = async(req: Request, res: Response) => {
-    const {id} = req.params
-
-    const dataPinjaman = await Peminjaman.findOne({_id: id})
+    const {id: idPeminjaman} = req.params
+    const {data} = await getOnePeminjaman({idPeminjaman})
     
-    res.status(StatusCodes.OK).json({
-        status: StatusCodes.OK,
+    SendOneDataResponse({
+        res,
         message: 'Data Pinjaman',
-        timestamps: new Date(Date.now()).toString(),
-        data: dataPinjaman
+        data
     })
 }
 

@@ -1,0 +1,108 @@
+import { loginPustakawan } from '@/actions/Pustakawan/pustakawanAuthActions'
+import Logo from '@/components/landing/Navbar/Logo'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import Container from '@/globals/Container'
+import { useMutation } from '@tanstack/react-query'
+import { Eye, Loader } from 'lucide-react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+
+const PustakawanLoginPage = () => {
+
+    const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const submitAction = async(event: any) => {
+        if (event.key === "Enter")  {
+            await handleLogin()
+        }
+    }
+
+    const {mutateAsync: login} = useMutation({
+        mutationFn: () => loginPustakawan({email, password}),
+        onMutate: () => {
+            setLoading(true)
+        },
+        onSuccess: () => {
+            setLoading(false)
+            toast('Login Berhasil', {description: 'Selamat datang kembali di akun anda! '})
+            navigate('/pustakawan')
+        },
+        onError: (data: any) => {
+            setLoading(false)
+            const serverErrMsg = data.response.data.message
+            const titleMsg = serverErrMsg ? 'Terjadi kesalahan!' : 'TIdak dapat melakukan login'
+            const errMsg = serverErrMsg || 'Tidak dapat melakukan login'
+            toast(titleMsg , {description: errMsg})
+        }
+    })
+
+    const handleLogin = async() => {
+        await login()
+    }
+    
+    return (
+        <Container className='min-h-[100vh] w-full flex items-center justify-center bg-primary/10'>
+            <section className='w-[90%] border rounded-2xl  lg:max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl bg-primary/10'>
+                <main className='w-full flex items-center justify-center mb-2'>
+                    <Logo />
+                </main>
+                <h1 className='uppercase font-bold text-lg text-center'>Halo, Pustakawan! 👋</h1>
+                <p className='text-center mt-2 text-sm text-muted-foreground'>Yuk, masuk ke dashboard dan mulai bantu jaga kelancaran perpustakaan hari ini. Cek buku, pantau peminjaman, dan tetap jadi andalan mahasiswa!</p>
+
+                <main className='w-full mt-8 flex flex-col gap-y-4'>
+                    <div className='flex flex-col'>
+                        <Label htmlFor='email' className='text-sm'>Email</Label>
+                        <div className='w-full flex items-center gap-x-1 mt-1.5'>
+                            <Input className='text-sm selection:text-white' 
+                                autoFocus
+                                required
+                                onKeyDown={submitAction}
+                                type='email' id='email' name='email'
+                                value={email} onChange={(e => setEmail(e.target.value))} />
+                        </div>
+                    </div>
+
+                    <div className='flex flex-col'>
+                    <Label className='text-sm' htmlFor='password'>Kata sandi</Label>
+                        <div className='w-full flex items-center gap-x-2 mt-1.5'>
+                            <Input className='text-sm selection:text-white' 
+                                placeholder='xxxx'
+                                required
+                                minLength={6}
+                                type={showPassword ? 'text' : 'password'} 
+                                name='password' id='password'
+                                onKeyDown={submitAction}
+                                value={password} onChange={e => setPassword(e.target.value)} min={8} />
+                            {password && (
+                                <Button size='icon' variant='secondary' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
+                                    <Eye className={showPassword ? 'stroke-primary' : ''} />
+                                </Button>
+                            )}
+                        </div>
+                    </div>
+
+                    <Button 
+                        onClick={handleLogin}
+                        className='text-white mt-6'
+                        disabled={loading}>
+                            {loading ? <Loader className='animate-spin duration-300' /> : 'Masuk'}
+                    </Button>
+                </main>
+            </section>
+        </Container>
+    )
+}
+
+export default PustakawanLoginPage

@@ -1,0 +1,70 @@
+import { Request, Response } from "express"
+import { buatKondisi, editKondisi, getDataKondisi, getOneKondisi, hapusKondisi } from "../../services/kondisiServices"
+import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
+import { StatusCodes } from "http-status-codes"
+
+// SUDAH DITESTING
+export const createKondisi = async(req: Request | any, res: Response) => {
+    const {kondisi, denda, deskripsi} = req.body
+    const {userId} = req.user
+
+    const {data} = await buatKondisi({denda, kondisi, userId, deskripsi})
+
+    SendOneDataResponse({
+        res,
+        message: 'Berhasil menambahkan data kondisi buku',
+        status: StatusCodes.CREATED,
+        data
+    })
+}
+
+// SUDAH DITESTING
+export const getAllKondisi = async(req: Request, res: Response) => {
+    const {data} = await getDataKondisi()
+
+    SendDataResponse({
+        res,
+        message: 'Seluruh data kondisi',
+        data,
+        total: data.length
+    })
+}
+
+// SUDAH DITESTING
+export const getSingleKondisi = async(req: Request, res: Response) => {
+    const {id: kondisiId} = req.params
+
+    const {data} = await getOneKondisi({kondisiId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data kondisi buku',
+        data
+    })
+}
+
+// SUDAH DITESTING
+export const updateKondisi = async(req: Request, res: Response) => {
+    const {id: kondisiId} = req.params
+    const {denda, kondisi, deskripsi} = req.body
+
+    const {data} = await editKondisi({denda, kondisi, deskripsi, kondisiId})
+
+    SendOneDataResponse({
+        res,
+        message: 'Data berhasil diperbaharui',
+        data
+    })
+}
+
+// SUDAH DITESTING
+export const deleteKondisi = async(req: Request, res: Response) => {
+    const {id: kondisiId} = req.params
+    
+    await hapusKondisi({kondisiId})
+
+    SendBasicResponse({
+        res,
+        message: 'Kondisi berhasil dihapus'
+    })
+}

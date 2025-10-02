@@ -2,9 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
 export const errorHandler = (err : any, req : Request, res : Response, next: NextFunction) => {
-
-    console.log(err.stack)
-
     const statusCode = err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR
     const message = err.message || 'Something is wrong'
     const timestamps = err.timestamps || new Date().toISOString()

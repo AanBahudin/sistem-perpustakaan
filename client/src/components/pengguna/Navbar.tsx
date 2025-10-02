@@ -1,11 +1,24 @@
-import React from 'react'
+import Logo from '../landing/Navbar/Logo'
+import { ModeToggle } from '../navbar/modeToggle'
+import NavSearch from './NavSearch'
+import NavbarPenggunaDropdown from './NavbarPenggunaDropdown'
 
 const Navbar = () => {
   return (
-    <nav className='bg-slate-50 w-full border border-b border-slate-400 p-10'>
-        <div className='w-[90%] mx-auto'>
-            <h1 className='text-4xl font-semibold uppercase'>Navbar Pengguna</h1>
-        </div>
+    <nav className='w-full py-8 border-b border-accent '>
+        <section className='w-[90%] mx-auto flex items-center justify-between '>
+          <Logo url='/my' />
+
+          <NavSearch />
+
+          {/* menu section */}
+          <div className='flex items-center justify-center lg:gap-x-10 gap-x-6'>
+            <ModeToggle />
+            <NavbarPenggunaDropdown />
+          </div>
+
+        </section>
+
     </nav>
   )
 }

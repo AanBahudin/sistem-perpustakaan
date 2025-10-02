@@ -6,8 +6,12 @@
   ],
   "include": [
     "src/**/*"
-  ],
+, "../utils/hitungPerBulan.ts"  ],
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",

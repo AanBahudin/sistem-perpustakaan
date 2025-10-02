@@ -6,7 +6,7 @@ export type BukuSchemaType = {
     penerbit?: string,
     tahunTerbit?: string,
     deskripsi: string,
-    cover: string,
+    cover?: string,
     ISBN?: string,
     stok?: number,
     kategori: string,
@@ -23,6 +23,10 @@ const BukuSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    tagline: {
+        type: String,
+        required: true
+    },
     penulis: {
         type: String,
         default: 'Tidak diketahui'
@@ -32,8 +36,8 @@ const BukuSchema = new mongoose.Schema({
         default: 'Tidak diketahui'
     },
     tahunTerbit: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: '2024'
     },
     deskripsi: {
         type: String,
@@ -42,10 +46,40 @@ const BukuSchema = new mongoose.Schema({
     cover: {
         type: String
     },
+    coverPublicId: {
+        type: String
+    },
+    jumlahHalaman: {
+        type: Number,   
+        required: true
+    },
+    featured: {
+        type: Boolean,
+        default: false
+    },
     ISBN: {
         type: String,
         unique: true,
         required: true
+    },
+    bahasa: {
+        type: String,
+        required: true,
+        default: 'Indonesia'
+    },
+    ukuranBuku: {
+        lebar: {
+            type: Number,
+            default: 0
+        },
+        panjang: {
+            type: Number,
+            default: 0
+        }
+    },
+    sumberPengadaan: {
+        type: String,
+        default: 'Beli',
     },
     stok: {
         type: Number,
@@ -54,14 +88,14 @@ const BukuSchema = new mongoose.Schema({
     kategori: [{
         type: String
     }],
-    // kategori: {
-    //     type: String,
-    //     default: 'Pemrograman'
-    // },
     status: {
         type: String,
         enum: ['Tidak Tersedia', 'Tersedia'],
         default: 'Tersedia'
+    },
+    hargaGanti: {
+        type: Number,
+        required: true
     },
     totalDipinjam: {
         type: Number,
@@ -74,6 +108,22 @@ const BukuSchema = new mongoose.Schema({
     totalDisukai: {
         type: Number,
         default: 0
+    },
+    totalDisimpan: {
+        type: Number,
+        default: 0
+    },
+    totalDihilangkan: {
+        type: Number,
+        default: 0
+    },
+    isMissing: {
+        type: Boolean,
+        default: false
+    },
+    dihapus: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

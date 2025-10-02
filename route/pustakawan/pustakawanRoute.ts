@@ -1,44 +1,68 @@
 import express from 'express'
-import { getAllUsers, getSingleUser } from '../../controllers/prodi/prodiController'
 import { 
-    getAllBuku, 
-    getSingleBuku,
-    addBuku,
-    editBuku,
-    hapusBuku,
-    createKategori,
-    getAllKategori,
-    hapusKategori,
-    getProfile } from '../../controllers/pustakawan/pustakawanController'
-import { verifyBukuIdMiddleware, verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
-import { kategoriIdValidator, kategoriInputValidator } from '../../validator/kategoriValidator'
-import { bukuInputValidator } from '../../validator/bukuValidator'
+    getAllDosenUser, 
+    getAllMahasiswaUser, 
+    getAllPengajuan, 
+    getAllPengajuanPeminjaman, 
+    getAllPengajuanPengembalian, 
+    getAllPengajuanPerpanjangan, 
+    getAllUsers, 
+    getSinglePengajuanPeminjaman, 
+    getSinglePengajuanPengembalian, 
+    getSinglePengajuanPerpanjangan, 
+    getSingleUser, 
+    updateEmailPustakawan, 
+    updatePasswordPustakawan} from '../../controllers/pustakawan/pustakawanController'
+import {getProfile } from '../../controllers/pustakawan/pustakawanController'
+import { verifyPenggunaIdMiddleware } from '../../middleware/utilsMiddleware'
+import { getStats } from '../../controllers/pustakawan/pustakawanController'
+import { updateEmailValidator, updatePasswordValidator } from '../../validator/pustakawanValidator'
 
 const router = express.Router()
 
-router.route('/kategori')
-    .get(getAllKategori)
-    .post(kategoriInputValidator, createKategori)
-
-router.route('/kategori/:id')
-    .delete(kategoriIdValidator, hapusKategori)
-
-router.route('/buku')
-    .get(getAllBuku)
-    .post(bukuInputValidator, addBuku)
-
-router.route('/buku/:id')
-    .get(verifyBukuIdMiddleware, getSingleBuku)
-    .delete(verifyBukuIdMiddleware, hapusBuku)
-    .patch(verifyBukuIdMiddleware, bukuInputValidator, editBuku)
-
 router.route('/users')
     .get(getAllUsers)
+
+router.route('/dosen')
+    .get(getAllDosenUser)
+
+router.route('/mahasiswa')
+    .get(getAllMahasiswaUser)
+
+router.route('/pengajuan')
+    .get(getAllPengajuan)
+
+router.route('/peminjaman')
+    .get(getAllPengajuanPeminjaman)
+
+router.route('/peminjaman/:id')
+    .get(getSinglePengajuanPeminjaman)
+
+router.route('/perpanjangan')
+    .get(getAllPengajuanPerpanjangan)
+
+router.route('/perpanjangan/:id')
+    .get(getSinglePengajuanPerpanjangan)
+
+router.route('/pengembalian')
+    .get(getAllPengajuanPengembalian)
+
+router.route('/pengembalian/:id')
+    .get(getSinglePengajuanPengembalian)
+
+router.route('/stats')
+    .get(getStats)
 
 router.route('/users/:id')
     .get(verifyPenggunaIdMiddleware, getSingleUser)
 
 router.route('/profile')
     .get(getProfile)
+
+router.route('/auth/password')
+    .post(updatePasswordValidator, updatePasswordPustakawan)
+
+router.route('/auth/email')
+    .post(updateEmailValidator, updateEmailPustakawan)
 
 export default router

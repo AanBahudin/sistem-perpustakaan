@@ -1,17 +1,33 @@
 import express from 'express'
-import { getProfile, updateProfile, updateEmail } from '../../controllers/pengguna/penggunaController'
-import { validateUpdateEmailPengguna, validateUpdateInputPengguna } from '../../validator/penggunaValidators'
+import { getProfile, updateProfile, updateEmail, updatePassword, updatePhoto, getStats, checkUserAccountStatus } from '../../controllers/pengguna/penggunaController'
+import { validateUpdateEmailPengguna, validateUpdateInputPengguna, validateUpdatePasswordPengguna, validateUpdatePhoto } from '../../validator/penggunaValidator'
 import { UpdateEmailPermissionMiddleware } from '../../middleware/utilsMiddleware'
+import { userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
+import upload from '../../middleware/multerMiddleware'
+
 
 const router = express.Router()
 
+router.route('/profile/stats')
+    .get(userMiddlewareAuthorized, getStats)
+    
 router.route('/profile')
-    .get(getProfile)
+    .get(userMiddlewareAuthorized, getProfile)
+
+router.route('/check/account/user')
+    .get(checkUserAccountStatus)
+
 
 router.route('/update/profil')
-    .patch(validateUpdateInputPengguna, updateProfile)
+    .patch(userMiddlewareAuthorized, validateUpdateInputPengguna, updateProfile)
+
+router.route('/update/photo')
+    .patch(userMiddlewareAuthorized, upload.single('fotoProfil'), updatePhoto)
+
+router.route('/update/password')
+    .patch(userMiddlewareAuthorized, validateUpdatePasswordPengguna, updatePassword)
 
 router.route('/update/email')
-    .patch(UpdateEmailPermissionMiddleware, validateUpdateEmailPengguna, updateEmail)
+    .patch(userMiddlewareAuthorized, UpdateEmailPermissionMiddleware, validateUpdateEmailPengguna, updateEmail)
 
 export default router
