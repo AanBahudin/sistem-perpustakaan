@@ -54,7 +54,7 @@ const PustakawanLoginPage = () => {
     
     return (
         <Container className='min-h-[100vh] w-full flex items-center justify-center bg-primary/10'>
-            <section className='w-full border rounded-2xl max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl bg-primary/10'>
+            <section className='w-[90%] border rounded-2xl  lg:max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl bg-primary/10'>
                 <main className='w-full flex items-center justify-center mb-2'>
                     <Logo />
                 </main>

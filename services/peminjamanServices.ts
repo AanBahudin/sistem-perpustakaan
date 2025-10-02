@@ -9,9 +9,7 @@ import tambahHariKeTanggal from "../utils/tambahHari";
 import { bukuDipinjam } from "./BukuServices/UtilsBukuServices";
 import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
-import { getWss, sendNotificationToUser } from "../sockets/socketConnection";
 import { notifyPustakawan, notifyUser } from "../sockets/soket";
-import { title } from "process";
 
 
 // 4 service dibawah khusus pengguna
@@ -148,9 +146,6 @@ export const terimaPeminjamanUser = async({idPeminjaman, kondisiBuku, userId} : 
     await penggunaMeminjam({idPengguna: dataPeminjaman.peminjam as string})
     // update attribute stok buku di model Buku
     await bukuDipinjam(dataPeminjaman.buku as string)
-
-
-    console.log(dataPinjaman?.peminjam.toString())
 
     notifyUser({
         userId: dataPinjaman?.peminjam.toString() as string,

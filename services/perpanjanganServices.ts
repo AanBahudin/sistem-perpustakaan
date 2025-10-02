@@ -2,6 +2,7 @@ import { BadRequestError, NotFoundError } from "../errors/errorHandler"
 import Buku from "../model/Buku"
 import Peminjaman from "../model/Peminjaman"
 import Perpanjangan from "../model/Perpanjangan"
+import { notifyPustakawan, notifyUser } from "../sockets/soket"
 import { AcceptPerpanjanganParamsType, GetOnePerpanjanganParamsType, GetOnePerpanjanganUserParamsType, GetSemauPerpanjanganParamsType, PembatalanPerpanjanganParamsType, PenambahanPerpanjanganParamsType, PerpanjanganDitolakParamsType, TambahPerpanjanganParamsType, UpdatePerpanjanganParamsType } from "../types/perpanjanganTypes"
 import tambahHariKeTanggal from "../utils/tambahHari"
 import { dataDurasiPeminjaman } from "./durasiServices"
@@ -35,6 +36,17 @@ export const tambahPerpanjangan = async({ userId, dataPerpanjangan } : TambahPer
         ...dataPerpanjangan,
         judulBuku: buku.judul,
         idPengguna: userId
+    })
+
+    notifyPustakawan({
+        event: 'PENGGUNA_MENGAJUKAN_PERPANJANGAN',
+        payload: {
+            untuk: 'PUSTAKAWAN',
+            tipe: 'PERPANJANGAN',
+            title: 'Pengajuan Baru',
+            deskripsi: 'Terdapat pengajuan perpanjangan baru',
+            data: perpanjangan
+        }
     })
 
     return {data: perpanjangan}
@@ -138,6 +150,19 @@ export const acceptPerpanjangan = async({idPerpanjangan, userId} : AcceptPerpanj
         berakhirPada: penambahanTanggalPinjaman,
         durasiPeminjaman: penambahanDurasiPeminjaman
     })
+
+    notifyUser({
+        userId: perpanjangan?.idPengguna.toString() as string,
+        event: 'PERPANJANGAN_DITERIMA',
+        payload: {
+            untuk: 'PENGGUNA',
+            tipe: 'PERPANJANGAN',
+            title: 'Perpanjangan anda telah diproses',
+            deskripsi: 'Lihat status penerimaan perpanjangan anda',
+            data: perpanjangan
+        }
+    })
+
     return {data: perpanjanganDiterima, message: 'Perpanjangan pinjaman diterima'}
 }
 
@@ -147,6 +172,19 @@ export const tolakPerpanjanganPustakawan = async({idPerpanjangan, idPustakawan} 
         {disetujui: 'Ditolak', diprosesOleh: idPustakawan}
     )
     if (!dataPerpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan!')
+
+
+    notifyUser({
+        userId: dataPerpanjangan?.idPengguna.toString() as string,
+        event: 'PERPANJANGAN_DITOLAK',
+        payload: {
+            untuk: 'PENGGUNA',
+            tipe: 'PERPANJANGAN',
+            title: 'Perpanjangan anda telah diproses',
+            deskripsi: 'Lihat status penerimaan perpanjangan anda',
+            data: dataPerpanjangan
+        }
+    })
 
     return dataPerpanjangan
 }
@@ -159,15 +197,6 @@ export const penambahanPerpanjangan = async({idPerpanjangan, userId} : Penambaha
     await Perpanjangan.findOneAndUpdate(
         {_id: idPerpanjangan},
         {disetujui: 'Diterima', diprosesOleh: userId},
-        {new: true, runValidators: true}
-    )
-}
-
-// SUDAH DITESTING
-export const perpanjangaDitolak = async({userId, idPerpanjangan} : PerpanjanganDitolakParamsType) => {
-    await Perpanjangan.findOneAndUpdate(
-        {_id: idPerpanjangan},
-        {diprosesOleh: userId, disetujui: 'Ditolak'},
         {new: true, runValidators: true}
     )
 }

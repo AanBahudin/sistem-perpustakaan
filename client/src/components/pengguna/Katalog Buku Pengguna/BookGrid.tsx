@@ -1,12 +1,17 @@
 import { Button } from '@/components/ui/button'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 type BookGridType = {
   dataBuku: any
 }
 
 const BookGrid = ({dataBuku} : BookGridType) => {
+
+  const navigate = useNavigate()
+  const handleNavigate = (id: string) => {
+    navigate(id)
+  }
 
   return (
     <section className='w-full grid grid-cols-12 gap-6'>
@@ -31,7 +36,7 @@ const BookGrid = ({dataBuku} : BookGridType) => {
               <p className='text-muted-foreground text-[12px] my-4'>{newDeskripsi}...</p>
 
               <div className='w-full flex gap-x-2'>
-                <Button className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
+                <Button onClick={() => handleNavigate(item._id)} className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>Selengkapnya</Button>
                 <GridLayoutButtons id={item._id}/>
               </div>
             </div>

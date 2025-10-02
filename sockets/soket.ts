@@ -77,7 +77,6 @@ export const initSocket = (server: any) => {
         const userId = socket.userId
 
         userSockets.set(userId, socket)
-        console.log(userSockets.size)
         
         socket.on("disconnect", () => {
             userSockets.delete(userId);

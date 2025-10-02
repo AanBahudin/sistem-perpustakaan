@@ -18,6 +18,7 @@ const DashboardLayout = () => {
       withCredentials: true,
       transports: ['websocket', 'polling'] // typo 'pooling' diperbaiki
     });
+
     // Contoh listen event custom dari server
     socketRef.current.on('PENGGUNA_MENGAJUKAN_PEMINJAMAN', (data) => {
       const {tipe, data: dataPeminjaman, title, deskripsi} = data
@@ -26,6 +27,7 @@ const DashboardLayout = () => {
 
       toast(title, {
         description: deskripsi,
+        duration: 10000,
         action: {
           label: "Lihat",
           onClick: () =>
@@ -33,6 +35,24 @@ const DashboardLayout = () => {
         }
       })
     });
+
+    socketRef.current.on('PENGGUNA_MENGAJUKAN_PERPANJANGAN', (response) => {
+      const {tipe, data, title, deskripsi} = response
+      const jenisPengajuan = tipe.toLowerCase()
+
+      const detailURL = `/pustakawan/pengajuan/${jenisPengajuan}/${data._id}`
+
+      toast(title, {
+        description: deskripsi,
+        duration: 10000,
+        action: {
+          label: "Lihat",
+          onClick: () =>
+            (window.location.href = detailURL),
+        }
+      })
+    })
+
     socketRef.current.on('connect', () => {
       console.log('Socket connected with id:', socketRef.current?.id);
     });

@@ -22,6 +22,7 @@ import {
     penggunaMenghilangkan, 
     tambahDendaPengguna } from "./penggunaServices"
 import Pengguna from "../model/Pengguna"
+import { notifyUser } from "../sockets/soket"
 
 
 // SUDAH TESTING
@@ -135,7 +136,8 @@ export const getOneDataPengembalian = async({ pengembalianId } : PustakawanGetOn
 export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreatePengembalianParamsType) => {
 
     // pecah data dari req.body
-    const {idPeminjaman} = dataBody 
+    const {idPeminjaman} = dataBody
+    console.log(dataBody)
 
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})
@@ -171,21 +173,6 @@ export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreat
             dataBuku: buku
         })
     }
-
-
-    // // update data peminjaman dengan memasukan id pengembalian
-    // await Peminjaman.findOneAndUpdate(
-    //     {_id: idPeminjaman, peminjam: pinjaman.peminjam},
-    //     {dataPengembalian: dataPengembalian?._id},
-    //     {new: true, runValidators: true}
-    // )
-
-    // return {
-    //     success: true,
-    //     message: 'Data Pengembalian dibuat',
-    //     data: dataPengembalian
-    //     // data: []
-    // }
 }
 
 // SUDAH TESTING
@@ -228,6 +215,9 @@ export const pustakawanTerimaDataPengembalian = async({ idPengembalian, userId }
         denda: pengembalian.totalDenda
     })
 
+    
+    
+
     // return agar diakses oleh controller
     return {data: updatedPengembalian}
 }
@@ -262,6 +252,19 @@ export const setujuiPengembalianPutakawan = async({idPengembalian, pustakawanId}
     } else {
         await bukuDikembalikan(updatePengembalian.idBuku as string)
     }
+
+
+    notifyUser({
+        userId: updatePengembalian.idPengguna.toString() as string,
+        event: 'PENGEMBALIAN_PEMINJAMAN',
+        payload: {
+            untuk: 'PENGGUNA',
+            tipe: 'PENGEMBALIAN',
+            title: 'Pengembalian Berhasil',
+            deskripsi: 'Lihat data pengembalian anda',
+            data: updatePengembalian
+        }
+    })
     
     return updatePengembalian
 }

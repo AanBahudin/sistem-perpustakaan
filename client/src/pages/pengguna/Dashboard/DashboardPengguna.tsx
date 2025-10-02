@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getStats } from '@/actions/userActions'
 import StatsOverview from '@/components/pengguna/Dashboard Pengguna/StatsOverview'
 import DashboardLoading from './DashboardLoading'
-
 const KatalogPengguna = () => {
 
   const {data: statsData, isLoading} = useQuery({
@@ -13,8 +12,8 @@ const KatalogPengguna = () => {
     queryFn: getStats
   })
 
-  if (isLoading) return <DashboardLoading />  
-  
+  if (isLoading) return <DashboardLoading />
+
   const {
     peminjaman, 
     peminjamanAktif, 

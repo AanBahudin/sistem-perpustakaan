@@ -1,28 +1,19 @@
+import Container from "@/globals/Container"
 import { Skeleton } from "../ui/skeleton"
 
 const BookLoading = () => {
   return (
-    <section className='w-full grid grid-cols-12 gap-6'>
-      {Array.from({length: 3}).map((_, index) => {
-        return (
-          <main key={index} className='col-span-4 bg-card p-2 flex items-center gap-x-4 rounded-xl border hover:border-primary duration-150 ease-in-out group'>
-            <Skeleton className='w-[200px] h-[160px] '/>
+    <Container className='my-20'>
+      <Skeleton className="w-full min-h-[300px]" />
 
-            <div className='flex w-full items-start justify-between flex-col gap-y-4'>
-              <Skeleton className="w-2/3 h-6" />
-              <Skeleton className="w-[200px] h-4" />
-              <Skeleton className="w-1/3 h-4" />
-              <Skeleton className="w-2/3 h-4" />
-
-              <div className='w-full flex gap-x-2'>
-                <Skeleton className="w-2/3 h-4" />
-                <Skeleton className="w-1/3 h-4" />
-              </div>
-            </div>
-          </main>
-        )
-      })}
-    </section>
+      <main className="w-full mt-18 items-center justify-center flex gap-x-8">
+        {Array.from({length: 5}).map((_, index: number) => {
+          return (
+            <Skeleton key={index} className="min-h-[300px] w-[230px] rounded-xl" />
+          )
+        })} 
+      </main>
+    </Container>
   )
 }
 
