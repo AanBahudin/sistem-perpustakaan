@@ -3,7 +3,7 @@ import { formatedDate } from "@/utils/formatDate"
 
 const DetailPengajuanPeminjamanPengembalianTabs = ({dataPeminjaman} : {dataPeminjaman: any}) => {
 
-    const {buku, peminjam} = dataPeminjaman
+    const {buku} = dataPeminjaman
 
     return (
         <section className='w-fuil p-4 bg-muted my-4 rounded-sm flex items-start gap-x-8'>

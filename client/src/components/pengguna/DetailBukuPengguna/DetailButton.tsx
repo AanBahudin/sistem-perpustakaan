@@ -2,7 +2,7 @@ import { tambahPeminjaman } from '@/actions/peminjamanActions'
 import FormContainer from '@/components/form/FormContainer'
 import { Button } from '@/components/ui/button'
 import { useFormStatus } from '@/context/FormContext'
-import { CircleFadingArrowUp, Loader2, Undo2 } from 'lucide-react'
+import { CircleFadingArrowUp, Loader2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import PengajuanCancelButton from './PengajuanCancelButton'
 import { Link } from 'react-router-dom'
@@ -62,17 +62,6 @@ const PerpanjangButton = ({idPeminjaman} : {idPeminjaman: any}) => {
             <Button className="flex items-center gap-x-2 text-white bg-primary/30 text-center w-full">
                 <CircleFadingArrowUp />
                 Perpanjang
-            </Button>
-        </Link>
-    )
-}
-
-const PengembalianButton = ({idPeminjaman} : {idPeminjaman: any}) => {
-    return (
-        <Link to={`/my/confirm/pengembalian/${idPeminjaman}`} className="w-full flex items-center mt-4 gap-x-8">
-            <Button className="text-white flex items-center gap-x-2 text-center bg-secondary/50 hover:bg-secondary ring-1 w-full">
-                <Undo2 />
-                Kembalikan
             </Button>
         </Link>
     )

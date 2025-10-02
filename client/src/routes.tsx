@@ -19,10 +19,10 @@ import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalian
 import DetailPerpanjanganPage from "./pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import ConfirmPerpanjangan from "./pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
-import DiscoveryPage from "./pages/pengguna/Discovery/DiscoveryPage";
+import DiscoveryPage from "./pages/pengguna/discovery/DiscoveryPage";
 import SearchPage from "./pages/pengguna/Search/SearchPage";
-import CategoryPage from "./pages/pengguna/Discovery/CategoryPage";
-import AllBook from "./pages/pengguna/Discovery/AllBook";
+import CategoryPage from "./pages/pengguna/discovery/CategoryPage";
+import AllBook from "./pages/pengguna/discovery/AllBook";
 import PustakawanLoginPage from "./pages/pustakawan/auth/PustakawanLoginPage";
 import PustakawanBerandaPage from "./pages/pustakawan/beranda/PustakawanBerandaPage";
 import PustakawanProfilePage from "./pages/pustakawan/profil/PustakawanProfilePage";
@@ -56,7 +56,6 @@ import ProdiSemuaPenggunaPage from "./pages/prodi/pengguna/ProdiSemuaPenggunaPag
 import ProdiPenggunaMahasiswaPage from "./pages/prodi/pengguna/ProdiPenggunaMahasiswaPage";
 import ProdiPenggunaDosenPage from "./pages/prodi/pengguna/ProdiPenggunaDosenPage";
 import ProdiPengajuanPenggunaPage from "./pages/prodi/pengguna/ProdiPengajuanPenggunaPage";
-import ProdiTambahPenggunaPage from "./pages/prodi/pengguna/ProdiTambahPenggunaPage";
 import ProdiBerandaPage from "./pages/beranda/ProdiBerandaPage";
 import ProdiBlockedPenggunPage from "./pages/prodi/pengguna/ProdiBlockedPenggunPage";
 import DetailPengguna from "./pages/prodi/pengguna/DetailPengguna";
@@ -385,10 +384,6 @@ const router : RouteObject[] = [
                     {
                         path: 'pemintaan',
                         element: <ProdiPengajuanPenggunaPage />
-                    },
-                    {
-                        path: 'tambah',
-                        element: <ProdiTambahPenggunaPage />
                     },
                     {
                         path: 'permintaan',

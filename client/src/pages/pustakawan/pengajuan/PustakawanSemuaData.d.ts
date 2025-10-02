@@ -1,0 +1,2 @@
+declare const PustakawanSemuaData: () => import("react/jsx-runtime").JSX.Element;
+export default PustakawanSemuaData;

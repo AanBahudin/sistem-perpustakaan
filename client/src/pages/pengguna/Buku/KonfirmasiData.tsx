@@ -2,7 +2,7 @@ import ConfirmPeminjaman from "@/components/dialog/ConfirmPeminjaman"
 import SelectDurasi from "./SelectDurasi"
 import NamaBox from "./NamaBox"
 import AlasanInput from "./AlasanInput"
-import { ConfirmButton, DiajukkanStatus } from "./StatusConfirm"
+import { DiajukkanStatus } from "./StatusConfirm"
 
 type KonfirmasiDataType = {
     profil: any

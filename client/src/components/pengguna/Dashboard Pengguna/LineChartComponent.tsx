@@ -1,4 +1,3 @@
-import React from 'react'
 import {chartConfig, chartData} from '@/utils/constants'
 import { ChartContainer } from '@/components/ui/chart'
 import { Line, LineChart, CartesianGrid } from "recharts"

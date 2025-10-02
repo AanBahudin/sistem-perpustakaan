@@ -1,4 +1,4 @@
-import { Loader2, ThumbsUp } from 'lucide-react'
+import { ThumbsUp } from 'lucide-react'
 // import GlobalTooltip from './GlobalTooltip'
 import { Button } from '@/components/ui/button'
 

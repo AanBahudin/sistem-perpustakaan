@@ -12,6 +12,7 @@ const FormContainer = ({action, children, className} : {action: ActionFunction, 
   const queryClient = useQueryClient()
     const navigate = useNavigate()
     const [message, setMessage] = useState<string>('')
+    console.log(message)
     const [loading, setLoading] = useState<boolean>(false)
 
     const mutation = useMutation({

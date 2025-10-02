@@ -1,8 +1,7 @@
-import { formatedDate } from "@/utils/formatDate"
 
 const DetailPengembalianInfo = ({data} : {data: any}) => {
 
-    const {idPengguna, idPeminjaman, IdBuku, statusPengembalian} = data
+    const {idPengguna, idPeminjaman, statusPengembalian} = data
     const {nama} = idPengguna
     const {durasiPeminjaman, _id, kondisi, statusPeminjaman} = idPeminjaman
 

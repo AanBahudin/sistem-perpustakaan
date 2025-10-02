@@ -1,0 +1,11 @@
+export declare const prodiCreatePengguna: (data: any) => Promise<any>;
+export declare const prodiGetAllPengguna: (params: string) => Promise<any>;
+export declare const prodiGetSinglePengguna: (id: string) => Promise<any>;
+export declare const prodiGetPenggunaDosen: (params: string) => Promise<any>;
+export declare const prodiGetPenggunaMahasiswa: (params: string) => Promise<any>;
+export declare const prodiGetRequestedUser: (params: string) => Promise<any>;
+export declare const prodiGetUserBlocked: (params: string) => Promise<any>;
+export declare const prodiVerifyUserAccount: (id: string) => Promise<any>;
+export declare const prodiCreatePustakawan: (data: any) => Promise<any>;
+export declare const prodiBlockedUser: (id: string) => Promise<any>;
+export declare const prodiUnblockedUser: (id: string) => Promise<any>;

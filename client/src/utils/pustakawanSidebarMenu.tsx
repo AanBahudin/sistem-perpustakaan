@@ -1,4 +1,4 @@
-import { Bell, BookCheck, BookCopy, BookDashed, BookDown, BookUp, CircleUser, Cog, FileCheck2, FilePlus, Files, FileSymlink, GraduationCap, History, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
+import { BookCheck, BookCopy, BookDashed, BookDown, BookUp, CircleUser, Cog, FileCheck2, FilePlus, Files, FileSymlink, GraduationCap, House, LibraryBig, Newspaper, User, Users } from "lucide-react"
 
 export const pustakanSidebarMenu = [
     {

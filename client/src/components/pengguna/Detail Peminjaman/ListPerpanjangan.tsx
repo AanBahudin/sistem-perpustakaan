@@ -13,7 +13,7 @@ const ListPerpanjangan = ({data} : {data: any}) => {
     return (
         <div className="w-full grid grid-cols-12 gap-4">
             {data.map((item: any) => {
-                const {idBuku, disetujui, durasi, createdAt, alasan} = item
+                const {disetujui, durasi, createdAt, alasan} = item
                 return (
                     <section key={item._id} className="w-full h-full col-span-6 border rounded-2xl items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
                         <div className="w-full flex flex-col items-start justify-stretch ">

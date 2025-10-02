@@ -1,4 +1,3 @@
-import React from 'react'
 
 type StatusPerpanjanganType = {
     status : 'Diterima' | 'Pending' | 'Ditolak'

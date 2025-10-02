@@ -26,7 +26,7 @@ const AddCategoriDialog = () => {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: (data: any) => createKategori(data),
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast('Berhasil Ditambahkan', {description: `kategori Baru ditambahkan`})
       queryClient.invalidateQueries({queryKey: ['kategori']})
       setOpen(false)

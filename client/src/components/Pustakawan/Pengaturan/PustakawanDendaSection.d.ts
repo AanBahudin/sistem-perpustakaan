@@ -1,0 +1,2 @@
+declare const PustakawanDendaSection: () => import("react/jsx-runtime").JSX.Element;
+export default PustakawanDendaSection;

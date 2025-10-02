@@ -28,7 +28,6 @@ const SelectDurasi = ({defaultDurasi, perpanjangan} : SelectDurasiType) => {
   })
 
   const durasiPinjam = isLoading ? [] : data
-  const isObjectEmpty = (Object.keys(perpanjangan || {}).length) === 0
 
   const durasi = useSelector((state: any) => state.peminjamanState.durasi)
   const newDefaultDurasi = perpanjangan?.disetujui === 'Diterima' ? defaultDurasi : durasi

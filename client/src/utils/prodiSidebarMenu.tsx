@@ -2,8 +2,7 @@ import { BookCheck, BookCopy,
     BookDashed, BookDown, BookUp, 
     CircleUser,
     GraduationCap, House, 
-    LibraryBig, User, 
-    UserCog, 
+    LibraryBig, UserCog, 
     UserRoundPlus, UserRoundX, Users } from "lucide-react"
 
 export const prodiSidebarMenu = [

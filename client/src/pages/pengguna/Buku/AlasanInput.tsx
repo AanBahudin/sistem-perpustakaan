@@ -12,7 +12,6 @@ type AlasanInputType = {
 
 const AlasanInput = ({defaultAlasan, perpanjangan, type='peminjaman'} : AlasanInputType) => {
 
-  const isObjectEmpty = (Object.keys(perpanjangan || {})).length === 0
   const newDefaultAlasan = perpanjangan?.disetujui === 'Diterima' ? defaultAlasan : ''
 
   return (

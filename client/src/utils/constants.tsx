@@ -1,6 +1,6 @@
 import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
 import { ChartConfig } from "@/components/ui/chart";
-import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Figma, Code, Database, Layout, Layers, GitGraph, Clipboard, ClipboardCheck, ClipboardPen} from "lucide-react"
+import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Clipboard, ClipboardCheck, ClipboardPen} from "lucide-react"
 
 export const accordions = [
     {
