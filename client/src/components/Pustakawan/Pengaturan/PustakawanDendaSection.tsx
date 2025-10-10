@@ -6,6 +6,7 @@ import { formatRupiah } from "@/utils/formatCurrency"
 import { Button } from "@/components/ui/button"
 import { Edit } from "lucide-react"
 import PengaturanEditDendaDialog from "./PengaturanEditDendaDialog"
+import PengaturanSectionLoading from "./PengaturanSectionLoading"
 
 const PustakawanDendaSection = () => {
 
@@ -14,7 +15,7 @@ const PustakawanDendaSection = () => {
     queryFn: getDenda
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PengaturanSectionLoading />
 
   return (
     <Container className='w-full my-6 min-h-[80vh]'>

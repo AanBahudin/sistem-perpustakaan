@@ -29,7 +29,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-app.use(express.static(path.resolve(__dirname, './client/dist')));
+// app.use(express.static(path.resolve(__dirname, './client/dist')));
 
 routeWrapper(app)
 

@@ -7,6 +7,7 @@ import { PlusCircle, Trash, Edit } from 'lucide-react'
 import { formatRupiah } from '@/utils/formatCurrency'
 import PengaturanKondisiBukuDialog from './PengaturanKondisiBukuDialog'
 import PengaturanKondisiBukuAlert from './PengaturanKondisiBukuAlert'
+import PengaturanSectionLoading from './PengaturanSectionLoading'
 
 const PustakawanKondisiBukuSection = () => {
 
@@ -15,7 +16,7 @@ const PustakawanKondisiBukuSection = () => {
     queryFn: getAllKondisi
   })
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <PengaturanSectionLoading />
 
   return (
     <Container className='w-full my-6 min-h-[80vh]'>

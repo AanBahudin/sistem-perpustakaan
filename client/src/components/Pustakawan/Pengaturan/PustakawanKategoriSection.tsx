@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import PengaturanTambahKategoriDialog from './PengaturanTambahKategoriDialog '
 import PengaturanHapusKategoriAlert from './PengaturanHapusKategoriAlert '
 import PengaturanEditKategoriDialog from './PengaturanEditKategoriDialog'
+import PengaturanSectionLoading from './PengaturanSectionLoading'
 
 const PustakawanKategoriSection = () => {
   const {data, isLoading} = useQuery({
@@ -15,7 +16,7 @@ const PustakawanKategoriSection = () => {
     queryFn: getAllKategori
   })
 
-  if (isLoading) return <h1>Loading....</h1>
+  if (isLoading) return <PengaturanSectionLoading />
 
 
   const groupedCategories = data.data.reduce((acc: any, kategori: any) => {

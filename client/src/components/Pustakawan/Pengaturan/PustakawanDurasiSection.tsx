@@ -6,6 +6,7 @@ import { Edit, Trash, PlusCircle } from 'lucide-react'
 import PengaturanDurasiPinjamAlert from './PengaturanDurasiPinjamAlert'
 import PengaturanDurasiDialog from './PengaturanDurasiDialog'
 import PengaturanTambahDurasiDialog from './PengaturanTambahDurasiDialog'
+import PengaturanSectionLoading from './PengaturanSectionLoading'
 
 
 const PustakawanDurasiSection = () => {
@@ -14,7 +15,7 @@ const PustakawanDurasiSection = () => {
     queryFn: getDurasi
   })
 
-  if (isLoading) return <h1>Loading....</h1>
+  if (isLoading) return <PengaturanSectionLoading />
 
   return (
     <Container className='w-full my-6 min-h-[80vh]'>
