@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 // Import semua handlers
-import { handlePeminjamanDitolak, handlePeminjamanDiterima } from './handlers/PeminjamanSockets';
-import { handlePengembalianPeminjaman } from './handlers/PengembalianSockets'
-import { handlePerpanjanganDiterima, handlePerpanjanganDitolak } from './handlers/PerpanjanganSockets';
+import { handlePeminjamanDitolak, handlePeminjamanDiterima } from './handlers/Pengguna/PeminjamanSockets';
+import { handlePengembalianPeminjaman } from './handlers/Pengguna/PengembalianSockets'
+import { handlePerpanjanganDiterima, handlePerpanjanganDitolak } from './handlers/Pengguna/PerpanjanganSockets';
 
 export const useSocket = () => {
   const SOCKET_SERVER_URL = "http://localhost:4000";
@@ -26,6 +26,11 @@ export const useSocket = () => {
 
     const socket = socketRef.current;
 
+    // Event connect/disconnect (opsional: tambah feedback)
+    socket.on('connect', () => { return });
+    socket.on('disconnect', () => { return });
+
+
     // PEMINJAMAN HANDLERS
     socket.on('PEMINJAMAN_DITOLAK', (data) => handlePeminjamanDitolak(data, navigate, toast));
     socket.on('PEMINJAMAN_DITERIMA', (data) => handlePeminjamanDiterima(data, navigate, toast));
@@ -37,18 +42,7 @@ export const useSocket = () => {
     // PENGEMBALIAN HANDLERS
     socket.on('PENGEMBALIAN_PEMINJAMAN', (response) => handlePengembalianPeminjaman(response, navigate, toast));
 
-    // Event connect/disconnect (opsional: tambah feedback)
-    socket.on('connect', () => {
-      return
-    });
-    
-    socket.on('disconnect', () => {
-      return
-    });
-
     // Cleanup saat komponen unmount
-    return () => {
-      socket.disconnect();
-    };
+    return () => { socket.disconnect(); };
   }, [navigate]); // navigate sebagai dependency
 };

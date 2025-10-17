@@ -37,7 +37,6 @@ export const handlePerpanjanganDitolak = ( response: PerpanjanganData, navigate:
       }
     });
   } catch (error) {
-    console.error('Error handling PERPANJANGAN_DITOLAK:', error);
     toastFn.error('Gagal menampilkan notifikasi perpanjangan ditolak.');
   }
 };
