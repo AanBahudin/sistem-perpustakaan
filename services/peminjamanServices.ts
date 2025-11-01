@@ -54,11 +54,29 @@ export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, ala
 
 // SUDAH DITESTING
 export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjamanUserParamsType) => {
+    
     if (query?.judulBuku) {
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
-    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query}).populate(['buku', 'peminjam']).sort({createdAt: -1})
-    return {data: pinjamanUser}
+    
+
+    const totalPeminjaman = await Peminjaman.find({peminjam: userId}).countDocuments()
+
+    const page = query.page || 1
+    const limit = 10
+    const totalPage = Math.ceil(totalPeminjaman / 10)
+    const skip = (page - 1) * limit
+    
+    if (query.page) delete query.page
+
+    const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query})
+        .populate(['buku', 'peminjam'])
+        .sort({createdAt: -1})
+        .limit(limit)
+        .skip(skip)
+        
+
+    return {data: pinjamanUser, totalPage}
 }
 
 // SUDAH DITESTING

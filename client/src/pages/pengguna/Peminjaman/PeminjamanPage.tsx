@@ -5,6 +5,7 @@ import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/Peminja
 import PeminjamanDataLayout from "@/components/pengguna/peminjaman Pengguna/PeminjamanDataLayout"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
+import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
 
 const PeminjamanPage = () => {
 
@@ -21,10 +22,20 @@ const PeminjamanPage = () => {
       <PeminjamanTab  />
       <PeminjamanSearch />
       
-      {isLoading ? <PeminjamanLoading /> : <PeminjamanDataLayout peminjamanData={dataPeminjaman.data} />}
+
+      
+      {isLoading ? <PeminjamanLoading /> : (
+        <>
+          <PeminjamanDataLayout peminjamanData={dataPeminjaman.data} />
+          {/* {dataPeminjaman.data.length !== 0 && <DataPagination />} */}
+          <DataPagination totalPage={dataPeminjaman.totalPage} />
+        </>
+      )}
+
+
       
     </main>
   ) 
 }
 
-export default PeminjamanPage 
+export default PeminjamanPage   

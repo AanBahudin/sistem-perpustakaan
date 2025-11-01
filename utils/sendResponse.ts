@@ -55,11 +55,13 @@ export const SendDataResponse = ({
     timestamps =  new Date(Date.now()).toString(),
     data,
     total,
+    totalPage = 1,
     page,
 } : SendManyDataResponseType ) => {
     return res.status(status).json({
         status,
         message,
+        totalPage,
         timestamps,
         total,
         page,

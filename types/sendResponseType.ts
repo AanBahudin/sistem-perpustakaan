@@ -16,6 +16,7 @@ export interface SendManyDataResponseType {
     total?: number,
     page?: number
     data: any
+    totalPage? : number
     durasi?: any
 }
 

@@ -26,14 +26,15 @@ export const getPinjamanUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     const query = req.query
 
-    const {data} = await getSemuaPeminjamanUser({userId, query})
+    const {data, totalPage} = await getSemuaPeminjamanUser({userId, query})
 
     SendDataResponse({
         res,
         message: 'Data Peminjaman',
         data,
         total: data.length,
-        page: 1
+        page: req.query.page,
+        totalPage
     })
 }
 
