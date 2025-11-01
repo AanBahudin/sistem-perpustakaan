@@ -1,6 +1,0 @@
-export { default as PenggunaLayout } from './PenggunaLayout';
-export { default as PinjamPengguna } from './PinjamPengguna';
-export { default as StatusPinjaman } from './StatusPinjaman';
-export { default as ProfilPengguna } from './ProfilPengguna';
-export { default as KatalogPengguna } from './Dashboard/DashboardPengguna';
-export { default as DetailBuku } from './DetailBook/DetailBuku';
