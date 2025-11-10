@@ -184,6 +184,9 @@ export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 }
 
 export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
+
+    await readPengajuanPeminjaman({idPeminjaman: id})
+
     const dataPeminjaman = await Peminjaman.findOne({_id: id})
         .populate(['peminjam', 'buku']).select('-password -email')
         .populate({
@@ -236,6 +239,7 @@ export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => 
 }
 
 export const getSinglePengajuanPerpanjanganUser = async({id} : {id: string}) => {
+
     const perpanjangan = await Perpanjangan.findOne({_id: id})
         .populate({
             path: 'idPeminjaman'
@@ -780,4 +784,8 @@ export const allPengembalianStats = async() => {
         },
     ]);
     return pertumbuhanBulanan
+}
+
+export const readPengajuanPeminjaman = async({idPeminjaman} : {idPeminjaman: string}) => {
+    await Peminjaman.findOneAndUpdate({_id: idPeminjaman}, {isOpen: true})
 }

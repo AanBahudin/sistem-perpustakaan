@@ -11,6 +11,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { Badge } from "@/components/ui/badge"
 import TabelDropdownMenu from "../TabelDropdownMenu"
+import NewBadge from "../NewBadge"
 
 const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
 
@@ -44,10 +45,14 @@ const TabelSemuaPeminjaman = ({peminjaman} : {peminjaman : any}) => {
                         <TableBody>
                             {peminjaman.map((item: any, index: number) => {
                                 const {buku, peminjam} = item
+                                console.log(item.isOpen)
                                 return (
                                     <TableRow key={index} onClick={() => handleNavigate(item._id)} className="border-accent-foreground/10 even:bg-accent/10 hover:bg-primary/10 ease-in-out duration-200 cursor-default" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                                        <TableCell className="w-[200px] text-xs">{buku.judul}</TableCell>
+                                        <TableCell className="w-[200px]  text-xs flex items-center gap-x-2">
+                                            {buku.judul}
+                                            {!item.isOpen && <NewBadge />}
+                                        </TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">
                                             <div className="w-full flex items-center justify-center gap-x-2">
                                                 {peminjam?.fotoProfil ? (
