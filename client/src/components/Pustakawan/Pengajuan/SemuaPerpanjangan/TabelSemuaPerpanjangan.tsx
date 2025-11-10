@@ -23,7 +23,7 @@ const TabelSemuaPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
     }
     return (
         <section className="w-full flex-1 overflow-auto scroll-custom">
-            <section className="w-full min-h-[50vh] border rounded overflow-hidden flex items-center">
+            <section className="w-full min-h-[50vh] border rounded overflow-hidden flex items-start">
                 <Table className="w-full text-sm">
                     <TableHeader>
                         <TableRow>

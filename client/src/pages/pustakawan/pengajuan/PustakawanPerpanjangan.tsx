@@ -1,4 +1,5 @@
 import { getAllPerpanjangan } from '@/actions/Pustakawan/pustakawanPerpanjanganActions'
+import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import SemuaPerpanjanganFilter from '@/components/Pustakawan/Pengajuan/SemuaPerpanjangan/SemuaPerpanjanganFilter'
@@ -19,7 +20,7 @@ const PustakawanPerpanjangan = () => {
   })
 
   if (isLoading) return <DetailPengajuanLoading />
-  const {pengajuanPerpanjangan, rasioStatusPerpanjangan, statsPerpanjangan} = data
+  const {pengajuanPerpanjangan, rasioStatusPerpanjangan, statsPerpanjangan, totalPage} = data
 
   return (
     <Container className='w-full'>
@@ -33,6 +34,7 @@ const PustakawanPerpanjangan = () => {
       />
       <SemuaPerpanjanganFilter />
       <TabelSemuaPerpanjangan perpanjangan={pengajuanPerpanjangan} />
+      <DataPagination totalPage={totalPage} />
     </Container>
   )
 }

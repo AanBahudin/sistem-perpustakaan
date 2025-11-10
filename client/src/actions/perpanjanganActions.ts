@@ -11,7 +11,6 @@ export const getPerpanjangan = async(query: string) => {
     if (response.status >= 400) {
         return {message: 'Terjadi Kesalahan', deskripsi: 'Tidak dapat mengambil data perpanjangan saat ini.'}
     }
-    console.log(response.data)
     return response.data
 }
 

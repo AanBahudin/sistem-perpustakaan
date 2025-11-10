@@ -103,7 +103,7 @@ export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
         message: 'Data pengajuan peminjaman',
         data,
         totalPage: data.totalPage,
-        total: data.pengajuanPeminjaman.length || 0
+        total: data.totalPage || 1
     })
 }
 

@@ -201,6 +201,7 @@ export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
 export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => {
     const searchNama = query.query || ''; // Ambil keyword pencarian
     const mongoQuery: any = { ...query };
+    delete mongoQuery.page
     delete mongoQuery.query;
 
     const rawData = await Perpanjangan.find(mongoQuery)
@@ -222,11 +223,13 @@ export const getAllPengajuanPerpanjanganUser = async({query} : {query: any}) => 
         });
 
     const pengajuanPerpanjangan = rawData.filter((item) => item.idPengguna !== null);
+    const {data, totalPage} = manualPaginationFn({data: pengajuanPerpanjangan, currentPage: query.page})
         
     const rasioStatusPerpanjangan = await allStatusPerpanjanganRatio()
     const statsPerpanjangan = await allPerpanjanganStats()
     return {
-        pengajuanPerpanjangan, 
+        totalPage,
+        pengajuanPerpanjangan: data, 
         rasioStatusPerpanjangan, 
         statsPerpanjangan
     }
