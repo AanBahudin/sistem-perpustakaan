@@ -24,6 +24,7 @@ const StatusPengembalianFilter = () => {
     
     setStatusValue(value)
     if (correctValue.includes(value)) {
+      fullParams.delete('page')
       fullParams.set('statusPengembalian', value)
     } else {
       fullParams.delete('statusPengembalian')

@@ -34,7 +34,8 @@ const PustakawanPengembalianPage = () => {
       />
       <SemuaPengembalianFilter />
       <TabelSemuaPengembalian pengembalian={pengajuanPengembalian} />
-      <DataPagination totalPage={totalPage} />
+      {pengajuanPengembalian.length !== 0 && <DataPagination totalPage={totalPage} />}
+      
     </Container>
   )
 }

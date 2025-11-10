@@ -24,6 +24,7 @@ const StatusPeminjamanFilter = () => {
     
     setRoleValue(value)
     if (correctValue.includes(value)) {
+      fullParams.delete('page')
       fullParams.set('statusPeminjaman', value)
     } else {
       fullParams.delete('statusPeminjaman')

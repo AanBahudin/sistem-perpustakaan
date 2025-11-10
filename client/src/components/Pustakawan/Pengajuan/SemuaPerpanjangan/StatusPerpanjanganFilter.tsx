@@ -24,6 +24,7 @@ const StatusPerpanjanganFilter = () => {
     
     setRoleValue(value)
     if (correctValue.includes(value)) {
+      fullParams.delete('page')
       fullParams.set('disetujui', value)
     } else {
       fullParams.delete('disetujui')

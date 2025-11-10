@@ -34,7 +34,7 @@ const PustakawanPeminjaman = () => {
       />
       <SemuaPeminjamanFilter />
       <TabelSemuaPeminjaman peminjaman={pengajuanPeminjaman} />
-      <DataPagination totalPage={totalPage} />
+      {pengajuanPeminjaman.length !== 0 && <DataPagination totalPage={totalPage} />}
     </Container>
   )
 }

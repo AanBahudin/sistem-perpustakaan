@@ -34,7 +34,7 @@ const PustakawanPerpanjangan = () => {
       />
       <SemuaPerpanjanganFilter />
       <TabelSemuaPerpanjangan perpanjangan={pengajuanPerpanjangan} />
-      <DataPagination totalPage={totalPage} />
+      {pengajuanPerpanjangan.length !== 0 && <DataPagination totalPage={totalPage} />}
     </Container>
   )
 }
