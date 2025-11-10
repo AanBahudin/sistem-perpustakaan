@@ -144,7 +144,8 @@ export const getAllPengajuanPengembalian = async(req: Request, res: Response) =>
     SendDataResponse({
         res,
         message: 'Data pengembalian',
-        data
+        data,
+        totalPage: data.totalPage
     })
 }
 

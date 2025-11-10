@@ -24,9 +24,10 @@ const SemuaPengembalianSearchInput = () => {
 
   const handleSearchToParams = useDebouncedCallback((value: string) => {
     if (value) {
-        fullParams.set('query', value)
+      fullParams.delete('page')
+      fullParams.set('query', value)
     } else {
-        fullParams.delete('query')
+      fullParams.delete('query')
     }
     navigate(`?${fullParams.toString()}`);
   }, 600)

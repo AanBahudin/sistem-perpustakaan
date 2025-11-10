@@ -1,4 +1,5 @@
 import { getAllPengembalian } from '@/actions/Pustakawan/pustakawanPengembalianActions'
+import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import SemuaPengembalianFilter from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/SemuaPengembalianFilter'
@@ -19,7 +20,7 @@ const PustakawanPengembalianPage = () => {
   })
 
   if (isLoading) return <DetailPengajuanLoading />
-  const {pengajuanPengembalian, rasioStatusPengembalian, statsPengembalian} = data
+  const {pengajuanPengembalian, rasioStatusPengembalian, statsPengembalian, totalPage} = data
 
   return (
     <Container className='w-full'>
@@ -33,6 +34,7 @@ const PustakawanPengembalianPage = () => {
       />
       <SemuaPengembalianFilter />
       <TabelSemuaPengembalian pengembalian={pengajuanPengembalian} />
+      <DataPagination totalPage={totalPage} />
     </Container>
   )
 }

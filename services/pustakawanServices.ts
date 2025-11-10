@@ -272,6 +272,7 @@ export const getSinglePengajuanPerpanjanganUser = async({id} : {id: string}) => 
 export const getAllPengajuanPengembalianUsers = async({query} : {query: any}) => {
     const searchNama = query.query || ''; // Ambil keyword pencarian
     const mongoQuery: any = { ...query };
+    delete mongoQuery.page
     delete mongoQuery.query;
 
     const rawData = await Pengembalian.find(mongoQuery)
@@ -289,11 +290,14 @@ export const getAllPengajuanPengembalianUsers = async({query} : {query: any}) =>
         });
 
     const pengajuanPengembalian = rawData.filter((item) => item.idPengguna !== null);
+    const { data, totalPage } = manualPaginationFn({data: pengajuanPengembalian, currentPage: query.page})
         
     const rasioStatusPengembalian = await allStatusPengembalianRatio()
     const statsPengembalian = await allPengembalianStats()
+
     return {
-        pengajuanPengembalian, 
+        totalPage,
+        pengajuanPengembalian: data, 
         rasioStatusPengembalian, 
         statsPengembalian
     }
