@@ -97,10 +97,12 @@ export const getAllPengajuan = async(req: Request, res: Response) => {
 export const getAllPengajuanPeminjaman = async(req: Request, res: Response) => {
     const query = req.query
     const data = await getAllPengajuanPeminjamanUser({query})
+
     SendDataResponse({
         res,
         message: 'Data pengajuan peminjaman',
         data,
+        totalPage: data.totalPage,
         total: data.pengajuanPeminjaman.length || 0
     })
 }

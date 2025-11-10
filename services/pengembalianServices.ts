@@ -149,7 +149,6 @@ export const pustakawanBuatDataPengembalian = async({dataBody} : PustakawanCreat
 
     // pecah data dari req.body
     const {idPeminjaman} = dataBody
-    console.log(dataBody)
 
     // cari data pinjaman
     const pinjaman = await Peminjaman.findOne({_id: idPeminjaman})

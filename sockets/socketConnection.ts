@@ -10,7 +10,6 @@ export const ServeSocketConnection = (server: any) => {
 
   wss.on("connection", (connection, request) => {
     const { query } = url.parse(request.url!, true)
-    console.log(query)
     const userId = query.userId as string
     const role = query.role as string
 
@@ -40,9 +39,6 @@ export const getWss = () => {
 export const sendNotificationToUser = (userId: string, payload: any) => {
   const client = userClients.get(userId)
   if (client && client.readyState === 1) {
-    console.log(client)
-    console.log(userId)
-    console.log(payload)
     client.send(JSON.stringify(payload))
   }
 }

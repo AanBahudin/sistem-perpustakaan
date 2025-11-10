@@ -24,6 +24,7 @@ const SemuaPeminjamanSearchInput = () => {
 
     const handleSearchToParams = useDebouncedCallback((value: string) => {
         if (value) {
+            fullParams.delete('page')
             fullParams.set('query', value)
         } else {
             fullParams.delete('query')

@@ -8,12 +8,13 @@ import { getPengembalianByUserId, pustakawanGetDataPengembalian } from './pengem
 import { getPerpanjanganByUserId, getSemuaPerpanjanganUser } from './perpanjanganServices'
 import { startOfMonth, subMonths } from "date-fns";
 import { hitungPerBulan } from '../utils/hitungPerBulan'
+import { manualPaginationFn } from '../utils/paginationFn'
 
 type StatusKey = 'Aktif' | 'Nonaktif' | 'Pending';
 
 export const getStatsServices = async() => {
     const pengguna = await Pengguna.find()
-    const peminjaman = await Peminjaman.find().sort({createdAt: -1}).populate(['buku', 'peminjam'])
+    const peminjaman = await Peminjaman.find().sort({createdAt: -1}).populate(['buku', 'peminjam']).limit(10)
     const {data: pengembalian} = await pustakawanGetDataPengembalian()
     const {data: perpanjangan} = await getSemuaPerpanjanganUser()
     const bukuHilang = await getBukuHilang()
@@ -145,19 +146,21 @@ export const getAllPengajuanUser = async() => {
 
 export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 
-    const searchNama = query.query || ''; // Ambil keyword pencarian
+    const searchNama = query.query || '';
     const mongoQuery: any = { ...query };
+    delete mongoQuery.page
     delete mongoQuery.query; // Hapus field `query` biar nggak ikut nyampur ke find()
+
     // Ambil semua peminjaman + populate peminjam yang cocok
     const rawData = await Peminjaman.find(mongoQuery)
         .sort({ createdAt: -1 })
         .populate({
-        path: 'peminjam',
-        select: 'nama email _id fotoProfil',
-        match: searchNama
-            ? { nama: { $regex: searchNama, $options: 'i' } }
-            : {},
-        })
+            path: 'peminjam',
+            select: 'nama email _id fotoProfil',
+            match: searchNama
+                ? { nama: { $regex: searchNama, $options: 'i' } }
+                : {},
+            })
         .populate({
             path: 'buku',
             select: 'judul _id kategori',
@@ -165,11 +168,16 @@ export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 
     // Filter supaya hanya data yang peminjamnya ketemu
     const pengajuanPeminjaman = rawData.filter((item) => item.peminjam !== null);
-        
+    const { data, totalPage } = manualPaginationFn({data: pengajuanPeminjaman, currentPage: query.page})
+
+    // graphic data 
     const rasioStatusPeminjaman = await allStatusPeminjamanRatio()
     const statsPeminjaman = await allPeminjamanStats()
+
+
     return {
-        pengajuanPeminjaman, 
+        totalPage,
+        pengajuanPeminjaman : data,
         rasioStatusPeminjaman, 
         statsPeminjaman
     }

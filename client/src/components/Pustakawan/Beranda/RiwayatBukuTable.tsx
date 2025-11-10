@@ -20,7 +20,7 @@ const RiwayatBukuTable = ({data} : {data: any}) => {
         <section className="flex flex-col items-start justify-start border  w-full rounded-2xl max-h-[60vh] overflow-y-clip px-3 py-5 ">
             <main className="w-full flex items-center h-fit justify-between">
                 <h3 className="font-semibold capitalize">Riwayat Buku dipinjam</h3>
-                <Link to={'/pustakawan/buku'} className="text-xs text-muted-foreground hover:underline ease-in-out duration-200">Lihat semua</Link>
+                <Link to={'/pustakawan/pengajuan/peminjaman'} className="text-xs text-muted-foreground hover:underline ease-in-out duration-200">Lihat semua</Link>
             </main>
 
             {/* TABLE */}

@@ -7,6 +7,7 @@ import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminja
 import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
 import { useSearchParams } from 'react-router-dom'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
+import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 
 const PustakawanPeminjaman = () => {
 
@@ -19,7 +20,7 @@ const PustakawanPeminjaman = () => {
   })
 
   if (isLoading) return <DetailPengajuanLoading />
-  const { pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman } = data
+  const { pengajuanPeminjaman, rasioStatusPeminjaman, statsPeminjaman, totalPage } = data
 
   return (
     <Container className='w-full'>
@@ -33,6 +34,7 @@ const PustakawanPeminjaman = () => {
       />
       <SemuaPeminjamanFilter />
       <TabelSemuaPeminjaman peminjaman={pengajuanPeminjaman} />
+      <DataPagination totalPage={totalPage} />
     </Container>
   )
 }

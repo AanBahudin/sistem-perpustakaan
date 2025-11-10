@@ -27,7 +27,6 @@ export const pustakawanHandlePerpanjangan = ({data, navigate, toastFn} : HandleF
             }
         })
     } catch (error) {
-        console.log('error')
         toast('Terdapat Perpanjangan Baru')
     }
 } 

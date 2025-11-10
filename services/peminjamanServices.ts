@@ -10,6 +10,7 @@ import { bukuDipinjam } from "./BukuServices/UtilsBukuServices";
 import { dataDurasiPeminjaman } from "./durasiServices";
 import { penggunaMeminjam } from "./penggunaServices";
 import { notifyPustakawan, notifyUser } from "../sockets/soket";
+import { paginationFn } from "../utils/paginationFn";
 
 
 // 4 service dibawah khusus pengguna
@@ -64,11 +65,9 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
     delete newQuery.page
     const totalPeminjaman = await Peminjaman.find({peminjam: userId, ...newQuery}).countDocuments()
 
-    const page = query.page || 1
-    const limit = 10
-    const totalPage = Math.ceil(totalPeminjaman / 10)
-    const skip = (page - 1) * limit
-    
+
+    // pagination function
+    const { totalPage, limit, skip } = paginationFn({data: totalPeminjaman, currentPage: query.page})
     if (query.page) delete query.page
 
     const pinjamanUser = await Peminjaman.find({peminjam: userId, ...query})
