@@ -59,8 +59,21 @@ export const getSemuaPerpanjangan = async({userId, query} : GetSemauPerpanjangan
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
 
-    const dataPerpanjangan = await Perpanjangan.find({idPengguna: userId, ...query}).populate('idBuku')
-    return {data: dataPerpanjangan}
+    const totalPerpanjangan = await Perpanjangan.find({idPengguna: userId}).countDocuments()
+    const page = query.page || 1
+    const limit = 10
+    const totalPage = Math.ceil(totalPerpanjangan / 10)
+    const skip = (page - 1) * limit
+    
+    if (query.page) delete query.page
+
+    const dataPerpanjangan = await Perpanjangan.find({idPengguna: userId, ...query})
+        .populate('idBuku')
+        .sort({createdAt: -1})
+        .limit(limit)
+        .skip(skip)
+
+    return {data: dataPerpanjangan, totalPage}
 }
 
 // SUDAH DITESTING

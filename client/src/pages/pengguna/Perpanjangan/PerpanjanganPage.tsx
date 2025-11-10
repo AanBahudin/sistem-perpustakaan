@@ -1,4 +1,5 @@
 import { getPerpanjangan } from '@/actions/perpanjanganActions'
+import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 import PeminjamanLoading from '@/components/pengguna/peminjaman Pengguna/PeminjamanLoading'
 import PerpanjanganDataLayout from '@/components/pengguna/Perpanjangan Pengguna.tsx/PerpanjanganDataLayout'
 import PerpanjanganSearch from '@/components/pengguna/Perpanjangan Pengguna.tsx/PerpanjanganSearch'
@@ -20,7 +21,13 @@ const PerpanjanganPage = () => {
       <PerpanjanganTab />
       <PerpanjanganSearch />
 
-      {isLoading ? <PeminjamanLoading /> : <PerpanjanganDataLayout data={dataPerpanjangan.data}/>}
+      {isLoading ? <PeminjamanLoading /> : (
+        <>
+          <PerpanjanganDataLayout data={dataPerpanjangan.data}/>
+          {dataPerpanjangan.data.length !== 0 && <DataPagination totalPage={dataPerpanjangan.totalPage} />}
+          
+        </>
+      )}
       
     </main>
   )

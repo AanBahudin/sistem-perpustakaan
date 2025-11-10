@@ -21,19 +21,14 @@ const PeminjamanPage = () => {
     <main className="min-h-[90vh] col-span-9">
       <PeminjamanTab  />
       <PeminjamanSearch />
-      
-
-      
+        
       {isLoading ? <PeminjamanLoading /> : (
         <>
           <PeminjamanDataLayout peminjamanData={dataPeminjaman.data} />
-          {/* {dataPeminjaman.data.length !== 0 && <DataPagination />} */}
-          <DataPagination totalPage={dataPeminjaman.totalPage} />
+          {dataPeminjaman.data.length !== 0 && <DataPagination totalPage={dataPeminjaman.totalPage} />}
         </>
       )}
 
-
-      
     </main>
   ) 
 }

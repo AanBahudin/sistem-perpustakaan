@@ -31,9 +31,21 @@ export const getPengembalianUser = async({ userId, query } : GetAllPengembalianD
         query.judulBuku = { $regex: query.judulBuku, $options: "i" }; 
     }
 
-    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query}).populate(['idBuku', 'idPeminjaman'])
+    const totalPengembalian = await Pengembalian.find({idPengguna: userId}).countDocuments()
+    const page = query.page || 1
+    const limit = 10
+    const totalPage = Math.ceil(totalPengembalian / 10)
+    const skip = (page - 1) * limit
+    
+    if (query.page) delete query.page
 
-    return {data: pengembalian}
+    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query})
+        .populate(['idBuku', 'idPeminjaman'])
+        .sort({createdAt: -1})
+        .limit(limit)
+        .skip(skip)
+
+    return {data: pengembalian, totalPage}
 }
 
 // BELUM TESTING

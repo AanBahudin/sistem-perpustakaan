@@ -10,15 +10,15 @@ interface PerpanjanganData {
 interface HandleFn {
     data: PerpanjanganData,
     navigate: (path: string) => void,
-    toastFn?: typeof toast
+    toastFn: typeof toast
 }
 
-export const pustakawanHandlePerpanjangan = ({data, navigate} : HandleFn) => {
+export const pustakawanHandlePerpanjangan = ({data, navigate, toastFn} : HandleFn) => {
     try {
         const {tipe, data: dataPeminjaman, title, deskripsi} = data
         const detailURL = `/pustakawan/pengajuan/${tipe.toLowerCase()}/${dataPeminjaman._id}`
     
-        toast(title, {
+        toastFn(title, {
             description: deskripsi,
             duration: 10000,
             action: {

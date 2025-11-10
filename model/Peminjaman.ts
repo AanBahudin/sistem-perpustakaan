@@ -46,6 +46,10 @@ const PeminjamanSchema = new mongoose.Schema({
     dataPengembalian: {
         type: mongoose.Types.ObjectId,
         ref: 'Pengembalian'
+    },
+    isOpen: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true})
 

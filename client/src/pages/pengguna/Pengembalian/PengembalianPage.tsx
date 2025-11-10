@@ -5,6 +5,7 @@ import { getPengembalianData } from '@/actions/pengembalianActions'
 import PengembalianSearch from '@/components/pengguna/Pengembalian Pengguna/PengembalianSearch'
 import PengembalianDataLayout from '@/components/pengguna/Pengembalian Pengguna/PengembalianDataLayout'
 import { useQuery } from '@tanstack/react-query'
+import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 
 const PengembalianPage = () => {
 
@@ -21,7 +22,12 @@ const PengembalianPage = () => {
       <PengembalianTabs  />
       <PengembalianSearch />
 
-      {isLoading ? <PeminjamanLoading /> : <PengembalianDataLayout pengembalianData={pengembalianData.data} />}
+      {isLoading ? <PeminjamanLoading /> : (
+        <>
+          <PengembalianDataLayout pengembalianData={pengembalianData.data} />
+          {pengembalianData.data.length !== 0 && <DataPagination totalPage={pengembalianData.totalPage} />}
+        </>
+      )}
     </main>
   )
 }

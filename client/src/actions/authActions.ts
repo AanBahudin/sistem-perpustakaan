@@ -1,6 +1,5 @@
 import { customFetch } from "@/utils/customFetch";
 import { redirect } from "react-router-dom";
-import { toast } from "sonner";
 
 
 export const registerAction = async(formData: FormData) => {
@@ -23,8 +22,7 @@ export const loginAction = async(formData: FormData) => {
 }
 
 export const logoutAction = async() => {
-    const {data} = await customFetch.get('/auth/logout')
-    toast(data.message, {description: 'Anda telah keluar dari Perpustakaan'})
+    await customFetch.get('/auth/logout')
 }
 
 export const accountStatus = async() => {

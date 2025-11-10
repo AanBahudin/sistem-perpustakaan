@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-import Perpanjangan from "../../model/Perpanjangan";
 import { StatusCodes } from "http-status-codes";
-import Peminjaman from "../../model/Peminjaman";
-import tambahHariKeTanggal from "../../utils/tambahHari";
 import { acceptPerpanjangan, getOnePerpanjangan, getOnePerpanjanganByPeminjamanId, getOnePerpanjanganUser, getSemuaPerpanjangan, getSemuaPerpanjanganUser, pembatalanPerpanjangan, tambahPerpanjangan, tolakPerpanjanganPustakawan, ubahPerpanjangan } from "../../services/perpanjanganServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
 
@@ -27,13 +24,14 @@ export const pengajuanPerpanjangan = async(req: Request | any, res: Response) =>
 // BELUM DITESTING
 export const getAllPerpanjanganUser = async(req: Request | any, res: Response) => {
     const query = req.query
-    const {data} = await getSemuaPerpanjangan({userId: req.user.userId, query})
+    const {data, totalPage} = await getSemuaPerpanjangan({userId: req.user.userId, query})
     SendDataResponse({
         res,
         message: 'Data Perpanjangan',
         total: data.length,
-        page: 1,
-        data
+        page: query.page,
+        data,
+        totalPage
     })
 }
 

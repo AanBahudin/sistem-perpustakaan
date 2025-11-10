@@ -60,7 +60,9 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
     }
     
 
-    const totalPeminjaman = await Peminjaman.find({peminjam: userId}).countDocuments()
+    const newQuery = {...query}
+    delete newQuery.page
+    const totalPeminjaman = await Peminjaman.find({peminjam: userId, ...newQuery}).countDocuments()
 
     const page = query.page || 1
     const limit = 10

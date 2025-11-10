@@ -46,6 +46,25 @@ export const registerUser = async(dataRegister: RegisterUserServicesParamsType) 
         const errorMsg = renderError(error)
         throw new BadRequestError(errorMsg)
     }
+
+    const payload : TokenType = {
+        userId: user._id.toString(),
+        role: user.role,
+        email: user.email
+    }
+
+    const token = generateToken(payload)
+
+    delete user.password
+
+    return {
+        token,
+        user,
+        data: {
+            verifikasiEmail: user.verifikasiEmail,
+            verifikasiProdi: user.verifikasiProdi
+        }
+    }
 }
 
 // SUDAH DITESTING

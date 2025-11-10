@@ -42,7 +42,8 @@ const AddSimpananButton = ({id} : {id: string}) => {
             </Button>
         )
     }
-    const idBukuTersimpan = data.bukuDisimpan.map((item: any) => item.buku._id.toString())
+
+    const idBukuTersimpan = data?.bukuDisimpan.map((item: any) => item.buku._id.toString())
 
     return (
         <>

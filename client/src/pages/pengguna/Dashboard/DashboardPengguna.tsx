@@ -9,7 +9,7 @@ const KatalogPengguna = () => {
 
   const {data: statsData, isLoading} = useQuery({
     queryKey: ['stats', 'pengguna'],
-    queryFn: getStats
+    queryFn: getStats,
   })
 
   if (isLoading) return <DashboardLoading />

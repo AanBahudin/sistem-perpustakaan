@@ -30,6 +30,7 @@ export const getStats = async(req: any | Request, res: Response) => {
 
 export const checkUserAccountStatus = async(req: Request | any, res: Response) => {
     const {userId} = req.user
+    
     const dataPengguna = await Pengguna.findOne({_id: userId}).select('verifikasiProdi verifikasiEmail nama')
     if (!dataPengguna) throw new NotFoundError('Data pengguna tidak ditemukan')
     

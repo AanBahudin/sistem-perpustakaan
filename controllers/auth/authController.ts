@@ -21,7 +21,7 @@ import { NotFoundError } from "../../errors/errorHandler"
 // controller unutuk registrasi pengguna/dosen - SUDAH DITESTING
 export const register = async(req : Request, res: Response) => {
 
-    const registerServices = await registerUser({
+    const {data, token} = await registerUser({
         email: req.body.email,
         nama: req.body.nama,
         idKampus: req.body.idKampus,
@@ -30,6 +30,14 @@ export const register = async(req : Request, res: Response) => {
     })
 
     // respons berhasil dari API
+
+    sendResponseWithToken({
+        res,
+        message: 'Pendaftaran berhasil',
+        token,
+        tokenName: 'token',
+        data
+    })
     SendBasicResponse({
         res,
         message: 'Proses pendaftaran berhasil',

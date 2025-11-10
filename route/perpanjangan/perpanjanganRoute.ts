@@ -17,7 +17,6 @@ import {
     terimaPerpanjanganValidator, } from '../../validator/perpanjanganValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
-import { isValidMongooseId } from '../../utils/checker'
 
 const router = express.Router()
 

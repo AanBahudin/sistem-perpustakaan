@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
+import { pustakawanHandlePeminjaman } from './handlers/Pustakawan/pustakawanPeminjamanSocket';
+import { toast } from 'sonner';
+import { pustakawanHandlePerpanjangan } from './handlers/Pustakawan/pustakawanPerpanjanganSocket';
 
 // Import semua handlers
 
@@ -26,7 +29,8 @@ export const usePustakawanSocket = () => {
     socket.on('connect', () => { return });
     socket.on('disconnect', () => { return });
 
-
+    socket.on('PENGGUNA_MENGAJUKAN_PEMINJAMAN', (data) => pustakawanHandlePeminjaman({data, navigate, toastFn: toast}))
+    socket.on('PENGGUNA_MENGAJUKAN_PERPANJANGAN', (data) => pustakawanHandlePerpanjangan({data, navigate, toastFn: toast}))
     
 
     // Cleanup saat komponen unmount

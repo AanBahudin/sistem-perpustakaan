@@ -6,10 +6,9 @@ import { GetProfileParamsServiceType, PenggunaMeminjamParamsType, TambahDendaPen
 import { comparePassword, hashPassword } from '../utils/passwordUtils'
 import cloudinary from 'cloudinary'
 import { promises as fs } from 'fs'
-import { getSemuaPeminjamanUser } from './peminjamanServices'
-import { getPengembalianUser, getTotalBukuHilangByUser } from './pengembalianServices'
-import { getAllPerpanjanganUser } from '../controllers/perpanjangan/perpanjanganController'
-import { getSemuaPerpanjangan } from './perpanjanganServices'
+import { getSemuaDataPeminjamanAktifUserById, getSemuaDataPeminjamanUserById } from './PeminjamanServices/pengguna/PeminjamanUserUtils'
+import { getSemuaPerpanjanganUserById } from './PerpanjanganServices/PerpanjanganUserUtils'
+import { getTotalBukuDihilangkan, getTotalPengembalian } from './PengembalianServices/PengembalianUserUtils'
 
 
 // SUDAH DITESTING
@@ -118,25 +117,16 @@ export const updatingEmail = async({userId, newEmail} : UpdateEmailParamsService
 }
 
 export const userStats = async({userId} : {userId: string}) => {
-    const peminjaman = await getSemuaPeminjamanUser({userId: userId})
-    const totalPeminjaman = peminjaman.data.length
-
-    const peminjamanAktif = await getSemuaPeminjamanUser({userId: userId, query: {statusPeminjaman: 'Dipinjam'}})
-    const totalPeminjamanAktif = peminjamanAktif.data.length
-
-    const pengembalian = await getPengembalianUser({userId})
-    const totalPengembalian = peminjaman.data.length
-
-    const perpanjangan = await getSemuaPerpanjangan({userId: userId})
-    const totalPerpanjangan = perpanjangan.data.length
-
-    const bukuDihilangkan = await getTotalBukuHilangByUser({idPengguna: userId})
-    const totalHilang = bukuDihilangkan.length
+    const {data: bukuTelahDipinjam, total: totalSemuaPeminjaman} = await getSemuaDataPeminjamanUserById({userId})
+    const {data: peminjamanAktif, total: totalPeminjamanAktif} = await getSemuaDataPeminjamanAktifUserById({userId})
+    const {data: perpanjangan, total: totalPerpanjangan} = await getSemuaPerpanjanganUserById({userId: userId})
+    const {data: pengembalian, total: totalPengembalian} = await getTotalPengembalian({userId})
+    const {data: bukuHilang, total: totalBukuHilang} = await getTotalBukuDihilangkan({userId})
 
     const summaryData = [
         {
-            title: 'Buku dipinjam',
-            value: totalPeminjaman
+            title: 'Total buku telah dipinjam',
+            value: totalSemuaPeminjaman
         },
         {
             title: 'Peminjaman aktif',
@@ -152,17 +142,17 @@ export const userStats = async({userId} : {userId: string}) => {
         },
         {
             title: 'Buku dihilangkan',
-            value: totalHilang
+            value: totalBukuHilang
         },
         
     ]
 
     const data = {
-        peminjaman: peminjaman.data,
-        pengembalian: pengembalian.data,
-        perpanjangan: perpanjangan.data,
-        peminjamanAktif: peminjamanAktif.data,
-        bukuHilang: bukuDihilangkan,
+        peminjaman: bukuTelahDipinjam,
+        pengembalian,
+        perpanjangan,
+        peminjamanAktif: peminjamanAktif,
+        bukuHilang,
         summaryData
     }
 

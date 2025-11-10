@@ -14,14 +14,15 @@ import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../
 export const getAllPengembalianUser = async(req: Request | any, res: Response) => {
     const {userId} = req.user
     const query = req.query
-    const {data} = await getPengembalianUser({userId, query})
+    const {data, totalPage} = await getPengembalianUser({userId, query})
 
     SendDataResponse({
         res,
         message: 'Data Pengembalian',
         total: data.length,
-        page: 1,
-        data
+        page: req.query.page || 1,
+        data,
+        totalPage
     })
 }
 
@@ -38,15 +39,6 @@ export const getSinglePengembalianUser = async(req: Request | any, res: Response
         data
     })
 }
-
-// export const createPengembalianDataUser = async(req: Request | any, res: Response) => {
-//     const {userId} = req.user
-//     const {id: peminjamanId} = req.params
-
-//     const data = await userCreatePengembalianInfo({userId, peminjamanId})
-
-//     res.status(200).json({message: 'test'})
-// }
 
 // untuk pustakawan
 

@@ -31,7 +31,6 @@ export const userMiddlewareAuthorized = async (req: any, res: Response, next: Ne
         throw new NotAuthenticated('Akun anda diblokir oleh program studi')
     }
 
-
     next()
 }
 

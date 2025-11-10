@@ -3,27 +3,15 @@ import Container from '../../globals/Container'
 import loginImg from '@/assets/images/loginImg.png'
 import Logo from '@/components/landing/Navbar/Logo'
 
-import { Link, redirect, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import InputForm from '@/components/form/InputForm'
 import PasswordInput from '@/components/form/PasswordInput'
-import { accountStatus, loginAction } from '@/actions/authActions'
+import { loginAction } from '@/actions/authActions'
 import { Button } from '@/components/ui/button'
 
-export const loader = async() => {
-  try {
-    const {nama} = await accountStatus()
-    if (nama) {
-      return redirect('/status/account')
-    }
-  } catch (error) {
-    return null
-  }
-  
-  return
-}
 
 const LoginPage : React.FC = () => {
 
