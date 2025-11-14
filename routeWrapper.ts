@@ -17,6 +17,7 @@ import simpanRoute from './route/simpan/simpanRoute'
 import searchRoute from './route/search/searchRoute'
 import penerbitRoute from './route/penerbit/penerbitRoutes'
 import penulisRoute from './route/penulis/penulisRoute'
+import landingRoute from './route/landing/LandingRoute'
 
 import { errorHandler } from './errors/errorHandler'
 
@@ -45,6 +46,7 @@ export const routeWrapper = (app: Express) => {
     app.use('/api/v1/search', authenticationMiddleware, userMiddlewareAuthorized, searchRoute)
     app.use('/api/v1/penerbit', authenticationMiddleware, penerbitRoute)
     app.use('/api/v1/penulis', authenticationMiddleware, penulisRoute)
+    app.use('/api/v1/landing', landingRoute)
 
 
     app.use(errorHandler)

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
+import { ImageOff } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 type BookGridType = {
@@ -26,7 +27,12 @@ const BookGrid = ({dataBuku} : BookGridType) => {
 
         return (
           <main key={index} className='col-span-4 bg-card p-2  flex items-center justify-center gap-x-4 rounded-xl border hover:border-primary duration-150 ease-in-out group'>
-            <img src={item.cover} className='w-[300px] h-[160px] overflow-hidden rounded object-cover object-center' alt="" />
+            {item.cover ? (
+                <img src={item.cover} className='w-[300px] h-[160px] overflow-hidden rounded object-cover object-center' alt="" /> 
+              ) : (
+                <div className='w-[300px] h-[160px] overflow-hidden rounded flex items-center justify-center border'> <ImageOff /> </div> 
+              )
+            }
 
             <div className='flex items-start justify-start flex-col'>
               <Link to={`/my/buku/${item._id}`}>

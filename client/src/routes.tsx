@@ -67,6 +67,8 @@ import ProdiSemuaBukuDikembalikan from "./pages/prodi/buku/ProdiSemuaBukuDikemba
 import ProdiDetailBuku from "./pages/prodi/buku/ProdiDetailBuku";
 import SemuaPustakawan from "./pages/prodi/pustakawan/SemuaPustakawan";
 import DetailPustakawan from "./pages/prodi/pustakawan/DetailPustakawan";
+import LandingKatalog from "./pages/landing/LandingKatalog";
+import DetailBukuKatalog from "./pages/landing/DetailBukuKatalog";
 
 const router : RouteObject[] = [
     {
@@ -85,6 +87,14 @@ const router : RouteObject[] = [
                 path: 'login',
                 element: <LoginPage />
             },
+            {
+                path: 'katalog',
+                element: <LandingKatalog />
+            },
+            {
+                path: 'katalog/:id',
+                element: <DetailBukuKatalog />
+            }
             
         ]
     },

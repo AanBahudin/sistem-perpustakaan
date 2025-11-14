@@ -1,33 +1,33 @@
 import Buku from "../../model/Buku";
 import { recomendationBook, lastAddedBook } from "./UtilsBukuServices";
 import { NotFoundError } from "../../errors/errorHandler";
+import { manualPaginationFn, paginationFn } from "../../utils/paginationFn";
 
 export const getSemuaBukuTersediaUntukUser = async({query} : {query: any}) => {
 
+    const newQuery = {...query}
+    delete newQuery.page
+
     let filters : Record<string, any>[] = []
-     if (query.search) {
-        const searchRegex = { $regex: query.search, $options: "i" };
+     if (newQuery.search) {
+        const searchRegex = { $regex: newQuery.search, $options: "i" };
         filters = [
             { penulis: searchRegex },
             { judul: searchRegex },
             { penerbit: searchRegex }
         ];
     }
+    
 
-    const buku = await Buku.find({
+    const rawBuku = await Buku.find({
         dihapus: false,
         status: 'Tersedia',
         ...(filters.length > 0 && { $or: filters })
     }).select('-dihapus').sort({createdAt: -1})
+    
+    const {data, totalPage} = manualPaginationFn({data: rawBuku, currentPage: query.page, limit: 18})
 
-
-    const recommendation = await recomendationBook()
-    const lastAdded = await lastAddedBook()
-
-    // for testing purposed
-    const totalPage = 1
-
-    return {buku, recommendation, totalPage, lastAdded}
+    return {data, totalPage}
 }
 
 export const discoveryBukuServices = async({query} : {query: any}) => {
@@ -57,4 +57,16 @@ export const getSatuBukuTersediaUntukUser = async(idBuku: string) => {
 
     if (!buku) throw new NotFoundError('Data buku tidak ditemukan')
     return buku
+}
+
+export const katalogBukuUser = async() => {
+    const rekomendasiBuku = await Buku.find({dihapus: false}).sort({totalDipinjam: 1}).limit(5)
+    const bukuTerbaru = await Buku.find().sort({createdAt: -1}).limit(1)
+    const buku = await Buku.find({dihapus: false}).sort({totalDipinjam: 1}).limit(18)
+
+    return {
+        rekomendasiBuku,
+        bukuTerbaru,
+        buku
+    }
 }

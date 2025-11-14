@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator"
-import { CalendarCheck, CalendarClock, CalendarSync } from "lucide-react"
+import { CalendarCheck, CalendarClock, CalendarSync, ImageOff } from "lucide-react"
 import { formatedDate } from "@/utils/formatDate"
 import StatusPengembalianGrid from "./StatusPengembalianGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
@@ -24,7 +24,11 @@ const PengembalianGrid = ({data=['default']} : PeminjamanGridType) => {
             }
             return (
                 <main key={item._id} className="group w-full h-full col-span-6 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
-                    <img src={idBuku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                    {idBuku.cover ? (
+                        <img src={idBuku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                    ) : (
+                        <div className="w-28 h-32 rounded border flex items-center justify-center"><ImageOff /></div>
+                    )}
                     <div className="w-full flex flex-col items-start justify-between ">
                         <Link to={`/my/pengembalian/${item._id}/${idBuku._id}`} className="text-2xl font-semibold group-hover:underline">{newJudul}</Link>
                         <Separator className="my-2 w-full" />

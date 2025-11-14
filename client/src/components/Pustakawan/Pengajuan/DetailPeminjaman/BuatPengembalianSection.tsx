@@ -3,6 +3,7 @@ import DetailPengajuanHeader from "../DetailPengajuanHeader"
 import { Separator } from "@/components/ui/separator"
 import DetailPengajuanPeminjamanPengembalianTabs from "./DetailPengajuanPeminjamanPengembalianTabs"
 import PengembalianDataForm from "./PengembalianDataForm"
+import { ImageOff } from "lucide-react"
 
 type BuatPengembalianSectionType = {
     buku: any
@@ -24,7 +25,11 @@ const BuatPengembalianSection = ({buku, peminjaman} : BuatPengembalianSectionTyp
                 <h1 className="font-semibold">BUKU YANG DIPINJAM</h1>
 
                 <div className="w-full flex items-start justify-start gap-x-4 mt-4">
-                    <img className="w-32 h-40 rounded object-cover border" src={buku.cover} alt={buku.judul} />
+                    {buku?.cover ? (
+                        <img className="w-32 h-40 rounded object-cover border" src={buku.cover} alt={buku.judul} />
+                    ) : (
+                        <div className="w-32 h-40 rounded border flex items-center justify-center"> <ImageOff /> </div>
+                    )}
 
                     <div className="flex flex-1 flex-col items-start">
                         <div className="w-full flex gap-2 my-1 flex-wrap">

@@ -2,6 +2,7 @@ import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 import SimpanPageNoData from '@/components/NoDataDisplay/SimpanPageNoData'
+import { ImageOff } from 'lucide-react'
 
 const SimpananBooks = ({books} : {books: any}) => {
 
@@ -23,23 +24,27 @@ const SimpananBooks = ({books} : {books: any}) => {
 
             return (
                 <main key={index} className='col-span-4 bg-card p-2  flex items-center justify-center gap-x-4 rounded-xl border hover:border-primary duration-150 ease-in-out group'>
-                <img src={cover} className='w-[300px] h-[160px] overflow-hidden rounded object-cover object-center' alt="" />
+                    {cover ? (
+                        <img src={cover} className='w-[300px] h-[160px] overflow-hidden rounded object-cover object-center' alt="" />
+                    ) : (
+                        <div className="w-[300px] h-[150px] flex items-center justify-center border rounded"> <ImageOff /> </div>
+                    )}
 
-                <div className='flex items-start justify-start flex-col'>
-                    <Link to={`/my/buku/${_id}`}>
-                        <h1 className='text-lg font-semibold group-hover:underline duration-150 ease-in-out'>{newJudul}</h1>
-                    </Link>
-                    <p className='capitalize italic text-[12px] text-muted-foreground text-ellipsis w-full'>{newTagline}...</p>
-                    <p className='text-muted-foreground text-[12px] my-4'>{newDeskripsi}...</p>
+                    <div className='flex items-start justify-start flex-col'>
+                        <Link to={`/my/buku/${_id}`}>
+                            <h1 className='text-lg font-semibold group-hover:underline duration-150 ease-in-out'>{newJudul}</h1>
+                        </Link>
+                        <p className='capitalize italic text-[12px] text-muted-foreground text-ellipsis w-full'>{newTagline}...</p>
+                        <p className='text-muted-foreground text-[12px] my-4'>{newDeskripsi}...</p>
 
-                    <div className='w-full flex gap-x-2'>
-                        <Button asChild className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>
-                            <Link to={`/my/buku/${_id}`}>Selengkapnya</Link>
-                        </Button>
-                        
-                        <GridLayoutButtons id={_id} />
+                        <div className='w-full flex gap-x-2'>
+                            <Button asChild className='flex-1 text-white text-[12px] self-start flex flex-col' size='sm'>
+                                <Link to={`/my/buku/${_id}`}>Selengkapnya</Link>
+                            </Button>
+                            
+                            <GridLayoutButtons id={_id} />
+                        </div>
                     </div>
-                </div>
                 </main>
             )
         })}

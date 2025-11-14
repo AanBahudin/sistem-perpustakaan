@@ -16,16 +16,28 @@ import { NotFoundError } from "../../errors/errorHandler";
 import { getPeminjamanAktifByBukuId } from "../peminjamanServices";
 import { getPengembalianByBukuId, getPengembalianHilangByBukuId } from "../pengembalianServices";
 import { bukuMatch } from "../../utils/bukuQuery";
+import { manualPaginationFn } from "../../utils/paginationFn";
 
 
 export const getSemuaBukuUntukPustakawan = async({query} : {query: any}) => {
-    const mongoQuery: any = { ...query };
-    delete mongoQuery.query;
 
-    const books = await Buku.find(mongoQuery).sort({createdAt: -1})
+    let coppiedQuery = {...query}
+    delete coppiedQuery.page
+
+    if (coppiedQuery.query) {
+        coppiedQuery.judul = {$regex: coppiedQuery.query, $options: 'i'}
+        delete coppiedQuery.query
+    }
+
+    const rawBooks = await Buku.find(coppiedQuery)
+        .sort({createdAt: -1})
+
+    const { data: books, totalPage } = manualPaginationFn({data: rawBooks, currentPage: query.page, limit: 20})
+
     const dataRasio = await rasioKategoriBuku()
     const dataStats = await allBukuStats()
     return {
+        totalPage,
         dataBuku: books,
         dataRasio, 
         dataStats,

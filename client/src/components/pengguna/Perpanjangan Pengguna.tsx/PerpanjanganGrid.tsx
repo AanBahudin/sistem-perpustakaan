@@ -3,6 +3,7 @@ import { CalendarCheck, CalendarSync, CalendarClock } from "lucide-react"
 import { formatedDate } from "@/utils/formatDate"
 import StatusPerpanjanganGrid from "./StatusPerpanjanganGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
+import { ImageOff } from "lucide-react"
 import { Link } from "react-router-dom"
 
 type PerpanjanganGridType = {
@@ -20,7 +21,11 @@ const PerpanjanganGrid = ({data} : PerpanjanganGridType) => {
             }
             return (
                 <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
-                    <img src={idBuku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                    {idBuku.cover ? (
+                        <img src={idBuku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                    ) : (
+                        <div className="w-28 h-32 rounded border flex items-center justify-center"><ImageOff /></div>
+                    )}
                     <div className="w-full flex flex-col items-start justify-between ">
                         <Link to={`/my/perpanjangan/${item._id}/${idBuku._id}`} className="text-2xl font-semibold group-hover:underline">{newJudul}</Link>
                         <Separator className="my-2 w-full" />

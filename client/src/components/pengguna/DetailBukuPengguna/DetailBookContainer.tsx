@@ -4,7 +4,7 @@ import InformationContainer from "./InformationContainer"
 import StatsDetailInfo from "./StatsDetailInfo"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { CircleAlert, Plus } from "lucide-react"
+import { CircleAlert, ImageOff, Plus } from "lucide-react"
 import { DangerAlert, DefaultAlert, LinkAlert } from "@/pages/pengguna/Buku/Alert"
 
 type DetailBookContainerDataType = {
@@ -35,11 +35,15 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
             <BreadCrumbDetailBuku title={data.judul} from="Buku" url="/my/buku" />
 
             <main className="w-full flex my-10 gap-x-10">
-                <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={data.cover} alt={data.judul} />
+                {data.cover ? (
+                    <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={data.cover} alt={data.judul} />
+                ) : (
+                    <div className="w-[700px] h-[400px] rounded-2xl border flex items-center justify-center"> <ImageOff className="w-14" /> </div>
+                )}
 
                 <div className="flex justify-start flex-col">
                     <div className="w-full flex justify-between items-center">
-                        <h1 className="text-3xl font-semibold">{data.judul}</h1>
+                        <h1 className="text-2xl font-semibold">{data.judul}</h1>
                         <GridLayoutButtons id={data._id}/>
                     </div>
 

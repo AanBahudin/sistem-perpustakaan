@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { DiajukkanAlert, DefaultAlert } from '../Buku/Alert'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Link } from 'react-router-dom'
+import { ImageOff } from 'lucide-react'
 
 type InfoPinjamanType = {
     peminjaman: any,
@@ -32,7 +33,11 @@ const InfoPinjaman = ({peminjaman, perpanjangan} : InfoPinjamanType) => {
             <main className="flex gap-x-6 mt-6">
 
             <div className="w-24 aspect-square overflow-hidden">
-                <img className="w-full object-cover rounded-lg" src={detailBuku.cover} alt={detailBuku.judul} />
+                {detailBuku.cover ? (
+                    <img className="w-full object-cover rounded-lg" src={detailBuku.cover} alt={detailBuku.judul} />
+                ) : (
+                    <div className='w-full h-full rounded-lg border flex items-center justify-center'> <ImageOff /> </div>
+                )}
             </div>
 
             <div className="w-[80%]">

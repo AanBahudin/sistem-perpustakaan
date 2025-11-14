@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getAllBukuUser, getSingleBukuUser, discoveryBuku } from '../../controllers/buku/userBukuController'
+import { getAllBukuUser, getSingleBukuUser, discoveryBuku, getDashboardUserBook } from '../../controllers/buku/userBukuController'
 import { getAllBukuYearPustakawan } from '../../controllers/buku/pustakawanBukuController'
 import {
     getAllBukuPustakawan,
@@ -18,6 +18,7 @@ import { bukuInputValidator } from '../../validator/bukuValidator'
 import { prodiMiddlewareAuthorized, pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongoIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 import upload from '../../middleware/multerMiddleware'
+import { getSuggestedBooks } from '../../controllers/buku/utilsBukuController'
 
 const router = express.Router()
 
@@ -27,11 +28,17 @@ router.route('/user')
 router.route('/year')
     .get(pustakawanMiddlewareAuthorized, getAllBukuYearPustakawan)
 
+router.route('/katalog/user')
+    .get(userMiddlewareAuthorized, getDashboardUserBook)
+
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongoIdMiddleware, getSingleBukuUser)
 
 router.route('/discovery')
     .get(discoveryBuku)
+
+router.route('/suggested/:id') 
+    .get(mongoIdMiddleware, getSuggestedBooks)
 
 router.route('/pustakawan')
     .get(pustakawanMiddlewareAuthorized, getAllBukuPustakawan)

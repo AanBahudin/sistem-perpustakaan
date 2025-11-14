@@ -248,10 +248,6 @@ export const tabPengembalian = [
     title: 'Dikembalikan',
     value: 'Dikembalikan'
   },
-  {
-    title: 'Pending',
-    value: 'Pending'
-  },
   
 ]
 

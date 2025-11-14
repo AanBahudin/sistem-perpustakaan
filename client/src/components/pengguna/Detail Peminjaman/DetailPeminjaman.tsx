@@ -2,6 +2,7 @@ import DetailButton from "../DetailBukuPengguna/DetailButton"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import StatsDetailInfo from "../DetailBukuPengguna/StatsDetailInfo"
 import DetailPeminjamanInfo from "./DetailPeminjamanInfo"
+import { ImageOff } from "lucide-react"
 
 type DetailPeminjamanType = {
     peminjaman: any,
@@ -15,7 +16,11 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
     return (
         <main className="w-full flex my-10 gap-x-10 mt-10">
-            <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={cover} alt={judul} />
+            {cover ? (
+                <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={cover} alt={judul} />
+            ) : (
+                <div className="w-[400px] h-[400px] rounded-2xl border flex items-center justify-center"> <ImageOff /> </div>
+            )}
 
             <div className="flex justify-start flex-col">
                 <div className="w-full flex justify-between items-center">

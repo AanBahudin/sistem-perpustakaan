@@ -39,7 +39,7 @@ export const getPengembalianUser = async({ userId, query } : GetAllPengembalianD
     
     if (query.page) delete query.page
 
-    const pengembalian = await Pengembalian.find({idPengguna: userId, ...query})
+    const pengembalian = await Pengembalian.find({idPengguna: userId, statusPembayaran: 'Dibayar', statusPengembalian: 'Dikembalikan', ...query})
         .populate(['idBuku', 'idPeminjaman'])
         .sort({createdAt: -1})
         .limit(limit)

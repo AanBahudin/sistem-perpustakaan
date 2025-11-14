@@ -11,6 +11,8 @@ type PeminjamanSectionType = {
 
 const PeminjamanSection = ({peminjaman, linkTarget='peminjaman'} : PeminjamanSectionType) => {
 
+  console.log(peminjaman)
+
   let { _id, buku:dataBuku, judulBuku, statusPeminjaman, durasiPeminjaman, berakhirPada, diprosesOleh: pustakawan, dataPengembalian } = peminjaman
   berakhirPada = formatedDate(berakhirPada)
   return (

@@ -8,12 +8,17 @@ const queryClient = new QueryClient({
 })
 
 export const getAllBuku = async(query?: string) => {
-    const res = await customFetch.get(`/buku/user?${query ?? ''}`)
-    if (res.status >= 400) {
+    const {data: response, status} = await customFetch.get(`/buku/user?${query ?? ''}`)
+    if (status >= 400) {
         throw new Error('Gagal mengambil data buku.')
     }
 
-    return res.data
+    return response
+}
+
+export const getDashboardBookAction = async() => {
+    const {data: response} = await customFetch.get('/buku/katalog/user')
+    return response.data
 }
 
 export const getRecommendationsBuku = async() => {
@@ -41,15 +46,18 @@ export const getDetailBuku = async(id: string) => {
 }
 
 export const discoverBuku = async(query: undefined | string) => {
-
     if (query === undefined) {
         redirect('/my/buku')
     }
-
     const data = await customFetch(`/buku/discovery?query=${query}`)
     if (data.status >= 400) {
         return {message: 'Terjadi kesalahan',  deskripsi: 'Tidak dapat mengambil buku'}
     }
 
     return data.data
+}
+
+export const getSuggestedBook = async({idBuku} : {idBuku: string}) => {
+    const {data: response} = await customFetch.get(`/buku/suggested/${idBuku}`)
+    return response.data
 }

@@ -1,3 +1,4 @@
+import { NotFoundError } from "../../errors/errorHandler"
 import Buku from "../../model/Buku"
 import Pengembalian from "../../model/Pengembalian"
 
@@ -38,6 +39,21 @@ export const recomendationBook = async() => {
 export const lastAddedBook = async() => {
     const lastAdded = await Buku.findOne().sort({ createdAt: -1 });
     return lastAdded
+}
+
+export const getSuggestedBook = async({idBuku} : {idBuku: string}) => {
+  const buku = await Buku.findOne({_id: idBuku, dihapus: false})
+  if (!buku) throw new NotFoundError('Buku tidak ditemukan')
+
+  // cari buku berdasarkan kategori buku yang sedang diakases pengguna
+  const kategoriBuku: string[] = buku.kategori
+
+  const relatedBooks = await Buku.find({
+      _id: { $ne: idBuku }, // jangan tampilkan buku utama
+      kategori: { $in: kategoriBuku }, // cari yang punya kategori serupa
+    }).limit(18); // batasi hasil
+
+  return relatedBooks
 }
 
 export const getAllBookYear = async() => {

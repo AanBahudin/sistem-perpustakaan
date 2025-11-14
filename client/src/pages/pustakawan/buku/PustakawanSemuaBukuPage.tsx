@@ -1,4 +1,5 @@
 import { getAllBukuPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
+import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
@@ -23,7 +24,7 @@ const PustakawanSemuaBukuPage = () => {
 
   if (isLoading) return <BukuLoading />
   
-  const { dataBuku, dataRasio, dataStats } = data
+  const { dataBuku, dataRasio, dataStats, totalPage } = data
   return (
     <Container className="w-full">
       <section className="w-full flex items-center justify-between">
@@ -42,6 +43,8 @@ const PustakawanSemuaBukuPage = () => {
       />
       <SemuaBukuFilter />
       <TabelSemuaBuku dataBuku={dataBuku} />
+
+      <DataPagination totalPage={totalPage} />
     </Container>
   )
 }

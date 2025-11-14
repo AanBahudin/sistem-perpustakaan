@@ -17,7 +17,7 @@ export const landingNavbarLink = [
     {
         id: 4,
         text: 'katalog',
-        url: '/#katalog'
+        url: '/katalog'
     }
 ]
 

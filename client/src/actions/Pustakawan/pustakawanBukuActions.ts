@@ -21,6 +21,7 @@ export const getSingleBukuPustakawan = async({idBuku} : {idBuku: string}) => {
 
 export const editBukuPustakawan = async(data: FormData, idBuku: string) => {
     const {data: response} = await customFetch.patch(`/buku/pustakawan/${idBuku}`, data)
+    console.log(response)
     return response.data
 }
 

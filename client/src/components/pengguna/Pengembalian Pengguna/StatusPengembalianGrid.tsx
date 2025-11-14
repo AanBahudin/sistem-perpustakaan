@@ -13,7 +13,7 @@ const StatusPengembalianGrid = ({status} : StatusPengembalianType) => {
 
 const Dikembalikan = () => {
   return (
-    <h3 className="w-full text-center bg-muted-foreground self-center py-1 rounded text-sm text-muted">Diajukan</h3>
+    <h3 className="w-full text-center bg-primary text-white self-center py-1 rounded text-sm ">Dikembalikan</h3>
   )
 }
 

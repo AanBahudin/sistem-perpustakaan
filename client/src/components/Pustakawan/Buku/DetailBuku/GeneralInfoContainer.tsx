@@ -1,4 +1,4 @@
-import { UserCog } from "lucide-react"
+import { ImageOff, UserCog } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import BookDetailInfo from "./BookDetailInfo"
 import { formatedDate } from "@/utils/formatDate"
@@ -10,7 +10,11 @@ const GeneralInfoContainer = ({data} : {data: any}) => {
   return (
     <section className='w-full flex items-start gap-x-8 my-4'>
       <main className='w-3/4 min-h-[40vh] rounded-xl flex items-start justify-start gap-x-4'>
-        <img className='w-36 h-56 rounded' src={data.cover} alt={data.judul} />       
+        {data.cover ? (
+          <img className='w-36 h-56 rounded' src={data.cover} alt={data.judul} />  
+        ) : (
+          <div className="w-36 h-56 rounded border flex items-center justify-center"> <ImageOff /> </div>
+        )}
         <BookDetailInfo data={data} />
       </main>
       

@@ -4,6 +4,7 @@ import { formatedDate } from "@/utils/formatDate"
 import StatusPeminjaman from "./StatusPeminjamanGrid"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import { Link } from "react-router-dom"
+import { ImageOff } from "lucide-react"
 
 type PeminjamanGridType = {
     data: any,
@@ -24,7 +25,11 @@ const PeminjamanGrid = ({data = ['default']} : PeminjamanGridType) => {
                 }
                 return (
                     <main key={item._id} className="w-full h-full col-span-6 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out">
-                        <img src={buku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                        {buku.cover ? (
+                            <img src={buku.cover} className="w-28 h-32 object-fill overflow-hidden rounded" />
+                        ) : (
+                            <div className="w-28 h-32 rounded border flex items-center justify-center"><ImageOff /></div>
+                        )}
                         <div className="w-full flex flex-col items-start justify-between ">
                             <Link to={`/my/peminjaman/${item._id}/${buku._id}`} className="text-2xl font-semibold hover:underline">{newJudul}</Link>
                             <Separator className="my-2 w-full" />

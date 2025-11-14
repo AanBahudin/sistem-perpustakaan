@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Separator } from "@/components/ui/separator"
 import DetailPengajuanInformation from "./DetailPengajuanInformation"
 import { Link } from "react-router-dom"
+import { ImageOff } from "lucide-react"
 
 const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
 
@@ -18,7 +19,11 @@ const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
             {/* DETAIL BUKU SECTION */}
         
             <section className='w-full flex items-start justify-start gap-x-10'>
-                <img className='w-40 h-44 rounded-xl object-cover border' src={dataBuku.cover} alt={dataBuku.judul} />
+                {dataBuku?.cover ? (
+                    <img className='w-40 h-44 rounded-xl object-cover border' src={dataBuku.cover} alt={dataBuku.judul} />
+                ) : (
+                    <div className="w-40 h-50 rounded-xl border flex items-center justify-center"> <ImageOff /> </div>
+                )}
 
                 <main className='flex-1'>
                     <Link to={`/pustakawan/buku/${dataBuku._id}`} className='text-xl font-semibold hover:underline ease-in-out duration-200'>{dataBuku.judul}</Link>

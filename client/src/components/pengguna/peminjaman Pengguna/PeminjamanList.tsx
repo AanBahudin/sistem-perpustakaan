@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import StatusPeminjamanList from "./StatusPeminjamanList"
 import PeminjamanKategori from "./PeminjamanKategori"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
+import { ImageOff } from "lucide-react"
 
 type PeminjamanListType = {
     data: any,
@@ -23,7 +24,11 @@ const PeminjamanList = ({data = [], } : PeminjamanListType) => {
 
           return (
             <section key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
-              <img src={buku.cover} className="w-24 h-32 object-fill rounded" />
+              {buku?.cover ? (
+                <img src={buku.cover} className="w-24 h-32 object-fill rounded" />
+              ) : (
+                <div className="w-24 h-32 rounded border flex items-center justify-center"> <ImageOff /> </div>
+              )}
 
               <div className="w-full flex flex-col items-start justify-stretch ">
                 <div className="w-full flex items-center justify-between">

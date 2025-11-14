@@ -1,5 +1,4 @@
 import {useSearchParams} from 'react-router-dom'
-import PengembalianTabs from '@/components/pengguna/Pengembalian Pengguna/PengembalianTabs'
 import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/PeminjamanLoading"
 import { getPengembalianData } from '@/actions/pengembalianActions'
 import PengembalianSearch from '@/components/pengguna/Pengembalian Pengguna/PengembalianSearch'
@@ -19,7 +18,7 @@ const PengembalianPage = () => {
 
   return (
     <main className="min-h-[80vh] col-span-9">
-      <PengembalianTabs  />
+      {/* <PengembalianTabs  /> */}
       <PengembalianSearch />
 
       {isLoading ? <PeminjamanLoading /> : (

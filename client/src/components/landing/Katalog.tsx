@@ -2,8 +2,13 @@ import Container from '@/globals/Container'
 import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
+import useFetchLandingData from '@/hooks/fetchHooks/landingHooks/useFetchLandingData'
+import LandingKatalogLoading from './Katalog/LandingKatalogLoading'
+import KatalogThumbnailImage from './Katalog/KatalogThumbnailImage'
 
 const Katalog = () => {
+  const { data, isLoading } = useFetchLandingData()
+
   return (
     <Container className='flex flex-col'>
         <h1 id='katalog' className='text-3xl font-semibold mb-8 text-center'>Katalog Bacaan</h1>
@@ -13,13 +18,7 @@ const Katalog = () => {
 
         {/* ICON */}
         <ScrollArea>
-            <section className='flex items-center gap-x-6 mt-10 justify-center'>
-              {Array.from({length: 5}).map((_, index) => {
-                return (
-                  <div key={index} className='lg:w-50 lg:h-70 w-30 h-50 bg-muted-foreground rounded'></div>
-                )
-              })}
-            </section>
+            {isLoading ? <LandingKatalogLoading /> : <KatalogThumbnailImage data={data.katalogReview} />}
             <ScrollBar orientation="horizontal" />
         </ScrollArea>
 
@@ -29,5 +28,7 @@ const Katalog = () => {
     </Container>
   )
 }
+
+
 
 export default Katalog

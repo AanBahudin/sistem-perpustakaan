@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Separator } from "@/components/ui/separator"
 import { formatedDate } from "@/utils/formatDate"
 import { CalendarCheck, CalendarSync, CalendarClock } from "lucide-react"
+import { ImageOff } from "lucide-react"
 import StatusPerpanjanganList from "./StatusPerpanjanganList"
 import PeminjamanKategori from "../peminjaman Pengguna/PeminjamanKategori"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
@@ -23,7 +24,11 @@ const PerpanjanganList = ({data} : PerpanjanganListType) => {
                 const newDeskripsi = idBuku.deskripsi.slice(0,240) + '...'
                 return (
                     <section key={item._id} className="w-full h-full col-span-12 border rounded-2xl flex items-center gap-x-4 p-4 hover:shadow-2xl duration-200 ease-in-out group">
-                        <img src={idBuku.cover} className="w-24 h-32 object-fill rounded" />
+                        {idBuku.cover ? (
+                            <img src={idBuku.cover} className="w-24 h-32 object-fill rounded" />
+                            ) : (
+                            <div className="w-24 h-32 rounded border flex items-center justify-center"> <ImageOff /> </div>
+                        )}
 
                         <div className="w-full flex flex-col items-start justify-stretch ">
                             <div className="w-full flex items-center justify-between">

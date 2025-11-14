@@ -27,7 +27,8 @@ const PustakawanEditBuku = () => {
       queryClient.invalidateQueries({queryKey: ['detail', 'buku', idBuku]})
       navigate(`/pustakawan/buku/detail/${idBuku}`)
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error)
       toast('Terjadi kesalahan', {description: 'Tidak dapat update buku'})
     }
   })

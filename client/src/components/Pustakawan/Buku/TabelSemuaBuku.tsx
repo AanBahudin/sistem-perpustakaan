@@ -49,8 +49,8 @@ const TabelSemuaBuku = ({dataBuku} : {dataBuku: any}) => {
                                 return (
                                     <TableRow onClick={() => handleNavigate(item._id)} key={index} className="border-accent-foreground/10 hover:bg-primary/20 cursor-default duration-200 ease-in-out even:bg-accent/10 text-muted-foreground" >
                                         <TableCell className="w-[50px] text-xs text-center px-0">{index + 1}</TableCell>
-                                        <TableCell className="w-[200px] text-xs">{item.judul}</TableCell>
-                                        <TableCell className="w-[120px] text-center text-xs">{item.penulis}</TableCell>
+                                        <TableCell className="w-[200px] text-xs">{item.judul.slice(0,30)}</TableCell>
+                                        <TableCell className="w-[120px] text-center text-xs">{item.penulis.slice(0,20)}</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs hover:text-primary duration-200 ease-in-o`ut cursor-pointer">{item.jumlahHalaman} Lembar</TableCell>
                                         <TableCell className="w-[120px] text-center text-xs">{item.kategori[0]} </TableCell>
                                         <TableCell className={`w-[120px] text-center text-xs ${isOutOfStock && 'text-destructive'}`}>{item.stok} </TableCell>

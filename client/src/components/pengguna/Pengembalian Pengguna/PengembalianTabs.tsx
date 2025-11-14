@@ -32,7 +32,7 @@ const PengembalianTabs = () => {
     }, [])
 
     return (
-        <div className="w-full grid grid-cols-3 place-items-center gap-x-2 rounded-xl border">
+        <div className="w-full grid grid-cols-2 place-items-center gap-x-2 rounded-xl border">
             {tabPengembalian.map((item, index) => {
                 return (
                 <div onClick={() => handleTab({title: item.title, value: item.value})} key={index} className={`${activeTab === item.title ? 'bg-muted text-primary-foreground' : ''} w-full cursor-default col-span-1 py-4 first:rounded-l last:rounded-l hover:text-primary-foreground duration-300 ease-in-out`}>

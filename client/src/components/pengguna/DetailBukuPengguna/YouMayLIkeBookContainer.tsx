@@ -1,7 +1,7 @@
 import SuggestedBook from "./SuggestedBook"
 
 type YouMayLIkeBookContainerType = {
-    dataBuku : any
+    dataBuku? : any
 }
 
 const YouMayLIkeBookContainer = ({dataBuku} : YouMayLIkeBookContainerType) => {
