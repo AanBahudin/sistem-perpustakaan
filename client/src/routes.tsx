@@ -133,7 +133,6 @@ const router : RouteObject[] = [
                 element: <DataPenggunaLayout />,
                 children: [
                     {
-                        id: 'peminjaman-data',
                         path: 'peminjaman',
                         element: <PeminjamanPage />
                     },
