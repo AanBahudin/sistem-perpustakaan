@@ -1,63 +1,37 @@
 import React from 'react'
 import Container from '../../globals/Container'
-import loginImg from '@/assets/images/loginImg.png'
 import Logo from '@/components/landing/Navbar/Logo'
 
-import { Link, useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
-import { toast } from 'sonner'
+import { Link } from 'react-router-dom'
 
 import InputForm from '@/components/form/InputForm'
 import PasswordInput from '@/components/form/PasswordInput'
-import { loginAction } from '@/actions/authActions'
 import { Button } from '@/components/ui/button'
+import { Loader } from 'lucide-react'
+import useLoginPengguna from '@/hooks/fetchHooks/penggunaHooks/authHooks/useLoginPengguna'
 
 
 const LoginPage : React.FC = () => {
 
-  const navigate = useNavigate()
-
-  const mutation = useMutation({
-    mutationFn: (data: FormData) => loginAction(data),
-    onSuccess: (data: any) => {
-      toast('Login Berhasil')
-      const {verifikasiEmail, verifikasiProdi} = data
-      if (verifikasiEmail && verifikasiProdi) {
-        navigate('/my')
-      } else {
-        navigate('/status/account')
-      }
-      
-    },
-    onError: (error: any) => {
-      const errMsg = error.response.data.message || 'Gagal Masuk, Coba lagi nanti'
-      toast('Tidak dapat melakukan login', {description: errMsg})
-    }
-  })
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    mutation.mutate(formData)
-  }
-
-  const isLoading = mutation.isPending
+  const { isLoading, mutationFn } = useLoginPengguna()
+  const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg'
 
   return (
-    <Container className='flex items-center flex-col justify-center py-10'>
-      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-2 border rounded-xl'>
+    <Container className='flex mt-20 items-center flex-col justify-center py-10'>
+      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-3'>
 
-        <main className='col-span-1 px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start mt-10 justify-center h-full'>
+        <main className='col-span-2 bg-[url("/images/callToAction.png")] rounded-l-xl object-contain bg-center px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
           <Logo />
-          <h1 className='text-foreground dark:text-white font-semibold text-3xl lg:text-4xl mt-2'>Selamat Datang Kembali</h1>
-          <h5 className='text-muted-foreground mt-2 '>Silahkan masuk menggunakan akun Anda untuk mengakses halaman utama Anda.</h5>
+          <h1 className=' dark:text-white text-primary font-bold text-3xl lg:text-4xl mt-2'>Selamat Datang Kembali</h1>
+          <h5 className='text-muted-foreground mt-1 '>Silahkan masuk menggunakan akun Anda untuk mengakses halaman utama Anda.</h5>
 
-          <form className='w-full' onSubmit={handleSubmit}>
+          <form className='w-full' onSubmit={mutationFn}>
             <div className='mt-6 w-full flex flex-col gap-y-4'>
-              <InputForm label='Email' name='email' type='email' placeholder='johndoe@gmail.com'  />
+              <InputForm label='Email' name='email' type='email' placeholder='mahasiswa@gmail.com'  />
               <PasswordInput />
 
-              <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full' >
+              <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full flex items-center justify-center gap-x-4' >
+                {isLoading && <Loader className='animate-spin' />}
                 {isLoading ? 'Loading...' : 'Masuk'}
               </Button>
               <p className='text-center text-sm text-muted-foreground'>Belum punya akun? <Link to='/register' className='text-foreground underline'>Daftar Disini</Link></p>
@@ -66,7 +40,7 @@ const LoginPage : React.FC = () => {
         </main>
 
         <main className='col-span-1 hidden xl:flex items-center justify-end'>
-          <img src={loginImg} className='h-[550px]' />
+          <img src={imageURL} className='h-[550px] rounded-r-xl' />
         </main>
 
       </section>
