@@ -1,20 +1,14 @@
 import { Separator } from '@/components/ui/separator'
 import ProfileData from '@/components/pengguna/Profil Pengguna/ProfileData'
 import PhotoProfile from '@/components/pengguna/Profil Pengguna/PhotoProfile'
-import { profileAction } from '@/actions/userActions'
-import { useQuery } from '@tanstack/react-query'
 import EditNamaDialog from '@/components/pengguna/Profil Pengguna/EditNamaDialog'
 import EditKelasDialog from '@/components/pengguna/Profil Pengguna/EditKelasDialog'
 import EditNomorTeleponDialog from '@/components/pengguna/Profil Pengguna/EditNomorTeleponDialog'
+import useFetchProfilPengguna from '@/hooks/fetchHooks/penggunaHooks/profil/useFetchProfilPengguna'
 
 const GeneralProfilePage = () => {
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['pengguna', 'profil'],
-    queryFn: profileAction
-  })
-
-
+  const {data, isLoading} = useFetchProfilPengguna()
   if (isLoading) return <h1>Loading...</h1>
 
 

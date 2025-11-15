@@ -51,7 +51,7 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
                       </Link>
                     </TableCell>
                     <TableCell className="text-center w-[150px]">
-                      <p className={` bg-${statusBg} flex-1 text-center py-2 rounded-lg text-[12px] text-white`}>
+                      <p className={` bg-${statusBg} flex-1 text-center py-2 rounded-lg text-[12px] `}>
                         {item.statusPeminjaman}
                       </p>
                     </TableCell>

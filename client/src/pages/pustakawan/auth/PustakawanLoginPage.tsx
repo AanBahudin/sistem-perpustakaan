@@ -19,7 +19,6 @@ const PustakawanLoginPage = () => {
     
     return (
         <Container className='min-h-[100vh] bg-[url("/images/callToAction.png")] object-contain bg-center w-full flex items-center justify-center bg-primary/10'>
-
             <section className='w-[90%] bg-accent border rounded-2xl  lg:max-w-[40vw] py-10 px-20 flex flex-col shadow-2xl'>
                 <main className='w-full flex items-center justify-center mb-2'>
                     <Logo />
@@ -33,8 +32,7 @@ const PustakawanLoginPage = () => {
                         <Label htmlFor='email' className='text-sm'>Email</Label>
                         <div className='w-full flex items-center gap-x-1 mt-1.5'>
                             <Input className='text-sm selection:text-white' 
-                                autoFocus
-                                required
+                                autoFocus required
                                 type='email' id='email' name='email' />
                         </div>
                     </div>
@@ -42,11 +40,10 @@ const PustakawanLoginPage = () => {
                     <div className='flex flex-col'>
                     <Label className='text-sm' htmlFor='password'>Kata sandi</Label>
                         <div className='w-full flex items-center gap-x-2 mt-1.5'>
-                            <Input className='text-sm selection:text-white' 
-                                placeholder='xxxx'
-                                required
-                                minLength={6}
-                                type={showPassword ? 'text' : 'password'} 
+                            <Input 
+                                className='text-sm selection:text-white' 
+                                placeholder='xxxx' type={showPassword ? 'text' : 'password'} 
+                                required minLength={6}
                                 name='password' id='password'
                                 value={password} onChange={e => setPassword(e.target.value)} min={8} />
                             {password && (

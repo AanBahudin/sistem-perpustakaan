@@ -1,17 +1,14 @@
 import Container from '../../../globals/Container'
 import SummaryCard from '@/components/pengguna/Dashboard Pengguna/SummaryCard'
 import LoanOverview from '@/components/pengguna/Dashboard Pengguna/LoanOverview'
-import { useQuery } from '@tanstack/react-query'
-import { getStats } from '@/actions/userActions'
 import StatsOverview from '@/components/pengguna/Dashboard Pengguna/StatsOverview'
 import DashboardLoading from './DashboardLoading'
+import useGetStatsPengguna from '@/hooks/fetchHooks/penggunaHooks/dashboard/useGetStatsPengguna'
+
+
 const KatalogPengguna = () => {
 
-  const {data: statsData, isLoading} = useQuery({
-    queryKey: ['stats', 'pengguna'],
-    queryFn: getStats,
-  })
-
+  const {data: statsData, isLoading} = useGetStatsPengguna()  
   if (isLoading) return <DashboardLoading />
 
   const {

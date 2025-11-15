@@ -9,8 +9,6 @@ import { profileAction } from "@/actions/userActions"
 
 
 const SimpanPage = () => {
-
-
   const datas = useQueries({
     queries: [
       {

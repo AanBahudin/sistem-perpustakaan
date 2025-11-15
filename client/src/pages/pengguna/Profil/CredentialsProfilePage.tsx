@@ -1,18 +1,12 @@
 import { Separator } from '@/components/ui/separator'
-import { useQuery } from '@tanstack/react-query'
-import { profileAction } from '@/actions/userActions'
 import EditEmailDialog from '@/components/pengguna/Profil Pengguna/EditEmailDialog'
 import EditPasswordDialog from '@/components/pengguna/Profil Pengguna/EditPasswordDialog'
+import useFetchProfilPengguna from '@/hooks/fetchHooks/penggunaHooks/profil/useFetchProfilPengguna'
 
 const CredentialsProfilePage = () => {
   
-  const {data, isLoading} = useQuery({
-      queryKey: ['pengguna', 'profil'],
-      queryFn: profileAction
-    })
-  
-  
-  if (isLoading) return <h1>Loading...</h1>
+  const {data, isLoading} = useFetchProfilPengguna()
+    if (isLoading) return <h1>Loading...</h1>
 
   return (
     <section className='w-full min-h-[70vh] grid-cols-9 flex flex-col justify-start'>

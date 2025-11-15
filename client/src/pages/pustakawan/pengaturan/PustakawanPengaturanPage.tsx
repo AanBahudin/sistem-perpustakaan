@@ -6,6 +6,7 @@ import PustakawanKondisiBukuSection from '@/components/Pustakawan/Pengaturan/Pus
 import PustakawanDendaSection from '@/components/Pustakawan/Pengaturan/PustakawanDendaSection'
 import PustakawanKategoriSection from '@/components/Pustakawan/Pengaturan/PustakawanKategoriSection'
 import PustakawanDurasiSection from '@/components/Pustakawan/Pengaturan/PustakawanDurasiSection'
+import PengaturanMaksPeminjaman from '@/components/Pustakawan/Pengaturan/PengaturanMaksPeminjaman'
 
 const PustakawanPengaturanPage = () => {
 
@@ -16,10 +17,13 @@ const PustakawanPengaturanPage = () => {
     <Container className='w-full'>
       <PustakawanBreadCrumbs />
       <PustakawanPengaturanTabsMenu />
+
       {(currentParams === 'Kondisi Buku' || !currentParams) && <PustakawanKondisiBukuSection />}
       {currentParams === 'Denda' && <PustakawanDendaSection />}
       {currentParams === 'Kategori' && <PustakawanKategoriSection />}
       {currentParams === 'Durasi' && <PustakawanDurasiSection />}
+      {currentParams === 'Lainnya' && <PengaturanMaksPeminjaman />}
+
     </Container>
   )
 }

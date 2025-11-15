@@ -38,20 +38,21 @@ const AddSimpananButton = ({id} : {id: string}) => {
     if (dataLoading || loading) {
         return (
             <Button disabled className='w-8 h-8 border p-2 bg-transparent hover:bg-muted'>
-                <Loader2 className="w-8 h-8 stroke-white animate-spin" />
+                <Loader2 className="w-8 h-8 dark:stroke-white stroke-primary animate-spin" />
             </Button>
         )
     }
 
     const idBukuTersimpan = data?.bukuDisimpan.map((item: any) => item.buku._id.toString())
+    const isIncludes = idBukuTersimpan.includes(id)
 
     return (
         <>
-            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${idBukuTersimpan.includes(id) ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}  duration-200 ease-in-out`}>
+            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${isIncludes ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}  duration-200 ease-in-out`}>
                 {dataLoading ? (
-                    <Loader2 className="w-8 h-8 dark:stroke-white stroke-black animate-spin" />
+                    <Loader2 className="w-8 h-8 dark:stroke-white stroke-primary animate-spin" />
                 ) : (
-                    <BookMarked className="w-8 h-8 dark:stroke-white stroke-black" />
+                    <BookMarked className={`w-8 h-8 dark:stroke-white ${isIncludes && 'stroke-white'} stroke-black`} />
                 )}
             </Button>
             <input type="hidden" name="bookId" id="bookId" value={id}  />

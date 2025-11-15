@@ -1,6 +1,5 @@
 import express from 'express'
 import { getDendaKeterlambatan, createDendaKeterlambatan, editDendaKeterlambatan, getDendaKeterlambatanWithId } from '../../controllers/denda/dendaKeterlambatanController'
-import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
 import { createDendaValidator } from '../../validator/dendaValidator'
 
 const router = express.Router()

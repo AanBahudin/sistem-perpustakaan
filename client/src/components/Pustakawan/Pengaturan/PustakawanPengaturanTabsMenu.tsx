@@ -6,7 +6,7 @@ const PustakawanPengaturanTabsMenu = () => {
   const [searchParams] = useSearchParams()
   const currentParams = searchParams.get('menu') || 'Kondisi Buku'
   const fullParams = new URLSearchParams(searchParams)
-  const values: Array<string> = ['Kondisi Buku', 'Denda', 'Kategori', 'Durasi']
+  const values: Array<string> = ['Kondisi Buku', 'Denda', 'Kategori', 'Durasi', 'Lainnya']
 
   const handleClick = (value: string) => {
     if (value === 'Kondisi Buku') {
