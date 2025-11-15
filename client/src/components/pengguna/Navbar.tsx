@@ -5,7 +5,7 @@ import NavbarPenggunaDropdown from './NavbarPenggunaDropdown'
 
 const Navbar = () => {
   return (
-    <nav className='w-full py-8 border-b border-accent '>
+    <nav className='w-full py-8 border-b border-accent'>
         <section className='w-[90%] mx-auto flex items-center justify-between '>
           <Logo url='/my' />
 

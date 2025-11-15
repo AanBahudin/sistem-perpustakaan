@@ -6,20 +6,22 @@ import Gallery from '@/components/landing/Gallery'
 import Hero from '@/components/landing/Hero'
 import Katalog from '@/components/landing/Katalog'
 import Kontak from '@/components/landing/Kontak'
-import Layanan from '@/components/landing/Layanan'
+// import Layanan from '@/components/landing/Layanan'
 import Parallax from '@/components/landing/Parallax'
-import Statistik from '@/components/landing/Statistik'
+// import Statistik from '@/components/landing/Statistik'
 import Testimoni from '@/components/landing/Testimoni'
+import Container from '@/globals/Container'
 import React from 'react'
 
 const HomePage : React.FC = () => {
   return (
-    <>
+    <Container className='w-full'>
       <Hero />
+      
       <About />
-      <Statistik />
+      {/* <Statistik /> */}
       <Gallery />
-      <Layanan />
+      {/* <Layanan /> */}
       <Testimoni />
       <Katalog />
       <Parallax />
@@ -27,7 +29,7 @@ const HomePage : React.FC = () => {
       <CallToAction />
       <Kontak />
       <Footer />
-    </>
+    </Container>
   )
 }
 

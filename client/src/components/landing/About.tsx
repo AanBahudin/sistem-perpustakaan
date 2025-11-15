@@ -3,9 +3,8 @@ import Container from '@/globals/Container'
 
 const About = () => {
   return (
-    <Container>
-        <h1 id='tentang' className='text-3xl font-semibold mb-8'>Sekilas Perpustakaan</h1>
-
+    <Container className='mt-10'>
+        <h1 id='tentang' className='text-3xl font-bold text-primary'>Sekilas Perpustakaan</h1>
         <section className='grid grid-cols-1 lg:grid-cols-2 place-items-center gap-x-8'>
             <div>
                 <h5 className='text-muted-foreground'>

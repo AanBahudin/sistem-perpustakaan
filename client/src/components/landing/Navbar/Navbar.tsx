@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar : React.FC= () => {
   return (
-    <nav className='w-full py-8 border-b border-accent '>
+    <nav className='w-full py-8 bg-transparent absolute z-10'>
         <section className='w-[90%] mx-auto flex items-center justify-between '>
           <Logo />
 
