@@ -1,6 +1,7 @@
 import { customFetch } from "@/utils/customFetch";
 
-export const loginPustakawan = async({email, password} : {email: string, password: string}) => {
-    const {data} = await customFetch.post('/auth/login/pustakawan', {email, password})
-    return data
+export const loginPustakawan = async(data: FormData) => {
+    const loginData = Object.fromEntries(data)
+    const {data: response} = await customFetch.post('/auth/login/pustakawan', loginData)
+    return response
 }
