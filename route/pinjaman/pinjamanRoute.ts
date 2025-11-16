@@ -25,12 +25,13 @@ import {
  } from '../../validator/pinjamanValidator'
 import { pustakawanMiddlewareAuthorized, userMiddlewareAuthorized } from '../../middleware/roleBasedMiddleware'
 import mongooseIdMiddleware from '../../middleware/validateMongoIdMiddleware'
+import { maksimalPeminjamanMiddleware } from '../../middleware/maksimalPeminjamanMiddleware'
 
 const router = express.Router()
 
 // KHUSUS USER
 router.route('/request/pinjaman')
-    .post(userMiddlewareAuthorized, pengajuanPeminjamanValidator, requestPinjaman)
+    .post(userMiddlewareAuthorized, pengajuanPeminjamanValidator, maksimalPeminjamanMiddleware, requestPinjaman)
 
 router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)

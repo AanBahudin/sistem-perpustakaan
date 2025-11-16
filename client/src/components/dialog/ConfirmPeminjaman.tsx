@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux'
 import { Button } from '../ui/button'
 import { store } from '@/store'
 import { setAlasan, setDurasi } from '@/cart/peminjamanSlice'
+import { toast } from 'sonner'
 
 type ConfirmPeminjamanType = {
     buku: any
@@ -45,7 +46,8 @@ const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
             store.dispatch(setDurasi(''))
         },
         onError: (error: any) => {
-            console.log(error)
+            const errMsg = error.response.data.message || 'Gagal memperbaharui durasi, Coba lagi nanti'
+            toast('Terjadi kesalahan', {description: errMsg})
             setLoading(false)
             setIsModalOpen(false)
         }

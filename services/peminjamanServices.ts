@@ -17,9 +17,6 @@ import { paginationFn } from "../utils/paginationFn";
  
 // SUDAH DITESTING
 export const pengajuanPeminjaman = async({ durasiPeminjaman, idBuku, userId, alasan } : PengajuanPeminjamanParamsType) => {
-    // fungsi mencegah peminjaman pada saat masih ada pinjaman aktif dengan buku yang sama
-    const pinjamanMasihAda = await mencegahBukuDipinjamBerulang(idBuku, userId)
-    if (pinjamanMasihAda) throw new BadRequestError('Kamu masih memiliki pinjaman aktif atau sedang dalam proses ')
     
     // cek apakah buku ada dan masih tersedia
     const buku = await Buku.findOne({_id: idBuku, stok: { $gte: 1 }, status: 'Tersedia', dihapus: false})
