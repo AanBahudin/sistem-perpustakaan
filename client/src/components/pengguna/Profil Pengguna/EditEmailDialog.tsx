@@ -1,7 +1,3 @@
-import { updateEmailAction } from "@/actions/userActions"
-import { errorMsgGenerator } from "@/utils/errorMsgFunc"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "sonner"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -14,40 +10,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Pencil } from "lucide-react"
-import { useState } from "react"
+import useUpdateEmailPengguna from "@/hooks/fetchHooks/penggunaHooks/profil/useUpdateEmailPengguna"
+
 
 const EditEmailDialog = ({data} : {data: any}) => {
 
+    const { isLoading, handleOpen, open, mutationFn } = useUpdateEmailPengguna()
 
-    const [open, setOpen] = useState(false)
-    const handleOpen = (value: boolean) => {
-        setOpen(value)
-    }
-
-    const queryClient = useQueryClient()
-    const mutation = useMutation({
-        mutationFn: (data: FormData) => updateEmailAction(data),
-        onSuccess: () => {
-            toast('Diperbaharui', {description: 'Tautan Verifikasi Telah Kami Kirim Ke Akun Anda, Silahkan Verifikasi'})
-            queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})
-            handleOpen(false)
-        },
-        onError: (error: any) => {
-            const errMsg = errorMsgGenerator(error)
-            toast('Gagal memperbaharui email', {description: errMsg})
-            handleOpen(false)
-        }
-    })
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        mutation.mutate(formData)
-    }
-
-    const isLoading = mutation.isPending
-
-    
     return (
         <section className='col-span-1 grid items-center gap-1.5'>
             <Label className='font-normal'>Email Pengguna</Label>
@@ -60,7 +29,7 @@ const EditEmailDialog = ({data} : {data: any}) => {
                     </DialogTrigger>
 
                     <DialogContent className="sm:max-w-[425px]">
-                        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                        <form onSubmit={mutationFn} className="grid gap-4 py-4">
                             <DialogHeader>
                                 <DialogTitle className="capitalize">Perbaharui Email</DialogTitle>
                                 <DialogDescription>Pastikan email anda sesuai dengan data kemahasiswaan</DialogDescription>
@@ -76,14 +45,10 @@ const EditEmailDialog = ({data} : {data: any}) => {
                             <Button type="submit" disabled={isLoading} className='text-white mt-6 place-self-end w-fit'>
                                 {isLoading ? 'Menyimpan...' : 'Simpan'}
                             </Button>
-
                         </form>
-
-        
                     </DialogContent>
                 </Dialog>
             </main>
-
         </section>
   )
 }

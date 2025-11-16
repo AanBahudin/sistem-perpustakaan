@@ -1,7 +1,3 @@
-import { updateProfileAction } from "@/actions/userActions"
-import { errorMsgGenerator } from "@/utils/errorMsgFunc"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "sonner"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -23,40 +19,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Pencil } from "lucide-react"
-import { useState } from "react"
 import { kelasEnum } from "@/utils/constants"
+import useUpdateInfoPengguna from "@/hooks/fetchHooks/penggunaHooks/profil/useUpdateInfoPengguna"
 
 const EditKelasDialog = ({data} : {data: any}) => {
 
-
-    const [open, setOpen] = useState(false)
-    const handleOpen = (value: boolean) => {
-        setOpen(value)
-    }
-
-    const queryClient = useQueryClient()
-    const mutation = useMutation({
-        mutationFn: (data: FormData) => updateProfileAction(data),
-        onSuccess: () => {
-            toast('Diperbaharui', {description: 'Kelas berhasil diperbaharui'})
-            queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})
-            handleOpen(false)
-        },
-        onError: (error: any) => {
-            const errMsg = errorMsgGenerator(error)
-            toast('Gagal memperbaharui kelas', {description: errMsg})
-            handleOpen(false)
-        }
-    })
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        mutation.mutate(formData)
-    }
-
-    const isLoading = mutation.isPending
-
+    const { isLoading, mutationFn, open, handleOpen } = useUpdateInfoPengguna({errMsg: 'Tidak dapat memperbaharui kelas', successMsg: 'Kelas berhasil diperbaharui'})
     
     return (
         <section className='col-span-1 grid items-center gap-1.5'>
@@ -70,7 +38,7 @@ const EditKelasDialog = ({data} : {data: any}) => {
                     </DialogTrigger>
 
                     <DialogContent className="sm:max-w-[425px]">
-                        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                        <form onSubmit={mutationFn} className="grid gap-4 py-4">
                             <DialogHeader>
                                 <DialogTitle className="capitalize">Perbaharui Kelas</DialogTitle>
                                 <DialogDescription>Pastikan kelas anda sesuai dengan data kemahasiswaan</DialogDescription>

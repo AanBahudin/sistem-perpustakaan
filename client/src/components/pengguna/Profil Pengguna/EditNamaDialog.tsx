@@ -1,7 +1,3 @@
-import { updateProfileAction } from "@/actions/userActions"
-import { errorMsgGenerator } from "@/utils/errorMsgFunc"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "sonner"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -14,40 +10,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Pencil } from "lucide-react"
-import { useState } from "react"
+import useUpdateInfoPengguna from "@/hooks/fetchHooks/penggunaHooks/profil/useUpdateInfoPengguna"
 
 
 const EditNamaDialog = ({data} : {data: any}) => {
 
-
-    const [open, setOpen] = useState(false)
-    const handleOpen = (value: boolean) => {
-        setOpen(value)
-    }
-
-    const queryClient = useQueryClient()
-    const mutation = useMutation({
-        mutationFn: (data: FormData) => updateProfileAction(data),
-        onSuccess: () => {
-            toast('Diperbaharui', {description: 'Nama lengkap berhasil diperbaharui'})
-            queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})
-            handleOpen(false)
-        },
-        onError: (error: any) => {
-            const errMsg = errorMsgGenerator(error)
-            toast('Gagal memperbaharui nama', {description: errMsg})
-            handleOpen(false)
-        }
-    })
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        mutation.mutate(formData)
-    }
-
-    const isLoading = mutation.isPending
-
+    const { isLoading, mutationFn, open, handleOpen } = useUpdateInfoPengguna({errMsg: 'Tidak dapat memperbaharui nama', successMsg: 'Nama berhasil diperbaharui'})
     
     return (
         <section className='col-span-1 grid items-center gap-1.5'>
@@ -61,7 +29,7 @@ const EditNamaDialog = ({data} : {data: any}) => {
                     </DialogTrigger>
 
                     <DialogContent className="sm:max-w-[425px]">
-                        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                        <form onSubmit={mutationFn} className="grid gap-4 py-4">
                             <DialogHeader>
                                 <DialogTitle className="capitalize">Perbaharui Nama Lengkap</DialogTitle>
                                 <DialogDescription>Pastikan nama anda sesuai dengan data kemahasiswaan</DialogDescription>
