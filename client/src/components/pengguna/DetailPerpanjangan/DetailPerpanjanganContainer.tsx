@@ -4,17 +4,20 @@ import DetailPerpanjangan from "./DetailPerpanjangan"
 type DetailPerpanjanganContainerType = {
     detailBuku: any,
     detailPerpanjangan: any,
-    profil: any
+    profil: any,
+    peminjaman: any
 }
 
-const DetailPerpanjanganContainer = ({detailBuku, detailPerpanjangan, profil} : DetailPerpanjanganContainerType) => {
-
-    const {data} = detailBuku
+const DetailPerpanjanganContainer = ({detailBuku, detailPerpanjangan, profil, peminjaman} : DetailPerpanjanganContainerType) => {
 
     return (
         <section className="w-full">
-            <BreadCrumbDetailBuku title={data.judul} from="Perpanjangan" url="/my/data/perpanjangan" />
-            <DetailPerpanjangan detailBuku={data} detailPerpanjangan={detailPerpanjangan} profil={profil} />
+            <BreadCrumbDetailBuku title={detailBuku.judul} from="Perpanjangan" url="/my/data/perpanjangan" />
+            <DetailPerpanjangan
+                peminjaman={peminjaman}
+                detailBuku={detailBuku} 
+                detailPerpanjangan={detailPerpanjangan} 
+                profil={profil} />
         </section>
     )
 }

@@ -37,7 +37,7 @@ export const getAllPerpanjanganUser = async(req: Request | any, res: Response) =
 
 // BELUM DITESTING
 export const getSinglePerpanjanganUser = async(req: Request | any, res: Response) => {
-    const {data} = await getOnePerpanjangan({
+    const data = await getOnePerpanjangan({
         idPerpanjangan: req.params.id,
         userId: req.user.userId
     })

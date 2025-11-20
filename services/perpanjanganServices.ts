@@ -80,7 +80,15 @@ export const getSemuaPerpanjangan = async({userId, query} : GetSemauPerpanjangan
 export const getOnePerpanjangan = async({idPerpanjangan, userId} : GetOnePerpanjanganParamsType) => {
     const perpanjangan = await Perpanjangan.findOne({_id: idPerpanjangan, idPengguna: userId})
     if (!perpanjangan) throw new NotFoundError('Data perpanjangan tidak ditemukan')
-    return {data: perpanjangan}
+
+    const relatedPeminjaman = await Peminjaman.findOne({_id: perpanjangan.idPeminjaman, peminjam: userId, buku: perpanjangan.idBuku})
+    const buku = await Buku.findOne({_id: perpanjangan.idBuku})
+    
+    return {
+        perpanjangan,
+        peminjaman: relatedPeminjaman,
+        detailBuku: buku
+    }
 }
 
 export const getOnePerpanjanganByPeminjamanId = async({userId, idPeminjaman} : {userId: string, idPeminjaman: string}) => {
