@@ -6,6 +6,7 @@ import CategoryPage from "@/pages/pengguna/discovery/CategoryPage";
 import DiscoveryPage from "@/pages/pengguna/discovery/DiscoveryPage";
 import KonfirmasiPeminjaman from "@/pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import PeminjamanDetailPage from "@/pages/pengguna/Peminjaman/PeminjamanDetailPage";
+import PeminjamanPage from "@/pages/pengguna/Peminjaman/PeminjamanPage";
 import PengembalianPage from "@/pages/pengguna/Pengembalian/PengembalianPage";
 import PerpanjanganPage from "@/pages/pengguna/Perpanjangan/PerpanjanganPage";
 import CredentialsProfilePage from "@/pages/pengguna/Profil/CredentialsProfilePage";
@@ -49,7 +50,7 @@ const penggunaRoute: RouteObject[] = [
                 children: [
                     {
                         path: 'peminjaman',
-                        element: <PengembalianPage />
+                        element: <PeminjamanPage />
                     },
                     {
                         path: 'perpanjangan',

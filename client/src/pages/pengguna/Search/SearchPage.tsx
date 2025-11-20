@@ -1,51 +1,12 @@
-import { getAllKategori } from '@/actions/kategoriAction'
-import { getAllPenerbit } from '@/actions/penerbitActions'
-import { getAllPenulis } from '@/actions/penulistAction'
-import { searchBookPageDataLoader } from '@/actions/searchActions'
 import SearchBooks from '@/components/pengguna/SearchPage/SearchBooks'
 import SearchFilter from '@/components/pengguna/SearchPage/SearchFilter'
 import SearchLoading from '@/components/pengguna/SearchPage/SearchLoading'
-import { useQueries } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import usePenggunaSearchBuku from '@/hooks/fetchHooks/penggunaHooks/searchHooks/usePenggunaSearchBuku'
+
 
 const SearchPage = () => {
 
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const params = new URLSearchParams(searchParams).toString()
-
-  const result = useQueries({
-    queries: [
-      {
-        queryKey: ['search', params],
-        queryFn: () => searchBookPageDataLoader(params as string),
-      },
-      {
-        queryKey: ['search', 'kategori', params],
-        queryFn: getAllKategori
-      },
-      {
-        queryKey: ['penerbit'],
-        queryFn: getAllPenerbit
-      },
-      {
-        queryKey: ['penulis'],
-        queryFn: getAllPenulis
-      }
-    ]
-  })
-
-
-  const [searchData, allKategori, dataPenerbit, dataPenulis] = result
-  const isLoading = result.some(q => q.isLoading)
-
-  useEffect(() => {
-    if (!params) {
-      navigate('/my/buku')
-    }
-  }, [])
-
+  const { isLoading, allKategori, dataPenerbit, dataPenulis, searchData } = usePenggunaSearchBuku()
   if (isLoading) return <SearchLoading />
 
   return (

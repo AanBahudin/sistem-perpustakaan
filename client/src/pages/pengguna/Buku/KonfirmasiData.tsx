@@ -6,14 +6,11 @@ import { DiajukkanStatus } from "./StatusConfirm"
 
 type KonfirmasiDataType = {
     profil: any
-    data: any,
+    dataBuku: any,
     pinjaman: any
 }
 
-const KonfirmasiData = ({profil, data, pinjaman} : KonfirmasiDataType) => {
-
-    const {data: dataDetail, durasi} = data
-
+const KonfirmasiData = ({profil, dataBuku, pinjaman} : KonfirmasiDataType) => {
     return (
         <section className="w-1/3 h-fit border rounded-2xl p-4">
             <h1 className="uppercase text-sm font-bold">Pengajuan peminjaman</h1>
@@ -21,11 +18,11 @@ const KonfirmasiData = ({profil, data, pinjaman} : KonfirmasiDataType) => {
 
             <main className="w-full flex flex-col gap-y-4 mt-7">
                 <NamaBox nama={profil.nama} />
-                <SelectDurasi defaultDurasi={pinjaman?.durasiPeminjaman} durasi={durasi} />
+                <SelectDurasi defaultDurasi={pinjaman?.durasiPeminjaman} />
                 <AlasanInput defaultAlasan={pinjaman?.alasan} />
             </main>
 
-            {pinjaman?.statusPeminjaman !== 'Diajukan' && <ConfirmPeminjaman buku={dataDetail} />}
+            {pinjaman?.statusPeminjaman !== 'Diajukan' && <ConfirmPeminjaman buku={dataBuku} />}
             {pinjaman?.statusPeminjaman === 'Diajukan' || pinjaman?.statusPeminjaman === 'Dipinjam' && <DiajukkanStatus link={`/my/peminjaman/${pinjaman._id}/${pinjaman.buku._id}`} />}
         </section>
     )

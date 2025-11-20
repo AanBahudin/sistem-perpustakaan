@@ -11,8 +11,7 @@ type DetailPeminjamanType = {
 
 const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
-    const {data} = detailBuku
-    const {cover, judul, _id, deskripsi, stok, tagline} = data
+    const {cover, judul, _id, deskripsi, stok, tagline} = detailBuku
 
     return (
         <main className="w-full flex my-10 gap-x-10 mt-10">
@@ -30,7 +29,7 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
                 <h5 className="text-muted-foreground text-sm w-full trun my-2">{tagline}</h5>
 
-                <StatsDetailInfo data={data} />
+                <StatsDetailInfo data={detailBuku} />
                 <p className="my-4 text-muted-foreground text-sm leading-6">{deskripsi}</p>
 
                 <DetailPeminjamanInfo peminjaman={peminjaman} />

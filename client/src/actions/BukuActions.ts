@@ -37,12 +37,11 @@ export const getRecommendationsBuku = async() => {
 }
 
 export const getDetailBuku = async(id: string) => {
-    const data = await customFetch.get(`/buku/user/${id}`)
-    if (data.status >= 400) {
+    const {data: response, status} = await customFetch.get(`/buku/user/${id}`)
+    if (status >= 400) {
         return {message: 'Terjadi kesalahan', deskripsi: 'Tidak dapat mengambil data buku'}
     }
-
-    return data.data
+    return response.data
 }
 
 export const discoverBuku = async(query: undefined | string) => {

@@ -13,8 +13,8 @@ type DetailBookContainerDataType = {
 }
 
 const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataType) => {
-    const {data} = detailBuku
-    const newTagline = data.tagline.slice(0,76) +"...."
+
+    const newTagline = detailBuku.tagline.slice(0,76) +"...."
 
     return (
         <section className="w-[80%] mx-auto">
@@ -32,37 +32,37 @@ const DetailBookContainer = ({peminjaman, detailBuku} : DetailBookContainerDataT
                     description="Untuk menghindari denda, Silahkan lakukan pengembalian buku"/>  
             ) : null)
             )}
-            <BreadCrumbDetailBuku title={data.judul} from="Buku" url="/my/buku" />
+            <BreadCrumbDetailBuku title={detailBuku.judul} from="Buku" url="/my/buku" />
 
             <main className="w-full flex my-10 gap-x-10">
-                {data.cover ? (
-                    <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={data.cover} alt={data.judul} />
+                {detailBuku.cover ? (
+                    <img className="w-[400px] h-[400px] object-contain rounded-2xl border p-4" src={detailBuku.cover} alt={detailBuku.judul} />
                 ) : (
                     <div className="w-[700px] h-[400px] rounded-2xl border flex items-center justify-center"> <ImageOff className="w-14" /> </div>
                 )}
 
                 <div className="flex justify-start flex-col">
                     <div className="w-full flex justify-between items-center">
-                        <h1 className="text-2xl font-semibold">{data.judul}</h1>
-                        <GridLayoutButtons id={data._id}/>
+                        <h1 className="text-2xl font-semibold">{detailBuku.judul}</h1>
+                        <GridLayoutButtons id={detailBuku._id}/>
                     </div>
 
                     <h5 className="text-muted-foreground text-sm w-full trun my-2">{newTagline}</h5>
 
-                    <StatsDetailInfo data={data} />
+                    <StatsDetailInfo data={detailBuku} />
 
-                    <p className="my-4 text-muted-foreground text-sm leading-6 bg-muted p-3 rounded-lg">{data.deskripsi}</p>
-                    <InformationContainer data={data} />
+                    <p className="my-4 text-muted-foreground text-sm leading-6 bg-muted p-3 rounded-lg">{detailBuku.deskripsi}</p>
+                    <InformationContainer data={detailBuku} />
 
                     {peminjaman?.statusPeminjaman === 'Dipinjam' ? (
                         null
                     ) : (
-                        data.stok <= 0 ? (
+                        detailBuku.stok <= 0 ? (
                             <Button variant='destructive' className="!dark:text-white mt-6 flex items-center">Buku Telah Habis</Button>
                         ) : (
                             <Button className="w-1/3 !dark:text-white mt-6 flex items-center" variant='secondary'>
                                 <Plus />
-                                <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${data._id}`}>Tambahkan ke peminjaman</Link>
+                                <Link className="text-[12px] capitalize" to={`/my/confirm/peminjaman/${detailBuku._id}`}>Tambahkan ke peminjaman</Link>
                             </Button>
                         )
                     )}

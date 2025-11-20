@@ -1,32 +1,13 @@
-import { getAllSimpanan } from "@/actions/simpanActions"
 import Container from "@/globals/Container"
 import SimpananBooks from "./SimpananBooks"
 import SukaLoading from "@/components/Loading/SukaLoading"
-import { useQueries } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { profileAction } from "@/actions/userActions"
-
+import useGetAllBukuPenggunaDisimpan from "@/hooks/fetchHooks/penggunaHooks/simpanHooks/useGetAllBukuPenggunaDisimpan"
 
 const SimpanPage = () => {
-  const datas = useQueries({
-    queries: [
-      {
-        queryKey: ['simpan'],
-        queryFn: getAllSimpanan
-      },
-      {
-        queryKey: ['pengguna', 'profil'],
-        queryFn: profileAction
-      }
-    ]
-  })
-
-  const [dataSimpanan, profil] = datas
-  const isLoading = datas.some(q => q.isLoading)
-
-  const { data: dataBukuDisimpan } = dataSimpanan
-  const { data: dataProfil } = profil
+  
+  const { isLoading, dataProfil, dataBukuDisimpan } = useGetAllBukuPenggunaDisimpan()
 
   return (
     <Container className="my-20 min-h-[110vh]">

@@ -1,21 +1,13 @@
-import { getAllBuku } from "@/actions/BukuActions"
+
 import BookGrid from "@/components/pengguna/Katalog Buku Pengguna/BookGrid"
 import BookPagination from "@/components/pengguna/Katalog Buku Pengguna/BookPagination"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useQuery } from "@tanstack/react-query"
-import { useSearchParams } from "react-router-dom"
+import useGetAllBukuPengguna from "@/hooks/fetchHooks/penggunaHooks/bukuHooks/useGetAllBukuPengguna"
+
 
 const AllBook = () => {
 
-
-    const [searchParams] = useSearchParams()
-    const fullParams = new URLSearchParams(searchParams).toString()
-
-    const {data: dataBuku, isLoading} = useQuery({
-        queryKey: ['buku', fullParams],
-        queryFn: () => getAllBuku(fullParams)
-    })
-
+    const { dataBuku, isLoading } = useGetAllBukuPengguna()
 
     return (
         <section className="w-full pb-20">
