@@ -32,7 +32,7 @@ const PeminjamanList = ({data = [], } : PeminjamanListType) => {
 
               <div className="w-full flex flex-col items-start justify-stretch ">
                 <div className="w-full flex items-center justify-between">
-                  <Link to={`/my/peminjaman/${item._id}/${buku._id}`} className="text-2xl font-semibold group-hover:underline">{buku.judul}</Link>
+                  <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold group-hover:underline">{buku.judul}</Link>
                   <div className="flex items-center gap-x-4">
                     <StatusPeminjamanList status={statusPeminjaman} />
                     <GridLayoutButtons id={buku._id}/>

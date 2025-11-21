@@ -10,7 +10,7 @@ interface PeminjamanData {
 export const handlePeminjamanDitolak = (data: PeminjamanData, navigate: (path: string) => void, toastFn: typeof toast) => {
   try {
     const { tipe, data: dataPeminjaman, title, deskripsi } = data;
-    const detailURL = `/my/${tipe.toLowerCase()}/${dataPeminjaman._id}/${dataPeminjaman.buku}`;
+    const detailURL = `/my/${tipe.toLowerCase()}/${dataPeminjaman._id}`;
 
     toastFn(title, {
       description: deskripsi,
@@ -27,7 +27,7 @@ export const handlePeminjamanDitolak = (data: PeminjamanData, navigate: (path: s
 export const handlePeminjamanDiterima = (data: PeminjamanData, navigate: (path: string) => void, toastFn: typeof toast) => {
   try {
     const { tipe, data: dataPeminjaman, title, deskripsi } = data;
-    const detailURL = `/my/${tipe.toLowerCase()}/${dataPeminjaman._id}/${dataPeminjaman.buku}`;
+    const detailURL = `/my/${tipe.toLowerCase()}/${dataPeminjaman._id}`;
     toastFn(title, {
       description: deskripsi,
       action: {

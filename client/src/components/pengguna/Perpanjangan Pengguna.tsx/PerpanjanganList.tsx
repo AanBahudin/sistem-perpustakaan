@@ -32,7 +32,7 @@ const PerpanjanganList = ({data} : PerpanjanganListType) => {
 
                         <div className="w-full flex flex-col items-start justify-stretch ">
                             <div className="w-full flex items-center justify-between">
-                            <Link to={`/my/perpanjangan/${item._id}/${idBuku._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
+                            <Link to={`/my/perpanjangan/${item._id}`} className="text-2xl font-semibold group-hover:underline">{idBuku.judul}</Link>
                             <div className="flex items-center gap-x-4">
                                 <StatusPerpanjanganList status={disetujui} />
                                 <GridLayoutButtons id={idBuku._id}/>

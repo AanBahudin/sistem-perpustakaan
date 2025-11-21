@@ -16,7 +16,7 @@ const PeminjamanSection = ({peminjaman, linkTarget='peminjaman'} : PeminjamanSec
   let { _id, buku:dataBuku, judulBuku, statusPeminjaman, durasiPeminjaman, berakhirPada, diprosesOleh: pustakawan, dataPengembalian } = peminjaman
   berakhirPada = formatedDate(berakhirPada)
   return (
-    <section className="w-full my-2 rounded-lg bg-popover px-2 py-4 bg-primary">
+    <section className="w-full my-2 rounded-lg bg-popover px-2 py-4">
         <h2 className='font-bold mb-2 uppercase'>Data Peminjaman</h2>
 
         <main className="w-full flex flex-col gap-y-4 mt-4">

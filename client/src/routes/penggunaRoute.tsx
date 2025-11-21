@@ -7,7 +7,9 @@ import DiscoveryPage from "@/pages/pengguna/discovery/DiscoveryPage";
 import KonfirmasiPeminjaman from "@/pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import PeminjamanDetailPage from "@/pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import PeminjamanPage from "@/pages/pengguna/Peminjaman/PeminjamanPage";
+import DetailPengembalianPage from "@/pages/pengguna/Pengembalian/DetailPengembalianPage";
 import PengembalianPage from "@/pages/pengguna/Pengembalian/PengembalianPage";
+import ConfirmPerpanjangan from "@/pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
 import DetailPerpanjanganPage from "@/pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import PerpanjanganPage from "@/pages/pengguna/Perpanjangan/PerpanjanganPage";
 import CredentialsProfilePage from "@/pages/pengguna/Profil/CredentialsProfilePage";
@@ -67,13 +69,21 @@ const penggunaRoute: RouteObject[] = [
                 path: 'confirm/peminjaman/:id',
                 element: <KonfirmasiPeminjaman />
             },
+             {
+                path: 'confirm/perpanjangan/:id',
+                element: <ConfirmPerpanjangan />
+            },
             {
-                path: 'peminjaman/:id/:idBuku',
+                path: 'peminjaman/:id',
                 element: <PeminjamanDetailPage />
             },
             {
-                path: 'perpanjangan/:id/:idBuku',
+                path: 'perpanjangan/:id',
                 element: <DetailPerpanjanganPage />
+            },
+            {
+                path: 'pengembalian/:id',
+                element: <DetailPengembalianPage />
             },
             {
                 id: 'disukai-data',

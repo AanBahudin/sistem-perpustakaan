@@ -31,7 +31,7 @@ const PeminjamanGrid = ({data = ['default']} : PeminjamanGridType) => {
                             <div className="w-28 h-32 rounded border flex items-center justify-center"><ImageOff /></div>
                         )}
                         <div className="w-full flex flex-col items-start justify-between ">
-                            <Link to={`/my/peminjaman/${item._id}/${buku._id}`} className="text-2xl font-semibold hover:underline">{newJudul}</Link>
+                            <Link to={`/my/peminjaman/${item._id}`} className="text-2xl font-semibold hover:underline">{newJudul}</Link>
                             <Separator className="my-2 w-full" />
 
                             <div className="w-full flex gap-x-4 items-center justify-between">

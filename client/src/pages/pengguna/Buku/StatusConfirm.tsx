@@ -18,7 +18,7 @@ export const ConfirmButton = () => {
 
 export const DiajukkanStatus = ({link} : {link: string}) => {
     return (
-        <Button variant='secondary' asChild className='text-white w-full mt-6 cursor-pointer'>
+        <Button variant='default' asChild className='text-white w-full mt-6 cursor-pointer'>
             <Link to={link}>Lihat detail</Link>
         </Button>
     )

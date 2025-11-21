@@ -13,9 +13,17 @@ const DetailPerpanjanganPage = () => {
     profil
   } = useFetchDetailPerpanjanganPengguna()
 
+  if (isLoading) {
+    return (
+      <Container className="my-20">
+        <DetailPengembalianLoadingPage />
+      </Container>
+    )
+  }
+
   return (
     <Container className="my-20">
-      {isLoading ? <DetailPengembalianLoadingPage /> : <DetailPerpanjanganContainer peminjaman={peminjaman} detailBuku={detailBuku} detailPerpanjangan={perpanjangan} profil={profil} />}
+      <DetailPerpanjanganContainer peminjaman={peminjaman} detailBuku={detailBuku} detailPerpanjangan={perpanjangan} profil={profil} />
     </Container>
   )
 }

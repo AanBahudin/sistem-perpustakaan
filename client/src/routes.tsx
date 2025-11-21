@@ -15,7 +15,7 @@ import PerpanjanganPage from "./pages/pengguna/Perpanjangan/PerpanjanganPage";
 import PeminjamanDetailPage from "./pages/pengguna/Peminjaman/PeminjamanDetailPage";
 import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
-import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalian";
+import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalianPage";
 import DetailPerpanjanganPage from "./pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
 import ConfirmPerpanjangan from "./pages/pengguna/Perpanjangan/ConfirmPerpanjangan";

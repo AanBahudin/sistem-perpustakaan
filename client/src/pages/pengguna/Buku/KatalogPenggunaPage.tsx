@@ -1,23 +1,16 @@
-import { getDashboardBookAction } from '@/actions/BukuActions'
 import BookRecomendation from '@/components/pengguna/Katalog Buku Pengguna/BookRecomendation'
 import KatalogCover from '@/components/pengguna/Katalog Buku Pengguna/KatalogCover'
 import KatalogSection from '@/components/pengguna/Katalog Buku Pengguna/KatalogSection'
 import KategorySection from '@/components/pengguna/Katalog Buku Pengguna/KategorySection'
 import LastAdded from '@/components/pengguna/Katalog Buku Pengguna/LastAdded'
 import Container from '@/globals/Container'
-import { useQuery } from '@tanstack/react-query'
 import BookLoading from '@/components/Loading/BookLoading'
+import useFetchBukuKatalogPengguna from '@/hooks/fetchHooks/penggunaHooks/bukuHooks/useFetchBukuKatalogPengguna'
 
 const KatalogPenggunaPage = () => {
   
-  const {data: dataBuku, isLoading} = useQuery({
-    queryKey: ['dashbaord', 'buku'],
-    queryFn: () => getDashboardBookAction()
-  })
-
+  const {isLoading, rekomendasiBuku, bukuTerbaru, buku} = useFetchBukuKatalogPengguna()
   if (isLoading) return <BookLoading />
-
-  const { rekomendasiBuku, bukuTerbaru, buku } = dataBuku
 
   return (
     <Container className='my-20'>

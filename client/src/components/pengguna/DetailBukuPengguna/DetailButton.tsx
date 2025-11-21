@@ -59,7 +59,7 @@ const PinjamButton = ({stok, idBuku} : {stok: number, idBuku: string}) => {
 const PerpanjangButton = ({idPeminjaman} : {idPeminjaman: any}) => {
     return (
         <Link to={`/my/confirm/perpanjangan/${idPeminjaman}`} className="w-full flex items-center mt-4 gap-x-8 cursor-pointer">
-            <Button className="flex items-center gap-x-2 text-white bg-primary/30 text-center w-full">
+            <Button className="flex items-center gap-x-2 text-white bg-primary text-center w-full">
                 <CircleFadingArrowUp />
                 Perpanjang
             </Button>

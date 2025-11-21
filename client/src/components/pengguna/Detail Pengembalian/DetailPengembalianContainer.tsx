@@ -9,11 +9,9 @@ type DetailPengembalianContainerType = {
 }
 
 const DetailPengembalianContainer = ({detailBuku, detailPengembalian, dataDiri, detailPinjaman} : DetailPengembalianContainerType) => {
-    const {data} = detailBuku
-
     return (
         <section className="w-full">
-            <BreadCrumbDetailBuku title={data.judul} from='Pengembalian' url='/my/data/pengembalian' />
+            <BreadCrumbDetailBuku title={detailBuku.judul} from='Pengembalian' url='/my/data/pengembalian' />
             <DetailPengembalian data={detailPengembalian} dataDiri={dataDiri} dataPeminjaman={detailPinjaman} />
         </section>
     )

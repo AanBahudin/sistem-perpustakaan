@@ -15,7 +15,7 @@ const StatusPerpanjanganList = ({status} : StatusPerpanjanganType) => {
 
 const Diterima = () => {
     return (
-        <h3 className="bg-primary px-6 text-sm py-1 rounded">Diterima</h3>
+        <h3 className="bg-primary px-6 text-sm py-1 text-white rounded">Diterima</h3>
     )
 }
 
@@ -27,7 +27,7 @@ const Pending = () => {
 
 const Ditolak = () => {
     return (
-        <h3 className="bg-destructive px-6 text-sm py-1 rounded">Ditolak</h3>
+        <h3 className="bg-destructive px-6 text-white text-sm py-1 rounded">Ditolak</h3>
     )
 }
 
