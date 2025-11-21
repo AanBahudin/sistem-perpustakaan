@@ -5,15 +5,18 @@ import { getDetailPeminjaman } from "@/actions/peminjamanActions"
 const useFetchDetailPeminjamanUser = () => {
     const {id} = useParams()
 
-    const {data: dataPinjaman, isLoading} = useQuery({
+    const {data, isLoading} = useQuery({
         queryKey: ['detail-peminjaman', id],
-        queryFn: () => getDetailPeminjaman(id!)
+        queryFn: () => getDetailPeminjaman(id!),
+        select: (rawData: any) => ({
+            detailBuku: rawData?.buku,
+            detailPeminjaman: rawData
+        })
     }) 
     
     return {
         isLoading,
-        detailBuku: dataPinjaman?.buku,
-        detailPeminjaman: dataPinjaman
+        ...data
     }
 }
 

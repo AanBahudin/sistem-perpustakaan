@@ -6,19 +6,20 @@ const useFetchDetailPengembalianPengguna = () => {
 
     const {id} = useParams()
 
-    const {data: detailPengembalian, isLoading} = useQuery({
+    const {data, isLoading} = useQuery({
         queryKey: ['detail-peminjaman', 'pengembalian', id],
-        queryFn: () => getDetailPengembalianData(id!)
+        queryFn: () => getDetailPengembalianData(id!),
+        select: (raw: any) => ({
+            detailPengembalian: raw,
+            detailPengguna : raw?.idBuku,
+            detailPeminjaman : raw?.idPeminjaman,
+            detailBuku : raw?.idBuku,
+        })
     })
-
-    console.log(detailPengembalian)
 
     return {
         isLoading,
-        detailPengembalian,
-        detailPengguna : detailPengembalian?.idBuku,
-        detailPeminjaman : detailPengembalian?.idPeminjaman,
-        detailBuku : detailPengembalian?.idBuku,
+        ...data  
     }
 }
 
