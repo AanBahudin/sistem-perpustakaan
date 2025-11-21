@@ -1,0 +1,36 @@
+import { useParams } from "react-router-dom"
+import { useQueries } from "@tanstack/react-query"
+import { getDetailPeminjaman } from "@/actions/peminjamanActions"
+import { getSinglePerpanjanganByPeminjamanId } from "@/actions/perpanjanganActions"
+
+const useFetchConfirmPerpanjanganUser = () => {
+
+    // REFACTOR HERE
+    // PIKIRKAN AGAR TIDAK PERLU DOUBLE FETCHING API
+    // BUATKAN BATAS MAKSIMAL PERPANJANGAN
+    const {id} = useParams()
+    const results = useQueries({
+        queries: [
+            {
+                queryKey: ['peminjaman', id],
+                queryFn: () => getDetailPeminjaman(id as string)
+            },
+            {
+                queryKey: ['perpanjangan', 'peminjamnan', id],
+                queryFn: () =>  getSinglePerpanjanganByPeminjamanId(id as string)
+            }
+        ]
+    })
+
+
+    const [peminjaman, perpanjangan] = results
+    const isLoading = results.some(q => q.isLoading)
+
+    return {
+        isLoading,
+        peminjaman: peminjaman?.data,
+        perpanjangan: perpanjangan?.data
+    }
+}
+
+export default useFetchConfirmPerpanjanganUser
