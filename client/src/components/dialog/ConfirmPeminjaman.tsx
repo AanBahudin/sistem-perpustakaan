@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,13 +10,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { BookOpenCheck } from 'lucide-react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { tambahPinjamanNew } from '@/actions/peminjamanActions'
-import { useSelector } from 'react-redux'
 import { Button } from '../ui/button'
-import { store } from '@/store'
-import { setAlasan, setDurasi } from '@/cart/peminjamanSlice'
-import { toast } from 'sonner'
+import useConfirmPeminjamanPengguna from '@/hooks/fetchHooks/penggunaHooks/peminjaman/useConfirmPeminjamanPengguna'
 
 type ConfirmPeminjamanType = {
     buku: any
@@ -25,38 +19,11 @@ type ConfirmPeminjamanType = {
 
 const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
 
-    const {alasan, durasi} = useSelector((state: any) => state.peminjamanState)
-    const [isModalOpen, setIsModalOpen]= useState<boolean>(false)
-    const [loading, setLoading] = useState<boolean>(false)
-    const queryClient = useQueryClient()
-
-    const {mutateAsync: tambahPinjaman} = useMutation({
-        mutationFn: () => tambahPinjamanNew({idBuku: buku._id, alasan, durasi}),
-        onMutate: () => {
-            setLoading(true)
-            setIsModalOpen(true)
-        },
-        onSuccess: () => {
-            setLoading(false)
-            setIsModalOpen(false)
-            queryClient.invalidateQueries({queryKey: ['confirm', 'peminjaman', buku._id]})
-            queryClient.invalidateQueries({queryKey: ['confirm', 'pinjaman', buku._id]})
-            queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna']})
-            store.dispatch(setAlasan(''))
-            store.dispatch(setDurasi(''))
-        },
-        onError: (error: any) => {
-            const errMsg = error.response.data.message || 'Gagal memperbaharui durasi, Coba lagi nanti'
-            toast('Terjadi kesalahan', {description: errMsg})
-            setLoading(false)
-            setIsModalOpen(false)
-        }
-    })
-
-    const handleClick = async() => {
-        await tambahPinjaman()
-        setIsModalOpen(false)
-    }
+    const {
+        alasan, durasi,
+        isLoading, isModalOpen, 
+        mutationFn, setIsModalOpen} = useConfirmPeminjamanPengguna({idBuku: buku._id})
+    
 
     return (
         <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -79,8 +46,8 @@ const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
 
                 <AlertDialogFooter>
                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleClick} className="bg-primary/70 hover:bg-primary text-white">
-                    {loading ? 'Mengajukkan... ' : 'Terima'}
+                    <AlertDialogAction onClick={mutationFn} className="bg-primary/70 hover:bg-primary text-white">
+                    {isLoading ? 'Mengajukkan... ' : 'Terima'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,54 +11,21 @@ import {
 } from "@/components/ui/alert-dialog"
 import { AlertCircleIcon } from "lucide-react"
 import { Button } from "../ui/button"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { pembatalanPerpanjangan } from "@/actions/perpanjanganActions"
-import { useNavigate } from "react-router-dom"
+import useCancelPerpanjanganPengguna from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useCancelPerpanjanganPengguna"
 
 
 const CancelPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
   const {disetujui, _id: idPerpanjangan} = perpanjangan
-
-  const [isModalOpen, setModalOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    setModalOpen(!isModalOpen)
-  }
-
-  
-  const queryClient = useQueryClient()
-  const {mutateAsync: batalPerpanjangan} = useMutation({
-    mutationFn: () => pembatalanPerpanjangan({idPerpanjangan}),
-    onMutate: () => {
-      setLoading(true)
-    },
-    onSuccess: () => {
-      setLoading(false)
-      queryClient.invalidateQueries({queryKey: ['detail-peminjaman', 'perpanjangan', idPerpanjangan]})
-      if (window.history.length > 2) {
-        navigate(-1);
-      } else {
-        navigate('/my/data/perpanjangan');
-      }
-    },
-    onError: () => {
-      setLoading(false)
-    }
-  })
-
-  const hapusPengajuanFunc = async() => {
-    await batalPerpanjangan()
-  }
+  const { 
+    isLoading, isModalOpen, 
+    setModalOpen, mutationFn } = useCancelPerpanjanganPengguna({idPerpanjangan})
   
   return (
     <AlertDialog open={isModalOpen} onOpenChange={setModalOpen}>
       <AlertDialogTrigger asChild>
           <Button
-            variant='destructive'
-            disabled={disetujui !== 'Pending'} 
+            variant='destructive' disabled={disetujui !== 'Pending'} 
             className="text-white w-full disabled:cursor-not-allowed">
               Batalkan Perpanjangan
           </Button>
@@ -76,10 +42,10 @@ const CancelPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
 
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={handleClick} className="bg-destructive">Batal</AlertDialogCancel>
+          <AlertDialogCancel className="bg-destructive">Batal</AlertDialogCancel>
           <Button asChild variant='destructive'>
-            <AlertDialogAction onClick={hapusPengajuanFunc} className="bg-primary/70 hover:bg-primary text-white">
-            {loading ? 'Membatalkan... ' : 'Batalkan pengajuan'}
+            <AlertDialogAction onClick={mutationFn} className="bg-primary/70 hover:bg-primary text-white">
+            {isLoading ? 'Membatalkan... ' : 'Batalkan pengajuan'}
             </AlertDialogAction>
           </Button>
         </AlertDialogFooter>

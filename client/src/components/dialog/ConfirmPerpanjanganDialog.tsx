@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,51 +8,15 @@ import {
   AlertDialogFooter,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useSelector } from 'react-redux'
 import { Button } from '../ui/button'
-import { store } from '@/store'
-import { setAlasan, setDurasi } from '@/cart/peminjamanSlice'
-import { tambahPerpanjangan } from '@/actions/perpanjanganActions'
 import {PackagePlus} from 'lucide-react'
+import useConfirmPerpanjanganPengguna from '@/hooks/fetchHooks/penggunaHooks/perpanjangan/useConfirmPerpanjanganPengguna'
 
 const ConfirmPerpanjanganDialog = ({peminjaman} : {peminjaman: any}) => {
-    
+
     const { _id: idPeminjaman, buku } = peminjaman
     const {_id: idBuku} = buku
-    const {alasan, durasi} = useSelector((state: any) => state.peminjamanState)
-
-    const [isModalOpen, setIsModalOpen]= useState<boolean>(false)
-    const [loading, setLoading] = useState<boolean>(false)
-
-    const queryClient = useQueryClient()
-
-    const {mutateAsync: tambahPinjaman} = useMutation({
-        mutationFn: () => tambahPerpanjangan({idPeminjaman, idBuku, durasi, alasan}),
-        onMutate: () => {
-            setLoading(true)
-            setIsModalOpen(true)
-        },
-        onSuccess: () => {
-            setLoading(false)
-            setIsModalOpen(false)
-            queryClient.invalidateQueries({queryKey: ['peminjaman', idPeminjaman]})
-            queryClient.invalidateQueries({queryKey: ['perpanjangan', 'peminjamnan', idPeminjaman]})
-            queryClient.invalidateQueries({ queryKey: ['stats', 'pengguna']})
-        },
-        onError: () => {
-            setLoading(false)
-            setIsModalOpen(false)
-        }
-    })
-    
-    const handleClick = async() => {
-        await tambahPinjaman()
-        store.dispatch(setAlasan(''))
-        store.dispatch(setDurasi(''))
-        setIsModalOpen(false)
-    }
-
+    const { isLoading, isModalOpen, setIsModalOpen, durasi, alasan, mutationFn } = useConfirmPerpanjanganPengguna({idBuku, idPeminjaman})
 
     return (
         <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -74,8 +37,8 @@ const ConfirmPerpanjanganDialog = ({peminjaman} : {peminjaman: any}) => {
 
                 <AlertDialogFooter>
                     <AlertDialogCancel>Batal</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleClick} className="bg-primary/70 hover:bg-primary text-white">
-                    {loading ? 'Mengajukkan... ' : 'Terima'}
+                    <AlertDialogAction onClick={mutationFn} className="bg-primary/70 hover:bg-primary text-white">
+                    {isLoading ? 'Mengajukkan... ' : 'Terima'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
