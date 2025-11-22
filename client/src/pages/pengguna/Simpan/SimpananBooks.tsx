@@ -1,7 +1,7 @@
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import SimpanPageNoData from '@/components/NoDataDisplay/SimpanPageNoData'
+import SimpanPageNoData from '@/components/pengguna/Simpan/SimpanPageNoData'
 import { ImageOff } from 'lucide-react'
 
 const SimpananBooks = ({books} : {books: any}) => {

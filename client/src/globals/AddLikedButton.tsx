@@ -1,49 +1,23 @@
 import { Loader2, ThumbsUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { addOrRemoveSukaNew, getAllSuka } from '@/actions/sukaActions'
-import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import useAddLikePengguna from '@/hooks/fetchHooks/penggunaHooks/sukaHooks/useAddLikePengguna'
 
 const AddLikedButton = ({id} : {id: string}) => {
-    const queryClient = useQueryClient()
-    const [loading, setLoading] = useState(false)
-    const [searchParams] = useSearchParams()
-    const params = searchParams.get('q')
+    
+    // REFACTOR KOMPONEN INI
+    /* 
+        komponen ini dipake berulang pada berbagai halaman dengan jumlah yang banyak dalam sekali render
+        yang mengakibatkan terjadinya fetch data yang sangat banyak, fungsi mutation nya meng-trigger
+        banyak sekali re-render. 
+    */
 
-    const {data, isLoading: reactQueryLoading} = useQuery({
-        queryKey: ['suka'],
-        queryFn: getAllSuka
-    })
+    const {
+        mutationFn, mutationLoading,
+        queryLoading, isInludes
+    } = useAddLikePengguna({idBuku: id})
 
-    const {mutateAsync: addOrRemoveLikeMutation} = useMutation({
-        mutationFn: () => addOrRemoveSukaNew(id),
-        onMutate: () => {
-            setLoading(true)
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['suka']
-            })
-            queryClient.invalidateQueries({
-                queryKey: ['detail-book', id]
-            })
-            queryClient.invalidateQueries({
-                queryKey: ['discovery', 'category', params]
-            })
-            setLoading(false)
-        },
-        onError: () => {
-            setLoading(false)
-        }
-    })
-
-    const handleClick = async() => {
-        await addOrRemoveLikeMutation()
-    }
-
-    if (reactQueryLoading || loading) {
+    if (queryLoading || mutationLoading) {
         return (
             <Button disabled className='w-8 h-8 border p-2 bg-transparent hover:bg-muted'>
                 <Loader2 className="w-8 h-8 stroke-white animate-spin" />
@@ -51,12 +25,10 @@ const AddLikedButton = ({id} : {id: string}) => {
         )
     }
 
-    const idBukuDisukai : any[]= data.bukuDisukai.map((item: any) => item._id)
-    const isInludes = idBukuDisukai.includes(id)
     return (
         <>
-            <Button type='submit' onClick={handleClick} className={`w-8 h-8 border p-2 ${isInludes ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}`}>
-                {reactQueryLoading ? (
+            <Button type='submit' onClick={mutationFn} className={`w-8 h-8 border p-2 ${isInludes ? 'dark:bg-primary-foreground bg-primary hover:bg-primary' : 'bg-transparent hover:bg-muted'}`}>
+                {queryLoading ? (
                     <Loader2 className="w-8 h-8 dark:stroke-white stroke-black animate-spin" />
                 ) : (
                     <ThumbsUp className={`dark:stroke-white ${isInludes && 'stroke-white'} stroke-black w-8 h-8`} />

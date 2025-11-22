@@ -1,7 +1,7 @@
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
-import SukaPageNoData from "@/components/NoDataDisplay/SukaPageNoData"
+import SukaPageNoData from "@/components/pengguna/Suka/SukaPageNoData"
 import { ImageOff } from "lucide-react"
 
 
