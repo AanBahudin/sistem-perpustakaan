@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
-import { getDetailPeminjaman } from "@/actions/peminjamanActions"
+import { getDetailPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 
 const useFetchDetailPeminjamanUser = () => {
     const {id} = useParams()
 
     const {data, isLoading} = useQuery({
         queryKey: ['detail-peminjaman', id],
-        queryFn: () => getDetailPeminjaman(id!),
+        queryFn: () => getDetailPeminjamanPengguna({idPeminjaman: id as string}),
         select: (rawData: any) => ({
             detailBuku: rawData?.buku,
             detailPeminjaman: rawData

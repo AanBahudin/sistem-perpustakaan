@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { getPeminjamanData } from "@/actions/peminjamanActions"
+import { getAllPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 
 const useFetchAllPeminjamanPengguna = () => {
     const [searchParams] = useSearchParams()
@@ -8,7 +8,7 @@ const useFetchAllPeminjamanPengguna = () => {
 
     const {data: dataPeminjaman, isLoading} = useQuery({
         queryKey: ['peminjaman', params],
-        queryFn: () => getPeminjamanData(params || '')
+        queryFn: () => getAllPeminjamanPengguna({query: params})
     })
 
     return {

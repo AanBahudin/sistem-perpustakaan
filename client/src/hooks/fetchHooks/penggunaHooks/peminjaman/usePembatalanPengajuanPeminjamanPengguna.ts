@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import { pembatalanPeminjamanBuku } from "@/actions/peminjamanActions"
+import { batalkanPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 import { toast } from "sonner"
 
 type HooksProps = {
@@ -18,7 +18,7 @@ const usePembatalanPengajuanPeminjamanPengguna = ({ idPeminjaman, idBuku } : Hoo
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: () => pembatalanPeminjamanBuku({idPeminjaman: idPeminjaman, idBuku: idBuku}),
+        mutationFn: () => batalkanPeminjamanPengguna({idPeminjaman: idPeminjaman}),
         onMutate: () => {
             setIsModalOpen(true)
         },

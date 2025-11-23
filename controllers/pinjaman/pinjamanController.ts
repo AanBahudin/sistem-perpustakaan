@@ -2,7 +2,7 @@ import { Response, Request } from "express"
 
 import { StatusCodes } from "http-status-codes"
 import Peminjaman from "../../model/Peminjaman"
-import { getOnePeminjaman, getOnePeminjamanUser, getOnePeminjamanUserByIdBook, getOnePeminjamanUserByPengembalianIdServices, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser, tolakPinjamanPustakawan } from "../../services/peminjamanServices"
+import { getOnePeminjaman, getOnePeminjamanUser, getSemuaPeminjamanUser, getSemuaPengajuanPeminjaman, getSemuaPinjaman, getSemuaPinjamanAktif, pembatalanPeminjamanUser, pengajuanPeminjaman, tambahPinjamanUser, terimaPeminjamanUser, tolakPinjamanPustakawan } from "../../services/peminjamanServices"
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse"
 
 // 4 controller dibawah khusus untuk pengguna
@@ -47,34 +47,6 @@ export const getSinglePinjamanUser = async(req: Request | any, res: Response) =>
     SendOneDataResponse({
         res,
         message: 'Data Pinjaman',
-        data
-    })
-}
-
-// SUDAH DITESTING
-export const getSinglePinjamanUserByBookId = async(req: Request | any, res: Response) => {
-    const {userId} = req.user
-    const {id} = req.params
-
-    const data = await getOnePeminjamanUserByIdBook({bookId: id, userId})
-
-    SendOneDataResponse({
-        res,
-        message: 'Data Pinjaman',
-        data
-    })
-}
-
-// SUDAH DITESTING
-export const getSinglePinjamanUserByPengembalianId = async(req: Request | any, res: Response) => {
-    const {id} = req.params
-    const {userId} = req.user
-
-    const data = await getOnePeminjamanUserByPengembalianIdServices({userId, pengembalianId: id})
-
-    SendOneDataResponse({
-        res,
-        message: 'Data Peminjaman',
         data
     })
 }

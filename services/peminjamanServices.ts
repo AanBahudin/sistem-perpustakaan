@@ -86,25 +86,6 @@ export const getOnePeminjamanUser = async({userId, peminjamanId} : GetOnePeminja
 }
 
 // SUDAH DITESTING
-export const getOnePeminjamanUserByIdBook = async({userId, bookId} : GetOnePeminjamanUserByBookId) => {
-    const peminjaman = await Peminjaman.findOne({
-        peminjam: userId, 
-        buku: bookId, 
-        $or: [
-            {statusPeminjaman: 'Dipinjam'},
-            {statusPeminjaman: 'Terlambat'},
-            {statusPeminjaman: 'Diajukan'},
-        ]
-    }).populate(['buku', 'peminjam', 'diprosesOleh', 'dataPengembalian'])
-
-    return peminjaman
-}
-
-// SUDAH DITESTING
-export const getOnePeminjamanUserByPengembalianIdServices = async({userId, pengembalianId} : getOnePeminjamanUserByPengembalianIdType) => {
-    const data = await Peminjaman.findOne({peminjam:userId,  dataPengembalian: pengembalianId}).populate(['buku', 'peminjam', 'diprosesOleh'])
-    return data
-}
 
 // SUDAH DITESTING
 export const pembatalanPeminjamanUser = async({idPeminjaman, userId} : PembatalanPeminjamanUserParamsType) => {

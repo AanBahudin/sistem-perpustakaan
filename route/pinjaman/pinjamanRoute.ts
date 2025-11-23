@@ -11,8 +11,6 @@ import {
     getPinjamanUser,
     getSinglePinjamanUser,
     pembatalanPinjamanUser,
-    getSinglePinjamanUserByBookId,
-    getSinglePinjamanUserByPengembalianId,
     tolakPeminjamanPustakawan
  } from '../../controllers/pinjaman/pinjamanController'
 
@@ -36,12 +34,6 @@ router.route('/request/pinjaman')
 router.route('/user')
     .get(userMiddlewareAuthorized, getPinjamanUser)
     .post(userMiddlewareAuthorized, inputPembatalanPeminjamanUserValidator, pembatalanPinjamanUser)
-
-router.route('/user/book/:id')
-    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUserByBookId)
-
-router.route('/user/pengembalian/:id')
-    .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUserByPengembalianId)
 
 router.route('/user/:id')
     .get(userMiddlewareAuthorized, mongooseIdMiddleware, getSinglePinjamanUser)

@@ -2,10 +2,16 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { useMutation } from "@tanstack/react-query"
-import { tambahPinjamanNew } from "@/actions/peminjamanActions"
+import { tambahPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 import { setAlasan, setDurasi } from "@/cart/peminjamanSlice"
 import { store } from "@/store"
 import { toast } from "sonner"
+
+/*
+    REFACTOR DISINI
+    PINDAHKAN TOAST DARI ACTION KE SINI
+    REFACTOR GLOBAL STATE, KALAU BISA GUNAKAN FORM DATA SAJA UNTUK KIRIM DATA KE SERVER
+*/
 
 type HooksProps = {
     idBuku: string
@@ -17,7 +23,7 @@ const useConfirmPeminjamanPengguna = ({idBuku} : HooksProps) => {
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: () => tambahPinjamanNew({idBuku, alasan, durasi}),
+        mutationFn: () => tambahPeminjamanPengguna({idBuku, alasan, durasi}),
         onSuccess: () => {
             setIsModalOpen(false)
             queryClient.invalidateQueries({queryKey: ['confirm', 'peminjaman', idBuku]})
