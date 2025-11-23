@@ -1,4 +1,4 @@
-import { getPerpanjangan } from "@/actions/perpanjanganActions"
+import { getAllPerpanjanganPengguna } from "@/actions/Pengguna/Perpanjangan"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
 
@@ -8,7 +8,7 @@ const useFetchAllPerpanjanganPengguna = () => {
     
     const {data: dataPerpanjangan, isLoading} = useQuery({
         queryKey: ['perpanjangan', params],
-        queryFn: () => getPerpanjangan(params)
+        queryFn: () => getAllPerpanjanganPengguna(params)
     })
 
     return {

@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query"
-import { getAllSuka, addOrRemoveSukaNew } from "@/actions/sukaActions"
+import { getAllSukaPengguna, toggleSukaPengguna } from "@/actions/Pengguna/Suka"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
@@ -14,11 +14,11 @@ const useAddLikePengguna = ({idBuku} : HooksProps) => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['suka'],
-        queryFn: getAllSuka
+        queryFn: getAllSukaPengguna
     })
 
     const mutation = useMutation({
-        mutationFn: () => addOrRemoveSukaNew(idBuku),
+        mutationFn: () => toggleSukaPengguna(idBuku),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['suka']})
             toast('Ditambahkan ke suka', {

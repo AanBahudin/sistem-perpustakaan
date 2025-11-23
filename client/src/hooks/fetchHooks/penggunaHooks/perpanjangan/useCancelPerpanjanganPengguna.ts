@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import { pembatalanPerpanjangan } from "@/actions/perpanjanganActions"
+import { penggunaBatalkanPerpanjangan } from "@/actions/Pengguna/Perpanjangan"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 
@@ -17,7 +17,7 @@ const useCancelPerpanjanganPengguna = ({ idPerpanjangan } : HooksProps) => {
     
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: () => pembatalanPerpanjangan({idPerpanjangan}),
+        mutationFn: () => penggunaBatalkanPerpanjangan({idPerpanjangan}),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['detail-peminjaman', 'perpanjangan', idPerpanjangan]})
             if (window.history.length > 2) {

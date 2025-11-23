@@ -3,7 +3,7 @@ import { store } from "@/store"
 import { useSelector } from "react-redux"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { useState } from "react"
-import { tambahPerpanjangan } from "@/actions/perpanjanganActions"
+import { penggunaTambahPerpanjangan } from "@/actions/Pengguna/Perpanjangan"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 
@@ -19,7 +19,7 @@ const useConfirmPerpanjanganPengguna = ({ idPeminjaman, idBuku } : HooksProps) =
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: () => tambahPerpanjangan({idPeminjaman, idBuku, durasi, alasan}),
+        mutationFn: () => penggunaTambahPerpanjangan({idPeminjaman, idBuku, durasi, alasan}),
         onMutate: () => {
             setIsModalOpen(true)
         },

@@ -1,6 +1,6 @@
 import { useQueries } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
-import { getPerpanjanganDetail } from "@/actions/perpanjanganActions"
+import { getDetailPerpanjanganPengguna } from "@/actions/Pengguna/Perpanjangan"
 import { profileAction } from "@/actions/userActions"
 
 const useFetchDetailPerpanjanganPengguna = () => {
@@ -11,7 +11,7 @@ const useFetchDetailPerpanjanganPengguna = () => {
         queries: [
         {
             queryKey: ['detail-perpanjangan', id],
-            queryFn: () => getPerpanjanganDetail(id as string)
+            queryFn: () => getDetailPerpanjanganPengguna(id as string)
         },
         {
             queryKey: ['profil'],

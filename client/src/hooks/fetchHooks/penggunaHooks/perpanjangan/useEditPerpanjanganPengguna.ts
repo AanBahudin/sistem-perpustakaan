@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import { editPerpanjangan } from "@/actions/perpanjanganActions"
+import { penggunaEditPerpanjangan } from "@/actions/Pengguna/Perpanjangan"
 import { store } from "@/store"
 import { setAlasan, setDurasi } from "@/cart/peminjamanSlice"
 import { useState } from "react"
@@ -14,7 +14,7 @@ const useEditPerpanjanganPengguna = ({idPerpanjangan} : HooksProps) => {
     const queryClient = useQueryClient()
     const mutation = useMutation({
         mutationFn: (formData: any) =>
-            editPerpanjangan({ idPerpanjangan, data: {...formData} 
+            penggunaEditPerpanjangan({ idPerpanjangan, data: {...formData} 
         }),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['detail-perpanjangan', idPerpanjangan]})
