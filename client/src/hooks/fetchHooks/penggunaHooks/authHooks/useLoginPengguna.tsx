@@ -1,13 +1,13 @@
-import { loginAction } from "@/actions/authActions"
 import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
+import { loginPenggunaAction } from "@/actions/Pengguna/Auth"
 
 const useLoginPengguna = () => {
     const navigate = useNavigate()   
 
     const mutation = useMutation({
-        mutationFn: (data: FormData) => loginAction(data),
+        mutationFn: (data: FormData) => loginPenggunaAction(data),
         onSuccess: (data: any) => {
             toast('Selamat Datang di Akun Anda', {description: 'Lihat apa yang dapat anda temukan'})
 

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "sonner"
-import { registerAction } from "@/actions/authActions"
+import { registerPenggunaAction } from "@/actions/Pengguna/Auth"
 
 const useRegisterPengguna = () => {
     const navigate = useNavigate()
 
     const mutation = useMutation({
-    mutationFn: (data: FormData) => registerAction(data),
+    mutationFn: (data: FormData) => registerPenggunaAction(data),
     onSuccess: () => {
         toast('Berhasil melakukan pendaftaran', {description: 'Silahkan verifikasi email anda'})
         navigate('/status/account')

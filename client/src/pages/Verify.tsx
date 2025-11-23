@@ -1,4 +1,4 @@
-import { accountStatus } from '@/actions/authActions';
+import { accountStatusPenggunaAction } from '@/actions/Pengguna/Auth';
 import Logo from '@/components/landing/Navbar/Logo';
 import loginImage from '@/assets/images/loginImg.png'
 import Container from '@/globals/Container';
@@ -13,7 +13,7 @@ const Verify : React.FC = () => {
     const navigate = useNavigate()
     const {data, isLoading} = useQuery({
         queryKey: ['no-cache'],
-        queryFn: accountStatus,
+        queryFn: accountStatusPenggunaAction,
         gcTime: 0,
     })
 
