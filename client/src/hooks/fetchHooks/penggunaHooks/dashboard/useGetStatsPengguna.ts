@@ -1,10 +1,10 @@
-import { getStats } from "@/actions/userActions"
+import { penggunaGetStatsAction } from "@/actions/Pengguna/Dashboard"
 import { useQuery } from "@tanstack/react-query"
 
 const useGetStatsPengguna = () => {
     const {data: statsData, isLoading} = useQuery({
         queryKey: ['stats', 'pengguna'],
-        queryFn: getStats,
+        queryFn: penggunaGetStatsAction,
     })
 
     return {

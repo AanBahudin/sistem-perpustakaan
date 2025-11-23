@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { updateEmailAction } from "@/actions/userActions"
+import { penggunaUpdateEmailAction } from "@/actions/Pengguna/Profil"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
@@ -13,7 +13,7 @@ const useUpdateEmailPengguna = () => {
     }
 
     const mutation = useMutation({
-        mutationFn: (data: FormData) => updateEmailAction(data),
+        mutationFn: (data: FormData) => penggunaUpdateEmailAction(data),
         onSuccess: () => {
             toast('Diperbaharui', {description: 'Tautan Verifikasi Telah Kami Kirim Ke Akun Anda, Silahkan Verifikasi'})
             queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})

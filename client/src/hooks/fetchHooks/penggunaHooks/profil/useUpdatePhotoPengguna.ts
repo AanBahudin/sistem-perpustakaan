@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query"
-import { updatePhotoAction } from "@/actions/userActions"
+import { penggunaUpdatePhotoAction } from "@/actions/Pengguna/Profil"
 import { useSelector } from "react-redux"
 import { useRef } from "react"
 import { store } from "@/store"
@@ -34,7 +34,7 @@ const useUpdatePhotoPengguna = () => {
     }
 
     const mutation = useMutation({
-        mutationFn: (data: FormData) => updatePhotoAction(data),
+        mutationFn: (data: FormData) => penggunaUpdatePhotoAction(data),
         onSuccess: () => {
             store.dispatch(removeSelectedImg())
             queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})

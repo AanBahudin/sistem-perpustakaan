@@ -1,11 +1,11 @@
-import { profileAction } from "@/actions/userActions"
+import { penggunaGetProfileAction } from "@/actions/Pengguna/Profil"
 import { useQuery } from "@tanstack/react-query"
 
 
 const useFetchProfilPengguna = () => {
     const {data, isLoading} = useQuery({
         queryKey: ['pengguna', 'profil'],
-        queryFn: profileAction
+        queryFn: penggunaGetProfileAction
     })
 
     return {

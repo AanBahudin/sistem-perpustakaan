@@ -1,0 +1,5 @@
+export {default as penggunaGetProfileAction} from './penggunaGetProfil'
+export {default as penggunaUpdateDataAction} from './penggunaUpdateDataProfile'
+export {default as penggunaUpdateEmailAction} from './penggunaUpdateEmailAction'
+export {default as penggunaUpdatePasswordAction} from './penggunaUpdatePassword'
+export {default as penggunaUpdatePhotoAction} from './penggunaUpdatePhotoAction'

@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query"
 import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
-import { updateProfileAction } from "@/actions/userActions"
+import { penggunaUpdateDataAction } from "@/actions/Pengguna/Profil"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 
@@ -19,7 +19,7 @@ const useUpdateInfoPengguna = ({ errMsg, successMsg } : useUpdateInfoPenggunaPro
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: (data: FormData) => updateProfileAction(data),
+        mutationFn: (data: FormData) => penggunaUpdateDataAction(data),
         onSuccess: () => {
             toast('Diperbaharui', {description: successMsg})
             queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})
