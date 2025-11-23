@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { discoverBuku } from "@/actions/BukuActions"
+import { getDiscoveryBukuPengguna } from "@/actions/Pengguna/Buku"
 
 const useFetchBukuBasedByCategoryPengguna = () => {
     const navigate = useNavigate()
@@ -11,7 +11,7 @@ const useFetchBukuBasedByCategoryPengguna = () => {
 
     const {data: dataBuku, isLoading} = useQuery({
         queryKey: ['discovery', 'category', params],
-        queryFn: () => discoverBuku(params as string)
+        queryFn: () => getDiscoveryBukuPengguna(params as string)
     })
     
     useEffect(() => {

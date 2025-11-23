@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { getDashboardBookAction } from "@/actions/BukuActions"
+import { getDashboardBukuPengguna } from "@/actions/Pengguna/Buku"
 
 const useFetchBukuKatalogPengguna = () => {
     const {data: dataBuku, isLoading} = useQuery({
         queryKey: ['dashbaord', 'buku'],
-        queryFn: () => getDashboardBookAction()
+        queryFn: () => getDashboardBukuPengguna()
     })
 
     return {

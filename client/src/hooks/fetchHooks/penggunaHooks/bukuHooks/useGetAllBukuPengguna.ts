@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
-import { getAllBuku } from "@/actions/BukuActions"
+import { getAllBukuPengguna } from "@/actions/Pengguna/Buku"
 
 const useGetAllBukuPengguna = () => {
    
@@ -9,7 +9,7 @@ const useGetAllBukuPengguna = () => {
 
     const {data: dataBuku, isLoading} = useQuery({
         queryKey: ['buku', fullParams],
-        queryFn: () => getAllBuku(fullParams)
+        queryFn: () => getAllBukuPengguna({query: fullParams})
     })
 
     return {

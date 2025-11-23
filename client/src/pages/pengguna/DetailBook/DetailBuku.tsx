@@ -4,14 +4,14 @@ import DetailBookContainer from "@/components/pengguna/DetailBukuPengguna/Detail
 import YouMayLIkeBookContainer from "@/components/pengguna/DetailBukuPengguna/YouMayLIkeBookContainer"
 import { useQuery } from "@tanstack/react-query"
 import DetailBookLoading from "@/components/Loading/DetailBookLoading"
-import { getDetailBuku } from "@/actions/BukuActions"
+import { getDetailBukuPengguna } from "@/actions/Pengguna/Buku"
 
 const DetailBuku = () => {
   const {id} = useParams()
 
   const {data: dataBuku, isLoading} = useQuery({
     queryKey: ['detail-book', id],
-    queryFn: () => getDetailBuku(id as string),
+    queryFn: () => getDetailBukuPengguna(id as string),
   })
 
   if (isLoading) return <DetailBookLoading />
