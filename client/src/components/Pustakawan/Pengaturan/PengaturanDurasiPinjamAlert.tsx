@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from 'react'
-import { pustakawanHapusDurasi } from '@/actions/Pustakawan/pustakawanDurasiActions'
+import { pustakawanHapusDurasi } from '@/actions/Pustakawan/Durasi/pustakawanDurasiActions'
 
 const PengaturanDurasiPinjamAlert = ({children, idDurasi} : {children: React.ReactNode, idDurasi: string}) => {
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import Logo from "../../landing/Navbar/Logo"
 import { Link } from "react-router-dom"
-import { getProfilePustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { getProfilePustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import { Skeleton } from "@/components/ui/skeleton"
 
 const PustakawanSidebarHeader = () => {

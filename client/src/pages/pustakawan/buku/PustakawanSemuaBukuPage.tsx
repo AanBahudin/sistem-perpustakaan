@@ -1,4 +1,4 @@
-import { getAllBukuPustakawan } from "@/actions/Pustakawan/pustakawanBukuActions"
+import { getAllBukuPustakawan } from "@/actions/Pustakawan/Buku/pustakawanBukuActions"
 import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"

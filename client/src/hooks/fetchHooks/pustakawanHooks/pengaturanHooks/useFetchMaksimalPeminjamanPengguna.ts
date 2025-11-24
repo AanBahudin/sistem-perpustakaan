@@ -1,4 +1,4 @@
-import { getMaksimalPeminjaman } from "@/actions/GlobalActions/MaksimalPeminjamanActions"
+import { getMaksimalPeminjaman } from "@/actions/Pustakawan/MaksimalPeminjaman/MaksimalPeminjamanActions"
 import { useQuery } from "@tanstack/react-query"
 
 const useFetchMaksimalPeminjamanPengguna = () => {

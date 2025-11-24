@@ -1,4 +1,4 @@
-import { getProfilePustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { getProfilePustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"

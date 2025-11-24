@@ -1,4 +1,4 @@
-import { getAllPerpanjangan } from '@/actions/Pustakawan/pustakawanPerpanjanganActions'
+import { getAllPerpanjangan } from '@/actions/Pustakawan/Perpanjangan/pustakawanPerpanjanganActions'
 import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'

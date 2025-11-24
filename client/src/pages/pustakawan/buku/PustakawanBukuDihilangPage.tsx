@@ -1,4 +1,4 @@
-import { getAllBukuDihilangkanPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
+import { getAllBukuDihilangkanPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
 import Container from '@/globals/Container'
 import { useSearchParams, Link } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'

@@ -40,7 +40,7 @@ export const routeWrapper = (app: Express) => {
     app.use('/api/v1/buku', authenticationMiddleware, bukuRoute)
     app.use('/api/v1/pengembalian', authenticationMiddleware, pengembalianRoute)
     app.use('/api/v1/kategori', authenticationMiddleware, kategoriRoute)
-    app.use('/api/v1/kondisi', authenticationMiddleware, pustakawanMiddlewareAuthorized, kondisiRoute)
+    app.use('/api/v1/kondisi', authenticationMiddleware, kondisiRoute)
     app.use('/api/v1/denda', authenticationMiddleware, pustakawanMiddlewareAuthorized, dendaRoute)
     app.use('/api/v1/suka', authenticationMiddleware, userMiddlewareAuthorized, sukaRoute)
     app.use('/api/v1/simpan', authenticationMiddleware, userMiddlewareAuthorized, simpanRoute)

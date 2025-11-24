@@ -4,7 +4,7 @@ import { PanelRightOpen } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { setShowSidebar } from '@/cart/pustakawanSidebar'
 import { useQuery } from '@tanstack/react-query'
-import { getProfilePustakawan } from '@/actions/Pustakawan/pustakawanProfileActions'
+import { getProfilePustakawan } from '@/actions/Pustakawan/Profil/pustakawanProfileActions'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const PustakawanNavbar = () => {

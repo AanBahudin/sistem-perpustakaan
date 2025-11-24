@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useSearchParams } from "react-router-dom"
-import { getAllPenulis } from "@/actions/penulistAction"
+import { getAllPenulis } from "@/actions/Shared/Penulis/penulistAction"
 import { useQuery } from "@tanstack/react-query"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"

@@ -1,4 +1,4 @@
-import { getSinglePerpanjanganPustakawan } from "@/actions/Pustakawan/pustakawanPerpanjanganActions"
+import { getSinglePerpanjanganPustakawan } from "@/actions/Pustakawan/Perpanjangan/pustakawanPerpanjanganActions"
 import DetailPengajuanBreadCrumbs from "@/components/Pustakawan/Pengajuan/DetailPengajuanBreadCrumbs"
 import PerpanjanganApprovalContainer from "@/components/Pustakawan/Pengajuan/DetailPerpanjangan/PerpanjanganApprovalContainer"
 import DetailPengajuanHeader from "@/components/Pustakawan/Pengajuan/DetailPengajuanHeader"

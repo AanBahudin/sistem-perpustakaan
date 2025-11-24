@@ -1,4 +1,4 @@
-import { getAllKondisi } from "@/actions/Pustakawan/pustakawanKondisiActionts"
+import { getAllKondisi } from "@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
-import { terimaPengajuanPeminjaman } from "@/actions/Pustakawan/pustakawanPengajuanActions"
+import { terimaPengajuanPeminjaman } from "@/actions/Pustakawan/Peminjaman/pustakawanPengajuanActions"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 

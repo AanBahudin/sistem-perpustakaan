@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { getAllPenerbit } from "@/actions/penerbitActions"
+import { getAllPenerbit } from "@/actions/Shared/Penerbit/penerbitActions"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { store } from "@/store"

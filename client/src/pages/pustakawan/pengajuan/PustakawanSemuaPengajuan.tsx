@@ -1,4 +1,4 @@
-import { getAllPengajuan } from "@/actions/Pustakawan/pustakawanPengajuanActions"
+import { getAllPengajuan } from "@/actions/Pustakawan/Peminjaman/pustakawanPengajuanActions"
 import ActivitySection from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/ActivitySection"
 import GrafikPertumbuhanPengajuanContainer from "@/components/Pustakawan/Pengajuan/SemuaPengajuan/GrafikPertumbuhanPengajuanContainer"
 import SemuaPengajuanLoading from "@/components/Pustakawan/Pengajuan/SemuaPengajuanLoading"

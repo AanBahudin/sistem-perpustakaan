@@ -1,4 +1,4 @@
-import { getAllBukuDipinjamPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
+import { getAllBukuDipinjamPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import Container from '@/globals/Container'
 import { Button } from '@/components/ui/button'

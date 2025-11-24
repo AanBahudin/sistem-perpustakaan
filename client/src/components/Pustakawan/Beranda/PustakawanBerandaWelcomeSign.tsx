@@ -1,4 +1,4 @@
-import { getProfilePustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { getProfilePustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useQuery } from "@tanstack/react-query"

@@ -1,7 +1,7 @@
 import Container from "@/globals/Container"
 import DetailPengajuanBreadCrumbs from "@/components/Pustakawan/Pengajuan/DetailPengajuanBreadCrumbs"
 import { useQuery } from "@tanstack/react-query"
-import { getSinglePengembalianPustakawan } from "@/actions/Pustakawan/pustakawanPengembalianActions"
+import { getSinglePengembalianPustakawan } from "@/actions/Pustakawan/Pengembalian/pustakawanPengembalianActions"
 import { useParams } from "react-router-dom"
 import DetailPengembalianTabs from "@/components/Pustakawan/Pengajuan/DetailPengembalian/DetailPengembalianTabs"
 import PengembalianDetailContainer from "@/components/Pustakawan/Pengajuan/DetailPengembalian/PengembalianDetailContainer"

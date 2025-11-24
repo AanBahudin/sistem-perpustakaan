@@ -3,7 +3,7 @@ import { Label } from '@/components/ui/label'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { pustakawanTambahKondisi } from '@/actions/Pustakawan/pustakawanKondisiActionts'
+import { pustakawanTambahKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
 
 import {
   Dialog,

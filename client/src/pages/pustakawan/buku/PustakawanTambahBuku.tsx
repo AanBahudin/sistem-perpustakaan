@@ -3,7 +3,7 @@ import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs
 import InputDataContainer from '@/components/Pustakawan/Buku/TambahBuku/InputDataContainer'
 import PustakawanTambahBukuHeader from '@/components/Pustakawan/Buku/TambahBuku/PustakawanTambahBukuHeader'
 import { useMutation } from '@tanstack/react-query'
-import { tambahBukuPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
+import { tambahBukuPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 

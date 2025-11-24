@@ -1,4 +1,4 @@
-import { tolakPerpanjanganPustakawan } from "@/actions/Pustakawan/pustakawanPerpanjanganActions"
+import { tolakPerpanjanganPustakawan } from "@/actions/Pustakawan/Perpanjangan/pustakawanPerpanjanganActions"
 import {
   AlertDialog,
   AlertDialogAction,

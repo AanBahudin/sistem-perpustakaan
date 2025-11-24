@@ -1,4 +1,4 @@
-import { getSinglePengguna } from "@/actions/Pustakawan/PustakawanGetPenggunaActions"
+import { getSinglePengguna } from "@/actions/Pustakawan/Pengguna/PustakawanGetPenggunaActions"
 import DetailPenggunaLoading from "@/components/Pustakawan/Pengguna/DetailPenggunaLoading"
 import ActivityInfoContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/ActivityInfoContainer"
 import MainProfileContainer from "@/components/Pustakawan/Pengguna/SinglePengguna/MainProfileContainer"

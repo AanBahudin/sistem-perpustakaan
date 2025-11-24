@@ -13,7 +13,7 @@ import { store } from "@/store"
 import { setDurasiPeminjaman } from "@/cart/peminjamanFilterSheetSlice"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { getAllDurasiPeminjaman } from "@/actions/Pustakawan/pustakawanDurasiActions"
+import { getAllDurasiPeminjaman } from "@/actions/Pustakawan/Durasi/pustakawanDurasiActions"
 
 const DurasiPeminjamanFilter = () => {
 

@@ -1,4 +1,4 @@
-import { editBukuPustakawan, getSingleBukuPustakawan } from '@/actions/Pustakawan/pustakawanBukuActions'
+import { editBukuPustakawan, getSingleBukuPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
 import DetailBukuBreadcrumbs from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuBreadcrumbs'
 import InputDataContainerEdit from '@/components/Pustakawan/Buku/EditBuku/InputDataContainerEdit'
 import PustakawanEditBukuLoading from '@/components/Pustakawan/Buku/EditBuku/PustakawanEditBukuLoading'

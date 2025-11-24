@@ -12,7 +12,7 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
-import { terimaPengajuanPerpanjanganPustakawan } from "@/actions/Pustakawan/pustakawanPerpanjanganActions"
+import { terimaPengajuanPerpanjanganPustakawan } from "@/actions/Pustakawan/Perpanjangan/pustakawanPerpanjanganActions"
 
 type DetailPerpanjanganConfirmDialogType = {
     children: React.ReactNode,

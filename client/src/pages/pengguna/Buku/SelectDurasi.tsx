@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { setDurasi } from "@/cart/peminjamanSlice"
 import { store } from "@/store"
 import { useQuery } from "@tanstack/react-query"
-import { getDurasi } from "@/actions/durasiActions"
+import { getDurasi } from "@/actions/Shared/Durasi/durasiActions"
 import { useSelector } from "react-redux"
 
 type SelectDurasiType = {

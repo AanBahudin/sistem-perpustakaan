@@ -1,4 +1,4 @@
-import { updateMaksimalPeminjaman } from "@/actions/GlobalActions/MaksimalPeminjamanActions";
+import { updateMaksimalPeminjaman } from "@/actions/Pustakawan/MaksimalPeminjaman/MaksimalPeminjamanActions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";

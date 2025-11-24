@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader } from 'lucide-react'
-import { pustakawanHapusKondisi } from '@/actions/Pustakawan/pustakawanKondisiActionts'
+import { pustakawanHapusKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
 
 import { toast } from 'sonner'
 import {

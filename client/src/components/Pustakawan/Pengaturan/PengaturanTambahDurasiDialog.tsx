@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { pustakawanTambahDurasi } from '@/actions/Pustakawan/pustakawanDurasiActions'
+import { pustakawanTambahDurasi } from '@/actions/Pustakawan/Durasi/pustakawanDurasiActions'
 
 const PengaturanTambahDurasiDialog = ({children} : {children: React.ReactNode}) => {
 

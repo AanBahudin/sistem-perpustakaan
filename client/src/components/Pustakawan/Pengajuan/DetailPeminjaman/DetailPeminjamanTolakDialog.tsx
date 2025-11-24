@@ -1,4 +1,4 @@
-import { tolakPengajuanPeminjaman } from "@/actions/Pustakawan/pustakawanPengajuanActions"
+import { tolakPengajuanPeminjaman } from "@/actions/Pustakawan/Peminjaman/pustakawanPengajuanActions"
 import {
   AlertDialog,
   AlertDialogAction,

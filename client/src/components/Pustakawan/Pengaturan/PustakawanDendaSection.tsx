@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getDenda } from "@/actions/GlobalActions/DendaActions"
+import { getDenda } from "@/actions/Shared/Denda/DendaActions"
 import Container from "@/globals/Container"
 import { Label } from "@/components/ui/label"
 import { formatRupiah } from "@/utils/formatCurrency"

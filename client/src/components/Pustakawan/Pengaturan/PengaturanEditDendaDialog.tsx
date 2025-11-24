@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { pustakawanEditDenda } from '@/actions/GlobalActions/DendaActions'
+import { pustakawanEditDenda } from '@/actions/Shared/Denda/DendaActions'
 
 const PengaturanEditDendaDialog = ({children, dataDenda} : {children: React.ReactNode, dataDenda: any}) => {
 

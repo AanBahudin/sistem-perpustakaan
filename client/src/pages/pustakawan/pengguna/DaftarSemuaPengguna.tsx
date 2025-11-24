@@ -3,7 +3,7 @@ import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/
 import Container from '@/globals/Container'
 import TableSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/TableSemuaPengguna'
 import { useQuery } from '@tanstack/react-query'
-import { getAllPengguna } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
+import { getAllPengguna } from '@/actions/Pustakawan/Pengguna/PustakawanGetPenggunaActions'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { useSearchParams } from 'react-router-dom'
 import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'

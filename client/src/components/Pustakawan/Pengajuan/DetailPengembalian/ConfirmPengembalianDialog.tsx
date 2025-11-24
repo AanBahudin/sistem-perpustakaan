@@ -1,4 +1,4 @@
-import { approvePengembalianDataPustakawan } from "@/actions/Pustakawan/pustakawanPengembalianActions"
+import { approvePengembalianDataPustakawan } from "@/actions/Pustakawan/Pengembalian/pustakawanPengembalianActions"
 import {
   AlertDialog,
   AlertDialogAction,

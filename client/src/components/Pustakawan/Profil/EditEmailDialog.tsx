@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label"
 import { store } from "@/store"
 import { useSelector } from "react-redux"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { updateEmailPustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { updateEmailPustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import { Loader } from "lucide-react"
 import { toast } from "sonner"
 

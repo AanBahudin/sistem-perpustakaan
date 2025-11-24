@@ -1,4 +1,4 @@
-import { updatePasswordPustakawan } from "@/actions/Pustakawan/pustakawanProfileActions"
+import { updatePasswordPustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import { setPasswordDialog, setShoNewPassword, setShowOldPassword } from "@/cart/pustakawanProfilePageSlice"
 import { Button } from "@/components/ui/button"
 import {

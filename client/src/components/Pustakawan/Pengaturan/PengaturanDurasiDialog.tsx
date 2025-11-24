@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { pustakawanEditDurasi } from '@/actions/Pustakawan/pustakawanDurasiActions'
+import { pustakawanEditDurasi } from '@/actions/Pustakawan/Durasi/pustakawanDurasiActions'
 
 const PengaturanDurasiDialog = ({children, dataDurasi} : {children: React.ReactNode, dataDurasi: any}) => {
 

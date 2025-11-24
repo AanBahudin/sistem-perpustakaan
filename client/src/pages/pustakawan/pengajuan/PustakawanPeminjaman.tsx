@@ -1,7 +1,7 @@
 import Container from '@/globals/Container'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { useQuery } from '@tanstack/react-query'
-import { getAllPengajuanPeminjaman } from '@/actions/Pustakawan/pustakawanPengajuanActions'
+import { getAllPengajuanPeminjaman } from '@/actions/Pustakawan/Peminjaman/pustakawanPengajuanActions'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/TabelSemuaPeminjaman'
 import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'

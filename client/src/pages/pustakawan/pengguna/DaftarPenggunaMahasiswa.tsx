@@ -1,4 +1,4 @@
-import { getAllPenggunaMahasiswa } from '@/actions/Pustakawan/PustakawanGetPenggunaActions'
+import { getAllPenggunaMahasiswa } from '@/actions/Pustakawan/Pengguna/PustakawanGetPenggunaActions'
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
