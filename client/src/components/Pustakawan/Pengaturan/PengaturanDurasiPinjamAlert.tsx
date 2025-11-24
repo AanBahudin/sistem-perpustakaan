@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from 'react'
-import { pustakawanHapusDurasi } from '@/actions/Pustakawan/Durasi/pustakawanDurasiActions'
+import { pustakawanDeleteDurasiAction } from '@/actions/Pustakawan/Durasi'
 
 const PengaturanDurasiPinjamAlert = ({children, idDurasi} : {children: React.ReactNode, idDurasi: string}) => {
 
@@ -27,7 +27,7 @@ const PengaturanDurasiPinjamAlert = ({children, idDurasi} : {children: React.Rea
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: () => pustakawanHapusDurasi(idDurasi),
+    mutationFn: () => pustakawanDeleteDurasiAction({idDurasi}),
     onSuccess: () => {
       toast('Durasi Berhasil Dihapus!')
       queryClient.invalidateQueries({queryKey: ['durasi']})

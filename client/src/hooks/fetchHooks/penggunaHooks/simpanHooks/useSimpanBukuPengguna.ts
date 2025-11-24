@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query"
-import { getAllSimpanan, addOrRemoveSimpanan } from "@/actions/simpanActions"
+import { getAllSimpananPengguna, toggleSimpananPengguna } from "@/actions/Pengguna/Simpan"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
@@ -14,11 +14,11 @@ const useSimpanBukuPengguna = ({idBuku} : HooksProps) => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['simpan'],
-        queryFn: getAllSimpanan
+        queryFn: getAllSimpananPengguna
     })
 
     const mutation = useMutation({
-        mutationFn: () => addOrRemoveSimpanan(idBuku),
+        mutationFn: () => toggleSimpananPengguna(idBuku),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['simpan']})
             toast('Ditambahkan ke simpan', {

@@ -1,4 +1,4 @@
-import { getAllBukuDihilangkanPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
+import {pustakawanGetAllBukuHilangAction} from '@/actions/Pustakawan/Buku'
 import Container from '@/globals/Container'
 import { useSearchParams, Link } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
@@ -17,7 +17,7 @@ const PustakawanBukuDihilangPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['buku', 'dihilangkan', query],
-    queryFn: () => getAllBukuDihilangkanPustakawan({query})
+    queryFn: () => pustakawanGetAllBukuHilangAction({query})
   })
 
   if (isLoading) return <BukuLoading />

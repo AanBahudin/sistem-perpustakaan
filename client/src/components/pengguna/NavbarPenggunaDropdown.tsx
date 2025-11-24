@@ -1,4 +1,4 @@
-import { logoutAction } from "@/actions/authActions"
+import {logoutPenggunaAction} from "@/actions/Pengguna/Auth"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -19,7 +19,7 @@ const NavbarPenggunaDropdown = () => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: logoutAction,
+    mutationFn: logoutPenggunaAction,
     onSuccess: () => {
       queryClient.removeQueries()
       navigate('/login')

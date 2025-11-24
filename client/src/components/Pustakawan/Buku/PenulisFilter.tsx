@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useSearchParams } from "react-router-dom"
-import { getAllPenulis } from "@/actions/Shared/Penulis/penulistAction"
+import { getAllPenulisAction } from "@/actions/Shared/Penulis"
 import { useQuery } from "@tanstack/react-query"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -28,7 +28,7 @@ const PenulisFilter = () => {
 
     const {isLoading, data} = useQuery({
         queryKey: ['penulis'],
-        queryFn: getAllPenulis
+        queryFn: getAllPenulisAction
     })
 
     const dataPenulis = isLoading ? ['Memuat'] : ['Semua', ...data]

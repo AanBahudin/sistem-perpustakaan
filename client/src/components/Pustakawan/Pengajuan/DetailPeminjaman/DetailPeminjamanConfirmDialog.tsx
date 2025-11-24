@@ -1,4 +1,4 @@
-import { getAllKondisi } from "@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts"
+import getAllKondisi from "@/actions/Shared/Kondisi/getAllKondisiBuku"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,

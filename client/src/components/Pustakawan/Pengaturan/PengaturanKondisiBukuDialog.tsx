@@ -3,7 +3,7 @@ import { Label } from '@/components/ui/label'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { psutakawanEditKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
+import { pustakawanEditKondisiBukuAction } from '@/actions/Pustakawan/Kondisi'
 
 import {
   Dialog,
@@ -58,7 +58,7 @@ const PengaturanKondisiBukuDialog = ({children, dataKondisi} : {children: React.
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-     mutationFn: (data: any) => psutakawanEditKondisi(data, idKondisi),
+     mutationFn: (data: any) => pustakawanEditKondisiBukuAction(data, idKondisi),
      onSuccess: () => {
       toast('Kondisi Berhasil Diperbaharui!')
       queryClient.invalidateQueries({queryKey: ['kondisi']})

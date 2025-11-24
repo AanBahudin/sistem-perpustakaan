@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { pustakawanEditDenda } from '@/actions/Shared/Denda/DendaActions'
+import pustakawanEditNominalDenda from '@/actions/Pustakawan/Denda/pustakawanEditDenda'
 
 const PengaturanEditDendaDialog = ({children, dataDenda} : {children: React.ReactNode, dataDenda: any}) => {
 
@@ -33,7 +33,7 @@ const PengaturanEditDendaDialog = ({children, dataDenda} : {children: React.Reac
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-     mutationFn: (data: any) => pustakawanEditDenda(data, idDenda),
+     mutationFn: (data: any) => pustakawanEditNominalDenda(data, idDenda),
      onSuccess: () => {
       toast('Denda Berhasil Diperbaharui!')
       queryClient.invalidateQueries({queryKey: ['denda']})

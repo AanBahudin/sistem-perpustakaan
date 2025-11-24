@@ -1,4 +1,4 @@
-import { searchBook } from "@/actions/searchActions"
+import {getSearchBookPengguna} from "@/actions/Pengguna/Buku"
 import { Input } from "../ui/input"
 import { useDebouncedCallback } from "use-debounce"
 import { useState, useRef, useEffect } from "react"
@@ -27,7 +27,7 @@ const NavSearch = () => {
       setSuggestData([])
       return
     }
-    const data = await searchBook(value)
+    const data = await getSearchBookPengguna(value)
     setSuggestData(data)
     setShowSuggestions(true)
   }, 700)

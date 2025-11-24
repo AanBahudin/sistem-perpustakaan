@@ -1,4 +1,4 @@
-import { logoutAction } from "@/actions/authActions"
+import penggunaLogoutAction from "@/actions/Pengguna/Auth/penggunaLogoutAction"
 import { Button } from "@/components/ui/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Loader } from "lucide-react"
@@ -11,7 +11,7 @@ const PustakawanSidebarFooter = () => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: logoutAction,
+    mutationFn: penggunaLogoutAction,
     onSuccess: () => {
       queryClient.removeQueries()
       navigate('/pustakawan/login')

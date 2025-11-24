@@ -1,4 +1,4 @@
-import { editBukuPustakawan, getSingleBukuPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
+import { pustakawanGetSingleBukuAction, pustakawanEditBukuAction } from '@/actions/Pustakawan/Buku'
 import DetailBukuBreadcrumbs from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuBreadcrumbs'
 import InputDataContainerEdit from '@/components/Pustakawan/Buku/EditBuku/InputDataContainerEdit'
 import PustakawanEditBukuLoading from '@/components/Pustakawan/Buku/EditBuku/PustakawanEditBukuLoading'
@@ -17,11 +17,11 @@ const PustakawanEditBuku = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['edit', 'buku', idBuku],
-    queryFn: () => getSingleBukuPustakawan({idBuku: idBuku as string}) 
+    queryFn: () => pustakawanGetSingleBukuAction({idBuku: idBuku as string}) 
   })
 
   const mutation = useMutation({
-    mutationFn: (data: FormData) => editBukuPustakawan(data, idBuku as string),
+    mutationFn: (data: any) => pustakawanEditBukuAction({data, idBuku: idBuku as string}),
     onSuccess: () => {
       toast('Berhasil Ditambahkan', {description: 'Buku berhasil diupdate!'})
       queryClient.invalidateQueries({queryKey: ['detail', 'buku', idBuku]})
@@ -36,7 +36,8 @@ const PustakawanEditBuku = () => {
   const handleSubmit = async(e: any) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    mutation.mutate(formData)
+    const objectData = Object.fromEntries(formData)
+    mutation.mutate(objectData)
   }
 
   useEffect(() => {

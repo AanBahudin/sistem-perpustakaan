@@ -1,4 +1,4 @@
-import { loginPustakawan } from "@/actions/Pustakawan/Auth/pustakawanAuthActions"
+import {pustakawanLoginAction} from "@/actions/Pustakawan/Auth"
 import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -8,7 +8,7 @@ const useLoginPustakawan = () => {
     const navigate = useNavigate()
 
     const mutation = useMutation({
-        mutationFn: (data: any) => loginPustakawan(data),
+        mutationFn: (data: any) => pustakawanLoginAction(data),
         onSuccess: () => {
             toast('Selamat Datang di Akun Anda', {description: 'Lihat apa yang dapat anda temukan'})
             navigate('/pustakawan')

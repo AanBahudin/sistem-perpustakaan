@@ -1,4 +1,4 @@
-import { getDetailPengembalianData } from "@/actions/pengembalianActions"
+import { getDetailPengembalianPenggunaAction } from "@/actions/Pengguna/Pengembalian"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 
@@ -8,7 +8,7 @@ const useFetchDetailPengembalianPengguna = () => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['detail-peminjaman', 'pengembalian', id],
-        queryFn: () => getDetailPengembalianData(id!),
+        queryFn: () => getDetailPengembalianPenggunaAction(id!),
         select: (raw: any) => ({
             detailPengembalian: raw,
             detailPengguna : raw?.idBuku,

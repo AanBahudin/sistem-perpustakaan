@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader } from 'lucide-react'
-import { pustakawanHapusKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
+import { pustakawanDeleteKondisiBukuAction } from '@/actions/Pustakawan/Kondisi'
 
 import { toast } from 'sonner'
 import {
@@ -27,7 +27,7 @@ const PengaturanKondisiBukuAlert = ({children, idKondisi} : {children: React.Rea
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: () => pustakawanHapusKondisi(idKondisi),
+    mutationFn: () => pustakawanDeleteKondisiBukuAction(idKondisi),
     onSuccess: () => {
       toast('Kondisi Berhasil Dihapus!')
       queryClient.invalidateQueries({queryKey: ['kondisi']})

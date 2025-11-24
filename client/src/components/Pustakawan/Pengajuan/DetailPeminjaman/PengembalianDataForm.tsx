@@ -1,4 +1,4 @@
-import { getAllKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
+import getAllKondisi from '@/actions/Shared/Kondisi/getAllKondisiBuku'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
 import SelectInputCreatePengembalianData from './SelectInputCreatePengembalianData'

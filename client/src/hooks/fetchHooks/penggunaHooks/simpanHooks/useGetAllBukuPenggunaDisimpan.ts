@@ -1,6 +1,6 @@
-import { profileAction } from "@/actions/userActions"
+import { penggunaGetProfileAction } from "@/actions/Pengguna/Profil"
 import { useQueries } from "@tanstack/react-query"
-import { getAllSimpanan } from "@/actions/simpanActions"
+import { getAllSimpananPengguna } from "@/actions/Pengguna/Simpan"
 
 const useGetAllBukuPenggunaDisimpan = () => {
 
@@ -8,11 +8,11 @@ const useGetAllBukuPenggunaDisimpan = () => {
     queries: [
             {
                 queryKey: ['simpan'],
-                queryFn: getAllSimpanan
+                queryFn: getAllSimpananPengguna
             },
             {
                 queryKey: ['pengguna', 'profil'],
-                queryFn: profileAction
+                queryFn: penggunaGetProfileAction
             }
         ]
     })

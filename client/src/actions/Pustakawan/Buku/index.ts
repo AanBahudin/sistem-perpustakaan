@@ -3,7 +3,7 @@ export {default as pustakawanGetSingleBukuAction} from './pustakawanGetSingleBuk
 export {default as pustakawanCreateBukuAction} from './pustakawanCreateBukuAction'
 export {default as pustakawanEditBukuAction} from './pustakawanEditBukuAction'
 export {default as pustakawanGetAllBukuDipinjamAction} from './pustakawanGetAllBukuDipinjam'
-export {default as pustakawaGetAllBukuDiperpanjangAction} from './pustakawanGetAllBukuDIperpanjang'
+export {default as pustakawaGetAllBukuDiperpanjangAction} from './pustakawanGetAllBukuDiperpanjang'
 export {default as pustakawanGetAllBukuDikembalikanAction} from './pustakawanGetAllBukuDikembalikan'
 export {default as pustakawanGetAllBukuHilangAction} from './pustakawanGetAllBukuHIlang'
 export {default as pustakawanGetTahunBukuAction} from './pustakawanGetAllTahunBuku'

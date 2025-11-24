@@ -1,7 +1,7 @@
 import { customFetch } from "@/utils/customFetch"
 
 type ActionType = {
-    data: FormData
+    data: any
 }
 
 const pustakawanCreateBukuAction = async({data} : ActionType) => {

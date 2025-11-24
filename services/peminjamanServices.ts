@@ -304,4 +304,9 @@ export const getPeminjamanAktifByBukuId = async({idBuku} : {idBuku: string}) => 
         })
 
     return peminjaman
-}   
+}
+
+export const getOnePeminjamanUserByIdBook = async({bookId, userId} : {bookId: string, userId: string}) => {
+    const data = await Peminjaman.findOne({peminjam: userId, buku: bookId})
+    return data
+}

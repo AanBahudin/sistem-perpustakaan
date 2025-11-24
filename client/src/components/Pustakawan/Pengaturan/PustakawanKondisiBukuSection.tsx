@@ -1,6 +1,6 @@
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
-import { getAllKondisi } from '@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts'
+import getAllKondisi from '@/actions/Shared/Kondisi/getAllKondisiBuku'
 import PengaturanTambahKondisiDialog from './PengaturanTambahKondisiDialog'
 import { Button } from '@/components/ui/button'
 import { PlusCircle, Trash, Edit } from 'lucide-react'

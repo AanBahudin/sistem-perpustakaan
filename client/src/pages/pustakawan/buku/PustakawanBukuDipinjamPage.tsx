@@ -1,4 +1,4 @@
-import { getAllBukuDipinjamPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
+import { pustakawanGetAllBukuDipinjamAction } from '@/actions/Pustakawan/Buku'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import Container from '@/globals/Container'
 import { Button } from '@/components/ui/button'
@@ -18,7 +18,7 @@ const PustakawanBukuDipinjamPage = () => {
 
   const {isLoading, data} = useQuery({
     queryKey: ['buku', 'dipinjam', params],
-    queryFn: () => getAllBukuDipinjamPustakawan({query : params})
+    queryFn: () => pustakawanGetAllBukuDipinjamAction({query : params})
   })
 
 

@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { setDurasi } from "@/cart/peminjamanSlice"
 import { store } from "@/store"
 import { useQuery } from "@tanstack/react-query"
-import { getDurasi } from "@/actions/Shared/Durasi/durasiActions"
+import getAllDurasiPeminjaman from "@/actions/Shared/Durasi/getAllDurasiPeminjaman"
 import { useSelector } from "react-redux"
 
 type SelectDurasiType = {
@@ -24,7 +24,7 @@ const SelectDurasi = ({defaultDurasi, perpanjangan} : SelectDurasiType) => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['durasi'],
-    queryFn: getDurasi
+    queryFn: getAllDurasiPeminjaman
   })
 
   const durasiPinjam = isLoading ? [] : data

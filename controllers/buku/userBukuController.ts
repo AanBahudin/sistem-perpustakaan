@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { SendDataWithDurasiResponse, SendDataResponse } from "../../utils/sendResponse"
 import { getSemuaBukuTersediaUntukUser, getSatuBukuTersediaUntukUser, katalogBukuUser } from "../../services/BukuServices/UserBukuseServices"
-import { dataDurasiPeminjaman } from "../../services/durasiServices"
 import { discoveryBukuServices } from "../../services/BukuServices/UserBukuseServices"
 import { getOnePeminjamanUserByIdBook, getPeminjamanAktifByBukuId } from "../../services/peminjamanServices"
 

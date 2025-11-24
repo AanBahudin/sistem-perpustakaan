@@ -1,5 +1,5 @@
 import { useQueries } from "@tanstack/react-query"
-import { profileAction } from "@/actions/userActions"
+import { penggunaGetProfileAction } from "@/actions/Pengguna/Profil"
 import { getAllSukaPengguna } from "@/actions/Pengguna/Suka"
 
 const useGetAllBukuPenggunaDisuka = () => {
@@ -12,7 +12,7 @@ const useGetAllBukuPenggunaDisuka = () => {
             },
             {
                 queryKey: ['pengguna', 'profil'],
-                queryFn: profileAction
+                queryFn: penggunaGetProfileAction
             }
         ]
     })

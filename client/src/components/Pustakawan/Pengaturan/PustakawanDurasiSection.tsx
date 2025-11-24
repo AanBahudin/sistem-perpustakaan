@@ -1,4 +1,4 @@
-import { getDurasi } from '@/actions/Shared/Durasi/durasiActions'
+import getAllDurasiPeminjaman from '@/actions/Shared/Durasi/getAllDurasiPeminjaman'
 import { Button } from '@/components/ui/button'
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
@@ -12,7 +12,7 @@ import PengaturanSectionLoading from './PengaturanSectionLoading'
 const PustakawanDurasiSection = () => {
   const {data, isLoading} = useQuery({
     queryKey: ['durasi'],
-    queryFn: getDurasi
+    queryFn: getAllDurasiPeminjaman
   })
 
   if (isLoading) return <PengaturanSectionLoading />

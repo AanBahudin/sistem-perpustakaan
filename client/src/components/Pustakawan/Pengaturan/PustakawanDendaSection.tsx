@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getDenda } from "@/actions/Shared/Denda/DendaActions"
+import getDendaAction from "@/actions/Shared/Denda/getNominalDendaAction"
 import Container from "@/globals/Container"
 import { Label } from "@/components/ui/label"
 import { formatRupiah } from "@/utils/formatCurrency"
@@ -12,7 +12,7 @@ const PustakawanDendaSection = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['denda'],
-    queryFn: getDenda
+    queryFn: getDendaAction
   })
 
   if (isLoading) return <PengaturanSectionLoading />

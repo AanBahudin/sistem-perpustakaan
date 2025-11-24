@@ -1,4 +1,4 @@
-import { updatePasswordAction } from "@/actions/userActions"
+import { penggunaUpdatePasswordAction } from "@/actions/Pengguna/Profil"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
@@ -30,7 +30,7 @@ const EditPasswordDialog = () => {
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: (data: FormData) => updatePasswordAction(data),
+        mutationFn: (data: FormData) => penggunaUpdatePasswordAction(data),
         onSuccess: () => {
             toast('Diperbaharui', {description: 'Kata sandi berhasil diperbaharui'})
             queryClient.invalidateQueries({queryKey: ['pengguna', 'profil']})

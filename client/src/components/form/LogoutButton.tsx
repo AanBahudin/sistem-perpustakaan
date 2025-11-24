@@ -1,14 +1,14 @@
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { logoutAction } from '@/actions/authActions'
+import { logoutPenggunaAction } from '@/actions/Pengguna/Auth'
 
 const LogoutButton = () => {
     const navigate = useNavigate()
 
     const handleLogout = async() => {
         try {
-          await logoutAction()
+          await logoutPenggunaAction()
           navigate('/')
         } catch (err) {
           toast('Gagal logout', {description: 'Terjadi kesalahan saat logout'})

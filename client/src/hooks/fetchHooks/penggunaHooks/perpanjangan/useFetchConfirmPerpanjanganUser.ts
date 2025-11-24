@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useQueries } from "@tanstack/react-query"
-import { getDetailPeminjaman } from "@/actions/peminjamanActions"
+import { getDetailPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 import { getPerpanjangaByPinjamanId } from "@/actions/Pengguna/Perpanjangan"
 
 const useFetchConfirmPerpanjanganUser = () => {
@@ -13,7 +13,7 @@ const useFetchConfirmPerpanjanganUser = () => {
         queries: [
             {
                 queryKey: ['peminjaman', id],
-                queryFn: () => getDetailPeminjaman(id as string)
+                queryFn: () => getDetailPeminjamanPengguna({idPeminjaman: id as string})
             },
             {
                 queryKey: ['perpanjangan', 'peminjamnan', id],

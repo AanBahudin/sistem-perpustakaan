@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getStatsPustakawan } from "@/actions/Pustakawan/Beranda/pustakawanStatsAction"
+import getStatsPustakawan from "@/actions/Pustakawan/Beranda/pustakawanStatsAction"
 import BerandaLeftSideContainer from "@/components/Pustakawan/Beranda/BerandaLeftSideContainer"
 import BerandaRightSideContainer from "@/components/Pustakawan/Beranda/BerandaRightSideContainer"
 import BerandaLoading from "@/components/Pustakawan/Beranda/BerandaLoading"

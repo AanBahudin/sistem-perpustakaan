@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import getAllKategori from '@/actions/Shared/Kategori/getAllKategoriAction'
-import { getAllPenerbit } from '@/actions/Shared/Penerbit/penerbitActions'
-import { getAllPenulis } from '@/actions/Shared/Penulis/penulistAction'
+import { getAllPenerbitAction } from '@/actions/Shared/Penerbit'
+import { getAllPenulisAction } from '@/actions/Shared/Penulis'
 import { searchBookPageDataLoader } from '@/actions/searchActions'
 
 
@@ -29,11 +29,11 @@ const usePenggunaSearchBuku = () => {
         },
         {
             queryKey: ['penerbit'],
-            queryFn: getAllPenerbit
+            queryFn: getAllPenerbitAction
         },
         {
             queryKey: ['penulis'],
-            queryFn: getAllPenulis
+            queryFn: getAllPenulisAction
         }
         ]
     })

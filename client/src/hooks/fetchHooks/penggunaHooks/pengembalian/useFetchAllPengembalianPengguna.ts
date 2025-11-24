@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router-dom"
-import { getPengembalianData } from "@/actions/pengembalianActions"
+import { getAllPengembalianPenggunaAction } from "@/actions/Pengguna/Pengembalian"
 
 const useFetchAllPengembalianPengguna = () => {
     const [searchParams] = useSearchParams()
@@ -8,7 +8,7 @@ const useFetchAllPengembalianPengguna = () => {
 
     const {data: dataPengembalian, isLoading} = useQuery({
         queryKey:['pengembalian', params],
-        queryFn: () => getPengembalianData(params)
+        queryFn: () => getAllPengembalianPenggunaAction(params)
     })
 
     return {

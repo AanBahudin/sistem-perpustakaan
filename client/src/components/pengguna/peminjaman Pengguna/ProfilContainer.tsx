@@ -1,14 +1,14 @@
 import { Pen } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { profileAction } from "@/actions/userActions"
+import { penggunaGetProfileAction } from "@/actions/Pengguna/Profil"
 import { Skeleton } from "@/components/ui/skeleton"
 
 const ProfilContainer = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['pengguna', 'profil'],
-    queryFn: profileAction
+    queryFn: penggunaGetProfileAction
   })
 
   return (

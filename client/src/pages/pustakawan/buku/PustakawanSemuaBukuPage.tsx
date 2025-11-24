@@ -1,4 +1,4 @@
-import { getAllBukuPustakawan } from "@/actions/Pustakawan/Buku/pustakawanBukuActions"
+import { pustakawanGetAllBukuAction } from "@/actions/Pustakawan/Buku"
 import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
@@ -19,7 +19,7 @@ const PustakawanSemuaBukuPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'buku', params],
-    queryFn: () => getAllBukuPustakawan({query: params})
+    queryFn: () => pustakawanGetAllBukuAction({query: params})
   })
 
   if (isLoading) return <BukuLoading />

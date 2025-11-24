@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { pustakawanTambahDurasi } from '@/actions/Pustakawan/Durasi/pustakawanDurasiActions'
+import { pustakawanCreateDurasiAction } from '@/actions/Pustakawan/Durasi'
 
 const PengaturanTambahDurasiDialog = ({children} : {children: React.ReactNode}) => {
 
@@ -32,7 +32,7 @@ const PengaturanTambahDurasiDialog = ({children} : {children: React.ReactNode}) 
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-     mutationFn: (data: any) => pustakawanTambahDurasi(data),
+     mutationFn: (data: any) => pustakawanCreateDurasiAction(data),
      onSuccess: () => {
       toast('Durasi Berhasil Ditambah!')
       queryClient.invalidateQueries({queryKey: ['durasi']})

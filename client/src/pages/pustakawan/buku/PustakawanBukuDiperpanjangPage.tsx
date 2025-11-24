@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Link, useSearchParams } from "react-router-dom"
 import { Plus } from "lucide-react"
 import { useQuery } from "@tanstack/react-query"
-import { getAllBukuDiperpanjanganPustakawan } from "@/actions/Pustakawan/Buku/pustakawanBukuActions"
+import { pustakawaGetAllBukuDiperpanjangAction } from "@/actions/Pustakawan/Buku"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import TabelBukuDiperpanjang from "@/components/Pustakawan/Buku/BukuDiperpanjang/TabelBukuDiperpanjang"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
@@ -17,7 +17,7 @@ const PustakawanBukuDiperpanjangPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['buku', 'diperpanjang', query],
-    queryFn: () =>  getAllBukuDiperpanjanganPustakawan({query})
+    queryFn: () =>  pustakawaGetAllBukuDiperpanjangAction({query})
   })
 
   if (isLoading) return <BukuLoading />

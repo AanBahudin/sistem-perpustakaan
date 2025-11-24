@@ -19,14 +19,14 @@ import { useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { getAllBooksPublishedYear } from "@/actions/Pustakawan/Buku/pustakawanBukuActions"
+import {pustakawanGetTahunBukuAction} from "@/actions/Pustakawan/Buku"
 import { setTahunTerbit } from "@/cart/bukuFilterSheetSlice"
 
 const TahunTerbitFilter = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['tahun'],
-    queryFn: getAllBooksPublishedYear
+    queryFn: pustakawanGetTahunBukuAction
   })
 
   const newData = isLoading ? ['Memuat'] : ['Semua', ...data.map((item: any) => item.toString())]

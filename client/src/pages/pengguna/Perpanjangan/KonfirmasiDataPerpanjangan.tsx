@@ -2,7 +2,7 @@ import SelectDurasi from '../Buku/SelectDurasi'
 import AlasanInput from '../Buku/AlasanInput'
 import NamaBox from '../Buku/NamaBox'
 import { useQuery } from '@tanstack/react-query'
-import { profileAction } from '@/actions/userActions'
+import { penggunaGetProfileAction } from '@/actions/Pengguna/Profil'
 import { DiajukkanStatus } from '../Buku/StatusConfirm'
 import ConfirmPerpanjanganDialog from '@/components/dialog/ConfirmPerpanjanganDialog'
 
@@ -10,7 +10,7 @@ const KonfirmasiDataPerpanjangan = ({perpanjangan, peminjaman} : {perpanjangan: 
 
     const {data: profil, isLoading} = useQuery({
         queryKey: ['profil'],
-        queryFn: profileAction
+        queryFn: penggunaGetProfileAction
     })
 
     return (

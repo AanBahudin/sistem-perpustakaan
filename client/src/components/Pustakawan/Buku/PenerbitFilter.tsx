@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { getAllPenerbit } from "@/actions/Shared/Penerbit/penerbitActions"
+import { getAllPenerbitAction } from "@/actions/Shared/Penerbit"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { store } from "@/store"
@@ -26,7 +26,7 @@ const PenerbitFilter = () => {
 
     const {isLoading, data} = useQuery({
         queryKey: ['penerbit'],
-        queryFn: getAllPenerbit
+        queryFn: getAllPenerbitAction
     })
 
     const dataPenerbit = isLoading ? ['Memuat'] : ['Semua', ...data]

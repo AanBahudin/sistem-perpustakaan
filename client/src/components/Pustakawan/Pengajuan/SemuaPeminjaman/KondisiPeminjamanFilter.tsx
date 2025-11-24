@@ -13,7 +13,7 @@ import { useSelector } from "react-redux"
 import { setKondisi } from "@/cart/peminjamanFilterSheetSlice"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { getAllKondisi } from "@/actions/Pustakawan/Kondisi/pustakawanKondisiActionts"
+import getAllKondisi from "@/actions/Shared/Kondisi/getAllKondisiBuku"
 
 const KondisiPeminjamanFilter = () => {
 

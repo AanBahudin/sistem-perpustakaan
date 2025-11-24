@@ -3,7 +3,7 @@ import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs
 import InputDataContainer from '@/components/Pustakawan/Buku/TambahBuku/InputDataContainer'
 import PustakawanTambahBukuHeader from '@/components/Pustakawan/Buku/TambahBuku/PustakawanTambahBukuHeader'
 import { useMutation } from '@tanstack/react-query'
-import { tambahBukuPustakawan } from '@/actions/Pustakawan/Buku/pustakawanBukuActions'
+import { pustakawanCreateBukuAction } from '@/actions/Pustakawan/Buku'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ const PustakawanTambahBuku = () => {
 
   const navigate = useNavigate()
   const mutation = useMutation({
-    mutationFn: (data: FormData) => tambahBukuPustakawan({data}),
+    mutationFn: (data: any) => pustakawanCreateBukuAction({data}),
     onSuccess: () => {
       toast('Berhasil Ditambahkan', {description: 'Buku berhasil ditambahkan!'})
       navigate('/pustakawan/buku')
@@ -24,7 +24,8 @@ const PustakawanTambahBuku = () => {
   const handleSubmit = async(e: any) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    mutation.mutate(formData)
+    const objectData = Object.fromEntries(formData)
+    mutation.mutate(objectData)
   }
 
   return (

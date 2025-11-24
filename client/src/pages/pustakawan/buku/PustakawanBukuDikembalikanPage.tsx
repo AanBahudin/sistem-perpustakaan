@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import { useQuery } from "@tanstack/react-query"
-import { getAllBukuDikembalikanPustakawan } from "@/actions/Pustakawan/Buku/pustakawanBukuActions"
+import { pustakawanGetAllBukuDikembalikanAction } from "@/actions/Pustakawan/Buku"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import TabelBukuDikembalikan from "@/components/Pustakawan/Buku/BukuDIkembalikan/TabelBukuDikembalikan"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
@@ -17,7 +17,7 @@ const PustakawanBukuDikembalikanPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['buku', 'dikembalikan', query],
-    queryFn: () => getAllBukuDikembalikanPustakawan({query})
+    queryFn: () => pustakawanGetAllBukuDikembalikanAction({query})
   })
 
   if (isLoading) return <BukuLoading />

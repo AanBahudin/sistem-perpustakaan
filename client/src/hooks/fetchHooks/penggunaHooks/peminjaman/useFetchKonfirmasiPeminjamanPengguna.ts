@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { profileAction } from "@/actions/userActions"
+import { penggunaGetProfileAction } from "@/actions/Pengguna/Profil"
 import { useQueries } from "@tanstack/react-query"
 import { getDetailBukuPengguna } from "@/actions/Pengguna/Buku"
 
@@ -10,7 +10,7 @@ const useFetchKonfirmasiPeminjamanPengguna = () => {
         queries: [
             {
                 queryKey: ['profil'],
-                queryFn: profileAction
+                queryFn: penggunaGetProfileAction
             },
             {
                 queryKey: ['confirm', 'peminjaman', id],
