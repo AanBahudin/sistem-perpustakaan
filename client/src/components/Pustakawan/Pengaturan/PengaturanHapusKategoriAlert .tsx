@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { useState } from 'react'
-import { pustakawanHapusKategori } from '@/actions/kategoriAction'
+import { pustakawanDeleteKategoriAction } from '@/actions/Pustakawan/Kategori'
 
 const PengaturanHapusKategoriAlert = ({idKategori} : {idKategori: string}) => {
 
@@ -27,7 +27,7 @@ const PengaturanHapusKategoriAlert = ({idKategori} : {idKategori: string}) => {
   const queryClient = useQueryClient()
   
   const mutation = useMutation({
-    mutationFn: () => pustakawanHapusKategori(idKategori),
+    mutationFn: () => pustakawanDeleteKategoriAction(idKategori),
     onSuccess: () => {
       toast('Kategori Berhasil Dihapus!')
       queryClient.invalidateQueries({queryKey: ['kategori']})

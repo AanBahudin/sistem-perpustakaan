@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { useQuery } from '@tanstack/react-query'
-import { getAllKategori } from '@/actions/kategoriAction'
+import getAllKategori from '@/actions/Shared/Kategori/getAllKategoriAction'
 import BookCategoryLoading from '@/components/Loading/BookCategoryLoading'
 import { cn } from '@/lib/utils'
 

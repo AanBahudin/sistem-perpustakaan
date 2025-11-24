@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createKategori } from "@/actions/kategoriAction"
+import { pustakawanCreateKategoriAction } from "@/actions/Pustakawan/Kategori"
 import { toast } from "sonner"
 import { useState } from "react"
 
@@ -25,7 +25,7 @@ const AddCategoriDialog = () => {
   }
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: (data: any) => createKategori(data),
+    mutationFn: (data: any) => pustakawanCreateKategoriAction(data),
     onSuccess: () => {
       toast('Berhasil Ditambahkan', {description: `kategori Baru ditambahkan`})
       queryClient.invalidateQueries({queryKey: ['kategori']})

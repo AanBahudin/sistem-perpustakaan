@@ -18,7 +18,7 @@ import { toast } from 'sonner'
 
 
 import { useState } from 'react'
-import { createKategori } from '@/actions/kategoriAction'
+import { pustakawanCreateKategoriAction } from "@/actions/Pustakawan/Kategori"
 
 const PengaturanTambahKategoriDialog  = ({children,} : {children: React.ReactNode}) => {
   
@@ -30,7 +30,7 @@ const PengaturanTambahKategoriDialog  = ({children,} : {children: React.ReactNod
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-     mutationFn: (data: any) => createKategori(data),
+     mutationFn: (data: any) => pustakawanCreateKategoriAction(data),
      onSuccess: () => {
       toast('Kategori Berhasil Ditambahkan!')
       queryClient.invalidateQueries({queryKey: ['kategori']})

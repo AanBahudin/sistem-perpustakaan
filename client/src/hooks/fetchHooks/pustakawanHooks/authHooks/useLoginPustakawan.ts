@@ -8,7 +8,7 @@ const useLoginPustakawan = () => {
     const navigate = useNavigate()
 
     const mutation = useMutation({
-        mutationFn: (data: FormData) => loginPustakawan(data),
+        mutationFn: (data: any) => loginPustakawan(data),
         onSuccess: () => {
             toast('Selamat Datang di Akun Anda', {description: 'Lihat apa yang dapat anda temukan'})
             navigate('/pustakawan')
@@ -24,7 +24,8 @@ const useLoginPustakawan = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        mutation.mutate(formData)
+        const data = Object.fromEntries(formData)
+        mutation.mutate(data)
     }
     return {
         isLoading: mutation.isPending,

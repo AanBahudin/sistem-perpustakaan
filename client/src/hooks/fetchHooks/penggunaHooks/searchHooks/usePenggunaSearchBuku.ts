@@ -2,7 +2,7 @@ import { useQueries } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { getAllKategori } from '@/actions/kategoriAction'
+import getAllKategori from '@/actions/Shared/Kategori/getAllKategoriAction'
 import { getAllPenerbit } from '@/actions/penerbitActions'
 import { getAllPenulis } from '@/actions/penulistAction'
 import { searchBookPageDataLoader } from '@/actions/searchActions'

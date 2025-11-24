@@ -1,4 +1,4 @@
-import { getAllKategori } from '@/actions/kategoriAction'
+import getAllKategori from '@/actions/Shared/Kategori/getAllKategoriAction'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import Container from '@/globals/Container'

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { getAllKategori } from "@/actions/kategoriAction"
+import getAllKategori from "@/actions/Shared/Kategori/getAllKategoriAction"
 import { useSelector } from "react-redux"
 import { setKategori } from "@/cart/bukuFilterSheetSlice"
 import { store } from "@/store"

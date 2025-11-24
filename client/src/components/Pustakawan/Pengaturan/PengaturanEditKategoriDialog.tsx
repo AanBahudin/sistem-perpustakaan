@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog"
 import { toast } from 'sonner'
 
-import { editSingleKategori } from '@/actions/kategoriAction'
+import { pustakawanEditKategoriAction } from '@/actions/Pustakawan/Kategori'
 import { useState } from 'react'
 
 const PengaturanEditKategoriDialog  = ({dataKategori} : {dataKategori: any}) => {
@@ -29,7 +29,7 @@ const PengaturanEditKategoriDialog  = ({dataKategori} : {dataKategori: any}) => 
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-     mutationFn: (data: any) => editSingleKategori(dataKategori.id, data),
+     mutationFn: (data: any) => pustakawanEditKategoriAction(dataKategori.id, data),
      onSuccess: () => {
       toast('Kategori Berhasil Dperbahrui!')
       queryClient.invalidateQueries({queryKey: ['kategori']})

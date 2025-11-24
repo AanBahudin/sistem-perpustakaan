@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getAllKategori } from '@/actions/kategoriAction'
+import getAllKategori from '@/actions/Shared/Kategori/getAllKategoriAction'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
