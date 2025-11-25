@@ -1,4 +1,4 @@
-import { prodiLogin } from '@/actions/Prodi/prodiAuthActions'
+import { prodiLoginAction } from '@/actions/Prodi/Auth'
 import { SecondaryLogo } from '@/components/landing/Navbar/Logo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -22,7 +22,7 @@ const ProdiLoginPage = () => {
         setShowPassword(!showPassword)
     }
     const mutation = useMutation({
-        mutationFn: (data: any) => prodiLogin(data),
+        mutationFn: (data: any) => prodiLoginAction(data),
         onSuccess: () => {
             toast('Login Berhasil', {description: 'Selamat datang kembali di akun anda! '})
             navigate('/prodi')

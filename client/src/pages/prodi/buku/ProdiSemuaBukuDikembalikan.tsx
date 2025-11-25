@@ -5,7 +5,7 @@ import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContaine
 import { useQuery } from "@tanstack/react-query"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
-import { prodiGetAllBukuDikembalikan } from "@/actions/Prodi/prodiBukuActions"
+import {prodiGetBukuDikembalikanAction} from '@/actions/Prodi/Buku'
 import ProdiBukuDikembalikanTable from "@/components/Prodi/Buku/BukuDIkembalikan/ProdiBukuDikembalikanTable"
 
 const ProdiSemuaBukuDikembalikan = () => {
@@ -15,7 +15,7 @@ const ProdiSemuaBukuDikembalikan = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['buku', 'dikembalikan', query],
-    queryFn: () => prodiGetAllBukuDikembalikan(query)
+    queryFn: () => prodiGetBukuDikembalikanAction(query)
   })
 
   if (isLoading) return <BukuLoading />

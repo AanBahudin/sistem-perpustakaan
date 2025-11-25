@@ -1,4 +1,4 @@
-import { prodiLogout } from '@/actions/Prodi/prodiAuthActions'
+import { prodiLogoutAction } from '@/actions/Prodi/Auth'
 import { Button } from '@/components/ui/button'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Loader, LogOut } from 'lucide-react'
@@ -11,7 +11,7 @@ const ProdiSidebarFooter = () => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: () => prodiLogout(),
+    mutationFn: () => prodiLogoutAction(),
     onSuccess: () => {
       queryClient.removeQueries()
       toast('Berhasil Keluar', {description: 'Anda berhasil keluar dari sistem perpustakaan!'})

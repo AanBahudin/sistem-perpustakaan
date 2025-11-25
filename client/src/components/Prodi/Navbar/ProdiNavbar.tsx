@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux'
 import { setShowSidebar } from '@/cart/pustakawanSidebar'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '@/components/ui/skeleton'
-import { getProfilProdi } from '@/actions/Prodi/prodiActions'
+import { prodiGetProfilAction } from "@/actions/Prodi/Profil"
 
 const ProdiNavbar = () => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['profil'],
-        queryFn: getProfilProdi
+        queryFn: prodiGetProfilAction
     })
 
     const {showSidebar} = useSelector((state: any) => state.pustakawanSidebarState)

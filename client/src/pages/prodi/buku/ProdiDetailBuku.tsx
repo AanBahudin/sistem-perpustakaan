@@ -10,7 +10,7 @@ import StatistikHilangDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/S
 import StatistikPengembalianDetailBuku from '@/components/Pustakawan/Buku/DetailBuku/StatistikPengembalianDetailBuku'
 import DetailBukuDropdownMenu from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuDropdownMenu'
 import PustakawanDetailBukuLoading from '@/components/Pustakawan/Buku/DetailBuku/PustakawanDetailBukuLoading'
-import { prodiGetSingleBuku } from '@/actions/Prodi/prodiBukuActions'
+import { prodiGetDetailBukuAction } from '@/actions/Prodi/Buku'
 
 const ProdiDetailBuku = () => {
 
@@ -18,7 +18,7 @@ const ProdiDetailBuku = () => {
 
     const {data, isLoading} = useQuery({
         queryKey: ['detail', 'buku', idBuku],
-        queryFn: () => prodiGetSingleBuku(idBuku as string)
+        queryFn: () => prodiGetDetailBukuAction(idBuku as string)
     })
 
     const { pustakawanDetailBukuTabs: isActive } = useSelector((state: any) => state.detailBukuState)

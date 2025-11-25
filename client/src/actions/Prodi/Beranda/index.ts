@@ -1,0 +1,1 @@
+export {default as prodiGetBerandaDataAction} from './prodiBerandaActions'

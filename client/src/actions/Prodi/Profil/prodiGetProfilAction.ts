@@ -1,6 +1,8 @@
 import { customFetch } from "@/utils/customFetch";
 
-export const getProfilProdi = async() => {
+const getProdiProfilAction = async() => {
     const {data: response} = await customFetch.get('prodi/profile')
     return response.data
 }
+
+export default getProdiProfilAction

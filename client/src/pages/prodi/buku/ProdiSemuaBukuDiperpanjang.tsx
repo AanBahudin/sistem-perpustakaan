@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
-import { prodiGetAllBukuDiperpanjang } from '@/actions/Prodi/prodiBukuActions'
+import {prodiGetBukuDiperpanjangAction} from '@/actions/Prodi/Buku'
 import ProdiBukuDiperpanjangTable from '@/components/Prodi/Buku/BukuDiperpanjang/ProdiBukuDiperpanjangTable'
 
 const ProdiSemuaBukuDiperpanjang = () => {
@@ -15,7 +15,7 @@ const ProdiSemuaBukuDiperpanjang = () => {
   
   const {isLoading, data} = useQuery({
     queryKey: ['buku', 'diperpanjang', params],
-    queryFn: () => prodiGetAllBukuDiperpanjang(params)
+    queryFn: () => prodiGetBukuDiperpanjangAction(params)
   })
   
   

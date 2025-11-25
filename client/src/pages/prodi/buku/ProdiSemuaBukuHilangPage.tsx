@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import ProdiBukuDihilangkanTable from '@/components/Prodi/Buku/BukuHilang/ProdiBukuDihilangkanTable'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
-import { prodiGetAllBukuDihilangkan } from '@/actions/Prodi/prodiBukuActions'
+import {prodiGetBukuDihilangkanction} from '@/actions/Prodi/Buku'
 
 const ProdiSemuaBukuHilangPage = () => {
 
@@ -15,7 +15,7 @@ const ProdiSemuaBukuHilangPage = () => {
   
   const {data, isLoading} = useQuery({
     queryKey: ['buku', 'dihilangkan', query],
-    queryFn: () => prodiGetAllBukuDihilangkan(query)
+    queryFn: () => prodiGetBukuDihilangkanction(query)
   })
   
   if (isLoading) return <BukuLoading />

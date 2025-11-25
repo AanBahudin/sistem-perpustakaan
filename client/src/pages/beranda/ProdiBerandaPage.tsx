@@ -1,4 +1,4 @@
-import { prodiBerandaData } from '@/actions/Prodi/prodiBerandaActions'
+import { prodiGetBerandaDataAction } from '@/actions/Prodi/Beranda'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import Container from '@/globals/Container'
@@ -8,7 +8,7 @@ const ProdiBerandaPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['prodi', 'beranda'],
-    queryFn: prodiBerandaData
+    queryFn: prodiGetBerandaDataAction
   })
 
   if (isLoading) return <h1>Loading ....</h1>

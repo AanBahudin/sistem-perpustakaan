@@ -3,7 +3,7 @@ import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContaine
 import Container from "@/globals/Container"
 import { useQuery } from "@tanstack/react-query"
 import { Link, useSearchParams } from "react-router-dom"
-import { prodiGetAllBuku } from "@/actions/Prodi/prodiBukuActions"
+import { prodiGetAllBukuAction } from "@/actions/Prodi/Buku"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import { ImageOff } from "lucide-react"
@@ -17,7 +17,7 @@ const ProdiSemuaBukuPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'buku', params],
-    queryFn: () => prodiGetAllBuku(params)
+    queryFn: () => prodiGetAllBukuAction(params)
   })
 
   if (isLoading) return <BukuLoading />
