@@ -1,17 +1,12 @@
-import { getProfilePustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import Container from "@/globals/Container"
-import { useQuery } from "@tanstack/react-query"
 import PustakawanMainProfileContainer from "@/components/Pustakawan/Profil/PustakawanMainProfileContainer"
 import PustakawanLoading from "@/components/Pustakawan/Profil/PustakawanLoading"
+import { usePustakawanProfil } from "@/hooks/fetchHooks/pustakawanHooks/profilHooks"
 
 const PustakawanProfilePage = () => {
 
-  const {isLoading, data} = useQuery({
-    queryKey: ['pustakawan', 'profil'],
-    queryFn: getProfilePustakawan
-  })
-
+  const {isLoading, data} = usePustakawanProfil()
   if (isLoading) return <PustakawanLoading />
 
   return (

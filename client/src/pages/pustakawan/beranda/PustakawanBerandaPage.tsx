@@ -1,15 +1,11 @@
-import { useQuery } from "@tanstack/react-query"
-import getStatsPustakawan from "@/actions/Pustakawan/Beranda/pustakawanStatsAction"
+import { usePustakawanBeranda } from "@/hooks/fetchHooks/pustakawanHooks/berandaHooks"
 import BerandaLeftSideContainer from "@/components/Pustakawan/Beranda/BerandaLeftSideContainer"
 import BerandaRightSideContainer from "@/components/Pustakawan/Beranda/BerandaRightSideContainer"
 import BerandaLoading from "@/components/Pustakawan/Beranda/BerandaLoading"
 
 const PustakawanBerandaPage = () => {
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['pustakawan', 'beranda'],
-    queryFn: getStatsPustakawan
-  })
+  const {data, isLoading} = usePustakawanBeranda()
 
   if (isLoading) return <BerandaLoading />
 

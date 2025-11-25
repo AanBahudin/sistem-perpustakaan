@@ -2,6 +2,7 @@ import Logo from '@/components/landing/Navbar/Logo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useCallback } from 'react'
 import Container from '@/globals/Container'
 import useLoginPustakawan from '@/hooks/fetchHooks/pustakawanHooks/authHooks/useLoginPustakawan'
 import { Eye, Loader } from 'lucide-react'
@@ -13,9 +14,9 @@ const PustakawanLoginPage = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [password, setPassword] = useState('')
 
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword)
-    }
+    const handleShowPassword = useCallback(() => {
+        setShowPassword(prev => !prev)
+    }, [])
     
     return (
         <Container className='min-h-[100vh] bg-[url("/images/callToAction.png")] object-contain bg-center w-full flex items-center justify-center bg-primary/10'>
@@ -30,27 +31,25 @@ const PustakawanLoginPage = () => {
                 <form onSubmit={mutationFn} className='w-full mt-8 flex flex-col gap-y-4'>
                     <div className='flex flex-col'>
                         <Label htmlFor='email' className='text-sm'>Email</Label>
-                        <div className='w-full flex items-center gap-x-1 mt-1.5'>
-                            <Input className='text-sm selection:text-white' 
-                                autoFocus required
-                                type='email' id='email' name='email' />
-                        </div>
+                        <Input className='text-sm selection:text-white mt-1.5' 
+                            autoFocus required
+                            type='email' id='email' name='email' />
                     </div>
 
                     <div className='flex flex-col'>
-                    <Label className='text-sm' htmlFor='password'>Kata sandi</Label>
-                        <div className='w-full flex items-center gap-x-2 mt-1.5'>
+                        <Label className='text-sm' htmlFor='password'>Kata sandi</Label>
+                        
+                        <div className='flex items-center gap-x-3'>
                             <Input 
-                                className='text-sm selection:text-white' 
+                                className='text-sm selection:text-white mt-1.5' 
                                 placeholder='xxxx' type={showPassword ? 'text' : 'password'} 
                                 required minLength={6}
                                 name='password' id='password'
-                                value={password} onChange={e => setPassword(e.target.value)} min={8} />
-                            {password && (
-                                <Button type='button' size='icon' variant='secondary' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
-                                    <Eye className={` ${showPassword ? 'stroke-primary' : ''}`} />
+                                value={password} onChange={e => setPassword(e.target.value)} />
+               
+                                <Button disabled={!password} type='button' size='icon' variant='default' className='border duration-200 ease-in-out' onClick={handleShowPassword}>
+                                    <Eye className={` ${showPassword ? '' : ''}`} />
                                 </Button>
-                            )}
                         </div>
                     </div>
 
