@@ -1,27 +1,18 @@
 import Container from "@/globals/Container"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
-import { Link, useSearchParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
-import { useQuery } from "@tanstack/react-query"
-import { pustakawanGetAllBukuDikembalikanAction } from "@/actions/Pustakawan/Buku"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import TabelBukuDikembalikan from "@/components/Pustakawan/Buku/BukuDIkembalikan/TabelBukuDikembalikan"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
+import { useGetBukuKembaliPustakawan } from "@/hooks/fetchHooks/pustakawanHooks/bukuHooks"
 
 const PustakawanBukuDikembalikanPage = () => {
 
-  const [searchParams] = useSearchParams()
-  const query = new URLSearchParams(searchParams).toString()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['buku', 'dikembalikan', query],
-    queryFn: () => pustakawanGetAllBukuDikembalikanAction({query})
-  })
-
+  const { isLoading, bukuDikembalikan, ratioBukuDikembalikan, statsBukuDikembalikan } = useGetBukuKembaliPustakawan()
   if (isLoading) return <BukuLoading />
-  const { bukuDikembalikan, ratioBukuDikembalikan, statsBukuDikembalikan } = data
 
   return (
     <Container className="w-full">

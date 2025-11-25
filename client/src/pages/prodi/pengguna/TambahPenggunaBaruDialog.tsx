@@ -1,4 +1,4 @@
-import { prodiCreatePengguna } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiCreatePenggunaAction } from "@/actions/Prodi/Pengguna"
 import TambahPenggunaAngkatanSelectInput from "@/components/Prodi/Pengguna/TambahPenggunaAngkatanSelectInput"
 import TambahPenggunaInput from "@/components/Prodi/Pengguna/TambahPenggunaInput"
 import TambahPenggunaInputPassword from "@/components/Prodi/Pengguna/TambahPenggunaInputPassword"
@@ -33,7 +33,7 @@ const TambahPenggunaBaruDialog = () => {
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: (data: any) => prodiCreatePengguna(data),
+        mutationFn: (data: any) => prodiCreatePenggunaAction(data),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pengguna', params]})
             toast('Pengguna Ditambahkan!', {description: 'Pengguna berhasil ditambahkan'})

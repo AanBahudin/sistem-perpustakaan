@@ -1,4 +1,4 @@
-import { prodiGetSinglePustakawanData } from '@/actions/Prodi/ProdiPustakawanActions'
+import {prodiGetDetailPustakawan} from '@/actions/Prodi/Pustakawan'
 import PenggunaBreadCrumbs from '@/components/Pustakawan/Pengguna/SinglePengguna/PenggunaBreadCrumbs'
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ const DetailPustakawan = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['detail', 'pustakawan', id],
-    queryFn: () => prodiGetSinglePustakawanData(id as string)
+    queryFn: () => prodiGetDetailPustakawan(id as string)
   })
 
   if (isLoading) return <PustakawanLoading />

@@ -1,7 +1,7 @@
 import PustakawanCard from "./PustakawanCard"
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
-import { prodiGetAllPustakawanData } from '@/actions/Prodi/ProdiPustakawanActions'
+import { prodiGetAllPustakawanAction } from "@/actions/Prodi/Pustakawan"
 import PustakawanLoading from "./PustakawanLoading"
 
 const PustakawanDataContainer = () => {
@@ -11,7 +11,7 @@ const PustakawanDataContainer = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'pustakawan', params],
-    queryFn: () => prodiGetAllPustakawanData(params)
+    queryFn: () => prodiGetAllPustakawanAction(params)
   })
 
   if (isLoading) return <PustakawanLoading />

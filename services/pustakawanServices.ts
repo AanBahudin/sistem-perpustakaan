@@ -186,17 +186,25 @@ export const getAllPengajuanPeminjamanUser = async({query} : {query: any}) => {
 export const getSinglePengajuanPeminjamanUser = async({id} : {id: string}) => {
 
     await readPengajuanPeminjaman({idPeminjaman: id})
-
     const dataPeminjaman = await Peminjaman.findOne({_id: id})
-        .populate(['peminjam', 'buku']).select('-password -email')
+        .populate({
+            path: 'buku',
+            select: '-createdBy -isMissing -dihapus -sumberPengadaan -coverPublicId'
+        })
+        .populate({
+            path: 'peminjam',
+            select: '-password'   
+        })
         .populate({
             path: 'dataPengembalian'
         })
         .populate({
             path: 'diprosesOleh',
-            select: 'nama email'
+            select: 'nama email',
+            
         })
-    return dataPeminjaman
+
+        return dataPeminjaman
 }
 
 // PERPANJANGAN STATS

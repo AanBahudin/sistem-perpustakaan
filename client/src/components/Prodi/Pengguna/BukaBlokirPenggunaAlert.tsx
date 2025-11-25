@@ -1,4 +1,4 @@
-import { prodiUnblockedUser } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiUnblokirPenggunaAction } from "@/actions/Prodi/Pengguna"
 import { setBukuBlokirPenggunaAlert } from "@/cart/Prodi/prodiPenggunaSlice"
 import {
   AlertDialog,
@@ -31,7 +31,7 @@ const BukaBlokirPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiUnblockedUser(idPengguna),
+        mutationFn: () => prodiUnblokirPenggunaAction(idPengguna),
         onSuccess: () => {
 
             if (pathname.includes('dosen')) queryClient.invalidateQueries({queryKey: ['semua', 'dosen', params]})

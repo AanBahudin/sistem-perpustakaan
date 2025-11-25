@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { NotAuthenticated, NotAuthorized, NotFoundError } from "../errors/errorHandler";
+import { NotAuthenticated, NotAuthorized } from "../errors/errorHandler";
 import { verifyToken } from "../utils/jwt";
 import { JwtVerifiedToken } from "../types/jwtTypes";
 
@@ -7,7 +7,7 @@ const authenticationMiddleware = (req: Request, res: Response, next: NextFunctio
     const { token } = req.cookies
 
     if (!token) {
-        throw new NotAuthenticated('Pengguna belum login')
+        throw new NotAuthorized('Pengguna belum login')
     }
 
     try {

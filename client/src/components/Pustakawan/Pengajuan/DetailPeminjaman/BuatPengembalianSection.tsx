@@ -6,19 +6,20 @@ import PengembalianDataForm from "./PengembalianDataForm"
 import { ImageOff } from "lucide-react"
 
 type BuatPengembalianSectionType = {
-    buku: any
-    peminjaman: any
+    dataPeminjaman: any
 }
 
-const BuatPengembalianSection = ({buku, peminjaman} : BuatPengembalianSectionType) => {
+const BuatPengembalianSection = ({ dataPeminjaman} : BuatPengembalianSectionType) => {
+
+    const {buku, diprosesOleh} = dataPeminjaman
 
     return (
         <section className='w-full flex items-start justify-start gap-x-2'>
             <main className='w-2/4 rounded-xl p-8'>
-                <DetailPengajuanHeader />
-                <DetailPengajuanPeminjamanPengembalianTabs dataPeminjaman={peminjaman} />
+                <DetailPengajuanHeader dataPustakawan={diprosesOleh}  />
+                <DetailPengajuanPeminjamanPengembalianTabs buku={buku} pinjaman={dataPeminjaman} />
                 <Separator />
-                <PengembalianDataForm dataPeminjaman={peminjaman} />
+                <PengembalianDataForm dataPeminjaman={dataPeminjaman} />
             </main>
 
             <main className="flex-1 p-4 flex flex-col items-start justify-start">

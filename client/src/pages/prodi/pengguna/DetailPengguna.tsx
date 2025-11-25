@@ -1,4 +1,4 @@
-import { prodiGetSinglePengguna } from '@/actions/Prodi/ProdiPenggunaActions'
+import { prodiGetDetailPenggunaAction } from '@/actions/Prodi/Pengguna'
 import DetailPenggunaLoading from '@/components/Pustakawan/Pengguna/DetailPenggunaLoading'
 import Container from '@/globals/Container'
 import { useQuery } from '@tanstack/react-query'
@@ -15,7 +15,7 @@ const DetailPengguna = () => {
 
   const {isLoading, data} = useQuery({
     queryKey: ['single', 'pengguna', idParams],
-    queryFn: () => prodiGetSinglePengguna(idParams as string)
+    queryFn: () => prodiGetDetailPenggunaAction(idParams as string)
   })
 
   if (isLoading) return <DetailPenggunaLoading />

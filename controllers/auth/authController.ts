@@ -14,9 +14,6 @@ import {
     SendOneDataResponse, 
     sendResponseWithPage, 
     sendResponseWithToken } from "../../utils/sendResponse"
-import Pengguna from "../../model/Pengguna"
-import { NotFoundError } from "../../errors/errorHandler"
-
 
 // controller unutuk registrasi pengguna/dosen - SUDAH DITESTING
 export const register = async(req : Request, res: Response) => {

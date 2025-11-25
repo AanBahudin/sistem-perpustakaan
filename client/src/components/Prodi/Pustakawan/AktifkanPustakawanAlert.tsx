@@ -1,4 +1,4 @@
-import { prodiAktifkan } from "@/actions/Prodi/ProdiPustakawanActions"
+import { prodiAktifkanPustakawanAction } from "@/actions/Prodi/Pustakawan"
 import { setAktifAlert } from "@/cart/Prodi/prodiPustakawanSlice"
 import {
   AlertDialog,
@@ -29,7 +29,7 @@ const AktifkanPustakawanAlert = ({idPustakawan} : {idPustakawan: string}) => {
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiAktifkan(activePustakawanId),
+        mutationFn: () => prodiAktifkanPustakawanAction(activePustakawanId),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
             toast('Akun pustakawan Diaktifkan')

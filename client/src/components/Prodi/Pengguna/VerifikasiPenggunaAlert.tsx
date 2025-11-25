@@ -1,4 +1,4 @@
-import { prodiVerifyUserAccount } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiVerifikasiPenggunaAction } from "@/actions/Prodi/Pengguna"
 import { setVerifikasiPenggunaAlert } from "@/cart/Prodi/prodiPenggunaSlice"
 import {
   AlertDialog,
@@ -31,7 +31,7 @@ const VerifikasiPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
   const params = new URLSearchParams(searchParams).toString()
 
   const mutation = useMutation({
-    mutationFn: () => prodiVerifyUserAccount(idPengguna),
+    mutationFn: () => prodiVerifikasiPenggunaAction(idPengguna),
     onSuccess: () => {
 
       if (pathname.includes('dosen')) queryClient.invalidateQueries({queryKey: ['semua', 'dosen', params]})

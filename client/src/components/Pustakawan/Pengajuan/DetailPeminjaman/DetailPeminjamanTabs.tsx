@@ -28,14 +28,14 @@ const DetailPeminjamanTabs = ({idPengembalian, peminjaman} : DetailPeminjamanTab
 
     return (
         <section className="w-full flex items-center justify-start gap-x-2 mb-3">
-            <p onClick={() => handleChangeMenu('Peminjaman')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPeminjamanActive ? 'bg-muted' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Peminjaman</p>
+            <p onClick={() => handleChangeMenu('Peminjaman')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPeminjamanActive ? 'bg-primary text-white' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Peminjaman</p>
 
             {showPengembalianDataTerms && (
-                <p onClick={() => handleChangeMenu('Data Pengembalian')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPengembalianExist ? 'bg-muted' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Data Pengembalian</p>
+                <p onClick={() => handleChangeMenu('Data Pengembalian')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPengembalianExist ? 'bg-primary text-white' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Data Pengembalian</p>
             )}
 
             {showCreatePengembalian && (
-                <p onClick={() => handleChangeMenu('Buat Pengembalian')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPengembalianNotExists ? 'bg-muted' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Buat Pengembalian</p>
+                <p onClick={() => handleChangeMenu('Buat Pengembalian')} className={`text-xs duration-200 ease-in-out min-w-[160px] text-center ${isPengembalianNotExists ? 'bg-primary text-white' : 'border'} px-4 py-2 rounded-lg cursor-default`}>Buat Pengembalian</p>
             )}
         </section>
     )

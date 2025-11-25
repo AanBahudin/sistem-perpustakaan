@@ -1,4 +1,3 @@
-import { pustakawanGetAllBukuAction } from "@/actions/Pustakawan/Buku"
 import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
@@ -7,24 +6,16 @@ import TabelSemuaBuku from "@/components/Pustakawan/Buku/TabelSemuaBuku"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import { Button } from "@/components/ui/button"
 import Container from "@/globals/Container"
-import { useQuery } from "@tanstack/react-query"
+import { useGetAllBukuPustakawan } from "@/hooks/fetchHooks/pustakawanHooks/bukuHooks"
 import { Plus } from "lucide-react"
-import { Link, useSearchParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 const PustakawanSemuaBukuPage = () => {
 
-  const [searchParams] = useSearchParams()
-  const params = new URLSearchParams(searchParams).toString()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['semua', 'buku', params],
-    queryFn: () => pustakawanGetAllBukuAction({query: params})
-  })
-
+  const { isLoading, dataBuku, dataRasio, dataStats, totalPage } = useGetAllBukuPustakawan()
   if (isLoading) return <BukuLoading />
-  
-  const { dataBuku, dataRasio, dataStats, totalPage } = data
+
   return (
     <Container className="w-full">
       <section className="w-full flex items-center justify-between">

@@ -3,7 +3,7 @@ import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs
 import TambahPenggunaBaruDialog from "./TambahPenggunaBaruDialog"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { prodiGetRequestedUser } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiGetPenggunaMendaftarAction } from "@/actions/Prodi/Pengguna"
 import PenggunaPageLoading from "@/components/Pustakawan/Pengguna/PenggunaPageLoading"
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
@@ -16,7 +16,7 @@ const ProdiPengajuanPenggunaPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['pengajuan', 'pengguna', params],
-    queryFn: () => prodiGetRequestedUser(params.toString())
+    queryFn: () => prodiGetPenggunaMendaftarAction(params.toString())
   })
 
   if (isLoading) return <PenggunaPageLoading />

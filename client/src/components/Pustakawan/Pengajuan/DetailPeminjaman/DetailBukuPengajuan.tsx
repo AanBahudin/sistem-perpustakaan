@@ -26,7 +26,7 @@ const DetailBukuPengajuan = ({dataBuku} : {dataBuku: any}) => {
                 )}
 
                 <main className='flex-1'>
-                    <Link to={`/pustakawan/buku/${dataBuku._id}`} className='text-xl font-semibold hover:underline ease-in-out duration-200'>{dataBuku.judul}</Link>
+                    <Link to={`/pustakawan/buku/detail/${dataBuku._id}`} className='text-xl font-semibold hover:underline ease-in-out duration-200'>{dataBuku.judul}</Link>
                     <p className='text-xs text-muted-foreground'>{dataBuku?.tagline?.slice(0, 80)}...</p>
                     <div className='w-full flex flex-wrap gap-2 my-1'>
                         {dataBuku?.kategori?.map((item: string, index: number) => {

@@ -2,7 +2,9 @@ import { formatedDate } from "@/utils/formatDate"
 import DetailPengajuanInformation from "./DetailPengajuanInformation"
 
 const DetailPengajuanPeminjaman = ({dataPeminjaman} : {dataPeminjaman: any}) => {
-    const {buku, peminjam} = dataPeminjaman
+
+    const {peminjam, buku} = dataPeminjaman
+
     return (
         <section className='w-fuil p-4 bg-muted my-4 rounded-sm flex items-start gap-x-8'>
             <main className='w-1/2'>
@@ -14,7 +16,8 @@ const DetailPengajuanPeminjaman = ({dataPeminjaman} : {dataPeminjaman: any}) => 
                     <DetailPengajuanInformation label="Kondisi" value={dataPeminjaman.kondisi} />
                     <DetailPengajuanInformation label="Durasi Peminjaman" value={dataPeminjaman.durasiPeminjaman + ' Hari'} />
                     <DetailPengajuanInformation label="Status Pengajuan" value={dataPeminjaman.statusPeminjaman} />
-                    <DetailPengajuanInformation label="Judul Buku" value={buku?.judul?.slice(0, 22) || dataPeminjaman.judulBuku.slice(0, 22)} />
+                    <DetailPengajuanInformation label="Judul Buku" value={buku?.judul?.slice(0, 22)} />
+                    <DetailPengajuanInformation label="Alasan peminjaman" value={dataPeminjaman.alasan} />
                 </div>
             </main>
 
@@ -22,7 +25,7 @@ const DetailPengajuanPeminjaman = ({dataPeminjaman} : {dataPeminjaman: any}) => 
                 <h1 className='text-sm font-light'>Diajukan Oleh</h1>
                 <p className='text-xs text-muted-foreground mt-2 font-semibold'>{peminjam.nama}</p>
                 <p className='text-xs text-muted-foreground'>{peminjam.email}</p>
-                <p className='text-xs text-muted-foreground'>{peminjam.idKampus} - {dataPeminjaman.peminjam.role}</p>
+                <p className='text-xs text-muted-foreground'>{peminjam.idKampus} - {peminjam.role}</p>
             </main>
         </section>
   )

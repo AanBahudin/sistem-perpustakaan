@@ -1,27 +1,18 @@
 import Container from "@/globals/Container"
 import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs"
 import { Button } from "@/components/ui/button"
-import { Link, useSearchParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Plus } from "lucide-react"
-import { useQuery } from "@tanstack/react-query"
-import { pustakawaGetAllBukuDiperpanjangAction } from "@/actions/Pustakawan/Buku"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import TabelBukuDiperpanjang from "@/components/Pustakawan/Buku/BukuDiperpanjang/TabelBukuDiperpanjang"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
+import { useGetBukuPerpanjangPustakawan } from "@/hooks/fetchHooks/pustakawanHooks/bukuHooks"
 
 const PustakawanBukuDiperpanjangPage = () => {
 
-  const [searchParams] = useSearchParams()
-  const query = new URLSearchParams(searchParams).toString()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['buku', 'diperpanjang', query],
-    queryFn: () =>  pustakawaGetAllBukuDiperpanjangAction({query})
-  })
-
+  const { isLoading, bukuDiperpanjang, ratioBukuDiperpanjang, statsBukuDiperpanjangan } = useGetBukuPerpanjangPustakawan()
   if (isLoading) return <BukuLoading />
-  const { bukuDiperpanjang, ratioBukuDiperpanjang, statsBukuDiperpanjangan } = data
 
   return (
     <Container className="w-full">

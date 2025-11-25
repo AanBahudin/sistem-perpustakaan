@@ -3,7 +3,7 @@ import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs
 import TambahPenggunaBaruDialog from "./TambahPenggunaBaruDialog"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { prodiGetUserBlocked } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiGetPenggunaDiblokirAction } from "@/actions/Prodi/Pengguna"
 import PenggunaPageLoading from "@/components/Pustakawan/Pengguna/PenggunaPageLoading"
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
@@ -16,7 +16,7 @@ const ProdiBlockedPenggunPage = () => {
     
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'blokir', params],
-    queryFn: () => prodiGetUserBlocked(params.toString())
+    queryFn: () => prodiGetPenggunaDiblokirAction(params.toString())
   })
     
   if (isLoading) return <PenggunaPageLoading />

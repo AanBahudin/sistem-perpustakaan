@@ -1,59 +1,21 @@
-import { pustakawanGetSingleBukuAction, pustakawanEditBukuAction } from '@/actions/Pustakawan/Buku'
 import DetailBukuBreadcrumbs from '@/components/Pustakawan/Buku/DetailBuku/DetailBukuBreadcrumbs'
 import InputDataContainerEdit from '@/components/Pustakawan/Buku/EditBuku/InputDataContainerEdit'
 import PustakawanEditBukuLoading from '@/components/Pustakawan/Buku/EditBuku/PustakawanEditBukuLoading'
 import PustakawanTambahBukuHeaderEdit from '@/components/Pustakawan/Buku/EditBuku/PustakawanTambahBukuHeaderEdit'
 import Container from '@/globals/Container'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'sonner'
+import { useEditBukuPustakawan } from '@/hooks/fetchHooks/pustakawanHooks/bukuHooks'
 
 const PustakawanEditBuku = () => {
 
-  const navigate = useNavigate()
-  const {idBuku} = useParams()
-  const queryClient = useQueryClient()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['edit', 'buku', idBuku],
-    queryFn: () => pustakawanGetSingleBukuAction({idBuku: idBuku as string}) 
-  })
-
-  const mutation = useMutation({
-    mutationFn: (data: any) => pustakawanEditBukuAction({data, idBuku: idBuku as string}),
-    onSuccess: () => {
-      toast('Berhasil Ditambahkan', {description: 'Buku berhasil diupdate!'})
-      queryClient.invalidateQueries({queryKey: ['detail', 'buku', idBuku]})
-      navigate(`/pustakawan/buku/detail/${idBuku}`)
-    },
-    onError: (error) => {
-      console.log(error)
-      toast('Terjadi kesalahan', {description: 'Tidak dapat update buku'})
-    }
-  })
-
-  const handleSubmit = async(e: any) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const objectData = Object.fromEntries(formData)
-    mutation.mutate(objectData)
-  }
-
-  useEffect(() => {
-    if (!idBuku) {
-      navigate(-1)
-    }
-  }, [idBuku])
-
-  if (isLoading) return <PustakawanEditBukuLoading />
+  const {dataBuku, mutationLoading, queryLoading, submitFn} = useEditBukuPustakawan()
+  if (queryLoading) return <PustakawanEditBukuLoading />
 
   return (
     <Container className='w-full'>
-      <DetailBukuBreadcrumbs text={data.buku.judul} />
-      <form onSubmit={handleSubmit} encType='multipart/form-data' className='w-full flex flex-col space-y-4'>
-        <PustakawanTambahBukuHeaderEdit isLoading={mutation.isPending} />
-        <InputDataContainerEdit data={data.buku} />
+      <DetailBukuBreadcrumbs text={dataBuku.buku.judul} />
+      <form onSubmit={submitFn} encType='multipart/form-data' className='w-full flex flex-col space-y-4'>
+        <PustakawanTambahBukuHeaderEdit isLoading={mutationLoading} />
+        <InputDataContainerEdit data={dataBuku.buku} />
       </form>
     </Container>
   )

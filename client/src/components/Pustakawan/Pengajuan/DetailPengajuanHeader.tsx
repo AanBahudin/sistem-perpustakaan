@@ -1,15 +1,7 @@
-import { getProfilePustakawan } from "@/actions/Pustakawan/Profil/pustakawanProfileActions"
 import Logo from "@/components/landing/Navbar/Logo"
-import { useQuery } from "@tanstack/react-query"
 
 
-const DetailPengajuanHeader = () => {
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['profil'],
-    queryFn: getProfilePustakawan
-  })
-
+const DetailPengajuanHeader = ({dataPustakawan} : {dataPustakawan: any}) => {
   return (
     <section className='w-full flex items-center justify-between'>
       <main className='flex gap-x-4 items-center'>
@@ -23,8 +15,8 @@ const DetailPengajuanHeader = () => {
 
       <main className='flex flex-col items-end'>
           <h4 className='text-xs font-semibold'>Diproses Oleh</h4>
-          <h3 className='text-xs text-muted-foreground'>{isLoading ? 'Memuat' : data.nama}</h3>
-          <p className='text-xs text-muted-foreground'>{isLoading ? 'Memuat' : data.email}</p>
+          <h3 className='text-xs text-muted-foreground'>{dataPustakawan?.nama}</h3>
+          <p className='text-xs text-muted-foreground'>{dataPustakawan?.email}</p>
       </main>
 
     </section>

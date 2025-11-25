@@ -1,4 +1,4 @@
-import { prodiCreatePustakawan } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiCreatePustakawanAction } from "@/actions/Prodi/Pustakawan"
 import TambahPenggunaInput from "@/components/Prodi/Pengguna/TambahPenggunaInput"
 import TambahPenggunaNomorHpInput from "@/components/Prodi/Pengguna/TambahPenggunaNomorHpInput"
 import { Button } from "@/components/ui/button"
@@ -30,7 +30,7 @@ const TambahPustakawanDialog = () => {
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
-        mutationFn: (data: any) => prodiCreatePustakawan(data),
+        mutationFn: (data: any) => prodiCreatePustakawanAction(data),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['semua', 'pustakawan', params]})
             toast('Pustakawan Ditambahkan!', {description: 'Pustakawan berhasil didaftarkan'})

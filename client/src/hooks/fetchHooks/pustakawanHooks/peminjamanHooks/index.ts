@@ -1,0 +1,1 @@
+export {default as useGetDetailPinjamanPustakawan} from './useGetDetailPinjamanPustakawan'

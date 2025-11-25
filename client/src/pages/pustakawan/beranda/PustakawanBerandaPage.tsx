@@ -6,7 +6,6 @@ import BerandaLoading from "@/components/Pustakawan/Beranda/BerandaLoading"
 const PustakawanBerandaPage = () => {
 
   const {data, isLoading} = usePustakawanBeranda()
-
   if (isLoading) return <BerandaLoading />
 
   return (

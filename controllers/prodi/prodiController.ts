@@ -20,7 +20,6 @@ import {
     prodiNonaktifPustakawan, 
     verifyRegisteredAccount } from "../../services/prodiServices";
 import { SendBasicResponse, SendDataResponse, SendOneDataResponse } from "../../utils/sendResponse";
-import { prodiNonaktifAkun } from "../../client/src/actions/Prodi/ProdiPustakawanActions";
 
 // controller untuk buat/tambah administrator
 export const createAdministrator = async(req: any | Request, res: Response) => {

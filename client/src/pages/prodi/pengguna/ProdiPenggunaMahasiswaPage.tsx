@@ -3,7 +3,7 @@ import PustakawanBreadCrumbs from "@/components/Pustakawan/PustakawanBreadCrumbs
 import TambahPenggunaBaruDialog from "./TambahPenggunaBaruDialog"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import { prodiGetPenggunaMahasiswa } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiGetMahasiswaAction } from "@/actions/Prodi/Pengguna"
 import PenggunaPageLoading from "@/components/Pustakawan/Pengguna/PenggunaPageLoading"
 import GrafikPertumbuhanSemuaPengguna from '@/components/Pustakawan/Pengguna/SemuaPengguna/GrafikPertumbuhanSemuaPengguna'
 import SemuaPenggunaFilter from '@/components/Pustakawan/Pengguna/SemuaPengguna/SemuaPenggunaFilter'
@@ -16,7 +16,7 @@ const ProdiPenggunaMahasiswaPage = () => {
   
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'mahasiswa', params],
-    queryFn: () => prodiGetPenggunaMahasiswa(params.toString())
+    queryFn: () => prodiGetMahasiswaAction(params.toString())
   })
   
   if (isLoading) return <PenggunaPageLoading />

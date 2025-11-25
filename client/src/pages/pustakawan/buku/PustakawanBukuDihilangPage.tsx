@@ -1,27 +1,18 @@
-import {pustakawanGetAllBukuHilangAction} from '@/actions/Pustakawan/Buku'
 import Container from '@/globals/Container'
-import { useSearchParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GrafikBukuContainer from '@/components/Pustakawan/Buku/GrafikBukuContainer'
 import SemuaBukuFilter from '@/components/Pustakawan/Buku/SemuaBukuFilter'
-import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { Plus } from 'lucide-react'
 import TabelBukuHilang from '@/components/Pustakawan/Buku/BukuDihilangkan/TabelBukuHIlang'
 import BukuLoading from '@/components/Pustakawan/Buku/BukuLoading'
+import { useGetBukuHilangPustakawan } from '@/hooks/fetchHooks/pustakawanHooks/bukuHooks'
 
 const PustakawanBukuDihilangPage = () => {
 
-  const [searchParams] = useSearchParams()
-  const query = new URLSearchParams(searchParams).toString()
-
-  const {data, isLoading} = useQuery({
-    queryKey: ['buku', 'dihilangkan', query],
-    queryFn: () => pustakawanGetAllBukuHilangAction({query})
-  })
-
+  const { bukuDihilangkan, ratioBukuDihilangkan, statsBukuDihilangkan, isLoading } = useGetBukuHilangPustakawan()
   if (isLoading) return <BukuLoading />
-  const { bukuDihilangkan, ratioBukuDihilangkan, statsBukuDihilangkan } = data
 
   return (
     <Container className="w-full">

@@ -1,4 +1,4 @@
-import { prodiBlockedUser } from "@/actions/Prodi/ProdiPenggunaActions"
+import { prodiBlokirPenggunaAction } from "@/actions/Prodi/Pengguna"
 import { setBlokirPenggunaAlert } from "@/cart/Prodi/prodiPenggunaSlice"
 import {
   AlertDialog,
@@ -31,7 +31,7 @@ const BlokirPenggunaAlert = ({dataPengguna} : {dataPengguna: any}) => {
     }
 
     const mutation = useMutation({
-        mutationFn: () => prodiBlockedUser(idPengguna),
+        mutationFn: () => prodiBlokirPenggunaAction(idPengguna),
         onSuccess: () => {
 
             if (pathname.includes('dosen')) queryClient.invalidateQueries({queryKey: ['semua', 'dosen', params]})

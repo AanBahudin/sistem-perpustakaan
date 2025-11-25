@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import PustakawanBreadCrumbs from '@/components/Pustakawan/PustakawanBreadCrumbs'
 import { useSearchParams } from 'react-router-dom'
 import PenggunaPageLoading from '@/components/Pustakawan/Pengguna/PenggunaPageLoading'
-import { prodiGetAllPengguna } from '@/actions/Prodi/ProdiPenggunaActions'
+import { prodiGetAllPenggunaAction } from '@/actions/Prodi/Pengguna'
 import ProdiSemuaPenggunaTable from '@/components/Prodi/Pengguna/SemuaPengguna/ProdiSemuaPenggunaTable'
 import TambahPenggunaBaruDialog from './TambahPenggunaBaruDialog'
 
@@ -16,7 +16,7 @@ const ProdiSemuaPenggunaPage = () => {
 
   const {data, isLoading} = useQuery({
     queryKey: ['semua', 'pengguna', params],
-    queryFn: () => prodiGetAllPengguna(params.toString())
+    queryFn: () => prodiGetAllPenggunaAction(params.toString())
   })
 
   if (isLoading) return <PenggunaPageLoading />

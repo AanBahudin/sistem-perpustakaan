@@ -1,68 +1,34 @@
 import Container from '@/globals/Container'
-import { useQuery } from '@tanstack/react-query'
-import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getDetailPengajuanPeminjaman } from '@/actions/Pustakawan/Peminjaman/pustakawanPengajuanActions'
 import DetailPengajuanBreadCrumbs from '@/components/Pustakawan/Pengajuan/DetailPengajuanBreadCrumbs'
 import PeminjamanApprovalContainer from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/PeminjamanApprovalContainer'
-import DetailPengajuanHeader from '@/components/Pustakawan/Pengajuan/DetailPengajuanHeader'
-import DetailPengajuanPeminjaman from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPengajuanPeminjaman'
-import DetailBukuPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailBukuPengajuan'
-import DetailPemohonPengajuan from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPemohonPengajuan'
 import DetailPeminjamanTabs from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DetailPeminjamanTabs'
 import BuatPengembalianSection from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/BuatPengembalianSection'
 import SinglePengajuanLoading from '@/components/Pustakawan/Pengajuan/SinglePengajuanLoading'
-import { Alert } from '@/components/ui/alert'
+import { useGetDetailPinjamanPustakawan } from '@/hooks/fetchHooks/pustakawanHooks/peminjamanHooks'
+import PeminjamanDetailSection from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/PeminjamanDetailSection'
+import DataPengembalianPeminjaman from '@/components/Pustakawan/Pengajuan/DetailPeminjaman/DataPengembalianPeminjaman'
 
 const PustakawanDetailPeminjaman = () => {
-
-    const { idPeminjaman } = useParams()
-    const {data, isLoading} = useQuery({
-        queryKey: ['detail', 'peminjaman', idPeminjaman],
-        queryFn: () => getDetailPengajuanPeminjaman({id: idPeminjaman as string})
-    })
-
+    
+    const {dataPeminjaman, isLoading} = useGetDetailPinjamanPustakawan()
     const { pustakawanDetailPeminjamanActiveTabs } = useSelector((state: any) => state.peminjamanState)
     
     if (isLoading) return <SinglePengajuanLoading />
-    const {buku, peminjam} = data
+    const {buku, dataPengembalian} = dataPeminjaman
 
     return (
         <Container className='w-full'>
-            <DetailPengajuanBreadCrumbs text={data.buku.judul} />
-            <PeminjamanApprovalContainer peminjaman={data} />
-            <DetailPeminjamanTabs peminjaman={data} idPengembalian={data.dataPengembalian} />
+            <DetailPengajuanBreadCrumbs text={buku.judul} />
+            <PeminjamanApprovalContainer peminjaman={dataPeminjaman} />
+            <DetailPeminjamanTabs peminjaman={dataPeminjaman} idPengembalian={dataPengembalian} />
 
             {/* JIKA TAB PEMINJAMAN AKTIF */}
-            {pustakawanDetailPeminjamanActiveTabs === 'Peminjaman' && (
-                <section className='w-full flex items-start gap-x-8'>
-                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8'>
-                        <DetailPengajuanHeader />
-                        <DetailPengajuanPeminjaman dataPeminjaman={data} />
-                        <DetailBukuPengajuan dataBuku={buku} />
-                    </main>
-
-                    <DetailPemohonPengajuan dataPemohon={peminjam} />
-                </section>
-            )}
-
+            {pustakawanDetailPeminjamanActiveTabs === 'Peminjaman' && <PeminjamanDetailSection dataPeminjaman={dataPeminjaman} />}
             {/* JIKA TAB DATA PENGEMBALIAN AKTIF */}
-            {pustakawanDetailPeminjamanActiveTabs === 'Data Pengembalian' && (
-                <section className='w-full flex items-start gap-x-8'>
-                    <main className='w-3/4 border rounded-xl min-h-[80vh] p-8 flex flex-col'>
-                        <DetailPengajuanHeader />
-                        <Alert className='w-full flex my-5 py-4 text-xs'>
-                            <Link className='w-full underline' to={`/pustakawan/pengajuan/pengembalian/${data?.dataPengembalian?._id}`}>Lihat Data Pengembalian</Link>
-                        </Alert>
-                        <DetailBukuPengajuan dataBuku={buku} />
-                    </main>
-
-                    <DetailPemohonPengajuan dataPemohon={peminjam} />
-                </section>
-            )}
-
+            {pustakawanDetailPeminjamanActiveTabs === 'Data Pengembalian' && <DataPengembalianPeminjaman dataPeminjaman={dataPeminjaman} />}
             {/* JIKA TAB BUAT PENGEMBALIAN AKTIF */}
-            {pustakawanDetailPeminjamanActiveTabs === 'Buat Pengembalian' && <BuatPengembalianSection buku={buku} peminjaman={data} />}
+            {pustakawanDetailPeminjamanActiveTabs === 'Buat Pengembalian' && <BuatPengembalianSection dataPeminjaman={dataPeminjaman} />}
         </Container>
     )
 }
