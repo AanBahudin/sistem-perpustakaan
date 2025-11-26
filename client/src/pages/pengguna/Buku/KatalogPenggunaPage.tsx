@@ -5,7 +5,7 @@ import KategorySection from '@/components/pengguna/Katalog Buku Pengguna/Kategor
 import LastAdded from '@/components/pengguna/Katalog Buku Pengguna/LastAdded'
 import Container from '@/globals/Container'
 import BookLoading from '@/components/Loading/BookLoading'
-import useFetchBukuKatalogPengguna from '@/hooks/fetchHooks/penggunaHooks/bukuHooks/useFetchBukuKatalogPengguna'
+import {useFetchBukuKatalogPengguna} from '@/hooks/fetchHooks/penggunaHooks/bukuHooks'
 
 const KatalogPenggunaPage = () => {
   

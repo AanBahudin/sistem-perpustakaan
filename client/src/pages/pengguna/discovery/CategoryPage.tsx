@@ -2,7 +2,8 @@ import BookLoading from "@/components/Loading/BookLoading"
 import BookGrid from "@/components/pengguna/Katalog Buku Pengguna/BookGrid"
 import BookPagination from "@/components/pengguna/Katalog Buku Pengguna/BookPagination"
 import KategorySection from "@/components/pengguna/Katalog Buku Pengguna/KategorySection"
-import useFetchBukuBasedByCategoryPengguna from "@/hooks/fetchHooks/penggunaHooks/bukuHooks/useFetchBukuBasedByCategoryPengguna"
+import {useFetchBukuBasedByCategoryPengguna} from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
+
 import { Search } from "lucide-react"
 
 const CategoryPage = () => {

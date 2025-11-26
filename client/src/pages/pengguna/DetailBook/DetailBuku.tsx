@@ -1,24 +1,17 @@
 import Container from "@/globals/Container"
-import { useParams } from "react-router-dom"
 import DetailBookContainer from "@/components/pengguna/DetailBukuPengguna/DetailBookContainer"
 import YouMayLIkeBookContainer from "@/components/pengguna/DetailBukuPengguna/YouMayLIkeBookContainer"
-import { useQuery } from "@tanstack/react-query"
 import DetailBookLoading from "@/components/Loading/DetailBookLoading"
-import { getDetailBukuPengguna } from "@/actions/Pengguna/Buku"
+import { useFetchDetailBukuPengguna } from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
 
 const DetailBuku = () => {
-  const {id} = useParams()
-
-  const {data: dataBuku, isLoading} = useQuery({
-    queryKey: ['detail-book', id],
-    queryFn: () => getDetailBukuPengguna(id as string),
-  })
-
+  
+  const {isLoading, data} = useFetchDetailBukuPengguna()
   if (isLoading) return <DetailBookLoading />
 
   return (
     <Container className="my-20">
-      <DetailBookContainer peminjaman={dataBuku.loan} detailBuku={dataBuku.buku}  />
+      <DetailBookContainer peminjaman={data.loan} detailBuku={data.buku}  />
       <YouMayLIkeBookContainer />
     </Container>
   )

@@ -2,7 +2,7 @@
 import BookGrid from "@/components/pengguna/Katalog Buku Pengguna/BookGrid"
 import BookPagination from "@/components/pengguna/Katalog Buku Pengguna/BookPagination"
 import { Skeleton } from "@/components/ui/skeleton"
-import useGetAllBukuPengguna from "@/hooks/fetchHooks/penggunaHooks/bukuHooks/useGetAllBukuPengguna"
+import {useGetAllBukuPengguna} from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
 
 
 const AllBook = () => {
