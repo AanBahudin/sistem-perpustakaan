@@ -12,6 +12,8 @@ import {
 import { BookOpenCheck } from 'lucide-react'
 import { Button } from '../ui/button'
 import useConfirmPeminjamanPengguna from '@/hooks/fetchHooks/penggunaHooks/peminjaman/useConfirmPeminjamanPengguna'
+import { useState } from "react"
+import { useSelector } from "react-redux"
 
 type ConfirmPeminjamanType = {
     buku: any
@@ -19,11 +21,9 @@ type ConfirmPeminjamanType = {
 
 const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
 
-    const {
-        alasan, durasi,
-        isLoading, isModalOpen, 
-        mutationFn, setIsModalOpen} = useConfirmPeminjamanPengguna({idBuku: buku._id})
-    
+    const {alasan, durasi} = useSelector((state: any) => state.peminjamanState)
+    const [isModalOpen, setIsModalOpen]= useState<boolean>(false)
+    const {mutationFn, isLoading} = useConfirmPeminjamanPengguna({idBuku: buku._id, alasan, durasi})
 
     return (
         <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>

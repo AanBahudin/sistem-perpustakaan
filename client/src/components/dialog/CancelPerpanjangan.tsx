@@ -12,14 +12,14 @@ import {
 import { AlertCircleIcon } from "lucide-react"
 import { Button } from "../ui/button"
 import useCancelPerpanjanganPengguna from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useCancelPerpanjanganPengguna"
+import { useState } from "react"
 
 
 const CancelPerpanjangan = ({perpanjangan} : {perpanjangan: any}) => {
 
+  const [isModalOpen, setModalOpen] = useState(false)
   const {disetujui, _id: idPerpanjangan} = perpanjangan
-  const { 
-    isLoading, isModalOpen, 
-    setModalOpen, mutationFn } = useCancelPerpanjanganPengguna({idPerpanjangan})
+  const { isLoading, mutationFn } = useCancelPerpanjanganPengguna({idPerpanjangan})
   
   return (
     <AlertDialog open={isModalOpen} onOpenChange={setModalOpen}>

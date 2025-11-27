@@ -13,13 +13,13 @@ type SearchFilterType = {
 const SearchFilter = ({kategori, penerbit, penulis} : SearchFilterType) => {
 
   return (
-    <section className='w-full border-r-2 min-h-[60vh]'>
+    <section className='w-full border-r-2 h-[100vh]'>
         <main className='flex items-start justify-start gap-x-4'>
             <ListFilter className='w-5 h-5'/>
             <h1 className='uppercase font-semibold'>Filter</h1>
         </main>
         <div className='w-[90%] mt-6'>
-          <SearchCategoryFilter data={kategori.data} />
+          <SearchCategoryFilter data={kategori} />
           <ISBNSearchInput />
           <PenulisSearchInput data={penulis} />
           <PenerbitSearchInput data={penerbit} />

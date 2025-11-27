@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { useState } from "react"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { batalkanPeminjamanPengguna } from "@/actions/Pengguna/Peminjaman"
 import { toast } from "sonner"
+import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 
 type HooksProps = {
     idPeminjaman: string,
@@ -13,39 +13,31 @@ type HooksProps = {
 const usePembatalanPengajuanPeminjamanPengguna = ({ idPeminjaman, idBuku } : HooksProps) => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
-
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
         mutationFn: () => batalkanPeminjamanPengguna({idPeminjaman: idPeminjaman}),
-        onMutate: () => {
-            setIsModalOpen(true)
-        },
         onSuccess: () => {
-            setIsModalOpen(false)
             queryClient.invalidateQueries({queryKey: ['detail-peminjaman', idBuku]})
             toast('Peminjaman Dibatalkan')
             if (pathname.includes('peminjaman')) {
                 navigate('/my/data/peminjaman')
             }
         },
-        onError: () => {
-            setIsModalOpen(false)
+        onError: (error: any) => {
+            const errMsg = errorMsgGenerator({error, defaultMsg: 'Tidak dapat membatalkan peminjaman ini, coba lagi nanti'})
+            toast('Terjadi kesalahan', {description: errMsg})
         }
     })
 
 
-    const handleClick = async() => {
-        await mutation.mutate()
-        setIsModalOpen(false)
+    const handleClick = () => {
+        mutation.mutate()
     }
 
     return {
-        setIsModalOpen,
         mutateFn: handleClick,
         isLoading: mutation.isPending,
-        isModalOpen
     }
 }
 

@@ -12,6 +12,7 @@ import SelectDurasi from "@/pages/pengguna/Buku/SelectDurasi"
 import AlasanInput from "@/pages/pengguna/Buku/AlasanInput"
 import { Button } from "../ui/button"
 import useEditPerpanjanganPengguna from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useEditPerpanjanganPengguna"
+import { useState } from "react"
 
 type EditPengajuanPerpanjanganDialogType = {
     children: React.ReactNode,
@@ -20,8 +21,9 @@ type EditPengajuanPerpanjanganDialogType = {
 
 const EditPengajuanPerpanjanganDialog = ({children, perpanjangan} : EditPengajuanPerpanjanganDialogType) => {
 
+    const [isModalOpen, setModalOpen] = useState(false)
     const { durasi, alasan, _id: idPerpanjangan } = perpanjangan
-    const { isLoading, isModalOpen, setModalOpen, mutationFn } = useEditPerpanjanganPengguna({idPerpanjangan})
+    const { isLoading, mutationFn } = useEditPerpanjanganPengguna({idPerpanjangan})
 
     return (
         <Dialog open={isModalOpen} onOpenChange={setModalOpen}>

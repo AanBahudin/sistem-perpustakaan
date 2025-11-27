@@ -2,7 +2,6 @@ import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { penggunaEditPerpanjangan } from "@/actions/Pengguna/Perpanjangan"
 import { store } from "@/store"
 import { setAlasan, setDurasi } from "@/cart/peminjamanSlice"
-import { useState } from "react"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
 
@@ -18,7 +17,6 @@ const useEditPerpanjanganPengguna = ({idPerpanjangan} : HooksProps) => {
         }),
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['detail-perpanjangan', idPerpanjangan]})
-            setModalOpen(false)
             store.dispatch(setAlasan(''))
             store.dispatch(setDurasi(''))
         },
@@ -28,19 +26,16 @@ const useEditPerpanjanganPengguna = ({idPerpanjangan} : HooksProps) => {
         }
     })
 
-    const [isModalOpen, setModalOpen] = useState(false)
-
-    const handleSubmit = async(event: any) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const data = Object.fromEntries(formData) as any
-        await mutation.mutate(data)
+        mutation.mutate(data)
     }
 
     return {
         mutationFn: handleSubmit,
-        isLoading: mutation.isPending,
-        isModalOpen, setModalOpen
+        isLoading: mutation.isPending
 
     }
 

@@ -12,7 +12,7 @@ export const getAllBukuUser = async(req: Request, res: Response) => {
         res,
         message: 'Data Buku',
         data: buku,
-        total: totalPage,
+        totalPage,
         page: Number(currentPage)
     })
 }

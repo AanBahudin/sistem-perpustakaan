@@ -1,10 +1,8 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { penggunaBatalkanPerpanjangan } from "@/actions/Pengguna/Perpanjangan"
 import { errorMsgGenerator } from "@/utils/errorMsgFunc"
 import { toast } from "sonner"
-
 
 type HooksProps = {
     idPerpanjangan: string
@@ -12,9 +10,7 @@ type HooksProps = {
 
 const useCancelPerpanjanganPengguna = ({ idPerpanjangan } : HooksProps) => {
 
-    const [isModalOpen, setModalOpen] = useState(false)
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate()    
     const queryClient = useQueryClient()
     const mutation = useMutation({
         mutationFn: () => penggunaBatalkanPerpanjangan({idPerpanjangan}),
@@ -32,14 +28,11 @@ const useCancelPerpanjanganPengguna = ({ idPerpanjangan } : HooksProps) => {
         }
     })
 
-    const handleClick = async() => {
-        await mutation.mutate()
-        setModalOpen(false)
+    const handleClick = () => {
+        mutation.mutate()
     }
 
     return {
-        setModalOpen,
-        isModalOpen,
         isLoading: mutation.isPending,
         mutationFn: handleClick
     }

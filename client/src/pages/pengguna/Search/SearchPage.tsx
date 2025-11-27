@@ -10,16 +10,16 @@ const SearchPage = () => {
   if (isLoading) return <SearchLoading />
 
   return (
-    <section className='w-full mx-auto my-20 flex gap-x-4'>
+    <section className='w-full max-h-[100vh] mx-auto my-20 flex gap-x-4'>
       <main className='w-[25%]'>
         <SearchFilter 
           kategori={allKategori.data}
           penerbit={dataPenerbit.data}
-          penulis={dataPenulis.data} />
+          penulis={dataPenulis} />
       </main>
 
       <main className='w-[75%]'>
-        <SearchBooks data={searchData.data} />
+        <SearchBooks data={searchData} />
       </main>
 
     </section>

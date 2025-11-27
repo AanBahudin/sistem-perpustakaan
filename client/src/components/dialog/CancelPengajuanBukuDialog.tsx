@@ -10,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import usePembatalanPengajuanPeminjamanPengguna from "@/hooks/fetchHooks/penggunaHooks/peminjaman/usePembatalanPengajuanPeminjamanPengguna"
+import { useState } from "react"
 
 type CancelPengajuanBukuDialogType = {
     children: React.ReactNode,
@@ -19,13 +20,12 @@ type CancelPengajuanBukuDialogType = {
 
 const CancelPengajuanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPengajuanBukuDialogType) => {
 
-  const { isLoading, isModalOpen, mutateFn, setIsModalOpen } = usePembatalanPengajuanPeminjamanPengguna({idBuku, idPeminjaman})
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { isLoading, mutateFn} = usePembatalanPengajuanPeminjamanPengguna({idBuku, idPeminjaman})
 
   return (
      <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-      <AlertDialogTrigger asChild >
-        {children}
-      </AlertDialogTrigger>
+      <AlertDialogTrigger asChild >{children}</AlertDialogTrigger>
 
       <AlertDialogContent>
         <AlertDialogHeader>

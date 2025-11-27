@@ -24,7 +24,7 @@ const PeminjamanInfo = ({detailBuku, peminjaman} : PeminjamanInfoType) => {
                 <DiajukkanAlert 
                     title="Peminjaman Telah Diajukan" 
                     deskripsi="Anda dapat melihat detail pengajuan anda" 
-                    link={`/my/peminjaman/${peminjaman._id}/${peminjaman.buku._id}`} />
+                    link={`/my/peminjaman/${peminjaman._id}`} />
             ) : (   
                 <DefaultAlert 
                     title="Selesaikan Pengajuan Anda" 

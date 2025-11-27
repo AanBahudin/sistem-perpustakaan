@@ -7,13 +7,13 @@ const useGetAllBukuPengguna = () => {
     const [searchParams] = useSearchParams()
     const fullParams = new URLSearchParams(searchParams).toString()
 
-    const {data: dataBuku, isLoading} = useQuery({
+    const {data, isLoading} = useQuery({
         queryKey: ['buku', fullParams],
         queryFn: () => getAllBukuPengguna({query: fullParams})
     })
 
     return {
-        dataBuku,
+        data,
         isLoading
     }
 

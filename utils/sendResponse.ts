@@ -54,7 +54,6 @@ export const SendDataResponse = ({
     message,
     timestamps =  new Date(Date.now()).toString(),
     data,
-    total,
     totalPage = 1,
     page,
 } : SendManyDataResponseType ) => {
@@ -63,7 +62,6 @@ export const SendDataResponse = ({
         message,
         totalPage,
         timestamps,
-        total,
         page,
         data,
     })
