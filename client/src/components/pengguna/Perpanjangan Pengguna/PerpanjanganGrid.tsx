@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { CalendarCheck, CalendarSync, CalendarClock } from "lucide-react"
 import { formatedDate } from "@/utils/formatDate"
-import StatusPerpanjanganGrid from "./StatusPerpanjanganGrid"
+import { StatusPerpanjanganGridLayout } from "."
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import { ImageOff } from "lucide-react"
 import { Link } from "react-router-dom"
@@ -49,7 +49,7 @@ const PerpanjanganGrid = ({data} : PerpanjanganGridType) => {
                         </p>
 
                         <div className="w-full flex justify-center items-center gap-x-4 mt-4">
-                            <StatusPerpanjanganGrid status={disetujui} />
+                            <StatusPerpanjanganGridLayout status={disetujui} />
                             <GridLayoutButtons id={idBuku._id}/>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
-import BookGrid from "../Katalog Buku Pengguna/BookGrid"
-import BookPagination from "../Katalog Buku Pengguna/BookPagination"
+import BookGrid from "../KatalogBukuPengguna/BookGrid"
+import BookPagination from "../KatalogBukuPengguna/BookPagination"
 import { useGetAllBukuPengguna } from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
 import AllBookLoading from "./AllBookLoading"
 

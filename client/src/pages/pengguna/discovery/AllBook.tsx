@@ -1,4 +1,4 @@
-import AllBookDataContainer from "@/components/pengguna/Discovery All Book/AllBookDataContainer"
+import AllBookDataContainer from "@/components/pengguna/DiscoveryAllBook/AllBookDataContainer"
 
 const AllBook = () => {
     return (

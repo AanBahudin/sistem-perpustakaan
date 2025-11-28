@@ -10,7 +10,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { BookOpenCheck } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import useConfirmPeminjamanPengguna from '@/hooks/fetchHooks/penggunaHooks/peminjaman/useConfirmPeminjamanPengguna'
 import { useState } from "react"
 import { useSelector } from "react-redux"
@@ -19,7 +19,7 @@ type ConfirmPeminjamanType = {
     buku: any
 }
 
-const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
+const ConfirmPeminjamanAlert = ({buku} : ConfirmPeminjamanType) => {
 
     const {alasan, durasi} = useSelector((state: any) => state.peminjamanState)
     const [isModalOpen, setIsModalOpen]= useState<boolean>(false)
@@ -55,4 +55,4 @@ const ConfirmPeminjaman = ({buku} : ConfirmPeminjamanType) => {
     )
 }
 
-export default ConfirmPeminjaman
+export default ConfirmPeminjamanAlert

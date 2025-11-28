@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DiajukkanAlert, DefaultAlert } from '../Buku/Alert'
+import { DiajukkanAlert, DefaultAlert } from '../KonfirmasiPeminjaman/Alert'
 import GridLayoutButtons from '@/globals/GridLayoutButtons'
 import { Link } from 'react-router-dom'
 import { ImageOff } from 'lucide-react'

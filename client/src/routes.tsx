@@ -4,7 +4,7 @@ import { PenggunaLayout, ProfilPengguna, KatalogPengguna, DetailBuku } from "./p
 import { ProdiLayout } from "./pages/prodi";
 import { PustakawanLayout } from "./pages/pustakawan";
 import Verify from "./pages/Verify";
-import KatalogPenggunaPage from "./pages/pengguna/Buku/KatalogPenggunaPage";
+import KatalogPenggunaPage from "./components/pengguna/Konfirmasi Peminjaman/KatalogPenggunaPage";
 import GeneralProfilePage from "./pages/pengguna/Profil/GeneralProfilePage";
 import CredentialsProfilePage from "./pages/pengguna/Profil/CredentialsProfilePage";
 import StatusProfilePage from "./pages/pengguna/Profil/StatusProfilePage";
@@ -17,7 +17,7 @@ import SukaPage from "./pages/pengguna/Suka/SukaPage";
 import SimpanPage from "./pages/pengguna/Simpan/SimpanPage";
 import DetailPengembalian from "./pages/pengguna/Pengembalian/DetailPengembalianPage";
 import DetailPerpanjanganPage from "./pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
-import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
+import KonfirmasiPeminjaman from "./pages/pengguna/Peminjaman/KonfirmasiPeminjamanPage";
 import ConfirmPerpanjangan from "./pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
 import DiscoveryPage from "./pages/pengguna/discovery/DiscoveryPage";
 import SearchPage from "./pages/pengguna/Search/SearchPage";

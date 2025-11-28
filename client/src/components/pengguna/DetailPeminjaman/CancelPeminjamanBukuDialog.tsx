@@ -12,13 +12,13 @@ import {
 import usePembatalanPengajuanPeminjamanPengguna from "@/hooks/fetchHooks/penggunaHooks/peminjaman/usePembatalanPengajuanPeminjamanPengguna"
 import { useState } from "react"
 
-type CancelPengajuanBukuDialogType = {
+type CancelPeminjamanBukuDialogType = {
     children: React.ReactNode,
     idPeminjaman: string,
     idBuku: string
 }
 
-const CancelPengajuanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPengajuanBukuDialogType) => {
+const CancelPeminjamanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPeminjamanBukuDialogType) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { isLoading, mutateFn} = usePembatalanPengajuanPeminjamanPengguna({idBuku, idPeminjaman})
@@ -46,4 +46,4 @@ const CancelPengajuanBukuDialog = ({children, idPeminjaman, idBuku} : CancelPeng
   )
 }
 
-export default CancelPengajuanBukuDialog
+export default CancelPeminjamanBukuDialog

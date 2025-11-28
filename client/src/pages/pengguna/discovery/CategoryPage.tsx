@@ -1,7 +1,7 @@
 import BookLoading from "@/components/Loading/BookLoading"
-import BookGrid from "@/components/pengguna/Katalog Buku Pengguna/BookGrid"
-import BookPagination from "@/components/pengguna/Katalog Buku Pengguna/BookPagination"
-import KategorySection from "@/components/pengguna/Katalog Buku Pengguna/KategorySection"
+import BookGrid from "@/components/pengguna/KatalogBukuPengguna/BookGrid"
+import BookPagination from "@/components/pengguna/KatalogBukuPengguna/BookPagination"
+import KategorySection from "@/components/pengguna/KatalogBukuPengguna/KategorySection"
 import {useFetchBukuBasedByCategoryPengguna} from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
 
 import { Search } from "lucide-react"

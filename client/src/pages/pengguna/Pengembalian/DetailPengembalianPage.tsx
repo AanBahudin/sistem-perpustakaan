@@ -1,5 +1,5 @@
 import DetailPengembalianLoadingPage from "@/components/Loading/DetailPengembalianLoadingPage"
-import DetailPengembalianContainer from "@/components/pengguna/Detail Pengembalian/DetailPengembalianContainer"
+import DetailPengembalianContainer from "@/components/pengguna/DetailPengembalian/DetailPengembalianContainer"
 import Container from "@/globals/Container"
 import useFetchDetailPengembalianPengguna from "@/hooks/fetchHooks/penggunaHooks/pengembalian/useFetchDetailPengembalianPengguna"
 

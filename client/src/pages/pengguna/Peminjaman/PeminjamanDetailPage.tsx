@@ -1,11 +1,12 @@
+import {DetailPeminjamanContainer} from '@/components/pengguna/DetailPeminjaman/index'
+import {useFetchDetailPeminjamanPengguna} from '@/hooks/fetchHooks/penggunaHooks/peminjaman'
 import Container from '@/globals/Container'
-import DetailPeminjamanContainer from '@/components/pengguna/Detail Peminjaman/DetailPeminjamanContainer'
 import DetailBookLoading from '@/components/Loading/DetailBookLoading'
-import useFetchDetailPeminjamanUser from '@/hooks/fetchHooks/penggunaHooks/peminjaman/useFetchDetailPeminjamanUser'
 
 const PeminjamanDetailPage = () => {
 
-  const { isLoading, detailBuku, detailPeminjaman } = useFetchDetailPeminjamanUser()
+  const { isLoading, detailBuku, detailPeminjaman } = useFetchDetailPeminjamanPengguna()
+  
   return (
     <Container className='my-20 mx-auto'>
       {isLoading ? <DetailBookLoading /> : (

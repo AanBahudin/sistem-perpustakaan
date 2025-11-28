@@ -1,7 +1,7 @@
 import Container from "@/globals/Container"
-import PeminjamanInfo from "../Buku/PeminjamanInfo"
-import KonfirmasiData from "../Buku/KonfirmasiData"
-import FAQ from "../Buku/FAQ"
+import PeminjamanInfo from "@/components/pengguna/KonfirmasiPeminjaman/PeminjamanInfo"
+import KonfirmasiData from "@/components/pengguna/KonfirmasiPeminjaman/KonfirmasiData"
+import FAQ from "@/components/pengguna/KonfirmasiPeminjaman/FAQ"
 import useFetchKonfirmasiPeminjamanPengguna from "@/hooks/fetchHooks/penggunaHooks/peminjaman/useFetchKonfirmasiPeminjamanPengguna"
 
 const KonfirmasiPeminjaman = () => {

@@ -1,0 +1,8 @@
+export {default as PerpanjanganDetailPinjaman} from './InfoPinjaman'
+export {default as PerpanjanganDataLayout} from './PerpanjanganDataLayout'
+export {default as PerpanjanganGridLayout} from './PerpanjanganGrid'
+export {default as PerpanjanganListLayout} from './PerpanjanganList'
+export {default as PerpanjanganSearchInput} from './PerpanjanganSearch'
+export {default as PerpanjanganTab} from './PerpanjanganTab'
+export {default as StatusPerpanjanganGridLayout} from './StatusPerpanjanganGrid'
+export {default as StatusPerpanjanganListLayout} from './StatusPerpanjanganList'

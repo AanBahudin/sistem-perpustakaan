@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
-import PerpanjanganGrid from './PerpanjanganGrid'
-import PerpanjanganList from './PerpanjanganList'
+import { PerpanjanganListLayout, PerpanjanganGridLayout } from '.'
 
 type PerpanjanganDataLayoutType = {
   data: any
@@ -12,8 +11,8 @@ const PerpanjanganDataLayout = ({data} : PerpanjanganDataLayoutType) => {
 
     return (
         <>
-            {layout === 'grid' && <PerpanjanganGrid data={data}/>}
-            {layout === 'list' && <PerpanjanganList data={data}/>}
+            {layout === 'grid' && <PerpanjanganGridLayout data={data}/>}
+            {layout === 'list' && <PerpanjanganListLayout data={data}/>}
         </>
     )
 }

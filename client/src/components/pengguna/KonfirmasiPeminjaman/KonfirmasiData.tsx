@@ -1,4 +1,4 @@
-import ConfirmPeminjaman from "@/components/dialog/ConfirmPeminjaman"
+import ConfirmPeminjaman from "@/components/pengguna/KonfirmasiPeminjaman/ConfirmPeminjamanAlert"
 import SelectDurasi from "./SelectDurasi"
 import NamaBox from "./NamaBox"
 import AlasanInput from "./AlasanInput"

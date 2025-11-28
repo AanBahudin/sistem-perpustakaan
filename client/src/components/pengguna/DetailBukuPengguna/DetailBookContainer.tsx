@@ -5,7 +5,7 @@ import StatsDetailInfo from "./StatsDetailInfo"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { CircleAlert, ImageOff, Plus } from "lucide-react"
-import { DangerAlert, DefaultAlert, LinkAlert } from "@/pages/pengguna/Buku/Alert"
+import { DangerAlert, DefaultAlert, LinkAlert } from "@/components/pengguna/Konfirmasi Peminjaman/Alert"
 
 type DetailBookContainerDataType = {
     peminjaman: any,

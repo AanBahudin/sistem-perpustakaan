@@ -1,7 +1,7 @@
-import Container from '../../../globals/Container'
-import SummaryCard from '@/components/pengguna/Dashboard Pengguna/SummaryCard'
-import LoanOverview from '@/components/pengguna/Dashboard Pengguna/LoanOverview'
-import StatsOverview from '@/components/pengguna/Dashboard Pengguna/StatsOverview'
+import Container from '@/globals/Container'
+import SummaryCard from '@/components/pengguna/DashboardPengguna/SummaryCard'
+import LoanOverview from '@/components/pengguna/DashboardPengguna/LoanOverview'
+import StatsOverview from '@/components/pengguna/DashboardPengguna/StatsOverview'
 import DashboardLoading from './DashboardLoading'
 import useGetStatsPengguna from '@/hooks/fetchHooks/penggunaHooks/dashboard/useGetStatsPengguna'
 

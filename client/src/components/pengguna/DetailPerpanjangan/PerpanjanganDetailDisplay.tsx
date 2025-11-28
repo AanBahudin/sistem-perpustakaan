@@ -1,4 +1,4 @@
-import DetailDataDisplay from "../Detail Pengembalian/DetailDataDisplay"
+import DetailDataDisplay from "../DetailPengembalian/DetailDataDisplay"
 import { Book, Calendar, CalendarPlus } from "lucide-react"
 
 

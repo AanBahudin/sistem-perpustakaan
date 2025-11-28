@@ -1,9 +1,9 @@
-import SelectDurasi from '../Buku/SelectDurasi'
-import AlasanInput from '../Buku/AlasanInput'
-import NamaBox from '../Buku/NamaBox'
+import SelectDurasi from '../KonfirmasiPeminjaman/SelectDurasi'
+import AlasanInput from '../KonfirmasiPeminjaman/AlasanInput'
+import NamaBox from '../KonfirmasiPeminjaman/NamaBox'
 import { useQuery } from '@tanstack/react-query'
 import { penggunaGetProfileAction } from '@/actions/Pengguna/Profil'
-import { DiajukkanStatus } from '../Buku/StatusConfirm'
+import { DiajukkanStatus } from '../KonfirmasiPeminjaman/StatusConfirm'
 import ConfirmPerpanjanganDialog from '@/components/dialog/ConfirmPerpanjanganDialog'
 
 const KonfirmasiDataPerpanjangan = ({perpanjangan, peminjaman} : {perpanjangan: any, peminjaman: any}) => {

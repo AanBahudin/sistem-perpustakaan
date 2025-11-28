@@ -1,20 +1,16 @@
 import { DetailBuku, KatalogPengguna, PenggunaLayout, ProfilPengguna } from "@/pages/pengguna";
-import KatalogPenggunaPage from "@/pages/pengguna/Buku/KatalogPenggunaPage";
+import {DetailPeminjamanPage, KonfirmasiPeminjamanPage, PeminjamanPage } from '@/pages/pengguna/Peminjaman'
+import { GeneralProfilePage, CredentiolProfilePage, StatusProfilePage } from "@/pages/pengguna/Profil";
+import KatalogPenggunaPage from "@/components/pengguna/KonfirmasiPeminjaman/KatalogPenggunaPage";
 import DataPenggunaLayout from "@/pages/pengguna/DataPenggunaLayout";
 import AllBook from "@/pages/pengguna/discovery/AllBook";
 import CategoryPage from "@/pages/pengguna/discovery/CategoryPage";
 import DiscoveryPage from "@/pages/pengguna/discovery/DiscoveryPage";
-import KonfirmasiPeminjaman from "@/pages/pengguna/Peminjaman/KonfirmasiPeminjaman";
-import PeminjamanDetailPage from "@/pages/pengguna/Peminjaman/PeminjamanDetailPage";
-import PeminjamanPage from "@/pages/pengguna/Peminjaman/PeminjamanPage";
 import DetailPengembalianPage from "@/pages/pengguna/Pengembalian/DetailPengembalianPage";
 import PengembalianPage from "@/pages/pengguna/Pengembalian/PengembalianPage";
 import ConfirmPerpanjangan from "@/pages/pengguna/Perpanjangan/ConfirmPerpanjangan";
 import DetailPerpanjanganPage from "@/pages/pengguna/Perpanjangan/DetailPerpanjanganPage";
 import PerpanjanganPage from "@/pages/pengguna/Perpanjangan/PerpanjanganPage";
-import CredentialsProfilePage from "@/pages/pengguna/Profil/CredentialsProfilePage";
-import GeneralProfilePage from "@/pages/pengguna/Profil/GeneralProfilePage";
-import StatusProfilePage from "@/pages/pengguna/Profil/StatusProfilePage";
 import SearchPage from "@/pages/pengguna/Search/SearchPage";
 import SimpanPage from "@/pages/pengguna/Simpan/SimpanPage";
 import SukaPage from "@/pages/pengguna/Suka/SukaPage";
@@ -39,7 +35,7 @@ const penggunaRoute: RouteObject[] = [
                     },
                     {
                         path: 'credentials',
-                        element: <CredentialsProfilePage />
+                        element: <CredentiolProfilePage />
                     },
                     {
                         path: 'status',
@@ -67,7 +63,7 @@ const penggunaRoute: RouteObject[] = [
             },
             {
                 path: 'confirm/peminjaman/:id',
-                element: <KonfirmasiPeminjaman />
+                element: <KonfirmasiPeminjamanPage />
             },
              {
                 path: 'confirm/perpanjangan/:id',
@@ -75,7 +71,7 @@ const penggunaRoute: RouteObject[] = [
             },
             {
                 path: 'peminjaman/:id',
-                element: <PeminjamanDetailPage />
+                element: <DetailPeminjamanPage />
             },
             {
                 path: 'perpanjangan/:id',

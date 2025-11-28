@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator"
-import ProductReview from "../Detail Pengembalian/ProductReview"
-import BookDescription from "../Detail Pengembalian/BookDescription"
-import ProfilePeminjamanContainer from "../Detail Pengembalian/ProfilePeminjamanContainer"
+import ProductReview from "../DetailPengembalian/ProductReview"
+import BookDescription from "../DetailPengembalian/BookDescription"
+import ProfilePeminjamanContainer from "../DetailPengembalian/ProfilePeminjamanContainer"
 
 type DetailColumnType = {
     detailBuku: any,

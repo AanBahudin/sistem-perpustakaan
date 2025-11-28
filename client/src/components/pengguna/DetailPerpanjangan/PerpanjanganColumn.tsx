@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import TimeDisplay from "../Detail Pengembalian/TimeDisplay"
+import TimeDisplay from "../DetailPengembalian/TimeDisplay"
 import PerpanjanganDetailDisplay from "./PerpanjanganDetailDisplay"
 import CancelPerpanjangan from "@/components/dialog/CancelPerpanjangan"
 import { Pen } from "lucide-react"
