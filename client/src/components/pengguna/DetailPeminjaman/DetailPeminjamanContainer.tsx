@@ -1,4 +1,4 @@
-import BreadCrumbDetailBuku from "../DetailBukuPengguna/BreadCrumbDetailBuku"
+import {BreadCrumbDetailBuku} from "../DetailBukuPengguna"
 import DetailPeminjaman from "./DetailPeminjaman"
 
 type DetailPeminjamanContainerType = {

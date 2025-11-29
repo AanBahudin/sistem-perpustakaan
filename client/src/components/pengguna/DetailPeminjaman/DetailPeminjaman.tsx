@@ -1,8 +1,8 @@
 // buatkan detail button sendiri untuk detail peminjaman
 import DetailButton from "../DetailBukuPengguna/DetailButton"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
-import StatsDetailInfo from "../DetailBukuPengguna/StatsDetailInfo"
-import DetailPeminjamanInfo from "./DetailPeminjamanInfo"
+import {StatsDetailInfo} from "@/components/pengguna/DetailBukuPengguna"
+import {DetailPeminjamanInfo} from "@/components/pengguna/DetailPeminjaman"
 import { ImageOff } from "lucide-react"
 import { formatTextLength } from "@/utils/formatTextLength"
 
