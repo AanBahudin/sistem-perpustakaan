@@ -1,7 +1,7 @@
-import {DetailPeminjamanContainer} from '@/components/pengguna/DetailPeminjaman/index'
+import {DetailPeminjamanContainer} from '@/components/pengguna/DetailPeminjaman'
 import {useFetchDetailPeminjamanPengguna} from '@/hooks/fetchHooks/penggunaHooks/peminjaman'
 import Container from '@/globals/Container'
-import DetailBookLoading from '@/components/Loading/DetailBookLoading'
+import DetailBookLoading from '@/components/pengguna/DetailBukuPengguna/DetailBookLoading'
 
 const PeminjamanDetailPage = () => {
 

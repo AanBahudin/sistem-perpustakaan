@@ -1,6 +1,6 @@
 import Container from "@/globals/Container"
-import { Skeleton } from "../ui/skeleton"
-import { Separator } from "../ui/separator"
+import { Skeleton } from "../../ui/skeleton"
+import { Separator } from "../../ui/separator"
 
 const DetailBookLoading = () => {
   return (

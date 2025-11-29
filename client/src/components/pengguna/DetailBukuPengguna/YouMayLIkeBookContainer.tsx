@@ -1,13 +1,9 @@
-import SuggestedBook from "./SuggestedBook"
+import {SuggestedBook} from "@/components/pengguna/DetailBukuPengguna"
 
-type YouMayLIkeBookContainerType = {
-    dataBuku? : any
-}
-
-const YouMayLIkeBookContainer = ({dataBuku} : YouMayLIkeBookContainerType) => {
+const YouMayLIkeBookContainer = () => {
     return (
         <section className="w-full my-30">
-            <SuggestedBook dataBuku={dataBuku} />
+            <SuggestedBook />
         </section>
     )
 }

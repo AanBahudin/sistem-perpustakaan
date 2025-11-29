@@ -1,7 +1,5 @@
 import Container from "@/globals/Container"
-import DetailBookContainer from "@/components/pengguna/DetailBukuPengguna/DetailBookContainer"
-import YouMayLIkeBookContainer from "@/components/pengguna/DetailBukuPengguna/YouMayLIkeBookContainer"
-import DetailBookLoading from "@/components/Loading/DetailBookLoading"
+import {YouMayLikeBookContainer, DetailBookContainer, DetailBookLoading} from "@/components/pengguna/DetailBukuPengguna"
 import { useFetchDetailBukuPengguna } from "@/hooks/fetchHooks/penggunaHooks/bukuHooks"
 
 const DetailBuku = () => {
@@ -12,7 +10,7 @@ const DetailBuku = () => {
   return (
     <Container className="my-20">
       <DetailBookContainer peminjaman={data.loan} detailBuku={data.buku}  />
-      <YouMayLIkeBookContainer />
+      <YouMayLikeBookContainer />
     </Container>
   )
 }

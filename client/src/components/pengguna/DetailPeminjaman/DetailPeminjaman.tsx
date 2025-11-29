@@ -1,8 +1,10 @@
+// buatkan detail button sendiri untuk detail peminjaman
 import DetailButton from "../DetailBukuPengguna/DetailButton"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 import StatsDetailInfo from "../DetailBukuPengguna/StatsDetailInfo"
 import DetailPeminjamanInfo from "./DetailPeminjamanInfo"
 import { ImageOff } from "lucide-react"
+import { formatTextLength } from "@/utils/formatTextLength"
 
 type DetailPeminjamanType = {
     peminjaman: any,
@@ -12,6 +14,7 @@ type DetailPeminjamanType = {
 const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
 
     const {cover, judul, _id, deskripsi, stok, tagline} = detailBuku
+    const newTagline = formatTextLength({minLength: 110, text: tagline})
 
     return (
         <main className="w-full flex my-10 gap-x-10 mt-10">
@@ -27,7 +30,7 @@ const DetailPeminjaman = ({peminjaman, detailBuku} : DetailPeminjamanType) => {
                     <GridLayoutButtons id={_id}/>
                 </div>
 
-                <h5 className="text-muted-foreground text-sm w-full trun my-2">{tagline}</h5>
+                <h5 className="text-muted-foreground text-sm w-full trun my-2">{newTagline}</h5>
 
                 <StatsDetailInfo data={detailBuku} />
                 <p className="my-4 text-muted-foreground text-sm leading-6">{deskripsi}</p>

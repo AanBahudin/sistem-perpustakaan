@@ -9,7 +9,7 @@ const DetailPeminjamanInfo = ({peminjaman} : DetailPeminjamanInfoType) => {
     const {peminjam} = peminjaman
 
   return (
-    <section className="w-full grid grid-cols-12 gap-x-10 place-items-start my-4 ml-10 text-muted-foreground">
+    <section className="w-full grid grid-cols-12 gap-x-10 text-xs place-items-start my-4 ml-10 text-muted-foreground">
         <div className='w-full col-span-6 grid grid-cols-2'>
             <main className="flex flex-col gap-y-2 font-semibold">
                 <p>Nama Peminjam</p>

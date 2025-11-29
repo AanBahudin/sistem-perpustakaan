@@ -2,13 +2,9 @@ import { getSuggestedBookPengguna } from "@/actions/Pengguna/Buku"
 import { useQuery } from "@tanstack/react-query"
 import { ImageOff } from "lucide-react"
 import { Link, useParams } from "react-router-dom"
-import SuggestedBookLoading from "./SuggestedBookLoading"
+import {SuggestedBookLoading} from '@/components/pengguna/DetailBukuPengguna'
 
-type SuggestedBookType = {
-    dataBuku: any
-}
-
-const SuggestedBook = ({dataBuku} : SuggestedBookType) => {
+const SuggestedBook = () => {
 
     const {id} = useParams()
     const {data, isLoading} = useQuery({

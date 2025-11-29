@@ -2,7 +2,7 @@ import useFetchSingleKatalogData from '@/hooks/fetchHooks/landingHooks/useFetchS
 import Container from '@/globals/Container'
 import DetailBuku from '@/components/landing/DetailBukuKatalog/DetailBuku'
 import SuggestedBooks from '@/components/landing/DetailBukuKatalog/SuggestedBooks'
-import DetailBookLoading from '@/components/Loading/DetailBookLoading'
+import DetailBookLoading from '@/components/pengguna/DetailBukuPengguna/DetailBookLoading'
 
 
 const DetailBukuKatalog = () => {
