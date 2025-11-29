@@ -1,4 +1,4 @@
-import TableContainer from './TableContainer'
+import {TableContainer} from '@/components/pengguna/DashboardPengguna'
 
 type LoanOverviewType = {
   peminjaman: any,

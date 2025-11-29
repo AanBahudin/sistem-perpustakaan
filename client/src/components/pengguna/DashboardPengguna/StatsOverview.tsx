@@ -1,5 +1,7 @@
-import CalendarPengguna from "./CalendarUser"
-import StatsContainer from "./StatsContainer"
+import {
+    CalendarUser,
+    StatsContainer
+} from '@/components/pengguna/DashboardPengguna'
 
 type StatsOverviewType = {
     peminjaman: any,
@@ -10,7 +12,7 @@ const StatsOverview = ({peminjaman, bukuHilang} : StatsOverviewType) => {
     return (
         <section className='flex'>
             <StatsContainer peminjaman={peminjaman} bukuHilang={bukuHilang} />
-            <CalendarPengguna peminjaman={peminjaman} />
+            <CalendarUser peminjaman={peminjaman} />
         </section>
     )
 }

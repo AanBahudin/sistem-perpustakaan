@@ -19,7 +19,7 @@ const TablePengguna = ({peminjaman} : {peminjaman: any}) => {
           )}
           <TableHeader>
             <TableRow className="border-primary/20">
-              <TableHead className="w-[50px] text-center">No</TableHead>
+              <TableHead className="w-[50px] text-center">Nsso</TableHead>
               <TableHead className="w-[500px]">Judul Buku</TableHead>
               <TableHead className="w-[150px] text-center">Status</TableHead>
               <TableHead className="w-[150px] text-center">Kondisi</TableHead>

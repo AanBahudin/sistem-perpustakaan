@@ -1,8 +1,10 @@
 import Container from '@/globals/Container'
-import SummaryCard from '@/components/pengguna/DashboardPengguna/SummaryCard'
-import LoanOverview from '@/components/pengguna/DashboardPengguna/LoanOverview'
-import StatsOverview from '@/components/pengguna/DashboardPengguna/StatsOverview'
-import DashboardLoading from './DashboardLoading'
+import {
+  SummaryCardData,
+  LoanOverview,
+  StatsOverview,
+  DashboardLoading
+} from '@/components/pengguna/DashboardPengguna'
 import useGetStatsPengguna from '@/hooks/fetchHooks/penggunaHooks/dashboard/useGetStatsPengguna'
 
 
@@ -22,7 +24,7 @@ const KatalogPengguna = () => {
   return (
     <Container className='my-16'>
       <StatsOverview peminjaman={peminjaman} bukuHilang={bukuHilang} />
-      <SummaryCard data={summaryData} />
+      <SummaryCardData data={summaryData} />
       <LoanOverview bukuHilang={bukuHilang} peminjaman={peminjaman} perpanjangan={perpanjangan} pengembalian={pengembalian} peminjamanAktif={peminjamanAktif} />
     </Container>
   )

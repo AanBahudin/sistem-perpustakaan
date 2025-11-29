@@ -8,8 +8,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Settings2 } from "lucide-react"
-import SelectDurasi from "@/components/pengguna/Konfirmasi Peminjaman/SelectDurasi"
-import AlasanInput from "@/components/pengguna/Konfirmasi Peminjaman/AlasanInput"
+import SelectDurasi from "@/components/pengguna/KonfirmasiPeminjaman/SelectDurasi"
+import AlasanInput from "@/components/pengguna/KonfirmasiPeminjaman/AlasanInput"
 import { Button } from "../ui/button"
 import useEditPerpanjanganPengguna from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useEditPerpanjanganPengguna"
 import { useState } from "react"

@@ -1,10 +1,12 @@
-import TablePengguna from './TablePengguna'
-import TableTabs from './TableTabs'
-import TablePerpanjangan from './TablePerpanjangan'
 import { useSelector } from 'react-redux'
-import TablePengembalian from './TablePengembalian'
-import DeadlineTable from './DeadlineTable'
-import TableKehilangan from './TableKehilangan'
+import {
+  TablePeminjamanPengguna,
+  TableTabs,
+  TablePerpanjangan,
+  TablePengembalian,
+  DeadlineTable,
+  TableBukuHilang
+} from '@/components/pengguna/DashboardPengguna'
 
 type TableContainerType = {
   peminjaman: any,
@@ -22,11 +24,11 @@ const TableContainer = ({peminjaman, perpanjangan, pengembalian, peminjamanAktif
         <section className='min-w-[700px]'>
           <section className='p-4'>
             <TableTabs />
-            {activeTab === 'peminjaman' && <TablePengguna peminjaman={peminjaman} />}
+            {activeTab === 'peminjaman' && <TablePeminjamanPengguna peminjaman={peminjaman} />}
             {activeTab === 'perpanjangan' && <TablePerpanjangan perpanjangan={perpanjangan} />}
             {activeTab === 'pengembalian' && <TablePengembalian pengembalian={pengembalian} />}
             {activeTab === 'deadline' && <DeadlineTable peminjamanAktif={peminjamanAktif} />}
-            {activeTab === 'hilang' && <TableKehilangan bukuHilang={bukuHilang}/>}
+            {activeTab === 'hilang' && <TableBukuHilang bukuHilang={bukuHilang}/>}
           </section>
         </section>
     </section>
