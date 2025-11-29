@@ -1,10 +1,10 @@
-import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
-import PeminjamanLoading from '@/components/pengguna/peminjaman Pengguna/PeminjamanLoading'
+import DataPagination from '@/components/pengguna/peminjamanPengguna/DataPagination'
+import PeminjamanLoading from '@/components/pengguna/peminjamanPengguna/PeminjamanLoading'
 import {
   PerpanjanganDataLayout,
   PerpanjanganSearchInput,
   PerpanjanganTab,
-} from '@/components/pengguna/Perpanjangan Pengguna'
+} from '@/components/pengguna/PerpanjanganPengguna/index'
 import useFetchAllPerpanjanganPengguna from '@/hooks/fetchHooks/penggunaHooks/perpanjangan/useFetchAllPerpanjanganPengguna'
 
 const PerpanjanganPage = () => {

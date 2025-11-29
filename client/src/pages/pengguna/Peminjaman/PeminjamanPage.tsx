@@ -1,8 +1,8 @@
-import PeminjamanSearch from "@/components/pengguna/peminjaman Pengguna/PeminjamanSearch"
-import PeminjamanTab from "@/components/pengguna/peminjaman Pengguna/PeminjamanTab"
-import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/PeminjamanLoading"
-import PeminjamanDataLayout from "@/components/pengguna/peminjaman Pengguna/PeminjamanDataLayout"
-import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
+import PeminjamanSearch from "@/components/pengguna/peminjamanPengguna/PeminjamanSearch"
+import PeminjamanTab from "@/components/pengguna/peminjamanPengguna/PeminjamanTab"
+import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
+import PeminjamanDataLayout from "@/components/pengguna/peminjamanPengguna/PeminjamanDataLayout"
+import DataPagination from "@/components/pengguna/peminjamanPengguna/DataPagination"
 import useFetchAllPeminjamanPengguna from "@/hooks/fetchHooks/penggunaHooks/peminjaman/useFetchAllPeminjamanPengguna"
 
 const PeminjamanPage = () => {

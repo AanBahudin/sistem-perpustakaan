@@ -4,7 +4,7 @@ import { formatedDate } from "@/utils/formatDate"
 import { CalendarCheck, CalendarSync, CalendarClock } from "lucide-react"
 import { ImageOff } from "lucide-react"
 import StatusPerpanjanganList from "./StatusPerpanjanganList"
-import PeminjamanKategori from "../peminjaman Pengguna/PeminjamanKategori"
+import PeminjamanKategori from "../peminjamanPengguna/PeminjamanKategori"
 import GridLayoutButtons from "@/globals/GridLayoutButtons"
 
 type PerpanjanganListType = {

@@ -1,6 +1,5 @@
 import { Separator } from '@/components/ui/separator'
-import EditEmailDialog from '@/components/pengguna/Profil Pengguna/EditEmailDialog'
-import EditPasswordDialog from '@/components/pengguna/Profil Pengguna/EditPasswordDialog'
+import {EditEmailDialog, EditPasswordDialog} from '@/components/pengguna/ProfilPengguna'
 import useFetchProfilPengguna from '@/hooks/fetchHooks/penggunaHooks/profil/useFetchProfilPengguna'
 
 const CredentialsProfilePage = () => {

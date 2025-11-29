@@ -1,5 +1,5 @@
 import Container from "@/globals/Container"
-import InfoPinjaman from "@/components/pengguna/Perpanjangan Pengguna/InfoPinjaman"
+import InfoPinjaman from "@/components/pengguna/PerpanjanganPengguna/InfoPinjaman"
 import {LoadingKonfirmasiPerpanjangan, DataKonfirmasiPerpanjangan} from "@/components/pengguna/KonfirmasiPerpanjangan/index"
 import useFetchConfirmPerpanjanganUser from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useFetchConfirmPerpanjanganUser"
 

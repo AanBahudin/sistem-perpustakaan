@@ -7,7 +7,7 @@ import TabelSemuaPeminjaman from '@/components/Pustakawan/Pengajuan/SemuaPeminja
 import SemuaPeminjamanFilter from '@/components/Pustakawan/Pengajuan/SemuaPeminjaman/SemuaPeminjamanFilter'
 import { useSearchParams } from 'react-router-dom'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
-import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
+import DataPagination from '@/components/pengguna/peminjamanPengguna/DataPagination'
 
 const PustakawanPeminjaman = () => {
 

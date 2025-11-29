@@ -7,7 +7,7 @@ import { prodiGetAllBukuAction } from "@/actions/Prodi/Buku"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import { ImageOff } from "lucide-react"
-import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
+import DataPagination from "@/components/pengguna/peminjamanPengguna/DataPagination"
 
 
 const ProdiSemuaBukuPage = () => {

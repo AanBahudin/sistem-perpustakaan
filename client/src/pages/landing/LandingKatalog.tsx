@@ -1,4 +1,4 @@
-import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
+import DataPagination from '@/components/pengguna/peminjamanPengguna/DataPagination'
 import Container from '@/globals/Container'
 import useFetchKatalogData from '@/hooks/fetchHooks/landingHooks/useFetchKatalogData'
 import LandingKatalogSearchInput from '@/components/landing/Katalog/LandingKatalogSearchInput'

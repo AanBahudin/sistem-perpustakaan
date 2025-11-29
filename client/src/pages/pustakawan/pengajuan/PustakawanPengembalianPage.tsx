@@ -1,5 +1,5 @@
 import { getAllPengembalian } from '@/actions/Pustakawan/Pengembalian/pustakawanPengembalianActions'
-import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
+import DataPagination from '@/components/pengguna/peminjamanPengguna/DataPagination'
 import DetailPengajuanLoading from '@/components/Pustakawan/Pengajuan/DetailPengajuanLoading'
 import GrafikPengajuanContainer from '@/components/Pustakawan/Pengajuan/GrafikPengajuanContainer'
 import SemuaPengembalianFilter from '@/components/Pustakawan/Pengajuan/SemuaPengembalian/SemuaPengembalianFilter'

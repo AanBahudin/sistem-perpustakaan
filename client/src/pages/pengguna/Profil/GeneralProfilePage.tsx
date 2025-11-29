@@ -1,9 +1,11 @@
 import { Separator } from '@/components/ui/separator'
-import ProfileData from '@/components/pengguna/Profil Pengguna/ProfileData'
-import PhotoProfile from '@/components/pengguna/Profil Pengguna/PhotoProfile'
-import EditNamaDialog from '@/components/pengguna/Profil Pengguna/EditNamaDialog'
-import EditKelasDialog from '@/components/pengguna/Profil Pengguna/EditKelasDialog'
-import EditNomorTeleponDialog from '@/components/pengguna/Profil Pengguna/EditNomorTeleponDialog'
+import {
+  PhotoProfileContainer,
+  ProfileDataContainer,
+  EditNamaDialog,
+  EditKelasDialog,
+  EditNomorTeleponDialog
+} from '@/components/pengguna/ProfilPengguna'
 import useFetchProfilPengguna from '@/hooks/fetchHooks/penggunaHooks/profil/useFetchProfilPengguna'
 
 const GeneralProfilePage = () => {
@@ -18,13 +20,13 @@ const GeneralProfilePage = () => {
       <Separator className='my-2' />
       <p className='text-muted-foreground'>Data profil utama yang digunakan untuk keperluan akademik dan identifikasi akun.</p>
 
-      <PhotoProfile fotoProfil={data.fotoProfil} />
+      <PhotoProfileContainer fotoProfil={data.fotoProfil} />
 
       <main className='w-full grid grid-cols-2 gap-4'>
         <EditNamaDialog data={data} />
         {data.role === 'Mahasiswa' && <EditKelasDialog data={data} />}
-        {data.role === 'Mahasiswa' && <ProfileData label='Angkatan' value={data.angkatan} />}
-        <ProfileData label='Jurusan' value={data.jurusan} />
+        {data.role === 'Mahasiswa' && <ProfileDataContainer label='Angkatan' value={data.angkatan} />}
+        <ProfileDataContainer label='Jurusan' value={data.jurusan} />
       </main>
 
       <h1 className='w-full text-2xl font-semibold mt-10'>Kontak</h1>
@@ -41,8 +43,8 @@ const GeneralProfilePage = () => {
       <p className='text-muted-foreground'>Informasi unik Anda dalam sistem kampus</p>
 
       <main className='w-full grid grid-cols-2 gap-4 my-10'>
-        <ProfileData label='NIM / NIDN' value={data.idKampus} />
-        <ProfileData label='Role' value={data.role}/>
+        <ProfileDataContainer label='NIM / NIDN' value={data.idKampus} />
+        <ProfileDataContainer label='Role' value={data.role}/>
       </main>
     </section>
   )

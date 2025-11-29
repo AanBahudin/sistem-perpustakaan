@@ -1,4 +1,4 @@
-import DataPagination from "@/components/pengguna/peminjaman Pengguna/DataPagination"
+import DataPagination from "@/components/pengguna/peminjamanPengguna/DataPagination"
 import BukuLoading from "@/components/Pustakawan/Buku/BukuLoading"
 import GrafikBukuContainer from "@/components/Pustakawan/Buku/GrafikBukuContainer"
 import SemuaBukuFilter from "@/components/Pustakawan/Buku/SemuaBukuFilter"

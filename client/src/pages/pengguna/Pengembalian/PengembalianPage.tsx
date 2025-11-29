@@ -1,7 +1,7 @@
-import PeminjamanLoading from "@/components/pengguna/peminjaman Pengguna/PeminjamanLoading"
-import PengembalianSearch from '@/components/pengguna/Pengembalian Pengguna/PengembalianSearch'
-import PengembalianDataLayout from '@/components/pengguna/Pengembalian Pengguna/PengembalianDataLayout'
-import DataPagination from '@/components/pengguna/peminjaman Pengguna/DataPagination'
+import PeminjamanLoading from "@/components/pengguna/peminjamanPengguna/PeminjamanLoading"
+import PengembalianSearch from '@/components/pengguna/PengembalianPengguna/PengembalianSearch'
+import PengembalianDataLayout from '@/components/pengguna/PengembalianPengguna/PengembalianDataLayout'
+import DataPagination from '@/components/pengguna/peminjamanPengguna/DataPagination'
 import useFetchAllPengembalianPengguna from '@/hooks/fetchHooks/penggunaHooks/pengembalian/useFetchAllPengembalianPengguna'
 
 const PengembalianPage = () => {
