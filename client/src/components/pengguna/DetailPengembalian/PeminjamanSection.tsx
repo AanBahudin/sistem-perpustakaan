@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { ExternalLink } from "lucide-react"
-import PeminjamanDanProfilData from "./PeminjamanDanProfilData"
 import { formatedDate } from "@/utils/formatDate"
 import { Link } from "react-router-dom"
+import {PeminjamanDanProfilData} from "."
 
 type PeminjamanSectionType = {
   peminjaman: any,

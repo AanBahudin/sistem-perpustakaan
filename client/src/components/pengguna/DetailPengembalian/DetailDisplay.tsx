@@ -1,5 +1,5 @@
 import { Book, Calendar } from "lucide-react"
-import DetailDataDisplay from "./DetailDataDisplay"
+import {DetailDataDisplay} from "."
 
 type DetailDisplayType = {
     peminjaman: any,

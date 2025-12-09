@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button'
-import TimeDisplay from './TimeDisplay'
-import DetailDisplay from './DetailDisplay'
-import FineDetail from './FineDetail'
+import {
+    TimeDisplay,
+    DetailDisplay,
+    FineDetail
+} from '.'
 
 type InvoiceColumnType = {
     dataPinjaman: any,

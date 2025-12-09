@@ -1,6 +1,8 @@
-import DetailPengembalianLoadingPage from "@/components/Loading/DetailPengembalianLoadingPage"
-import DetailPengembalianContainer from "@/components/pengguna/DetailPengembalian/DetailPengembalianContainer"
 import Container from "@/globals/Container"
+import {
+  DetailPengembalianLoading,
+  DetailPengembalianContainer,
+} from '@/components/pengguna/DetailPengembalian'
 import useFetchDetailPengembalianPengguna from "@/hooks/fetchHooks/penggunaHooks/pengembalian/useFetchDetailPengembalianPengguna"
 
 const DetailPengembalianPage = () => {
@@ -13,7 +15,7 @@ const DetailPengembalianPage = () => {
   if (isLoading) {
     return (
       <Container className="my-20">
-        <DetailPengembalianLoadingPage />
+        <DetailPengembalianLoading />
       </Container>
     )
   }

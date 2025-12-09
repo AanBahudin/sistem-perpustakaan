@@ -1,5 +1,5 @@
 import { ImageOff } from 'lucide-react'
-import BukuStats from './BukuStats'
+import { PengembalianBukuStats } from '.'
 
 type ProductReviewType = {
     buku: any
@@ -21,7 +21,7 @@ const ProductReview = ({buku} : ProductReviewType)=> {
           <h1 className='font-bold text-lg'>{buku.judul}</h1>
           <p className='text-muted-foreground text-[12px]'>Id: {buku._id}</p>
           <p className='text-muted-foreground text-[12px]'>{buku.tagline}</p>
-          <BukuStats data={buku} />
+          <PengembalianBukuStats data={buku} />
       </main>
     </section>
   )

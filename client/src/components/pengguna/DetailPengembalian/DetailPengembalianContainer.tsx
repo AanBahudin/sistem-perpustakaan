@@ -1,5 +1,5 @@
-import BreadCrumbDetailBuku from '../DetailBukuPengguna/BreadCrumbDetailBuku'
-import DetailPengembalian from './DetailPengembalian'
+import {BreadCrumbDetailBuku} from '../DetailBukuPengguna'
+import {DetailPengembalian} from '@/components/pengguna/DetailPengembalian'
 
 type DetailPengembalianContainerType = {
     detailPengembalian: any,

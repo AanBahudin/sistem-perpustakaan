@@ -1,4 +1,4 @@
-import PeminjamanDanProfilData from './PeminjamanDanProfilData'
+import {PeminjamanDanProfilData} from '.'
 import { ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'

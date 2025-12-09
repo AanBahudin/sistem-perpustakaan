@@ -1,10 +1,10 @@
+import { formatTextLength } from '@/utils/formatTextLength'
 import { useState } from 'react'
 
 const BookDescription = ({deskripsi} : {deskripsi: string}) => {
 
     const [showMore, setShowMore] = useState(false)
-
-    const shortDesc = deskripsi.slice(0, 400)
+    const shortDesc = formatTextLength({minLength: 400, text: deskripsi})
 
     return (
         <section className='w-full'>

@@ -1,5 +1,6 @@
-import ProfileSection from "./ProfileSection"
-import PeminjamanSection from "./PeminjamanSection"
+import {
+  PeminjamanSection, 
+  ProfileSection} from '@/components/pengguna/DetailPengembalian'
 
 type ProfilePeminjamanContainer = {
     profileData: any,
