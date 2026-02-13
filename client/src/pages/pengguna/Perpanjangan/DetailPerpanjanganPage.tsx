@@ -1,5 +1,7 @@
 import Container from "@/globals/Container"
-import DetailPerpanjanganContainer from "@/components/pengguna/DetailPerpanjangan/DetailPerpanjanganContainer"
+import {
+  DetailPerpanjanganContainer
+} from '@/components/pengguna/DetailPerpanjangan'
 import DetailPengembalianLoadingPage from "@/components/pengguna/DetailPengembalian/DetailPengembalianLoadingPage"
 import useFetchDetailPerpanjanganPengguna from "@/hooks/fetchHooks/penggunaHooks/perpanjangan/useFetchDetailPerpanjanganPengguna"
 

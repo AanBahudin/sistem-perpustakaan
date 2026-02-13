@@ -6,7 +6,9 @@ type ActionType = {
 }
 
 const pustakawanEditBukuAction = async({data, idBuku} : ActionType) => {
+    console.log(data)
     const {data: response} = await customFetch.patch(`/buku/pustakawan/${idBuku}`, data)
+    console.log(response)
     return response.data
 }
 

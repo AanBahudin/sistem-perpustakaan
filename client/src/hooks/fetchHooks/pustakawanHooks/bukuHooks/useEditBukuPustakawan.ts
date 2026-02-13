@@ -19,7 +19,7 @@ const useEditBukuPustakawan = () => {
             queryClient.invalidateQueries({queryKey: ['detail', 'buku', idBuku]})
             navigate(`/pustakawan/buku/detail/${idBuku}`)
         },
-        onError: (error) => {
+        onError: (error: any) => {
             const errMsg = errorMsgGenerator(error) || 'Tidak dapat update buku'
             toast('Terjadi kesalahan', {description: errMsg})
         }
@@ -28,8 +28,7 @@ const useEditBukuPustakawan = () => {
     const handleSubmit = async(e: any) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const objectData = Object.fromEntries(formData)
-        mutation.mutate(objectData)
+        mutation.mutate(formData)
     }
 
     return {

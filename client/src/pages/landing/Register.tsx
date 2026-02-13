@@ -12,48 +12,85 @@ import useRegisterPengguna from '@/hooks/fetchHooks/penggunaHooks/authHooks/useR
 const Register : React.FC = () => {
 
   const {isLoading, mutationFn} = useRegisterPengguna()
-  const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg'
+  const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/3_tqz5yk.png'
 
 
   return (
-    <Container className='flex items-center flex-col justify-center py-10 mt-20'>
-      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-3  rounded-xl'>
+    <Container className='w-full flex items-center justify-center min-h-[100vh] mt-10'>
+      <main className='w-[90%] relative flex items-center justify-between bg-[url("/images/callToAction.png")] rounded-xl object-contain bg-center py-4 px-10'>
+ 
+      {/* LEFT SECTION */}
+      <section className='flex-1'>
+        <h1 className='text-primary dark:text-white font-bold text-3xl lg:text-4xl mt-2'>Ayo Bergabung</h1>
+        <h5 className='text-muted-foreground mt-2 '>Silahkan daftarkan akun anda untuk mengakses layanan perpustakaan Teknik Informatika</h5>
 
-        <main className='col-span-2 bg-[url("/images/callToAction.png")] rounded-l-xl object-contain bg-center px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
-          {/* <Logo /> */}
-          <h1 className='text-primary dark:text-white font-bold text-3xl lg:text-4xl mt-2'>Ayo Bergabung</h1>
-          <h5 className='text-muted-foreground mt-2 '>Silahkan daftarkan akun anda untuk mengakses layanan perpustakaan Teknik Informatika</h5>
+        <form onSubmit={mutationFn} className='static w-full'>
+          <div className='mt-6 w-full flex flex-col gap-y-4'>
 
-          <form onSubmit={mutationFn} className='static w-full'>
-            <div className='mt-6 w-full flex flex-col gap-y-4'>
+            <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
+              <InputForm label='Nama' name='nama' placeholder='John Doe' type='text' /> 
+              <InputForm label='Email' name='email' placeholder='johndoe@gmail.com' type='email' /> 
+            </main>
 
-              <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
-                <InputForm label='Nama' name='nama' placeholder='John Doe' type='text' /> 
-                <InputForm label='Email' name='email' placeholder='johndoe@gmail.com' type='email' /> 
-              </main>
+            <main className='grid grid-cols-2 gap-x-2'>
+              <InputForm label='Nim / Nidn' name='idKampus' placeholder='3423232' type='number'  /> 
+              <SelectForm label='Posisi' name='role' placeholder='Daftar sebagai' selectLabel='Pilih salah satu' values={registerSelectInput} />
+            </main>
 
-              <main className='grid grid-cols-2 gap-x-2'>
-                <InputForm label='Nim / Nidn' name='idKampus' placeholder='3423232' type='number'  /> 
-                <SelectForm label='Posisi' name='role' placeholder='Daftar sebagai' selectLabel='Pilih salah satu' values={registerSelectInput} />
-              </main>
-
-              <PasswordInput />
-
-              <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full'>
-                {isLoading ? 'Loading...' : 'Daftar'}
-              </Button>
-              <p className='text-center text-sm text-muted-foreground'>Sudah punya akun? <Link to='/login' className='text-foreground underline'>Masuk Disini</Link></p>
-            </div>
-          </form>
-        </main>
-
-        <main className='col-span-1 hidden xl:flex items-center justify-end'>
-          <img src={imageURL} className='h-[550px] object-cover rounded-r-xl' />
-        </main>
-
+            <PasswordInput />
+            <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full'>
+              {isLoading ? 'Loading...' : 'Daftar'}
+            </Button>
+            <p className='text-center text-sm text-muted-foreground'>Sudah punya akun? <Link to='/login' className='text-foreground underline'>Masuk Disini</Link></p>
+          </div>
+        </form>
       </section>
+
+        {/* RIGHT SECTION */}
+        <section className='w-fit flex flex-col justify-end items-end'>
+          <img src={imageURL} className='h-[510px] top-[16px] left-14 relative rounded-r-xl' />
+        </section>
+
+      </main>
     </Container>
   )
 }
+    // <Container className='flex items-center flex-col justify-center py-10 mt-20 bg-red-20'>
+    //   <section className='w-full h-full grid grid-cols-1 xl:grid-cols-3 rounded-xl'>
+
+    //     <main className='col-span-2 bg-[url("/images/callToAction.png")] rounded-l-xl object-contain bg-center px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
+    //       {/* <Logo /> */}
+          // <h1 className='text-primary dark:text-white font-bold text-3xl lg:text-4xl mt-2'>Ayo Bergabung</h1>
+          // <h5 className='text-muted-foreground mt-2 '>Silahkan daftarkan akun anda untuk mengakses layanan perpustakaan Teknik Informatika</h5>
+
+          // <form onSubmit={mutationFn} className='static w-full'>
+          //   <div className='mt-6 w-full flex flex-col gap-y-4'>
+
+          //     <main className='grid grid-cols-1 lg:grid-cols-2 gap-x-2'>
+          //       <InputForm label='Nama' name='nama' placeholder='John Doe' type='text' /> 
+          //       <InputForm label='Email' name='email' placeholder='johndoe@gmail.com' type='email' /> 
+          //     </main>
+
+          //     <main className='grid grid-cols-2 gap-x-2'>
+          //       <InputForm label='Nim / Nidn' name='idKampus' placeholder='3423232' type='number'  /> 
+          //       <SelectForm label='Posisi' name='role' placeholder='Daftar sebagai' selectLabel='Pilih salah satu' values={registerSelectInput} />
+          //     </main>
+
+          //     <PasswordInput />
+
+          //     <Button disabled={isLoading} type='submit' className='text-white text-center capitalize w-full'>
+          //       {isLoading ? 'Loading...' : 'Daftar'}
+          //     </Button>
+          //     <p className='text-center text-sm text-muted-foreground'>Sudah punya akun? <Link to='/login' className='text-foreground underline'>Masuk Disini</Link></p>
+          //   </div>
+          // </form>
+    //     </main>
+
+    //     <main className='col-span-1 hidden xl:flex items-center h-full justify-end'>
+    //       <img src={imageURL} className='object-cover bg-red-100 self-end rounded-r-xl' />
+    //     </main>
+
+    //   </section>
+    // </Container>
 
 export default Register

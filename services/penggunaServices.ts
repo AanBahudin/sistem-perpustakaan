@@ -34,6 +34,8 @@ export const updateProfil = async({userId, dataUpdate} : UpdateProfilParamsServi
 
 export const photoUpdate = async(req: Request | any, res: Response) => {
     const {userId} = req.user
+    
+    console.log("file dari update foto ", req.file)
 
     if (req.file) {
         const response = await cloudinary.v2.uploader.upload(req.file.path)

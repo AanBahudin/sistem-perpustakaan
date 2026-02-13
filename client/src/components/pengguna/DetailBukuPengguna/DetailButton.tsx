@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 type DetailButtonType = {
     stok: number,
-    status: 'Dipinjam' | 'Diajukan' | 'Terlambat' | undefined,
+    status: 'Dipinjam' | 'Diajukan' | 'Terlambat' | undefined | 'Ditolak',
     idPeminjaman?: string,
     idBuku: string
 }
@@ -13,6 +13,7 @@ type DetailButtonType = {
 const DetailButton = ({status, idPeminjaman, idBuku} : DetailButtonType) => {
 
     // REFACTOR INI BARANG
+    console.log(status)
 
     return (
         <>
@@ -22,6 +23,7 @@ const DetailButton = ({status, idPeminjaman, idBuku} : DetailButtonType) => {
                     <PerpanjangButton idPeminjaman={idPeminjaman} />
                 </main>
             )}
+            {status === 'Ditolak' && <TertolakButton />}
             {status === 'Terlambat' && <TerlambatButton />}
         </>
     )
@@ -43,6 +45,14 @@ const TerlambatButton = () => {
         <div className="flex items-center mt-4 gap-x-8">
             <Button variant='default' className="text-white text-center w-1/2">Kembalikan</Button>
             <p className="text-muted-foreground text-sm">Peminjaman buku ini telah terlambat</p>
+        </div>
+    )
+}
+
+const TertolakButton = () => {
+    return (
+        <div>
+            <Button variant='destructive' className='text-white text-center w-full text-sm mt-6'>Peminjaman Ditolak</Button>
         </div>
     )
 }

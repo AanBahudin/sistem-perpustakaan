@@ -8,6 +8,7 @@ import useFetchAllPeminjamanPengguna from "@/hooks/fetchHooks/penggunaHooks/pemi
 const PeminjamanPage = () => {
 
   const {data: dataPeminjaman, isLoading} = useFetchAllPeminjamanPengguna()
+  console.log(dataPeminjaman)
 
   return (
     <main className="min-h-[90vh] col-span-9">

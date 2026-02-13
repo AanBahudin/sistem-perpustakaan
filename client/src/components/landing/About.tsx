@@ -17,7 +17,7 @@ const About = () => {
             </div>
 
             <div className='justify-self-end lg:grid hidden'>
-                <img src='https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg' className='w-[500px] h-[300px] bg-muted-foreground rounded' />
+                <img src='https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/IMG_20260213_095734_smky3k.png' className='w-[500px] h-[300px] bg-muted-foreground rounded' />
             </div>
         </section>
     </Container>

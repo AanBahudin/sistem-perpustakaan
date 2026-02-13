@@ -14,7 +14,7 @@ const PhotoFrame : React.FC = () => {
                 <CarouselItem key={item.id} className="basis-full">
                     <div className="p-1">
                         <main className='w-full h-fit lg:h-[400px] overflow-hidden bg-muted rounded-2xl'>
-                        <img className='rounded-xl object-cover grayscale-25' src={item.url} />
+                        <img className='rounded-xl object-fit grayscale-25' src={item.url} />
                         </main>
                     </div>
                 </CarouselItem>

@@ -1,0 +1,5 @@
+export {default as PerpanjanganDetailColum} from './DetailColumn'
+export {default as DetailPerpanjangan} from './DetailPerpanjangan'
+export {default as DetailPerpanjanganContainer} from './DetailPerpanjanganContainer'
+export {default as PerpanjanganColumn} from './PerpanjanganColumn'
+export {default as PerpanjanganDetailDisplay} from './PerpanjanganDetailDisplay'

@@ -1,6 +1,5 @@
 import { accountStatusPenggunaAction } from '@/actions/Pengguna/Auth';
 import Logo from '@/components/landing/Navbar/Logo';
-import loginImage from '@/assets/images/loginImg.png'
 import Container from '@/globals/Container';
 import React from 'react'
 import { Check, X } from 'lucide-react';
@@ -23,6 +22,8 @@ const Verify : React.FC = () => {
     if (verifikasiEmail && verifikasiProdi) {
         navigate('/my')
     }
+
+    const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/3_tqz5yk.png'
 
     return (
         <Container className='h-fit lg:h-[100vh] lg:p-20'>
@@ -52,7 +53,7 @@ const Verify : React.FC = () => {
                 </div>
 
                 <div className='col-span-1 h-full hidden lg:grid content-center place-items-end'>
-                    <img className='w-[500px] h-[500px] object-cover rounded-2xl' src={loginImage} />
+                    <img className='w-[500px] h-[500px] object-cover rounded-2xl relative top-10' src={imageURL} />
                 </div>
 
             </section>

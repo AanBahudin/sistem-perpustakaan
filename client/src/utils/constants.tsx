@@ -1,6 +1,6 @@
 import { ContactCardType, TestimonialsDataType } from "@/types/constantsTypes";
 import { ChartConfig } from "@/components/ui/chart";
-import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Clipboard, ClipboardCheck, ClipboardPen} from "lucide-react"
+import { BookCopy, LibraryBig, Users, Mail, MapPin, BellRing, Calendar, LaptopMinimal, LockKeyhole, Clipboard, ClipboardCheck, ClipboardPen, Lock, Info, Bell, Computer} from "lucide-react"
 
 export const accordions = [
     {
@@ -122,23 +122,23 @@ export const contactCard : ContactCardType[] = [
 export const galleryPict = [
   {
     id: 1,
-    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg'
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/IMG_20260213_095535_jorkwh.jpg'
   },
   {
     id: 2,
-    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905004/s1yqle6mjxcykd1brkrq.jpg'
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905004/IMG_20260213_095523_jjrtkj.jpg'
   },
   {
     id: 3,
-    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904999/lks7kqyid1aozwoibpag.jpg'
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904999/IMG_20260213_095440_oqa4th.jpg'
   },
   {
     id: 4,
-    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904996/nonf0gcw31ta7gimzsf6.jpg'
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904996/IMG_20260213_095734_fybetf.jpg'
   },
   {
     id: 5,
-    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904995/afflxn84nr26h664crat.jpg'
+    url: 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745904995/IMG_20260213_095653_lijzjq.jpg'
   }
 ]
 
@@ -303,5 +303,28 @@ export const FAQConfirmation = [
   {
     "question": "Apa yang harus saya lakukan jika saya salah meminjam buku?",
     "answer": "Silakan segera batalkan pengajuan jika status masih dalam proses. Jika buku sudah dipinjam, Anda tetap bertanggung jawab atas buku tersebut sampai dikembalikan."
+  }
+]
+
+export const IconsData = [
+  {
+    title: "Keamanan",
+    icon: Lock
+  },
+  {
+    title: 'Informatif',
+    icon: Info
+  },
+  {
+    title: 'Komunitas',
+    icon: Users,
+  },
+  {
+    title: 'Terjadwal',
+    icon: Bell
+  },
+  {
+    title: 'Akses Cepat',
+    icon: Computer
   }
 ]

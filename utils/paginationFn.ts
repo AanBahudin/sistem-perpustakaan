@@ -7,7 +7,7 @@ interface PaginationFnParams {
 
 export const paginationFn = ({data, currentPage = 1, limit = 10} : PaginationFnParams) => {
 
-    const totalData = data.length || 0
+    const totalData = data || 0
     const totalPage = Math.ceil(totalData / limit)
     const skip = (currentPage - 1) * limit
 

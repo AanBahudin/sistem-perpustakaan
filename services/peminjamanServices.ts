@@ -62,7 +62,6 @@ export const getSemuaPeminjamanUser = async({userId, query} : GetSemuaPeminjaman
     delete newQuery.page
     const totalPeminjaman = await Peminjaman.find({peminjam: userId, ...newQuery}).countDocuments()
 
-
     // pagination function
     const { totalPage, limit, skip } = paginationFn({data: totalPeminjaman, currentPage: query.page})
     if (query.page) delete query.page

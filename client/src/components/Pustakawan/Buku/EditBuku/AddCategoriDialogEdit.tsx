@@ -59,7 +59,7 @@ const AddCategoriDialogEdit = () => {
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="name-1">Kategori</Label>
-            <Input className='text-white selection:text-white  !text-xs' 
+            <Input className=' selection:text-white  !text-xs' 
               id="name-1" name="kategoriBaru" 
               value={kategori} onChange={(e) => setKategori(e.target.value)} 
               defaultValue="Pemrograman" />
@@ -68,7 +68,7 @@ const AddCategoriDialogEdit = () => {
 
         <DialogFooter className='!text-xs'>
           <DialogClose asChild>
-            <Button disabled={isLoading} variant="outline" className='text-white text-xs' size='sm'>Cancel</Button>
+            <Button disabled={isLoading} variant="destructive" className='text-white text-xs' size='sm'>Cancel</Button>
           </DialogClose>
 
           <Button disabled={isLoading} type="button" onClick={handleSubmit} className='text-white text-xs' size='sm'>

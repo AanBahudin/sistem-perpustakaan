@@ -14,14 +14,15 @@ import useLoginPengguna from '@/hooks/fetchHooks/penggunaHooks/authHooks/useLogi
 const LoginPage : React.FC = () => {
 
   const { isLoading, mutationFn } = useLoginPengguna()
-  const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/k861oq846rph9u5b1oh3.jpg'
+  const imageURL : string = 'https://res.cloudinary.com/dhthnjizr/image/upload/v1745905005/2_axrxxk.png'
 
   return (
-    <Container className='flex mt-20 items-center flex-col justify-center py-10'>
-      <section className='w-full h-full grid grid-cols-1 xl:grid-cols-3'>
-
-        <main className='col-span-2 bg-[url("/images/callToAction.png")] rounded-l-xl object-contain bg-center px-10 py-10 xl:py-0 lg:px-20 flex flex-col items-start justify-center h-full'>
-          <Logo />
+     <Container className='w-full flex items-center justify-center min-h-[100vh] mt-10'>
+      <main className='w-[90%] relative flex items-center justify-between bg-[url("/images/callToAction.png")] rounded-l-xl object-contain bg-center py-4 px-10'>
+ 
+      {/* LEFT SECTION */}
+      <section className='flex-1'>
+        <Logo />
           <h1 className=' dark:text-white text-primary font-bold text-3xl lg:text-4xl mt-2'>Selamat Datang Kembali</h1>
           <h5 className='text-muted-foreground mt-1 '>Silahkan masuk menggunakan akun Anda untuk mengakses halaman utama Anda.</h5>
 
@@ -37,13 +38,14 @@ const LoginPage : React.FC = () => {
               <p className='text-center text-sm text-muted-foreground'>Belum punya akun? <Link to='/register' className='text-foreground underline'>Daftar Disini</Link></p>
             </div>
           </form>
-        </main>
-
-        <main className='col-span-1 hidden xl:flex items-center justify-end'>
-          <img src={imageURL} className='h-[550px] rounded-r-xl' />
-        </main>
-
       </section>
+
+        {/* RIGHT SECTION */}
+        <section className='w-fit flex flex-col justify-end items-end'>
+          <img src={imageURL} className='h-[510px] top-[16px] left-14 relative rounded-r-xl' />
+        </section>
+
+      </main>
     </Container>
   )
 }
